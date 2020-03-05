@@ -19,7 +19,7 @@
 ///that derivations relying on the Axiom of Choice are separated out into the
 ///'BoolClass' module.
 [<AutoOpen>]
-module Bool
+module HOL.Bool
 
 (* Utilities *)
 
@@ -203,17 +203,16 @@ let undisch_rule th =              (* A |- p ==> q     *)
         let () = assert1 (is_imp (concl th))     (func,"Not an implication term")
         internal_err func
 
-(* add_asm_rule : term -> thm -> thm                                          *)
-(*                                                                            *)
-(* This is the assumption insertion rule.  It takes a boolean term and a      *)
-(* theorem, and returns the same theorem but with the supplied term added to  *)
-(* its assumptions.  The returned theorem is the inputted theorem if the term *)
-(* is already in the assumptions.                                             *)
-(*                                                                            *)
-(*    `q`   A |- p                                                            *)
-(*    ------------                                                            *)
-(*    A u {q} |- p                                                            *)
-
+// add_asm_rule : term -> thm -> thm                                         
+//                                                                           
+/// This is the assumption insertion rule.  It takes a boolean term and a     
+/// theorem, and returns the same theorem but with the supplied term added to 
+/// its assumptions.  The returned theorem is the inputted theorem if the term
+/// is already in the assumptions.
+/// 
+///    `q`   A |- p                                                           
+///    ------------                                                           
+///    A u {q} |- p                 
 let add_asm_rule tm th =          (* A |- p          *)
     try
         let th1 = disch_rule tm th               (* A\{q} |- q ==> p          *)
@@ -327,19 +326,20 @@ let not_elim_rule th =           (* A |- ~ p      *)
         let () = assert1 (is_not (concl th))      (func,"Not a negation theorem") in
         internal_err func
 
-(* deduct_contrapos_rule : term -> thm -> thm                                 *)
-(*                                                                            *)
-(* This is the contraposition rule for deduction.  It swaps and logically     *)
-(* negates the supplied assumption term and the conclusion of the supplied    *)
-(* theorem.  Note that the supplied term does not have to be present in the   *)
-(* assumptions of the supplied theorem for the rule to succeed.  If the       *)
-(* logical negation of the supplied theorem's conclusion is the supplied      *)
-(* term, then it will not occur in the resulting theorem's assumptions.       *)
-(*                                                                            *)
-(*        `q`   A |- p                                                        *)
-(*    ---------------------                                                   *)
-(*    (A u {~p})\{q} |- ~ q                                                   *)
-
+//  deduct_contrapos_rule : term -> thm -> thm                              
+//                                                                          
+/// This is the contraposition rule for deduction.  It swaps and logically  
+/// negates the supplied assumption term and the conclusion of the supplied 
+/// theorem.  Note that the supplied term does not have to be present in the
+/// assumptions of the supplied theorem for the rule to succeed.  If the    
+/// logical negation of the supplied theorem's conclusion is the supplied   
+/// term, then it will not occur in the resulting theorem's assumptions.    
+///                                                                         
+///        `q`   A |- p                                                     
+///    ---------------------                                                
+///    (A u {~p})\{q} |- ~ q                                                
+///
+/// See also: not_intro_rule, disch_rule, contr_rule, ccontr_rule.
 let deduct_contrapos_rule tm1 th =         (* A |- p         *)
   let tm2 = concl th in
   (* (A u {~p}) \ {q} |- ~ q        *)
@@ -527,6 +527,18 @@ let beta_patt_conv vsp tmp tm =
 
 let beta_patt_rule vsp tmp th = conv_rule (beta_patt_conv vsp tmp) th
 
+//  bspec_rule : term -> thm -> thm
+// 
+/// This is the beta-reducing universal elimination rule.  It strips off the
+/// outermost universal quantifier from the supplied theorem, and replaces in the
+/// body each occurrence of the stripped binding variable with the supplied term.
+/// If the supplied term is a lambda abstraction, it also performs beta-reduction on
+/// each substituted occurrence that is applied to an argument.  The type of the
+/// supplied term must equal the type of the stripped binding variable.
+/// 
+///             `\y. t`   A |- !x. p
+///       --------------------------------
+///       A |- p[ \y.t / x; t[s/y] / x s ]
 let bspec_rule tm th =
     let th1 = try2 (spec_rule tm) th    "bspec_rule" in
     if (is_abs tm)
@@ -536,17 +548,18 @@ let bspec_rule tm th =
 
 let list_bspec_rule tms th = foldl (swap_arg bspec_rule) th tms
 
-(* contr_rule : term -> thm -> thm                                            *)
-(*                                                                            *)
-(* This is the intuitionistic contradiction rule.  It takes a boolean term    *)
-(* and a theorem with falsity as its conclusion.  It returns a theorem with   *)
-(* the supplied term as its conclusion, under the same assumptions as the     *)
-(* supplied theorem.                                                          *)
-(*                                                                            *)
-(*    `p`   A |- false                                                        *)
-(*    ----------------                                                        *)
-(*         A |- p                                                             *)
-
+//  contr_rule : term -> thm -> thm                                           
+//                                                                            
+/// This is the intuitionistic contradiction rule.  It takes a boolean term   
+/// and a theorem with falsity as its conclusion.  It returns a theorem with  
+/// the supplied term as its conclusion, under the same assumptions as the    
+/// supplied theorem.                                                         
+///                                                                           
+///    `p`   A |- false                                                       
+///    ----------------                                                       
+///         A |- p                                               
+///
+/// See also: ccontr_rule, deduct_contrapos_rule.
 let contr_rule tm th =            (* p     A |- false      *)
     try
         let () = assert0 (term_eq (concl th) false_tm)     LocalFail in
@@ -623,17 +636,18 @@ let imp_antisym_rule th01 th02 =    (* A1 |- p ==> q    A2 |- q ==> p   *)
                   (func,"1st theorem RHS and 2nd theorem LHS not alpha-equivalent") in
         internal_err func
 
-(* deduct_antisym_rule : thm -> thm -> thm                                    *)
-(*                                                                            *)
-(* This is the antisymmetry rule for deduction.  It takes two theorem         *)
-(* arguments.  It returns a theorem stating that the supplied conclusions are *)
-(* equivalent, under the unioned assumptions but with each theorem's          *)
-(* conclusion removed from the other's assumptions.                           *)
-(*                                                                            *)
-(*        A1 |- p    A2 |- q                                                  *)
-(*    --------------------------                                              *)
-(*    A1\{q} u A2\{p} |- p <=> q                                              *)
-
+//  deduct_antisym_rule : thm -> thm -> thm                                   
+//                                                                            
+/// This is the antisymmetry rule for deduction.  It takes two theorem        
+/// arguments.  It returns a theorem stating that the supplied conclusions are
+/// equivalent, under the unioned assumptions but with each theorem's         
+/// conclusion removed from the other's assumptions.                          
+///                                                                           
+///        A1 |- p    A2 |- q      
+///    --------------------------              
+///    A1\{q} u A2\{p} |- p <=> q                      
+///
+/// See also: imp_antisym_rule, undisch_rule.
 let deduct_antisym_rule th01 th02 =      (* A1 |- p     A2 |- q   *)
     let th1 = disch_rule (concl th02) th01 in    (* A1\{q} |- q ==> p          *)
     let th2 = disch_rule (concl th01) th02 in    (* A2\{p} |- p ==> q          *)
@@ -766,6 +780,14 @@ let conj_lemma =
                               (assume_rule p1_))
                      (assume_rule p2_) )))))
 
+// conj_rule : thm -> thm -> thm                                           
+//                                                                         
+/// This is the conjunction introduction rule.  It conjoins the two supplied
+/// theorems and unions their assumptions.                                  
+///                                                                         
+///    A1 |- p    A2 |- q                                                   
+///    ------------------                                                   
+///    A1 u A2 |- p /\ q                                                    
 let conj_rule th01 th02 =     (* A1 |- p    A2 |- q   *)
     try
         let p = concl th01  
@@ -774,14 +796,7 @@ let conj_rule th01 th02 =     (* A1 |- p    A2 |- q   *)
         mp_rule (mp_rule th1 th01) th02                     (* A1uA2 |- p /\ q      *)
     with HolFail _ -> internal_err "conj_rule"
 
-(* conjunct1_rule : thm -> thm                                                *)
-(*                                                                            *)
-(* This is the conjunction elimination rule for the LHS.  It removes the RHS  *)
-(* conjunct from the supplied conjunction theorem.                            *)
-(*                                                                            *)
-(*    A |- p /\ q                                                             *)
-(*    -----------                                                             *)
-(*      A |- p                                                                *)
+(* conjunct1_rule *)
 
 let conjunct1_lemma =
   (* |- p1_ /\ p2_ ==> p1_             *)
@@ -792,6 +807,16 @@ let conjunct1_lemma =
       (* |- p1_ ==> p2_ ==> p1_                        *)
       (disch_rule p1_ (disch_rule p2_ (assume_rule p1_))) )
 
+//  conjunct1_rule : thm -> thm                                                
+//                                                                             
+/// This is the conjunction elimination rule for the LHS.  It removes the RHS  
+/// conjunct from the supplied conjunction theorem.                            
+///                                                                            
+///    A |- p /\ q                                                             
+///    -----------                                                             
+///      A |- p                       
+///
+/// See also: conjunct2_rule, conjunct_rule, mk_conj_rule.
 let conjunct1_rule th =          (* A |- p /\ q       *)
     try
         let (p,q) = dest_conj (concl th) in
@@ -802,14 +827,7 @@ let conjunct1_rule th =          (* A |- p /\ q       *)
         let () = assert1 (is_conj (concl th))    (func,"Not a conjunction theorem") in
         internal_err func
 
-(* conjunct2_rule : thm -> thm                                                *)
-(*                                                                            *)
-(* This is the conjunction elimination rule for the RHS.  It removes the LHS  *)
-(* conjunct from the supplied conjunction theorem.                            *)
-(*                                                                            *)
-(*    A |- p /\ q                                                             *)
-(*    -----------                                                             *)
-(*      A |- q                                                                *)
+(* conjunct2_rule *)
 
 let conjunct2_lemma =
   (* |- p1_ /\ p2_ ==> p2_             *)
@@ -821,6 +839,16 @@ let conjunct2_lemma =
       (* |- p1_ ==> p2_ ==> p2_                         *)
       (disch_rule p1_ (disch_rule p2_ (assume_rule p2_))) )
 
+//  conjunct2_rule : thm -> thm                                                
+//                                                                             
+/// This is the conjunction elimination rule for the RHS.  It removes the LHS  
+/// conjunct from the supplied conjunction theorem.                            
+///                                                                            
+///    A |- p /\ q                                                             
+///    -----------                                                             
+///      A |- q                                                               
+///
+/// See also: conjunct1_rule, conjunct_rule, mk_conj_rule.
 let conjunct2_rule th =          (* A |- p /\ q       *)
     try
         let (p,q) = dest_conj (concl th) in
@@ -937,22 +965,23 @@ let disj2_rule tm th =             (* p    A |- q   *)
         let () = assert1 (is_bool_term tm)      (func,"Arg 1 not a boolean term") in
         internal_err func
 
-(* choose_rule : term * thm -> thm -> thm                                     *)
-(*                                                                            *)
-(* This is the existential elimination rule.  It removes, from the            *)
-(* assumptions of a supplied main theorem, the body of a supplied existential *)
-(* theorem (but with all occurrences of the binding variable replaced with a  *)
-(* supplied variable), and adds the assumptions of the existential theorem.   *)
-(* The supplied variable is not allowed to be free in existential theorem's   *)
-(* conclusion or in the original main theorem's other assumptions or its      *)
-(* conclusion.  Note that the altered body of the existential theorem does    *)
-(* not have to be present in the assumptions of the main theorem for the rule *)
-(* to succeed.                                                                *)
-(*                                                                            *)
-(*    `y`   A1 |- ?x. p    A2 |- q      [ "y" not free in:                    *)
-(*    ----------------------------          `?x. p`, `q` or `A2\{p[y/x]}` ]   *)
-(*        A1 u A2\{p[y/x]} |- q                                               *)
-
+//  choose_rule : term * thm -> thm -> thm                                     
+//                                                                             
+/// This is the existential elimination rule.  It removes, from the            
+/// assumptions of a supplied main theorem, the body of a supplied existential 
+/// theorem (but with all occurrences of the binding variable replaced with a  
+/// supplied variable), and adds the assumptions of the existential theorem.   
+/// The supplied variable is not allowed to be free in existential theorem's   
+/// conclusion or in the original main theorem's other assumptions or its      
+/// conclusion.  Note that the altered body of the existential theorem does    
+/// not have to be present in the assumptions of the main theorem for the rule 
+/// to succeed.                                                                
+///                                                                            
+///    `y`   A1 |- ?x. p    A2 |- q      [ "y" not free in:                    
+///    ----------------------------          `?x. p`, `q` or `A2\{p[y/x]}` ]   
+///        A1 u A2\{p[y/x]} |- q                                               
+///
+/// See also: exists_rule, mk_exists_rule.
 let choose_rule (v,th0) th =       (* y    A1 |- ?x. p    A2 |- q   *)
     let ty = type_of v in
     let (hs,q) = dest_thm th in

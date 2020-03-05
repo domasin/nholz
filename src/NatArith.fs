@@ -17,7 +17,7 @@
 ///using recursive function definition and the "SUC" and "ZERO" constants,
 ///and proves various basic properties about each operator.               
 [<AutoOpen>]
-module NatArith
+module HOL.NatArith
 
 (* HOL variables *)
 

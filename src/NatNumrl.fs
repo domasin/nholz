@@ -16,7 +16,7 @@
 ///This module defines the representation of natural number numerals.  This
 ///is based on the HOL functions "BIT0" and "BIT1".
 [<AutoOpen>]
-module NatNumrl
+module HOL.NatNumrl
 
 open System.Numerics
 

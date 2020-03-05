@@ -18,7 +18,7 @@
 ///computation, special consideration is given to the efficieny of these   
 ///functions.                                                              
 [<AutoOpen>]
-module NatEval
+module HOL.NatEval
 
 (* Throughout the module, the HOL variables "l", "m" and "n" are used for     *)
 (* natural numbers that are free in the pre-computed evaluation lemmas.  Free *)

@@ -19,7 +19,7 @@
 ///used in the HOL quotation lexer and parsers (see 'Lexer' and 'Parser'   
 ///modules respectively).            
 [<AutoOpen>]                                      
-module Reader
+module HOL.Reader
 
 (* ** GENERIC SOURCE ** *)
 

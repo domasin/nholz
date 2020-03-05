@@ -16,7 +16,7 @@
 ///This module defines a command for defining type bijection constants for a
 ///given type constant definition.                                                                                                                                
 [<AutoOpen>]
-module Def1
+module HOL.Def1
 
 (* ** TYPE BIJECTIONS DEFINITION ** *)
 

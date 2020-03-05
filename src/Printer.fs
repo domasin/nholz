@@ -22,7 +22,7 @@
 ///of the system, since the user will normally rely on it to determine what  
 ///has been proved and what has been asserted.          
 [<AutoOpen>]                                                                                                                   
-module Printer
+module HOL.Printer
 
 (* The printers have the important completeness property that their output is *)
 (* unambiguous, so for example there is no confusion about the type of any    *)

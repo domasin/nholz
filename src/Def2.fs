@@ -17,7 +17,7 @@
 ///constants.  The first form is for non-recursive functions and the second
 ///is for recursive functions.                                                                                                                                                                                                                                   
 [<AutoOpen>]
-module Def2
+module HOL.Def2
 
 (* ** UTILITIES ** *)
 

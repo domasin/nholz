@@ -18,7 +18,7 @@
 ///free variables or assumptions, whereas stored lemmas are theorems that have 
 ///no such restrictions.                                                   
 [<AutoOpen>]
-module Store
+module HOL.Store
 
 (* ** THEOREM STORAGE ** *)
 

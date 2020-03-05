@@ -8,6 +8,28 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{9C37445C-6322-4C4A-952B-2AEAB7B3F887}"
 	ProjectSection(SolutionItems) = preProject
 		scripts\initialization.fsx = scripts\initialization.fsx
+		scripts\prop.fsx = scripts\prop.fsx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A3BF9663-E3B3-4363-B5B7-BD4191A8D4E6}"
+	ProjectSection(SolutionItems) = preProject
+		docs\001_introduction.fsx = docs\001_introduction.fsx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "experiments", "experiments", "{056F303E-08C0-476E-9A7E-2C71BC0F49A2}"
+	ProjectSection(SolutionItems) = preProject
+		sections\it\prop.fsx = sections\it\prop.fsx
+		sections\it\prop_rules.fsx = sections\it\prop_rules.fsx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "manuale", "manuale", "{08F988BE-4817-4730-BF1E-A8333BEA87E2}"
+	ProjectSection(SolutionItems) = preProject
+		manuale\A5_Inference_Rules.fsx = manuale\A5_Inference_Rules.fsx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "it", "it", "{40DAE171-1C4D-4008-A9E0-F611A61032AF}"
+	ProjectSection(SolutionItems) = preProject
+		sections\it\prop.fsx = sections\it\prop.fsx
 	EndProjectSection
 EndProject
 Global
@@ -23,6 +45,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{40DAE171-1C4D-4008-A9E0-F611A61032AF} = {056F303E-08C0-476E-9A7E-2C71BC0F49A2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C78457C6-63C7-4158-B6B2-4CDEE07ED89D}

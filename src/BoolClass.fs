@@ -20,7 +20,7 @@
 ///intuitionistic logic if an alternative definition of existential         
 ///quantification is used (as in HOL Light).                                                                                        
 [<AutoOpen>]
-module BoolClass
+module HOL.BoolClass
 
 (* select_rule : thm -> thm                                                   *)
 (*                                                                            *)
@@ -446,6 +446,20 @@ let ccontr_lemma =
       (contr_rule p_
         (undisch_rule (assume_rule (parse_term(@"~ p_ ==> false")))) ))
 
+//  ccontr_rule : term -> thm -> thm
+//  
+/// This is the classical contradiction rule.  It takes a boolean term and a theorem
+/// with falsity as its conclusion.  It returns a theorem with the supplied term as
+/// its conclusion, and with the same assumptions as the supplied theorem but with
+/// the logical negation of the supplied term removed.  Note that the logical
+/// negation of the supplied term does not have to be in the supplied theorem's
+/// assumptions for the rule to succeed.
+/// 
+///       `p`   A |- false
+///       ----------------
+///         A\{~p} |- p
+/// 
+/// See also: contr_rule, deduct_contrapos_rule.
 let ccontr_rule tm th =            (* p    A |- false   *)
     try
         let p_ = mk_var ("p_",bool_ty) in

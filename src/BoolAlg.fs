@@ -16,7 +16,7 @@
 ///This module proves various algebraic property theorems for the predicate
 ///logic operators.                                                                  
 [<AutoOpen>]
-module BoolAlg
+module HOL.BoolAlg
 
 (* HOL variables *)
 

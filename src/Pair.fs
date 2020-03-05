@@ -19,7 +19,7 @@
 ///basic properties.  Syntax functions and equality congruence rules are also
 ///provided.                                                                                                                                                                                          
 [<AutoOpen>]
-module Pair
+module HOL.Pair
 
 (* ** THE PRODUCT TYPE ** *)
 

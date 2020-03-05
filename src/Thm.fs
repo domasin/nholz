@@ -22,7 +22,7 @@
 ///terms of these constructors.  This module is a trusted component of the   
 ///system.                                                               
 [<AutoOpen>]                                      
-module Thm
+module HOL.Thm
 
 (* Note that the primitive constructors are defined here in anticipation of   *)
 (* suitable declarations/definitions of certain HOL theory objects.  These    *)

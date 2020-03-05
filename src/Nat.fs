@@ -18,7 +18,7 @@
 ///and the "ZERO" and "SUC" constants, based on the theory of individuals,  
 ///and proving a few important properties.                                                                                                                                                                                                      
 [<AutoOpen>]
-module Nat
+module HOL.Nat
 
 (* ** NATURALS TYPE ** *)
 

@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/bin
+/docs
+/privatedocs
+/sections/it
+/src/obj
+/Original LICENSE Hol Zero.txt
+/.vs/nholz
+/experiments/it/prop_rules.fsx
+/scripts/prop.fsx

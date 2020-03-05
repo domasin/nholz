@@ -16,10 +16,9 @@
 /// Questo modulo definisce varie utilità di programmazione funzionale da 
 /// usare nel corso dell'implementazione.
 [<AutoOpen>]                                     
-module Lib
+module HOL.Lib
 
 open System.Numerics
-open Exn
 open System
 
 //* ** GESTIONE DELL'ECCEZIONI ** *//

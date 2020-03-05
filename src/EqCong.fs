@@ -10,7 +10,7 @@
 (* F# Porting                                                                 *)
 (*                                                                            *)
 (* by Domenico Masini 2013                                                    *)
-(* http://github.com/domasin/nholz                                        *)
+(* http://github.com/domasin/nholz                                            *)
 (* ========================================================================== *)
 
 ///This module implements equality congruence rules for equality, function
@@ -19,7 +19,7 @@
 ///'mk_abs_rule' (see 'Thm' module) and the derived congruence rules      
 ///'mk_comb1_rule' and 'mk_comb2_rule' (see 'Equal' module).              
 [<AutoOpen>]
-module EqCong
+module HOL.EqCong
 
 (* Utilities *)
 

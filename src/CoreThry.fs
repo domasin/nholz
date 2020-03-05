@@ -17,7 +17,7 @@
 ///theory.  This involves giving declarations, definitions and axioms for all
 ///the HOL theory objects anticipated by the language and inference kernels. 
 [<AutoOpen>]
-module CoreThry
+module HOL.CoreThry
 
 (* This module is part of the logical core and thus crucial to the soundness  *)
 (* of the system.  However, strictly speaking this module is not a trusted    *)

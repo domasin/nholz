@@ -21,7 +21,7 @@
 ///well-formed types can be constructed.  This module is a trusted component 
 [<AutoOpen>] 
 ///of the system.                                                                                                          
-module Type
+module HOL.Type
 
 open System.Numerics
 

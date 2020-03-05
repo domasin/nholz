@@ -16,7 +16,7 @@
 ///This module defines the classic natural number arithmetic relations and
 ///derives various basic properties about them.
 [<AutoOpen>]
-module NatRel
+module HOL.NatRel
 
 (* HOL variables *)
 

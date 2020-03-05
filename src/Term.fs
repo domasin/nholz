@@ -21,7 +21,7 @@
 ///formed terms can be constructed.  This module is a trusted component of   
 ///the system.                                                               
 [<AutoOpen>]                                                                                                      
-module Term
+module HOL.Term
 
 (* Also defined in this module is a primitive utility (for calculating the    *)
 (* type of a term) that is needed in the definition of a primitive syntax     *)

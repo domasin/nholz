@@ -16,7 +16,7 @@
 ///This module adds more constants and inference rules for basic reasoning
 ///using equality.                                                                                                       
 [<AutoOpen>]
-module Equal
+module HOL.Equal
 
 
 (* ** NEW CONSTANTS ** *)
@@ -166,19 +166,18 @@ let sym_rule th =                   (* A |- t1 = t2    *)
         let () = assert1 (is_eqthm th)      (func,"Not an equality theorem")
         internal_err func
 
-(* app_beta_rhs_rule : thm -> term -> thm                                     *)
-(*                                                                            *)
-(* This rule is for expanding a function defined in terms of a lambda         *)
-(* abstraction.  It takes an equality theorem and a term argument, where the  *)
-(* theorem RHS is a lambda abstraction with a binding variable of the same    *)
-(* type as the term argument.  It returns a theorem stating that the theorem  *)
-(* argument's LHS applied to the term argument is equal to the beta reduction *)
-(* of the lambda abstraction applied to the term argument.                    *)
-(*                                                                            *)
-(*    A |- f = (\v. t)   `s`                                                  *)
-(*    ----------------------                                                  *)
-(*      A |- f s = t[s/v]                                                     *)
-
+// app_beta_rhs_rule : thm -> term -> thm                                     
+//                                                                            
+/// This rule is for expanding a function defined in terms of a lambda         
+/// abstraction.  It takes an equality theorem and a term argument, where the  
+/// theorem RHS is a lambda abstraction with a binding variable of the same    
+/// type as the term argument.  It returns a theorem stating that the theorem  
+/// argument's LHS applied to the term argument is equal to the beta reduction 
+/// of the lambda abstraction applied to the term argument.                    
+///                                                                            
+///    A |- f = (\v. t)   `s`                                                  
+///    ----------------------                                                  
+///      A |- f s = t[s/v]                                                     
 let app_beta_rhs_rule th0 z =          (* |- f = (\v. t)     *)
     try
         let th1 = mk_comb1_rule th0 z                 (* |- f s = (\v. t) s        *)
@@ -220,16 +219,15 @@ let app_beta_rule th0 tm =      (* A |- (\v1. t1) = (\v2. t2)    s  *)
 
 let list_app_beta_rule th0 tms = foldl app_beta_rule th0 tms
 
-(* alpha_link_conv : term -> term -> thm                                      *)
-(*                                                                            *)
-(* This is the alpha linking conversion.  It takes two alpha-equivalent terms *)
-(* and returns a theorem stating that the second is equal to the first, under *)
-(* no assumptions.  Fails if the supplied terms are not alpha-equivalent.     *)
-(*                                                                            *)
-(*    `t'`   `t`                                                              *)
-(*    ----------                                                              *)
-(*    |- t = t'                                                               *)
-
+// alpha_link_conv : term -> term -> thm                                      
+//                                                                            
+/// This is the alpha linking conversion.  It takes two alpha-equivalent terms 
+/// and returns a theorem stating that the second is equal to the first, under 
+/// no assumptions.  Fails if the supplied terms are not alpha-equivalent.     
+///                                                                            
+///    `t'`   `t`                                                              
+///    ----------                                                              
+///    |- t = t'                                                               
 let alpha_link_conv tm' tm =       (* t'   t  *)
     try
         let th1 = refl_conv tm                   (* |- t = t       *)
@@ -240,18 +238,17 @@ let alpha_link_conv tm' tm =       (* t'   t  *)
         let () = assert1 (alpha_eq tm tm')      (func,"Args not alpha-equivalent")
         internal_err func
 
-(* alpha_conv : term -> term -> thm                                           *)
-(*                                                                            *)
-(* This is the alpha renaming conversion.  It replaces the binding variable   *)
-(* and all occurrences of it in the supplied lambda abstraction term (the 2nd *)
-(* argument) with the supplied variable (the 1st argument).  The supplied     *)
-(* variable must have the same type as the original binding variable, and     *)
-(* must not occur free in the original body.                                  *)
-(*                                                                            *)
-(*          `y`   `\x. t`                                                     *)
-(*    -------------------------                                               *)
-(*    |- (\x. t) = (\y. t[y/x])                                               *)
-
+// alpha_conv : term -> term -> thm                                           
+//                                                                            
+/// This is the alpha renaming conversion.  It replaces the binding variable   
+/// and all occurrences of it in the supplied lambda abstraction term (the 2nd 
+/// argument) with the supplied variable (the 1st argument).  The supplied     
+/// variable must have the same type as the original binding variable, and     
+/// must not occur free in the original body.                                  
+///                                                                            
+///          `y`   `\x. t`                                                    
+///    -------------------------                                              
+///    |- (\x. t) = (\y. t[y/x])                                              
 let alpha_conv u tm =
     let func = "alpha_conv"
     let () = assert1 (is_var u)                  (func,"Arg 1 not a variable")

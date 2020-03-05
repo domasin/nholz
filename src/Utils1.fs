@@ -19,7 +19,7 @@
 ///assertion commands in the 'Thm' module.  This module is a trusted        
 ///component of the system.
 [<AutoOpen>]  
-module Utils1
+module HOL.Utils1
 
 (* ** TYPE SYNTAX FUNCTIONS ** *)
 

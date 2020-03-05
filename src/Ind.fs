@@ -17,7 +17,7 @@
 ///together with a zero and a successor function for this type.  These get  
 ///used in the 'Nat' module as the basis for defining the natural numbers.                                                                                                                                                                     
 [<AutoOpen>]
-module Ind
+module HOL.Ind
 
 (* ** INDIVIDUALS TYPE ** *)
 

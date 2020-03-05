@@ -17,7 +17,7 @@
 ///the pretty printers display types and terms.  Note that the display modes
 ///make no difference to the way that types and terms are parsed.   
 [<AutoOpen>]                                                                     
-module Dmodes
+module HOL.Dmodes
 
 (* 'level' datatype *)
 

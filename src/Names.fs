@@ -20,10 +20,9 @@
 ///module is a trusted component of the system, since it is used in the      
 ///implementation of the pretty printer.          
 [<AutoOpen>]                                                                  
-module Names
+module HOL.Names
 
 (* ** SUPPORTING DATATYPES ** *)
-
 
 (* hand *)
 

@@ -20,7 +20,7 @@
 ///used to determine how lexical tokens are formed, is implemented in the    
 ///'Names' module.           
 [<AutoOpen>]                                                                                                                                                                                                                     
-module Lexer
+module HOL.Lexer
 
 (* The lexer (like the syntax parsers) is implemented in terms of reader      *)
 (* functions that take a source (in this case, a list of characters) and      *)

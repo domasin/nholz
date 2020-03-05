@@ -23,7 +23,7 @@
 ///intermediate datatypes, there is no need for well-formedness restrictions 
 ///on their constructors, and so the datatypes are not made abstract.
 [<AutoOpen>] 
-module Preterm
+module HOL.Preterm
 
 (* This module is a trusted component of the system, since it is used in the  *)
 (* implementation of the pretty printer.                                      *)

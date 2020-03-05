@@ -15,7 +15,7 @@
 
 ///This module defines various basic useful operations on types, terms and theorems. 
 [<AutoOpen>]
-module Utils2
+module HOL.Utils2
 
 (* ** TYPE SYNTAX FUNCTIONS ** *)
 

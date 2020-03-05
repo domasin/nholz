@@ -20,7 +20,7 @@
 ///counting and the theory commands benign redefinition and slightly enhanced
 ///functionality. 
 [<AutoOpen>]
-module Wrap
+module HOL.Wrap
 
 open System.Numerics
 
@@ -64,6 +64,16 @@ let refl_conv tm =
     (inc_step_total ();
      th')
 
+//  beta_conv : term -> thm 
+//
+/// This is the beta reduction conversion.  It takes a lambda abstraction
+/// application term, and returns a theorem stating that the application is equal to
+/// the lambda abstraction body but with all occurrences of the binding variable
+/// replaced with the application's argument, under no assumptions.
+/// 
+///            `(\x. t) s`
+///       ---------------------
+///       |- (\x. t) s = t[s/x]
 let beta_conv tm =
     let th' = try2 prim_beta_conv tm   "beta_conv" in
     (inc_step_total ();
@@ -79,6 +89,14 @@ let mk_abs_rule v th =
     (inc_step_total ();
      th')
 
+//   assume_rule : term -> thm                                     [ Primitive ]
+// 
+/// This is the assumption rule.  It takes a boolean term, and returns a theorem
+/// stating that the term holds under the single assumption of the term itself.
+///
+///     `p`
+///   --------
+///   {p} |- p
 let assume_rule tm =
     let th' = try2 prim_assume_rule tm   "assume_rule" in
     (inc_step_total ();

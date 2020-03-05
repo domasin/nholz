@@ -20,7 +20,7 @@
 ///the 'Lexer' module, and type analsyis (actually common to parsing and    
 ///printing) is implemented in the 'TypeAnal' module.           
 [<AutoOpen>]                                                   
-module Parser
+module HOL.Parser
 
 (* The parsers have two important parser soundness/completeness properties.   *)
 (* Firstly, every well-formed type/term has a quotation representation that   *)

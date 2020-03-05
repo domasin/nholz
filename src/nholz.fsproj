@@ -6,6 +6,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\bin\</OutputPath>
+    <DocumentationFile>..\bin\nholz.XML</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

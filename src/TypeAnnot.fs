@@ -20,7 +20,7 @@
 ///This module is used in the implementation of the pretty printer, and is a 
 ///trusted component of the system.                                            
 [<AutoOpen>]                                        
-module TypeAnnot
+module HOL.TypeAnnot
 
 (* Note that although this module is used in the implementation of the pretty *)
 (* printer, it is not a trusted component of the system.  This is because     *)

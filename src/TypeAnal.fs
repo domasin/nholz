@@ -20,7 +20,7 @@
 ///This module is used in the implementation of the pretty printer, and is a 
 ///trusted component of the system.                              
 [<AutoOpen>]             
-module TypeAnal
+module HOL.TypeAnal
 
 (* These facilities support the parser/printer soundness/completeness         *)
 (* objectives.  These are: the ability to parse-in a quotation representation *)

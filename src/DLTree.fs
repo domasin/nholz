@@ -17,7 +17,7 @@
 /// di ricerca - alberi binari auto-bilanciati che memorizzano informazioni 
 /// su nodi ordinati in base a un indice rispetto alla relazione (<).
 [<AutoOpen>]
-module DLTree
+module HOL.DLTree
 
 (* Questo è implementato come alberi AA (anche chiamati alberi di Andersson), *)
 (* che rimangono bilanciati con un fattore di 2 - ovvero la massima distanza  *)

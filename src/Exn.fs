@@ -16,7 +16,7 @@
 /// Questo modulo definisce tre nuove eccezioni di uso generale, insieme a una 
 /// stampa di queste eccezioni.
 [<AutoOpen>]      
-module Exn
+module HOL.Exn
 
 //* HolFail exception *//
 
