@@ -11,11 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{9C37
 		scripts\prop.fsx = scripts\prop.fsx
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A3BF9663-E3B3-4363-B5B7-BD4191A8D4E6}"
-	ProjectSection(SolutionItems) = preProject
-		docs\001_introduction.fsx = docs\001_introduction.fsx
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "experiments", "experiments", "{056F303E-08C0-476E-9A7E-2C71BC0F49A2}"
 	ProjectSection(SolutionItems) = preProject
 		sections\it\prop.fsx = sections\it\prop.fsx
@@ -30,6 +25,17 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "it", "it", "{40DAE171-1C4D-4008-A9E0-F611A61032AF}"
 	ProjectSection(SolutionItems) = preProject
 		sections\it\prop.fsx = sections\it\prop.fsx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{FD66B3EA-18DF-4072-8DB1-39615AEA55AB}"
+	ProjectSection(SolutionItems) = preProject
+		docs\A5_Inference_Rules.html = docs\A5_Inference_Rules.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{DAD11A7D-1280-4F63-BBB5-828EB9EAAA1A}"
+	ProjectSection(SolutionItems) = preProject
+		docs\content\style.css = docs\content\style.css
+		docs\content\tips.js = docs\content\tips.js
 	EndProjectSection
 EndProject
 Global
@@ -48,6 +54,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{40DAE171-1C4D-4008-A9E0-F611A61032AF} = {056F303E-08C0-476E-9A7E-2C71BC0F49A2}
+		{DAD11A7D-1280-4F63-BBB5-828EB9EAAA1A} = {FD66B3EA-18DF-4072-8DB1-39615AEA55AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C78457C6-63C7-4158-B6B2-4CDEE07ED89D}
