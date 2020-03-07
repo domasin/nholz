@@ -33,6 +33,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{FD66B3EA-18DF-4072-8DB1-39615AEA55AB}"
 	ProjectSection(SolutionItems) = preProject
 		docs\A5_Inference_Rules.html = docs\A5_Inference_Rules.html
+		docs\B1_Teorie.html = docs\B1_Teorie.html
+		docs\index.html = docs\index.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{DAD11A7D-1280-4F63-BBB5-828EB9EAAA1A}"
