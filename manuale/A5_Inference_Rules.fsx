@@ -315,3 +315,85 @@ deduct_contrapos_rule
 //       `q`   A |- p                                                     
 //   ---------------------                                                
 //   (A u {~p})\{q} |- ~ q      
+
+(**
+
+| Wrap.disch\_rule                                     
+-------------------
+
+Regola primitiva
+
+Questa &egrave; la regola d'intrdouzone dell'implicazione. Prende un termine booleano 
+e un teorema, rimuove il termine (se presente) dalle assunzioni del teorema e lo 
+aggiunge come antecedente della conclusione. Si noti che il termine non deve essere 
+presente nelle assunzioni del teorema fornito perch&eacute; la regola abbia 
+successo.
+
+Si veda anche: undisch\_rule, mp\_rule.
+
+*)
+
+disch_rule
+
+//     `p`   A |- q
+//   ----------------
+//   A\{p} |- p ==> q
+
+(**
+
+| Bool.disj1\_rule                                     
+-------------------
+
+Questa &egrave; la regola di o-introduzione per il lato sinistro. Disgiunge il 
+termine booleano fornito al lato destro del teorema in input.
+
+Si veda anche: disj2\_rule, disj\_cases\_rule, mk\_disj1\_rule.
+
+*)
+
+disj1_rule
+
+//    A |- p   `q`
+//    ------------
+//    A |- p \/ q
+
+(**
+
+| Bool.disj2\_rule                                     
+-------------------
+
+Questa &egrave; la regola di o-introduzione per il lato destro. Disgiunge il 
+termine booleano fornito al lato sinistro del teorema in input.
+
+Si veda anche: disj2\_rule, disj\_cases\_rule, mk\_disj1\_rule.
+
+*)
+
+disj2_rule
+
+//   `p`   A |- q                                                           
+//   ------------                                                           
+//   A |- p \/ q      
+
+(**
+
+| Bool.disj\_cases\_rule                                    
+-------------------
+
+Questa &egrave; la regola di o-eliminazione. Prende un teorema di disgiunzione 
+e due teoremi extra che condividono la stessa conclusione. Restituisce un 
+teorema con la stessa conclusione dei teoremi extra. Le assunzioni del teorema 
+restituito sono l'unione delle assunzioni dei teoremi extra, ma con il 
+lato sinostro del teorema di disgiunzione rimosso dalle assunzioni del primo 
+e il lato destro rimosso da quelle del secondo, e unite insieme con le 
+assunzioni del teorema di disgiunzione.
+
+Si veda anche: disj1\_rule, disj2\_rule, mk\_disj\_rule.
+
+*)
+
+disj_cases_rule
+
+//  A |- p \/ q    A1 |- r    A2 |- r                                       
+//  ---------------------------------                                       
+//      A u A1\{p} u A2\{q} |- r     

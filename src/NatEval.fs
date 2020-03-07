@@ -1215,3 +1215,7 @@ let eval_sub_conv tm =
     let tm01 = dest_numeral_tag tm1 in
     let tm02 = dest_numeral_tag tm2 in
     numeralise_bin_rule (eval_sub_conv0 tm01 tm02)
+
+/// Force module evaluation
+let load = 
+    get_all_axioms ()

@@ -116,9 +116,11 @@ let () = prim_new_const ("<=>", parse_type("bool->bool->bool"))
 (* Like any definition term, it cannot involve free variables.  Neither can   *)
 (* it involve type variables, because truth is of type boolean, which is not  *)
 (* polymorphic.  The term used here just uses equality and the boolean type.  *)
-(* It is the instance of the equality reflexive property for the boolean      *)
-(* identity function.                                                         *)
 
+/// It is the instance of the equality reflexive property for the boolean      
+/// identity function.
+///
+/// |- true <=> (\(p:bool). p) = (\p. p)
 let true_def =
     prim_new_const_definition ("true", parse_term(@"(\(p:bool). p) = (\p. p)"))
 
@@ -126,62 +128,67 @@ let true_tm = parse_term(@"true")
 
 (* Universal quantifier *)
 
-(* The universal quantifier is defined using equality and truth, simply as    *)
-(* the function that returns whether its predicate argument returns true for  *)
-(* every input.                                                               *)
-
 let () = set_fixity ("!", Binder)
 
+/// The universal quantifier is defined using equality and truth, simply as  
+/// the function that returns whether its predicate argument returns true for
+/// every input.                                                             
+///
+/// |- $! = (\(P:'a->bool). P = (\x. true))
 let forall_def =
     prim_new_const_definition ("!", parse_term(@"\(P:'a->bool). P = (\x. true)"))
 
 (* Conjunction *)
 
-(* Conjunction is defined here using implication and the universal            *)
-(* quantifier, as the binary function that returns whether, for any boolean   *)
-(* value, the arguments together implying the value necessarily implies the   *)
-(* value.                                                                     *)
-
 let () = set_fixity ("/\\", Infix (20,RightAssoc))
 
+/// Conjunction is defined here using implication and the universal         
+/// quantifier, as the binary function that returns whether, for any boolean
+/// value, the arguments together implying the value necessarily implies the
+/// value.                                                                  
+///
+/// |- $/\ = (\p1 p2. !p. (p1 ==> (p2 ==> p)) ==> p)
 let conj_def =
     prim_new_const_definition ("/\\", parse_term(@"\p1 p2. !p. (p1 ==> (p2 ==> p)) ==> p"))
 
 (* Existential quantifier *)
 
-(* The existential quantifier is defined using just selection, as the         *)
-(* function that returns whether any element selected as satisfying the       *)
-(* function's predicate argument necessarily satisfies the predicate.  Note   *)
-(* that if there is no element satisfying the predicate, then not even the    *)
-(* result of the selection operation can satisfy the predicate.               *)
-
 let () = set_fixity ("?", Binder)
 
+/// The existential quantifier is defined using just selection, as the      
+/// function that returns whether any element selected as satisfying the    
+/// function's predicate argument necessarily satisfies the predicate.  Note
+/// that if there is no element satisfying the predicate, then not even the 
+/// result of the selection operation can satisfy the predicate.            
+///
+/// |- $? = (\(P:'a->bool). P ($@ P))
 let exists_def =
     prim_new_const_definition ("?", parse_term(@"\(P:'a->bool). P ($@ P)"))
 
 (* One-to-one predicate *)
 
-(* The one-to-one predicate is defined as the function that returns whether   *)
-(* its function argument having the same result when applied to two elements  *)
-(* necessarily implies that the two elements are equal.                       *)
-
+/// The one-to-one predicate is defined as the function that returns whether 
+/// its function argument having the same result when applied to two elements
+/// necessarily implies that the two elements are equal.                     
+///
+/// |- ONE_ONE = (\(f:'a->'b). !x1 x2. f x1 = f x2 ==> x1 = x2)
 let one_one_def =
     prim_new_const_definition
         ("ONE_ONE", parse_term(@"\(f:'a->'b). !x1 x2. f x1 = f x2 ==> x1 = x2"))
 
 (* Type definition predicate *)
 
-(* This predicate is used in the theorem created by the primitive type        *)
-(* constant definition command to assert that there is a bijection from the   *)
-(* new type to its representation type.  It is defined as the function that   *)
-(* takes a characteristic function (a predicate for elements of the           *)
-(* representation type) and a representation function (mapping elements of    *)
-(* the new type to the representation type), and returns whether the          *)
-(* representation function is one-to-one and maps onto precisely those        *)
-(* elements in the representation type that satisfy the characteristic        *)
-(* function.                                                                  *)
-
+/// This predicate is used in the theorem created by the primitive type     
+/// constant definition command to assert that there is a bijection from the
+/// new type to its representation type.  It is defined as the function that
+/// takes a characteristic function (a predicate for elements of the        
+/// representation type) and a representation function (mapping elements of 
+/// the new type to the representation type), and returns whether the       
+/// representation function is one-to-one and maps onto precisely those     
+/// elements in the representation type that satisfy the characteristic     
+/// function.                                                               
+///
+/// |- TYPE_DEFINITION = (\P (rep:'b->'a). ONE_ONE rep /\ (!x. P x <=> (?y. x = rep y)))
 let type_definition_def =
     prim_new_const_definition
         ("TYPE_DEFINITION",
@@ -194,28 +201,31 @@ let type_definition_def =
 
 (* Eta Axiom *)
 
-(* This axiom states that, for any given function, the lambda abstraction     *)
-(* formed by applying the function to the binding variable is equal to the    *)
-(* function.                                                                  *)
-
+/// This axiom states that, for any given function, the lambda abstraction  
+/// formed by applying the function to the binding variable is equal to the 
+/// function.                                                               
+///
+/// |- !(f:'a->'b). (\x. f x) = f
 let eta_ax =
     prim_new_axiom ("eta_ax", parse_term(@"!(f:'a->'b). (\x. f x) = f"))
 
 (* Implication Antisymmetry Axiom *)
 
-(* This axiom states the antisymmetry property for implication.               *)
-
+/// This axiom states the antisymmetry property for implication.
+///
+/// |- !p1 p2. (p1 ==> p2) ==> ((p2 ==> p1) ==> (p1 <=> p2))
 let imp_antisym_ax =
     prim_new_axiom ("imp_antisym_ax",
                         parse_term(@"!p1 p2. (p1 ==> p2) ==> ((p2 ==> p1) ==> (p1 <=> p2))"))
 
 (* Axiom of Choice *)
 
-(* This axiom states a crucial property about the selection operator, namely  *)
-(* that any element satisfying a given predicate implies that the selected    *)
-(* element for the predicate satisfies the predicate.  Note that it says      *)
-(* nothing about when there is no element that can satisfy the predicate.     *)
-
+/// This axiom states a crucial property about the selection operator, namely
+/// that any element satisfying a given predicate implies that the selected  
+/// element for the predicate satisfies the predicate.  Note that it says    
+/// nothing about when there is no element that can satisfy the predicate.   
+///
+/// |- !(P:'a->bool) x. P x ==> P ($@ P)
 let select_ax =
     prim_new_axiom ("select_ax", parse_term(@"!(P:'a->bool) x. P x ==> P ($@ P)"))
 

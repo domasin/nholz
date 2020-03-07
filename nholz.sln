@@ -19,7 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "experiments", "experiments"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "manuale", "manuale", "{08F988BE-4817-4730-BF1E-A8333BEA87E2}"
 	ProjectSection(SolutionItems) = preProject
+		manuale\1_Introduzione.fsx = manuale\1_Introduzione.fsx
 		manuale\A5_Inference_Rules.fsx = manuale\A5_Inference_Rules.fsx
+		manuale\B1_Theorie.fsx = manuale\B1_Theorie.fsx
+		manuale\index.fsx = manuale\index.fsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "it", "it", "{40DAE171-1C4D-4008-A9E0-F611A61032AF}"
@@ -36,6 +39,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{DAD1
 	ProjectSection(SolutionItems) = preProject
 		docs\content\style.css = docs\content\style.css
 		docs\content\tips.js = docs\content\tips.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docsscipt", "docsscipt", "{F084FA05-9794-421F-ADDC-4561CD56A2FB}"
+	ProjectSection(SolutionItems) = preProject
+		generatedocs.fsx = generatedocs.fsx
 	EndProjectSection
 EndProject
 Global

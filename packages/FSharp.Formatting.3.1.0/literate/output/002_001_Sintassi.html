@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!--
+      The 2.1 La sintassi della logica proposizionale
+ parameters will be replaced with the
+      document title extracted from the <h1> element or
+      file name, if there is no <h1> heading
+    -->
+    <title>2.1 La sintassi della logica proposizionale
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="content/style.css" />
+    <script src="content/tips.js" type="text/javascript"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="row" style="margin-top:30px">
+        <div class="span1"></div>
+        <div class="span10" id="main">
+          <h1>2.1 La sintassi della logica proposizionale</h1>
+<p>La logica proposizionale &egrave; una versione moderna dell'algebra delle proposizioni di Boole cos&igrave; come &egrave; stata presentata
+nella Sezione 1.4 1. Essa studia espressioni chiamate formule 2 che intendono rappresentare proposizioni, ovvero affermazioni che possono
+essere considerate vere o false. Queste formule possono essere costruite dalle costanti "vero" o "falso" e alcune proposizioni atomiche (atomi) base
+utilizzando vari connettivi logici ("non", "e", "o", ecc.). Le proposizioni atomiche sono come le variabili nell'algebra ordinaria,
+e a volte ci riferiamo ad esse come variabili proposizionali o variabili booleane. Come suggerisce la parola "atomiche", non analizziamo
+la loro struttura interna; questa sar&agrave; considerata quando tratteremo la logica predicativa del primo-ordine nel prossimo capitolo.</p>
+<h2>2.1.1 Rappresentazione in F#</h2>
+<p>Le formule proposizionali sono rappresentate usando un datatype F# analogo al tipo delle espressioni descritto nella Sezione 1.6.
+Permettiamo le "costanti" proposizionali <code>False</code> e <code>True</code>, le formule atomiche Atom p, e costruiamo da esse formule usando l'operatore unario
+Not e i connettivi binari <code>And</code>, <code>Or</code>, <code>Imp</code> ("implica") e <code>Iff</code> ("se e solo se"). Rimandiamo la discussione dell'esatto significato di questi
+connettivi, e trattiamo prima di tutto alcune questioni pratiche.</p>
+<p>L'insieme sottostante delle proposizioni atomiche &egrave; ampiamente arbitrario, sebbene per alcuni scopi &egrave; importante che sia
+infinito, per escludere un limite alla complessit&agrave; delle formule che possiamo considerare. Nelle trattazioni astratte &egrave; comune
+indicizzare le proposizioni primitive con dei numeri. Facciamo s&igrave; che il tipo a delle proposizioni atomiche sia un parametro della
+definizione del tipo delle formule, di modo che alcune funzioni base funzionino indipendentemente da cosa esso sia. Questa generalit&agrave;
+apparentemente speciosa ci permetter&agrave; di evitare di ripetere del lavoro pi&ugrave; avanti quando considereremo lestensione alla logica del primo
+ordine. Per la stessa ragione includiamo due tipi costruttori di formule aggiuntivi Forall e Exists. Questi saranno largamente ignorati
+nel presente capitolo ma il loro ruolo diventer&agrave; chiaro pi&ugrave; avanti.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="rt">formula</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">a</span><span class="pn">&gt;</span> <span class="o">=</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="uc">False</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="uc">True</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="uc">Atom</span> <span class="k">of</span> <span class="ta">&#39;</span><span class="id">a</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="uc">Not</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs2', 7)" onmouseover="showTip(event, 'fs2', 7)" class="rt">formula</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">a</span><span class="pn">&gt;</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="uc">And</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs2', 9)" onmouseover="showTip(event, 'fs2', 9)" class="rt">formula</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">a</span><span class="pn">&gt;</span> <span class="pn">*</span> <span onmouseout="hideTip(event, 'fs2', 10)" onmouseover="showTip(event, 'fs2', 10)" class="rt">formula</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">a</span><span class="pn">&gt;</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="uc">Or</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs2', 12)" onmouseover="showTip(event, 'fs2', 12)" class="rt">formula</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">a</span><span class="pn">&gt;</span> <span class="pn">*</span> <span onmouseout="hideTip(event, 'fs2', 13)" onmouseover="showTip(event, 'fs2', 13)" class="rt">formula</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">a</span><span class="pn">&gt;</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs9', 14)" onmouseover="showTip(event, 'fs9', 14)" class="uc">Imp</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs2', 15)" onmouseover="showTip(event, 'fs2', 15)" class="rt">formula</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">a</span><span class="pn">&gt;</span> <span class="pn">*</span> <span onmouseout="hideTip(event, 'fs2', 16)" onmouseover="showTip(event, 'fs2', 16)" class="rt">formula</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">a</span><span class="pn">&gt;</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs10', 17)" onmouseover="showTip(event, 'fs10', 17)" class="uc">Iff</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs2', 18)" onmouseover="showTip(event, 'fs2', 18)" class="rt">formula</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">a</span><span class="pn">&gt;</span> <span class="pn">*</span> <span onmouseout="hideTip(event, 'fs2', 19)" onmouseover="showTip(event, 'fs2', 19)" class="rt">formula</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">a</span><span class="pn">&gt;</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs11', 20)" onmouseover="showTip(event, 'fs11', 20)" class="uc">Forall</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="rt">string</span> <span class="pn">*</span> <span onmouseout="hideTip(event, 'fs2', 22)" onmouseover="showTip(event, 'fs2', 22)" class="rt">formula</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">a</span><span class="pn">&gt;</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs13', 23)" onmouseover="showTip(event, 'fs13', 23)" class="uc">Exists</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs12', 24)" onmouseover="showTip(event, 'fs12', 24)" class="rt">string</span> <span class="pn">*</span> <span onmouseout="hideTip(event, 'fs2', 25)" onmouseover="showTip(event, 'fs2', 25)" class="rt">formula</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">a</span><span class="pn">&gt;</span>
+</code></pre></td>
+</tr>
+</table>
+<h2>2.1.2 Sintassi concreta</h2>
+<p>Come abbiamo visto Boole usava per i connettivi logici i segni algebrici tradizionali come "+". Questo faceva sembrare molte
+verit&agrave; logiche illusoriamente familiari, per esempio</p>
+<blockquote>
+<p>p(q + r) = pq + pr</p>
+</blockquote>
+<p>Ma alcune verit&agrave; logiche sembravano poi piuttosto aliene, come le seguenti, che risultano dallo scambiare sistematicamente gli "e"
+con gli "o" nella prima formula</p>
+<blockquote>
+<p>p + qr = (p + q)(p + r)</p>
+</blockquote>
+<p>Nel suo significato logico questo dice che se vale p o valgono sia q che r, allora vale p o q, e anche p o r, e vice versa.
+Pensandoci un poco il lettore pu&ograve; facilmente convincersi che questo &egrave; sempre vero; si ricordi che "p o q" &egrave; inteso in senso inclusivo,
+significando p o q o entrambi.</p>
+<p>Per evitare confusione o analogie fuorvianti con l'algebra ordinaria, useremo per i connettivi dei simboli speciali che
+oggigiorno sono diventati abbastanza standard.</p>
+<p>In ciascuna riga della seguente tabella diamo la lettura di ogni costrutto, seguito dal simbolismo standard che adotteremo nella
+discussione, quindi le approssimazioni ASCII che forniremo nei nostri programmi, il corrispondente costrutto della sintassi astratta,
+ed in fine alcuni altri simbolismi in uso. (L'ultima colonna pu&ograve; essere ignorata ai fini di questo libro, ma pu&ograve; essere utile quando
+si consulta la letteratura.)</p>
+<p><span class="math">\[\begin{array}{|l|l|l|l|l|}
+	\hline
+	Italiano &amp; Simbolico &amp; ASCII &amp; F\# &amp; Altri simboli\\
+	\hline
+	falso &amp; \bot &amp; false &amp; False &amp; 0, F\\
+	\hline
+	vero &amp; \top &amp; true &amp; True &amp; 1, T\\
+	\hline
+	non  &amp; \neg &amp; \sim\ p  &amp; Not p &amp; -p \\
+	\hline
+	p\ e\ q &amp; p \wedge q &amp; p \verb|/\| q &amp; And(p,q) &amp; pq, \\
+	\hline
+	p\ o\ q\ &amp; p \vee o q &amp; p \verb|\/| q &amp; Or(p,q) &amp; p + q, p\| q, p or q  \\
+	\hline
+	p\ implice\ q &amp; p \Rightarrow q &amp; p ==&gt; q &amp; Imp(p,q) &amp; p \rightarrow q, \\
+	\hline
+	p\ sse\ q &amp; p \Leftrightarrow q &amp; p &lt;=&gt; q &amp; Iff(p,q) &amp; p \leftrightarrow q, \\
+	\hline
+\end{array}\]</span></p>
+<p>Il simbolo "‘∨"’ è derivato dalla prima lettera di "‘vel"’, la parola latina per l’o inclusivo, ⊤ assomiglia alla prima
+lettera di "‘true"’, mentre ⊥ e ∧ sono semplicemente le immagini speculari di ⊤ e ∨, per riflettere un principio di dualità che
+sarà spiegato nella Sottosezione 2.4.1. 3 Il simbolo per la negazione è abbastanza simile al segno per la negazione aritmetica in
+modo da essere facilmente ricordato. Qualche lettore può aver visto i simboli per l’implicazione e "‘se e solo se"’ nella matematica
+informale.</p>
+<p>Così come per l’algebra ordinaria, stabiliamo delle regole di precedenza per i connettivi, che possono essere bypassate attraverso
+l’uso di parentesi. L’ordine di precedenza (abbastanza standard) che adottiamo è indicato dall’ordinamento della tabella di sopra,
+con "‘¬"’ come il simbolo più alto e "‘⇔"’ come quello più basso. Per esempio p ⇒ q ∧¬r ∨s significa p ⇒ ((q ∧ (¬r)) ∨s). Forse
+sarebbe più appropriato dare una precedenza equivalente a ∧ e ∨, ma solo alcuni autori lo fanno ( [ Dijkstra and Scholten, 1990 ] )
+e noi seguiremo la massa dando a ∧ la precedenza più alta.</p>
+<p>Tutti i nostri connettivi sono analizzati secondo una regola di associazione a destra, così p ∧ q ∧ r significa p ∧ (q ∧ r), e
+così via. Nella pratica informale, implicazioni consecutive della forma p ⇒ q ⇒ r sono spesso usate come abbreviazione per
+"‘p ⇒ q e q ⇒ r"’, esattamente come x ≤ y ≤ z sta per "‘x ≤ y e y ≤ z"’. Per noi, comunque, p ⇒ q ⇒ r significa solamente p ⇒ (q ⇒ r),
+che non è la stessa cosa. 4 Nelle discussioni informali, non renderemo esplicito il costrutto Atom, ma cercheremo di usare nomi di variabili
+come p, q e r per formule generali e x, y e z per atomi generali. Per esempio quando parliamo di una formula x ⇔ p, intendiamo di solito una
+formula della forma <code>IFF(Atom(x),p)</code>.</p>
+<h2>2.1.3 Parsing e stampa generici</h2>
+<p>Sviluppiamo un supporto per il parsing e la stampa delle formule, esattamente come abbiamo fatto per le ordinarie espressioni
+algebriche nella Sezione 1.7 e Sezione 1.8. Dal momento che i dettagli non sono importanti per gli scopi attuali, una descrizione
+dettagliata del codice è rimandata all'Appendice C. Vogliamo enfatizzare, comunque, che dal momento che il tipo delle formule è
+parametrizzato da un tipo di proposizioni atomiche, le funzioni di parsing e stampa sono parametrizzate in modo analogo. La funzione
+parse_formula ha il tipo:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs14', 26)" onmouseover="showTip(event, 'fs14', 26)" class="fn">parse_formula</span><span class="pn">;;</span>
+</code></pre></td>
+</tr>
+</table>
+
+          <div class="tip" id="fs1">module Formulas</div>
+<div class="tip" id="fs2">type formula&lt;&#39;a&gt; =<br />&#160;&#160;| False<br />&#160;&#160;| True<br />&#160;&#160;| Atom of &#39;a<br />&#160;&#160;| Not of formula&lt;&#39;a&gt;<br />&#160;&#160;| And of formula&lt;&#39;a&gt; * formula&lt;&#39;a&gt;<br />&#160;&#160;| Or of formula&lt;&#39;a&gt; * formula&lt;&#39;a&gt;<br />&#160;&#160;| Imp of formula&lt;&#39;a&gt; * formula&lt;&#39;a&gt;<br />&#160;&#160;| Iff of formula&lt;&#39;a&gt; * formula&lt;&#39;a&gt;<br />&#160;&#160;| Forall of string * formula&lt;&#39;a&gt;<br />&#160;&#160;| Exists of string * formula&lt;&#39;a&gt;</div>
+<div class="tip" id="fs3">union case formula.False: formula&lt;&#39;a&gt;</div>
+<div class="tip" id="fs4">union case formula.True: formula&lt;&#39;a&gt;</div>
+<div class="tip" id="fs5">union case formula.Atom: &#39;a -&gt; formula&lt;&#39;a&gt;</div>
+<div class="tip" id="fs6">union case formula.Not: formula&lt;&#39;a&gt; -&gt; formula&lt;&#39;a&gt;</div>
+<div class="tip" id="fs7">union case formula.And: formula&lt;&#39;a&gt; * formula&lt;&#39;a&gt; -&gt; formula&lt;&#39;a&gt;</div>
+<div class="tip" id="fs8">union case formula.Or: formula&lt;&#39;a&gt; * formula&lt;&#39;a&gt; -&gt; formula&lt;&#39;a&gt;</div>
+<div class="tip" id="fs9">union case formula.Imp: formula&lt;&#39;a&gt; * formula&lt;&#39;a&gt; -&gt; formula&lt;&#39;a&gt;</div>
+<div class="tip" id="fs10">union case formula.Iff: formula&lt;&#39;a&gt; * formula&lt;&#39;a&gt; -&gt; formula&lt;&#39;a&gt;</div>
+<div class="tip" id="fs11">union case formula.Forall: string * formula&lt;&#39;a&gt; -&gt; formula&lt;&#39;a&gt;</div>
+<div class="tip" id="fs12">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />--------------------<br />type string = System.String</div>
+<div class="tip" id="fs13">union case formula.Exists: string * formula&lt;&#39;a&gt; -&gt; formula&lt;&#39;a&gt;</div>
+<div class="tip" id="fs14">val parse_formula : ifn:(string list -&gt; string list -&gt; formula&lt;&#39;a&gt; * string list) * afn:(string list -&gt; string list -&gt; formula&lt;&#39;a&gt; * string list) -&gt; vs:string list -&gt; inp:string list -&gt; formula&lt;&#39;a&gt; * string list</div>
+
+        </div>
+        <div class="span1"></div>
+      </div>
+    </div>
+  </body>
+</html>

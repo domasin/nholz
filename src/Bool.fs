@@ -859,19 +859,7 @@ let conjunct2_rule th =          (* A |- p /\ q       *)
         let () = assert1 (is_conj (concl th))   (func,"Not a conjunction theorem") in
         internal_err func
 
-(* disj_cases_rule : thm -> thm -> thm -> thm                                 *)
-(*                                                                            *)
-(* This is the disjunction elimination rule.  It takes a disjunction theorem  *)
-(* and two extra theorems that share the same conclusion.  It returns a       *)
-(* theorem with the same conclusion as the extra theorems.  The assumptions   *)
-(* of the returned theorem union the assumptions of the extra theorems, but   *)
-(* with the disjunction theorem's LHS removed from the first's assumptions    *)
-(* and its RHS removed from the second's, unioned together with the           *)
-(* disjunction theorem's assumptions.                                         *)
-(*                                                                            *)
-(*    A |- p \/ q    A1 |- r    A2 |- r                                       *)
-(*    ---------------------------------                                       *)
-(*        A u A1\{p} u A2\{q} |- r                                            *)
+(* disj_cases_rule *)
 
 let disj_lemma0 =
     list_app_beta_rhs_rule disj_def [p1_;p2_]
@@ -884,6 +872,21 @@ let disj_cases_lemma =
        (* p1_ \/ p2_ |- !p. (p1_ ==> p) ==> (p2_ ==> p) ==> p      *)
        (eq_mp_rule disj_lemma0 (assume_rule (parse_term(@"p1_ \/ p2_")))))
 
+//  disj_cases_rule : thm -> thm -> thm -> thm                                 
+//                                                                             
+/// This is the disjunction elimination rule.  It takes a disjunction theorem  
+/// and two extra theorems that share the same conclusion.  It returns a       
+/// theorem with the same conclusion as the extra theorems.  The assumptions   
+/// of the returned theorem union the assumptions of the extra theorems, but   
+/// with the disjunction theorem's LHS removed from the first's assumptions    
+/// and its RHS removed from the second's, unioned together with the           
+/// disjunction theorem's assumptions.                                         
+///                                                                            
+///    A |- p \/ q    A1 |- r    A2 |- r                                       
+///    ---------------------------------                                       
+///        A u A1\{p} u A2\{q} |- r                
+///
+/// See also: disj1_rule, disj2_rule, mk_disj_rule.
 let disj_cases_rule th0 th01 th02 =   (* A0 |- p \/ q    A1 |- r    A2 |- r  *)
     try
         let (p,q) = dest_disj (concl th0) in
@@ -901,14 +904,7 @@ let disj_cases_rule th0 th01 th02 =   (* A0 |- p \/ q    A1 |- r    A2 |- r  *)
                          (func,"Arg 2 and Arg 3 conclusions not alpha-equivalent") in
         internal_err func
 
-(* disj1_rule : thm -> term -> thm                                            *)
-(*                                                                            *)
-(* This is the disjunction introduction rule for the LHS.  It disjoins the    *)
-(* supplied boolean term to RHS of the supplied theorem.                      *)
-(*                                                                            *)
-(*    A |- p   `q`                                                            *)
-(*    ------------                                                            *)
-(*    A |- p \/ q                                                             *)
+(* disj1_rule *)                                         
 
 let disj1_lemma =
   (* |- p1_ ==> p1_ \/ p2_        *)
@@ -922,6 +918,16 @@ let disj1_lemma =
             (* p1_ ==> p, p1_ |- p                               *)
             (mp_rule (assume_rule (parse_term(@"p1_ ==> p"))) (assume_rule p1_)) ))))
 
+//  disj1_rule : thm -> term -> thm
+//  
+/// This is the disjunction introduction rule for the LHS.  It disjoins the supplied
+/// boolean term to the RHS of the supplied theorem.
+/// 
+///       A |- p   `q`
+///       ------------
+///       A |- p \/ q
+/// 
+/// See also: disj2_rule, disj_cases_rule, mk_disj1_rule.
 let disj1_rule th tm =             (* A |- p    q   *)
     try
         let p = concl th  
@@ -933,14 +939,7 @@ let disj1_rule th tm =             (* A |- p    q   *)
         let () = assert1 (is_bool_term tm)      (func,"Arg 2 not a boolean term") in
         internal_err func
 
-(* disj2_rule : term -> thm -> thm                                            *)
-(*                                                                            *)
-(* This is the disjunction introduction rule for the RHS.  It disjoins the    *)
-(* supplied boolean term to LHS of the supplied theorem.                      *)
-(*                                                                            *)
-(*    `p`   A |- q                                                            *)
-(*    ------------                                                            *)
-(*    A |- p \/ q                                                             *)
+(* disj2_rule *)   
 
 let disj2_lemma =
   (* |- q ==> p \/ q                         *)
@@ -954,6 +953,16 @@ let disj2_lemma =
             (* p2_ ==> p, p2_ |- p                         *)
             (mp_rule (assume_rule (parse_term(@"p2_ ==> p"))) (assume_rule p2_)) ))))
 
+//  disj2_rule : term -> thm -> thm                                           
+//                                                                            
+/// This is the disjunction introduction rule for the RHS.  It disjoins the   
+/// supplied boolean term to LHS of the supplied theorem.                     
+///                                                                           
+///    `p`   A |- q                                                           
+///    ------------                                                           
+///    A |- p \/ q                                         
+///
+/// Si veda anche: disj1_rule, disj_cases_rule, mk_disj2_rule.
 let disj2_rule tm th =             (* p    A |- q   *)
     try
         let p = tm  

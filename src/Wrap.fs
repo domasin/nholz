@@ -102,6 +102,19 @@ let assume_rule tm =
     (inc_step_total ();
      th')
 
+
+// disch_rule : term -> thm -> thm                                 [ Primitive ]
+// 
+/// This is the implication introduction rule.  It takes a boolean term and a
+/// theorem, and removes the term from the theorem's assumptions (if present) and
+/// adds it as an antecedent of the conclusion.  Note that the term does not have to
+/// be in the assumptions of the supplied theorem for the rule to succeed.
+/// 
+///         `p`   A |- q
+///       ----------------
+///       A\{p} |- p ==> q
+/// 
+/// See also: undisch_rule, mp_rule.
 let disch_rule tm th =
     let th' = try2 (prim_disch_rule tm) th   "disch_rule" in
     (inc_step_total ();
