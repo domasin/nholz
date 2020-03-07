@@ -17,7 +17,7 @@ per lo studio a livello personale di sistemi di questo tipo. Si &egrave; scelto 
 un dimostratore di teoremi relativamente semplice che si concentra su buone funzionalit&agrave; di base, 
 robustezza architetturale, lo sviluppo della sintassi concreta, un prettyprinting completo e non ambiguo, e la 
 leggibilit&agrave; del codice sorgente e perch&eacute; per le sue caratteristiche &egrave; risultato piuttosto semplice 
-effetturane il porting. 
+effettuarne il porting. 
 
 NHOLZ non &egrave; adatto allo sviluppo di dimostrazioni di grandi dimensioni. Esso, infatti, supporta soltanto uno 
 stile di dimostrazione nella semplice deduzione naturale, e manca di funzionalit&agrave; interattive ed automatiche 
@@ -32,7 +32,6 @@ estensione consiste nell'immettere definizioni in una sessione di NHOLZ (cio&egr
 sorgente di NHOLZ incorporata). Qualsiasi di queste estensioni sono sicure nel senso che non possono introdurre incoerenze 
 logiche nel sistema. Questa sicurezza &egrave; garantita dal fatto che NHOLZ &egrave; implementato secondo quella che viene 
 chiamata un'architettura nello ''stile LCF'' (si veda la Sessione 4.1.3), che &egrave; usata anche in altri sistemi HOL. 
-NHOLZ supporta lo standard Common HOL avendolo ereditato da HOL Zero.
 
 **1.1.2 La logica HOL**
 
@@ -58,6 +57,9 @@ e delle dimostrazioni formali tra i membri della famiglia HOL. Esso consiste nel
 - l'implementazione dell'API per vari sistemi HOL;
 - la specifica di un formato di file di dimostrazione, per permettere il porting delle dimostrazioni formali tra sistemi HOL compatibili;
 - l'implementazioni di oggetti per l'esportazione e l'importazione delle dimostrazioni tra vari sistemi HOL.
+
+NHOLZ, in generale, supporta lo standard Common HOL avendolo ereditato da HOL Zero. Va, tuttavia, notato che non supporta 
+le term e le type quotation.
 
 1.2 Avviare una sessione
 ------------------------

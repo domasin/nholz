@@ -37,7 +37,7 @@ per lo studio a livello personale di sistemi di questo tipo. Si &egrave; scelto 
 un dimostratore di teoremi relativamente semplice che si concentra su buone funzionalit&agrave; di base,
 robustezza architetturale, lo sviluppo della sintassi concreta, un prettyprinting completo e non ambiguo, e la
 leggibilit&agrave; del codice sorgente e perch&eacute; per le sue caratteristiche &egrave; risultato piuttosto semplice
-effetturane il porting.</p>
+effettuarne il porting.</p>
 <p>NHOLZ non &egrave; adatto allo sviluppo di dimostrazioni di grandi dimensioni. Esso, infatti, supporta soltanto uno
 stile di dimostrazione nella semplice deduzione naturale, e manca di funzionalit&agrave; interattive ed automatiche
 avanzate che altri sistemi HOL hanno.</p>
@@ -48,8 +48,7 @@ dall'interprete REPL una volta immesse.</p>
 estensione consiste nell'immettere definizioni in una sessione di NHOLZ (cio&egrave; una sessione interativa F# con il codice
 sorgente di NHOLZ incorporata). Qualsiasi di queste estensioni sono sicure nel senso che non possono introdurre incoerenze
 logiche nel sistema. Questa sicurezza &egrave; garantita dal fatto che NHOLZ &egrave; implementato secondo quella che viene
-chiamata un'architettura nello ''stile LCF'' (si veda la Sessione 4.1.3), che &egrave; usata anche in altri sistemi HOL.
-NHOLZ supporta lo standard Common HOL avendolo ereditato da HOL Zero.</p>
+chiamata un'architettura nello ''stile LCF'' (si veda la Sessione 4.1.3), che &egrave; usata anche in altri sistemi HOL.</p>
 <p><strong>1.1.2 La logica HOL</strong></p>
 <p>La logica HOL &egrave; una logica predicativa tipizzata, classica, di ordine superiore, cio&egrave; una logica
 predicativa con un sistema di tipi, con la legge del terzo escluso come teorema, e con la possibilit&agrave; di
@@ -71,6 +70,8 @@ e delle dimostrazioni formali tra i membri della famiglia HOL. Esso consiste nel
 <li>la specifica di un formato di file di dimostrazione, per permettere il porting delle dimostrazioni formali tra sistemi HOL compatibili;</li>
 <li>l'implementazioni di oggetti per l'esportazione e l'importazione delle dimostrazioni tra vari sistemi HOL.</li>
 </ul>
+<p>NHOLZ, in generale, supporta lo standard Common HOL avendolo ereditato da HOL Zero. Va, tuttavia, notato che non supporta
+le term e le type quotation.</p>
 <h2>1.2 Avviare una sessione</h2>
 <p>Una sessione di NHOLZ &egrave; avviata da uno script F#. Innanzitutto &egrave; necessario referenziare la dll
 e importare i relativi moduli:</p>
