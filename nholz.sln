@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "manuale", "manuale", "{08F9
 	ProjectSection(SolutionItems) = preProject
 		manuale\1_Introduzione.fsx = manuale\1_Introduzione.fsx
 		manuale\A5_Inference_Rules.fsx = manuale\A5_Inference_Rules.fsx
-		manuale\B1_Theorie.fsx = manuale\B1_Theorie.fsx
+		manuale\B1_Teorie.fsx = manuale\B1_Teorie.fsx
 		manuale\index.fsx = manuale\index.fsx
 	EndProjectSection
 EndProject
