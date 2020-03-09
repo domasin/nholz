@@ -101,34 +101,38 @@ Logica Predicativa
 // ONTO             `:('a->'b)->bool`               Nonfix
 // COND             `:bool->'a->'a->'a`             Nonfix *
 
+
+
+(**
+**Definizioni**
+*)
+
+false_def                                                    // falsita'
+// |- false <=> (!p. p)                                      //
+
+not_def                                                      // negazione logica
+// |- $~ = (\p. p ==> false)                                 // 
+
+disj_def                                                     // digiunzione
+// |- $\/ = (\p1 p2. !p. (p1 ==> p) ==> (p2 ==> p) ==> p)    // 
+
+uexists_def                                                  // quantificazione esistenziale univoca
+// |- $?! = (\(P:'a->bool). ?x. P x /\ (!y. P y ==> y = x))  // 
+
+let_def                                                      // espressioni let: `LET (LET (\x1 x2. t) s1) s2`
+// |- LET = (\(f:'a->'b) x. f x)                             // e' stampato come `let x1 = s1 and x2 = s2 in t`  
+
+onto_def                                                     // suriettivita'
+// |- ONTO = (\(f:'a->'b). !y. ?x. y = f x)                  // 
+
+cond_def                                                     // espressioni condizionali
+// |- COND =                                                 // `COND c t1 t2` e stampato come
+//     (\p (t1:'a) t2.                                       // `if c then t1 else t2`
+//         @x. ((p <=> true) ==> x = t1)                     // 
+//              /\ ((p <=> false) ==> x = t2))               // 
+
+
 (*** hide ***)
-
-//(**
-//DEFINITIONS
-
-//false_def
-//   |- false <=> (!p. p)
-
-//not_def
-//   |- $~ = (\p. p ==> false)
-
-//disj_def
-//   |- $\/ = (\p1 p2. !p. (p1 ==> p) ==> (p2 ==> p) ==> p)
-
-//uexists_def
-//   |- $?! = (\(P:'a->bool). ?x. P x /\ (!y. P y ==> y = x))
-
-//let_def
-//   |- LET = (\(f:'a->'b) x. f x)
-
-//onto_def
-//   |- ONTO = (\(f:'a->'b). !y. ?x. y = f x)
-
-//cond_def
-//   |- COND =
-//        (\p (t1:'a) t2.
-//            @x. ((p <=> true) ==> x = t1) /\ ((p <=> false) ==> x = t2))
-
 //********************************************************************************
 
 //                                  PAIRS

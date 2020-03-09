@@ -93,6 +93,31 @@
 <span class="c">// ONTO             `:(&#39;a-&gt;&#39;b)-&gt;bool`               Nonfix</span>
 <span class="c">// COND             `:bool-&gt;&#39;a-&gt;&#39;a-&gt;&#39;a`             Nonfix *</span>
 </code></pre>
+<p><strong>Definizioni</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs18', 26)" onmouseover="showTip(event, 'fs18', 26)" class="id">false_def</span>                                                    <span class="c">// falsita&#39;</span>
+<span class="c">// |- false &lt;=&gt; (!p. p)                                      //</span>
+
+<span onmouseout="hideTip(event, 'fs19', 27)" onmouseover="showTip(event, 'fs19', 27)" class="id">not_def</span>                                                      <span class="c">// negazione logica</span>
+<span class="c">// |- $~ = (\p. p ==&gt; false)                                 // </span>
+
+<span onmouseout="hideTip(event, 'fs20', 28)" onmouseover="showTip(event, 'fs20', 28)" class="id">disj_def</span>                                                     <span class="c">// digiunzione</span>
+<span class="c">// |- $\/ = (\p1 p2. !p. (p1 ==&gt; p) ==&gt; (p2 ==&gt; p) ==&gt; p)    // </span>
+
+<span onmouseout="hideTip(event, 'fs21', 29)" onmouseover="showTip(event, 'fs21', 29)" class="id">uexists_def</span>                                                  <span class="c">// quantificazione esistenziale unica</span>
+<span class="c">// |- $?! = (\(P:&#39;a-&gt;bool). ?x. P x /\ (!y. P y ==&gt; y = x))  // </span>
+
+<span onmouseout="hideTip(event, 'fs22', 30)" onmouseover="showTip(event, 'fs22', 30)" class="id">let_def</span>                                                      <span class="c">// espressioni let: `LET (LET (\x1 x2. t) s1) s2`</span>
+<span class="c">// |- LET = (\(f:&#39;a-&gt;&#39;b) x. f x)                             // e&#39; stampato come `let x1 = s1 and x2 = s2 in t`  </span>
+
+<span onmouseout="hideTip(event, 'fs23', 31)" onmouseover="showTip(event, 'fs23', 31)" class="id">onto_def</span>                                                     <span class="c">// suriettivita&#39;</span>
+<span class="c">// |- ONTO = (\(f:&#39;a-&gt;&#39;b). !y. ?x. y = f x)                  // </span>
+
+<span onmouseout="hideTip(event, 'fs24', 32)" onmouseover="showTip(event, 'fs24', 32)" class="id">cond_def</span>                                                     <span class="c">// espressioni condizionali</span>
+<span class="c">// |- COND =                                                 // `COND c t1 t2` e stampato come</span>
+<span class="c">//     (\p (t1:&#39;a) t2.                                       // `if c then t1 else t2`</span>
+<span class="c">//         @x. ((p &lt;=&gt; true) ==&gt; x = t1)                     // </span>
+<span class="c">//              /\ ((p &lt;=&gt; false) ==&gt; x = t2))</span>
+</code></pre>
 
           <div class="tip" id="fs1">namespace HOL</div>
 <div class="tip" id="fs2">val fsi : Compiler.Interactive.InteractiveSession</div>
@@ -111,6 +136,13 @@
 <div class="tip" id="fs15">val eta_ax : thm</div>
 <div class="tip" id="fs16">val imp_antisym_ax : thm</div>
 <div class="tip" id="fs17">val select_ax : thm</div>
+<div class="tip" id="fs18">val false_def : thm</div>
+<div class="tip" id="fs19">val not_def : thm</div>
+<div class="tip" id="fs20">val disj_def : thm</div>
+<div class="tip" id="fs21">val uexists_def : thm</div>
+<div class="tip" id="fs22">val let_def : thm</div>
+<div class="tip" id="fs23">val onto_def : thm</div>
+<div class="tip" id="fs24">val cond_def : thm</div>
 
         </div>
         <div class="span1"></div>

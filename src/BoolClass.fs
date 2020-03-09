@@ -54,18 +54,18 @@ let select_rule th =           (* A |- ?x. p  *)
 
 //  exists_rule : term * term -> thm -> thm
 //
-/// <summary>
-/// This is the existential introduction rule.  It takes an existential term,    <para>      </para>
-/// a witness term and a theorem, where the theorem's conclusion is the body     <para>      </para>
-/// of the existential term but with the witness term replacing occurrences of   <para>      </para>
-/// its binding variable.  It returns a theorem stating that the supplied        <para>      </para>
-/// existential term holds, under the same assumptions as the supplied           <para>      </para>
-/// theorem.                                                                     <para>      </para>
-///                                                                              <para>&#160;</para>
-///    `?x. p`   `t`   A |- p[t/x]                                               <para>      </para>
-///    ---------------------------                                               <para>      </para>
-///            A |- ?x. p                                                        <para>      </para>
-/// </summary>
+/// This is the existential introduction rule.  It takes an existential term, 
+/// a witness term and a theorem, where the theorem's conclusion is the body  
+/// of the existential term but with the witness term replacing occurrences of
+/// its binding variable.  It returns a theorem stating that the supplied     
+/// existential term holds, under the same assumptions as the supplied        
+/// theorem.                                                                  
+///                                                                           
+///    `?x. p`   `t`   A |- p[t/x]                                            
+///    ---------------------------                                            
+///            A |- ?x. p                                                     
+/// 
+/// See also: choose_rule, select_rule, mk_exists_rule.
 let exists_rule (tm1,tm2) th =       (* ?x. p    t    A |- p[t/x]   *)
     try
         let (v,p) = dest_exists tm1 in

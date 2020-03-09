@@ -203,6 +203,17 @@ let rec eval_suc_conv0 tm0 =
          -> (*  SUC (BIT1 ZERO)  -->  BIT0 (BIT1 ZERO)  *)
             suc_one_thm0
 
+//  eval_suc_conv : term -> thm                                              
+//                                                                           
+/// This is the evaluation conversion for numeral successor.  It takes a term
+/// of the form `SUC n`, where "n" is a natural number numeral, and returns a
+/// theorem stating that this equals its numeral value, under no assumptions.
+///                                                                          
+///       `SUC n`                                                            
+///    ------------                                                          
+///    |- SUC n = z                                                          
+///
+/// See also: eval_pre_conv.
 let eval_suc_conv tm =
     let func = "eval_suc_conv" in
     let tm0 = try1 dest_suc tm      (func, "Not a 'SUC' expression") in
@@ -221,16 +232,7 @@ let pre_suc_lemma =       (* |- SUC z = n ==> PRE n = z      *)
   disch_rule (parse_term(@"SUC z = n"))
     (subs_rule [assume_rule (parse_term(@"SUC z = n"))] (spec_rule z pre_suc_thm))
 
-(* eval_pre_conv : term -> thm                                                *)
-(*                                                                            *)
-(* This is the evaluation conversion for numeral predecessor.  It takes a     *)
-(* term of the form `PRE n`, where "n" is a natural number numeral, and       *)
-(* returns a theorem stating that this equals its numeral value, under no     *)
-(* assumptions.                                                               *)
-(*                                                                            *)
-(*       `PRE n`                                                              *)
-(*    ------------                                                            *)
-(*    |- PRE n = z                                                            *)
+(* eval_pre_conv *)
 
 (* For the non-trivial case, this is implemented by working out the result    *)
 (* `z` in ML and then working backwards from evaluating `SUC z` in HOL.       *)
@@ -248,6 +250,18 @@ let eval_pre_conv0 tm0 =
            (inst_rule [(n,tm0);(z,tm1)] pre_suc_lemma)
            (eval_suc_conv0 tm1)
 
+/// eval_pre_conv : term -> thm                                           
+///                                                                       
+/// This is the evaluation conversion for numeral predecessor.  It takes a
+/// term of the form `PRE n`, where "n" is a natural number numeral, and  
+/// returns a theorem stating that this equals its numeral value, under no
+/// assumptions.                                                          
+///                                                                       
+///       `PRE n`                                                         
+///    ------------                                                       
+///    |- PRE n = z                                                       
+///
+/// See also: eval_suc_conv.
 let eval_pre_conv tm =
     let func = "eval_pre_conv" in
     let tm0 = try1 dest_pre tm      (func, "Not a 'PRE' expression") in
@@ -331,16 +345,7 @@ let bit1_add_bit1_lemma =   (* |- BIT1 m + BIT1 n = BIT0 (SUC (m + n))   *)
         (* |- ...             = BIT0 (SUC (m + n))               *)
         sym_rule (spec_rule (parse_term(@"SUC (m+n)")) bit0_adddef_thm) ]
 
-(* eval_add_conv : term -> thm                                                *)
-(*                                                                            *)
-(* This is the evaluation conversion for numeral addition.  It takes a term   *)
-(* of the form `m + n`, where "m" and "n" are both natural number numerals,   *)
-(* and returns a theorem stating that this equals its numeral value, under no *)
-(* assumptions.                                                               *)
-(*                                                                            *)
-(*       `m + n`                                                              *)
-(*    ------------                                                            *)
-(*    |- m + n = z                                                            *)
+(* eval_add_conv *)
 
 let rec eval_add_conv0 tm1 tm2 =
   match (dest_bit tm1, dest_bit tm2) with
@@ -375,6 +380,18 @@ let rec eval_add_conv0 tm1 tm2 =
           inst_rule [(n,tm2)] zero_add_lemma
   | _  -> internal_err "eval_add_conv0"
 
+//  eval_add_conv : term -> thm                                               
+//                                                                            
+/// This is the evaluation conversion for numeral addition.  It takes a term  
+/// of the form `m + n`, where "m" and "n" are both natural number numerals,  
+/// and returns a theorem stating that this equals its numeral value, under no
+/// assumptions.                                                              
+///                                                                           
+///       `m + n`                                                             
+///    ------------                                                           
+///    |- m + n = z                                                
+///
+/// See also: eval_sub_conv, eval_mult_conv, eval_exp_conv.
 let eval_add_conv tm =
     let func = "eval_add_conv" in
     let (tm1,tm2) = try1 dest_add tm    (func, "Not a '+' expression") in
@@ -482,16 +499,7 @@ let bit1_squared_lemma =  (* |- (BIT1 m) * (BIT1 m) = BIT1 (BIT0 (m * m + m)) *)
              (* |- ...                    = BIT0 (m * m + m)              *)
              sym_rule (spec_rule (parse_term(@"m * m + m")) bit0_multdef_thm) ]))
 
-(* eval_mult_conv : term -> thm                                               *)
-(*                                                                            *)
-(* This is the evaluation conversion for numeral multiplication.  It takes a  *)
-(* term of the form `m * m`, where "m" and "n" are both natural number        *)
-(* numerals, and returns a theorem stating that this equals its numeral       *)
-(* value, under no assumptions.                                               *)
-(*                                                                            *)
-(*       `m * n`                                                              *)
-(*    ------------                                                            *)
-(*    |- m * n = z                                                            *)
+(* eval_mult_conv *)
 
 let rec eval_mult_conv0 tm1 tm2 =
     match (dest_bit1 tm1, dest_bit1 tm2) with
@@ -535,6 +543,18 @@ let rec eval_mult_conv0 tm1 tm2 =
                          (eval_add_conv0 (mk_comb (bit0_fn, eqthm_rhs th0))
                                          (eqthm_rhs th00) )))
 
+/// eval_mult_conv : term -> thm                                             
+///                                                                          
+/// This is the evaluation conversion for numeral multiplication.  It takes a
+/// term of the form `m * m`, where "m" and "n" are both natural number      
+/// numerals, and returns a theorem stating that this equals its numeral     
+/// value, under no assumptions.                                             
+///                                                                          
+///       `m * n`                                                            
+///    ------------                                                          
+///    |- m * n = z                                                          
+///
+/// See also: eval_add_conv, eval_sub_conv, eval_exp_conv.
 let eval_mult_conv tm =
     let func = "eval_mult_conv" in
     let (tm1,tm2) = try1 dest_mult tm   (func, "Not a '*' expression") in
@@ -573,16 +593,7 @@ let exp_zero_lemma =     (* |- m EXP ZERO = BIT1 ZERO                       *)
 let exp_one_lemma =      (* |- m EXP BIT1 ZERO = m                          *)
     subs_rule [numeral_one_thm] (spec_rule m exp_right_id_thm)
 
-(* eval_exp_conv : term -> thm                                                *)
-(*                                                                            *)
-(* This is the evaluation conversion for numeral exponentiation.  It takes a  *)
-(* term of the form `m EXP n`, where "m" and "n" are both natural number      *)
-(* numerals, and returns a theorem stating that this equals its numeral       *)
-(* value, under no assumptions.                                               *)
-(*                                                                            *)
-(*       `m EXP n`                                                            *)
-(*    --------------                                                          *)
-(*    |- m EXP n = z                                                          *)
+(* eval_exp_conv *)
 
 let rec eval_exp_conv0 tm1 tm2 =
     match (dest_bit1 tm2) with
@@ -612,6 +623,18 @@ let rec eval_exp_conv0 tm1 tm2 =
          -> (*  m EXP 0  -->  1                                     *)
             inst_rule [(m,tm1)] exp_zero_lemma
 
+//  eval_exp_conv : term -> thm                                              
+//                                                                           
+/// This is the evaluation conversion for numeral exponentiation.  It takes a
+/// term of the form `m EXP n`, where "m" and "n" are both natural number    
+/// numerals, and returns a theorem stating that this equals its numeral     
+/// value, under no assumptions.                                             
+///                                                                          
+///       `m EXP n`                                                          
+///    --------------                                                        
+///    |- m EXP n = z                                                        
+///
+/// See also: eval_add_conv, eval_sub_conv, eval_mult_conv.
 let eval_exp_conv tm =
     let func = "eval_exp_conv" in
     let (tm1,tm2) = try1 dest_exp tm   (func, "Not an 'EXP' expression") in
@@ -673,6 +696,17 @@ let rec eval_even_conv0 tm =
             zero_even_lemma
     | _  -> internal_err "eval_even_conv0"
 
+//  eval_even_conv : term -> thm                                            
+//                                                                          
+/// This is the evaluation conversion for numeral evenness.  It takes a term
+/// of the form `EVEN n`, where "n" is a natural number numeral, and returns
+/// a theorem stating its boolean value, under no assumptions.              
+///                                                                         
+///        `EVEN n`                                                         
+///    ---------------                                                      
+///    |- EVEN n <=> z                                                      
+///
+/// See also: eval_odd_conv.
 let eval_even_conv tm =
     let func = "eval_even_conv" in
     let tm0 = try1 dest_even tm     (func, "Not an 'EVEN' expression") in
@@ -729,6 +763,17 @@ let rec eval_odd_conv0 tm =
             zero_not_odd_lemma
     | _  -> internal_err "eval_odd_conv0"
 
+//  eval_odd_conv : term -> thm                                               
+//                                                                            
+/// This is the evaluation conversion for numeral oddness.  It takes a term of
+/// the form `ODD n`, where "n" is a natural number numeral, and returns a    
+/// theorem stating its boolean value, under no assumptions.                  
+///                                                                           
+///        `ODD n`                                                            
+///    --------------                                                         
+///    |- ODD n <=> z       
+///
+/// See also: eval_even_conv.
 let eval_odd_conv tm =
     let func = "eval_odd_conv" in
     let tm0 = try1 dest_odd tm      (func, "Not an 'ODD' expression") in
@@ -820,16 +865,7 @@ let bit1_eq_bit1_lemma =        (* |- BIT1 m = BIT1 n <=> m = n   *)
 let eq_refl_lemma =             (* |- n = n <=> true              *)
     eqt_intro_rule (refl_conv n)
 
-(* eval_nat_eq_conv : term -> thm                                             *)
-(*                                                                            *)
-(* This is the evaluation conversion for numeric equality.  It takes a term   *)
-(* of the form `m = n`, where "m" and "n" are both natural number numerals,   *)
-(* and returns a theorem stating that this equals its boolean value, under no *)
-(* assumptions.                                                               *)
-(*                                                                            *)
-(*        `m = n`                                                             *)
-(*    --------------                                                          *)
-(*    |- m = n <=> z                                                          *)
+(* eval_nat_eq_conv *)
 
 let rec eval_nat_eq_conv0 tm1 tm2 =
   if (tm1 = tm2)
@@ -867,6 +903,18 @@ let rec eval_nat_eq_conv0 tm1 tm2 =
               inst_rule [(n,tm01)] zero_eq_bit1_lemma
       | _  -> internal_err "eval_nat_eq_conv0"
 
+//  eval_nat_eq_conv : term -> thm                                            
+//                                                                            
+/// This is the evaluation conversion for numeric equality.  It takes a term  
+/// of the form `m = n`, where "m" and "n" are both natural number numerals,  
+/// and returns a theorem stating that this equals its boolean value, under no
+/// assumptions.                                                              
+///                                                                           
+///        `m = n`                                                            
+///    --------------                                                         
+///    |- m = n <=> z                                    
+///
+/// See also: eval_le_conv, eval_lt_conv, eval_ge_conv, eval_gt_conv.
 let eval_nat_eq_conv tm =
     let func = "eval_nat_eq_conv" in
     let (tm1,tm2) = try1 dest_eq tm     (func, "Not an '=' expression") in
@@ -1007,18 +1055,8 @@ let bit1_lt_bit1_lemma =         (* |- BIT1 m < BIT1 n <=> m < n   *)
 let lt_irrefl_lemma =             (* |- n < n <=> false            *)
     eqf_intro_rule (spec_rule n lt_irrefl_thm)
 
-(* eval_lt_conv : term -> thm                                                 *)
-(* eval_le_conv : term -> thm                                                 *)
-(*                                                                            *)
-(* These are the evaluation conversions for numeral less-than and less-than-  *)
-(* or-equal comparison.  They take a term of the form `m < n` or `m <= n`     *)
-(* respectively, where "m" and "n" are both natural number numerals, and      *)
-(* returns a theorem stating that this input equals its boolean value, under  *)
-(* no assumptions.                                                            *)
-(*                                                                            *)
-(*        `m < n`                   `m <= n`                                  *)
-(*    --------------            ---------------                               *)
-(*    |- m < n <=> z            |- m <= n <=> z                               *)
+(* eval_lt_conv *)
+(* eval_le_conv *)
 
 (* It is necessary to implement '<=' and '<' evaluation as mutually recursive *)
 (* because each have a case that reduces to the other (BIT1-BIT0 for '<=' and *)
@@ -1088,6 +1126,18 @@ and eval_lt_conv0 tm1 tm2 =
               inst_rule [(n,tm1)] lt_zero_lemma
       | _  -> internal_err "eval_lt_conv0"
 
+//  eval_le_conv : term -> thm                                                
+//                                                                            
+/// This is the evaluation conversion for numeral less-than-or-equal comparison.  It
+/// takes a term of the form `m <= n`, where "m" and "n" are both natural number
+/// numerals, and returns a theorem stating that this input equals its boolean
+/// value, under no assumptions.                                                        
+///                                                                           
+///        `m <= n`                               
+///    --------------                            
+///    |- m <= n <=> z            
+///
+/// See also: eval_lt_conv, eval_ge_conv, eval_gt_conv, eval_nat_eq_conv.
 let eval_le_conv tm =
   let func = "eval_le_conv" in
   let (tm1,tm2) = try1 dest_le tm     (func, "Not a '<=' expression") in
@@ -1097,6 +1147,18 @@ let eval_le_conv tm =
   let tm02 = dest_numeral_tag tm2 in
   numeralise_rel_rule (eval_le_conv0 tm01 tm02)
 
+//  eval_lt_conv : term -> thm                                                
+//                                                                            
+/// This is the evaluation conversion for numeral less-than-or-equal comparison.  It
+/// takes a term of the form `m < n`, where "m" and "n" are both natural number
+/// numerals, and returns a theorem stating that this input equals its boolean
+/// value, under no assumptions.                                                        
+///                                                                           
+///        `m < n`                               
+///    --------------                            
+///    |- m < n <=> z            
+///
+/// See also: eval_le_conv, eval_ge_conv, eval_gt_conv, eval_nat_eq_conv.
 let eval_lt_conv tm =
   let func = "eval_lt_conv" in
   let (tm1,tm2) = try1 dest_lt tm     (func, "Not a '<' expression") in
@@ -1118,19 +1180,18 @@ let gt_lt_lemma =            (* |- m > n <=> n < m        *)
 let ge_le_lemma =            (* |- m >= n <=> n =< m      *)
     list_spec_rule [m;n] ge_def
 
-(* eval_gt_conv : term -> thm                                                 *)
-(* eval_ge_conv : term -> thm                                                 *)
-(*                                                                            *)
-(* These are the evaluation conversions for numeral greater-than and greater- *)
-(* than-or-equal comparison.  They take a term of the form `m > n` or         *)
-(* `m >= n` respectively, where "m" and "n" are both natural number numerals, *)
-(* and returns a theorem stating that this input equals its boolean value,    *)
-(* under no assumptions.                                                      *)
-(*                                                                            *)
-(*        `m > n`                   `m >= n`                                  *)
-(*    --------------            ---------------                               *)
-(*    |- m > n <=> z            |- m >= n <=> z                               *)
-
+//  eval_gt_conv : term -> thm                                            
+//                                                                            
+/// This is the evaluation conversion for numeral greater-than comparison.  It takes
+/// a term of the form `m > n`, where "m" and "n" are both natural number numerals,
+/// and returns a theorem stating that this input equals its boolean value, under no
+/// assumptions.                                                
+///                   
+///        `m > n`    
+///    -------------- 
+///    |- m > n <=> z 
+///
+/// eval_ge_conv, eval_le_conv, eval_lt_conv, eval_nat_eq_conv.
 let eval_gt_conv tm =
     let func = "eval_gt_conv" in
     let (tm1,tm2) = try1 dest_gt tm     (func, "Not a '>' expression") in
@@ -1142,6 +1203,18 @@ let eval_gt_conv tm =
                         (eval_lt_conv0 tm02 tm01) in
     numeralise_rel_rule th
 
+//  eval_ge_conv : term -> thm                                            
+//                                                                            
+/// This is the evaluation conversion for numeral greater-than-or-equal comparison.
+/// It takes a term of the form `m >= n`, where "m" and "n" are both natural number
+/// numerals, and returns a theorem stating that this input equals its boolean
+/// value, under no assumptions.
+/// 
+///           `m >= n`
+///       ---------------
+///       |- m >= n <=> z
+///
+/// eval_ge_conv, eval_le_conv, eval_lt_conv, eval_nat_eq_conv.
 let eval_ge_conv tm =
     let func = "eval_ge_conv" in
     let (tm1,tm2) = try1 dest_ge tm     (func, "Not a '>=' expression") in
@@ -1171,16 +1244,7 @@ let add_sub_lemma =         (* |- z + n = m ==> m - n = z    *)
         [assume_rule (parse_term(@"z+n = m"))]
         (list_spec_rule [z;n] add_sub_cancel_thm) )
 
-(* eval_sub_conv : term -> thm                                                *)
-(*                                                                            *)
-(* This is the evaluation conversion for numeral subtraction.  It takes a     *)
-(* term of the form `m - n`, where "m" and "n" are both natural number        *)
-(* numerals, and returns a theorem stating that this equals its numeral       *)
-(* value, under no assumptions.                                               *)
-(*                                                                            *)
-(*       `m - n`                                                              *)
-(*    ------------                                                            *)
-(*    |- m - n = z                                                            *)
+(* eval_sub_conv *)
 
 (* For the non-trivial cases, this is implemented by working out the result   *)
 (* `z` in ML and then working backwards from evaluating the `z + n` in HOL.   *)
@@ -1207,6 +1271,18 @@ let eval_sub_conv0 tm1 tm2 =
              (list_spec_rule [tm1;tm2] sub_floor_thm0)
              (eqt_elim_rule (eval_le_conv0 tm1 tm2))
 
+//  eval_sub_conv : term -> thm                                           
+//                                                                        
+/// This is the evaluation conversion for numeral subtraction.  It takes a
+/// term of the form `m - n`, where "m" and "n" are both natural number   
+/// numerals, and returns a theorem stating that this equals its numeral  
+/// value, under no assumptions.                                          
+///                                                                       
+///       `m - n`                                                         
+///    ------------                                                       
+///    |- m - n = z                                                       
+///
+/// See also: eval_add_conv, eval_mult_conv, eval_exp_conv.
 let eval_sub_conv tm =
     let func = "eval_sub_conv" in
     let (tm1,tm2) = try1 dest_sub tm    (func, "Not a '-' expression") in

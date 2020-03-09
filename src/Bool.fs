@@ -41,8 +41,9 @@ let p2_ = parse_term(@"p2_:bool")
 (* ** NEW CONSTANTS ** *)
 
 
-(* Falsity *)
-
+///  Falsity
+/// 
+/// |- false <=> (!p. p) 
 let false_def =
     new_const_definition (parse_term(@"false = (!(p:bool). p)"))
 
@@ -52,6 +53,9 @@ let false_tm = parse_term(@"false")
 
 let _ = set_fixity ("\\/", Infix (15,RightAssoc))
 
+/// Disjunction
+///
+/// |- $\/ = (\p1 p2. !p. (p1 ==> p) ==> (p2 ==> p) ==> p)
 let disj_def =
     new_const_definition (parse_term(@"$\/ = (\p1 p2. !p. (p1 ==> p) ==> (p2 ==> p) ==> p)"))
 
@@ -77,6 +81,7 @@ let is_disj tm = is_cbin "\\/" tm
 
 let _ = set_fixity ("~", Prefix)
 
+/// |- $~ = (\p. p ==> false)
 let not_def =
     new_const_definition (parse_term(@"$~ = (\p. p ==> false)"))
 
@@ -98,6 +103,9 @@ let is_not tm = can dest_not tm
 
 let _ = set_fixity ("?!", Binder)
 
+/// Unique existential quantification 
+///
+/// |- $?! = (\(P:'a->bool). ?x. P x /\ (!y. P y ==> y = x))
 let uexists_def =
     new_const_definition (parse_term(@"$?! = (\(P:'a->bool). ?x. P x /\ (!y. P y ==> y = x))"))
 
@@ -112,14 +120,17 @@ let dest_uexists tm =
 
 let is_uexists tm = is_cbinder "?!" tm
 
-(* Conditional *)
-
-(* The internal constant for conditional expressions is called "COND".  It    *)
-(* has special support in the parser/printer, so that                         *)
-(*    `if c then t1 else t2`                                                  *)
-(* is parsed/printed for the internal term                                    *)
-(*    `COND c t1 t2`.                                                         *)
-
+/// Conditional
+///
+/// The internal constant for conditional expressions is called "COND".  It    *)
+/// has special support in the parser/printer, so that                         *)
+///    `if c then t1 else t2`                                                  *)
+/// is parsed/printed for the internal term                                    *)
+///    `COND c t1 t2`.                                                         *)
+///
+/// |- COND =
+/// (\p (t1:'a) t2.
+///     @x. ((p <=> true) ==> x = t1) /\ ((p <=> false) ==> x = t2))
 let cond_def =
     new_const_definition
         (parse_term(@"COND = 
@@ -165,16 +176,17 @@ let truth_thm =
                  (refl_conv (parse_term(@"\(p:bool).p")))
              )
 
-(* eqt_elim_rule : thm -> thm                                                 *)
-(*                                                                            *)
-(* This is the truth equivalence elimination rule.  It takes an equality      *)
-(* theorem that has truth on the RHS, and returns a theorem stating that the  *)
-(* LHS holds, under the same assumptions.                                     *)
-(*                                                                            *)
-(*    A |- p <=> true                                                         *)
-(*    ---------------                                                         *)
-(*        A |- p                                                              *)
-
+//  eqt_elim_rule : thm -> thm                                               
+//                                                                           
+/// This is the truth equivalence elimination rule.  It takes an equality    
+/// theorem that has truth on the RHS, and returns a theorem stating that the
+/// LHS holds, under the same assumptions.                                   
+///                                                                          
+///    A |- p <=> true                                                       
+///    ---------------                                                       
+///        A |- p                                                            
+///
+/// See also: eqt_intro_rule, eqf_elim_rule.
 let eqt_elim_rule th =            (* A |- p <=> true    *)
     try
         eq_mp_rule (sym_rule th) truth_thm     (* A |- p                *)
@@ -238,16 +250,15 @@ let prove_asm_rule th01 th02 =      (* A1 |- p    A2 |- q    *)
     let th1 = disch_rule (concl th01) th02 in    (* A2\{p} |- p ==> q      *)
     mp_rule th1 th01                             (* A1 u A2\{p} |- q       *)
 
-(* eq_imp_rule1 : thm -> thm * thm                                            *)
-(*                                                                            *)
-(* This is the first equivalence elimination rule.  It takes a theorem        *)
-(* stating the equivalence of two boolean terms, and returns a theorem        *)
-(* stating that the LHS implies the RHS, under the same assumptions.          *)
-(*                                                                            *)
-(*    A |- p <=> q                                                            *)
-(*    ------------                                                            *)
-(*    A |- p ==> q                                                            *)
-
+//  eq_imp_rule1 : thm -> thm * thm                                    
+//                                                                     
+/// This is the first equivalence elimination rule.  It takes a theorem
+/// stating the equivalence of two boolean terms, and returns a theorem
+/// stating that the LHS implies the RHS, under the same assumptions.  
+///                                                                    
+///    A |- p <=> q                                                    
+///    ------------                                                    
+///    A |- p ==> q                                                    
 let eq_imp_rule1 th =       (* A |- p <=> q      *)
     try
         let tm1 = eqthm_lhs th
@@ -261,16 +272,15 @@ let eq_imp_rule1 th =       (* A |- p <=> q      *)
         let () = assert1 (is_bool_eqthm th)      (func,"Not a bool equality thm")
         internal_err func
 
-(* eq_imp_rule2 : thm -> thm * thm                                            *)
-(*                                                                            *)
-(* This is the second equivalence elimination rule.  It takes a theorem       *)
-(* stating the equivalence of two boolean terms, and returns a theorem        *)
-(* stating that the RHS implies the LHS, under the same assumptions.          *)
-(*                                                                            *)
-(*    A |- p <=> q                                                            *)
-(*    ------------                                                            *)
-(*    A |- q ==> p                                                            *)
-
+//  eq_imp_rule2 : thm -> thm * thm                                     
+//                                                                      
+/// This is the second equivalence elimination rule.  It takes a theorem
+/// stating the equivalence of two boolean terms, and returns a theorem 
+/// stating that the RHS implies the LHS, under the same assumptions.   
+///                                                                     
+///    A |- p <=> q                                                     
+///    ------------                                                     
+///    A |- q ==> p                                                     
 let eq_imp_rule2 th =       (* A |- p <=> q      *)
     try
         let tm2 = eqthm_rhs th
@@ -351,16 +361,18 @@ let deduct_contrapos_rule tm1 th =         (* A |- p         *)
         (not_elim_rule (assume_rule (mk_not tm2)))
         th ))
 
-(* eqf_elim_rule : thm -> thm                                                 *)
-(*                                                                            *)
-(* The is the falsity equivalence elimination rule.  It takes an equality     *)
-(* theorem with falsity on the RHS, and returns the logical negation of the   *)
-(* LHS, under the same assumptions.                                           *)
-(*                                                                            *)
-(*    A |- p <=> false                                                        *)
-(*    ----------------                                                        *)
-(*        A |- ~ p                                                            *)
-
+//  eqf_elim_rule : thm -> thm                                              
+//                                                                          
+/// The is the falsity equivalence elimination rule.  It takes an equality  
+/// theorem with falsity on the RHS, and returns the logical negation of the
+/// LHS, under the same assumptions.                                        
+///                                                                         
+///    A |- p <=> false                                                     
+///    ----------------                                                     
+///        A |- ~ p                                                         
+///
+/// See also: eqf_intro_rule, not_intro_rule, not_elim_rule, mk_not_rule,
+/// eqt_elim_rule, deduct_contrapos_rule.
 let eqf_elim_rule th  =         (* A |- p <=> false   *)
     try
         let th1 = eq_imp_rule1 th                 (* A |- p ==> false        *)
@@ -371,18 +383,19 @@ let eqf_elim_rule th  =         (* A |- p <=> false   *)
         let () = assert1 (term_eq tm2 false_tm)   (func,"Theorem RHS not `false`")
         internal_err func
 
-(* imp_trans_rule : thm -> thm -> thm                                         *)
-(*                                                                            *)
-(* This is the transitivity rule for implication.  It takes two implication   *)
-(* theorem arguments, where the first theorem's RHS is the same (modulo       *)
-(* alpha-equivalence) as the second theorem's LHS.  It returns a theorem      *)
-(* stating that the first theorem's LHS implies the second theorem's RHS,     *)
-(* under the unioned assumptions of the two theorems.                         *)
-(*                                                                            *)
-(*    A1 |- p ==> q    A2 |- q ==> r                                          *)
-(*    ------------------------------                                          *)
-(*          A1 u A2 |- p ==> r                                                *)
-
+/// imp_trans_rule : thm -> thm -> thm                                       
+///                                                                          
+/// This is the transitivity rule for implication.  It takes two implication 
+/// theorem arguments, where the first theorem's RHS is the same (modulo     
+/// alpha-equivalence) as the second theorem's LHS.  It returns a theorem    
+/// stating that the first theorem's LHS implies the second theorem's RHS,   
+/// under the unioned assumptions of the two theorems.                       
+///                                                                          
+///    A1 |- p ==> q    A2 |- q ==> r                                        
+///    ------------------------------                                        
+///          A1 u A2 |- p ==> r                                              
+///
+/// See also: list_imp_trans_rule, eq_trans_rule, disch_rule, imp_anitsym_asm_rule.
 let imp_trans_rule tha thb =      (* A1 |- p ==> q    A2 |- q ==> r   *)
     try
         let (tm1,_) = dest_imp (concl tha) in
@@ -436,19 +449,20 @@ let spec_rule tm th =             (* x     A |- !x. p        *)
                                                 universal's binding var type") in
         internal_err func
 
-(* list_spec_rule : term list -> thm -> thm                                   *)
-(*                                                                            *)
-(* This is the compound universal elimination rule.  It strips off an         *)
-(* outermost universal quantifier from the supplied theorem for each item in  *)
-(* the supplied term list, replacing each occurrence of a stripped binding    *)
-(* variable in the body with its corresponding item in the term list.  The    *)
-(* type of each term in the term list must equal the type of its              *)
-(* corresponding binding variable.                                            *)
-(*                                                                            *)
-(*    [`t1`;`t2`;..]   A |- !x1 x2 .. . p                                     *)
-(*    -----------------------------------                                     *)
-(*           A |- p[t1/x1;t2/x2;..]                                           *)
-
+//  list_spec_rule : term list -> thm -> thm                                 
+//                                                                           
+/// This is the compound universal elimination rule.  It strips off an       
+/// outermost universal quantifier from the supplied theorem for each item in
+/// the supplied term list, replacing each occurrence of a stripped binding  
+/// variable in the body with its corresponding item in the term list.  The  
+/// type of each term in the term list must equal the type of its            
+/// corresponding binding variable.                                          
+///                                                                          
+///    [`t1`;`t2`;..]   A |- !x1 x2 .. . p                                   
+///    -----------------------------------                                   
+///           A |- p[t1/x1;t2/x2;..]                                         
+///
+/// See also: spec_rule, spec_all_rule, bspec_rule, list_gen_rule.
 let list_spec_rule tms th =
     try
         foldl (swap_arg spec_rule) th tms
@@ -573,18 +587,19 @@ let contr_rule tm th =            (* p     A |- false      *)
                                               (func,"Arg 2 conclusion not `false`") in
         internal_err func
 
-(* eta_conv : term -> thm                                                     *)
-(*                                                                            *)
-(* This is the eta reduction rule.  It takes a lambda abstraction term, where *)
-(* the body is a function application, and the binding variable is the        *)
-(* argument subterm of the function application and not free in the function  *)
-(* subterm.  It returns a theorem stating that the term is equal to the       *)
-(* function subterm, under no assumptions.                                    *)
-(*                                                                            *)
-(*       `\x. f x`                                                            *)
-(*    ----------------                                                        *)
-(*    |- (\x. f x) = f                                                        *)
-
+/// eta_conv : term -> thm                                                    
+///                                                                           
+/// This is the eta reduction rule.  It takes a lambda abstraction term, where
+/// the body is a function application, and the binding variable is the       
+/// argument subterm of the function application and not free in the function 
+/// subterm.  It returns a theorem stating that the term is equal to the      
+/// function subterm, under no assumptions.                                   
+///                                                                           
+///       `\x. f x`                                                           
+///    ----------------                                                       
+///    |- (\x. f x) = f                                                       
+///
+/// See also: beta_conv.
 let eta_conv tm =
     try
         let (v,tm0) = dest_abs tm in
@@ -607,17 +622,19 @@ let eta_conv tm =
                                   of lambda abstraction body") in
         internal_err func
 
-(* imp_antisym_rule : thm -> thm -> thm                                       *)
-(*                                                                            *)
-(* This is the antisymmetry rule for implication.  It takes two implication   *)
-(* theorem arguments, where the LHS of each is the same (modulo alpha-        *)
-(* equivalence) as the RHS of the other.  It returns a theorem stating the    *)
-(* logical equivalence of the two sides, under the unioned assumptions.       *)
-(*                                                                            *)
-(*    A1 |- p ==> q    A2 |- q ==> p                                          *)
-(*    ------------------------------                                          *)
-(*          A1 u A2 |- p <=> q                                                *)
-
+//  imp_antisym_rule : thm -> thm -> thm                                    
+//                                                                          
+/// This is the antisymmetry rule for implication.  It takes two implication
+/// theorem arguments, where the LHS of each is the same (modulo alpha-     
+/// equivalence) as the RHS of the other.  It returns a theorem stating the 
+/// logical equivalence of the two sides, under the unioned assumptions.    
+///                                                                         
+///    A1 |- p ==> q    A2 |- q ==> p                                       
+///    ------------------------------                                       
+///          A1 u A2 |- p <=> q                                             
+///
+/// See also: eq_imp_rule1, eq_imp_rule2, deduct_antisym_rule, disch_rule,
+/// eqt_intro_rule.
 let imp_antisym_rule th01 th02 =    (* A1 |- p ==> q    A2 |- q ==> p   *)
     try
         let (tm1,tm2) = dest_imp (concl th01) in
@@ -678,16 +695,17 @@ let sym_conv tm =                  (* t1 = t2      *)
         let () = assert1 (is_eq tm)       (func,"Not an equality term") in
         internal_err func
 
-(* eqt_intro_rule : thm -> thm                                                *)
-(*                                                                            *)
-(* This is the truth equivalence introduction rule.  It takes any theorem,    *)
-(* and returns the theorem stating that the conclusion is equivalent to       *)
-(* truth, under the same assumptions.                                         *)
-(*                                                                            *)
-(*         A |- p                                                             *)
-(*    ---------------                                                         *)
-(*    A |- p <=> true                                                         *)
-
+//  eqt_intro_rule : thm -> thm                                            
+//                                                                         
+/// This is the truth equivalence introduction rule.  It takes any theorem,
+/// and returns the theorem stating that the conclusion is equivalent to   
+/// truth, under the same assumptions.                                     
+///                                                                        
+///         A |- p                                                         
+///    ---------------                                                     
+///    A |- p <=> true                                                     
+///
+/// See also: eqt_elim_rule, eqf_intro_rule.
 let eqt_intro_rule th =            (* A |- p      *)
     try
         let p = concl th in
@@ -698,17 +716,19 @@ let eqt_intro_rule th =            (* A |- p      *)
         mp_rule (mp_rule th1 th2) th3               (* A |- p <=> true             *)
     with HolFail _ -> internal_err "eqt_intro_rule"
 
-(* eqf_intro_rule : thm -> thm                                                *)
-(*                                                                            *)
-(* This is the falsity equivalence introduction rule.  It takes a theorem     *)
-(* with logical negation at its top level, and returns a theorem stating that *)
-(* the body of the negation is equivalent to falsity, under the same          *)
-(* assumptions.                                                               *)
-(*                                                                            *)
-(*        A |- ~ p                                                            *)
-(*    ----------------                                                        *)
-(*    A |- p <=> false                                                        *)
-
+//  eqf_intro_rule : thm -> thm                                               
+//                                                                            
+/// This is the falsity equivalence introduction rule.  It takes a theorem    
+/// with logical negation at its top level, and returns a theorem stating that
+/// the body of the negation is equivalent to falsity, under the same         
+/// assumptions.                                                              
+///                                                                           
+///        A |- ~ p                                                           
+///    ----------------                                                       
+///    A |- p <=> false                                                       
+///
+/// See also: eqf_elim_rule, not_elim_rule, not_intro_rule, mk_not_rule,
+/// eqt_intro_rule.
 let eqf_intro_rule th =            (* A |- ~ p    *)
     try
         let p = dest_not (concl th) in
@@ -723,16 +743,17 @@ let eqf_intro_rule th =            (* A |- ~ p    *)
         let () = assert1 (is_not (concl th))      (func,"Not a negation term") in
         internal_err func
 
-(* gen_rule : term -> thm -> thm                                              *)
-(*                                                                            *)
-(* This is the universal introduction rule.  It universally quantifies the    *)
-(* supplied theorem with the supplied binding variable, under the same        *)
-(* assumptions.  The binding variable must not occur free in the assumptions. *)
-(*                                                                            *)
-(*    `x`   A |- p         [ "x" not free in `A` ]                            *)
-(*    ------------                                                            *)
-(*     A |- !x. p                                                             *)
-
+/// gen_rule : term -> thm -> thm                                             
+///                                                                           
+/// This is the universal introduction rule.  It universally quantifies the   
+/// supplied theorem with the supplied binding variable, under the same       
+/// assumptions.  The binding variable must not occur free in the assumptions.
+///                                                                           
+///    `x`   A |- p         [ "x" not free in `A` ]                           
+///    ------------                                                           
+///     A |- !x. p                                                            
+///
+/// See also: list_gen_rule, spec_rule, mk_forall_rule.
 let gen_rule v th =               (* A |- p        *)
     try
         let p = concl th in

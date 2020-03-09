@@ -79,11 +79,35 @@ let beta_conv tm =
     (inc_step_total ();
      th')
 
+/// mk_comb_rule : thm -> thm -> thm                                [ Primitive ]
+/// 
+/// This is the equality congruence rule for function application.  It takes two
+/// equality theorems, and applies corresponding sides of the first theorem to the
+/// second, unioning the assumptions.  The first theorem's LHS/RHS must be functions
+/// with domain type equal to the type of the second theorem's LHS/RHS.
+/// 
+///       A1 |- f1 = f2    A2 |- t1 = t2
+///       ------------------------------
+///          A1 u A2 |- f1 t1 = f2 t2
+/// 
+/// See also: mk_comb1_rule, mk_comb2_rule, mk_bin_rule, mk_abs_rule.
 let mk_comb_rule th1 th2 =
     let th' = try2 (prim_mk_comb_rule th1) th2   "mk_comb_rule" in
     (inc_step_total ();
      th')
 
+//  mk_abs_rule : term -> thm -> thm                                [ Primitive ]
+//  
+/// This is the equality congruence rule for lambda abstraction.  It takes a
+/// variable and an equality theorem, and abstracts the variable from both sides of
+/// the theorem.  The variable must not occur free in the assumptions of the
+/// supplied theorem.
+/// 
+///          `x`   A |- t1 = t2        [ "x" not free in 'A' ]
+///       ------------------------
+///       A |- (\x. t1) = (\x. t2)
+/// 
+/// See also: mk_comb_rule.
 let mk_abs_rule v th =
     let th' = try2 (prim_mk_abs_rule v) th   "mk_abs_rule" in
     (inc_step_total ();
@@ -125,16 +149,70 @@ let mp_rule th1 th2 =
     (inc_step_total ();
      th')
 
+//  eq_mp_rule : thm -> thm -> thm                                  [ Primitive ]
+//  
+/// This is the equality modus ponens rule.  It takes an equality theorem and a
+/// second theorem, where the equality theorem's LHS is alpha-equivalent to the
+/// conclusion of the second theorem.  It returns a theorem stating that the
+/// equality theorem's RHS holds, under the unioned assumptions of the supplied
+/// theorems.
+/// 
+///       A1 |- p <=> q    A2 |- p
+///       ------------------------
+///             A1 u A2 |- q
+/// 
+/// See also: mp_rule, eq_imp_rule1, eq_imp_rule2, imp_antisym_rule.
 let eq_mp_rule th1 th2 =
     let th' = try2 (prim_eq_mp_rule th1) th2   "eq_mp_rule" in
     (inc_step_total ();
      th')
 
+//  inst_rule : (term * term) list -> thm -> thm                    [ Primitive ]
+//  
+/// This is the variable instantiation rule.  It takes a variable instantiation list
+/// and a theorem, and performs a single parallel instantiation of the free
+/// variables in the theorem's assumptions and conclusion, according to the
+/// instantiation list.  All free occurrences of instantiation list domain elements
+/// in the theorem get replaced.  Each instantiation list domain element must be a
+/// variable, and each range element must have the same type as its corresponding
+/// domain element.
+/// 
+/// Binding variables in the resulting theorem are renamed as necessary to avoid
+/// variable capture.  Note that instantiation list entries that do not apply are
+/// simply ignored, as are repeated entries for a given variable (beyond its first
+/// entry).  If no instantiation list entries apply, then the returned theorem is
+/// the same as the input.
+/// 
+///           [(x1,t1);(x2,t2);..]    A |- p
+///       --------------------------------------
+///       A[t1/x1,t2/x2,..] |- p[t1/x1,t2/x2,..]
+/// 
+/// See also: inst_type_rule, subs_rule, subst_rule.
 let inst_rule theta th =
     let th' = try2 (prim_inst_rule theta) th   "inst_rule" in
     (inc_step_total ();
      th')
 
+//  inst_type_rule : (hol_type * hol_type) list -> thm -> thm       [ Primitive ]
+//  
+/// This is the type variable instantiation rule.  It takes a type variable
+/// instantiation list and a theorem, and performs a single parallel instantiation
+/// of the type variables in the theorem's assumptions and conclusion, according to
+/// the instantiation list.  All occurrences of instantiation list domain elements
+/// in the theorem get replaced.  Each instantiation list domain element must be a
+/// type variable.
+/// 
+/// Binding variables in the resulting theorem are renamed as necessary to avoid
+/// variable capture.  Note that instantiation list entries that do not apply are
+/// simply ignored, as are repeated entries for a given type variable (beyond its
+/// first entry).  If no instantiation list entries apply, then the returned theorem
+/// is the same as the input.
+/// 
+///            [(tv1,ty1);(tv2,ty2);..]    A |- p
+///       ----------------------------------------------
+///       A[ty1/tv1,ty2/tv2,..] |- p[ty1/tv1,ty2/tv2,..]
+/// 
+/// See also: inst_rule.
 let inst_type_rule tytheta th =
     let th' = try2 (prim_inst_type_rule tytheta) th   "inst_type_rule" in
     (inc_step_total ();

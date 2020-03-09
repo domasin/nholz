@@ -24,12 +24,13 @@ module HOL.Equal
 
 (* Let definition *)
 
-(* The internal constant for let-expressions is called "LET".  It has special *)
-(* support in the parser/printer, so that the quotation                       *)
-(*    `let x1 = s1 and x2 = s2 in t`                                          *)
-(* is parsed/printed for the internal term                                    *)
-(*    `LET (LET (\x1 x2. t) s1) s2`.                                          *)
-
+/// The internal constant for let-expressions is called "LET".  It has special
+/// support in the parser/printer, so that the quotation                      
+///    `let x1 = s1 and x2 = s2 in t`                                         
+/// is parsed/printed for the internal term                                   
+///    `LET (LET (\x1 x2. t) s1) s2`.                                         
+///
+/// |- LET = (\(f:'a->'b) x. f x) 
 let let_def =
     new_const_definition (parse_term(@"LET = (\(f:'a->'b) (x:'a). f x)"))
 
@@ -60,25 +61,27 @@ let dest_let tm =
 
 let is_let tm = can dest_let tm
 
-(* ONTO *)
-
+/// ONTO
+///
+/// |- ONTO = (\(f:'a->'b). !y. ?x. y = f x)
 let onto_def =
     new_const_definition (parse_term(@"ONTO = (\(f:'a->'b). !y. ?x. y = f x)"))
 
 (* ** DERIVED INFERENCE RULES ** *)
 
 
-(* mk_comb1_rule : thm -> term -> thm                                         *)
-(*                                                                            *)
-(* This is the equality congruence rule for function application functions.   *)
-(* It takes an equality theorem over functions and a term, and supplies the   *)
-(* term as the argument to each side of the theorem.  The type of the         *)
-(* supplied term must be the same as the domain type of the functions.        *)
-(*                                                                            *)
-(*    A |- f1 = f2   `t`                                                      *)
-(*    ------------------                                                      *)
-(*     A |- f1 t = f2 t                                                       *)
-
+//  mk_comb1_rule : thm -> term -> thm                                      
+//                                                                          
+/// This is the equality congruence rule for function application functions.
+/// It takes an equality theorem over functions and a term, and supplies the
+/// term as the argument to each side of the theorem.  The type of the      
+/// supplied term must be the same as the domain type of the functions.     
+///                                                                         
+///    A |- f1 = f2   `t`                                                   
+///    ------------------                                                   
+///     A |- f1 t = f2 t                                                    
+///
+/// See also: mk_comb2_rule, mk_comb_rule.
 let mk_comb1_rule th tm =            (* A |- f1 = f2    t    *)
     try
         mk_comb_rule th (refl_conv tm)            (* A |- f1 t = f2 t     *)
@@ -92,17 +95,18 @@ let mk_comb1_rule th tm =            (* A |- f1 = f2    t    *)
                            (func,"Function domain type not equal to argument type")
         internal_err func
 
-(* mk_comb2_rule : term -> thm -> thm                                         *)
-(*                                                                            *)
-(* This is the equality congruence rule for function application arguments.   *)
-(* It takes a function term and an equality theorem, and applies the function *)
-(* to each side of the theorem.  The domain type of the supplied function     *)
-(* must be the same as the type of the theorem LHS/RHS.                       *)
-(*                                                                            *)
-(*    `f`   A |- t1 = t2                                                      *)
-(*    ------------------                                                      *)
-(*     A |- f t1 = f t2                                                       *)
-
+//  mk_comb2_rule : term -> thm -> thm                                        
+//                                                                            
+/// This is the equality congruence rule for function application arguments.  
+/// It takes a function term and an equality theorem, and applies the function
+/// to each side of the theorem.  The domain type of the supplied function    
+/// must be the same as the type of the theorem LHS/RHS.                      
+///                                                                           
+///    `f`   A |- t1 = t2                                                     
+///    ------------------                                                     
+///     A |- f t1 = f t2                                                      
+///
+/// See also: mk_comb1_rule, mk_comb_rule.
 let mk_comb2_rule tm th =          (* f    A |- t1 = t2    *)
     try
         mk_comb_rule (refl_conv tm) th            (* A |- f t1 = f t2     *)

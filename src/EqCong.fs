@@ -13,11 +13,11 @@
 (* http://github.com/domasin/nholz                                            *)
 (* ========================================================================== *)
 
-///This module implements equality congruence rules for equality, function
-///application and predicate logic operators.  These are all trivial      
-///derivations of the primitive congruence rules 'mk_comb_rule' and       
-///'mk_abs_rule' (see 'Thm' module) and the derived congruence rules      
-///'mk_comb1_rule' and 'mk_comb2_rule' (see 'Equal' module).              
+/// This module implements equality congruence rules for equality, function
+/// application and predicate logic operators.  These are all trivial      
+/// derivations of the primitive congruence rules 'mk_comb_rule' and       
+/// 'mk_abs_rule' (see 'Thm' module) and the derived congruence rules      
+/// 'mk_comb1_rule' and 'mk_comb2_rule' (see 'Equal' module).              
 [<AutoOpen>]
 module HOL.EqCong
 
@@ -28,20 +28,21 @@ let is_bool_eqthm th =
         is_bool_term (eqthm_lhs th)
     with HolFail _ -> false
 
-(* mk_bin_rule : term -> thm -> thm -> thm                                    *)
-(*                                                                            *)
-(* This is the equality congruence rule for binary function application.  It  *)
-(* takes a binary function term and two equality theorems, and applies the    *)
-(* function in curried form to corresponding sides of each theorem, under     *)
-(* their unioned assumptions.  The type of the supplied function must be a    *)
-(* binary curried function type, with first and second domain types equal to  *)
-(* the type of each side of their corresponding theorems.                     *)
-(*                                                                            *)
-(*    `f`   A1 |- s1 = s2    A2 |- t1 = t2                                    *)
-(*    ------------------------------------                                    *)
-(*        A1 u A2 |- f s1 t1 = f s2 t2                                        *)
-
-
+//  mk_bin_rule : term -> thm -> thm -> thm                                  
+//                                                                           
+/// This is the equality congruence rule for binary function application.  It
+/// takes a binary function term and two equality theorems, and applies the  
+/// function in curried form to corresponding sides of each theorem, under   
+/// their unioned assumptions.  The type of the supplied function must be a  
+/// binary curried function type, with first and second domain types equal to
+/// the type of each side of their corresponding theorems.                   
+///                                                                          
+///    `f`   A1 |- s1 = s2    A2 |- t1 = t2                                  
+///    ------------------------------------                                  
+///        A1 u A2 |- f s1 t1 = f s2 t2                                      
+///
+/// See also: mk_bin1_rule, mk_bin2_rule, mk_comb_rule, mk_conj_rule, mk_disj_rule,
+/// mk_imp_rule, mk_eq_rule, mk_pair_rule.
 let mk_bin_rule f th1 th2 =
     try
         mk_comb_rule (mk_comb2_rule f th1) th2
@@ -56,20 +57,21 @@ let mk_bin_rule f th1 th2 =
         let () = assert1 (type_eq (type_of tm2) ty2)  (func,"RHS types not equal") in
         internal_err func
 
-(* mk_bin1_rule : term -> thm -> term -> thm                                  *)
-(*                                                                            *)
-(* This is the equality congruence rule for binary function LHS application.  *)
-(* It takes a binary function term, an equality theorem and a RHS argument    *)
-(* term, and applies the function in curried form to corresponding sides of   *)
-(* the theorem as its LHS argument and the supplied RHS argument.  The type   *)
-(* of the supplied function must be a binary curried function type, with      *)
-(* first domain type equal to the type of each side of the theorem, and       *)
-(* second domain type equal to the type of the RHS argument term.             *)
-(*                                                                            *)
-(*    `f`   |- s1 = s2   `t`                                                  *)
-(*    ----------------------                                                  *)
-(*      |- f s1 t = f s2 t                                                    *)
-
+//  mk_bin1_rule : term -> thm -> term -> thm                                
+//                                                                           
+/// This is the equality congruence rule for binary function LHS application.
+/// It takes a binary function term, an equality theorem and a RHS argument  
+/// term, and applies the function in curried form to corresponding sides of 
+/// the theorem as its LHS argument and the supplied RHS argument.  The type 
+/// of the supplied function must be a binary curried function type, with    
+/// first domain type equal to the type of each side of the theorem, and     
+/// second domain type equal to the type of the RHS argument term.           
+///                                                                          
+///    `f`   |- s1 = s2   `t`                                                
+///    ----------------------                                                
+///      |- f s1 t = f s2 t                                                  
+///
+/// See also: mk_bin2_rule, mk_bin_rule, mk_comb_rule.
 let mk_bin1_rule f th1 tm2 =       (* |- s1 = s2     *)
     try
         mk_comb1_rule (mk_comb2_rule f th1) tm2       (* |- f s1 t = f s2 t      *)
@@ -83,20 +85,21 @@ let mk_bin1_rule f th1 tm2 =       (* |- s1 = s2     *)
         let () = assert1 (type_eq (type_of tm2) ty2)  (func,"RHS types not equal") in
         internal_err func
 
-(* mk_bin2_rule : term -> term -> thm -> thm                                  *)
-(*                                                                            *)
-(* This is the equality congruence rule for binary function RHS application.  *)
-(* It takes a binary function term, a LHS argument term and an equality       *)
-(* theorem, and applies the function in curried form to the supplied LHS      *)
-(* argument and corresponding sides of the theorem as its RHS argument.  The  *)
-(* type of the supplied function must be a binary curried function type, with *)
-(* first domain type equal to the type of the LHS argument term, and second   *)
-(* domain type equal to the type of each side of the theorem.                 *)
-(*                                                                            *)
-(*    `f`   `s`   |- t1 = t2                                                  *)
-(*    ----------------------                                                  *)
-(*      |- f s t1 = f s t2                                                    *)
-
+//  mk_bin2_rule : term -> term -> thm -> thm                                 
+//                                                                            
+/// This is the equality congruence rule for binary function RHS application. 
+/// It takes a binary function term, a LHS argument term and an equality      
+/// theorem, and applies the function in curried form to the supplied LHS     
+/// argument and corresponding sides of the theorem as its RHS argument.  The 
+/// type of the supplied function must be a binary curried function type, with
+/// first domain type equal to the type of the LHS argument term, and second  
+/// domain type equal to the type of each side of the theorem.                
+///                                                                           
+///    `f`   `s`   |- t1 = t2                                                 
+///    ----------------------                                                 
+///      |- f s t1 = f s t2                                                   
+///
+/// See also: mk_bin1_rule, mk_bin_rule, mk_comb_rule.
 let mk_bin2_rule f tm1 th2 =       (* |- t1 = t2     *)
     try
         mk_comb2_rule (mk_comb (f,tm1)) th2           (* |- f s t1 = f s t2      *)
@@ -197,18 +200,21 @@ let mk_not_rule th =      (* A1 |- p1 <=> p2   *)
         let () = assert1 (is_bool_eqthm th)    (func,"Not a bool equality thm") in
         internal_err func
 
-(* mk_conj_rule : thm -> thm -> thm                                           *)
-(*                                                                            *)
-(* This is the equality congruence rule for conjunction.  It takes two        *)
-(* boolean equality theorems, and conjoins corresponding sides of the first   *)
-(* theorem with the second, unioning the assumptions.                         *)
-(*                                                                            *)
-(*    A1 |- p1 <=> p2    A2 |- q1 <=> q2                                      *)
-(*    ----------------------------------                                      *)
-(*     A1 u A2 |- p1 /\ q1 <=> p2 /\ q2                                       *)
+
 
 let conj_fn = parse_term(@"$/\")
 
+//  mk_conj_rule : thm -> thm -> thm                                        
+//                                                                          
+/// This is the equality congruence rule for conjunction.  It takes two     
+/// boolean equality theorems, and conjoins corresponding sides of the first
+/// theorem with the second, unioning the assumptions.                      
+///                                                                         
+///    A1 |- p1 <=> p2    A2 |- q1 <=> q2                                   
+///    ----------------------------------                                   
+///     A1 u A2 |- p1 /\ q1 <=> p2 /\ q2     
+///
+/// See also: mk_conj1_rule, mk_conj2_rule, mk_bin_rule, conj_rule.
 let mk_conj_rule tha thb =     (* A1 |- p1 <=> p2    A2 |- q1 <=> q2   *)
     try
         mk_bin_rule conj_fn tha thb      (* A1 u A2 |- p1 /\ q1 <=> p2 /\ q2    *)
@@ -218,16 +224,17 @@ let mk_conj_rule tha thb =     (* A1 |- p1 <=> p2    A2 |- q1 <=> q2   *)
         let () = assert1 (is_bool_eqthm thb) (func,"Arg 2 not a bool equality thm") in
         internal_err func
 
-(* mk_conj1_rule : thm -> term -> thm                                         *)
-(*                                                                            *)
-(* This is the equality congruence rule for conjunction LHS.  It takes a      *)
-(* boolean equality theorem and a boolean term, and conjoins each side of the *)
-(* theorem with the supplied term.                                            *)
-(*                                                                            *)
-(*      A |- p1 <=> p2   `q`                                                  *)
-(*    ------------------------                                                *)
-(*    A |- p1 /\ q <=> p2 /\ q                                                *)
-
+//  mk_conj1_rule : thm -> term -> thm                                        
+//                                                                            
+/// This is the equality congruence rule for conjunction LHS.  It takes a     
+/// boolean equality theorem and a boolean term, and conjoins each side of the
+/// theorem with the supplied term.                                           
+///                                                                           
+///      A |- p1 <=> p2   `q`                                                 
+///    ------------------------                                               
+///    A |- p1 /\ q <=> p2 /\ q                                               
+/// 
+/// See also: mk_conj2_rule, mk_conj_rule, mk_bin1_rule, conj_rule.
 let mk_conj1_rule tha tm =      (* A |- p1 <=> p2   *)
     try
         mk_bin1_rule conj_fn tha tm            (* A |- p1 /\ q <=> p2 /\ q    *)
@@ -237,16 +244,17 @@ let mk_conj1_rule tha tm =      (* A |- p1 <=> p2   *)
         let () = assert1 (is_bool_term tm)   (func,"Arg 2 not boolean") in
         internal_err func
 
-(* mk_conj2_rule : term -> thm -> thm                                         *)
-(*                                                                            *)
-(* This is the equality congruence rule for conjunction RHS.  It takes a      *)
-(* boolean term and a boolean equality theorem, and conjoins the supplied     *)
-(* term with each side of the theorem.                                        *)
-(*                                                                            *)
-(*      `p`   A |- q1 <=> q2                                                  *)
-(*    ------------------------                                                *)
-(*    A |- p /\ q1 <=> p /\ q2                                                *)
-
+/// mk_conj2_rule : term -> thm -> thm                                    
+///                                                                       
+/// This is the equality congruence rule for conjunction RHS.  It takes a 
+/// boolean term and a boolean equality theorem, and conjoins the supplied
+/// term with each side of the theorem.                                   
+///                                                                       
+///      `p`   A |- q1 <=> q2                                             
+///    ------------------------                                           
+///    A |- p /\ q1 <=> p /\ q2                                           
+///
+/// See also: mk_conj1_rule, mk_conj_rule, mk_bin2_rule, conj_rule.
 let mk_conj2_rule tm th =      (* A |- q1 <=> q2   *)
     try
         mk_bin2_rule conj_fn tm th             (* A |- p /\ q1 <=> p /\ q2    *)
@@ -256,16 +264,17 @@ let mk_conj2_rule tm th =      (* A |- q1 <=> q2   *)
         let () = assert1 (is_bool_eqthm th) (func,"Arg 2 not a bool equality thm") in
         internal_err func
 
-(* mk_disj_rule : thm -> thm -> thm                                           *)
-(*                                                                            *)
-(* This is the equality congruence rule for disjunction.    It takes two      *)
-(* boolean equality theorems, and disjoins corresponding sides of the first   *)
-(* theorem with the second, unioning the assumptions.                         *)
-(*                                                                            *)
-(*    A1 |- p1 <=> p2    A2 |- q1 <=> q2                                      *)
-(*    ----------------------------------                                      *)
-(*     A1 u A2 |- p1 \/ q1 <=> p2 \/ q2                                       *)
-
+//  mk_disj_rule : thm -> thm -> thm                                        
+//                                                                          
+/// This is the equality congruence rule for disjunction.    It takes two   
+/// boolean equality theorems, and disjoins corresponding sides of the first
+/// theorem with the second, unioning the assumptions.                      
+///                                                                         
+///    A1 |- p1 <=> p2    A2 |- q1 <=> q2                                   
+///    ----------------------------------                                   
+///     A1 u A2 |- p1 \/ q1 <=> p2 \/ q2                                    
+///
+/// See also: mk_disj1_rule, mk_disj2_rule, mk_bin_rule, disj1_rule, disj2_rule.
 let disj_fn = parse_term(@"$\/")
 
 let mk_disj_rule tha thb =    (* A1 |- p1 <=> p2    A2 |- q1 <=> q2  *)
