@@ -1275,3 +1275,737 @@ mk_disj_rule
 //  A1 |- p1 <=> p2    A2 |- q1 <=> q2                                   
 //  ----------------------------------                                   
 //   A1 u A2 |- p1 \/ q1 <=> p2 \/ q2    
+
+(**
+
+| EqCong.mk\_disj1\_rule       
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la disgiunzione sul 
+lato sinistro. Prende un teorema di eguaglianza booleana e un termine booleano, 
+e disgiunge ogni lato del teorema con il termine fornito.
+
+Si veda anche: mk\_disj2\_rule, mk\_disj\_rule, mk\_bin1\_rule, disj1\_rule.
+
+*)
+
+mk_disj1_rule
+
+//     A |- p1 <=> p2   `q`                                                 
+//   ------------------------                                               
+//   A |- p1 \/ q <=> p2 \/ q  
+
+(**
+
+| EqCong.mk\_disj2\_rule       
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la disgiunzione sul 
+lato destro. Prende un termine booleano e un teorema di eguaglianza booleana, 
+e disgiunge il termine fornito con ogni lato del teorema.
+
+Si veda anche: mk\_disj1\_rule, mk\_disj\_rule, mk\_bin1\_rule, disj2\_rule.
+
+*)
+
+mk_disj2_rule
+
+//    `p`   A |- q1 <=> q2                                             
+//  ------------------------                                           
+//  A |- p \/ q1 <=> p \/ q2   
+
+(**
+
+| EqCong.mk\_eq\_rule       
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza. 
+Prende due teoremi di uguaglianza, e uguaglia i corrispondenti lati del 
+primo teorema con quelli del secondo, unendone le assunzioni. I tipi di 
+ciascun lato di ogni equazione devono essere uguali.
+
+Si veda anche: mk\_eq1\_rule, mk\_eq2\_rule, mk\_eq\_rule.
+
+*)
+
+mk_eq_rule
+
+//  A1 |- s1 = s2    A2 |- t1 = t2                                          
+//  ------------------------------                                          
+//  A1 u A2 |- s1 = t1 <=> s2 = t2  
+
+(**
+
+| EqCong.mk\_eq1\_rule    
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza 
+sul lato sinistro. Prende un teorema di uguaglianza e un termine, e uguaglia 
+ogni lato del teorema con il termine fornito. Il tipo del termine fornito 
+deve essere uguale al tipo di ciascun lato del teorema fornito.
+
+Si veda anche: mk\_eq2\_rule, mk\_eq\_rule, mk\_eq1\_rule.
+
+*)
+
+mk_eq1_rule
+
+//   A |- s1 = s2   `t`                                                   
+// ----------------------                                                 
+// A |- s1 = t <=> s2 = t  
+
+(**
+
+| EqCong.mk\_eq2\_rule     
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza 
+sul lato destro. Prende un termine e un teorema di eguaglianza, e uguaglia 
+il termine a ciascun lato del teorema. Il tipo del termine fornito deve 
+essere uguale al tipo di cascun lato del teorema fornito.
+
+Si veda anche: mk\_eq1\_rule, mk\_eq\_rule, mk\_eq1\_rule.
+
+*)
+
+mk_eq2_rule
+
+//    `s`   A |- t1 = t2                                                   
+//  ----------------------                                                 
+//  A |- s = t1 <=> s = t2    
+
+(**
+
+| EqCong.mk\_exists\_rule    
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione 
+esistenziale. Prende una variabile e un teorema di uguaglianza, e quantifica 
+in modo esistenzaiale la variabile su entrambi i lati del teorema. La variabile 
+non deve occorrere libera nelle assunzioni del teorema fornito
+
+Si veda anche: mk\_uexists\_rule, mk\_abs\_rule, mk\_comb\_rule, exists\_rule.
+
+*)
+
+mk_exists_rule
+
+//     `x`   A |- p1 <=> p2         [ "x" not free in `A` ]                
+//  --------------------------                                             
+//  A |- (?x. p1) <=> (?x. p2)  
+
+
+(**
+
+| EqCong.mk\_forall\_rule  
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione 
+universale. Prende una variabile e un teorema di uguaglianza, e quantifica 
+universalmente la variabile su entrambi i lati del teorema. La variabile 
+non deve occorrere libera nelle assunzioni del teorema fornito
+
+Si veda anche: mk\_abs\_rule, mk\_comb\_rule, gen\_rule.
+
+*)
+
+mk_forall_rule
+
+//     `x`   A |- p1 <=> p2         [ "x" not free in `A` ]              
+//  --------------------------                                           
+//  A |- (!x. p1) <=> (!x. p2)    
+
+(**
+
+| EqCong.mk\_imp\_rule 
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione. 
+Prende due teoremi di eguaglianza booleana, e crea l'implicazione dai 
+corrispondeti lati del primo e del secondo teorema, unendone le assunzioni.
+
+Si veda anche: mk\_imp1\_rule, mk\_imp2\_rule, mk\_bin\_rule.
+
+*)
+
+mk_imp_rule
+
+//  A1 |- p1 <=> p2    A2 |- q1 <=> q2                                    
+//  ----------------------------------                                    
+//  A1 u A2 |- p1 ==> q1 <=> p2 ==> q2 
+
+
+(**
+
+| EqCong.mk\_imp1\_rule 
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione 
+su lato sinistro. Prende un teorema di eguaglianza booleana e un termine 
+booleano, e crea le implicazioni da ogni lato del teorema, con il lato 
+del teorema come antecedente e il termine come conseguente.
+
+Si veda anche: mk\_imp2\_rule, mk\_imp\_rule, mk\_bin1\_rule
+
+*)
+
+mk_imp1_rule
+
+//    A |- p1 <=> p2   `q`                                               
+// --------------------------                                            
+// A |- p1 ==> q <=> p2 ==> q    
+
+(**
+
+| EqCong.mk\_imp2\_rule 
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione 
+su lato destro. Prende un termine booleano e un teorema di eguaglianza 
+booleana, e rende il termine un antecedente di ciascun lato del teorema.
+
+Si veda anche: mk\_imp1\_rule, mk\_imp\_rule, mk\_bin2\_rule
+
+*)
+
+mk_imp2_rule
+
+//    `p`   A |- q1 <=> q2                                            
+//  --------------------------                                        
+//  A |- p ==> q1 <=> p ==> q2  
+
+
+(**
+
+| EqCong.mk\_not\_rule 
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la negazione 
+logica, Prende un teorema di eguaglianza booleana, e nega logicamente 
+ciascun lato del teorema.
+
+Si veda anche: mk\_comb\_rule, eqf\_intro\_rule, eqf\_elim\_rule.
+
+*)
+
+mk_not_rule
+
+//    A |- p1 <=> p2                                                      
+//  ------------------                                                    
+//  A |- ~ p1 <=> ~ p2   
+
+(**
+
+| Pair.mk\_pair\_rule
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per l'accoppiamento.
+Prende due teoremi di uguaglianza, e accoppia i corrispondenti lati del 
+primo teorema con quelli del secondo, unendone le assunzioni
+
+Si veda anche: mk\_pair1\_rule, mk\_pair2\_rule, mk\_bin\_rule.
+
+*)
+
+mk_pair_rule
+
+//  A1 |- x1 = x2    A2 |- y1 = y2                                       
+//  ------------------------------                                       
+//   A1 u A2 |- (x1,y1) = (x2,y2)    
+
+(**
+
+| Pair.mk\_pair1\_rule
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la coppia a 
+sinistra. Prende un teorema di uguaglianza e un termine, e accoppia ogni 
+lato del teorema con il termine.
+
+Si veda anche: mk\_pair2\_rule, mk\_pair\_rule, mk\_bin1\_rule.
+
+*)
+
+mk_pair1_rule
+
+//    A |- x1 = x2   `y`                                                  
+//   --------------------                                                 
+//   A |- (x1,y) = (x2,y) 
+
+(**
+
+| Pair.mk\_pair2\_rule
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la coppia a 
+destra. Prende un termine un teorema di uguaglianza, e accoppia il termine 
+con ogni lato del teorema.
+
+Si veda anche: mk\_pair1\_rule, mk\_pair\_rule, mk\_bin2\_rule.
+
+*)
+
+mk_pair2_rule
+
+///     `x`   A |- y1 = y2                                                    
+///    --------------------                                                   
+///    A |- (x,y1) = (x,y2)  
+
+(**
+
+| EqCong.mk\_select\_rule
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la selezione.
+Prende una variabile e un teorema di eguaglianza, e seleziona la variabile 
+da entrambi i lati del teorema. La variabile non deve occorrere libera 
+nelle assunzioni del teorema.
+
+Si veda anche: mk\_abs\_rule, mk\_comb\_rule.
+
+*)
+
+mk_select_rule
+
+//    `x`   A |- p1 <=> p2        [ "x" not free in `A` ]                
+//  ------------------------                                             
+//  A |- (@x. p1) = (@x. p2)     
+
+
+(**
+
+| EqCong.mk\_uexists\_rule
+-------------------
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione 
+esistenziale univoca. Prende una variabile e un teorema di eguaglianza, e 
+quantifica con quantificatore esistenziale univoco la variabile su 
+entrambi i lato del teorema. La variabile non deve occorrere libera 
+nelle assunzioni del teorema fornito.
+
+Si veda anche: mk\_exists\_rule, mk\_abs\_rule, mk\_comb\_rule
+
+*)
+
+mk_uexists_rule
+
+//      `x`   A |- p1 <=> p2        [ "x" not free in `A` ]               
+//  ----------------------------                                          
+//  A |- (?!x. p1) <=> (?!x. p2)             
+
+
+(**
+
+| Wrap.mp\_rule
+-------------------
+
+Regola primitiva
+
+Questa &egrave; la regola di modus ponens. Prende un teorema di implicazione ed 
+un secondo teorema, dove l'antecendente del teorema di implicazione &egrave; 
+alfa-equivalente alla conclusione del secondo teorema. Restituisce un teorema che 
+afferma che vale il conseguente del teorema di implicazione, sotto l'unione delle 
+assunzioni dei teoremi forniti.
+
+Si veda anche: eq\_mp\_rule, disch\_rule, undisch\_rule, prove\_asm\_rule.
+
+*)
+
+mp_rule
+
+//   A1 |- p ==> q    A2 |- p
+//   ------------------------
+//         A1 u A2 |- q
+
+(**
+
+| Bool.not\_elim\_rule
+-------------------
+
+Questa &egrave; la regola di eliminazione della negazione logica. Prende 
+un teorema di negazione logica, e restituisce un'implicazione con 
+il termine negato sul lato sinistro e `false` sul lato destro, sotto le 
+stesse assunzioni.
+
+Si veda anche: not\_intro\_rule, eqf\_intro\_rule, eqf\_elim\_rule.
+
+*)
+
+not_elim_rule
+
+//      A |- ~ p                                                          
+//  ----------------                                                      
+//  A |- p ==> false     
+
+
+(**
+
+| Bool.not\_intro\_rule
+-------------------
+
+Questa &egrave; la regola di introduzione della negazione logica. Prende un 
+teorema di implicazione dove il lato destro &egrave; `false`, e restituisce la 
+negazione logica del lato sinistro, sotto le stesse assunzioni.
+
+Si veda anche: not\_elim\_rule, eqf\_elim\_rule, eqf\_intro\_rule, deduct\_contrapos\_rule.
+
+*)
+
+not_intro_rule
+
+//  A |- p ==> false                                                      
+//  ----------------                                                      
+//      A |- ~ p     
+
+(**
+
+| Bool.prove\_asm\_rule
+-------------------
+
+Questa &egrave; la regola di assunzione provata. Prende due teoremi, e 
+restituisce il secondo teorema ma con la conclusione del primo teorema 
+rimossa (se presente) dalle sue assunzioni a cui sono aggiunte le assunzioni 
+del primo teorema. Si noti che la conclusione del primo teorema non deve 
+essere nelle assunzioni del secondo affinch&egrave; questa regola abbia 
+successo.
+
+Si veda anche: mp\_rule, undisch\_rule.
+
+*)
+
+prove_asm_rule
+
+//  A1 |- p    A2 |- q                                                     
+//  ------------------                                                     
+//  A1 u (A2\{p}) |- q   
+
+(**
+
+| Wrap.refl\_conv
+-------------------
+
+Regola primitiva
+
+Questa &egrave; la regola di riflessivit&agrave; per l'uguaglianza. Prende un 
+termine, e restituisce un teorema che afferma che il termine &egrave; uguale a 
+se stesso, senza alcuna assunzione. Non ci sono restrizioni al termine fornito.
+
+Si veda anche: sym\_conv, sym\_rule, trans\_rule.
+
+*)
+
+refl_conv
+
+//     `t`
+//  --------
+//  |- t = t
+
+(**
+
+| BoolClass.select\_rule
+-------------------
+
+Questa &egrave; la regola di selezione esistenziale. Elimina il 
+quantificatore esistenziale del teorema fornito, e sostituisce nel corpo 
+ogni occorrenza della variabile legata con l'operatore di selezione 
+applicato al corpo originario (con la stessa variabile legata).
+
+Si veda anche: exists\_rule.
+
+*)
+
+select_rule
+
+//     A |- ?x. p                                                         
+//  ----------------                                                      
+//  A |- p[(@x.p)/x]   
+
+(**
+
+| Bool.spec\_all\_rule
+-------------------
+
+Questa &egrave; la regola composta di eliminazione di default del quantificatore 
+universale. Elimina tutti i quantificatori universali esterni dal teorema fornito. 
+Si noti che il teorema fornito non deve necessariamente essere una quantificazione 
+universale perch&egrave; il teorema abbia successo (in  questo caso il teorema 
+risultante &egrave; semplicemente lo stesso del teorema fornito):
+
+Si veda anche: spec\_rule, list\_spec\_rule, bspec\_rule, list\_gen\_rule.
+
+*)
+
+spec_all_rule
+
+//  A |- !x1 x2 .. xn. p                                                  
+//  --------------------                                                  
+//         A |- p  
+
+(**
+
+| Equal.subs\_conv
+-------------------
+
+Questa &egrave; la conversione di sostituzione base. Prende una lista di 
+teoremi di eguaglianza e un termine, e trasofrma il termine eseguendo una 
+singola sostituzione parallela di tutti i suoi sottotermini liberi secondo 
+i teoremi di eguaglianza. Tutto le occorrenze libere dei lati sinistri dei 
+teoremi di eguaglianza nel termine vegono rimpiazzate. Il teorema risultante 
+ha l'unione delle assunzioni di tutti i teoremi forniti (indipendentemente 
+dal fatto che esse si applichino al teorema).
+
+Le variabili legate nel lato destro del teorema risultante sono rinominate 
+a seconda delle necessit&agrave; per evitare catture di variabili. Si noti 
+che se uno dei lati sinistri dei teorei di uguaglianza occorre libero 
+in uno degli altri, allora viene usato di preferenza il teorema con il lato 
+sinistro pi&ugrave; ampio, e se due teoremi di uguaglianza hanno lati sinistri 
+alfa-equivalenti, allora di preferenza &egrave; usato di preferenza il primo 
+teorema nella lisa. Se nessuno dei teoremi di eguaglianza pu&ograve; essere 
+usato, allora il lato destro del teorema risultante &egrave; lo stesso del 
+suo lato sinistro.
+
+Si veda anche: subs\_rule, subst\_conv, inst\_rule.
+
+*)
+
+subs_conv
+
+//    A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`                               
+//    ----------------------------------------                               
+//     A1 u A2 u .. |- t = t[t1/s1,t2/s2,..]  
+
+(**
+
+| Equal.subs\_rule
+-------------------
+
+Questa &egrave; la regola di sostituzione di base. Prende una lista di 
+teoremi di equivalenza e un teorema, ed esegue una singola sostituzione 
+parallela dei sottotermini liberi nella conclusione del teorema secondo i 
+teoremi di equivalenza. Tutte le occorrenze libere dei lati sinistri dei 
+teoremi di equivalenza nel teorema vengono rimpiazzate. Il teorema risultante 
+ha l'unione di tutte le assunzioni di tutti i teoremi forniti (indipendentemente 
+dal fatto che questi si applichino o meno al teorema fornito).
+
+Le variabili legate nel teorema risultante sono rinominate 
+a seconda delle necessit&agrave; per evitare catture di variabili. Si noti 
+che se uno dei lati sinistri dei teorei di uguaglianza occorre libero 
+in uno degli altri, allora viene usato di preferenza il teorema con il lato 
+sinistro pi&ugrave; ampio, e se due teoremi di uguaglianza hanno lati sinistri 
+alfa-equivalenti, allora di preferenza &egrave; usato di preferenza il primo 
+teorema nella lisa. Se nessuno dei teoremi di eguaglianza pu&ograve; essere 
+usato, allora la conclusione del teorema risultante &egrave; la stessa 
+dell'input.
+
+Si veda anche: subs\_conv, subst\_rule, inst\_rule.
+
+*)
+
+subs_rule
+
+//  A1 |- s1 = t1   A2 |- s2 = t2   ..    A |- t                           
+//  --------------------------------------------                           
+//       A1 u A2 u .. |- t[t1/s1,t2/s2,..]  
+
+(**
+
+| Equal.subst\_conv
+-------------------
+
+Questa &egrave; la conversione di sostituzione tramite template. Prende uno 
+schema di sostituzione (nella forma di una lista di associazione e un termine 
+template) seguito da un termine principale, e trasforma il termine principale 
+una singola sostituzione parallela di tutti i suoi sottotermini liberi, secondo 
+lo schema di sostituzione. Il termine template determina quali occorrenze 
+libere dei lati sinistri del teorema di equivalenz nel termine principale sono 
+rimpiazzate, e riflette la struttura sintattica del termine, eccetto che per 
+l'avere atomi variabili template al posto dei sottotoermini a causa del 
+rimpiazzamento. La lista di associazione mappa ogni variabile template a un 
+teorema di equivalenza, con il lato sinistro del teorema di equivalenza per 
+il sottotermine del termine principale originale e il lato destro per il 
+sottotermine che lo rimpiazza. Il teorema risultante ha l'unione delle 
+assunzioni di tutti i teoremi forniti (indipenentemente dal fatto che essi 
+si applichino al template fornito).
+
+Le variabili legate nel teorema risultante sono rinominate secondo le 
+necessit&agrave; per evitare catture di variabili. Si noti che se due elementi 
+appaiono nella lista di associazione per la stessa variabile template, allora 
+viene usato il primo elemento, e che elementi per variabili che non appaiono 
+nel template sono ignorate. Se nessun elemento pu&ograve; essere applicato, 
+allora il lato destro della conclusione del teorema risultante &egrave; 
+lo stesso del suo lato sinistro.
+
+Si veda anche: subst\_rule, subs\_conv, inst\_rule.
+
+*)
+
+subst_conv
+
+//     `v1`           `v2`          ..                                     
+//  A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`   `t[s1/v1,s2/v2,..]`         
+//  --------------------------------------------------------------         
+//      A1 u A2 u .. |- t[s1/v1,s2/v2,..] = t[t1/v1,t2/v2,..]     
+
+(**
+
+| Equal.subst\_rule
+-------------------
+
+Questa &egrave; la regola di sostituzione tramite template. Prende uno 
+schema di sostituzione (nella forma di una lista di associazione e di 
+un termine template) seguito da un teorema, ed esegue una singola sostituzione 
+parallela di tutti i sottotermini liberi nella conclusione del teorema, secondo 
+lo schema di sostituzione. Il termine template determina quali occorrenze 
+libere dei lati sinistri del teorema di equivalenza vengono rimpiazzate nella 
+conclusione del teorema, eccetto che variabili atomiche template al posto 
+dei sottotermini a causa del rimpiazzamento. La lista di associazione mappa 
+ogni variabile template a un teorema di equivalenza, con il lato sinistro del 
+teorema di equivalenza per il sottotermine del teorema originale fornito e il 
+lato destro per il sottotermine che viene sostituito. Il teorema risultante 
+ha l'unione delle assunzioni di tutti i teoremi forniti (indipenentemente dal 
+fatto che essi si applichino al template fornito).
+
+Le variabili di astrazione nel teorema risultante sono rinominate secondo le 
+necessit&agrave; per evitare catture di variabili. Si noti che se due elementi 
+appaiono nella lista di associazione per la stessa variabile template, allora 
+viene usato il primo elemento, e che elementi per variabili che non appaiono 
+nel template sono ignorate. Se nessun elemento pu&ograve; essere applicato, 
+allora il lato destro della conclusione del teorema risultante &egrave; 
+lo stesso del suo lato sinistro.
+
+Si veda anche: subst\_conv, subs\_rule, inst\_rule.
+
+*)
+
+subst_rule
+
+//     `v1`            `v2`          ..                                      
+//   A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`   A |- t[s1/v1,s2/v2,..]       
+//   -----------------------------------------------------------------       
+//                  A1 u A2 u .. |- t[t1/v1,t2/v2,..]     
+
+(**
+
+| Bool.sym\_conv
+-------------------
+
+Questa &egrave; la conversione di simmetria per l'uguaglianza. Trasforma il 
+termine di ugualianza fornito scambiando il lato sinistro con il destro, senza 
+alcuna assunzione.
+
+Si veda anche: sym\_rule, refl\_conv.
+
+*)
+
+sym_conv
+
+//          `t1 = t2`                                                      
+//   ----------------------                                                
+//   |- t1 = t2 <=> t2 = t1      
+
+(**
+
+| Equal.sym\_conv
+-------------------
+
+Questa &egrave; la regola di simmetria per l'uguaglianza. Scambia il lato 
+sinistro con il destro nel teorema di uguaglianza fornito.
+
+Si veda anche: sym\_conv, refl\_conv, trans\_rule.
+
+*)
+
+sym_rule
+
+//  A |- t1 = t2                                                           
+//  ------------                                                           
+//  A |- t2 = t1
+
+(**
+
+| Equal.trans\_rule
+-------------------
+
+Questa &egrave; la regola di transitivit&agrave; per l'uguaglianza. Prende 
+due teoremi di uguaglianza, dove il lato destro del primo teorema &egrave; 
+lo stesso (modulo alfa-equivalenza) del lato sinistro del secondot. Restituisce 
+un teorema che afferma che il lato sinistro del primo teorema uguaglia il 
+lato destro del secondo teorema, sotto l'unione delle assunzioni dei due 
+teoremi.
+
+Si veda anche: list\_trans\_rule, refl\_conv, sym\_rule, imp\_trans\_rule.
+
+*)
+
+trans_rule
+
+//  A1 |- t1 = t2    A2 |- t2 = t3                                          
+//  ------------------------------                                          
+//        A1 u A2 |- t1 = t3    
+
+(**
+
+| Bool.undisch\_rule
+-------------------
+
+Questa &egrave; la regola di scaricamento. Prende un teorema di implicazione, 
+e rimuove l'antecedente dalla conclusione e lo aggiunge nelle assunzioni.
+
+Si veda anche: disch\_rule, mp\_rule, prove\_asm\_rule.
+
+*)
+
+undisch_rule
+
+//  A |- p ==> q                                                           
+//  ------------                                                           
+//  A u {p} |- q   
+
+(**
+
+| Equal.conv\_rule
+-------------------
+
+...
+
+*)
+
+conv_rule
+
+(**
+
+| Equal.list\_app\_beta\_rhs\_rule
+-------------------
+
+...
+
+*)
+
+list_app_beta_rhs_rule
+
+(**
+
+| Equal.app\_beta\_rule
+-------------------
+
+...
+
+*)
+
+app_beta_rule
+
+//    A |- (\v1. t1) = (\v2. t2)   `s` 
+//    -------------------------------- 
+//       A |- t1[s/v1] = t2[s/v2]      
+
+(**
+
+| Equal.list\_app\_beta\_rule
+-------------------
+
+...
+
+*)
+
+list_app_beta_rule
+    

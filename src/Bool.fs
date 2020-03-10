@@ -196,15 +196,16 @@ let eqt_elim_rule th =            (* A |- p <=> true    *)
         let () = assert1 (term_eq tm2 true_tm)   (func,"Theorem RHS not `true`") in
         internal_err func
 
-(* undisch_rule : thm -> thm                                                  *)
-(*                                                                            *)
-(* This is the undischarge rule.  It takes an implication theorem, and        *)
-(* removes the antecedent from the conclusion and adds it to the assumptions. *)
-(*                                                                            *)
-(*    A |- p ==> q                                                            *)
-(*    ------------                                                            *)
-(*    A u {p} |- q                                                            *)
-
+//  undisch_rule : thm -> thm                                                 
+//                                                                            
+/// This is the undischarge rule.  It takes an implication theorem, and       
+/// removes the antecedent from the conclusion and adds it to the assumptions.
+///                                                                           
+///    A |- p ==> q                                                           
+///    ------------                                                           
+///    A u {p} |- q                                                           
+///
+/// See also: disch_rule, mp_rule, prove_asm_rule.
 let undisch_rule th =              (* A |- p ==> q     *)
     try
         let (tm1,_) = dest_imp (concl th)
@@ -234,18 +235,19 @@ let add_asm_rule tm th =          (* A |- p          *)
         let () = assert1 (is_bool_term tm)       (func,"Arg 1 not a boolean term")
         internal_err func
 
-(* prove_asm_rule : thm -> thm -> thm                                         *)
-(*                                                                            *)
-(* This is the assumption proving rule.  It takes two theorems, and returns   *)
-(* the second theorem but with the conclusion of the first theorem removed    *)
-(* from the assumptions (if present) and the assumptions from the first       *)
-(* theorem added.  Note that the first theorem's conclusion does not have to  *)
-(* be in the second's assumptions for the rule to succeed.                    *)
-(*                                                                            *)
-(*    A1 |- p    A2 |- q                                                      *)
-(*    ------------------                                                      *)
-(*    A1 u (A2\{p}) |- q                                                      *)
-
+//  prove_asm_rule : thm -> thm -> thm                                        
+//                                                                            
+/// This is the assumption proving rule.  It takes two theorems, and returns  
+/// the second theorem but with the conclusion of the first theorem removed   
+/// from the assumptions (if present) and the assumptions from the first      
+/// theorem added.  Note that the first theorem's conclusion does not have to 
+/// be in the second's assumptions for the rule to succeed.                   
+///                                                                           
+///    A1 |- p    A2 |- q                                                     
+///    ------------------                                                     
+///    A1 u (A2\{p}) |- q                                                     
+///
+/// See also: mp_rule, undisch_rule.
 let prove_asm_rule th01 th02 =      (* A1 |- p    A2 |- q    *)
     let th1 = disch_rule (concl th01) th02 in    (* A2\{p} |- p ==> q      *)
     mp_rule th1 th01                             (* A1 u A2\{p} |- q       *)
@@ -258,7 +260,9 @@ let prove_asm_rule th01 th02 =      (* A1 |- p    A2 |- q    *)
 ///                                                                    
 ///    A |- p <=> q                                                    
 ///    ------------                                                    
-///    A |- p ==> q                                                    
+///    A |- p ==> q                                  
+///
+/// See also: eq_imp_rule2, imp_antisym_rule, eq_mp_rule, undisch_rule, mk_imp_rule.
 let eq_imp_rule1 th =       (* A |- p <=> q      *)
     try
         let tm1 = eqthm_lhs th
@@ -280,7 +284,9 @@ let eq_imp_rule1 th =       (* A |- p <=> q      *)
 ///                                                                     
 ///    A |- p <=> q                                                     
 ///    ------------                                                     
-///    A |- q ==> p                                                     
+///    A |- q ==> p             
+///
+/// See also: eq_imp_rule1, imp_antisym_rule, eq_mp_rule, undisch_rule, mk_imp_rule.
 let eq_imp_rule2 th =       (* A |- p <=> q      *)
     try
         let tm2 = eqthm_rhs th
@@ -295,16 +301,17 @@ let eq_imp_rule2 th =       (* A |- p <=> q      *)
         let () = assert1 (is_bool_eqthm th)      (func,"Not a bool equality thm")
         internal_err func
 
-(* not_intro_rule : thm -> thm                                                *)
-(*                                                                            *)
-(* This is the logical negation introduction rule.  It takes an implication   *)
-(* theorem where the RHS is falsity, and returns the logical negation of the  *)
-(* LHS, under the same assumptions.                                           *)
-(*                                                                            *)
-(*    A |- p ==> false                                                        *)
-(*    ----------------                                                        *)
-(*        A |- ~ p                                                            *)
-
+//  not_intro_rule : thm -> thm                                              
+//                                                                           
+/// This is the logical negation introduction rule.  It takes an implication 
+/// theorem where the RHS is falsity, and returns the logical negation of the
+/// LHS, under the same assumptions.                                         
+///                                                                          
+///    A |- p ==> false                                                      
+///    ----------------                                                      
+///        A |- ~ p                                                          
+///
+/// See also: not_elim_rule, eqf_elim_rule, eqf_intro_rule, deduct_contrapos_rule.
 let not_intro_rule th =           (* A |- p ==> false   *)
     try
         let p = fst (dest_imp (concl th))
@@ -316,16 +323,17 @@ let not_intro_rule th =           (* A |- p ==> false   *)
         let () = assert1 (term_eq f false_tm)  (func,"Theorem RHS not `false`")
         internal_err func
 
-(* not_elim_rule : thm -> thm                                                 *)
-(*                                                                            *)
-(* This is the logical negation elimination rule.  It takes a logical         *)
-(* negation theorem, and returns an implication with the negated term on the  *)
-(* LHS and falsity on the RHS, under the same assumptions.                    *)
-(*                                                                            *)
-(*        A |- ~ p                                                            *)
-(*    ----------------                                                        *)
-(*    A |- p ==> false                                                        *)
-
+//  not_elim_rule : thm -> thm                                               
+//                                                                           
+/// This is the logical negation elimination rule.  It takes a logical       
+/// negation theorem, and returns an implication with the negated term on the
+/// LHS and falsity on the RHS, under the same assumptions.                  
+///                                                                          
+///        A |- ~ p                                                          
+///    ----------------                                                      
+///    A |- p ==> false                                                      
+///
+/// See also: not_intro_rule, eqf_intro_rule, eqf_elim_rule.
 let not_elim_rule th =           (* A |- ~ p      *)
     try
         let p = dest_not (concl th) in
@@ -363,7 +371,7 @@ let deduct_contrapos_rule tm1 th =         (* A |- p         *)
 
 //  eqf_elim_rule : thm -> thm                                              
 //                                                                          
-/// The is the falsity equivalence elimination rule.  It takes an equality  
+/// This is the falsity equivalence elimination rule.  It takes an equality  
 /// theorem with falsity on the RHS, and returns the logical negation of the
 /// LHS, under the same assumptions.                                        
 ///                                                                         
@@ -478,18 +486,19 @@ let list_spec_rule tms th =
         let _ = map foo nvtms in
         internal_err func
 
-(* spec_all_rule : thm -> thm                                                 *)
-(*                                                                            *)
-(* This is the compound default universal elimination rule.  It strips off    *)
-(* all the outer universal quantifiers from the supplied theorem.  Note that  *)
-(* the supplied theorem does not have to be a universal quantification for    *)
-(* the rule to succeed (in which case the resulting theorem is the same as    *)
-(* the supplied theorem).                                                     *)
-(*                                                                            *)
-(*    A |- !x1 x2 .. xn. p                                                    *)
-(*    --------------------                                                    *)
-(*           A |- p                                                           *)
-
+//  spec_all_rule : thm -> thm                                               
+//                                                                           
+/// This is the compound default universal elimination rule.  It strips off  
+/// all the outer universal quantifiers from the supplied theorem.  Note that
+/// the supplied theorem does not have to be a universal quantification for  
+/// the rule to succeed (in which case the resulting theorem is the same as  
+/// the supplied theorem).                                                   
+///                                                                          
+///    A |- !x1 x2 .. xn. p                                                  
+///    --------------------                                                  
+///           A |- p                                                         
+///
+/// See also: spec_rule, list_spec_rule, bspec_rule, list_gen_rule.
 let spec_all_rule th =
     let vs = (fst <* strip_forall <* concl) th in
     list_spec_rule vs th
@@ -675,15 +684,16 @@ let deduct_antisym_rule th01 th02 =      (* A1 |- p     A2 |- q   *)
     //printfn "%A" (print_thm cncl)
     cncl
 
-(* sym_conv : term -> thm                                                     *)
-(*                                                                            *)
-(* This is the symmetry conversion for equality.  It transforms the supplied  *)
-(* equality term by swapping its LHS with its RHS, under no assumptions.      *)
-(*                                                                            *)
-(*           `t1 = t2`                                                        *)
-(*    ----------------------                                                  *)
-(*    |- t1 = t2 <=> t2 = t1                                                  *)
-
+//  sym_conv : term -> thm                                                   
+//                                                                           
+/// This is the symmetry conversion for equality.  It transforms the supplied
+/// equality term by swapping its LHS with its RHS, under no assumptions.    
+///                                                                          
+///           `t1 = t2`                                                      
+///    ----------------------                                                
+///    |- t1 = t2 <=> t2 = t1                                                
+///
+/// See also: sym_rule, refl_conv.
 let sym_conv tm =                  (* t1 = t2      *)
     try
         let th1 = sym_rule (assume_rule tm) in   (* t1 = t2 |- t2 = t1         *)

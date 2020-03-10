@@ -156,16 +156,17 @@ let flatstrip_pair tm = unfold dest_pair tm
 
 let is_pair tm = can dest_pair tm
 
-(* mk_pair_rule : thm -> thm -> thm                                           *)
-(*                                                                            *)
-(* This is the equality congruence rule for pairing.  It takes two equality   *)
-(* theorems, and pairs corresponding sides of the first theorem with the      *)
-(* second, unioning the assumptions.                                          *)
-(*                                                                            *)
-(*    A1 |- x1 = x2    A2 |- y1 = y2                                          *)
-(*    ------------------------------                                          *)
-(*     A1 u A2 |- (x1,y1) = (x2,y2)                                           *)
-
+//  mk_pair_rule : thm -> thm -> thm                                        
+//                                                                          
+/// This is the equality congruence rule for pairing.  It takes two equality
+/// theorems, and pairs corresponding sides of the first theorem with the   
+/// second, unioning the assumptions.                                       
+///                                                                         
+///    A1 |- x1 = x2    A2 |- y1 = y2                                       
+///    ------------------------------                                       
+///     A1 u A2 |- (x1,y1) = (x2,y2)                                        
+///
+/// See also: mk_pair1_rule, mk_pair2_rule, mk_bin_rule.
 let mk_pair_rule th1 th2 =
     try
         let ty1 = type_of (eqthm_rhs th1)  
@@ -178,15 +179,16 @@ let mk_pair_rule th1 th2 =
         let () = assert1 (is_eqthm th2)       (func,"Arg 2 not an equality") in
         internal_err func
 
-(* mk_pair1_rule : thm -> term -> thm                                         *)
-(*                                                                            *)
-(* This is the equality congruence rule for pair LHS.  It takes an equality   *)
-(* theorem and a term, and pairs each side of the theorem with the term.      *)
-(*                                                                            *)
-(*     A |- x1 = x2   `y`                                                     *)
-(*    --------------------                                                    *)
-(*    A |- (x1,y) = (x2,y)                                                    *)
-
+//  mk_pair1_rule : thm -> term -> thm                                      
+//                                                                          
+/// This is the equality congruence rule for pair LHS.  It takes an equality
+/// theorem and a term, and pairs each side of the theorem with the term.   
+///                                                                         
+///     A |- x1 = x2   `y`                                                  
+///    --------------------                                                 
+///    A |- (x1,y) = (x2,y)                                                 
+///
+/// See also: mk_pair2_rule, mk_pair_rule, mk_bin1_rule.
 let mk_pair1_rule th1 tm =
     try
         let ty1 = type_of (eqthm_rhs th1)  
@@ -198,15 +200,16 @@ let mk_pair1_rule th1 tm =
         let () = assert1 (is_eqthm th1)       (func,"Arg 1 not an equality") in
         internal_err func
 
-(* mk_pair2_rule : term -> thm -> thm                                         *)
-(*                                                                            *)
-(* This is the equality congruence rule for pair RHS.  It takes a term and an *)
-(* equality theorem, and pairs the term with each side of the theorem.        *)
-(*                                                                            *)
-(*     `x`   A |- y1 = y2                                                     *)
-(*    --------------------                                                    *)
-(*    A |- (x,y1) = (x,y2)                                                    *)
-
+//  mk_pair2_rule : term -> thm -> thm                                        
+//                                                                            
+/// This is the equality congruence rule for pair RHS.  It takes a term and an
+/// equality theorem, and pairs the term with each side of the theorem.       
+///                                                                           
+///     `x`   A |- y1 = y2                                                    
+///    --------------------                                                   
+///    A |- (x,y1) = (x,y2)                                                   
+///
+/// See also: mk_pair1_rule, mk_pair_rule, mk_bin2_rule.
 let mk_pair2_rule tm th2 =
     try
         let ty1 = type_of tm  

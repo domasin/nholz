@@ -22,17 +22,18 @@
 [<AutoOpen>]
 module HOL.BoolClass
 
-(* select_rule : thm -> thm                                                   *)
-(*                                                                            *)
-(* This is the existential selection rule.  It strips off the existential     *)
-(* quantifier from the supplied theorem, and replaces each occurrence of the  *)
-(* binding variable in the body with the selection operator applied to the    *)
-(* original body (with the same binding variable).                            *)
-(*                                                                            *)
-(*       A |- ?x. p                                                           *)
-(*    ----------------                                                        *)
-(*    A |- p[(@x.p)/x]                                                        *)
-
+//  select_rule : thm -> thm                                                 
+//                                                                           
+/// This is the existential selection rule.  It strips off the existential   
+/// quantifier from the supplied theorem, and replaces each occurrence of the
+/// binding variable in the body with the selection operator applied to the  
+/// original body (with the same binding variable).                          
+///                                                                          
+///       A |- ?x. p                                                         
+///    ----------------                                                      
+///    A |- p[(@x.p)/x]                                                      
+///
+/// See also: exists_rule.
 let select_rule th =           (* A |- ?x. p  *)
     try
         let (v,p) = dest_exists (concl th) in

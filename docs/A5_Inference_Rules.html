@@ -792,6 +792,452 @@ primo teorema con quelli del secondo, unendone le assunzioni.</p>
 <span class="c">//  ----------------------------------                                   </span>
 <span class="c">//   A1 u A2 |- p1 \/ q1 &lt;=&gt; p2 \/ q2    </span>
 </code></pre>
+<h2>| EqCong.mk_disj1_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la disgiunzione sul
+lato sinistro. Prende un teorema di eguaglianza booleana e un termine booleano,
+e disgiunge ogni lato del teorema con il termine fornito.</p>
+<p>Si veda anche: mk_disj2_rule, mk_disj_rule, mk_bin1_rule, disj1_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs63', 68)" onmouseover="showTip(event, 'fs63', 68)" class="fn">mk_disj1_rule</span>
+
+<span class="c">//     A |- p1 &lt;=&gt; p2   `q`                                                 </span>
+<span class="c">//   ------------------------                                               </span>
+<span class="c">//   A |- p1 \/ q &lt;=&gt; p2 \/ q  </span>
+</code></pre>
+<h2>| EqCong.mk_disj2_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la disgiunzione sul
+lato destro. Prende un termine booleano e un teorema di eguaglianza booleana,
+e disgiunge il termine fornito con ogni lato del teorema.</p>
+<p>Si veda anche: mk_disj1_rule, mk_disj_rule, mk_bin1_rule, disj2_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs64', 69)" onmouseover="showTip(event, 'fs64', 69)" class="fn">mk_disj2_rule</span>
+
+<span class="c">//    `p`   A |- q1 &lt;=&gt; q2                                             </span>
+<span class="c">//  ------------------------                                           </span>
+<span class="c">//  A |- p \/ q1 &lt;=&gt; p \/ q2   </span>
+</code></pre>
+<h2>| EqCong.mk_eq_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza.
+Prende due teoremi di uguaglianza, e uguaglia i corrispondenti lati del
+primo teorema con quelli del secondo, unendone le assunzioni. I tipi di
+ciascun lato di ogni equazione devono essere uguali.</p>
+<p>Si veda anche: mk_eq1_rule, mk_eq2_rule, mk_eq_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs65', 70)" onmouseover="showTip(event, 'fs65', 70)" class="fn">mk_eq_rule</span>
+
+<span class="c">//  A1 |- s1 = s2    A2 |- t1 = t2                                          </span>
+<span class="c">//  ------------------------------                                          </span>
+<span class="c">//  A1 u A2 |- s1 = t1 &lt;=&gt; s2 = t2  </span>
+</code></pre>
+<h2>| EqCong.mk_eq1_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza
+sul lato sinistro. Prende un teorema di uguaglianza e un termine, e uguaglia
+ogni lato del teorema con il termine fornito. Il tipo del termine fornito
+deve essere uguale al tipo di ciascun lato del teorema fornito.</p>
+<p>Si veda anche: mk_eq2_rule, mk_eq_rule, mk_eq1_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs66', 71)" onmouseover="showTip(event, 'fs66', 71)" class="fn">mk_eq1_rule</span>
+
+<span class="c">//   A |- s1 = s2   `t`                                                   </span>
+<span class="c">// ----------------------                                                 </span>
+<span class="c">// A |- s1 = t &lt;=&gt; s2 = t  </span>
+</code></pre>
+<h2>| EqCong.mk_eq2_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza
+sul lato destro. Prende un termine e un teorema di eguaglianza, e uguaglia
+il termine a ciascun lato del teorema. Il tipo del termine fornito deve
+essere uguale al tipo di cascun lato del teorema fornito.</p>
+<p>Si veda anche: mk_eq1_rule, mk_eq_rule, mk_eq1_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs67', 72)" onmouseover="showTip(event, 'fs67', 72)" class="fn">mk_eq2_rule</span>
+
+<span class="c">//    `s`   A |- t1 = t2                                                   </span>
+<span class="c">//  ----------------------                                                 </span>
+<span class="c">//  A |- s = t1 &lt;=&gt; s = t2    </span>
+</code></pre>
+<h2>| EqCong.mk_exists_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione
+esistenziale. Prende una variabile e un teorema di uguaglianza, e quantifica
+in modo esistenzaiale la variabile su entrambi i lati del teorema. La variabile
+non deve occorrere libera nelle assunzioni del teorema fornito</p>
+<p>Si veda anche: mk_uexists_rule, mk_abs_rule, mk_comb_rule, exists_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs68', 73)" onmouseover="showTip(event, 'fs68', 73)" class="fn">mk_exists_rule</span>
+
+<span class="c">//     `x`   A |- p1 &lt;=&gt; p2         [ &quot;x&quot; not free in `A` ]                </span>
+<span class="c">//  --------------------------                                             </span>
+<span class="c">//  A |- (?x. p1) &lt;=&gt; (?x. p2)  </span>
+</code></pre>
+<h2>| EqCong.mk_forall_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione
+universale. Prende una variabile e un teorema di uguaglianza, e quantifica
+universalmente la variabile su entrambi i lati del teorema. La variabile
+non deve occorrere libera nelle assunzioni del teorema fornito</p>
+<p>Si veda anche: mk_abs_rule, mk_comb_rule, gen_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs69', 74)" onmouseover="showTip(event, 'fs69', 74)" class="fn">mk_forall_rule</span>
+
+<span class="c">//     `x`   A |- p1 &lt;=&gt; p2         [ &quot;x&quot; not free in `A` ]              </span>
+<span class="c">//  --------------------------                                           </span>
+<span class="c">//  A |- (!x. p1) &lt;=&gt; (!x. p2)    </span>
+</code></pre>
+<h2>| EqCong.mk_imp_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione.
+Prende due teoremi di eguaglianza booleana, e crea l'implicazione dai
+corrispondeti lati del primo e del secondo teorema, unendone le assunzioni.</p>
+<p>Si veda anche: mk_imp1_rule, mk_imp2_rule, mk_bin_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs70', 75)" onmouseover="showTip(event, 'fs70', 75)" class="fn">mk_imp_rule</span>
+
+<span class="c">//  A1 |- p1 &lt;=&gt; p2    A2 |- q1 &lt;=&gt; q2                                    </span>
+<span class="c">//  ----------------------------------                                    </span>
+<span class="c">//  A1 u A2 |- p1 ==&gt; q1 &lt;=&gt; p2 ==&gt; q2 </span>
+</code></pre>
+<h2>| EqCong.mk_imp1_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione
+su lato sinistro. Prende un teorema di eguaglianza booleana e un termine
+booleano, e crea le implicazioni da ogni lato del teorema, con il lato
+del teorema come antecedente e il termine come conseguente.</p>
+<p>Si veda anche: mk_imp2_rule, mk_imp_rule, mk_bin1_rule</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs71', 76)" onmouseover="showTip(event, 'fs71', 76)" class="fn">mk_imp1_rule</span>
+
+<span class="c">//    A |- p1 &lt;=&gt; p2   `q`                                               </span>
+<span class="c">// --------------------------                                            </span>
+<span class="c">// A |- p1 ==&gt; q &lt;=&gt; p2 ==&gt; q    </span>
+</code></pre>
+<h2>| EqCong.mk_imp2_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione
+su lato destro. Prende un termine booleano e un teorema di eguaglianza
+booleana, e rende il termine un antecedente di ciascun lato del teorema.</p>
+<p>Si veda anche: mk_imp1_rule, mk_imp_rule, mk_bin2_rule</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs72', 77)" onmouseover="showTip(event, 'fs72', 77)" class="fn">mk_imp2_rule</span>
+
+<span class="c">//    `p`   A |- q1 &lt;=&gt; q2                                            </span>
+<span class="c">//  --------------------------                                        </span>
+<span class="c">//  A |- p ==&gt; q1 &lt;=&gt; p ==&gt; q2  </span>
+</code></pre>
+<h2>| EqCong.mk_not_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la negazione
+logica, Prende un teorema di eguaglianza booleana, e nega logicamente
+ciascun lato del teorema.</p>
+<p>Si veda anche: mk_comb_rule, eqf_intro_rule, eqf_elim_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs73', 78)" onmouseover="showTip(event, 'fs73', 78)" class="fn">mk_not_rule</span>
+
+<span class="c">//    A |- p1 &lt;=&gt; p2                                                      </span>
+<span class="c">//  ------------------                                                    </span>
+<span class="c">//  A |- ~ p1 &lt;=&gt; ~ p2   </span>
+</code></pre>
+<h2>| Pair.mk_pair_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'accoppiamento.
+Prende due teoremi di uguaglianza, e accoppia i corrispondenti lati del
+primo teorema con quelli del secondo, unendone le assunzioni</p>
+<p>Si veda anche: mk_pair1_rule, mk_pair2_rule, mk_bin_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs74', 79)" onmouseover="showTip(event, 'fs74', 79)" class="fn">mk_pair_rule</span>
+
+<span class="c">//  A1 |- x1 = x2    A2 |- y1 = y2                                       </span>
+<span class="c">//  ------------------------------                                       </span>
+<span class="c">//   A1 u A2 |- (x1,y1) = (x2,y2)    </span>
+</code></pre>
+<h2>| Pair.mk_pair1_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la coppia a
+sinistra. Prende un teorema di uguaglianza e un termine, e accoppia ogni
+lato del teorema con il termine.</p>
+<p>Si veda anche: mk_pair2_rule, mk_pair_rule, mk_bin1_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs75', 80)" onmouseover="showTip(event, 'fs75', 80)" class="fn">mk_pair1_rule</span>
+
+<span class="c">//    A |- x1 = x2   `y`                                                  </span>
+<span class="c">//   --------------------                                                 </span>
+<span class="c">//   A |- (x1,y) = (x2,y) </span>
+</code></pre>
+<h2>| Pair.mk_pair2_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la coppia a
+destra. Prende un termine un teorema di uguaglianza, e accoppia il termine
+con ogni lato del teorema.</p>
+<p>Si veda anche: mk_pair1_rule, mk_pair_rule, mk_bin2_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs76', 81)" onmouseover="showTip(event, 'fs76', 81)" class="fn">mk_pair2_rule</span>
+
+<span class="c">///     `x`   A |- y1 = y2                                                    </span>
+<span class="c">///    --------------------                                                   </span>
+<span class="c">///    A |- (x,y1) = (x,y2)  </span>
+</code></pre>
+<h2>| EqCong.mk_select_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la selezione.
+Prende una variabile e un teorema di eguaglianza, e seleziona la variabile
+da entrambi i lati del teorema. La variabile non deve occorrere libera
+nelle assunzioni del teorema.</p>
+<p>Si veda anche: mk_abs_rule, mk_comb_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs77', 82)" onmouseover="showTip(event, 'fs77', 82)" class="fn">mk_select_rule</span>
+
+<span class="c">//    `x`   A |- p1 &lt;=&gt; p2        [ &quot;x&quot; not free in `A` ]                </span>
+<span class="c">//  ------------------------                                             </span>
+<span class="c">//  A |- (@x. p1) = (@x. p2)     </span>
+</code></pre>
+<h2>| EqCong.mk_uexists_rule</h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione
+esistenziale univoca. Prende una variabile e un teorema di eguaglianza, e
+quantifica con quantificatore esistenziale univoco la variabile su
+entrambi i lato del teorema. La variabile non deve occorrere libera
+nelle assunzioni del teorema fornito.</p>
+<p>Si veda anche: mk_exists_rule, mk_abs_rule, mk_comb_rule</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs78', 83)" onmouseover="showTip(event, 'fs78', 83)" class="fn">mk_uexists_rule</span>
+
+<span class="c">//      `x`   A |- p1 &lt;=&gt; p2        [ &quot;x&quot; not free in `A` ]               </span>
+<span class="c">//  ----------------------------                                          </span>
+<span class="c">//  A |- (?!x. p1) &lt;=&gt; (?!x. p2)             </span>
+</code></pre>
+<h2>| Wrap.mp_rule</h2>
+<p>Regola primitiva</p>
+<p>Questa &egrave; la regola di modus ponens. Prende un teorema di implicazione ed
+un secondo teorema, dove l'antecendente del teorema di implicazione &egrave;
+alfa-equivalente alla conclusione del secondo teorema. Restituisce un teorema che
+afferma che vale il conseguente del teorema di implicazione, sotto l'unione delle
+assunzioni dei teoremi forniti.</p>
+<p>Si veda anche: eq_mp_rule, disch_rule, undisch_rule, prove_asm_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs79', 84)" onmouseover="showTip(event, 'fs79', 84)" class="fn">mp_rule</span>
+
+<span class="c">//   A1 |- p ==&gt; q    A2 |- p</span>
+<span class="c">//   ------------------------</span>
+<span class="c">//         A1 u A2 |- q</span>
+</code></pre>
+<h2>| Bool.not_elim_rule</h2>
+<p>Questa &egrave; la regola di eliminazione della negazione logica. Prende
+un teorema di negazione logica, e restituisce un'implicazione con
+il termine negato sul lato sinistro e <code>false</code> sul lato destro, sotto le
+stesse assunzioni.</p>
+<p>Si veda anche: not_intro_rule, eqf_intro_rule, eqf_elim_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs80', 85)" onmouseover="showTip(event, 'fs80', 85)" class="fn">not_elim_rule</span>
+
+<span class="c">//      A |- ~ p                                                          </span>
+<span class="c">//  ----------------                                                      </span>
+<span class="c">//  A |- p ==&gt; false     </span>
+</code></pre>
+<h2>| Bool.not_intro_rule</h2>
+<p>Questa &egrave; la regola di introduzione della negazione logica. Prende un
+teorema di implicazione dove il lato destro &egrave; <code>false</code>, e restituisce la
+negazione logica del lato sinistro, sotto le stesse assunzioni.</p>
+<p>Si veda anche: not_elim_rule, eqf_elim_rule, eqf_intro_rule, deduct_contrapos_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs81', 86)" onmouseover="showTip(event, 'fs81', 86)" class="fn">not_intro_rule</span>
+
+<span class="c">//  A |- p ==&gt; false                                                      </span>
+<span class="c">//  ----------------                                                      </span>
+<span class="c">//      A |- ~ p     </span>
+</code></pre>
+<h2>| Bool.prove_asm_rule</h2>
+<p>Questa &egrave; la regola di assunzione provata. Prende due teoremi, e
+restituisce il secondo teorema ma con la conclusione del primo teorema
+rimossa (se presente) dalle sue assunzioni a cui sono aggiunte le assunzioni
+del primo teorema. Si noti che la conclusione del primo teorema non deve
+essere nelle assunzioni del secondo affinch&egrave; questa regola abbia
+successo.</p>
+<p>Si veda anche: mp_rule, undisch_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs82', 87)" onmouseover="showTip(event, 'fs82', 87)" class="fn">prove_asm_rule</span>
+
+<span class="c">//  A1 |- p    A2 |- q                                                     </span>
+<span class="c">//  ------------------                                                     </span>
+<span class="c">//  A1 u (A2\{p}) |- q   </span>
+</code></pre>
+<h2>| Wrap.refl_conv</h2>
+<p>Regola primitiva</p>
+<p>Questa &egrave; la regola di riflessivit&agrave; per l'uguaglianza. Prende un
+termine, e restituisce un teorema che afferma che il termine &egrave; uguale a
+se stesso, senza alcuna assunzione. Non ci sono restrizioni al termine fornito.</p>
+<p>Si veda anche: sym_conv, sym_rule, trans_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs83', 88)" onmouseover="showTip(event, 'fs83', 88)" class="fn">refl_conv</span>
+
+<span class="c">//     `t`</span>
+<span class="c">//  --------</span>
+<span class="c">//  |- t = t</span>
+</code></pre>
+<h2>| BoolClass.select_rule</h2>
+<p>Questa &egrave; la regola di selezione esistenziale. Elimina il
+quantificatore esistenziale del teorema fornito, e sostituisce nel corpo
+ogni occorrenza della variabile legata con l'operatore di selezione
+applicato al corpo originario (con la stessa variabile legata).</p>
+<p>Si veda anche: exists_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs84', 89)" onmouseover="showTip(event, 'fs84', 89)" class="fn">select_rule</span>
+
+<span class="c">//     A |- ?x. p                                                         </span>
+<span class="c">//  ----------------                                                      </span>
+<span class="c">//  A |- p[(@x.p)/x]   </span>
+</code></pre>
+<h2>| Bool.spec_all_rule</h2>
+<p>Questa &egrave; la regola composta di eliminazione di default del quantificatore
+universale. Elimina tutti i quantificatori universali esterni dal teorema fornito.
+Si noti che il teorema fornito non deve necessariamente essere una quantificazione
+universale perch&egrave; il teorema abbia successo (in  questo caso il teorema
+risultante &egrave; semplicemente lo stesso del teorema fornito):</p>
+<p>Si veda anche: spec_rule, list_spec_rule, bspec_rule, list_gen_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs85', 90)" onmouseover="showTip(event, 'fs85', 90)" class="fn">spec_all_rule</span>
+
+<span class="c">//  A |- !x1 x2 .. xn. p                                                  </span>
+<span class="c">//  --------------------                                                  </span>
+<span class="c">//         A |- p  </span>
+</code></pre>
+<h2>| Equal.subs_conv</h2>
+<p>Questa &egrave; la conversione di sostituzione base. Prende una lista di
+teoremi di eguaglianza e un termine, e trasofrma il termine eseguendo una
+singola sostituzione parallela di tutti i suoi sottotermini liberi secondo
+i teoremi di eguaglianza. Tutto le occorrenze libere dei lati sinistri dei
+teoremi di eguaglianza nel termine vegono rimpiazzate. Il teorema risultante
+ha l'unione delle assunzioni di tutti i teoremi forniti (indipendentemente
+dal fatto che esse si applichino al teorema).</p>
+<p>Le variabili legate nel lato destro del teorema risultante sono rinominate
+a seconda delle necessit&agrave; per evitare catture di variabili. Si noti
+che se uno dei lati sinistri dei teorei di uguaglianza occorre libero
+in uno degli altri, allora viene usato di preferenza il teorema con il lato
+sinistro pi&ugrave; ampio, e se due teoremi di uguaglianza hanno lati sinistri
+alfa-equivalenti, allora di preferenza &egrave; usato di preferenza il primo
+teorema nella lisa. Se nessuno dei teoremi di eguaglianza pu&ograve; essere
+usato, allora il lato destro del teorema risultante &egrave; lo stesso del
+suo lato sinistro.</p>
+<p>Si veda anche: subs_rule, subst_conv, inst_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs86', 91)" onmouseover="showTip(event, 'fs86', 91)" class="fn">subs_conv</span>
+
+<span class="c">//    A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`                               </span>
+<span class="c">//    ----------------------------------------                               </span>
+<span class="c">//     A1 u A2 u .. |- t = t[t1/s1,t2/s2,..]  </span>
+</code></pre>
+<h2>| Equal.subs_rule</h2>
+<p>Questa &egrave; la regola di sostituzione di base. Prende una lista di
+teoremi di equivalenza e un teorema, ed esegue una singola sostituzione
+parallela dei sottotermini liberi nella conclusione del teorema secondo i
+teoremi di equivalenza. Tutte le occorrenze libere dei lati sinistri dei
+teoremi di equivalenza nel teorema vengono rimpiazzate. Il teorema risultante
+ha l'unione di tutte le assunzioni di tutti i teoremi forniti (indipendentemente
+dal fatto che questi si applichino o meno al teorema fornito).</p>
+<p>Le variabili legate nel teorema risultante sono rinominate
+a seconda delle necessit&agrave; per evitare catture di variabili. Si noti
+che se uno dei lati sinistri dei teorei di uguaglianza occorre libero
+in uno degli altri, allora viene usato di preferenza il teorema con il lato
+sinistro pi&ugrave; ampio, e se due teoremi di uguaglianza hanno lati sinistri
+alfa-equivalenti, allora di preferenza &egrave; usato di preferenza il primo
+teorema nella lisa. Se nessuno dei teoremi di eguaglianza pu&ograve; essere
+usato, allora la conclusione del teorema risultante &egrave; la stessa
+dell'input.</p>
+<p>Si veda anche: subs_conv, subst_rule, inst_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs87', 92)" onmouseover="showTip(event, 'fs87', 92)" class="fn">subs_rule</span>
+
+<span class="c">//  A1 |- s1 = t1   A2 |- s2 = t2   ..    A |- t                           </span>
+<span class="c">//  --------------------------------------------                           </span>
+<span class="c">//       A1 u A2 u .. |- t[t1/s1,t2/s2,..]  </span>
+</code></pre>
+<h2>| Equal.subst_conv</h2>
+<p>Questa &egrave; la conversione di sostituzione tramite template. Prende uno
+schema di sostituzione (nella forma di una lista di associazione e un termine
+template) seguito da un termine principale, e trasforma il termine principale
+una singola sostituzione parallela di tutti i suoi sottotermini liberi, secondo
+lo schema di sostituzione. Il termine template determina quali occorrenze
+libere dei lati sinistri del teorema di equivalenz nel termine principale sono
+rimpiazzate, e riflette la struttura sintattica del termine, eccetto che per
+l'avere atomi variabili template al posto dei sottotoermini a causa del
+rimpiazzamento. La lista di associazione mappa ogni variabile template a un
+teorema di equivalenza, con il lato sinistro del teorema di equivalenza per
+il sottotermine del termine principale originale e il lato destro per il
+sottotermine che lo rimpiazza. Il teorema risultante ha l'unione delle
+assunzioni di tutti i teoremi forniti (indipenentemente dal fatto che essi
+si applichino al template fornito).</p>
+<p>Le variabili legate nel teorema risultante sono rinominate secondo le
+necessit&agrave; per evitare catture di variabili. Si noti che se due elementi
+appaiono nella lista di associazione per la stessa variabile template, allora
+viene usato il primo elemento, e che elementi per variabili che non appaiono
+nel template sono ignorate. Se nessun elemento pu&ograve; essere applicato,
+allora il lato destro della conclusione del teorema risultante &egrave;
+lo stesso del suo lato sinistro.</p>
+<p>Si veda anche: subst_rule, subs_conv, inst_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs88', 93)" onmouseover="showTip(event, 'fs88', 93)" class="fn">subst_conv</span>
+
+<span class="c">//     `v1`           `v2`          ..                                     </span>
+<span class="c">//  A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`   `t[s1/v1,s2/v2,..]`         </span>
+<span class="c">//  --------------------------------------------------------------         </span>
+<span class="c">//      A1 u A2 u .. |- t[s1/v1,s2/v2,..] = t[t1/v1,t2/v2,..]     </span>
+</code></pre>
+<h2>| Equal.subst_rule</h2>
+<p>Questa &egrave; la regola di sostituzione tramite template. Prende uno
+schema di sostituzione (nella forma di una lista di associazione e di
+un termine template) seguito da un teorema, ed esegue una singola sostituzione
+parallela di tutti i sottotermini liberi nella conclusione del teorema, secondo
+lo schema di sostituzione. Il termine template determina quali occorrenze
+libere dei lati sinistri del teorema di equivalenza vengono rimpiazzate nella
+conclusione del teorema, eccetto che variabili atomiche template al posto
+dei sottotermini a causa del rimpiazzamento. La lista di associazione mappa
+ogni variabile template a un teorema di equivalenza, con il lato sinistro del
+teorema di equivalenza per il sottotermine del teorema originale fornito e il
+lato destro per il sottotermine che viene sostituito. Il teorema risultante
+ha l'unione delle assunzioni di tutti i teoremi forniti (indipenentemente dal
+fatto che essi si applichino al template fornito).</p>
+<p>Le variabili di astrazione nel teorema risultante sono rinominate secondo le
+necessit&agrave; per evitare catture di variabili. Si noti che se due elementi
+appaiono nella lista di associazione per la stessa variabile template, allora
+viene usato il primo elemento, e che elementi per variabili che non appaiono
+nel template sono ignorate. Se nessun elemento pu&ograve; essere applicato,
+allora il lato destro della conclusione del teorema risultante &egrave;
+lo stesso del suo lato sinistro.</p>
+<p>Si veda anche: subst_conv, subs_rule, inst_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs89', 94)" onmouseover="showTip(event, 'fs89', 94)" class="fn">subst_rule</span>
+
+<span class="c">//     `v1`            `v2`          ..                                      </span>
+<span class="c">//   A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`   A |- t[s1/v1,s2/v2,..]       </span>
+<span class="c">//   -----------------------------------------------------------------       </span>
+<span class="c">//                  A1 u A2 u .. |- t[t1/v1,t2/v2,..]     </span>
+</code></pre>
+<h2>| Bool.sym_conv</h2>
+<p>Questa &egrave; la conversione di simmetria per l'uguaglianza. Trasforma il
+termine di ugualianza fornito scambiando il lato sinistro con il destro, senza
+alcuna assunzione.</p>
+<p>Si veda anche: sym_rule, refl_conv.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs90', 95)" onmouseover="showTip(event, 'fs90', 95)" class="fn">sym_conv</span>
+
+<span class="c">//          `t1 = t2`                                                      </span>
+<span class="c">//   ----------------------                                                </span>
+<span class="c">//   |- t1 = t2 &lt;=&gt; t2 = t1      </span>
+</code></pre>
+<h2>| Equal.sym_conv</h2>
+<p>Questa &egrave; la regola di simmetria per l'uguaglianza. Scambia il lato
+sinistro con il destro nel teorema di uguaglianza fornito.</p>
+<p>Si veda anche: sym_conv, refl_conv, trans_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs91', 96)" onmouseover="showTip(event, 'fs91', 96)" class="fn">sym_rule</span>
+
+<span class="c">//  A |- t1 = t2                                                           </span>
+<span class="c">//  ------------                                                           </span>
+<span class="c">//  A |- t2 = t1</span>
+</code></pre>
+<h2>| Equal.trans_rule</h2>
+<p>Questa &egrave; la regola di transitivit&agrave; per l'uguaglianza. Prende
+due teoremi di uguaglianza, dove il lato destro del primo teorema &egrave;
+lo stesso (modulo alfa-equivalenza) del lato sinistro del secondot. Restituisce
+un teorema che afferma che il lato sinistro del primo teorema uguaglia il
+lato destro del secondo teorema, sotto l'unione delle assunzioni dei due
+teoremi.</p>
+<p>Si veda anche: list_trans_rule, refl_conv, sym_rule, imp_trans_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs92', 97)" onmouseover="showTip(event, 'fs92', 97)" class="fn">trans_rule</span>
+
+<span class="c">//  A1 |- t1 = t2    A2 |- t2 = t3                                          </span>
+<span class="c">//  ------------------------------                                          </span>
+<span class="c">//        A1 u A2 |- t1 = t3    </span>
+</code></pre>
+<h2>| Bool.undisch_rule</h2>
+<p>Questa &egrave; la regola di scaricamento. Prende un teorema di implicazione,
+e rimuove l'antecedente dalla conclusione e lo aggiunge nelle assunzioni.</p>
+<p>Si veda anche: disch_rule, mp_rule, prove_asm_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs93', 98)" onmouseover="showTip(event, 'fs93', 98)" class="fn">undisch_rule</span>
+
+<span class="c">//  A |- p ==&gt; q                                                           </span>
+<span class="c">//  ------------                                                           </span>
+<span class="c">//  A u {p} |- q   </span>
+</code></pre>
+<h2>| Equal.conv_rule</h2>
+<p>...</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs94', 99)" onmouseover="showTip(event, 'fs94', 99)" class="fn">conv_rule</span>
+</code></pre>
+<h2>| Equal.list_app_beta_rhs_rule</h2>
+<p>...</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs95', 100)" onmouseover="showTip(event, 'fs95', 100)" class="fn">list_app_beta_rhs_rule</span>
+</code></pre>
+<h2>| Equal.app_beta_rule</h2>
+<p>...</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs96', 101)" onmouseover="showTip(event, 'fs96', 101)" class="fn">app_beta_rule</span>
+
+<span class="c">//    A |- (\v1. t1) = (\v2. t2)   `s` </span>
+<span class="c">//    -------------------------------- </span>
+<span class="c">//       A |- t1[s/v1] = t2[s/v2]      </span>
+</code></pre>
+<h2>| Equal.list_app_beta_rule</h2>
+<p>...</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs97', 102)" onmouseover="showTip(event, 'fs97', 102)" class="fn">list_app_beta_rule</span>
+    
+</code></pre>
 
           <div class="tip" id="fs1">namespace HOL</div>
 <div class="tip" id="fs2">val add_asm_rule : tm:term -&gt; th:thm -&gt; thm</div>
@@ -855,6 +1301,41 @@ primo teorema con quelli del secondo, unendone le assunzioni.</p>
 <div class="tip" id="fs60">val mk_conj1_rule : tha:thm -&gt; tm:term -&gt; thm</div>
 <div class="tip" id="fs61">val mk_conj2_rule : tm:term -&gt; th:thm -&gt; thm</div>
 <div class="tip" id="fs62">val mk_disj_rule : tha:thm -&gt; thb:thm -&gt; thm</div>
+<div class="tip" id="fs63">val mk_disj1_rule : th:thm -&gt; tm:term -&gt; thm</div>
+<div class="tip" id="fs64">val mk_disj2_rule : tm:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs65">val mk_eq_rule : tha:thm -&gt; thb:thm -&gt; thm</div>
+<div class="tip" id="fs66">val mk_eq1_rule : tha:thm -&gt; tm:term -&gt; thm</div>
+<div class="tip" id="fs67">val mk_eq2_rule : tm:term -&gt; thb:thm -&gt; thm</div>
+<div class="tip" id="fs68">val mk_exists_rule : v:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs69">val mk_forall_rule : v:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs70">val mk_imp_rule : tha:thm -&gt; thb:thm -&gt; thm</div>
+<div class="tip" id="fs71">val mk_imp1_rule : th:thm -&gt; tm:term -&gt; thm</div>
+<div class="tip" id="fs72">val mk_imp2_rule : tm:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs73">val mk_not_rule : th:thm -&gt; thm</div>
+<div class="tip" id="fs74">val mk_pair_rule : th1:thm -&gt; th2:thm -&gt; thm</div>
+<div class="tip" id="fs75">val mk_pair1_rule : th1:thm -&gt; tm:term -&gt; thm</div>
+<div class="tip" id="fs76">val mk_pair2_rule : tm:term -&gt; th2:thm -&gt; thm</div>
+<div class="tip" id="fs77">val mk_select_rule : v:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs78">val mk_uexists_rule : v:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs79">val mp_rule : th1:thm -&gt; th2:thm -&gt; thm</div>
+<div class="tip" id="fs80">val not_elim_rule : th:thm -&gt; thm</div>
+<div class="tip" id="fs81">val not_intro_rule : th:thm -&gt; thm</div>
+<div class="tip" id="fs82">val prove_asm_rule : th01:thm -&gt; th02:thm -&gt; thm</div>
+<div class="tip" id="fs83">val refl_conv : tm:term -&gt; thm</div>
+<div class="tip" id="fs84">val select_rule : th:thm -&gt; thm</div>
+<div class="tip" id="fs85">val spec_all_rule : th:thm -&gt; thm</div>
+<div class="tip" id="fs86">val subs_conv : ths:thm list -&gt; tm:term -&gt; thm</div>
+<div class="tip" id="fs87">val subs_rule : ths:thm list -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs88">val subst_conv : vths:(term * thm) list -&gt; tmp:term -&gt; tm:term -&gt; thm</div>
+<div class="tip" id="fs89">val subst_rule : vths:(term * thm) list -&gt; tmp:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs90">val sym_conv : tm:term -&gt; thm</div>
+<div class="tip" id="fs91">val sym_rule : th:thm -&gt; thm</div>
+<div class="tip" id="fs92">val trans_rule : tha:thm -&gt; thb:thm -&gt; thm</div>
+<div class="tip" id="fs93">val undisch_rule : th:thm -&gt; thm</div>
+<div class="tip" id="fs94">val conv_rule : conv:(term -&gt; thm) -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs95">val list_app_beta_rhs_rule : th0:thm -&gt; zs:term list -&gt; thm</div>
+<div class="tip" id="fs96">val app_beta_rule : th0:thm -&gt; tm:term -&gt; thm</div>
+<div class="tip" id="fs97">val list_app_beta_rule : th0:thm -&gt; tms:term list -&gt; thm</div>
 
         </div>
         <div class="span1"></div>

@@ -59,6 +59,17 @@ let step_counter () = !the_absolute_step_total - !the_relative_step_start
 (* same behaviour as their primitive counterparts, except that they increment *)
 (* the absolute step counter for a successful execution.                      *)
 
+//  refl_conv : term -> thm                                      [ Primitive ]
+//  
+/// This is the reflexivity rule for equality.  It takes a term, and returns a
+/// theorem stating that this term is equal to itself, under no assumptions.  There
+/// are no restrictions on the supplied term.
+/// 
+///          `t`
+///       --------
+///       |- t = t
+/// 
+/// See also: eq_sym_conv, eq_sym_rule, eq_trans_rule.
 let refl_conv tm =
     let th' = prim_refl_conv tm in
     (inc_step_total ();
@@ -144,6 +155,19 @@ let disch_rule tm th =
     (inc_step_total ();
      th')
 
+//  mp_rule : thm -> thm -> thm                                     [ Primitive ]
+//  
+/// This is the modus ponens rule.  It takes an implication theorem and a second
+/// theorem, where the implication theorem's antecedent is alpha-equivalent to the
+/// conclusion of the second theorem.  It returns a theorem stating that the
+/// implication theorem's consequent holds, under the unioned assumptions of the
+/// supplied theorems.
+/// 
+///       A1 |- p ==> q    A2 |- p
+///       ------------------------
+///             A1 u A2 |- q
+/// 
+/// See also: eq_mp_rule, disch_rule, undisch_rule, prove_asm_rule.
 let mp_rule th1 th2 =
     let th' = try2 (prim_mp_rule th1) th2   "mp_rule" in
     (inc_step_total ();

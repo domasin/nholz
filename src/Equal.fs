@@ -120,18 +120,19 @@ let mk_comb2_rule tm th =          (* f    A |- t1 = t2    *)
                            (func,"Function domain type not equal to argument type")
         internal_err func
 
-(* trans_rule : thm -> thm -> thm                                             *)
-(*                                                                            *)
-(* This is the transitivity rule for equality.  It takes two equality theorem *)
-(* arguments, where the first theorem's RHS is the same (modulo alpha-        *)
-(* equivalence) as the second theorem's LHS.  It returns a theorem stating    *)
-(* that the first theorem's LHS equals the second theorem's RHS, under the    *)
-(* unioned assumptions of the two theorems.                                   *)
-(*                                                                            *)
-(*    A1 |- t1 = t2    A2 |- t2 = t3                                          *)
-(*    ------------------------------                                          *)
-(*          A1 u A2 |- t1 = t3                                                *)
-
+//  trans_rule : thm -> thm -> thm                                             
+//                                                                             
+/// This is the transitivity rule for equality.  It takes two equality theorem 
+/// arguments, where the first theorem's RHS is the same (modulo alpha-        
+/// equivalence) as the second theorem's LHS.  It returns a theorem stating    
+/// that the first theorem's LHS equals the second theorem's RHS, under the    
+/// unioned assumptions of the two theorems.                                   
+///                                                                            
+///    A1 |- t1 = t2    A2 |- t2 = t3                                          
+///    ------------------------------                                          
+///          A1 u A2 |- t1 = t3                                                
+///
+/// See also: list_trans_rule, refl_conv, sym_rule, imp_trans_rule.
 let trans_rule tha thb =        (* A1 |- t1 = t2    A2 |- t2 = t3  *)
     try
         let et1 = rator (concl tha)
@@ -149,15 +150,16 @@ let trans_rule tha thb =        (* A1 |- t1 = t2    A2 |- t2 = t3  *)
 
 let list_trans_rule ths = foldl1 trans_rule ths
 
-(* sym_rule : thm -> thm                                                      *)
-(*                                                                            *)
-(* This is the symmetry rule for equality.  It swaps the LHS with the RHS in  *)
-(* the supplied equality theorem.                                             *)
-(*                                                                            *)
-(*    A |- t1 = t2                                                            *)
-(*    ------------                                                            *)
-(*    A |- t2 = t1                                                            *)
-
+//  sym_rule : thm -> thm                                                     
+//                                                                            
+/// This is the symmetry rule for equality.  It swaps the LHS with the RHS in 
+/// the supplied equality theorem.                                            
+///                                                                           
+///    A |- t1 = t2                                                           
+///    ------------                                                           
+///    A |- t2 = t1                                                           
+///
+/// See also: sym_conv, refl_conv, trans_rule.
 let sym_rule th =                   (* A |- t1 = t2    *)
     try
         let (e,tm1) = (dest_comb <* rator <* concl) th
@@ -199,12 +201,12 @@ let app_beta_rhs_rule th0 z =          (* |- f = (\v. t)     *)
 
 let list_app_beta_rhs_rule th0 zs = foldl app_beta_rhs_rule th0 zs
 
-(* app_beta_rule : thm -> term -> thm                                         *)
-(*                                                                            *)
-(*    A |- (\v1. t1) = (\v2. t2)   `s`                                        *)
-(*    --------------------------------                                        *)
-(*       A |- t1[s/v1] = t2[s/v2]                                             *)
-
+/// app_beta_rule : thm -> term -> thm  
+///                                     
+///    A |- (\v1. t1) = (\v2. t2)   `s` 
+///    -------------------------------- 
+///       A |- t1[s/v1] = t2[s/v2]      
+///
 let app_beta_rule th0 tm =      (* A |- (\v1. t1) = (\v2. t2)    s  *)
     try
         let th1 = mk_comb1_rule th0 tm            (* A |- (\v1. t1) s = (\v2. t2) s *)
@@ -264,27 +266,7 @@ let alpha_conv u tm =
     let tm' = mk_abs (u, var_inst [(v,u)] tm0)
     alpha_link_conv tm' tm
 
-(* subs_conv : thm list -> term -> thm                                        *)
-(*                                                                            *)
-(* This is the basic substitution conversion.  It takes a list of equality    *)
-(* theorems and a term, and transforms the term by performing a single        *)
-(* parallel substitution of its free subterms according to the equality       *)
-(* theorems.  All free occurrences of equality theorem LHSs in the term get   *)
-(* replaced.  The resulting theorem has the unioned assumptions of all the    *)
-(* supplied theorems (regardless of whether they apply to the supplied        *)
-(* theorem).                                                                  *)
-(*                                                                            *)
-(* Binding variables in the resulting theorem's RHS are renamed as necessary  *)
-(* to avoid variable capture.  Note that if one equality theorem's LHS occurs *)
-(* free in another's, then the theorem with the larger LHS gets used in       *)
-(* preference, and if two equality theorems have alpha-equivalent LHSs, then  *)
-(* the earlier theorem in the list gets used in preference.  If no equality   *)
-(* theorems apply, then the returned theorem's conclusion's RHS is the same   *)
-(* as its LHS.                                                                *)
-(*                                                                            *)
-(*    A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`                                *)
-(*    ----------------------------------------                                *)
-(*     A1 u A2 u .. |- t = t[t1/s1,t2/s2,..]                                  *)
+(* subs_conv *)
 
 let beta_thm_rule th0 th =    (* A1 |- (\u. s) = (\v. t)    A2 |- x = y  *)
     let th1 = mk_comb_rule th0 th        (* A1 u A2 |- (\u. s) x = (\v. t) y   *)
@@ -295,6 +277,29 @@ let beta_thm_rule th0 th =    (* A1 |- (\u. s) = (\v. t)    A2 |- x = y  *)
 
 let list_beta_thm_rule th0 ths = foldl beta_thm_rule th0 ths
 
+//  subs_conv : thm list -> term -> thm                                       
+//                                                                            
+/// This is the basic substitution conversion.  It takes a list of equality   
+/// theorems and a term, and transforms the term by performing a single       
+/// parallel substitution of its free subterms according to the equality      
+/// theorems.  All free occurrences of equality theorem LHSs in the term get  
+/// replaced.  The resulting theorem has the unioned assumptions of all the   
+/// supplied theorems (regardless of whether they apply to the supplied       
+/// theorem).                                                                 
+///                                                                           
+/// Binding variables in the resulting theorem's RHS are renamed as necessary 
+/// to avoid variable capture.  Note that if one equality theorem's LHS occurs
+/// free in another's, then the theorem with the larger LHS gets used in      
+/// preference, and if two equality theorems have alpha-equivalent LHSs, then 
+/// the earlier theorem in the list gets used in preference.  If no equality  
+/// theorems apply, then the returned theorem's conclusion's RHS is the same  
+/// as its LHS.                                                               
+///                                                                           
+///    A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`                               
+///    ----------------------------------------                               
+///     A1 u A2 u .. |- t = t[t1/s1,t2/s2,..]   
+///
+/// See also: subs_rule, subst_conv, inst_rule.
 let subs_conv ths tm =      (* A1 |- s1 = t1   ..   An |- sn = tn    t    *)
     try
         let lhss = map eqthm_lhs ths
@@ -311,58 +316,60 @@ let subs_conv ths tm =      (* A1 |- s1 = t1   ..   An |- sn = tn    t    *)
                                      (func, "Arg 1 item is not an equality thm")
         internal_err func
 
-(* subs_rule : thm list -> thm -> thm                                         *)
-(*                                                                            *)
-(* This is the basic substitution rule.  It takes a list of equality theorems *)
-(* and a theorem, and performs a single parallel substitution of free         *)
-(* subterms in the theorem's conclusion according to the equality theorems.   *)
-(* All free occurrences of equality theorem LHSs in the theorem get replaced. *)
-(* The resulting theorem has the unioned assumptions of all the supplied      *)
-(* theorems (regardless of whether they apply to the supplied theorem).       *)
-(*                                                                            *)
-(* Binding variables in the resulting theorem are renamed as necessary to     *)
-(* avoid variable capture.  Note that if one equality theorem's LHS occurs    *)
-(* free in another's, then the theorem with the larger LHS gets used in       *)
-(* preference, and if two equality theorems have alpha-equivalent LHSs, then  *)
-(* the earlier theorem in the list gets used in preference.  If no equality   *)
-(* theorems apply, then the returned theorem's conclusion is the same as the  *)
-(* input's.                                                                   *)
-(*                                                                            *)
-(*    A1 |- s1 = t1   A2 |- s2 = t2   ..    A |- t                            *)
-(*    --------------------------------------------                            *)
-(*         A1 u A2 u .. |- t[t1/s1,t2/s2,..]                                  *)
-
+//  subs_rule : thm list -> thm -> thm                                        
+//                                                                            
+/// This is the basic substitution rule.  It takes a list of equality theorems
+/// and a theorem, and performs a single parallel substitution of free        
+/// subterms in the theorem's conclusion according to the equality theorems.  
+/// All free occurrences of equality theorem LHSs in the theorem get replaced.
+/// The resulting theorem has the unioned assumptions of all the supplied     
+/// theorems (regardless of whether they apply to the supplied theorem).      
+///                                                                           
+/// Binding variables in the resulting theorem are renamed as necessary to    
+/// avoid variable capture.  Note that if one equality theorem's LHS occurs   
+/// free in another's, then the theorem with the larger LHS gets used in      
+/// preference, and if two equality theorems have alpha-equivalent LHSs, then 
+/// the earlier theorem in the list gets used in preference.  If no equality  
+/// theorems apply, then the returned theorem's conclusion is the same as the 
+/// input's.                                                                  
+///                                                                           
+///    A1 |- s1 = t1   A2 |- s2 = t2   ..    A |- t                           
+///    --------------------------------------------                           
+///         A1 u A2 u .. |- t[t1/s1,t2/s2,..]                                 
+///
+/// See also: subs_conv, subst_rule, inst_rule.
 let subs_rule ths th =
     let th1 = try2 (subs_conv ths) (concl th)        "subs_rule"
     eq_mp_rule th1 th
 
-(* subst_conv : (term * thm) list -> term -> term -> thm                      *)
-(*                                                                            *)
-(* This is the template substitution conversion.  It takes a substitution     *)
-(* scheme (in the form of an association list and a template term) followed   *)
-(* by a main term, and transforms the main term by performing a single        *)
-(* parallel substitution of its free subterms, according to the substitution  *)
-(* scheme.  The template term determines which free occurrences of equality   *)
-(* theorem LHSs in the main term get replaced, and reflects the syntactic     *)
-(* structure of the term, except having template variable atoms in place of   *)
-(* subterms due for replacement.  The association list maps each template     *)
-(* variable to an equality theorem, with equality theorem LHS for the main    *)
-(* term's original subterm and RHS for the subterm that replaces it.  The     *)
-(* resulting theorem has the unioned assumptions of all the supplied theorems *)
-(* (regardless of whether they apply to the supplied template).               *)
-(*                                                                            *)
-(* Binding variables in the resulting theorem are renamed as necessary to     *)
-(* avoid variable capture.  Note that if two entries appear in the            *)
-(* association list for the same template variable, then the earlier entry    *)
-(* gets used, and that entries for variables that don't appear in the         *)
-(* template are ignored.  If no entries apply, then the returned theorem's    *)
-(* conclusion's RHS is the same as its LHS.                                   *)
-(*                                                                            *)
-(*       `v1`           `v2`          ..                                      *)
-(*    A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`   `t[s1/v1,s2/v2,..]`          *)
-(*    --------------------------------------------------------------          *)
-(*        A1 u A2 u .. |- t[s1/v1,s2/v2,..] = t[t1/v1,t2/v2,..]               *)
-
+//  subst_conv : (term * thm) list -> term -> term -> thm                     
+//                                                                            
+/// This is the template substitution conversion.  It takes a substitution    
+/// scheme (in the form of an association list and a template term) followed  
+/// by a main term, and transforms the main term by performing a single       
+/// parallel substitution of its free subterms, according to the substitution 
+/// scheme.  The template term determines which free occurrences of equality  
+/// theorem LHSs in the main term get replaced, and reflects the syntactic    
+/// structure of the term, except having template variable atoms in place of  
+/// subterms due for replacement.  The association list maps each template    
+/// variable to an equality theorem, with equality theorem LHS for the main   
+/// term's original subterm and RHS for the subterm that replaces it.  The    
+/// resulting theorem has the unioned assumptions of all the supplied theorems
+/// (regardless of whether they apply to the supplied template).              
+///                                                                           
+/// Binding variables in the resulting theorem are renamed as necessary to    
+/// avoid variable capture.  Note that if two entries appear in the           
+/// association list for the same template variable, then the earlier entry   
+/// gets used, and that entries for variables that don't appear in the        
+/// template are ignored.  If no entries apply, then the returned theorem's   
+/// conclusion's RHS is the same as its LHS.                                  
+///                                                                           
+///       `v1`           `v2`          ..                                     
+///    A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`   `t[s1/v1,s2/v2,..]`         
+///    --------------------------------------------------------------         
+///        A1 u A2 u .. |- t[s1/v1,s2/v2,..] = t[t1/v1,t2/v2,..]              
+///
+/// See also: subst_rule, subs_conv, inst_rule.
 let subst_conv vths tmp tm =
     let (vs,ths) = unzip vths
     try
@@ -390,34 +397,35 @@ let subst_conv vths tmp tm =
                      (func,"Substitution list entry missing for template variable") in
         internal_err func
 
-(* subst_rule : (term * thm) list -> term -> thm -> thm                       *)
-(*                                                                            *)
-(* This is the template substitution rule.  It takes a substitution scheme    *)
-(* (in the form of an association list and a template term) followed by a     *)
-(* theorem, and performs a single parallel substitution of free subterms in   *)
-(* the theorem's conclusion, according to the substitution scheme.  The       *)
-(* template term determines which free occurrences of equality theorem LHSs   *)
-(* in the supplied theorem get replaced, and reflects the syntactic structure *)
-(* of the theorem's conclusion, except having template variable atoms in      *)
-(* place of subterms due for replacement.  The association list maps each     *)
-(* template variable to an equality theorem, with equality theorem LHS for    *)
-(* the supplied theorem's original subterm and RHS for the subterm that       *)
-(* replaces it.  The resulting theorem has the unioned assumptions of all the *)
-(* supplied theorems (regardless of whether they apply to the supplied        *)
-(* template).                                                                 *)
-(*                                                                            *)
-(* Abstraction variables in the resulting theorem are renamed as necessary to *)
-(* avoid variable capture.  Note that if two entries appear in the            *)
-(* association list for the same template variable, then the earlier entry    *)
-(* gets used, and that entries for variables that don't appear in the         *)
-(* template are ignored.  If no entries apply, then the returned theorem's    *)
-(* conclusion is the same as the input's.                                     *)
-(*                                                                            *)
-(*      `v1`            `v2`          ..                                      *)
-(*    A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`   A |- t[s1/v1,s2/v2,..]       *)
-(*    -----------------------------------------------------------------       *)
-(*                   A1 u A2 u .. |- t[t1/v1,t2/v2,..]                        *)
-
+//  subst_rule : (term * thm) list -> term -> thm -> thm                       
+//                                                                             
+/// This is the template substitution rule.  It takes a substitution scheme    
+/// (in the form of an association list and a template term) followed by a     
+/// theorem, and performs a single parallel substitution of free subterms in   
+/// the theorem's conclusion, according to the substitution scheme.  The       
+/// template term determines which free occurrences of equality theorem LHSs   
+/// in the supplied theorem get replaced, and reflects the syntactic structure 
+/// of the theorem's conclusion, except having template variable atoms in      
+/// place of subterms due for replacement.  The association list maps each     
+/// template variable to an equality theorem, with equality theorem LHS for    
+/// the supplied theorem's original subterm and RHS for the subterm that       
+/// replaces it.  The resulting theorem has the unioned assumptions of all the 
+/// supplied theorems (regardless of whether they apply to the supplied        
+/// template).                                                                 
+///                                                                            
+/// Abstraction variables in the resulting theorem are renamed as necessary to 
+/// avoid variable capture.  Note that if two entries appear in the            
+/// association list for the same template variable, then the earlier entry    
+/// gets used, and that entries for variables that don't appear in the         
+/// template are ignored.  If no entries apply, then the returned theorem's    
+/// conclusion is the same as the input's.                                     
+///                                                                            
+///      `v1`            `v2`          ..                                      
+///    A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`   A |- t[s1/v1,s2/v2,..]       
+///    -----------------------------------------------------------------       
+///                   A1 u A2 u .. |- t[t1/v1,t2/v2,..]                        
+///
+/// See also: subst_conv, subs_rule, inst_rule.
 let subst_rule vths tmp th =
     let th1 = try2 (subst_conv vths tmp) (concl th)       "subst_rule"
     eq_mp_rule th1 th

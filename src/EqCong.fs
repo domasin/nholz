@@ -113,17 +113,18 @@ let mk_bin2_rule f tm1 th2 =       (* |- t1 = t2     *)
         let () = assert1 (type_eq (type_of tm2) ty2)  (func,"RHS types not equal") in
         internal_err func
 
-(* mk_eq_rule : thm -> thm -> thm                                             *)
-(*                                                                            *)
-(* This is the equality congruence rule for equality.  It takes two equality  *)
-(* theorems, and equates corresponding sides of the first theorem with the    *)
-(* second, unioning the assumptions.  The types of each side of each equation *)
-(* must all be equal.                                                         *)
-(*                                                                            *)
-(*    A1 |- s1 = s2    A2 |- t1 = t2                                          *)
-(*    ------------------------------                                          *)
-(*    A1 u A2 |- s1 = t1 <=> s2 = t2                                          *)
-
+//  mk_eq_rule : thm -> thm -> thm                                             
+//                                                                             
+/// This is the equality congruence rule for equality.  It takes two equality  
+/// theorems, and equates corresponding sides of the first theorem with the    
+/// second, unioning the assumptions.  The types of each side of each equation 
+/// must all be equal.                                                         
+///                                                                            
+///    A1 |- s1 = s2    A2 |- t1 = t2                                          
+///    ------------------------------                                          
+///    A1 u A2 |- s1 = t1 <=> s2 = t2                                          
+///
+/// See also: mk_eq1_rule, mk_eq2_rule, mk_eq_rule.
 let mk_eq_rule tha thb =     (* A1 |- s1 = s2    A2 |- t1 = t2  *)
     try
         let f = (rator <* rator) (concl tha) in
@@ -137,17 +138,18 @@ let mk_eq_rule tha thb =     (* A1 |- s1 = s2    A2 |- t1 = t2  *)
                                             (func,"Types not equal") in
         internal_err func
 
-(* mk_eq1_rule : thm -> term -> thm                                           *)
-(*                                                                            *)
-(* This is the equality congruence rule for equality LHS.  It takes an        *)
-(* equality theorem and a term, and equates each side of the theorem with the *)
-(* supplied term.  The type of the supplied term must equal the types of each *)
-(* side of the supplied theorem.                                              *)
-(*                                                                            *)
-(*      A |- s1 = s2   `t`                                                    *)
-(*    ----------------------                                                  *)
-(*    A |- s1 = t <=> s2 = t                                                  *)
-
+//  mk_eq1_rule : thm -> term -> thm                                          
+//                                                                            
+/// This is the equality congruence rule for equality LHS.  It takes an       
+/// equality theorem and a term, and equates each side of the theorem with the
+/// supplied term.  The type of the supplied term must equal the types of each
+/// side of the supplied theorem.                                             
+///                                                                           
+///      A |- s1 = s2   `t`                                                   
+///    ----------------------                                                 
+///    A |- s1 = t <=> s2 = t                                                 
+///
+/// See also: mk_eq2_rule, mk_eq_rule, mk_eq1_rule.
 let mk_eq1_rule tha tm =      (* A |- s1 = s2    t   *)
     try
         let f = (rator <* rator) (concl tha) in
@@ -159,17 +161,18 @@ let mk_eq1_rule tha tm =      (* A |- s1 = s2    t   *)
         let () = assert1 (same_types (eq_rhs tma) tm)     (func,"Types not equal") in
         internal_err func
 
-(* mk_eq2_rule : term -> thm -> thm                                           *)
-(*                                                                            *)
-(* This is the equality congruence rule for equality RHS.  It takes a term    *)
-(* and an equality theorem, and equates the term to each side of the theorem. *)
-(* The type of the supplied term must equal the types of each side of the     *)
-(* supplied theorem.                                                          *)
-(*                                                                            *)
-(*      `s`   A |- t1 = t2                                                    *)
-(*    ----------------------                                                  *)
-(*    A |- s = t1 <=> s = t2                                                  *)
-
+//  mk_eq2_rule : term -> thm -> thm                                          
+//                                                                            
+/// This is the equality congruence rule for equality RHS.  It takes a term   
+/// and an equality theorem, and equates the term to each side of the theorem.
+/// The type of the supplied term must equal the types of each side of the    
+/// supplied theorem.                                                         
+///                                                                           
+///      `s`   A |- t1 = t2                                                   
+///    ----------------------                                                 
+///    A |- s = t1 <=> s = t2                                                 
+///
+/// See also: mk_eq1_rule, mk_eq_rule, mk_eq2_rule.
 let mk_eq2_rule tm thb =      (* s     A |- t1 = t2   *)
     try
         let f = (rator <* rator) (concl thb) in
@@ -181,17 +184,20 @@ let mk_eq2_rule tm thb =      (* s     A |- t1 = t2   *)
         let () = assert1 (same_types (eq_rhs tmb) tm)     (func,"Types not equal") in
         internal_err func
 
-(* mk_not_rule : thm -> thm                                                   *)
-(*                                                                            *)
-(* This is the equality congruence rule for logical negation.  Its takes a    *)
-(* boolean equality theorem, and logically negates each side of the theorem.  *)
-(*                                                                            *)
-(*      A |- p1 <=> p2                                                        *)
-(*    ------------------                                                      *)
-(*    A |- ~ p1 <=> ~ p2                                                      *)
+(* mk_not_rule *)
 
 let not_fn = parse_term(@"$~")
 
+//  mk_not_rule : thm -> thm                                                 
+//                                                                           
+/// This is the equality congruence rule for logical negation.  Its takes a  
+/// boolean equality theorem, and logically negates each side of the theorem.
+///                                                                          
+///      A |- p1 <=> p2                                                      
+///    ------------------                                                    
+///    A |- ~ p1 <=> ~ p2                                                    
+///
+/// See also: mk_comb_rule, eqf_intro_rule, eqf_elim_rule.
 let mk_not_rule th =      (* A1 |- p1 <=> p2   *)
     try
         mk_comb2_rule not_fn th                (* A |- ~ p1 <=> ~ p2    *)
@@ -286,16 +292,17 @@ let mk_disj_rule tha thb =    (* A1 |- p1 <=> p2    A2 |- q1 <=> q2  *)
         let () = assert1 (is_bool_eqthm thb) (func,"Arg 2 not a bool equality thm") in
         internal_err func
 
-(* mk_disj1_rule : thm -> term -> thm                                         *)
-(*                                                                            *)
-(* This is the equality congruence rule for disjunction LHS.  It takes a      *)
-(* boolean equality theorem and a boolean term, and disjoins each side of the *)
-(* theorem with the supplied term.                                            *)
-(*                                                                            *)
-(*      A |- p1 <=> p2   `q`                                                  *)
-(*    ------------------------                                                *)
-(*    A |- p1 \/ q <=> p2 \/ q                                                *)
-
+//  mk_disj1_rule : thm -> term -> thm                                        
+//                                                                            
+/// This is the equality congruence rule for disjunction LHS.  It takes a     
+/// boolean equality theorem and a boolean term, and disjoins each side of the
+/// theorem with the supplied term.                                           
+///                                                                           
+///      A |- p1 <=> p2   `q`                                                 
+///    ------------------------                                               
+///    A |- p1 \/ q <=> p2 \/ q                                               
+///
+/// See also: mk_disj2_rule, mk_disj_rule, mk_bin1_rule, disj1_rule.
 let mk_disj1_rule th tm =          (* A |- p1 <=> p2     *)
     try
         mk_bin1_rule disj_fn th tm                (* A |- p1 \/ q <=> p2 \/ q  *)
@@ -305,16 +312,17 @@ let mk_disj1_rule th tm =          (* A |- p1 <=> p2     *)
         let () = assert1 (is_bool_term tm)  (func,"Arg 2 not boolean") in
         internal_err func
 
-(* mk_disj2_rule : term -> thm -> thm                                         *)
-(*                                                                            *)
-(* This is the equality congruence rule for disjunction RHS.  It takes a      *)
-(* boolean term and a boolean equality theorem, and disjoins the supplied     *)
-(* term with each side of the theorem.                                        *)
-(*                                                                            *)
-(*      `p`   A |- q1 <=> q2                                                  *)
-(*    ------------------------                                                *)
-(*    A |- p \/ q1 <=> p \/ q2                                                *)
-
+//  mk_disj2_rule : term -> thm -> thm                                    
+//                                                                        
+/// This is the equality congruence rule for disjunction RHS.  It takes a 
+/// boolean term and a boolean equality theorem, and disjoins the supplied
+/// term with each side of the theorem.                                   
+///                                                                       
+///      `p`   A |- q1 <=> q2                                             
+///    ------------------------                                           
+///    A |- p \/ q1 <=> p \/ q2                                           
+///
+/// See also: mk_disj1_rule, mk_disj_rule, mk_bin2_rule, disj2_rule.
 let mk_disj2_rule tm th =      (* A |- q1 <=> q2   *)
     try
         mk_bin2_rule disj_fn tm th                (* A |- p \/ q1 <=> p \/ q2   *)
@@ -324,18 +332,22 @@ let mk_disj2_rule tm th =      (* A |- q1 <=> q2   *)
         let () = assert1 (is_bool_eqthm th)  (func,"Arg 2 not a bool equality thm") in
         internal_err func
 
-(* mk_imp_rule : thm -> thm -> thm                                            *)
-(*                                                                            *)
-(* This is the equality congruence rule for implication.  It takes two        *)
-(* boolean equality theorems, and creates implications out of corresponding   *)
-(* sides of the first theorem and the second, unioning the assumptions.       *)
-(*                                                                            *)
-(*    A1 |- p1 <=> p2    A2 |- q1 <=> q2                                      *)
-(*    ----------------------------------                                      *)
-(*    A1 u A2 |- p1 ==> q1 <=> p2 ==> q2                                      *)
+(* mk_imp_rule *)
 
 let imp_fn = parse_term(@"$==>")
 
+
+//  mk_imp_rule : thm -> thm -> thm                                          
+//                                                                           
+/// This is the equality congruence rule for implication.  It takes two      
+/// boolean equality theorems, and creates implications out of corresponding 
+/// sides of the first theorem and the second, unioning the assumptions.     
+///                                                                          
+///    A1 |- p1 <=> p2    A2 |- q1 <=> q2                                    
+///    ----------------------------------                                    
+///    A1 u A2 |- p1 ==> q1 <=> p2 ==> q2 
+///
+/// See also: mk_imp1_rule, mk_imp2_rule, mk_bin_rule.
 let mk_imp_rule tha thb =    (* A1 |- p1 <=> p2    A2 |- q1 <=> q2  *)
     try
         mk_bin_rule imp_fn tha thb     (* A1 u A2 |- p1 ==> q1 <=> p2 ==> q2    *)
@@ -345,17 +357,18 @@ let mk_imp_rule tha thb =    (* A1 |- p1 <=> p2    A2 |- q1 <=> q2  *)
         let () = assert1 (is_bool_eqthm thb) (func,"Arg 2 not a bool equality thm") in
         internal_err func
 
-(* mk_imp1_rule : thm -> term -> thm                                          *)
-(*                                                                            *)
-(* This is the equality congruence rule for implication LHS.  It takes a      *)
-(* boolean equality theorem and a boolean term, and creates implications out  *)
-(* of each side of the theorem, with the theorem side as the antecedent and   *)
-(* the term as the consequent.                                                *)
-(*                                                                            *)
-(*       A |- p1 <=> p2   `q`                                                 *)
-(*    --------------------------                                              *)
-(*    A |- p1 ==> q <=> p2 ==> q                                              *)
-
+//  mk_imp1_rule : thm -> term -> thm                                        
+//                                                                           
+/// This is the equality congruence rule for implication LHS.  It takes a    
+/// boolean equality theorem and a boolean term, and creates implications out
+/// of each side of the theorem, with the theorem side as the antecedent and 
+/// the term as the consequent.                                              
+///                                                                          
+///       A |- p1 <=> p2   `q`                                               
+///    --------------------------                                            
+///    A |- p1 ==> q <=> p2 ==> q                                            
+///
+/// See also: mk_imp2_rule, mk_imp_rule, mk_bin1_rule.
 let mk_imp1_rule th tm =      (* A |- p1 <=> p2   *)
     try
         mk_bin1_rule imp_fn th tm             (* A |- p1 ==> q <=> p2 ==> q   *)
@@ -365,16 +378,17 @@ let mk_imp1_rule th tm =      (* A |- p1 <=> p2   *)
         let () = assert1 (is_bool_term tm)   (func,"Arg 2 not boolean") in
         internal_err func
 
-(* mk_imp2_rule : term -> thm -> thm                                          *)
-(*                                                                            *)
-(* This is the equality congruence rule for implication RHS.  It takes a      *)
-(* boolean term and a boolean equality theorem, and makes the term an         *)
-(* antecedent of each side of the theorem.                                    *)
-(*                                                                            *)
-(*      `p`   A |- q1 <=> q2                                                  *)
-(*    --------------------------                                              *)
-(*    A |- p ==> q1 <=> p ==> q2                                              *)
-
+//  mk_imp2_rule : term -> thm -> thm                                    
+//                                                                       
+/// This is the equality congruence rule for implication RHS.  It takes a
+/// boolean term and a boolean equality theorem, and makes the term an   
+/// antecedent of each side of the theorem.                              
+///                                                                      
+///      `p`   A |- q1 <=> q2                                            
+///    --------------------------                                        
+///    A |- p ==> q1 <=> p ==> q2                                        
+///
+/// See also: mk_imp1_rule, mk_imp_rule, mk_bin2_rule.
 let mk_imp2_rule tm th =    (* A |- q1 <=> q2   *)
     try
         mk_bin2_rule imp_fn tm th             (* A |- p ==> q1 <=> p ==> q2    *)
@@ -384,17 +398,18 @@ let mk_imp2_rule tm th =    (* A |- q1 <=> q2   *)
         let () = assert1 (is_bool_eqthm th)  (func,"Arg 2 not a bool equality thm") in
         internal_err func
 
-(* mk_forall_rule : term -> thm -> thm                                        *)
-(*                                                                            *)
-(* This is the equality congruence rule for universal quantification.  It     *)
-(* takes a variable and an equality theorem, and universally quantifies the   *)
-(* variable on both sides of the theorem.  The variable must not occur free   *)
-(* in the assumptions of the supplied theorem.                                *)
-(*                                                                            *)
-(*       `x`   A |- p1 <=> p2         [ "x" not free in `A` ]                 *)
-(*    --------------------------                                              *)
-(*    A |- (!x. p1) <=> (!x. p2)                                              *)
-
+//  mk_forall_rule : term -> thm -> thm                                     
+//                                                                          
+/// This is the equality congruence rule for universal quantification.  It  
+/// takes a variable and an equality theorem, and universally quantifies the
+/// variable on both sides of the theorem.  The variable must not occur free
+/// in the assumptions of the supplied theorem.                             
+///                                                                         
+///       `x`   A |- p1 <=> p2         [ "x" not free in `A` ]              
+///    --------------------------                                           
+///    A |- (!x. p1) <=> (!x. p2)                                           
+///
+/// See also: mk_abs_rule, mk_comb_rule, gen_rule.
 let mk_forall_rule v th =      (* A |- p1 <=> p2   *)
     try
         let forall_fn = mk_iconst ("!", [(a_ty, type_of v)]) in
@@ -408,17 +423,18 @@ let mk_forall_rule v th =      (* A |- p1 <=> p2   *)
                              (func,"Supplied variable occurs free in assumptions") in
         internal_err func
 
-(* mk_exists_rule : term -> thm -> thm                                        *)
-(*                                                                            *)
-(* This is the equality congruence rule for existential quantification.  It   *)
-(* takes a variable and an equality theorem, and existentially quantifies the *)
-(* variable on both sides of the theorem.  The variable must not occur free   *)
-(* in the assumptions of the supplied theorem.                                *)
-(*                                                                            *)
-(*       `x`   A |- p1 <=> p2         [ "x" not free in `A` ]                 *)
-(*    --------------------------                                              *)
-(*    A |- (?x. p1) <=> (?x. p2)                                              *)
-
+//  mk_exists_rule : term -> thm -> thm                                       
+//                                                                            
+/// This is the equality congruence rule for existential quantification.  It  
+/// takes a variable and an equality theorem, and existentially quantifies the
+/// variable on both sides of the theorem.  The variable must not occur free  
+/// in the assumptions of the supplied theorem.                               
+///                                                                           
+///       `x`   A |- p1 <=> p2         [ "x" not free in `A` ]                
+///    --------------------------                                             
+///    A |- (?x. p1) <=> (?x. p2)                                             
+///
+/// See also: mk_uexists_rule, mk_abs_rule, mk_comb_rule, exists_rule.
 let mk_exists_rule v th  =      (* A |- p1 <=> p2   *)
     try
         let exists_fn = mk_iconst ("?", [(a_ty, type_of v)]) in
@@ -432,17 +448,18 @@ let mk_exists_rule v th  =      (* A |- p1 <=> p2   *)
                              (func,"Supplied variable occurs free in assumptions") in
         internal_err func
 
-(* mk_uexists_rule : term -> thm -> thm                                       *)
-(*                                                                            *)
-(* This is the equality congruence rule for unique existential                *)
-(* quantification.  It takes a variable and an equality theorem, and unique-  *)
-(* existentially quantifies the variable on both sides of the theorem.  The   *)
-(* variable must not occur free in the assumptions of the supplied theorem.   *)
-(*                                                                            *)
-(*        `x`   A |- p1 <=> p2        [ "x" not free in `A` ]                 *)
-(*    ----------------------------                                            *)
-(*    A |- (?!x. p1) <=> (?!x. p2)                                            *)
-
+//  mk_uexists_rule : term -> thm -> thm                                     
+//                                                                           
+/// This is the equality congruence rule for unique existential              
+/// quantification.  It takes a variable and an equality theorem, and unique-
+/// existentially quantifies the variable on both sides of the theorem.  The 
+/// variable must not occur free in the assumptions of the supplied theorem. 
+///                                                                          
+///        `x`   A |- p1 <=> p2        [ "x" not free in `A` ]               
+///    ----------------------------                                          
+///    A |- (?!x. p1) <=> (?!x. p2)                                          
+///
+/// See also: mk_exists_rule, mk_abs_rule, mk_comb_rule
 let mk_uexists_rule v th  =      (* A |- p1 <=> p2   *)
     try
         let uexists_fn = mk_iconst ("?!", [(a_ty, type_of v)]) in
@@ -456,17 +473,18 @@ let mk_uexists_rule v th  =      (* A |- p1 <=> p2   *)
                              (func,"Supplied variable occurs free in assumptions") in
         internal_err func
 
-(* mk_select_rule : term -> thm -> thm                                        *)
-(*                                                                            *)
-(* This is the equality congruence rule for selection.  It takes a variable   *)
-(* and an equality theorem, and selects the variable from both sides of the   *)
-(* theorem.  The variable must not occur free in the assumptions of the       *)
-(* supplied theorem.                                                          *)
-(*                                                                            *)
-(*      `x`   A |- p1 <=> p2        [ "x" not free in `A` ]                   *)
-(*    ------------------------                                                *)
-(*    A |- (@x. p1) = (@x. p2)                                                *)
-
+//  mk_select_rule : term -> thm -> thm                                     
+//                                                                          
+/// This is the equality congruence rule for selection.  It takes a variable
+/// and an equality theorem, and selects the variable from both sides of the
+/// theorem.  The variable must not occur free in the assumptions of the    
+/// supplied theorem.                                                       
+///                                                                         
+///      `x`   A |- p1 <=> p2        [ "x" not free in `A` ]                
+///    ------------------------                                             
+///    A |- (@x. p1) = (@x. p2)                                             
+///
+/// See also: mk_abs_rule, mk_comb_rule.
 let mk_select_rule v th  =      (* A |- p1 = p2   *)
     try
         let select_fn = mk_iconst ("@", [(a_ty, type_of v)]) in
