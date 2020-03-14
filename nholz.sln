@@ -51,6 +51,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docsscipt", "docsscipt", "{
 		generatedocs.fsx = generatedocs.fsx
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{69403268-3CC0-4F03-B2AF-BB616DEC0B2D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
