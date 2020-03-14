@@ -3,7 +3,7 @@
 TEORIE
 =============
 
-TOERIA CORE
+Teoria Core
 ------------
 
 **Costani di Tipo**
@@ -132,16 +132,18 @@ cond_def                                                     // espressioni cond
 //              /\ ((p <=> false) ==> x = t2))               // 
 
 
-(*** hide ***)
-//********************************************************************************
+(**
+Coppie ordinate
+--------------
 
-//                                  PAIRS
-
-//TYPE CONSTANTS
+**Costanti di tipo**
+*)
 
 //#                `:'1#'2`                        Infix (10, RightAssoc)
 
-//CONSTANTS
+(**
+**Costanti**
+*)
 
 //MkPairRep        `:'a->'b->'a->'b->bool`         Nonfix
 //IsPairRep        `:('a->'b->bool)->bool`         Nonfix
@@ -151,38 +153,48 @@ cond_def                                                     // espressioni cond
 //FST              `:'a#'b->'a`                    Nonfix
 //SND              `:'a#'b->'b`                    Nonfix
 
-//TYPE DEFINITIONS
+(**
+**Definizioni di tipo**
+*)
 
-//prod_def
-//   |- ?(f:'a#'b->'a->'b->bool). TYPE_DEFINITION IsPairRep f
+prod_def
+// |- ?(f:'a#'b->'a->'b->bool). TYPE_DEFINITION IsPairRep f
 
-//DEFINITIONS
-
-//mk_pair_rep_def
-//   |- MkPairRep = (\(x:'a) (y:'b) a b. a = x /\ b = y)
-
-//is_pair_rep_def
-//   |- IsPairRep = (\(r:'a->'b->bool). ?a b. r = MkPairRep a b)
-
-//prod_def
-//   |- ?(f:'a#'b->'a->'b->bool). TYPE_DEFINITION IsPairRep f
-
-//prod_bij_def1
-//   |- !(a:'a#'b). PairAbs (PairRep a) = a
-
-//prod_bij_def2
-//   |- !(r:'a->'b->bool). IsPairRep r <=> PairRep (PairAbs r) = r
-
-//pair_def
-//   |- PAIR = (\(x:'a) (y:'b). PairAbs (MkPairRep x y))
-
-//fst_def
-//   |- FST = (\(p:'a#'b). @x. ?y. p = (x,y))
-
-//snd_def
-//   |- SND = (\(p:'a#'b). @y. ?x. p = (x,y))
+(**
+**Definizioni**
+*)
 
 
+mk_pair_rep_def                                         // la funzione di rappresentazione restituisce vero solo 
+// |- MkPairRep =                                       // quando ogni argomento e' uguale al suo corrispondente
+//     (\(x:'a) (y:'b) a b. a = x /\ b = y)             // elemento nella coppia
+
+is_pair_rep_def                                         // la funzione caratteristica per l'operatore di tipo prodotto.
+// |- IsPairRep =                                       // Prende la funzione di rappresentazione e restituisce vero se 
+//     (\(r:'a->'b->bool). ?a b. r = MkPairRep a b)     // esiste una coppia per cui ne e' la concreta rappresentazione
+
+prod_def                                                // definizione del tipo prodotto
+// |- ?(f:'a#'b->'a->'b->bool).                         // 
+//                   TYPE_DEFINITION IsPairRep f        // 
+
+prod_bij_def1                                           // biiezioni del tipo prodotto
+// |- !(a:'a#'b). PairAbs (PairRep a) = a               // 
+                                                        // 
+prod_bij_def2                                           // 
+// |- !(r:'a->'b->bool).                                // 
+//       IsPairRep r <=> PairRep (PairAbs r) = r        // 
+
+pair_def                                                // funzione di accoppiamento. E' definita come l'astrazione del 
+// |- PAIR =                                            // tipo prodotto della funzione 
+//     (\(x:'a) (y:'b). PairAbs (MkPairRep x y))        // PAIR t1 t2 e' elaborata e stampata come (t1,t2).
+
+fst_def                                                 // seleziona il primo componente della coppia
+// |- FST = (\(p:'a#'b). @x. ?y. p = (x,y))             //
+
+snd_def                                                 // seleziona il secondo componente della coppia
+// |- SND = (\(p:'a#'b). @y. ?x. p = (x,y))             // 
+
+(*** hide ***)
 //********************************************************************************
 
 //                                INDIVIDUALS

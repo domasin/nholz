@@ -8,4 +8,6 @@ Manuale
 
 [Appendice B1 - Teorie](B1_Teorie.html)
 
+[Appendice B2 - Teoremi](B2_Teoremi.html)
+
 *)

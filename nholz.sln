@@ -22,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "manuale", "manuale", "{08F9
 		manuale\1_Introduzione.fsx = manuale\1_Introduzione.fsx
 		manuale\A5_Inference_Rules.fsx = manuale\A5_Inference_Rules.fsx
 		manuale\B1_Teorie.fsx = manuale\B1_Teorie.fsx
+		manuale\B2_Teoremi.fsx = manuale\B2_Teoremi.fsx
 		manuale\index.fsx = manuale\index.fsx
 	EndProjectSection
 EndProject
@@ -35,6 +36,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{FD66B3EA-1
 		docs\1_Introduzione.html = docs\1_Introduzione.html
 		docs\A5_Inference_Rules.html = docs\A5_Inference_Rules.html
 		docs\B1_Teorie.html = docs\B1_Teorie.html
+		docs\B2_Teoremi.html = docs\B2_Teoremi.html
 		docs\index.html = docs\index.html
 	EndProjectSection
 EndProject

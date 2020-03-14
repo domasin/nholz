@@ -1,0 +1,488 @@
+(**
+
+TEOREMI
+=============
+
+Lambda Calcolo
+------------
+
+*)
+
+(***hide***)
+#I "../bin/netstandard2.0"
+#r "nholz.dll"
+open HOL
+fsi.AddPrinter print_type
+fsi.AddPrinter print_qtype
+fsi.AddPrinter print_term
+fsi.AddPrinter print_qterm
+fsi.AddPrinter print_thm
+
+CoreThry.load
+Equal.load
+Bool.load
+(***unhide***)
+
+fun_eq_thm
+// |- !(f:'a->'b) g. f = g <=> (!x. f x = g x)
+
+(**
+**Dimostrazione**
+
+I teoremi ripostati in questa pagina sono dimostrati internamente dal sistema ma a titolo esemplificativo si da di seguito una dimostrazione 
+solo per il teorema `fun_eq_thm`:
+*)
+
+let x = parse_term(@"x:'a") 
+let f = parse_term(@"f:'a->'b")
+let g = parse_term(@"g:'a->'b")
+
+let th1 = parse_term(@"\x. (f:'a->'b) x") |> eta_conv                            
+let th2 = sym_rule th1                     
+let th3 = parse_term(@"!x. (f:'a->'b) x = g x") |> assume_rule                         
+let th4 = spec_rule x th3                  
+let th5 = mk_abs_rule x th4                
+let th6 = parse_term(@"\x. (g:'a->'b) x") |> eta_conv                            
+let th7 = [th2; th5; th6] |> list_trans_rule                     
+let th8 = parse_term(@"(f:'a->'b)=g") |> assume_rule                         
+let th9 = mk_comb1_rule th8 x              
+let th10 = gen_rule x th9                  
+let th11 = deduct_antisym_rule th7 th10    
+let th = list_gen_rule [f;g] th11          
+
+(**
+di seguito la rappresentazione per sequenti della dimostrazione
+*)
+
+// 1                |- (\x. (f:'a->'b) x) = f                   | per eta_conv
+// 2                |- (f:'a->'b) = (\x. f x)                   | per sym_rule da 1
+// 3  !x. f x = g x |- !x. f x = (g:'a->'b) x                   | per assume_rule
+// 4  !x. f x = g x |- f x = (g:'a->'b) x                       | per spec_rule da 3
+// 5  !x. f x = g x |- (\x. f x) = (\x. (g:'a->'b) x)           | per mk_abs_rule da 4
+// 6                |- (\x. (g:'a->'b) x) = g                   | per eta_conv
+// 7  !x. f x = g x |- f = (g:'a->'b)                           | per list_trans_rule da 1 5 e 6
+// 8          f = g |- f = (g:'a->'b)                           | per assume_rule
+// 9          f = g |- f x = (g:'a->'b) x                       | per mk_comb1_rule da 8
+// 10         f = g |- !x. f x = (g:'a->'b) x                   | per gen_rule da 9
+// 11               |- f = (g:'a->'b) <=> (!x. f x = g x)       | per deduct_antisym_rule da 7 e 10
+//                  |- !(f:'a->'b) g. f = g <=> (!x. f x = g x) | per list_gen_rule da 11
+
+(***hide***)
+
+//********************************************************************************
+
+//PREDICATE LOGIC
+
+//bool_cases_thm
+//   |- !p. (p <=> true) \/ (p <=> false)
+
+//cond_false_thm
+//   |- !(t1:'a) t2. (if false then t1 else t2) = t2
+
+//cond_idem_thm
+//   |- !p (t:'a). (if p then t else t) = t
+
+//cond_not_thm
+//   |- !p (t1:'a) t2. (if (~ p) then t1 else t2) = (if p then t2 else t1)
+
+//cond_true_thm
+//   |- !(t1:'a) t2. (if true then t1 else t2) = t1
+
+//conj_absorb_disj_thm
+//   |- !p q. p /\ (p \/ q) <=> p
+
+//conj_assoc_thm
+//   |- !p q r. p /\ (q /\ r) <=> (p /\ q) /\ r
+
+//conj_comm_thm
+//   |- !p q. p /\ q <=> q /\ p
+
+//conj_contr_thm
+//   |- !p. p /\ ~ p <=> false
+
+//conj_dist_left_disj_thm
+//   |- !p q r. (p \/ q) /\ r <=> (p /\ r) \/ (q /\ r)
+
+//conj_dist_right_disj_thm
+//   |- !p q r. p /\ (q \/ r) <=> (p /\ q) \/ (p /\ r)
+
+//conj_id_thm
+//   |- !p. p /\ true <=> p
+
+//conj_idem_thm
+//   |- !p. p /\ p <=> p
+
+//conj_zero_thm
+//   |- !p. p /\ false <=> false
+
+//disj_absorb_conj_thm
+//   |- !p q. p \/ (p /\ q) <=> p
+
+//disj_assoc_thm
+//   |- !p q r. p \/ (q \/ r) <=> (p \/ q) \/ r
+
+//disj_comm_thm
+//   |- !p q. p \/ q <=> q \/ p
+
+//disj_dist_left_conj_thm
+//   |- !p q r. (p /\ q) \/ r <=> (p \/ r) /\ (q \/ r)
+
+//disj_dist_right_conj_thm
+//   |- !p q r. p \/ (q /\ r) <=> (p \/ q) /\ (p \/ r)
+
+//disj_id_thm
+//   |- !p. p \/ false <=> p
+
+//disj_idem_thm
+//   |- !p. p \/ p <=> p
+
+//disj_zero_thm
+//   |- !p. p \/ true <=> true
+
+//excluded_middle_thm
+//   |- !p. p \/ ~ p
+
+//exists_dist_disj_thm
+//   |- !(P:'a->bool) Q. (?x. P x \/ Q x) <=> (?x. P x) \/ (?x. Q x)
+
+//exists_null_thm
+//   |- !t. (?(x:'a). t) <=> t
+
+//exists_one_point_thm
+//   |- !(P:'a->bool) a. (?x. x = a /\ P x) <=> P a
+
+//exists_value_thm
+//   |- !(x:'a). ?y. y = x
+
+//forall_dist_conj_thm
+//   |- !(P:'a->bool) Q. (!x. P x /\ Q x) <=> (!x. P x) /\ (!x. Q x)
+
+//forall_null_thm
+//   |- !t. (!(x:'a). t) <=> t
+
+//forall_one_point_thm
+//   |- !(P:'a->bool) a. (!x. x = a ==> P x) <=> P a
+
+//imp_alt_def_thm
+//   |- $==> = (\p q. p /\ q <=> p)
+
+//imp_disj_thm
+//   |- !p q. (p ==> q) <=> (~ p \/ q)
+
+//imp_dist_left_disj_thm
+//   |- !p q r. (p \/ q ==> r) <=> (p ==> r) /\ (q ==> r)
+
+//imp_dist_right_conj_thm
+//   |- !p q r. (p ==> q /\ r) <=> (p ==> q) /\ (p ==> r)
+
+//imp_imp_thm
+//   |- !p q r. (p ==> q ==> r) <=> (p /\ q ==> r)
+
+//imp_left_id_thm
+//   |- !p. (true ==> p) <=> p
+
+//imp_left_zero_thm
+//   |- !p. false ==> p
+
+//imp_refl_thm
+//   |- !p. p ==> p
+
+//imp_right_zero_thm
+//   |- !p. p ==> true
+
+//not_dist_conj_thm
+//   |- !p q. ~ (p /\ q) <=> ~ p \/ ~ q
+
+//not_dist_disj_thm
+//   |- !p q. ~ (p \/ q) <=> ~ p /\ ~ q
+
+//not_dist_exists_thm
+//   |- !(P:'a->bool). ~ (?x. P x) <=> (!x. ~ P x)
+
+//not_dist_forall_thm
+//   |- !(P:'a->bool). ~ (!x. P x) <=> (?x. ~ P x)
+
+//not_dneg_thm
+//   |- !p. ~ ~ p <=> p
+
+//not_false_thm
+//   |- ~ false <=> true
+
+//not_true_thm
+//   |- ~ true <=> false
+
+//select_eq_thm
+//   |- !(a:'a). (@x. x = a) = a
+
+//skolem_thm
+//   |- !(P:'a->'b->bool). (!x. ?y. P x y) <=> (?f. !x. P x (f x))
+
+//true_not_eq_false_thm
+//   |- ~ (true <=> false)
+
+//truth_thm
+//   |- true
+
+//uexists_thm1
+//   |- !(P:'a->bool). (?!x. P x) <=> (?x. P x /\ (!y. P y ==> y = x))
+
+//uexists_thm2
+//   |- !(P:'a->bool). (?!x. P x) <=> (?x. !y. P y <=> x = y)
+
+//uexists_thm3
+//   |- !(P:'a->bool). (?!x. P x)
+//                     <=> (?x. P x) /\ (!x' x''. P x' /\ P x'' ==> x' = x'')
+
+//uexists_one_point_thm
+//   |- !(P:'a->bool) a. (?!x. x = a /\ P x) <=> P a
+
+//unique_skolem_thm : thm =
+//   |- !(P:'a->'b->bool). (!x. ?!y. P x y) <=> (?f. !x y. P x y <=> f x = y)
+
+//********************************************************************************
+
+//PAIRS
+
+//fst_snd_thm
+//   |- !(p:'a#'b). (FST p, SND p) = p
+
+//fst_thm
+//   |- !(x:'a) (y:'b). FST (x,y) = x
+
+//pair_eq_thm
+//   |- !(x:'a) (y:'b) u v. (x,y) = (u,v) <=> x = u /\ y = v
+
+//pair_surjective_thm
+//   |- !(p:'a#'b). ?x y. p = (x,y)
+
+//snd_thm
+//   |- !(x:'a) (y:'b). SND (x,y) = y
+
+//********************************************************************************
+
+//INDIVIDUALS
+
+//ind_suc_injective_thm
+//   |- !i j. IND_SUC i = IND_SUC j <=> i = j
+
+//ind_suc_not_zero_thm
+//   |- !i. ~ (IND_SUC i = IND_ZERO)
+
+//********************************************************************************
+
+//NATURAL NUMBERS
+
+//add_assoc_thm
+//   |- !l m n. l + (m + n) = (l + m) + n
+
+//add_comm_thm
+//   |- !m n. m + n = n + m
+
+//add_dist_left_suc_thm
+//   |- !m n. (SUC m) + n = SUC (m + n)
+
+//add_dist_right_suc_thm
+//   |- !m n. m + (SUC n) = SUC (m + n)
+
+//add_eq_cancel_thm
+//   |- !l m n. l + n = m + n <=> l = m
+
+//add_eq_zero_thm
+//   |- !m n. m + n = 0 <=> m = 0 /\ n = 0
+
+//add_id_thm
+//   |- !n. n + 0 = n
+
+//add_le_cancel_thm
+//   |- !l m n. l + n <= m + n <=> l <= m
+
+//add_lt_cancel_thm
+//   |- !l m n. l + n < m + n <=> l < m
+
+//add_sub_cancel_thm
+//   |- !m n. (m + n) - n = m
+
+//even_suc_thm
+//   |- !n. EVEN (SUC n) <=> ~ EVEN n
+
+//exp_dist_right_add_thm
+//   |- !l m n. l EXP (m + n) = (l EXP m) * (l EXP n)
+
+//exp_dist_right_suc_thm
+//   |- !m n. m EXP (SUC n) = m * m EXP n
+
+//exp_right_id_thm
+//   |- !n. n EXP 1 = n
+
+//exp_right_zero_thm
+//   |- !n. n EXP 0 = 1
+
+//le_antisym_thm
+//   |- !m n. m <= n /\ n <= m ==> m = n
+
+//le_cases_thm
+//   |- !m n. m <= n <=> m < n \/ m = n
+
+//le_refl_thm
+//   |- !n. n <= n
+
+//le_trans_thm
+//   |- !l m n. l <= m /\ m <= n ==> l <= n
+
+//le_zero_thm
+//   |- !n. n <= 0 <=> n = 0
+
+//lt_asym_thm
+//   |- !m n. ~ (m < n /\ n < m)
+
+//lt_irrefl_thm
+//   |- !n. ~ (n < n)
+
+//lt_suc_cases_thm
+//   |- !m n. m < SUC n <=> m = n \/ m < n
+
+//lt_suc_le_thm
+//   |- !m n. m < SUC n <=> m <= n
+
+//lt_suc_thm
+//   |- !n. n < SUC n
+
+//lt_trans_thm
+//   |- !l m n. l < m /\ m < n ==> l < n
+
+//lt_zero_cases_thm
+//   |- !n. n = 0 \/ 0 < n
+
+//mult_assoc_thm
+//   |- !l m n. l * (m * n) = (l * m) * n
+
+//mult_comm_thm
+//   |- !m n. m * n = n * m
+
+//mult_dist_left_add_thm
+//   |- !l m n. (l + m) * n = l * n + m * n
+
+//mult_dist_left_suc_thm
+//   |- !m n. (SUC m) * n = n + m * n
+
+//mult_dist_right_add_thm
+//   |- !l m n. l * (m + n) = l * m + l * n
+
+//mult_dist_right_suc_thm
+//   |- !m n. m * SUC n = m + (m * n)
+
+//mult_eq_cancel_thm
+//   |- !l m n. ~ (l = 0) ==> (l * m = l * n <=> m = n)
+
+//mult_eq_zero_thm
+//   |- !m n. m * n = 0 <=> m = 0 \/ n = 0
+
+//mult_id_thm
+//   |- !n. n * 1 = n
+
+//mult_le_cancel_thm
+//   |- !l m n. ~ (l = 0) ==> (l * m <= l * n <=> m <= n)
+
+//mult_lt_cancel_thm
+//   |- !l m n. ~ (l = 0) ==> (l * m < l * n <=> m < n)
+
+//mult_zero_thm
+//   |- !n. n * 0 = 0
+
+//nat_cases_thm
+//   |- !n. n = 0 \/ (?m. n = SUC m)
+
+//nat_induction_thm
+//   |- !P. P 0 /\ (!n. P n ==> P (SUC n)) ==> (!n. P n)
+
+//nat_recursion_thm
+//   |- !(e1:'a) e2. ?F. F 0 = e1 /\ (!n. F (SUC n) = e2 (F n) n)
+
+//not_lt_cases_thm
+//   |- !m n. ~ (m < n) <=> n = m \/ n < m
+
+//not_lt_zero_thm
+//   |- !n. ~ (n < 0)
+
+//odd_suc_thm
+//   |- !n. ODD (SUC n) <=> ~ ODD n
+
+//one_not_zero_thm
+//   |- ~ (1 = 0)
+
+//one_odd_thm
+//   |- ODD 1
+
+//pre_suc_thm
+//   |- !n. PRE (SUC n) = n
+
+//pre_zero_thm
+//   |- PRE 0 = 0
+
+//sub_cancel_thm
+//   |- !n. n - n = 0
+
+//sub_dist_right_suc_thm
+//   |- !m n. m - SUC n = PRE (m - n)
+
+//sub_floor_thm
+//   |- !m n. m <= n ==> m - n = 0
+
+//sub_right_id_thm
+//   |- !n. n - 0 = n
+
+//suc_add_thm
+//   |- !n. SUC n = n + 1
+
+//suc_injective_thm
+//   |- !m n. SUC m = SUC n <=> m = n
+
+//suc_le_cancel_thm
+//   |- !m n. SUC m <= SUC n <=> m <= n
+
+//suc_le_lt_thm
+//   |- !m n. SUC m <= n <=> m < n
+
+//suc_lt_cancel_thm
+//   |- !m n. SUC m < SUC n <=> m < n
+
+//suc_not_zero_thm
+//   |- !n. ~ (SUC n = 0)
+
+//suc_one_thm
+//   |- SUC 1 = 2
+
+//suc_sub_suc_thm
+//   |- !m n. SUC m - SUC n = m - n
+
+//suc_twice_odd_thm
+//   |- !n. ODD (SUC (2 * n))
+
+//suc_zero_thm
+//   |- SUC 0 = 1
+
+//twice_even_thm
+//   |- !n. EVEN (2 * n)
+
+//twice_thm
+//   |- !n. 2 * n = n + n
+
+//two_not_zero_thm
+//   |- ~ (2 = 0)
+
+//zero_even_thm
+//   |- EVEN 0
+
+//zero_le_thm
+//   |- !n. 0 <= n
+
+//zero_lt_suc_thm
+//   |- !n. 0 < SUC n
+
+//zero_lt_thm
+//   |- !n. 0 < n <=> ~ (n = 0)
+
+//zero_not_odd_thm
+//   |- ~ ODD 0
+
+//********************************************************************************

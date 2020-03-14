@@ -13,11 +13,11 @@
 (* http://github.com/domasin/nholz                                        *)
 (* ========================================================================== *)
 
-///This module extends the HOL logic with the theory of ordered pairs.  This 
-///involves giving theory object definitions for the product type operator,  
-///the pairing function and the constants "FST" and "SND", and proving a few 
-///basic properties.  Syntax functions and equality congruence rules are also
-///provided.                                                                                                                                                                                          
+/// This module extends the HOL logic with the theory of ordered pairs.  This 
+/// involves giving theory object definitions for the product type operator,  
+/// the pairing function and the constants "FST" and "SND", and proving a few 
+/// basic properties.  Syntax functions and equality congruence rules are also
+/// provided.                                                                                                                                                                                          
 [<AutoOpen>]
 module HOL.Pair
 
@@ -30,23 +30,25 @@ module HOL.Pair
 
 (* Supporting definition *)
 
-(* The "MkPairRep" function returns the concrete representation for a given   *)
-(* pair's two components (i.e. the representation in terms of existing types, *)
-(* before the product type is defined).  This representation is a function    *)
-(* that takes two arguments and returns `true` for just one combination of    *)
-(* its arguments - when each argument is equal to its respective pair         *)
-(* component.  This is used to define both "IsPairRep" and the pairing        *)
-(* function.                                                                  *)
-
+/// The "MkPairRep" function returns the concrete representation for a given  
+/// pair's two components (i.e. the representation in terms of existing types,
+/// before the product type is defined).  This representation is a function   
+/// that takes two arguments and returns `true` for just one combination of   
+/// its arguments - when each argument is equal to its respective pair        
+/// component.  This is used to define both "IsPairRep" and the pairing       
+/// function.                                                                 
+///
+/// |- MkPairRep = (\(x:'a) (y:'b) a b. a = x /\ b = y)
 let mk_pair_rep_def =
     new_const_definition (parse_term(@"MkPairRep = \(x:'a) (y:'b). \a b. a = x /\ b = y"))
 
 (* Characteristic function *)
 
-(* "IsPairRep" is the characteristic function for the product type operator.  *)
-(* It takes a boolean-valued binary function and returns whether there is a   *)
-(* pair for which this is the concrete representation.                        *)
-
+/// "IsPairRep" is the characteristic function for the product type operator.
+/// It takes a boolean-valued binary function and returns whether there is a 
+/// pair for which this is the concrete representation.                      
+///
+/// |- IsPairRep = (\(r:'a->'b->bool). ?a b. r = MkPairRep a b)
 let is_pair_rep_def =
   new_const_definition
        (parse_term(@"IsPairRep = \(r:'a->'b->bool). ?a b. r = MkPairRep a b"))
@@ -94,6 +96,7 @@ let pair_rep_exists_lemma =
 
 let _ = set_type_fixity ("#", Infix (10,RightAssoc))
 
+/// |- ?(f:'a#'b->'a->'b->bool). TYPE_DEFINITION IsPairRep 
 let prod_def = new_tyconst_definition ("#", pair_rep_exists_lemma)
 
 (* Product type bijections *)
@@ -128,12 +131,13 @@ let is_prod_type ty = can dest_prod_type ty
 
 (* Pair definition *)
 
-(* The pairing function, called "PAIR", takes two arguments and returns the   *)
-(* corresponding element in the product type.  It is simply defined as the    *)
-(* product type's abstraction of the "MkPairRep" function.  It has special    *)
-(* support in the parser/printer, so that the quotation `(t1,t2)` is parsed/  *)
-(* printed for the internal term `PAIR t1 t2`.                                *)
-
+/// The pairing function, called "PAIR", takes two arguments and returns the 
+/// corresponding element in the product type.  It is simply defined as the  
+/// product type's abstraction of the "MkPairRep" function.  It has special  
+/// support in the parser/printer, so that the quotation `(t1,t2)` is parsed/
+/// printed for the internal term `PAIR t1 t2`.                              
+///
+/// |- PAIR = (\(x:'a) (y:'b). PairAbs (MkPairRep x y))
 let pair_def =
     new_const_definition (parse_term(@"PAIR = \(x:'a) (y:'b). PairAbs (MkPairRep x y)"))
 
@@ -336,8 +340,14 @@ let pair_surjective_thm =
 
 (* Definitions *)
 
+/// Selects the first component of a pair
+///
+/// |- FST = (\(p:'a#'b). @x. ?y. p = (x,y))
 let fst_def = new_const_definition (parse_term(@"FST = \(p:'a#'b). @x. ?y. p = (x,y)"))
 
+/// Selects the second component of a pair
+///
+/// |- SND = (\(p:'a#'b). @y. ?x. p = (x,y))
 let snd_def = new_const_definition (parse_term(@"SND = \(p:'a#'b). @y. ?x. p = (x,y)"))
 
 (* fst_thm                                                                    *)

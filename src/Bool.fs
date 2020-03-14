@@ -1064,10 +1064,9 @@ let choose_rule (v,th0) th =       (* y    A1 |- ?x. p    A2 |- q   *)
                                               main theorem's other assumptions") in
         internal_err func
 
-(* fun_eq_thm : thm                                                           *)
-(*                                                                            *)
-(*    |- !f g. f = g <=> (!x. f x = g x)                                      *)
-
+//  fun_eq_thm : thm                              
+//                                                
+///    |- !f g. f = g <=> (!x. f x = g x)         
 let fun_eq_thm = 
     save_thm ("fun_eq_thm",
       let x = parse_term(@"x:'a") 

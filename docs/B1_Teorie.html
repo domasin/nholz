@@ -103,7 +103,7 @@
 <span onmouseout="hideTip(event, 'fs20', 28)" onmouseover="showTip(event, 'fs20', 28)" class="id">disj_def</span>                                                     <span class="c">// digiunzione</span>
 <span class="c">// |- $\/ = (\p1 p2. !p. (p1 ==&gt; p) ==&gt; (p2 ==&gt; p) ==&gt; p)    // </span>
 
-<span onmouseout="hideTip(event, 'fs21', 29)" onmouseover="showTip(event, 'fs21', 29)" class="id">uexists_def</span>                                                  <span class="c">// quantificazione esistenziale unica</span>
+<span onmouseout="hideTip(event, 'fs21', 29)" onmouseover="showTip(event, 'fs21', 29)" class="id">uexists_def</span>                                                  <span class="c">// quantificazione esistenziale univoca</span>
 <span class="c">// |- $?! = (\(P:&#39;a-&gt;bool). ?x. P x /\ (!y. P y ==&gt; y = x))  // </span>
 
 <span onmouseout="hideTip(event, 'fs22', 30)" onmouseover="showTip(event, 'fs22', 30)" class="id">let_def</span>                                                      <span class="c">// espressioni let: `LET (LET (\x1 x2. t) s1) s2`</span>
@@ -116,7 +116,54 @@
 <span class="c">// |- COND =                                                 // `COND c t1 t2` e stampato come</span>
 <span class="c">//     (\p (t1:&#39;a) t2.                                       // `if c then t1 else t2`</span>
 <span class="c">//         @x. ((p &lt;=&gt; true) ==&gt; x = t1)                     // </span>
-<span class="c">//              /\ ((p &lt;=&gt; false) ==&gt; x = t2))</span>
+<span class="c">//              /\ ((p &lt;=&gt; false) ==&gt; x = t2))               // </span>
+</code></pre>
+<h2>Coppie ordinate</h2>
+<p><strong>Costanti di tipo</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//#                `:&#39;1#&#39;2`                        Infix (10, RightAssoc)</span>
+</code></pre>
+<p><strong>Costanti</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//MkPairRep        `:&#39;a-&gt;&#39;b-&gt;&#39;a-&gt;&#39;b-&gt;bool`         Nonfix</span>
+<span class="c">//IsPairRep        `:(&#39;a-&gt;&#39;b-&gt;bool)-&gt;bool`         Nonfix</span>
+<span class="c">//PairAbs          `:(&#39;a-&gt;&#39;b-&gt;bool)-&gt;&#39;a#&#39;b`        Nonfix</span>
+<span class="c">//PairRep          `:&#39;a#&#39;b-&gt;&#39;a-&gt;&#39;b-&gt;bool`          Nonfix</span>
+<span class="c">//PAIR             `:&#39;a-&gt;&#39;b-&gt;&#39;a#&#39;b`                Nonfix *</span>
+<span class="c">//FST              `:&#39;a#&#39;b-&gt;&#39;a`                    Nonfix</span>
+<span class="c">//SND              `:&#39;a#&#39;b-&gt;&#39;b`                    Nonfix</span>
+</code></pre>
+<p><strong>Definizioni di tipo</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs25', 33)" onmouseover="showTip(event, 'fs25', 33)" class="id">prod_def</span>
+<span class="c">// |- ?(f:&#39;a#&#39;b-&gt;&#39;a-&gt;&#39;b-&gt;bool). TYPE_DEFINITION IsPairRep f</span>
+</code></pre>
+<p><strong>Definizioni</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs26', 34)" onmouseover="showTip(event, 'fs26', 34)" class="id">mk_pair_rep_def</span>                                         <span class="c">// la funzione di rappresentazione restituisce vero solo </span>
+<span class="c">// |- MkPairRep =                                       // quando ogni argomento e&#39; uguale al suo corrispondente</span>
+<span class="c">//     (\(x:&#39;a) (y:&#39;b) a b. a = x /\ b = y)             // elemento nella coppia</span>
+
+<span onmouseout="hideTip(event, 'fs27', 35)" onmouseover="showTip(event, 'fs27', 35)" class="id">is_pair_rep_def</span>                                         <span class="c">// la funzione caratteristica per l&#39;operatore di tipo prodotto.</span>
+<span class="c">// |- IsPairRep =                                       // Prende la funzione di rappresentazione e restituisce vero se </span>
+<span class="c">//     (\(r:&#39;a-&gt;&#39;b-&gt;bool). ?a b. r = MkPairRep a b)     // esiste una coppia per cui ne e&#39; la concreta rappresentazione</span>
+
+<span onmouseout="hideTip(event, 'fs25', 36)" onmouseover="showTip(event, 'fs25', 36)" class="id">prod_def</span>                                                <span class="c">// definizione del tipo prodotto</span>
+<span class="c">// |- ?(f:&#39;a#&#39;b-&gt;&#39;a-&gt;&#39;b-&gt;bool).                         // </span>
+<span class="c">//                   TYPE_DEFINITION IsPairRep f        // </span>
+
+<span onmouseout="hideTip(event, 'fs28', 37)" onmouseover="showTip(event, 'fs28', 37)" class="id">prod_bij_def1</span>                                           <span class="c">// biiezioni del tipo prodotto</span>
+<span class="c">// |- !(a:&#39;a#&#39;b). PairAbs (PairRep a) = a               // </span>
+                                                        <span class="c">// </span>
+<span onmouseout="hideTip(event, 'fs29', 38)" onmouseover="showTip(event, 'fs29', 38)" class="id">prod_bij_def2</span>                                           <span class="c">// </span>
+<span class="c">// |- !(r:&#39;a-&gt;&#39;b-&gt;bool).                                // </span>
+<span class="c">//       IsPairRep r &lt;=&gt; PairRep (PairAbs r) = r        // </span>
+
+<span onmouseout="hideTip(event, 'fs30', 39)" onmouseover="showTip(event, 'fs30', 39)" class="id">pair_def</span>                                                <span class="c">// funzione di accoppiamento. E&#39; definita come l&#39;astrazione del </span>
+<span class="c">// |- PAIR =                                            // tipo prodotto della funzione </span>
+<span class="c">//     (\(x:&#39;a) (y:&#39;b). PairAbs (MkPairRep x y))        // PAIR t1 t2 e&#39; elaborata e stampata come (t1,t2).</span>
+
+<span onmouseout="hideTip(event, 'fs31', 40)" onmouseover="showTip(event, 'fs31', 40)" class="id">fst_def</span>
+<span class="c">// |- FST = (\(p:&#39;a#&#39;b). @x. ?y. p = (x,y))</span>
+
+<span onmouseout="hideTip(event, 'fs32', 41)" onmouseover="showTip(event, 'fs32', 41)" class="id">snd_def</span>
+<span class="c">// |- SND = (\(p:&#39;a#&#39;b). @y. ?x. p = (x,y))</span>
 </code></pre>
 
           <div class="tip" id="fs1">namespace HOL</div>
@@ -143,6 +190,14 @@
 <div class="tip" id="fs22">val let_def : thm</div>
 <div class="tip" id="fs23">val onto_def : thm</div>
 <div class="tip" id="fs24">val cond_def : thm</div>
+<div class="tip" id="fs25">val prod_def : thm</div>
+<div class="tip" id="fs26">val mk_pair_rep_def : thm</div>
+<div class="tip" id="fs27">val is_pair_rep_def : thm</div>
+<div class="tip" id="fs28">val prod_bij_def1 : thm</div>
+<div class="tip" id="fs29">val prod_bij_def2 : thm</div>
+<div class="tip" id="fs30">val pair_def : thm</div>
+<div class="tip" id="fs31">val fst_def : thm</div>
+<div class="tip" id="fs32">val snd_def : thm</div>
 
         </div>
         <div class="span1"></div>
