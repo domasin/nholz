@@ -30,12 +30,13 @@ module HOL.Ind
 
 let ind_ty = new_tyconst ("ind",0)
 
-(* Infinity axiom *)
-
-(* This states that the newly declared individuals type is infinite, by       *)
-(* asserting that there is an injective total function from individuals to    *)
-(* individuals that is not surjective.                                        *)
-
+/// Infinity axiom
+///
+/// This states that the newly declared individuals type is infinite, by      
+/// asserting that there is an injective total function from individuals to   
+/// individuals that is not surjective.                                       
+///
+/// |- ?(f:ind->ind). ONE_ONE f /\ ~ ONTO f
 let infinity_ax =
     new_axiom ("infinity_ax", (parse_term(@"?(f:ind->ind). ONE_ONE f /\ ~ ONTO f")))
 
@@ -108,6 +109,7 @@ let ind_suc_zero_exists_lemma =
 
 (* Constants specification *)
 
+/// |- ONE_ONE IND_SUC /\ (!i. ~ (IND_SUC i = IND_ZERO))
 let ind_suc_zero_spec =
     new_const_specification (["IND_SUC";"IND_ZERO"], ind_suc_zero_exists_lemma)
 

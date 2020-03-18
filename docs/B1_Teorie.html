@@ -28,7 +28,7 @@
         <div class="span1"></div>
         <div class="span10" id="main">
           <h1>TEORIE</h1>
-<h2>TOERIA CORE</h2>
+<h2>Teoria Core</h2>
 <p><strong>Costani di Tipo</strong></p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// bool             `:bool`                         Nonfix</span>
 <span class="c">// -&gt;               `:&#39;1-&gt;&#39;2`                       Infix (5, RightAssoc)</span>
@@ -120,16 +120,16 @@
 </code></pre>
 <h2>Coppie ordinate</h2>
 <p><strong>Costanti di tipo</strong></p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//#                `:&#39;1#&#39;2`                        Infix (10, RightAssoc)</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// #                `:&#39;1#&#39;2`                        Infix (10, RightAssoc)</span>
 </code></pre>
 <p><strong>Costanti</strong></p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//MkPairRep        `:&#39;a-&gt;&#39;b-&gt;&#39;a-&gt;&#39;b-&gt;bool`         Nonfix</span>
-<span class="c">//IsPairRep        `:(&#39;a-&gt;&#39;b-&gt;bool)-&gt;bool`         Nonfix</span>
-<span class="c">//PairAbs          `:(&#39;a-&gt;&#39;b-&gt;bool)-&gt;&#39;a#&#39;b`        Nonfix</span>
-<span class="c">//PairRep          `:&#39;a#&#39;b-&gt;&#39;a-&gt;&#39;b-&gt;bool`          Nonfix</span>
-<span class="c">//PAIR             `:&#39;a-&gt;&#39;b-&gt;&#39;a#&#39;b`                Nonfix *</span>
-<span class="c">//FST              `:&#39;a#&#39;b-&gt;&#39;a`                    Nonfix</span>
-<span class="c">//SND              `:&#39;a#&#39;b-&gt;&#39;b`                    Nonfix</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// MkPairRep        `:&#39;a-&gt;&#39;b-&gt;&#39;a-&gt;&#39;b-&gt;bool`         Nonfix</span>
+<span class="c">// IsPairRep        `:(&#39;a-&gt;&#39;b-&gt;bool)-&gt;bool`         Nonfix</span>
+<span class="c">// PairAbs          `:(&#39;a-&gt;&#39;b-&gt;bool)-&gt;&#39;a#&#39;b`        Nonfix</span>
+<span class="c">// PairRep          `:&#39;a#&#39;b-&gt;&#39;a-&gt;&#39;b-&gt;bool`          Nonfix</span>
+<span class="c">// PAIR             `:&#39;a-&gt;&#39;b-&gt;&#39;a#&#39;b`                Nonfix *</span>
+<span class="c">// FST              `:&#39;a#&#39;b-&gt;&#39;a`                    Nonfix</span>
+<span class="c">// SND              `:&#39;a#&#39;b-&gt;&#39;b`                    Nonfix</span>
 </code></pre>
 <p><strong>Definizioni di tipo</strong></p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs25', 33)" onmouseover="showTip(event, 'fs25', 33)" class="id">prod_def</span>
@@ -159,11 +159,132 @@
 <span class="c">// |- PAIR =                                            // tipo prodotto della funzione </span>
 <span class="c">//     (\(x:&#39;a) (y:&#39;b). PairAbs (MkPairRep x y))        // PAIR t1 t2 e&#39; elaborata e stampata come (t1,t2).</span>
 
-<span onmouseout="hideTip(event, 'fs31', 40)" onmouseover="showTip(event, 'fs31', 40)" class="id">fst_def</span>
-<span class="c">// |- FST = (\(p:&#39;a#&#39;b). @x. ?y. p = (x,y))</span>
+<span onmouseout="hideTip(event, 'fs31', 40)" onmouseover="showTip(event, 'fs31', 40)" class="id">fst_def</span>                                                 <span class="c">// seleziona il primo componente della coppia</span>
+<span class="c">// |- FST = (\(p:&#39;a#&#39;b). @x. ?y. p = (x,y))             //</span>
 
-<span onmouseout="hideTip(event, 'fs32', 41)" onmouseover="showTip(event, 'fs32', 41)" class="id">snd_def</span>
-<span class="c">// |- SND = (\(p:&#39;a#&#39;b). @y. ?x. p = (x,y))</span>
+<span onmouseout="hideTip(event, 'fs32', 41)" onmouseover="showTip(event, 'fs32', 41)" class="id">snd_def</span>                                                 <span class="c">// seleziona il secondo componente della coppia</span>
+<span class="c">// |- SND = (\(p:&#39;a#&#39;b). @y. ?x. p = (x,y))             // </span>
+</code></pre>
+<h2>Individui</h2>
+<p><strong>Costanti di tipo</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// ind              `:ind`                          Nonfix</span>
+</code></pre>
+<p><strong>Costanti</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// IND_ZERO         `:ind`                          Nonfix</span>
+<span class="c">// IND_SUC          `:ind-&gt;ind`                     Nonfix</span>
+</code></pre>
+<p><strong>Definizioni</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs33', 42)" onmouseover="showTip(event, 'fs33', 42)" class="id">ind_suc_zero_spec</span>
+<span class="c">// |- ONE_ONE IND_SUC /\ (!i. ~ (IND_SUC i = IND_ZERO))</span>
+</code></pre>
+<p><strong>Assiomi</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs34', 43)" onmouseover="showTip(event, 'fs34', 43)" class="id">infinity_ax</span>                                             <span class="c">// l&#39;assioma dell&#39;infinito dichiara che il nuovo tipo degli</span>
+<span class="c">// |- ?(f:ind-&gt;ind). ONE_ONE f /\ ~ ONTO f              // individui e&#39; infinito affermando che esiste una funzione</span>
+                                                        <span class="c">// totale iniettiva da individui a individui che non e&#39;</span>
+                                                        <span class="c">// suriettiva</span>
+</code></pre>
+<h2>Numeri naturali</h2>
+<p><strong>Costanti di tipo</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// nat              `:nat`                          Nonfix</span>
+</code></pre>
+<p><strong>Costanti</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// IsNatRep         `:ind-&gt;bool`                    Nonfix</span>
+<span class="c">// NatAbs           `:ind-&gt;nat`                     Nonfix</span>
+<span class="c">// NatRep           `:nat-&gt;ind`                     Nonfix</span>
+<span class="c">// ZERO             `:nat`                          Nonfix</span>
+<span class="c">// SUC              `:nat-&gt;nat`                     Nonfix</span>
+<span class="c">// PRE              `:nat-&gt;nat`                     Nonfix</span>
+<span class="c">// +                `:nat-&gt;nat-&gt;nat`                Infix (50, LeftAssoc)</span>
+<span class="c">// -                `:nat-&gt;nat-&gt;nat`                Infix (50, LeftAssoc)</span>
+<span class="c">// *                `:nat-&gt;nat-&gt;nat`                Infix (55, LeftAssoc)</span>
+<span class="c">// EXP              `:nat-&gt;nat-&gt;nat`                Infix (60, LeftAssoc)</span>
+<span class="c">// EVEN             `:nat-&gt;bool`                    Nonfix</span>
+<span class="c">// ODD              `:nat-&gt;bool`                    Nonfix</span>
+<span class="c">// &lt;                `:nat-&gt;nat-&gt;bool`               Infix (40, NonAssoc)</span>
+<span class="c">// &lt;=               `:nat-&gt;nat-&gt;bool`               Infix (40, NonAssoc)</span>
+<span class="c">// &gt;                `:nat-&gt;nat-&gt;bool`               Infix (40, NonAssoc)</span>
+<span class="c">// &gt;=               `:nat-&gt;nat-&gt;bool`               Infix (40, NonAssoc)</span>
+<span class="c">// BIT0             `:nat-&gt;nat`                     Nonfix</span>
+<span class="c">// BIT1             `:nat-&gt;nat`                     Nonfix</span>
+<span class="c">// NUMERAL          `:nat-&gt;nat`                     Nonfix</span>
+</code></pre>
+<p><strong>Definizioni di tipo</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs35', 44)" onmouseover="showTip(event, 'fs35', 44)" class="id">nat_def</span>
+<span class="c">// |- ?(f:nat-&gt;ind). TYPE_DEFINITION IsNatRep f</span>
+</code></pre>
+<p><strong>Definizioni</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs36', 45)" onmouseover="showTip(event, 'fs36', 45)" class="id">is_nat_rep_def</span>                                   <span class="c">// funzione caratteristica dei naturali definita come quella funzione che </span>
+<span class="c">// |- !i. IsNatRep i &lt;=&gt;                         // restituisce vero per un elemento di ind sse qualsiasi proprieta&#39; che </span>
+<span class="c">//    (!P. P IND_ZERO /\                         // valga per IND_ZERO e tutti i suoi successori sotto IND_SUCC vale </span>
+<span class="c">//       (!j. P j ==&gt; P (IND_SUC j)) ==&gt; P i)    // necessariamente anche per l&#39;elemento. Questo da il piu&#39; piccolo sotto-</span>
+                                                 <span class="c">// insieme di ind che contiene IND_ZERO ed e&#39; chiuso sotto IND_SUC</span>
+
+<span onmouseout="hideTip(event, 'fs37', 46)" onmouseover="showTip(event, 'fs37', 46)" class="id">nat_bij_def1</span>                                     <span class="c">// biiezioni del tipo dei naturali</span>
+<span class="c">// |- !a. NatAbs (NatRep a) = a                  //</span>
+                                                 <span class="c">//</span>
+<span onmouseout="hideTip(event, 'fs38', 47)" onmouseover="showTip(event, 'fs38', 47)" class="id">nat_bij_def2</span>                                     <span class="c">//</span>
+<span class="c">// |- !r. IsNatRep r &lt;=&gt; NatRep (NatAbs r) = r   //</span>
+
+<span onmouseout="hideTip(event, 'fs39', 48)" onmouseover="showTip(event, 'fs39', 48)" class="id">zero_def</span>                                         <span class="c">// ZERO e SUCC sono definiti in termini dei loro equivalenti nel tipo </span>
+<span class="c">// |- ZERO = NatAbs IND_ZERO                     // degli individui</span>
+                                                 <span class="c">//</span>
+<span onmouseout="hideTip(event, 'fs40', 49)" onmouseover="showTip(event, 'fs40', 49)" class="id">suc_def</span>                                          <span class="c">//</span>
+<span class="c">// |- !n. SUC n = NatAbs (IND_SUC (NatRep n))    //</span>
+
+<span onmouseout="hideTip(event, 'fs41', 50)" onmouseover="showTip(event, 'fs41', 50)" class="id">pre_def</span>
+<span class="c">// |- PRE 0 = 0 /\ (!n. PRE (SUC n) = n)</span>
+
+<span onmouseout="hideTip(event, 'fs42', 51)" onmouseover="showTip(event, 'fs42', 51)" class="id">add_def</span>
+<span class="c">// |- (!n. 0 + n = n) </span>
+<span class="c">//         /\ (!m n. SUC m + n = SUC (m + n))</span>
+
+<span onmouseout="hideTip(event, 'fs43', 52)" onmouseover="showTip(event, 'fs43', 52)" class="id">sub_def</span>
+<span class="c">// |- (!n. n - 0 = n) </span>
+<span class="c">//         /\ (!m n. m - SUC n = PRE (m - n))</span>
+
+<span onmouseout="hideTip(event, 'fs44', 53)" onmouseover="showTip(event, 'fs44', 53)" class="id">mult_def</span>
+<span class="c">// |- (!n. 0 * n = 0) </span>
+<span class="c">//         /\ (!m n. SUC m * n = n + m * n)</span>
+
+<span onmouseout="hideTip(event, 'fs45', 54)" onmouseover="showTip(event, 'fs45', 54)" class="id">exp_def</span>
+<span class="c">// |- (!n. n EXP 0 = 1) </span>
+<span class="c">//         /\ (!m n. m EXP SUC n = m * m EXP n)</span>
+
+<span onmouseout="hideTip(event, 'fs46', 55)" onmouseover="showTip(event, 'fs46', 55)" class="id">even_def</span>
+<span class="c">// |- (EVEN 0 &lt;=&gt; true) </span>
+<span class="c">//         /\ (!n. EVEN (SUC n) &lt;=&gt; ~ EVEN n)</span>
+
+<span onmouseout="hideTip(event, 'fs47', 56)" onmouseover="showTip(event, 'fs47', 56)" class="id">odd_def</span>
+<span class="c">// |- !n. ODD n &lt;=&gt; ~ EVEN n</span>
+
+<span onmouseout="hideTip(event, 'fs48', 57)" onmouseover="showTip(event, 'fs48', 57)" class="id">lt_def</span>
+<span class="c">// |- (!m. m &lt; 0 &lt;=&gt; false) </span>
+<span class="c">//        /\ (!m n. m &lt; SUC n &lt;=&gt; m = n \/ m &lt; n)</span>
+
+<span onmouseout="hideTip(event, 'fs49', 58)" onmouseover="showTip(event, 'fs49', 58)" class="id">le_def</span>
+<span class="c">// |- !m n. m &lt;= n &lt;=&gt; m &lt; n \/ m = n</span>
+
+<span onmouseout="hideTip(event, 'fs50', 59)" onmouseover="showTip(event, 'fs50', 59)" class="id">gt_def</span>
+<span class="c">// |- !m n. m &gt; n &lt;=&gt; n &lt; m</span>
+
+<span onmouseout="hideTip(event, 'fs51', 60)" onmouseover="showTip(event, 'fs51', 60)" class="id">ge_def</span>
+<span class="c">// |- !m n. m &gt;= n &lt;=&gt; n &lt;= m</span>
+</code></pre>
+<p>I numeri naturali sono definiti in termini di <code>SUC</code> e dell'addizione. La rappresentazione implica l'applicare una sequenza di operatori
+<code>BIT0</code> e <code>BIT1</code> alla costante <code>ZERO</code>, con <code>NUMERAL</code> come un tag che viene applicato al risultato. Sia <code>BIT0</code> che <code>BIT1</code> duplicano il loro
+argmento aggiungendo rispettivamente 0 o 1. Il tag <code>NUMERAL</code> semplicemente ritorna il suo argomento, ed &egrave; usato per identicare
+atomi di numerali nei termini. Letta dall'interno all'esterno, una sequenza di <code>BIT0</code> e <code>BIT1</code> corrisponde direttamente agli 0 e agli 1
+della notazione binaria.</p>
+<p>Ad esempio, il numero 6 &egrave; rappresentato da <code>NUMERAL (BIT0 (BIT1 (BIT1 ZERO)))</code> o 110 in binario.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs52', 61)" onmouseover="showTip(event, 'fs52', 61)" class="id">bit0_def</span>                                           
+<span class="c">// |- (BIT0 ZERO = ZERO)                           </span>
+<span class="c">//     /\ (!n. BIT0 (SUC n) = SUC (SUC (BIT0 n)))  </span>
+                                                   
+<span onmouseout="hideTip(event, 'fs53', 62)" onmouseover="showTip(event, 'fs53', 62)" class="id">bit1_def</span>                                           
+<span class="c">// |- !n. BIT1 n = SUC (BIT0 n)                    </span>
+                                                   
+<span onmouseout="hideTip(event, 'fs54', 63)" onmouseover="showTip(event, 'fs54', 63)" class="id">numeral_def</span>                                        
+<span class="c">// |- !n. NUMERAL n = n                            </span>
 </code></pre>
 
           <div class="tip" id="fs1">namespace HOL</div>
@@ -198,6 +319,28 @@
 <div class="tip" id="fs30">val pair_def : thm</div>
 <div class="tip" id="fs31">val fst_def : thm</div>
 <div class="tip" id="fs32">val snd_def : thm</div>
+<div class="tip" id="fs33">val ind_suc_zero_spec : thm</div>
+<div class="tip" id="fs34">val infinity_ax : thm</div>
+<div class="tip" id="fs35">val nat_def : thm</div>
+<div class="tip" id="fs36">val is_nat_rep_def : thm</div>
+<div class="tip" id="fs37">val nat_bij_def1 : thm</div>
+<div class="tip" id="fs38">val nat_bij_def2 : thm</div>
+<div class="tip" id="fs39">val zero_def : thm</div>
+<div class="tip" id="fs40">val suc_def : thm</div>
+<div class="tip" id="fs41">val pre_def : thm</div>
+<div class="tip" id="fs42">val add_def : thm</div>
+<div class="tip" id="fs43">val sub_def : thm</div>
+<div class="tip" id="fs44">val mult_def : thm</div>
+<div class="tip" id="fs45">val exp_def : thm</div>
+<div class="tip" id="fs46">val even_def : thm</div>
+<div class="tip" id="fs47">val odd_def : thm</div>
+<div class="tip" id="fs48">val lt_def : thm</div>
+<div class="tip" id="fs49">val le_def : thm</div>
+<div class="tip" id="fs50">val gt_def : thm</div>
+<div class="tip" id="fs51">val ge_def : thm</div>
+<div class="tip" id="fs52">val bit0_def : thm</div>
+<div class="tip" id="fs53">val bit1_def : thm</div>
+<div class="tip" id="fs54">val numeral_def : thm</div>
 
         </div>
         <div class="span1"></div>

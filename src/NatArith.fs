@@ -33,6 +33,7 @@ let n = (parse_term(@"n:nat"))
 
 set_fixity ("+", Infix (50,LeftAssoc))
 
+/// |- (!n. 0 + n = n) /\ (!m n. SUC m + n = SUC (m + n))
 let add_def =
     new_recursive_fun_definition nat_recursion_thm
      (parse_term(@"(!n. 0 + n = n) /\
@@ -224,6 +225,7 @@ let add_switch_lemma =
 
 (* Definition *)
 
+/// |- PRE 0 = 0 /\ (!n. PRE (SUC n) = n)
 let pre_def =
     new_recursive_fun_definition nat_recursion_thm
         (parse_term(@"(PRE 0 = 0) /\ (!n. PRE (SUC n) = n)"))
@@ -270,6 +272,8 @@ let pre_zero_thm =
 
 set_fixity ("-", Infix (50,LeftAssoc))
 
+
+/// |- (!n. n - 0 = n) /\ (!m n. m - SUC n = PRE (m - n))
 let sub_def =
     new_recursive_fun_definition nat_recursion_thm
         (parse_term(@"(!n. n - 0 = n) /\ (!m n. m - (SUC n) = PRE (m - n))"))
@@ -395,6 +399,7 @@ let add_sub_cancel_thm =
 
 set_fixity ("*", Infix (55,LeftAssoc))
 
+/// |- (!n. 0 * n = 0) /\ (!m n. SUC m * n = n + m * n)
 let mult_def =
     new_recursive_fun_definition nat_recursion_thm
         (parse_term(@"(!n. 0 * n = 0) /\ (!m n. (SUC m) * n = n + (m * n))"))
@@ -682,6 +687,7 @@ let twice_thm =
 
 set_fixity ("EXP", Infix (60,LeftAssoc))
 
+/// |- (!n. n EXP 0 = 1) /\ (!m n. m EXP SUC n = m * m EXP n)
 let exp_def =
   new_recursive_fun_definition nat_recursion_thm
    (parse_term(@"(!n. n EXP 0 = 1) /\ (!m n. m EXP (SUC n) = m * m EXP n)"))
@@ -777,12 +783,14 @@ let exp_dist_right_add_thm =
 
 (* Definitions *)
 
+/// |- (EVEN 0 <=> true) /\ (!n. EVEN (SUC n) <=> ~ EVEN n)
 let even_def =
   new_recursive_fun_definition nat_recursion_thm
     (parse_term(@"(EVEN 0 <=> true) /\ (!n. EVEN (SUC n) <=> ~ (EVEN n))"))
 
 let even_fn = (parse_term(@"EVEN"))
 
+/// |- !n. ODD n <=> ~ EVEN n
 let odd_def =
     new_fun_definition  (parse_term(@"!n. ODD n <=> ~ (EVEN n)"))
 

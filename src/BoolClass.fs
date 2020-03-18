@@ -400,10 +400,9 @@ let excluded_middle_thm =
          th2 )
     )
 
-(* bool_cases_thm : thm                                                       *)
-(*                                                                            *)
-(*    |- !p. (p <=> true) \/ (p <=> false)                                    *)
-
+//  bool_cases_thm : thm                   
+//                                         
+/// |- !p. (p <=> true) \/ (p <=> false)
 let bool_cases_thm = 
     save_thm ("bool_cases_thm",
       let p = mk_var ("p",bool_ty) in
@@ -576,10 +575,9 @@ let not_dist_forall_thm =
           (spec_rule (parse_term(@"(?(x:'a). ~ P x)")) not_dneg_thm) )
     )
 
-(* cond_true_thm                                                              *)
-(*                                                                            *)
-(*    |- !t1 t2. (if true then t1 else t2) = t1                               *)
-
+//  cond_true_thm                               
+//                                              
+/// |- !t1 t2. (if true then t1 else t2) = t1
 let cond_true_thm = 
     save_thm ("cond_true_thm",
       let t1 = (parse_term(@"t1:'a")) 
@@ -609,10 +607,9 @@ let cond_true_thm =
              spec_rule t1 select_eq_thm ])
     )
 
-(* cond_false_thm                                                             *)
-(*                                                                            *)
-(*    |- !t1 t2. (if false then t1 else t2) = t2                              *)
-
+//  cond_false_thm                                
+//                                                
+/// |- !t1 t2. (if false then t1 else t2) = t2 
 let cond_false_thm = 
     save_thm ("cond_false_thm",
       let t1 = (parse_term(@"t1:'a")) 
@@ -646,10 +643,9 @@ let cond_false_thm =
              spec_rule t2 select_eq_thm ])
     )
 
-(* cond_idem_thm                                                              *)
-(*                                                                            *)
-(*    |- !p t. (if p then t else t) = t                                       *)
-
+//  cond_idem_thm                       
+//                                      
+/// |- !p t. (if p then t else t) = t
 let cond_idem_thm = 
     save_thm ("cond_idem_thm",
       let p = (parse_term(@"p:bool")) 
@@ -667,10 +663,9 @@ let cond_idem_thm =
            (list_spec_rule [t;t] cond_false_thm) ))
     )
 
-(* cond_not_thm                                                               *)
-(*                                                                            *)
-(*    |- !p t1 t2. (if ~ p then t1 else t2) = (if p then t2 else t1)          *)
-
+//  cond_not_thm                                                     
+//                                                                   
+/// |- !p t1 t2. (if ~ p then t1 else t2) = (if p then t2 else t1)
 let cond_not_thm = 
     save_thm ("cond_not_thm",
       let p = (parse_term(@"p:bool")) 

@@ -67,26 +67,28 @@ di seguito la rappresentazione per sequenti della dimostrazione
 // 11               |- f = (g:'a->'b) <=> (!x. f x = g x)       | per deduct_antisym_rule da 7 e 10
 //                  |- !(f:'a->'b) g. f = g <=> (!x. f x = g x) | per list_gen_rule da 11
 
-(***hide***)
 
-//********************************************************************************
 
-//PREDICATE LOGIC
+(**
+Logica Predicativa
+------------
 
-//bool_cases_thm
-//   |- !p. (p <=> true) \/ (p <=> false)
+*)
 
-//cond_false_thm
-//   |- !(t1:'a) t2. (if false then t1 else t2) = t2
+bool_cases_thm
+// |- !p. (p <=> true) \/ (p <=> false)
 
-//cond_idem_thm
-//   |- !p (t:'a). (if p then t else t) = t
+cond_false_thm
+// |- !(t1:'a) t2. (if false then t1 else t2) = t2
 
-//cond_not_thm
-//   |- !p (t1:'a) t2. (if (~ p) then t1 else t2) = (if p then t2 else t1)
+cond_idem_thm
+// |- !p (t:'a). (if p then t else t) = t
 
-//cond_true_thm
-//   |- !(t1:'a) t2. (if true then t1 else t2) = t1
+cond_not_thm
+// |- !p (t1:'a) t2. (if (~ p) then t1 else t2) = (if p then t2 else t1)
+
+cond_true_thm
+// |- !(t1:'a) t2. (if true then t1 else t2) = t1
 
 //conj_absorb_disj_thm
 //   |- !p q. p /\ (p \/ q) <=> p
@@ -239,6 +241,8 @@ di seguito la rappresentazione per sequenti della dimostrazione
 //unique_skolem_thm : thm =
 //   |- !(P:'a->'b->bool). (!x. ?!y. P x y) <=> (?f. !x y. P x y <=> f x = y)
 
+
+(***hide***)
 //********************************************************************************
 
 //PAIRS

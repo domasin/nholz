@@ -207,6 +207,7 @@ let mult_eq_cancel_thm =
 
 set_fixity ("<", Infix (40,NonAssoc))
 
+/// |- (!m. m < 0 <=> false) /\ (!m n. m < SUC n <=> m = n \/ m < n)
 let lt_def =
   new_recursive_fun_definition nat_recursion_thm
    (parse_term(@"(!m. m < 0 <=> false) /\ (!m n. m < SUC n <=> m = n \/ m < n)"))
@@ -594,6 +595,7 @@ let mult_lt_cancel_thm =
 
 set_fixity ("<=", Infix (40,NonAssoc))
 
+/// |- !m n. m <= n <=> m < n \/ m = n
 let le_def =
     new_fun_definition (parse_term(@"!m n. m <= n <=> m < n \/ m = n"))
 
@@ -893,6 +895,7 @@ let sub_floor_thm =
 
 set_fixity (">", Infix (40,NonAssoc))
 
+/// |- !m n. m > n <=> n < m
 let gt_def =
     new_fun_definition (parse_term(@"!m n. m > n <=> n < m"))
 
@@ -915,6 +918,7 @@ let is_gt = can dest_gt
 
 set_fixity (">=", Infix (40,NonAssoc))
 
+/// |- !m n. m >= n <=> n <= m
 let ge_def =
     new_fun_definition (parse_term(@"!m n. m >= n <=> n <= m"))
 

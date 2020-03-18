@@ -29,13 +29,14 @@ module HOL.Nat
 
 (* Characteristic funtion *)
 
-(* "IsNatRep" is the characteristic function for the naturals base type,      *)
-(* prescribing the subset of `:ind` used to represent naturals.  It is        *)
-(* defined as the function that returns `true` for a given `:ind` element iff *)
-(* any property that holds for "IND_ZERO" and all its successors under        *)
-(* "IND_SUC" necessarily holds for the element.  This gives the smallest      *)
-(* subset of `:ind` containing "IND_ZERO" and closed under "IND_SUC".         *)
-
+/// "IsNatRep" is the characteristic function for the naturals base type,     
+/// prescribing the subset of `:ind` used to represent naturals.  It is       
+/// defined as the function that returns `true` for a given `:ind` element iff
+/// any property that holds for "IND_ZERO" and all its successors under       
+/// "IND_SUC" necessarily holds for the element.  This gives the smallest     
+/// subset of `:ind` containing "IND_ZERO" and closed under "IND_SUC".        
+///
+/// |- !i. IsNatRep i <=> (!P. P IND_ZERO /\ (!j. P j ==> P (IND_SUC j)) ==> P i)
 let is_nat_rep_def =
     new_fun_definition
       (parse_term(@"!(i:ind). IsNatRep i <=>
@@ -106,6 +107,9 @@ let nat_rep_exists_lemma =
 
 (* The type for natural numbers can now be defined.                           *)
 
+/// typer for natural numbers
+///
+/// |- ?(f:nat->ind). TYPE_DEFINITION IsNatRep f
 let nat_def = new_tyconst_definition ("nat", nat_rep_exists_lemma)
 
 let nat_ty = parse_type(@"nat")
@@ -160,10 +164,12 @@ let nat_rep_injective_lemma =
 
 (* Definitions *)
 
+/// |- ZERO = NatAbs IND_ZERO
 let zero_def = new_const_definition (parse_term(@"ZERO = NatAbs IND_ZERO"))
 
 let zero_tm0 = (parse_term(@"ZERO"))
 
+/// |- !n. SUC n = NatAbs (IND_SUC (NatRep n))
 let suc_def = new_fun_definition (parse_term(@"!n. SUC n = NatAbs (IND_SUC (NatRep n))"))
 
 let suc_fn = (parse_term(@"SUC"))

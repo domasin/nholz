@@ -139,19 +139,19 @@ Coppie ordinate
 **Costanti di tipo**
 *)
 
-//#                `:'1#'2`                        Infix (10, RightAssoc)
+// #                `:'1#'2`                        Infix (10, RightAssoc)
 
 (**
 **Costanti**
 *)
 
-//MkPairRep        `:'a->'b->'a->'b->bool`         Nonfix
-//IsPairRep        `:('a->'b->bool)->bool`         Nonfix
-//PairAbs          `:('a->'b->bool)->'a#'b`        Nonfix
-//PairRep          `:'a#'b->'a->'b->bool`          Nonfix
-//PAIR             `:'a->'b->'a#'b`                Nonfix *
-//FST              `:'a#'b->'a`                    Nonfix
-//SND              `:'a#'b->'b`                    Nonfix
+// MkPairRep        `:'a->'b->'a->'b->bool`         Nonfix
+// IsPairRep        `:('a->'b->bool)->bool`         Nonfix
+// PairAbs          `:('a->'b->bool)->'a#'b`        Nonfix
+// PairRep          `:'a#'b->'a->'b->bool`          Nonfix
+// PAIR             `:'a->'b->'a#'b`                Nonfix *
+// FST              `:'a#'b->'a`                    Nonfix
+// SND              `:'a#'b->'b`                    Nonfix
 
 (**
 **Definizioni di tipo**
@@ -163,7 +163,6 @@ prod_def
 (**
 **Definizioni**
 *)
-
 
 mk_pair_rep_def                                         // la funzione di rappresentazione restituisce vero solo 
 // |- MkPairRep =                                       // quando ogni argomento e' uguale al suo corrispondente
@@ -194,122 +193,155 @@ fst_def                                                 // seleziona il primo co
 snd_def                                                 // seleziona il secondo componente della coppia
 // |- SND = (\(p:'a#'b). @y. ?x. p = (x,y))             // 
 
-(*** hide ***)
-//********************************************************************************
 
-//                                INDIVIDUALS
+(**
+Individui
+--------------
 
-//TYPE CONSTANTS
+**Costanti di tipo**
+*)
+// ind              `:ind`                          Nonfix
 
-//ind              `:ind`                          Nonfix
+(**
+**Costanti**
+*)
 
-//CONSTANTS
+// IND_ZERO         `:ind`                          Nonfix
+// IND_SUC          `:ind->ind`                     Nonfix
 
-//IND_ZERO         `:ind`                          Nonfix
-//IND_SUC          `:ind->ind`                     Nonfix
+(**
+**Definizioni**
+*)
+ind_suc_zero_spec
+// |- ONE_ONE IND_SUC /\ (!i. ~ (IND_SUC i = IND_ZERO))
 
-//DEFINITIONS
+(**
+**Assiomi**
+*)
 
-//ind_suc_zero_spec
-//   |- ONE_ONE IND_SUC /\ (!i. ~ (IND_SUC i = IND_ZERO))
+infinity_ax                                             // l'assioma dell'infinito dichiara che il nuovo tipo degli
+// |- ?(f:ind->ind). ONE_ONE f /\ ~ ONTO f              // individui e' infinito affermando che esiste una funzione
+                                                        // totale iniettiva da individui a individui che non e'
+                                                        // suriettiva
 
-//AXIOMS
+(**
+Numeri naturali
+---------------
 
-//infinity_ax
-//   |- ?(f:ind->ind). ONE_ONE f /\ ~ ONTO f
+**Costanti di tipo**
+*)
 
-//********************************************************************************
+// nat              `:nat`                          Nonfix
 
-//                              NATURAL NUMBERS
+(**
+**Costanti**
+*)
 
-//TYPE CONSTANTS
+// IsNatRep         `:ind->bool`                    Nonfix
+// NatAbs           `:ind->nat`                     Nonfix
+// NatRep           `:nat->ind`                     Nonfix
+// ZERO             `:nat`                          Nonfix
+// SUC              `:nat->nat`                     Nonfix
+// PRE              `:nat->nat`                     Nonfix
+// +                `:nat->nat->nat`                Infix (50, LeftAssoc)
+// -                `:nat->nat->nat`                Infix (50, LeftAssoc)
+// *                `:nat->nat->nat`                Infix (55, LeftAssoc)
+// EXP              `:nat->nat->nat`                Infix (60, LeftAssoc)
+// EVEN             `:nat->bool`                    Nonfix
+// ODD              `:nat->bool`                    Nonfix
+// <                `:nat->nat->bool`               Infix (40, NonAssoc)
+// <=               `:nat->nat->bool`               Infix (40, NonAssoc)
+// >                `:nat->nat->bool`               Infix (40, NonAssoc)
+// >=               `:nat->nat->bool`               Infix (40, NonAssoc)
+// BIT0             `:nat->nat`                     Nonfix
+// BIT1             `:nat->nat`                     Nonfix
+// NUMERAL          `:nat->nat`                     Nonfix
 
-//nat              `:nat`                          Nonfix
+(**
+**Definizioni di tipo**
+*)
 
-//CONSTANTS
+nat_def
+// |- ?(f:nat->ind). TYPE_DEFINITION IsNatRep f
 
-//IsNatRep         `:ind->bool`                    Nonfix
-//NatAbs           `:ind->nat`                     Nonfix
-//NatRep           `:nat->ind`                     Nonfix
-//ZERO             `:nat`                          Nonfix
-//SUC              `:nat->nat`                     Nonfix
-//PRE              `:nat->nat`                     Nonfix
-//+                `:nat->nat->nat`                Infix (50, LeftAssoc)
-//-                `:nat->nat->nat`                Infix (50, LeftAssoc)
-//*                `:nat->nat->nat`                Infix (55, LeftAssoc)
-//EXP              `:nat->nat->nat`                Infix (60, LeftAssoc)
-//EVEN             `:nat->bool`                    Nonfix
-//ODD              `:nat->bool`                    Nonfix
-//<                `:nat->nat->bool`               Infix (40, NonAssoc)
-//<=               `:nat->nat->bool`               Infix (40, NonAssoc)
-//>                `:nat->nat->bool`               Infix (40, NonAssoc)
-//>=               `:nat->nat->bool`               Infix (40, NonAssoc)
-//BIT0             `:nat->nat`                     Nonfix
-//BIT1             `:nat->nat`                     Nonfix
-//NUMERAL          `:nat->nat`                     Nonfix
+(**
+**Definizioni**
+*)
 
-//TYPE DEFINITIONS
+is_nat_rep_def                                   // funzione caratteristica dei naturali definita come quella funzione che 
+// |- !i. IsNatRep i <=>                         // restituisce vero per un elemento di ind sse qualsiasi proprieta' che 
+//    (!P. P IND_ZERO /\                         // valga per IND_ZERO e tutti i suoi successori sotto IND_SUCC vale 
+//       (!j. P j ==> P (IND_SUC j)) ==> P i)    // necessariamente anche per l'elemento. Questo da il piu' piccolo sotto-
+                                                 // insieme di ind che contiene IND_ZERO ed e' chiuso sotto IND_SUC
 
-//nat_def
-//   |- ?(f:nat->ind). TYPE_DEFINITION IsNatRep f
+nat_bij_def1                                     // biiezioni del tipo dei naturali
+// |- !a. NatAbs (NatRep a) = a                  //
+                                                 //
+nat_bij_def2                                     //
+// |- !r. IsNatRep r <=> NatRep (NatAbs r) = r   //
 
-//DEFINITIONS
+zero_def                                         // ZERO e SUCC sono definiti in termini dei loro equivalenti nel tipo 
+// |- ZERO = NatAbs IND_ZERO                     // degli individui
+                                                 //
+suc_def                                          //
+// |- !n. SUC n = NatAbs (IND_SUC (NatRep n))    //
 
-//is_nat_rep_def
-//   |- !i. IsNatRep i <=> (!P. P IND_ZERO /\ (!j. P j ==> P (IND_SUC j)) ==> P i)
+pre_def
+// |- PRE 0 = 0 /\ (!n. PRE (SUC n) = n)
 
-//nat_bij_def1
-//   |- !a. NatAbs (NatRep a) = a
+add_def
+// |- (!n. 0 + n = n) 
+//         /\ (!m n. SUC m + n = SUC (m + n))
 
-//nat_bij_def2
-//   |- !r. IsNatRep r <=> NatRep (NatAbs r) = r
+sub_def
+// |- (!n. n - 0 = n) 
+//         /\ (!m n. m - SUC n = PRE (m - n))
 
-//zero_def
-//   |- ZERO = NatAbs IND_ZERO
+mult_def
+// |- (!n. 0 * n = 0) 
+//         /\ (!m n. SUC m * n = n + m * n)
 
-//suc_def
-//   |- !n. SUC n = NatAbs (IND_SUC (NatRep n))
+exp_def
+// |- (!n. n EXP 0 = 1) 
+//         /\ (!m n. m EXP SUC n = m * m EXP n)
 
-//pre_def
-//   |- PRE 0 = 0 /\ (!n. PRE (SUC n) = n)
+even_def
+// |- (EVEN 0 <=> true) 
+//         /\ (!n. EVEN (SUC n) <=> ~ EVEN n)
 
-//add_def
-//   |- (!n. 0 + n = n) /\ (!m n. SUC m + n = SUC (m + n))
+odd_def
+// |- !n. ODD n <=> ~ EVEN n
 
-//sub_def
-//   |- (!n. n - 0 = n) /\ (!m n. m - SUC n = PRE (m - n))
+lt_def
+// |- (!m. m < 0 <=> false) 
+//        /\ (!m n. m < SUC n <=> m = n \/ m < n)
 
-//mult_def
-//   |- (!n. 0 * n = 0) /\ (!m n. SUC m * n = n + m * n)
+le_def
+// |- !m n. m <= n <=> m < n \/ m = n
 
-//exp_def
-//   |- (!n. n EXP 0 = 1) /\ (!m n. m EXP SUC n = m * m EXP n)
+gt_def
+// |- !m n. m > n <=> n < m
 
-//even_def
-//   |- (EVEN 0 <=> true) /\ (!n. EVEN (SUC n) <=> ~ EVEN n)
+ge_def
+// |- !m n. m >= n <=> n <= m
 
-//odd_def
-//   |- !n. ODD n <=> ~ EVEN n
+(**
 
-//lt_def
-//   |- (!m. m < 0 <=> false) /\ (!m n. m < SUC n <=> m = n \/ m < n)
+I numeri naturali sono definiti in termini di `SUC` e dell'addizione. La rappresentazione implica l'applicare una sequenza di operatori
+`BIT0` e `BIT1` alla costante `ZERO`, con `NUMERAL` come un tag che viene applicato al risultato. Sia `BIT0` che `BIT1` duplicano il loro 
+argmento aggiungendo rispettivamente 0 o 1. Il tag `NUMERAL` semplicemente ritorna il suo argomento, ed &egrave; usato per identicare 
+atomi di numerali nei termini. Letta dall'interno all'esterno, una sequenza di `BIT0` e `BIT1` corrisponde direttamente agli 0 e agli 1 
+della notazione binaria. 
 
-//le_def
-//   |- !m n. m <= n <=> m < n \/ m = n
+Ad esempio, il numero 6 &egrave; rappresentato da `NUMERAL (BIT0 (BIT1 (BIT1 ZERO)))` o 110 in binario.
+*)
 
-//gt_def
-//   |- !m n. m > n <=> n < m
-
-//ge_def
-//   |- !m n. m >= n <=> n <= m
-
-//bit0_def
-//   |- (BIT0 ZERO = ZERO) /\ (!n. BIT0 (SUC n) = SUC (SUC (BIT0 n)))
-
-//bit1_def
-//   |- !n. BIT1 n = SUC (BIT0 n)
-
-//numeral_def
-//   |- !n. NUMERAL n = n
-
-//*)
+bit0_def                                           
+// |- (BIT0 ZERO = ZERO)                           
+//     /\ (!n. BIT0 (SUC n) = SUC (SUC (BIT0 n)))  
+                                                   
+bit1_def                                           
+// |- !n. BIT1 n = SUC (BIT0 n)                    
+                                                   
+numeral_def                                        
+// |- !n. NUMERAL n = n                            

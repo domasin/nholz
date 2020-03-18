@@ -37,12 +37,14 @@ open System.Numerics
 
 (* NUMERAL *)
 
+/// |- !n. NUMERAL n = n
 let numeral_def = new_fun_definition (parse_term(@"!(n:nat). NUMERAL n = n"))
 
 let numeral_fn = (parse_term(@"NUMERAL"))
 
 (* BIT0 *)
 
+/// |- (BIT0 ZERO = ZERO) /\ (!n. BIT0 (SUC n) = SUC (SUC (BIT0 n)))
 let bit0_def =
   new_recursive_fun_definition nat_recursion_thm0
    (parse_term(@"(BIT0 ZERO = ZERO) /\
@@ -52,6 +54,7 @@ let bit0_fn = (parse_term(@"BIT0"))
 
 (* BIT *)
 
+/// |- !n. BIT1 n = SUC (BIT0 n)
 let bit1_def = new_fun_definition (parse_term(@"!n. BIT1 n = SUC (BIT0 n)"))
 
 let bit1_fn = (parse_term(@"BIT1"))
