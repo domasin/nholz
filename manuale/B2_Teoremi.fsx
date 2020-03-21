@@ -51,7 +51,7 @@ let th11 = deduct_antisym_rule th7 th10
 let th = list_gen_rule [f;g] th11          
 
 (**
-di seguito la rappresentazione per sequenti della dimostrazione
+di seguito la rappresentazione per sequenti:
 *)
 
 // 1                |- (\x. (f:'a->'b) x) = f                   | per eta_conv
@@ -60,14 +60,62 @@ di seguito la rappresentazione per sequenti della dimostrazione
 // 4  !x. f x = g x |- f x = (g:'a->'b) x                       | per spec_rule da 3
 // 5  !x. f x = g x |- (\x. f x) = (\x. (g:'a->'b) x)           | per mk_abs_rule da 4
 // 6                |- (\x. (g:'a->'b) x) = g                   | per eta_conv
-// 7  !x. f x = g x |- f = (g:'a->'b)                           | per list_trans_rule da 1 5 e 6
+// 7  !x. f x = g x |- f = (g:'a->'b)                           | per list_trans_rule da 2 5 e 6
 // 8          f = g |- f = (g:'a->'b)                           | per assume_rule
 // 9          f = g |- f x = (g:'a->'b) x                       | per mk_comb1_rule da 8
 // 10         f = g |- !x. f x = (g:'a->'b) x                   | per gen_rule da 9
 // 11               |- f = (g:'a->'b) <=> (!x. f x = g x)       | per deduct_antisym_rule da 7 e 10
 //                  |- !(f:'a->'b) g. f = g <=> (!x. f x = g x) | per list_gen_rule da 11
 
+(**
 
+e una formattazione ad albero:
+
+$\scriptsize{\dfrac
+    {
+        \dfrac
+            {
+                \dfrac
+                    {
+                        \dfrac
+                            {
+                                \dfrac
+                                    {}
+                                    {(1) \vdash (\lambda x. (f:\alpha \rightarrow \beta)\ x) = f}
+                                    \textsf{eta_conv}}
+                            {(2) \vdash (f:\alpha \rightarrow \beta) = (\lambda x. f\ x)}
+                            \textsf{sym_rule}
+                    \qquad 
+                        \dfrac
+                            {
+                                \dfrac
+                                    {\dfrac{}{(3) \forall x. f\ x = g\ x \vdash \forall x. f\ x = (g:\alpha \rightarrow \beta)\ x}\textsf{assume_rule}}
+                                    {(4)\forall x. f\ x = g\ x \vdash f\ x = (g:\alpha \rightarrow \beta)\ x}
+                                    \textsf{spec_rule}
+                            }
+                            {(5) \forall x. f\ x = g\ x \vdash (\lambda x. f\ x) = (\lambda x. (g:\alpha \rightarrow \beta)\ x)}\textsf{mk_abs_rule}
+                    \qquad 
+                        \dfrac{}{(6) \vdash (\lambda x. (g:\alpha \rightarrow \beta)\ x) = g}\textsf{eta_conv}
+                    }
+                    {(7) \forall x.\ f\ x = g\ x \vdash f = (g:\alpha \rightarrow \beta)}\textsf{list_trans_rule}
+                \qquad 
+                \dfrac
+                    {
+                        \dfrac
+                            {
+                                \dfrac{}{(8) f = g \vdash f = (g:\alpha \rightarrow \beta)}\textsf{assume_rule}
+                            }
+                            {(9) f = g \vdash f\ x = (g:\alpha \rightarrow \beta)\ x}\textsf{mk_comb1_rule}
+                    }
+                    {(10) f = g \vdash \forall x. f\ x = (g: \alpha \rightarrow \beta)\ x}\textsf{gen_rule}
+            }
+            {
+                (11) \vdash f = g\ \leftrightarrow\ (\forall x.\ f\ x = g\ x)
+            }\textsf{deduct_antisym_rule}
+    }
+      {(th) \vdash \forall (f:\alpha \rightarrow \beta)\ g.\ f = g\ \leftrightarrow\ (\forall x.\ f\ x = g\ x)}
+      \textsf{list_gen_rule}}$
+*)
 
 (**
 Logica Predicativa

@@ -14,6 +14,7 @@
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="content/style.css" />
     <script src="content/tips.js" type="text/javascript"></script>
@@ -52,19 +53,231 @@ solo per il teorema <code>fun_eq_thm</code>:</p>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 66)" onmouseover="showTip(event, 'fs36', 66)" class="id">th11</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs37', 67)" onmouseover="showTip(event, 'fs37', 67)" class="fn">deduct_antisym_rule</span> <span onmouseout="hideTip(event, 'fs29', 68)" onmouseover="showTip(event, 'fs29', 68)" class="id">th7</span> <span onmouseout="hideTip(event, 'fs34', 69)" onmouseover="showTip(event, 'fs34', 69)" class="id">th10</span>    
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs38', 70)" onmouseover="showTip(event, 'fs38', 70)" class="id">th</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs39', 71)" onmouseover="showTip(event, 'fs39', 71)" class="fn">list_gen_rule</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs16', 72)" onmouseover="showTip(event, 'fs16', 72)" class="id">f</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs17', 73)" onmouseover="showTip(event, 'fs17', 73)" class="id">g</span><span class="pn">]</span> <span onmouseout="hideTip(event, 'fs36', 74)" onmouseover="showTip(event, 'fs36', 74)" class="id">th11</span>          
 </code></pre>
-<p>di seguito la rappresentazione per sequenti della dimostrazione</p>
+<p>di seguito la rappresentazione per sequenti:</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// 1                |- (\x. (f:&#39;a-&gt;&#39;b) x) = f                   | per eta_conv</span>
 <span class="c">// 2                |- (f:&#39;a-&gt;&#39;b) = (\x. f x)                   | per sym_rule da 1</span>
 <span class="c">// 3  !x. f x = g x |- !x. f x = (g:&#39;a-&gt;&#39;b) x                   | per assume_rule</span>
 <span class="c">// 4  !x. f x = g x |- f x = (g:&#39;a-&gt;&#39;b) x                       | per spec_rule da 3</span>
 <span class="c">// 5  !x. f x = g x |- (\x. f x) = (\x. (g:&#39;a-&gt;&#39;b) x)           | per mk_abs_rule da 4</span>
 <span class="c">// 6                |- (\x. (g:&#39;a-&gt;&#39;b) x) = g                   | per eta_conv</span>
-<span class="c">// 7  !x. f x = g x |- f = (g:&#39;a-&gt;&#39;b)                           | per list_trans_rule da 1 5 e 6</span>
+<span class="c">// 7  !x. f x = g x |- f = (g:&#39;a-&gt;&#39;b)                           | per list_trans_rule da 2 5 e 6</span>
 <span class="c">// 8          f = g |- f = (g:&#39;a-&gt;&#39;b)                           | per assume_rule</span>
 <span class="c">// 9          f = g |- f x = (g:&#39;a-&gt;&#39;b) x                       | per mk_comb1_rule da 8</span>
 <span class="c">// 10         f = g |- !x. f x = (g:&#39;a-&gt;&#39;b) x                   | per gen_rule da 9</span>
 <span class="c">// 11               |- f = (g:&#39;a-&gt;&#39;b) &lt;=&gt; (!x. f x = g x)       | per deduct_antisym_rule da 7 e 10</span>
 <span class="c">//                  |- !(f:&#39;a-&gt;&#39;b) g. f = g &lt;=&gt; (!x. f x = g x) | per list_gen_rule da 11</span>
+</code></pre>
+<p>e una formattazione ad albero:</p>
+<p><span class="math">\(\scriptsize{\dfrac
+{
+\dfrac
+{
+\dfrac
+{
+\dfrac
+{
+\dfrac
+{}
+{(1) \vdash (\lambda x. (f:\alpha \rightarrow \beta)\ x) = f}
+\textsf{eta_conv}}
+{(2) \vdash (f:\alpha \rightarrow \beta) = (\lambda x. f\ x)}
+\textsf{sym_rule}
+\qquad
+\dfrac
+{
+\dfrac
+{\dfrac{}{(3) \forall x. f\ x = g\ x \vdash \forall x. f\ x = (g:\alpha \rightarrow \beta)\ x}\textsf{assume_rule}}
+{(4)\forall x. f\ x = g\ x \vdash f\ x = (g:\alpha \rightarrow \beta)\ x}
+\textsf{spec_rule}
+}
+{(5) \forall x. f\ x = g\ x \vdash (\lambda x. f\ x) = (\lambda x. (g:\alpha \rightarrow \beta)\ x)}\textsf{mk_abs_rule}
+\qquad
+\dfrac{}{(6) \vdash (\lambda x. (g:\alpha \rightarrow \beta)\ x) = g}\textsf{eta_conv}
+}
+{(7) \forall x.\ f\ x = g\ x \vdash f = (g:\alpha \rightarrow \beta)}\textsf{list_trans_rule}
+\qquad
+\dfrac
+{
+\dfrac
+{
+\dfrac{}{(8) f = g \vdash f = (g:\alpha \rightarrow \beta)}\textsf{assume_rule}
+}
+{(9) f = g \vdash f\ x = (g:\alpha \rightarrow \beta)\ x}\textsf{mk_comb1_rule}
+}
+{(10) f = g \vdash \forall x. f\ x = (g: \alpha \rightarrow \beta)\ x}\textsf{gen_rule}
+}
+{
+(11) \vdash f = g\ \leftrightarrow\ (\forall x.\ f\ x = g\ x)
+}\textsf{deduct_antisym_rule}
+}
+{(th) \vdash \forall (f:\alpha \rightarrow \beta)\ g.\ f = g\ \leftrightarrow\ (\forall x.\ f\ x = g\ x)}
+\textsf{list_gen_rule}}\)</span></p>
+<h2>Logica Predicativa</h2>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs40', 75)" onmouseover="showTip(event, 'fs40', 75)" class="id">bool_cases_thm</span>
+<span class="c">// |- !p. (p &lt;=&gt; true) \/ (p &lt;=&gt; false)</span>
+
+<span onmouseout="hideTip(event, 'fs41', 76)" onmouseover="showTip(event, 'fs41', 76)" class="id">cond_false_thm</span>
+<span class="c">// |- !(t1:&#39;a) t2. (if false then t1 else t2) = t2</span>
+
+<span onmouseout="hideTip(event, 'fs42', 77)" onmouseover="showTip(event, 'fs42', 77)" class="id">cond_idem_thm</span>
+<span class="c">// |- !p (t:&#39;a). (if p then t else t) = t</span>
+
+<span onmouseout="hideTip(event, 'fs43', 78)" onmouseover="showTip(event, 'fs43', 78)" class="id">cond_not_thm</span>
+<span class="c">// |- !p (t1:&#39;a) t2. (if (~ p) then t1 else t2) = (if p then t2 else t1)</span>
+
+<span onmouseout="hideTip(event, 'fs44', 79)" onmouseover="showTip(event, 'fs44', 79)" class="id">cond_true_thm</span>
+<span class="c">// |- !(t1:&#39;a) t2. (if true then t1 else t2) = t1</span>
+
+<span class="c">//conj_absorb_disj_thm</span>
+<span class="c">//   |- !p q. p /\ (p \/ q) &lt;=&gt; p</span>
+
+<span class="c">//conj_assoc_thm</span>
+<span class="c">//   |- !p q r. p /\ (q /\ r) &lt;=&gt; (p /\ q) /\ r</span>
+
+<span class="c">//conj_comm_thm</span>
+<span class="c">//   |- !p q. p /\ q &lt;=&gt; q /\ p</span>
+
+<span class="c">//conj_contr_thm</span>
+<span class="c">//   |- !p. p /\ ~ p &lt;=&gt; false</span>
+
+<span class="c">//conj_dist_left_disj_thm</span>
+<span class="c">//   |- !p q r. (p \/ q) /\ r &lt;=&gt; (p /\ r) \/ (q /\ r)</span>
+
+<span class="c">//conj_dist_right_disj_thm</span>
+<span class="c">//   |- !p q r. p /\ (q \/ r) &lt;=&gt; (p /\ q) \/ (p /\ r)</span>
+
+<span class="c">//conj_id_thm</span>
+<span class="c">//   |- !p. p /\ true &lt;=&gt; p</span>
+
+<span class="c">//conj_idem_thm</span>
+<span class="c">//   |- !p. p /\ p &lt;=&gt; p</span>
+
+<span class="c">//conj_zero_thm</span>
+<span class="c">//   |- !p. p /\ false &lt;=&gt; false</span>
+
+<span class="c">//disj_absorb_conj_thm</span>
+<span class="c">//   |- !p q. p \/ (p /\ q) &lt;=&gt; p</span>
+
+<span class="c">//disj_assoc_thm</span>
+<span class="c">//   |- !p q r. p \/ (q \/ r) &lt;=&gt; (p \/ q) \/ r</span>
+
+<span class="c">//disj_comm_thm</span>
+<span class="c">//   |- !p q. p \/ q &lt;=&gt; q \/ p</span>
+
+<span class="c">//disj_dist_left_conj_thm</span>
+<span class="c">//   |- !p q r. (p /\ q) \/ r &lt;=&gt; (p \/ r) /\ (q \/ r)</span>
+
+<span class="c">//disj_dist_right_conj_thm</span>
+<span class="c">//   |- !p q r. p \/ (q /\ r) &lt;=&gt; (p \/ q) /\ (p \/ r)</span>
+
+<span class="c">//disj_id_thm</span>
+<span class="c">//   |- !p. p \/ false &lt;=&gt; p</span>
+
+<span class="c">//disj_idem_thm</span>
+<span class="c">//   |- !p. p \/ p &lt;=&gt; p</span>
+
+<span class="c">//disj_zero_thm</span>
+<span class="c">//   |- !p. p \/ true &lt;=&gt; true</span>
+
+<span class="c">//excluded_middle_thm</span>
+<span class="c">//   |- !p. p \/ ~ p</span>
+
+<span class="c">//exists_dist_disj_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool) Q. (?x. P x \/ Q x) &lt;=&gt; (?x. P x) \/ (?x. Q x)</span>
+
+<span class="c">//exists_null_thm</span>
+<span class="c">//   |- !t. (?(x:&#39;a). t) &lt;=&gt; t</span>
+
+<span class="c">//exists_one_point_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool) a. (?x. x = a /\ P x) &lt;=&gt; P a</span>
+
+<span class="c">//exists_value_thm</span>
+<span class="c">//   |- !(x:&#39;a). ?y. y = x</span>
+
+<span class="c">//forall_dist_conj_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool) Q. (!x. P x /\ Q x) &lt;=&gt; (!x. P x) /\ (!x. Q x)</span>
+
+<span class="c">//forall_null_thm</span>
+<span class="c">//   |- !t. (!(x:&#39;a). t) &lt;=&gt; t</span>
+
+<span class="c">//forall_one_point_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool) a. (!x. x = a ==&gt; P x) &lt;=&gt; P a</span>
+
+<span class="c">//imp_alt_def_thm</span>
+<span class="c">//   |- $==&gt; = (\p q. p /\ q &lt;=&gt; p)</span>
+
+<span class="c">//imp_disj_thm</span>
+<span class="c">//   |- !p q. (p ==&gt; q) &lt;=&gt; (~ p \/ q)</span>
+
+<span class="c">//imp_dist_left_disj_thm</span>
+<span class="c">//   |- !p q r. (p \/ q ==&gt; r) &lt;=&gt; (p ==&gt; r) /\ (q ==&gt; r)</span>
+
+<span class="c">//imp_dist_right_conj_thm</span>
+<span class="c">//   |- !p q r. (p ==&gt; q /\ r) &lt;=&gt; (p ==&gt; q) /\ (p ==&gt; r)</span>
+
+<span class="c">//imp_imp_thm</span>
+<span class="c">//   |- !p q r. (p ==&gt; q ==&gt; r) &lt;=&gt; (p /\ q ==&gt; r)</span>
+
+<span class="c">//imp_left_id_thm</span>
+<span class="c">//   |- !p. (true ==&gt; p) &lt;=&gt; p</span>
+
+<span class="c">//imp_left_zero_thm</span>
+<span class="c">//   |- !p. false ==&gt; p</span>
+
+<span class="c">//imp_refl_thm</span>
+<span class="c">//   |- !p. p ==&gt; p</span>
+
+<span class="c">//imp_right_zero_thm</span>
+<span class="c">//   |- !p. p ==&gt; true</span>
+
+<span class="c">//not_dist_conj_thm</span>
+<span class="c">//   |- !p q. ~ (p /\ q) &lt;=&gt; ~ p \/ ~ q</span>
+
+<span class="c">//not_dist_disj_thm</span>
+<span class="c">//   |- !p q. ~ (p \/ q) &lt;=&gt; ~ p /\ ~ q</span>
+
+<span class="c">//not_dist_exists_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool). ~ (?x. P x) &lt;=&gt; (!x. ~ P x)</span>
+
+<span class="c">//not_dist_forall_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool). ~ (!x. P x) &lt;=&gt; (?x. ~ P x)</span>
+
+<span class="c">//not_dneg_thm</span>
+<span class="c">//   |- !p. ~ ~ p &lt;=&gt; p</span>
+
+<span class="c">//not_false_thm</span>
+<span class="c">//   |- ~ false &lt;=&gt; true</span>
+
+<span class="c">//not_true_thm</span>
+<span class="c">//   |- ~ true &lt;=&gt; false</span>
+
+<span class="c">//select_eq_thm</span>
+<span class="c">//   |- !(a:&#39;a). (@x. x = a) = a</span>
+
+<span class="c">//skolem_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;&#39;b-&gt;bool). (!x. ?y. P x y) &lt;=&gt; (?f. !x. P x (f x))</span>
+
+<span class="c">//true_not_eq_false_thm</span>
+<span class="c">//   |- ~ (true &lt;=&gt; false)</span>
+
+<span class="c">//truth_thm</span>
+<span class="c">//   |- true</span>
+
+<span class="c">//uexists_thm1</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool). (?!x. P x) &lt;=&gt; (?x. P x /\ (!y. P y ==&gt; y = x))</span>
+
+<span class="c">//uexists_thm2</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool). (?!x. P x) &lt;=&gt; (?x. !y. P y &lt;=&gt; x = y)</span>
+
+<span class="c">//uexists_thm3</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool). (?!x. P x)</span>
+<span class="c">//                     &lt;=&gt; (?x. P x) /\ (!x&#39; x&#39;&#39;. P x&#39; /\ P x&#39;&#39; ==&gt; x&#39; = x&#39;&#39;)</span>
+
+<span class="c">//uexists_one_point_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool) a. (?!x. x = a /\ P x) &lt;=&gt; P a</span>
+
+<span class="c">//unique_skolem_thm : thm =</span>
+<span class="c">//   |- !(P:&#39;a-&gt;&#39;b-&gt;bool). (!x. ?!y. P x y) &lt;=&gt; (?f. !x y. P x y &lt;=&gt; f x = y)</span>
 </code></pre>
 
           <div class="tip" id="fs1">namespace HOL</div>
@@ -106,6 +319,11 @@ solo per il teorema <code>fun_eq_thm</code>:</p>
 <div class="tip" id="fs37">val deduct_antisym_rule : th01:thm -&gt; th02:thm -&gt; thm</div>
 <div class="tip" id="fs38">val th : thm</div>
 <div class="tip" id="fs39">val list_gen_rule : tms:term list -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs40">val bool_cases_thm : thm</div>
+<div class="tip" id="fs41">val cond_false_thm : thm</div>
+<div class="tip" id="fs42">val cond_idem_thm : thm</div>
+<div class="tip" id="fs43">val cond_not_thm : thm</div>
+<div class="tip" id="fs44">val cond_true_thm : thm</div>
 
         </div>
         <div class="span1"></div>
