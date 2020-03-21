@@ -960,7 +960,7 @@ inst_rule
 
 (**
 
-| Wrap.inst\_rule                 
+| Wrap.inst\_type\_rule                 
 -------------------
 
 Regola primitiva

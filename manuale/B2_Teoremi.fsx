@@ -216,14 +216,61 @@ $\scriptsize{
         \dfrac
             {
                 \dfrac
-                    {\dots}
+                    {
+                        \dfrac
+                            {
+                                \dfrac
+                                    {
+                                        \dfrac
+                                            {}
+                                            {(7) (\top \Leftrightarrow \top)}
+                                            \textsf{refl_conv}
+                                    }
+                                    {(8) (\top \Leftrightarrow \top) \vee p}
+                                    \textsf{disj1_rule}
+                            }
+                            {(9) \exists x. (x \Leftrightarrow \top) \vee p}
+                            \textsf{exists_rule}
+                    }
                     {(10) \vdash ((\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top) \vee p}
-                    \textsf{...}
+                    \textsf{select_rule}
                 \qquad
                     \dfrac
-                    {\dots}
-                    {(22) (\epsilon x. (x \Leftrightarrow \top) \vee p) <=> \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \vee \neg p}
-                    \textsf{...}
+                    {
+                        \dfrac
+                        {
+                            \dfrac
+                            {
+                                \dfrac
+                                {
+                                    \dfrac
+                                        {
+                                            \dfrac
+                                            {\dots}
+                                            {(13) (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot }
+                                            \textsf{mk_eq_rule}
+                                            \qquad
+                                            \dfrac
+                                                {\dots}
+                                                {(17) p \vdash (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow (\epsilon x. (x \Leftrightarrow \bot) \vee p)}
+                                                \textsf{mk_select_rule}
+                                        }
+                                        {(18) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow, p \bot \vdash \top \Leftrightarrow \bot}
+                                        \textsf{eq_mp_rule}
+                                    \qquad
+                                    (truth\_tm) \vdash \top
+                                }
+                                {(19) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow, p \bot \vdash \bot}
+                                \textsf{eq_mp_rule}
+                            }
+                            {(20) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \rightarrow \bot}
+                            \textsf{disch_rule}
+                        }
+                        {(21) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash \neg p}
+                        \textsf{not_intro_rule}
+                    }
+                    {(22) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \vee \neg p}
+                    \textsf{disj2_rule}
                 \qquad
                 \dfrac
                 {
