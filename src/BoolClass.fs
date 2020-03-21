@@ -351,12 +351,10 @@ let not_dist_exists_thm =
               (exists_rule ((parse_term(@"?(x:'a). P x")), x) (assume_rule px)) )))
     )
 
-(* excluded_middle_thm : thm                                                  *)
-(*                                                                            *)
-(*    |- !p. p \/ ~p                                                          *)
-(*                                                                            *)
-(* The proof is roughly based on that from Radu Diaconescu (1975).            *)
-
+//  excluded_middle_thm : thm   
+//  The proof is roughly based on that from Radu Diaconescu (1975).
+//                                                                 
+///    |- !p. p \/ ~p
 let excluded_middle_thm = 
     save_thm ("excluded_middle_thm",
       let p = mk_var ("p",bool_ty) in

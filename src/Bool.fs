@@ -162,10 +162,9 @@ let is_cond tm = can dest_cond tm
 (* starts by proving an important property: that "true" holds.                *)
 
 
-(* truth_thm : thm                                                            *)
-(*                                                                            *)
-(*    |- true                                                                 *)
-
+//  truth_thm : thm
+//                 
+/// |- true
 let truth_thm = 
     save_thm ("truth_thm",
                (* |- true                        *)

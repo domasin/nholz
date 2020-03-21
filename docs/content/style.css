@@ -4,9 +4,6 @@
   Formatting for F# code snippets
 /*--------------------------------------------------------------------------*/
 
-.MathJax {
-font-size: 65%;
-}
 
 /* strings --- and stlyes for other string related formats */
 span.s { color:#E0E268; }
@@ -88,7 +85,7 @@ table.pre, pre.fssnip, pre {
   border-collapse:separate;
   white-space:pre;
   font: 9pt 'Droid Sans Mono',consolas,monospace;
-  width:90%;
+  width:110%;
   margin:10px 20px 20px 20px;
   background-color:#212d30;
   padding:10px;
@@ -122,6 +119,7 @@ body {
   font-family: 'Open Sans', serif;
   padding-top: 0px;
   padding-bottom: 40px;
+  margin-left: -30%;
 }
 
 pre {
