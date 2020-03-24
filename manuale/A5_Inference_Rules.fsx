@@ -7,6 +7,409 @@ Questa appendice fornisce una descrizione delle regole d'inferenza
 
 (**
 
+Regole primitive
+----------------
+
+$\dfrac
+{t}
+{\vdash t = t}
+\textsf{ refl_conv}
+$
+
+Questa &egrave; la regola di riflessivit&agrave; per l'uguaglianza. Prende un 
+termine, e restituisce un teorema che afferma che il termine &egrave; uguale a 
+se stesso, senza alcuna assunzione. Non ci sono restrizioni al termine fornito.
+
+Si veda anche: sym\_conv, sym\_rule, trans\_rule.
+
+$\dfrac
+{(\lambda x. t)\ s}
+{\vdash (\lambda x. t)\ s = t[s/x]}
+\textsf{ beta_conv}
+$
+
+Questa &egrave; la conversione di beta riduzione. Prende una lambda astrazione 
+applicata a un termine, e restituisce un teorema che afferma che l'applicazione 
+&egrave; uguale al corpo della lambda astrazione con tutte le occorrenze della 
+variabile legata sostituita con l'argomento dell'apllicazione, senza alcuna 
+assunzione.
+
+$\dfrac
+{A_1 \vdash f_1 = f_2 \qquad  A_2 \vdash t_1 = t_2}
+{A_1 \cup A_2 \vdash f_1\ t_1 = f_2\ t_2}
+\textsf{ mk_comb_rule}
+$
+
+Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di 
+funzione. Prende due teoremi di equivalenza, e applica i corrispondenti lati del 
+primo teorema a quelli del secondo, unendo le loro assunzioni. I lati sinistro e 
+destro del primo teorema devono essere funzioni con il tipo del dominio uguale al 
+tipo dei lati sinistro e destro del secondo teorema.
+
+Si veda anche: mk\_comb1\_rule, mk\_comb2\_rule, mk\_bin\_rule, mk\_abs\_rule.
+
+$\dfrac
+{x \qquad A \vdash t_1 = t_2}
+{A \vdash (\lambda x.\ t_1 = t_2)}
+\textsf{ mk_abs_rule}
+$
+
+(per x non libera in A)
+
+Questa &egrave; la regola di congruenza di eguaglianza per la lambda astrazione.
+Prende una variabile e un teorema di uguaglianza, e astrae la variabile da 
+entrambi i lati del teorema. La variabile non deve occorrere libera nelle 
+assunzioni del teorema fornito.
+
+Si veda anche: mk\_comb\_rule.
+
+$\dfrac
+{p}
+{p \vdash p}
+\textsf{ assume_rule}
+$
+
+Questa &egrave; la regola di assunzione. Prende un termine booleano, e restituisce 
+un teorema che afferma che il termine vale sotto la singola assunzione del termine 
+stesso.
+
+Si veda anche: add\_asm\_rule.
+
+$\dfrac
+{p \qquad A \vdash q}
+{A \setminus \{p\} \vdash p \Rightarrow q}
+\textsf{ disch_rule}
+$
+
+Questa &egrave; la regola d'intrdouzone dell'implicazione. Prende un termine booleano 
+e un teorema, rimuove il termine (se presente) dalle assunzioni del teorema e lo 
+aggiunge come antecedente della conclusione. Si noti che il termine non deve essere 
+presente nelle assunzioni del teorema fornito perch&eacute; la regola abbia 
+successo.
+
+Si veda anche: undisch\_rule, mp\_rule.
+
+$\dfrac
+{A_1 \vdash p \Rightarrow q \qquad A_2 \vdash p}
+{A_1 \cup A_2 \vdash q}
+\textsf{ mp_rule}
+$
+
+Questa &egrave; la regola di modus ponens. Prende un teorema di implicazione ed 
+un secondo teorema, dove l'antecendente del teorema di implicazione &egrave; 
+alfa-equivalente alla conclusione del secondo teorema. Restituisce un teorema che 
+afferma che vale il conseguente del teorema di implicazione, sotto l'unione delle 
+assunzioni dei teoremi forniti.
+
+Si veda anche: eq\_mp\_rule, disch\_rule, undisch\_rule, prove\_asm\_rule.
+
+$\dfrac
+{A_1 \vdash p \Leftrightarrow q \qquad A_2 \vdash p}
+{A_1 \cup A_2 \vdash q}
+\textsf{ eq_mp_rule}
+$
+
+Questa &egrave; la regola di modus ponens per l'uguaglianza. Prende un teorema di 
+uguaglianza e un secondo teorema, dove il lato sinistro del teorema &egrave; 
+alf-equivalente alla conclusione del secondo teorema. Restituisce un teorema che 
+aggerma la parte destra del teorema di uguaglianza vale, sotto l'unione delle 
+assunzioni dei teoremi forniti.
+
+Si veda anche: mp\_rule, eq\_imp\_rule1, eq\_imp\_rule2, imp\_antisym\_rule.
+
+$\dfrac
+{[(x_1,t_1);(x_2,t_2);\dots] \qquad   A \vdash p}
+{A[t_1/x_1,t_2/x_2,\dots] \vdash p[t_1/x_1,t_2/x_2,\dots]}
+\textsf{ inst_rule}
+$
+
+Questa &egrave; la regola d'istanziazione della variabile. Prende una lista di 
+instanziazioni di variabili e un teorema, ed esegue una singola instanziazione 
+parallela delle variabili libere nelle assunzioni e nella conclusione del teorema, 
+secondo la lista di instanziazioni. Tutte le occorrenze libere di elementi nel dominio 
+della lista di instanziazione sono sostituite nel teorema. Ciascun elemento del dominio 
+della lista di instanziazione deve essere una variabile, e ciascun elemento nel rango 
+deve avere lo stesso tipo del corrispondente elemento del dominio.
+
+Le variabili legate nel teorema risultante sono rinominate a seconda delle 
+necessit&agrave; per evitare catture di variabili. Si noti che gli elementi della 
+lista che non possono essere applicati sono semplicemente ignorati, cos&igrave; 
+come lo sono gli elementi ripetuti per una data variabile (oltre al primo elemento). 
+Se nessun elemento della lista soddisfa i criteri, allora il teorema risultante 
+&egrave; lo stesso del teorema in input.
+
+Si veda anche: inst\_type\_rule, subs\_rule, subst\_rule.
+
+$\dfrac
+{[(tv_1,ty_1);(tv_2,ty_2);\dots] \qquad   A \vdash p}
+{A[ty_1/tv_1,ty_2/tv_2,\dots] \vdash p[ty_1/tv_1,ty_2/tv_2,\dots]}
+\textsf{ inst_type_rule}
+$
+
+Questa &egrave; la regola d'istanziazione delle variabili di tipo. Prende una lista di 
+instanziazioni di variabili di tipo e un teorema, ed esegue una singola instanziazione 
+parallela delle variabili di tipo nelle assunzioni e nella conclusione del teorema, secondo 
+la lista di instanziazione. Tutte le occorrenze di elementi nel dominio della lista 
+di instanziazione sono sostituite nel teorema. Ciascun elemento del dominio della 
+lista deve essere una variabile di tipo.
+
+Le variabili legate nel teorema risultante sono rinominate a seconda delle 
+necessit&agrave; per evitare catture di variabili. Si noti che gli elementi della 
+lista che non possono essere applicati sono semplicemente ignorati, cos&igrave; 
+come lo sono gli elementi ripetuti per una data variabile (oltre al primo elemento). 
+Se nessun elemento della lista soddisfa i criteri, allora il teorema risultante 
+&egrave; lo stesso del teorema in input.
+
+Si veda anche: inst\_rule.
+
+Eguaglianza
+----------------
+
+$\dfrac
+{A \vdash f_1 = f_2 \qquad t}
+{A \vdash f_1\ t = f_2\ t}
+\textsf{ mk_comb1_rule}
+$
+
+Questa &egrave; la regola di congruenza di eguaglianza di funzioni per l'applicazione di 
+funzioni. Prende un teorema di equivalenza su funzioni e un termine, e fornisce 
+il termine come argomento a ciascun lato del teorema. Il tipo del termine fornito 
+deve essere lo stesso del tipo del dominio delle funzioni.
+
+Si veda anche: mk\_comb2\_rule, mk\_comb\_rule.
+
+$\dfrac
+{f \qquad  A \vdash t_1 = t_2}
+{A \vdash f\ t_1 = f\ t_2}
+\textsf{ mk_comb2_rule}
+$
+
+Questa &egrave; la regola di congruenza di eguaglianza di argomenti per l'applicazione di 
+funzioni. Prende un termine funzione e un teorema di uguaglianza, ed applica la 
+funzione a ciascun lato del teorema. Il tipo del dominio della funzione fornita deve 
+essere lo stesso del tipo dei lati sinitro e destro del teorema.
+
+Si veda anche: mk\_comb1_rule, mk\_comb\_rule.
+
+$\dfrac
+{A_1 \vdash t_1 = t_2 \qquad  A_2 \vdash t_2 = t_3}
+{A_1 \cup A2 \vdash t_1 = t_3}
+\textsf{ trans_rule}
+$
+
+Questa &egrave; la regola di transitivit&agrave; per l'uguaglianza. Prende 
+due teoremi di uguaglianza, dove il lato destro del primo teorema &egrave; 
+lo stesso (modulo alfa-equivalenza) del lato sinistro del secondot. Restituisce 
+un teorema che afferma che il lato sinistro del primo teorema uguaglia il 
+lato destro del secondo teorema, sotto l'unione delle assunzioni dei due 
+teoremi.
+
+Si veda anche: list\_trans\_rule, refl\_conv, sym\_rule, imp\_trans\_rule.
+
+$\dfrac
+{A \vdash t_1 = t_2}
+{A \vdash t_2 = t_1}
+\textsf{ sym_rule}
+$
+
+Questa &egrave; la regola di simmetria per l'uguaglianza. Scambia il lato 
+sinistro con il destro nel teorema di uguaglianza fornito.
+
+Si veda anche: sym\_conv, refl\_conv, trans\_rule.
+
+$\dfrac
+{A \vdash f = (\lambda v.\ t)  \qquad s}
+{A \vdash f\ s = t[s/v]}
+\textsf{ app_beta_rhs_rule}
+$
+
+Questa regola &egrave; utilizzata per espandere una funzione definita in termini 
+di una lambda astrazione. Prende un teorema di uguaglianza e un termine, dove 
+la parte destra del teorema &egrave; una lambda astrazione con una variabile 
+legata dello stesso tipo del termine argomento. Restituisce un teorema che 
+afferma che l'argomento sinistro del teorema applicato al termine in input 
+&egrave; uguale alla beta riduzione della lambda astrazione applicata al termine 
+in input.
+
+**list\_app\_beta\_rhs\_rule**
+
+da documentare...
+
+$\dfrac
+{A \vdash (\lambda v_1. t_1) = (\lambda v_2. t_2)  \qquad s}
+{A \vdash t_1[s/v_1] = t_2[s/v_2]}
+\textsf{ app_beta_rule}
+$
+
+Si veda anche: app\_beta\_rhs\_rule.
+
+**list\_app\_beta\_rule**
+
+Da documentare...
+
+$\dfrac
+{t' \qquad t}
+{\vdash t = t'}
+\textsf{ alpha_link_conv}
+$
+
+Questa &egrave; la regola di conversione alfa linking. Prende due termini 
+alfa-equivalentei e restituisce un terorema che afferma che il secondo &egrave; 
+uguale al primo, senza alcuna assunzione. Fallisce se i termini forniti non sono 
+alfa equivalenti.
+
+$\dfrac
+{y \qquad \lambda x.\ t}
+{\vdash (\lambda x.\ t) = (\lambda y.\ t[y/x])}
+\textsf{ alpha_conv}
+$
+
+Questa &egrave; la regola di alfa conversione. Sostituisce la variabile legata 
+e tutte le sue occorrenze nel termine di lambda astrazione  fornito (il secondo 
+argomento) con la variabile fornita (come primo argomento).
+
+Si veda anche alpha\_link\_conv.
+
+$\dfrac
+{A_1 \vdash s_1 = t_1 \qquad A_2 \vdash s_2 = t_2 \qquad \dots \qquad t}
+{A_1 \cup A_2 \cup \dots \vdash t = t[t_1/s_1,t_2/s_2,\dots] }
+\textsf{ subs_conv}
+$
+
+Questa &egrave; la conversione di sostituzione base. Prende una lista di 
+teoremi di eguaglianza e un termine, e trasofrma il termine eseguendo una 
+singola sostituzione parallela di tutti i suoi sottotermini liberi secondo 
+i teoremi di eguaglianza. Tutto le occorrenze libere dei lati sinistri dei 
+teoremi di eguaglianza nel termine vegono rimpiazzate. Il teorema risultante 
+ha l'unione delle assunzioni di tutti i teoremi forniti (indipendentemente 
+dal fatto che esse si applichino al teorema).
+
+Le variabili legate nel lato destro del teorema risultante sono rinominate 
+a seconda delle necessit&agrave; per evitare catture di variabili. Si noti 
+che se uno dei lati sinistri dei teorei di uguaglianza occorre libero 
+in uno degli altri, allora viene usato di preferenza il teorema con il lato 
+sinistro pi&ugrave; ampio, e se due teoremi di uguaglianza hanno lati sinistri 
+alfa-equivalenti, allora di preferenza &egrave; usato di preferenza il primo 
+teorema nella lisa. Se nessuno dei teoremi di eguaglianza pu&ograve; essere 
+usato, allora il lato destro del teorema risultante &egrave; lo stesso del 
+suo lato sinistro.
+
+Si veda anche: subs\_rule, subst\_conv, inst\_rule.
+
+$\dfrac
+{A_1 \vdash s_1 = t_1 \qquad A_2 \vdash s_2 = t_2 \qquad \dots \qquad A \vdash t}
+{A_1 \cup A_2 \cup \dots \cup A \vdash t = t[t_1/s_1,t_2/s_2,\dots] }
+\textsf{ subs_rule}
+$
+
+Questa &egrave; la regola di sostituzione di base. Prende una lista di 
+teoremi di equivalenza e un teorema, ed esegue una singola sostituzione 
+parallela dei sottotermini liberi nella conclusione del teorema secondo i 
+teoremi di equivalenza. Tutte le occorrenze libere dei lati sinistri dei 
+teoremi di equivalenza nel teorema vengono rimpiazzate. Il teorema risultante 
+ha l'unione di tutte le assunzioni di tutti i teoremi forniti (indipendentemente 
+dal fatto che questi si applichino o meno al teorema fornito).
+
+Le variabili legate nel teorema risultante sono rinominate 
+a seconda delle necessit&agrave; per evitare catture di variabili. Si noti 
+che se uno dei lati sinistri dei teorei di uguaglianza occorre libero 
+in uno degli altri, allora viene usato di preferenza il teorema con il lato 
+sinistro pi&ugrave; ampio, e se due teoremi di uguaglianza hanno lati sinistri 
+alfa-equivalenti, allora di preferenza &egrave; usato di preferenza il primo 
+teorema nella lisa. Se nessuno dei teoremi di eguaglianza pu&ograve; essere 
+usato, allora la conclusione del teorema risultante &egrave; la stessa 
+dell'input.
+
+Si veda anche: subs\_conv, subst\_rule, inst\_rule.
+
+$\dfrac
+{(v_1, A_1 \vdash s_1 = t_1) \qquad (v_2, A_2 \vdash s_2 = t_2) \qquad \dots \qquad t \qquad t[s_1/v_1,s_2/v_2,\dots]}
+{A_1 \cup A_2 \cup \dots \vdash t = t[s_1/v_1,s_2/v_2,\dots] = t[t_1/v_1,t_2/v_2,\dots]}
+\textsf{ subst_conv}
+$
+
+Questa &egrave; la conversione di sostituzione tramite template. Prende uno 
+schema di sostituzione (nella forma di una lista di associazione e un termine 
+template) seguito da un termine principale, e trasforma il termine principale 
+con una singola sostituzione parallela di tutti i suoi sottotermini liberi, secondo 
+lo schema di sostituzione. Il termine template determina quali occorrenze 
+libere dei lati sinistri del teorema di equivalenza nel termine principale sono 
+rimpiazzate, e riflette la struttura sintattica del termine, eccetto che per 
+l'avere atomi variabili template al posto dei sottotoermini a causa del 
+rimpiazzamento. La lista di associazione mappa ogni variabile template a un 
+teorema di equivalenza, con il lato sinistro del teorema di equivalenza per 
+il sottotermine del termine principale originale e il lato destro per il 
+sottotermine che lo rimpiazza. Il teorema risultante ha l'unione delle 
+assunzioni di tutti i teoremi forniti (indipenentemente dal fatto che essi 
+si applichino al template fornito).
+
+Le variabili legate nel teorema risultante sono rinominate secondo le 
+necessit&agrave; per evitare catture di variabili. Si noti che se due elementi 
+appaiono nella lista di associazione per la stessa variabile template, allora 
+viene usato il primo elemento, e che elementi per variabili che non appaiono 
+nel template sono ignorate. Se nessun elemento pu&ograve; essere applicato, 
+allora il lato destro della conclusione del teorema risultante &egrave; 
+lo stesso del suo lato sinistro.
+
+Si veda anche: subst\_rule, subs\_conv, inst\_rule.
+
+$\dfrac
+{(v_1, A_1 \vdash s_1 = t_1) \qquad (v_2, A_2 \vdash s_2 = t_2) \qquad \dots \qquad t \qquad A \vdash t[s_1/v_1,s_2/v_2,\dots]}
+{A_1 \cup A_2 \cup \dots \cup A \vdash t = t[t_1/v_1,t_2/v_2,\dots]}
+\textsf{ subst_rule}
+$
+
+Questa &egrave; la regola di sostituzione tramite template. Prende uno 
+schema di sostituzione (nella forma di una lista di associazione e di 
+un termine template) seguito da un teorema, ed esegue una singola sostituzione 
+parallela di tutti i sottotermini liberi nella conclusione del teorema, secondo 
+lo schema di sostituzione. Il termine template determina quali occorrenze 
+libere dei lati sinistri del teorema di equivalenza vengono rimpiazzate nella 
+conclusione del teorema, eccetto che variabili atomiche template al posto 
+dei sottotermini a causa del rimpiazzamento. La lista di associazione mappa 
+ogni variabile template a un teorema di equivalenza, con il lato sinistro del 
+teorema di equivalenza per il sottotermine del teorema originale fornito e il 
+lato destro per il sottotermine che viene sostituito. Il teorema risultante 
+ha l'unione delle assunzioni di tutti i teoremi forniti (indipenentemente dal 
+fatto che essi si applichino al template fornito).
+
+Le variabili di astrazione nel teorema risultante sono rinominate secondo le 
+necessit&agrave; per evitare catture di variabili. Si noti che se due elementi 
+appaiono nella lista di associazione per la stessa variabile template, allora 
+viene usato il primo elemento, e che elementi per variabili che non appaiono 
+nel template sono ignorate. Se nessun elemento pu&ograve; essere applicato, 
+allora il lato destro della conclusione del teorema risultante &egrave; 
+lo stesso del suo lato sinistro.
+
+Si veda anche: subst\_conv, subs\_rule, inst\_rule.
+
+**conv\_rule**
+
+Regola di metaconversione.
+
+Prende una regola di conversione `term -> thm` e un teorema e applica `eq_mp_rule` alla conclusione 
+convertita e al teorema stesso.
+
+*)
+
+
+ 
+
+
+
+
+ 
+
+
+
+
+    
+
+
+
+
+(**
+
 | Bool.add\_asm\_rule 
 --------------
 
@@ -17,117 +420,16 @@ se il termine &egrave; gi&agrave; presente nelle assunzioni.
 
 *)
 
-(*** hide ***)
+
 #I "../bin/netstandard2.0"
 #r "nholz.dll"
 open HOL
-(*** unhide ***)
 
 add_asm_rule
 
 //  `q`   A |- p
 //  ------------
 //  A u {q} |- p
-
-(**
-
-| Equal.alpha\_conv
---------------
-
-Questa &egrave; la regola di alfa conversione. Sostituisce la variabile legata 
-e tutte le sue occorrenze nel termine di lambda astrazione  fornito (il secondo 
-argomento) con la variabile fornita (come primo argomento).
-
-Si veda anche alpha\_link\_conv.
-*)
-
-alpha_conv
-
-//        `y`   `\x. t`
-//  -------------------------
-//  |- (\x. t) = (\y. t[y/x])
-
-
-(**
-
-| Equal.alpha\_link\_conv
---------------
-
-Questa &egrave; la regola di conversione alfa linking. Prende due termini 
-alfa-equivalentei e restituisce un terorema che afferma che il secondo &egrave; 
-uguale al primo, senza alcuna assunzione. Fallisce se i termini forniti non sono 
-alfa equivalenti.
-
-*)
-
-alpha_link_conv
-
-//   `t'`   `t`                                                              
-//   ----------                                                              
-//   |- t = t'      
-
-(**
-
-| Equal.app\_beta\_rhs\_rule
---------------
-
-Questa regola &egrave; utilizzata per espandere una funzione definita in termini 
-di una lambda astrazione. Prende un teorema di uguaglianza e un termine, dove 
-la parte destra del teorema &egrave; una lambda astrazione con una variabile 
-legata dello stesso tipo del termine argomento. Restituisce un teorema che 
-afferma che l'argomento sinistro del teorema applicato al termine in input 
-&egrave; uguale alla beta riduzione della lambda astrazione applicata al termine 
-in input.
-
-*)
-
-app_beta_rhs_rule
-
-//    A |- f = (\v. t)   `s`                                                  
-//   -----------------------                                                  
-//     A |- f s = t[s/v]     
-
-(**
-
-| Wrap.assume\_rule                                          
--------------------
-
-Regola primitiva.
-
-Questa &egrave; la regola di assunzione. Prende un termine booleano, e restituisce 
-un teorema che afferma che il termine vale sotto la singola assunzione del termine 
-stesso.
-
-Si veda anche: add\_asm\_rule.
-
-*)
-
-assume_rule
-
-//     `p`
-//   --------
-//   {p} |- p
-
-(**
-
-| Wrap.beta\_conv                                         
--------------------
-
-Regola primitiva.
-
-Questa &egrave; la conversione di beta riduzione. Prende una lambda astrazione 
-applicata a un termine, e restituisce un teorema che afferma che l'applicazione 
-&egrave; uguale al corpo della lambda astrazione con tutte le occorrenze della 
-variabile legata sostituita con l'argomento dell'apllicazione, senza alcuna 
-assunzione.
-
-*)
-
-beta_conv
-
-//         `(\x. t) s`
-//    ---------------------
-//    |- (\x. t) s = t[s/x]
 
 (**
 
@@ -318,29 +620,6 @@ deduct_contrapos_rule
 
 (**
 
-| Wrap.disch\_rule                                     
--------------------
-
-Regola primitiva
-
-Questa &egrave; la regola d'intrdouzone dell'implicazione. Prende un termine booleano 
-e un teorema, rimuove il termine (se presente) dalle assunzioni del teorema e lo 
-aggiunge come antecedente della conclusione. Si noti che il termine non deve essere 
-presente nelle assunzioni del teorema fornito perch&eacute; la regola abbia 
-successo.
-
-Si veda anche: undisch\_rule, mp\_rule.
-
-*)
-
-disch_rule
-
-//     `p`   A |- q
-//   ----------------
-//   A\{p} |- p ==> q
-
-(**
-
 | Bool.disj1\_rule                                     
 -------------------
 
@@ -437,29 +716,6 @@ eq_imp_rule2
 // A |- p <=> q
 // ------------
 // A |- q ==> p
-
-(**
-
-| Wrap.eq\_mp\_rule                                
--------------------
-
-Regola primitiva
-
-Questa &egrave; la regola di modus ponens per l'uguaglianza. Prende un teorema di 
-uguaglianza e un secondo teorema, dove il lato sinistro del teorema &egrave; 
-alf-equivalente alla conclusione del secondo teorema. Restituisce un teorema che 
-aggerma la parte destra del teorema di uguaglianza vale, sotto l'unione delle 
-assunzioni dei teoremi forniti.
-
-Si veda anche: mp\_rule, eq\_imp\_rule1, eq\_imp\_rule2, imp\_antisym\_rule.
-
-*)
-
-eq_mp_rule
-
-//  A1 |- p <=> q    A2 |- p
-//  ------------------------
-//        A1 u A2 |- q
 
 
 (**
@@ -927,70 +1183,6 @@ imp_trans_rule
 
 (**
 
-| Wrap.inst\_rule                 
--------------------
-
-Regola primitiva
-
-Questa &egrave; la regola d'istanziazione della variabile. Prende una lista di 
-instanziazioni di variabili e un teorema, ed esegue una singola instanziazione 
-parallela delle variabili libere nelle assunzioni e nella conclusione del teorema, s
-econdo la lista di instanziazioni. Tutte le occorrenze libere di elementi nel dominio 
-della lista di instanziazione sono sostituite nel teorema. Ciascun elemento del dominio 
-della lista di instanziazione deve essere una variabile, e ciascun elemento nel rango 
-deve avere lo stesso tipo del corrispondente elemento del dominio.
-
-Le variabili legate nel teorema risultante sono rinominate a seconda delle 
-necessit&agrave; per evitare catture di variabili. Si noti che gli elementi della 
-lista che non possono essere applicati sono semplicemente ignorati, cos&igrave; 
-come lo sono gli elementi ripetuti per una data variabile (oltre al primo elemento). 
-Se nessun elemento della lista soddisfa i criteri, allora il teorema risultante 
-&egrave; lo stesso del teorema in input.
-
-Si veda anche: inst\_type\_rule, subs\_rule, subst\_rule.
-
-*)
-
-inst_rule
-
-//       [(x1,t1);(x2,t2);..]    A |- p
-//   --------------------------------------
-//   A[t1/x1,t2/x2,..] |- p[t1/x1,t2/x2,..]
-
-
-(**
-
-| Wrap.inst\_type\_rule                 
--------------------
-
-Regola primitiva
-
-Questa &egrave; la regola d'istanziazione delle variabili di tipo. Prende una lista di 
-instanziazioni di variabili di tipo e un teorema, ed esegue una singola instanziazione 
-parallela delle variabili di tipo nelle assunzioni e nella conclusione del teorema, secondo 
-la lista di instanziazione. Tutte le occorrenze di elementi nel dominio della lista 
-di instanziazione sono sostituite nel teorema. Ciascun elemento del dominio della 
-lista deve essere una variabile di tipo.
-
-Le variabili legate nel teorema risultante sono rinominate a seconda delle 
-necessit&agrave; per evitare catture di variabili. Si noti che gli elementi della 
-lista che non possono essere applicati sono semplicemente ignorati, cos&igrave; 
-come lo sono gli elementi ripetuti per una data variabile (oltre al primo elemento). 
-Se nessun elemento della lista soddisfa i criteri, allora il teorema risultante 
-&egrave; lo stesso del teorema in input.
-
-Si veda anche: inst\_rule.
-
-*)
-
-inst_type_rule
-
-//        [(tv1,ty1);(tv2,ty2);..]    A |- p
-//   ----------------------------------------------
-//   A[ty1/tv1,ty2/tv2,..] |- p[ty1/tv1,ty2/tv2,..]
-
-(**
-
 | Bool.inst\_rule                 
 -------------------
 
@@ -1037,28 +1229,7 @@ list_spec_rule
 //  -----------------------------------                                   
 //         A |- p[t1/x1;t2/x2;..]    
 
-(**
 
-| Wrap.mk\_abs\_rule                
--------------------
-
-Regola primitiva
-
-Questa &egrave; la regola di congruenza di eguaglianza per la lambda astrazione.
-Prende una variabile e un teorema di uguaglianza, e astrae la variabile da 
-entrambi i lati del teorema. La variabile non deve occorrere libera nelle 
-assunzioni del teorema fornito.
-
-
-Si veda anche: mk\_comb\_rule.
-
-*)
-
-mk_abs_rule
-
-//      `x`   A |- t1 = t2        [ "x" not free in 'A' ]
-//   ------------------------
-//   A |- (\x. t1) = (\x. t2)
 
 
 (**
@@ -1135,69 +1306,6 @@ mk_bin2_rule
 //   |- f s t1 = f s t2   
 
 
-(**
-
-| Wrap.mk\_comb\_rule             
--------------------
-
-Regola primitiva
-
-Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di 
-funzione. Prende due teoremi di equivalenza, e applica i corrispondenti lati del 
-primo teoream a quelli del secondo, unendo le loro assunzioni. I lati sinistro e 
-destro del primo teorema devono essere funzioni con il tipo del dominio uguale al 
-tipo dei lati sinistro e destro del secondo teorema.
-
-Si veda anche: mk\_comb1\_rule, mk\_comb2\_rule, mk\_bin\_rule, mk\_abs\_rule.
-
-*)
-
-mk_comb_rule
-
-//  A1 |- f1 = f2    A2 |- t1 = t2
-//  ------------------------------
-//     A1 u A2 |- f1 t1 = f2 t2
-
-
-(**
-
-| Equal.mk\_comb1\_rule           
--------------------
-
-Questa &egrave; la regola di congruenza di eguaglianza di funzioni per l'applicazione di 
-funzioni. Prende un teorema di equivalenza su funzioni e un termine, e fornisce 
-il termine come argomento a ciascun lato del teorema. Il tipo del termine fornito 
-deve essere lo stesso del tipo del dominio delle funzioni.
-
-Si veda anche: mk\_comb2\_rule, mk\_comb\_rule.
-
-*)
-
-mk_comb1_rule
-
-//  A |- f1 = f2   `t`                                                   
-//  ------------------                                                   
-//   A |- f1 t = f2 t  
-
-(**
-
-| Equal.mk\_comb2\_rule           
--------------------
-
-Questa &egrave; la regola di congruenza di eguaglianza di argomenti per l'applicazione di 
-funzioni. Prende un termine funzione e un teorema di uguaglianza, ed applica la 
-funzione a ciascun lato del teorema. Il tipo del dominio della funzione fornita deve 
-essere lo stesso del tipo dei lati sinitro e destro del teorema.
-
-Si veda anche: mk\_comb1_rule, mk\_comb\_rule.
-
-*)
-
-mk_comb2_rule
-
-//  `f`   A |- t1 = t2                                                     
-//  ------------------                                                     
-//   A |- f t1 = f t2    
 
 
 (**
@@ -1593,30 +1701,6 @@ mk_uexists_rule
 //  ----------------------------                                          
 //  A |- (?!x. p1) <=> (?!x. p2)             
 
-
-(**
-
-| Wrap.mp\_rule
--------------------
-
-Regola primitiva
-
-Questa &egrave; la regola di modus ponens. Prende un teorema di implicazione ed 
-un secondo teorema, dove l'antecendente del teorema di implicazione &egrave; 
-alfa-equivalente alla conclusione del secondo teorema. Restituisce un teorema che 
-afferma che vale il conseguente del teorema di implicazione, sotto l'unione delle 
-assunzioni dei teoremi forniti.
-
-Si veda anche: eq\_mp\_rule, disch\_rule, undisch\_rule, prove\_asm\_rule.
-
-*)
-
-mp_rule
-
-//   A1 |- p ==> q    A2 |- p
-//   ------------------------
-//         A1 u A2 |- q
-
 (**
 
 | Bool.not\_elim\_rule
@@ -1679,26 +1763,7 @@ prove_asm_rule
 //  ------------------                                                     
 //  A1 u (A2\{p}) |- q   
 
-(**
 
-| Wrap.refl\_conv
--------------------
-
-Regola primitiva
-
-Questa &egrave; la regola di riflessivit&agrave; per l'uguaglianza. Prende un 
-termine, e restituisce un teorema che afferma che il termine &egrave; uguale a 
-se stesso, senza alcuna assunzione. Non ci sono restrizioni al termine fornito.
-
-Si veda anche: sym\_conv, sym\_rule, trans\_rule.
-
-*)
-
-refl_conv
-
-//     `t`
-//  --------
-//  |- t = t
 
 (**
 
@@ -1743,149 +1808,6 @@ spec_all_rule
 
 (**
 
-| Equal.subs\_conv
--------------------
-
-Questa &egrave; la conversione di sostituzione base. Prende una lista di 
-teoremi di eguaglianza e un termine, e trasofrma il termine eseguendo una 
-singola sostituzione parallela di tutti i suoi sottotermini liberi secondo 
-i teoremi di eguaglianza. Tutto le occorrenze libere dei lati sinistri dei 
-teoremi di eguaglianza nel termine vegono rimpiazzate. Il teorema risultante 
-ha l'unione delle assunzioni di tutti i teoremi forniti (indipendentemente 
-dal fatto che esse si applichino al teorema).
-
-Le variabili legate nel lato destro del teorema risultante sono rinominate 
-a seconda delle necessit&agrave; per evitare catture di variabili. Si noti 
-che se uno dei lati sinistri dei teorei di uguaglianza occorre libero 
-in uno degli altri, allora viene usato di preferenza il teorema con il lato 
-sinistro pi&ugrave; ampio, e se due teoremi di uguaglianza hanno lati sinistri 
-alfa-equivalenti, allora di preferenza &egrave; usato di preferenza il primo 
-teorema nella lisa. Se nessuno dei teoremi di eguaglianza pu&ograve; essere 
-usato, allora il lato destro del teorema risultante &egrave; lo stesso del 
-suo lato sinistro.
-
-Si veda anche: subs\_rule, subst\_conv, inst\_rule.
-
-*)
-
-subs_conv
-
-//    A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`                               
-//    ----------------------------------------                               
-//     A1 u A2 u .. |- t = t[t1/s1,t2/s2,..]  
-
-(**
-
-| Equal.subs\_rule
--------------------
-
-Questa &egrave; la regola di sostituzione di base. Prende una lista di 
-teoremi di equivalenza e un teorema, ed esegue una singola sostituzione 
-parallela dei sottotermini liberi nella conclusione del teorema secondo i 
-teoremi di equivalenza. Tutte le occorrenze libere dei lati sinistri dei 
-teoremi di equivalenza nel teorema vengono rimpiazzate. Il teorema risultante 
-ha l'unione di tutte le assunzioni di tutti i teoremi forniti (indipendentemente 
-dal fatto che questi si applichino o meno al teorema fornito).
-
-Le variabili legate nel teorema risultante sono rinominate 
-a seconda delle necessit&agrave; per evitare catture di variabili. Si noti 
-che se uno dei lati sinistri dei teorei di uguaglianza occorre libero 
-in uno degli altri, allora viene usato di preferenza il teorema con il lato 
-sinistro pi&ugrave; ampio, e se due teoremi di uguaglianza hanno lati sinistri 
-alfa-equivalenti, allora di preferenza &egrave; usato di preferenza il primo 
-teorema nella lisa. Se nessuno dei teoremi di eguaglianza pu&ograve; essere 
-usato, allora la conclusione del teorema risultante &egrave; la stessa 
-dell'input.
-
-Si veda anche: subs\_conv, subst\_rule, inst\_rule.
-
-*)
-
-subs_rule
-
-//  A1 |- s1 = t1   A2 |- s2 = t2   ..    A |- t                           
-//  --------------------------------------------                           
-//       A1 u A2 u .. |- t[t1/s1,t2/s2,..]  
-
-(**
-
-| Equal.subst\_conv
--------------------
-
-Questa &egrave; la conversione di sostituzione tramite template. Prende uno 
-schema di sostituzione (nella forma di una lista di associazione e un termine 
-template) seguito da un termine principale, e trasforma il termine principale 
-una singola sostituzione parallela di tutti i suoi sottotermini liberi, secondo 
-lo schema di sostituzione. Il termine template determina quali occorrenze 
-libere dei lati sinistri del teorema di equivalenz nel termine principale sono 
-rimpiazzate, e riflette la struttura sintattica del termine, eccetto che per 
-l'avere atomi variabili template al posto dei sottotoermini a causa del 
-rimpiazzamento. La lista di associazione mappa ogni variabile template a un 
-teorema di equivalenza, con il lato sinistro del teorema di equivalenza per 
-il sottotermine del termine principale originale e il lato destro per il 
-sottotermine che lo rimpiazza. Il teorema risultante ha l'unione delle 
-assunzioni di tutti i teoremi forniti (indipenentemente dal fatto che essi 
-si applichino al template fornito).
-
-Le variabili legate nel teorema risultante sono rinominate secondo le 
-necessit&agrave; per evitare catture di variabili. Si noti che se due elementi 
-appaiono nella lista di associazione per la stessa variabile template, allora 
-viene usato il primo elemento, e che elementi per variabili che non appaiono 
-nel template sono ignorate. Se nessun elemento pu&ograve; essere applicato, 
-allora il lato destro della conclusione del teorema risultante &egrave; 
-lo stesso del suo lato sinistro.
-
-Si veda anche: subst\_rule, subs\_conv, inst\_rule.
-
-*)
-
-subst_conv
-
-//     `v1`           `v2`          ..                                     
-//  A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`   `t[s1/v1,s2/v2,..]`         
-//  --------------------------------------------------------------         
-//      A1 u A2 u .. |- t[s1/v1,s2/v2,..] = t[t1/v1,t2/v2,..]     
-
-(**
-
-| Equal.subst\_rule
--------------------
-
-Questa &egrave; la regola di sostituzione tramite template. Prende uno 
-schema di sostituzione (nella forma di una lista di associazione e di 
-un termine template) seguito da un teorema, ed esegue una singola sostituzione 
-parallela di tutti i sottotermini liberi nella conclusione del teorema, secondo 
-lo schema di sostituzione. Il termine template determina quali occorrenze 
-libere dei lati sinistri del teorema di equivalenza vengono rimpiazzate nella 
-conclusione del teorema, eccetto che variabili atomiche template al posto 
-dei sottotermini a causa del rimpiazzamento. La lista di associazione mappa 
-ogni variabile template a un teorema di equivalenza, con il lato sinistro del 
-teorema di equivalenza per il sottotermine del teorema originale fornito e il 
-lato destro per il sottotermine che viene sostituito. Il teorema risultante 
-ha l'unione delle assunzioni di tutti i teoremi forniti (indipenentemente dal 
-fatto che essi si applichino al template fornito).
-
-Le variabili di astrazione nel teorema risultante sono rinominate secondo le 
-necessit&agrave; per evitare catture di variabili. Si noti che se due elementi 
-appaiono nella lista di associazione per la stessa variabile template, allora 
-viene usato il primo elemento, e che elementi per variabili che non appaiono 
-nel template sono ignorate. Se nessun elemento pu&ograve; essere applicato, 
-allora il lato destro della conclusione del teorema risultante &egrave; 
-lo stesso del suo lato sinistro.
-
-Si veda anche: subst\_conv, subs\_rule, inst\_rule.
-
-*)
-
-subst_rule
-
-//     `v1`            `v2`          ..                                      
-//   A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`   A |- t[s1/v1,s2/v2,..]       
-//   -----------------------------------------------------------------       
-//                  A1 u A2 u .. |- t[t1/v1,t2/v2,..]     
-
-(**
-
 | Bool.sym\_conv
 -------------------
 
@@ -1905,46 +1827,6 @@ sym_conv
 
 (**
 
-| Equal.sym\_conv
--------------------
-
-Questa &egrave; la regola di simmetria per l'uguaglianza. Scambia il lato 
-sinistro con il destro nel teorema di uguaglianza fornito.
-
-Si veda anche: sym\_conv, refl\_conv, trans\_rule.
-
-*)
-
-sym_rule
-
-//  A |- t1 = t2                                                           
-//  ------------                                                           
-//  A |- t2 = t1
-
-(**
-
-| Equal.trans\_rule
--------------------
-
-Questa &egrave; la regola di transitivit&agrave; per l'uguaglianza. Prende 
-due teoremi di uguaglianza, dove il lato destro del primo teorema &egrave; 
-lo stesso (modulo alfa-equivalenza) del lato sinistro del secondot. Restituisce 
-un teorema che afferma che il lato sinistro del primo teorema uguaglia il 
-lato destro del secondo teorema, sotto l'unione delle assunzioni dei due 
-teoremi.
-
-Si veda anche: list\_trans\_rule, refl\_conv, sym\_rule, imp\_trans\_rule.
-
-*)
-
-trans_rule
-
-//  A1 |- t1 = t2    A2 |- t2 = t3                                          
-//  ------------------------------                                          
-//        A1 u A2 |- t1 = t3    
-
-(**
-
 | Bool.undisch\_rule
 -------------------
 
@@ -1961,51 +1843,5 @@ undisch_rule
 //  ------------                                                           
 //  A u {p} |- q   
 
-(**
 
-| Equal.conv\_rule
--------------------
 
-...
-
-*)
-
-conv_rule
-
-(**
-
-| Equal.list\_app\_beta\_rhs\_rule
--------------------
-
-...
-
-*)
-
-list_app_beta_rhs_rule
-
-(**
-
-| Equal.app\_beta\_rule
--------------------
-
-...
-
-*)
-
-app_beta_rule
-
-//    A |- (\v1. t1) = (\v2. t2)   `s` 
-//    -------------------------------- 
-//       A |- t1[s/v1] = t2[s/v2]      
-
-(**
-
-| Equal.list\_app\_beta\_rule
--------------------
-
-...
-
-*)
-
-list_app_beta_rule
-    
