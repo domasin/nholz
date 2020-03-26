@@ -176,6 +176,22 @@ funzioni. Prende un teorema di equivalenza su funzioni e un termine, e fornisce
 il termine come argomento a ciascun lato del teorema. Il tipo del termine fornito 
 deve essere lo stesso del tipo del dominio delle funzioni.
 
+Derivazione:
+
+$\tiny{
+\dfrac
+    {
+        A \vdash f_1 = f_2 
+        \qquad 
+        \dfrac
+            {t}
+            {\vdash t = t}
+            \textsf{ refl_conv}    
+    }
+    {A \vdash f_1\ t = f_2\ t}
+    \textsf{ mk_comb_rule}
+}$
+
 Si veda anche: mk\_comb2\_rule, mk\_comb\_rule.
 
 $\dfrac
@@ -188,6 +204,22 @@ Questa &egrave; la regola di congruenza di eguaglianza di argomenti per l'applic
 funzioni. Prende un termine funzione e un teorema di uguaglianza, ed applica la 
 funzione a ciascun lato del teorema. Il tipo del dominio della funzione fornita deve 
 essere lo stesso del tipo dei lati sinitro e destro del teorema.
+
+Derivazione:
+
+$\tiny{
+\dfrac
+    {
+        \dfrac
+            {f}
+            {\vdash f = f}
+            \textsf{ refl_conv} 
+        \qquad 
+        A \vdash t_1 = t_2 
+    }
+    {A \vdash f\ t_1 = f\ t_2}
+    \textsf{ mk_comb_rule}
+}$
 
 Si veda anche: mk\_comb1_rule, mk\_comb\_rule.
 

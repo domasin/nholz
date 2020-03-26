@@ -5,334 +5,39 @@ TEOREMI
 Lambda Calcolo
 ------------
 
-**fun\_eq\_thm**
+**[fun\_eq\_thm](0001_fun_eq.html)**
 
-se due funzioni sono uguali, allora restituiscono lo stesso valore per ogni argomento e viceversa
-*)
+$\vdash \forall (f:\alpha \rightarrow \beta)\ g.\ f = g\ \Leftrightarrow\ (\forall x.\ f\ x = g\ x)$
 
-(***hide***)
-#I "../bin/netstandard2.0"
-#r "nholz.dll"
-open HOL
-fsi.AddPrinter print_type
-fsi.AddPrinter print_qtype
-fsi.AddPrinter print_term
-fsi.AddPrinter print_qterm
-fsi.AddPrinter print_thm
-CoreThry.load
-Equal.load
-Bool.load
-(***unhide***)
+L'euivalenza tra funzione corrisponde all'equivalenza dei loro valori a parit&agrave; di argomento.
 
-fun_eq_thm
-// |- !(f:'a->'b) g. f = g <=> (!x. f x = g x)
 
-let x = parse_term(@"x:'a") 
-let f = parse_term(@"f:'a->'b")
-let g = parse_term(@"g:'a->'b")
-
-let th1 = parse_term(@"\x. (f:'a->'b) x") |> eta_conv  // 1                |- (\x. (f:'a->'b) x) = f                  
-let th2 = sym_rule th1                                 // 2                |- (f:'a->'b) = (\x. f x)                  
-let th3 = parse_term(@"!x. (f:'a->'b) x = g x") 
-            |> assume_rule                             // 3  !x. f x = g x |- !x. f x = (g:'a->'b) x                  
-let th4 = spec_rule x th3                              // 4  !x. f x = g x |- f x = (g:'a->'b) x                      
-let th5 = mk_abs_rule x th4                            // 5  !x. f x = g x |- (\x. f x) = (\x. (g:'a->'b) x)          
-let th6 = parse_term(@"\x. (g:'a->'b) x") |> eta_conv  // 6                |- (\x. (g:'a->'b) x) = g                  
-let th7 = [th2; th5; th6] |> list_trans_rule           // 7  !x. f x = g x |- f = (g:'a->'b)                          
-let th8 = parse_term(@"(f:'a->'b)=g") |> assume_rule   // 8          f = g |- f = (g:'a->'b)                          
-let th9 = mk_comb1_rule th8 x                          // 9          f = g |- f x = (g:'a->'b) x                      
-let th10 = gen_rule x th9                              // 10         f = g |- !x. f x = (g:'a->'b) x                  
-let th11 = deduct_antisym_rule th7 th10                // 11               |- f = (g:'a->'b) <=> (!x. f x = g x)      
-let th = list_gen_rule [f;g] th11                      //                  |- !(f:'a->'b) g. f = g <=> (!x. f x = g x)
-
-(**
-$\scriptsize{\dfrac
-    {
-        \dfrac
-            {
-                \dfrac
-                    {
-                        \dfrac
-                            {
-                                \dfrac
-                                    {}
-                                    {(1) \vdash (\lambda x. (f:\alpha \rightarrow \beta)\ x) = f}
-                                    \textsf{eta_conv}}
-                            {(2) \vdash (f:\alpha \rightarrow \beta) = (\lambda x. f\ x)}
-                            \textsf{sym_rule}
-                    \qquad 
-                        \dfrac
-                            {
-                                \dfrac
-                                    {\dfrac{}{(3) \forall x. f\ x = g\ x \vdash \forall x. f\ x = (g:\alpha \rightarrow \beta)\ x}\textsf{assume_rule}}
-                                    {(4)\forall x. f\ x = g\ x \vdash f\ x = (g:\alpha \rightarrow \beta)\ x}
-                                    \textsf{spec_rule}
-                            }
-                            {(5) \forall x. f\ x = g\ x \vdash (\lambda x. f\ x) = (\lambda x. (g:\alpha \rightarrow \beta)\ x)}\textsf{mk_abs_rule}
-                    \qquad 
-                        \dfrac{}{(6) \vdash (\lambda x. (g:\alpha \rightarrow \beta)\ x) = g}\textsf{eta_conv}
-                    }
-                    {(7) \forall x.\ f\ x = g\ x \vdash f = (g:\alpha \rightarrow \beta)}\textsf{list_trans_rule}
-                \qquad 
-                \dfrac
-                    {
-                        \dfrac
-                            {
-                                \dfrac{}{(8) f = g \vdash f = (g:\alpha \rightarrow \beta)}\textsf{assume_rule}
-                            }
-                            {(9) f = g \vdash f\ x = (g:\alpha \rightarrow \beta)\ x}\textsf{mk_comb1_rule}
-                    }
-                    {(10) f = g \vdash \forall x. f\ x = (g: \alpha \rightarrow \beta)\ x}\textsf{gen_rule}
-            }
-            {
-                (11) \vdash f = g\ \leftrightarrow\ (\forall x.\ f\ x = g\ x)
-            }\textsf{deduct_antisym_rule}
-    }
-      {(th) \vdash \forall (f:\alpha \rightarrow \beta)\ g.\ f = g\ \leftrightarrow\ (\forall x.\ f\ x = g\ x)}
-      \textsf{list_gen_rule}}$
-*)
-
-(**
 Logica Predicativa
 ------------
 
-**truth\_thm**
+**[truth\_thm](0002_truth.html)**
 
-`true` &egrave; sempre dimostrato
+$\vdash \top$
 
+true &egrave; derivabile.
+
+**[excluded\_middle\_thm](0003_excluded_midle.html)**
+
+$\vdash \forall p.\ p \vee \neg p$
+
+Per ogni proposizione, o essa &egrave; dimostrabile o lo &egrave; la sua negazione
+
+**[bool\_cases\_thm](0004_bool_cases.html)**
+
+$\vdash \forall p.\ (p \Leftrightarrow \top) \vee (p \Leftrightarrow \bot)$
+
+Per ogni proposizione, o essa equivale a true oppure equivale a false
 *)
 
-truth_thm
-// |- true
-
-true_def                                            // |- true <=> (\(p:bool). p) = (\p. p)
-let tt1 = sym_rule true_def                         // |- (\(p:bool). p) = (\p. p) <=> true
-let tt2 = refl_conv (parse_term(@"\(p:bool).p"))    // |- (\(p:bool). p) = (\p. p)
-let tt3 = eq_mp_rule tt1 tt2                        // |- true
-
-(**
-$\scriptsize{
-\dfrac
-    {
-        \dfrac
-            {\dfrac{}{\vdash \top \Leftrightarrow (\lambda(p:bool). p) = (\lambda p. p)}\textsf{true_def}}
-            {\vdash (\lambda (p:bool).\ p) = (\lambda p. p) \Leftrightarrow \top}\textsf{sym_rule}
-        \qquad
-        \dfrac{}{\vdash (\lambda (p:bool).\ p) = (\lambda p. p)}\textsf{refl_conv}
-    }
-    {\vdash \top}\textsf{eq_mp_rule}
-}$
-
-**excluded\_middle\_thm**
-
-Per qualsiasi proposizione, o essa &egrave; dimostrabile o lo &egrave; la sua negazione
-
-*)
-
-excluded_middle_thm
-// |- !p. p \/ ~ p
-
-let emt1 = assume_rule p                           //                                  p |- p
-let emt2 = disj1_rule emt1 (mk_not p)              //                                  p |- p \/ ~ p
-let emt3 = "false" |> parse_term |> refl_conv      //                                    |- false <=> false
-let emt4 = disj1_rule emt3 p                       //                                    |- (false <=> false) \/ p
-let emt5 =                                                                            
-    exists_rule                                                                       
-        ((parse_term(@"?x. (x <=> false) \/ p")),                                     
-            (parse_term(@"false"))) emt4           //                                    |- ?x. (x <=> false) \/ p
-let emt6 = select_rule emt5                        //                                    |- ((@x. (x <=> false) \/ p) <=> false) \/ p
-let emt7 = refl_conv (parse_term(@"true"))         //                                    |- true <=> true
-let emt8 = disj1_rule emt7 p                       //                                    |- (true <=> true) \/ p
-let emt9 =                                                                            
-    exists_rule                                                                       
-        ((parse_term(@"?x. (x <=> true) \/ p")),                                      
-            (parse_term(@"true"))) emt8            //                                    |- ?x. (x <=> true) \/ p
-let emt10 = select_rule emt9                       //                                    |- ((@x. (x <=> true) \/ p) <=> true) \/ p
-let emt11 = 
-    assume_rule 
-        (parse_term(@"(@x. (x <=> true) \/ p) 
-            <=> true"))                            //   (@x. (x <=> true) \/ p) <=> true |- (@x. (x <=> true) \/ p) <=> true
-let emt12 = 
-    assume_rule 
-        (parse_term(@"(@x. (x <=> false) \/ p) 
-            <=> false"))                           // (@x. (x <=> false) \/ p) <=> false |- (@x. (x <=> false) \/ p) <=> false
-let emt13 = mk_eq_rule emt11 emt12                 // (@x. (x <=> true) \/ p) <=> true, 
-                                                   // (@x. (x <=> false) \/ p) <=> false 
-                                                   //                                    |- ((@x. (x <=> true) \/ p) 
-                                                   //                                         <=> (@x. (x <=> false) \/ p)) 
-                                                   //                                       <=> (true <=> false)
-let emt14 = 
-    disj2_rule (parse_term(@"x <=> true")) emt1    //                                  p |- (x <=> true) \/ p
-let emt15 = 
-    disj2_rule (parse_term(@"x <=> false")) emt1   //                                  p |- (x <=> false) \/ p
-let emt16 = deduct_antisym_rule emt14 emt15        //                                  p |- (x <=> true) \/ p <=> (x <=> false) \/ p
-let emt17 = 
-    mk_select_rule 
-        (parse_term(@"x:bool")) emt16              //                                  p |- (@x. (x <=> true) \/ p) <=> (@x. (x <=> false) \/ p)
-let emt18 = eq_mp_rule emt13 emt17                 // (@x. (x <=> true) \/ p) <=> true, 
-                                                   // (@x. (x <=> false) \/ p) <=> false,
-                                                   // p
-                                                   //                                    |- true <=> false
-let emt19 = eq_mp_rule emt18 truth_thm             // (@x. (x <=> true) \/ p) <=> true, 
-                                                   // (@x. (x <=> false) \/ p) <=> false,
-                                                   // p
-                                                   //                                    |- false
-let emt20 = disch_rule p emt19                     // (@x. (x <=> true) \/ p) <=> true, 
-                                                   // (@x. (x <=> false) \/ p) <=> false
-                                                   //                                    |- p ==> false
-let emt21 = not_intro_rule emt20                   // (@x. (x <=> true) \/ p) <=> true, 
-                                                   // (@x. (x <=> false) \/ p) <=> false
-                                                   //                                    |- ~ p
-let emt22 = disj2_rule p emt21                     // (@x. (x <=> true) \/ p) <=> true, 
-                                                   // (@x. (x <=> false) \/ p) <=> false
-                                                   //                                    |- p \/ ~ p
-let emt23 = disj_cases_rule emt10 emt22 emt2       // (@x. (x <=> false) \/ p) <=> false |- p \/ ~ p
-let emt24 = disj_cases_rule emt6 emt23 emt2        //                                    |- p \/ ~ p
-
-(**
-$\scriptsize{
-\dfrac
-    {
-        \dfrac
-            {
-                \dfrac
-                    {
-                        \dfrac
-                            {
-                                \dfrac
-                                    {}
-                                    {(3) \vdash \bot \Leftrightarrow \bot}
-                                    \textsf{refl_conv}
-                            }
-                            {(4) \vdash (\bot \Leftrightarrow \bot) \vee p}
-                            \textsf{disj1_rule}
-                    }
-                    {(5) \vdash \exists x. (x \Leftrightarrow \bot) \vee p}
-                    \textsf{exists_rule}
-            }
-            {(6) \vdash ((\epsilon x. (x \Leftrightarrow \bot) \vee p)\Leftrightarrow \bot) \vee p}
-            \textsf{select_rule}
-        \qquad 
-        \dfrac
-            {
-                \dfrac
-                    {
-                        \dfrac
-                            {
-                                \dfrac
-                                    {
-                                        \dfrac
-                                            {}
-                                            {(7) (\top \Leftrightarrow \top)}
-                                            \textsf{refl_conv}
-                                    }
-                                    {(8) (\top \Leftrightarrow \top) \vee p}
-                                    \textsf{disj1_rule}
-                            }
-                            {(9) \exists x. (x \Leftrightarrow \top) \vee p}
-                            \textsf{exists_rule}
-                    }
-                    {(10) \vdash ((\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top) \vee p}
-                    \textsf{select_rule}
-                \qquad
-                    \dfrac
-                    {
-                        \dfrac
-                        {
-                            \dfrac
-                            {
-                                \dfrac
-                                {
-                                    \dfrac
-                                        {
-                                            \dfrac
-                                            {\dots}
-                                            {(13) (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot }
-                                            \textsf{mk_eq_rule}
-                                            \qquad
-                                            \dfrac
-                                                {\dots}
-                                                {(17) p \vdash (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow (\epsilon x. (x \Leftrightarrow \bot) \vee p)}
-                                                \textsf{mk_select_rule}
-                                        }
-                                        {(18) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow, p \bot \vdash \top \Leftrightarrow \bot}
-                                        \textsf{eq_mp_rule}
-                                    \qquad
-                                    (truth\_tm) \vdash \top
-                                }
-                                {(19) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow, p \bot \vdash \bot}
-                                \textsf{eq_mp_rule}
-                            }
-                            {(20) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \rightarrow \bot}
-                            \textsf{disch_rule}
-                        }
-                        {(21) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash \neg p}
-                        \textsf{not_intro_rule}
-                    }
-                    {(22) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \vee \neg p}
-                    \textsf{disj2_rule}
-                \qquad
-                \dfrac
-                {
-                    \dfrac
-                        {}
-                        {(1) p \vdash p}
-                        \textsf{assume_rule}
-                }
-                {(2) p \vdash p \vee \neg p}
-                \textsf{disj1_rule}
-            }
-            {(23) (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \vee \neg p}
-            \textsf{disj_cases_rule}
-        \qquad
-        \dfrac
-            {
-                \dfrac
-                    {}
-                    {(1) p \vdash p}
-                    \textsf{assume_rule}
-            }
-            {(2) p \vdash p \vee \neg p}
-            \textsf{disj1_rule}
-    }
-    {\vdash p \vee \neg p}
-    \textsf{disj_cases_rule}
-}
-$
-*)
-
-
-
-
-(**                                                
-**bool\_cases\_thm**
-*)
-
-bool_cases_thm
-// |- !p. (p <=> true) \/ (p <=> false)
-
-let p = mk_var ("p",bool_ty)
-let tm1 = spec_rule p excluded_middle_thm                   //     |- p \/ ~ p
-let tm2 = eqt_intro_rule (assume_rule p)                    //   p |- p <=> true
-let tm3 = disj1_rule tm2 (parse_term(@"p <=> false"))       //   p |- (p <=> true) \/ (p <=> false)
-let tm4 = eqf_intro_rule (assume_rule (parse_term(@"~ p"))) // ~ p |- p <=> false
-let tm5 = disj2_rule (parse_term(@"p <=> true")) tm4        // ~ p |- (p <=> true) \/ (p <=> false)
-let tm = disj_cases_rule tm1 tm3 tm5                        //     |- (p <=> true) \/ (p <=> false)
-
-(**
-
-$\scriptsize{
-\dfrac
-    {
-        \dfrac{}{\vdash p \vee \neg p}\textsf{excluded_middle_thm}
-        \qquad
-        p \vdash (p \leftrightarrow \top) \vee (p \leftrightarrow \bot)
-        \qquad
-        \neg p \vdash (p \leftrightarrow \top) \vee (p \leftrightarrow \bot)
-    }
-    {\vdash p \leftrightarrow \top \vee p \leftrightarrow \bot}\textsf{disj_cases_rule}
-}$
-*)
+(***hide***)
+#load "avvio.fsx"
+open HOL
+(***unhide***)
 
 cond_false_thm
 // |- !(t1:'a) t2. (if false then t1 else t2) = t2

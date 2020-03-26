@@ -22,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "manuale", "manuale", "{08F9
 		manuale\1_Introduzione.fsx = manuale\1_Introduzione.fsx
 		manuale\3_Liguaggio_HOL.fsx = manuale\3_Liguaggio_HOL.fsx
 		manuale\A5_Inference_Rules.fsx = manuale\A5_Inference_Rules.fsx
+		manuale\avvio.fsx = manuale\avvio.fsx
 		manuale\B1_Teorie.fsx = manuale\B1_Teorie.fsx
 		manuale\B2_Teoremi.fsx = manuale\B2_Teoremi.fsx
 		manuale\index.fsx = manuale\index.fsx
@@ -34,6 +35,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "it", "it", "{40DAE171-1C4D-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{FD66B3EA-18DF-4072-8DB1-39615AEA55AB}"
 	ProjectSection(SolutionItems) = preProject
+		docs\0001_fun_eq.html = docs\0001_fun_eq.html
+		docs\0002_truth.html = docs\0002_truth.html
+		docs\0003_excluded_midle.html = docs\0003_excluded_midle.html
+		docs\0004_bool_cases.html = docs\0004_bool_cases.html
 		docs\1_Introduzione.html = docs\1_Introduzione.html
 		docs\3_Liguaggio_HOL.html = docs\3_Liguaggio_HOL.html
 		docs\A5_Inference_Rules.html = docs\A5_Inference_Rules.html
@@ -58,6 +63,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "teoremi", "teoremi", "{45C51ED2-5DF6-44E6-B236-069DFB94A683}"
+	ProjectSection(SolutionItems) = preProject
+		manuale\teoremi\0001_fun_eq.fsx = manuale\teoremi\0001_fun_eq.fsx
+		manuale\teoremi\0002_truth.fsx = manuale\teoremi\0002_truth.fsx
+		manuale\teoremi\0003_excluded_midle.fsx = manuale\teoremi\0003_excluded_midle.fsx
+		manuale\teoremi\0004_bool_cases.fsx = manuale\teoremi\0004_bool_cases.fsx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +88,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{40DAE171-1C4D-4008-A9E0-F611A61032AF} = {056F303E-08C0-476E-9A7E-2C71BC0F49A2}
 		{DAD11A7D-1280-4F63-BBB5-828EB9EAAA1A} = {FD66B3EA-18DF-4072-8DB1-39615AEA55AB}
+		{45C51ED2-5DF6-44E6-B236-069DFB94A683} = {08F988BE-4817-4730-BF1E-A8333BEA87E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C78457C6-63C7-4158-B6B2-4CDEE07ED89D}
