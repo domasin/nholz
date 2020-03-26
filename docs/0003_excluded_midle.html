@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!--
+      The Terzo escluso
+ parameters will be replaced with the
+      document title extracted from the <h1> element or
+      file name, if there is no <h1> heading
+    -->
+    <title>Terzo escluso
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="content/style.css" />
+    <script src="content/tips.js" type="text/javascript"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container" >
+      <div class="row" style="margin-top:30px;">
+        <div class="span1"></div>
+        <div class="span10" id="main">
+          <h1>Terzo escluso</h1>
+<p><span class="math">\(\vdash \forall p.\ p \vee \neg p\)</span></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs8', 12)" onmouseover="showTip(event, 'fs8', 12)" class="id">excluded_middle_thm</span>
+<span class="c">// |- !p. p \/ ~ p</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 13)" onmouseover="showTip(event, 'fs9', 13)" class="id">emt1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="fn">assume_rule</span> <span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="id">p</span>                           <span class="c">//                                  p |- p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 16)" onmouseover="showTip(event, 'fs12', 16)" class="id">emt2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="fn">disj1_rule</span> <span onmouseout="hideTip(event, 'fs9', 18)" onmouseover="showTip(event, 'fs9', 18)" class="id">emt1</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="fn">mk_not</span> <span onmouseout="hideTip(event, 'fs11', 20)" onmouseover="showTip(event, 'fs11', 20)" class="id">p</span><span class="pn">)</span>              <span class="c">//                                  p |- p \/ ~ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="id">emt3</span> <span class="o">=</span> <span class="s">&quot;false&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 22)" onmouseover="showTip(event, 'fs16', 22)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 23)" onmouseover="showTip(event, 'fs17', 23)" class="fn">refl_conv</span>      <span class="c">//                                    |- false &lt;=&gt; false</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 24)" onmouseover="showTip(event, 'fs18', 24)" class="id">emt4</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 25)" onmouseover="showTip(event, 'fs13', 25)" class="fn">disj1_rule</span> <span onmouseout="hideTip(event, 'fs15', 26)" onmouseover="showTip(event, 'fs15', 26)" class="id">emt3</span> <span onmouseout="hideTip(event, 'fs11', 27)" onmouseover="showTip(event, 'fs11', 27)" class="id">p</span>                       <span class="c">//                                    |- (false &lt;=&gt; false) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 28)" onmouseover="showTip(event, 'fs19', 28)" class="id">emt5</span> <span class="o">=</span>                                                                            
+    <span onmouseout="hideTip(event, 'fs20', 29)" onmouseover="showTip(event, 'fs20', 29)" class="fn">exists_rule</span>                                                                       
+        <span class="pn">(</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 30)" onmouseover="showTip(event, 'fs16', 30)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;?x. (x &lt;=&gt; false) \/ p&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">,</span>                                     
+            <span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 31)" onmouseover="showTip(event, 'fs16', 31)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;false&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs18', 32)" onmouseover="showTip(event, 'fs18', 32)" class="id">emt4</span>           <span class="c">//                                    |- ?x. (x &lt;=&gt; false) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 33)" onmouseover="showTip(event, 'fs21', 33)" class="id">emt6</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs22', 34)" onmouseover="showTip(event, 'fs22', 34)" class="fn">select_rule</span> <span onmouseout="hideTip(event, 'fs19', 35)" onmouseover="showTip(event, 'fs19', 35)" class="id">emt5</span>                        <span class="c">//                                    |- ((@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 36)" onmouseover="showTip(event, 'fs23', 36)" class="id">emt7</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 37)" onmouseover="showTip(event, 'fs17', 37)" class="fn">refl_conv</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 38)" onmouseover="showTip(event, 'fs16', 38)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;true&quot;</span><span class="pn">)</span><span class="pn">)</span>         <span class="c">//                                    |- true &lt;=&gt; true</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 39)" onmouseover="showTip(event, 'fs24', 39)" class="id">emt8</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 40)" onmouseover="showTip(event, 'fs13', 40)" class="fn">disj1_rule</span> <span onmouseout="hideTip(event, 'fs23', 41)" onmouseover="showTip(event, 'fs23', 41)" class="id">emt7</span> <span onmouseout="hideTip(event, 'fs11', 42)" onmouseover="showTip(event, 'fs11', 42)" class="id">p</span>                       <span class="c">//                                    |- (true &lt;=&gt; true) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 43)" onmouseover="showTip(event, 'fs25', 43)" class="id">emt9</span> <span class="o">=</span>                                                                            
+    <span onmouseout="hideTip(event, 'fs20', 44)" onmouseover="showTip(event, 'fs20', 44)" class="fn">exists_rule</span>                                                                       
+        <span class="pn">(</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 45)" onmouseover="showTip(event, 'fs16', 45)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;?x. (x &lt;=&gt; true) \/ p&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">,</span>                                      
+            <span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 46)" onmouseover="showTip(event, 'fs16', 46)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;true&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs24', 47)" onmouseover="showTip(event, 'fs24', 47)" class="id">emt8</span>            <span class="c">//                                    |- ?x. (x &lt;=&gt; true) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 48)" onmouseover="showTip(event, 'fs26', 48)" class="id">emt10</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs22', 49)" onmouseover="showTip(event, 'fs22', 49)" class="fn">select_rule</span> <span onmouseout="hideTip(event, 'fs25', 50)" onmouseover="showTip(event, 'fs25', 50)" class="id">emt9</span>                       <span class="c">//                                    |- ((@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 51)" onmouseover="showTip(event, 'fs27', 51)" class="id">emt11</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs10', 52)" onmouseover="showTip(event, 'fs10', 52)" class="fn">assume_rule</span> 
+        <span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 53)" onmouseover="showTip(event, 'fs16', 53)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;(@x. (x &lt;=&gt; true) \/ p) </span>
+<span class="s">            &lt;=&gt; true&quot;</span><span class="pn">)</span><span class="pn">)</span>                            <span class="c">//   (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true |- (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 54)" onmouseover="showTip(event, 'fs28', 54)" class="id">emt12</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs10', 55)" onmouseover="showTip(event, 'fs10', 55)" class="fn">assume_rule</span> 
+        <span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 56)" onmouseover="showTip(event, 'fs16', 56)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;(@x. (x &lt;=&gt; false) \/ p) </span>
+<span class="s">            &lt;=&gt; false&quot;</span><span class="pn">)</span><span class="pn">)</span>                           <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false |- (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 57)" onmouseover="showTip(event, 'fs29', 57)" class="id">emt13</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 58)" onmouseover="showTip(event, 'fs30', 58)" class="fn">mk_eq_rule</span> <span onmouseout="hideTip(event, 'fs27', 59)" onmouseover="showTip(event, 'fs27', 59)" class="id">emt11</span> <span onmouseout="hideTip(event, 'fs28', 60)" onmouseover="showTip(event, 'fs28', 60)" class="id">emt12</span>                 <span class="c">// (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true, </span>
+                                                   <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false </span>
+                                                   <span class="c">//                                    |- ((@x. (x &lt;=&gt; true) \/ p) </span>
+                                                   <span class="c">//                                         &lt;=&gt; (@x. (x &lt;=&gt; false) \/ p)) </span>
+                                                   <span class="c">//                                       &lt;=&gt; (true &lt;=&gt; false)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 61)" onmouseover="showTip(event, 'fs31', 61)" class="id">emt14</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs32', 62)" onmouseover="showTip(event, 'fs32', 62)" class="fn">disj2_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 63)" onmouseover="showTip(event, 'fs16', 63)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;x &lt;=&gt; true&quot;</span><span class="pn">)</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs9', 64)" onmouseover="showTip(event, 'fs9', 64)" class="id">emt1</span>    <span class="c">//                                  p |- (x &lt;=&gt; true) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 65)" onmouseover="showTip(event, 'fs33', 65)" class="id">emt15</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs32', 66)" onmouseover="showTip(event, 'fs32', 66)" class="fn">disj2_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 67)" onmouseover="showTip(event, 'fs16', 67)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;x &lt;=&gt; false&quot;</span><span class="pn">)</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs9', 68)" onmouseover="showTip(event, 'fs9', 68)" class="id">emt1</span>   <span class="c">//                                  p |- (x &lt;=&gt; false) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs34', 69)" onmouseover="showTip(event, 'fs34', 69)" class="id">emt16</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs35', 70)" onmouseover="showTip(event, 'fs35', 70)" class="fn">deduct_antisym_rule</span> <span onmouseout="hideTip(event, 'fs31', 71)" onmouseover="showTip(event, 'fs31', 71)" class="id">emt14</span> <span onmouseout="hideTip(event, 'fs33', 72)" onmouseover="showTip(event, 'fs33', 72)" class="id">emt15</span>        <span class="c">//                                  p |- (x &lt;=&gt; true) \/ p &lt;=&gt; (x &lt;=&gt; false) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 73)" onmouseover="showTip(event, 'fs36', 73)" class="id">emt17</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs37', 74)" onmouseover="showTip(event, 'fs37', 74)" class="fn">mk_select_rule</span> 
+        <span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 75)" onmouseover="showTip(event, 'fs16', 75)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;x:bool&quot;</span><span class="pn">)</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs34', 76)" onmouseover="showTip(event, 'fs34', 76)" class="id">emt16</span>              <span class="c">//                                  p |- (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; (@x. (x &lt;=&gt; false) \/ p)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs38', 77)" onmouseover="showTip(event, 'fs38', 77)" class="id">emt18</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs39', 78)" onmouseover="showTip(event, 'fs39', 78)" class="fn">eq_mp_rule</span> <span onmouseout="hideTip(event, 'fs29', 79)" onmouseover="showTip(event, 'fs29', 79)" class="id">emt13</span> <span onmouseout="hideTip(event, 'fs36', 80)" onmouseover="showTip(event, 'fs36', 80)" class="id">emt17</span>                 <span class="c">// (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true, </span>
+                                                   <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false,</span>
+                                                   <span class="c">// p</span>
+                                                   <span class="c">//                                    |- true &lt;=&gt; false</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs40', 81)" onmouseover="showTip(event, 'fs40', 81)" class="id">emt19</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs39', 82)" onmouseover="showTip(event, 'fs39', 82)" class="fn">eq_mp_rule</span> <span onmouseout="hideTip(event, 'fs38', 83)" onmouseover="showTip(event, 'fs38', 83)" class="id">emt18</span> <span onmouseout="hideTip(event, 'fs41', 84)" onmouseover="showTip(event, 'fs41', 84)" class="id">truth_thm</span>             <span class="c">// (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true, </span>
+                                                   <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false,</span>
+                                                   <span class="c">// p</span>
+                                                   <span class="c">//                                    |- false</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs42', 85)" onmouseover="showTip(event, 'fs42', 85)" class="id">emt20</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs43', 86)" onmouseover="showTip(event, 'fs43', 86)" class="fn">disch_rule</span> <span onmouseout="hideTip(event, 'fs11', 87)" onmouseover="showTip(event, 'fs11', 87)" class="id">p</span> <span onmouseout="hideTip(event, 'fs40', 88)" onmouseover="showTip(event, 'fs40', 88)" class="id">emt19</span>                     <span class="c">// (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true, </span>
+                                                   <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false</span>
+                                                   <span class="c">//                                    |- p ==&gt; false</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 89)" onmouseover="showTip(event, 'fs44', 89)" class="id">emt21</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs45', 90)" onmouseover="showTip(event, 'fs45', 90)" class="fn">not_intro_rule</span> <span onmouseout="hideTip(event, 'fs42', 91)" onmouseover="showTip(event, 'fs42', 91)" class="id">emt20</span>                   <span class="c">// (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true, </span>
+                                                   <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false</span>
+                                                   <span class="c">//                                    |- ~ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs46', 92)" onmouseover="showTip(event, 'fs46', 92)" class="id">emt22</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 93)" onmouseover="showTip(event, 'fs32', 93)" class="fn">disj2_rule</span> <span onmouseout="hideTip(event, 'fs11', 94)" onmouseover="showTip(event, 'fs11', 94)" class="id">p</span> <span onmouseout="hideTip(event, 'fs44', 95)" onmouseover="showTip(event, 'fs44', 95)" class="id">emt21</span>                     <span class="c">// (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true, </span>
+                                                   <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false</span>
+                                                   <span class="c">//                                    |- p \/ ~ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs47', 96)" onmouseover="showTip(event, 'fs47', 96)" class="id">emt23</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs48', 97)" onmouseover="showTip(event, 'fs48', 97)" class="fn">disj_cases_rule</span> <span onmouseout="hideTip(event, 'fs26', 98)" onmouseover="showTip(event, 'fs26', 98)" class="id">emt10</span> <span onmouseout="hideTip(event, 'fs46', 99)" onmouseover="showTip(event, 'fs46', 99)" class="id">emt22</span> <span onmouseout="hideTip(event, 'fs12', 100)" onmouseover="showTip(event, 'fs12', 100)" class="id">emt2</span>       <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false |- p \/ ~ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs49', 101)" onmouseover="showTip(event, 'fs49', 101)" class="id">emt24</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs48', 102)" onmouseover="showTip(event, 'fs48', 102)" class="fn">disj_cases_rule</span> <span onmouseout="hideTip(event, 'fs21', 103)" onmouseover="showTip(event, 'fs21', 103)" class="id">emt6</span> <span onmouseout="hideTip(event, 'fs47', 104)" onmouseover="showTip(event, 'fs47', 104)" class="id">emt23</span> <span onmouseout="hideTip(event, 'fs12', 105)" onmouseover="showTip(event, 'fs12', 105)" class="id">emt2</span>        <span class="c">//                                    |- p \/ ~ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs50', 106)" onmouseover="showTip(event, 'fs50', 106)" class="id">excluded_middle</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs51', 107)" onmouseover="showTip(event, 'fs51', 107)" class="fn">gen_rule</span> <span onmouseout="hideTip(event, 'fs11', 108)" onmouseover="showTip(event, 'fs11', 108)" class="id">p</span> <span onmouseout="hideTip(event, 'fs49', 109)" onmouseover="showTip(event, 'fs49', 109)" class="id">emt24</span>             <span class="c">//                                    |- !p. p \/ ~ p</span>
+</code></pre>
+<p><span class="math">\(\scriptsize{
+\dfrac
+{
+p
+\qquad
+\dfrac
+{
+\dfrac
+{
+\dfrac
+{
+\dfrac
+{
+\dfrac
+{}
+{(3) \vdash \bot \Leftrightarrow \bot}
+\textsf{refl_conv}
+}
+{(4) \vdash (\bot \Leftrightarrow \bot) \vee p}
+\textsf{disj1_rule}
+}
+{(5) \vdash \exists x. (x \Leftrightarrow \bot) \vee p}
+\textsf{exists_rule}
+}
+{(6) \vdash ((\epsilon x. (x \Leftrightarrow \bot) \vee p)\Leftrightarrow \bot) \vee p}
+\textsf{select_rule}
+\qquad
+\dfrac
+{
+\dfrac
+{
+\dfrac
+{
+\dfrac
+{
+\dfrac
+{}
+{(7) (\top \Leftrightarrow \top)}
+\textsf{refl_conv}
+}
+{(8) (\top \Leftrightarrow \top) \vee p}
+\textsf{disj1_rule}
+}
+{(9) \exists x. (x \Leftrightarrow \top) \vee p}
+\textsf{exists_rule}
+}
+{(10) \vdash ((\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top) \vee p}
+\textsf{select_rule}
+\qquad
+\dfrac
+{
+\dfrac
+{
+\dfrac
+{
+\dfrac
+{
+\dfrac
+{
+\dfrac
+{
+(11) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top \vdash (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top
+\qquad
+(12) (\epsilon x.\ (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot}
+{
+(13) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top,
+(\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot
+\vdash ((\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow (\epsilon x. (x \Leftrightarrow \bot) \vee p))  \Leftrightarrow (\top \Leftrightarrow \bot)
+}
+\textsf{mk_eq_rule}
+\qquad
+\dfrac
+{\dots}
+{(17) p \vdash (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow (\epsilon x. (x \Leftrightarrow \bot) \vee p)}
+\textsf{mk_select_rule}
+}
+{(18) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow, p \bot \vdash \top \Leftrightarrow \bot}
+\textsf{eq_mp_rule}
+\qquad
+(truth\_tm) \vdash \top
+}
+{(19) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow, p \bot \vdash \bot}
+\textsf{eq_mp_rule}
+}
+{(20) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \rightarrow \bot}
+\textsf{disch_rule}
+}
+{(21) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash \neg p}
+\textsf{not_intro_rule}
+}
+{(22) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \vee \neg p}
+\textsf{disj2_rule}
+\qquad
+\dfrac
+{
+\dfrac
+{}
+{(1) p \vdash p}
+\textsf{assume_rule}
+}
+{(2) p \vdash p \vee \neg p}
+\textsf{disj1_rule}
+}
+{(23) (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \vee \neg p}
+\textsf{disj_cases_rule}
+\qquad
+\dfrac
+{
+\dfrac
+{}
+{(1) p \vdash p}
+\textsf{assume_rule}
+}
+{(2) p \vdash p \vee \neg p}
+\textsf{disj1_rule}
+}
+{\vdash p \vee \neg p}
+\textsf{disj_cases_rule}
+}
+{\vdash \forall p.\ p \vee \neg p}
+\textsf{ gen_rule}
+}\)</span></p>
+
+          <div class="tip" id="fs1">namespace HOL</div>
+<div class="tip" id="fs2">module CoreThry<br /><br />from HOL</div>
+<div class="tip" id="fs3">val load : (string * thm) list</div>
+<div class="tip" id="fs4">module Equal<br /><br />from HOL</div>
+<div class="tip" id="fs5">module Bool<br /><br />from HOL</div>
+<div class="tip" id="fs6">module BoolAlg<br /><br />from HOL</div>
+<div class="tip" id="fs7">module BoolClass<br /><br />from HOL</div>
+<div class="tip" id="fs8">val excluded_middle_thm : thm</div>
+<div class="tip" id="fs9">val emt1 : thm</div>
+<div class="tip" id="fs10">val assume_rule : tm:term -&gt; thm</div>
+<div class="tip" id="fs11">val p : term</div>
+<div class="tip" id="fs12">val emt2 : thm</div>
+<div class="tip" id="fs13">val disj1_rule : th:thm -&gt; tm:term -&gt; thm</div>
+<div class="tip" id="fs14">val mk_not : tm0:term -&gt; term</div>
+<div class="tip" id="fs15">val emt3 : thm</div>
+<div class="tip" id="fs16">val parse_term : x:string -&gt; term</div>
+<div class="tip" id="fs17">val refl_conv : tm:term -&gt; thm</div>
+<div class="tip" id="fs18">val emt4 : thm</div>
+<div class="tip" id="fs19">val emt5 : thm</div>
+<div class="tip" id="fs20">val exists_rule : tm1:term * tm2:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs21">val emt6 : thm</div>
+<div class="tip" id="fs22">val select_rule : th:thm -&gt; thm</div>
+<div class="tip" id="fs23">val emt7 : thm</div>
+<div class="tip" id="fs24">val emt8 : thm</div>
+<div class="tip" id="fs25">val emt9 : thm</div>
+<div class="tip" id="fs26">val emt10 : thm</div>
+<div class="tip" id="fs27">val emt11 : thm</div>
+<div class="tip" id="fs28">val emt12 : thm</div>
+<div class="tip" id="fs29">val emt13 : thm</div>
+<div class="tip" id="fs30">val mk_eq_rule : tha:thm -&gt; thb:thm -&gt; thm</div>
+<div class="tip" id="fs31">val emt14 : thm</div>
+<div class="tip" id="fs32">val disj2_rule : tm:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs33">val emt15 : thm</div>
+<div class="tip" id="fs34">val emt16 : thm</div>
+<div class="tip" id="fs35">val deduct_antisym_rule : th01:thm -&gt; th02:thm -&gt; thm</div>
+<div class="tip" id="fs36">val emt17 : thm</div>
+<div class="tip" id="fs37">val mk_select_rule : v:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs38">val emt18 : thm</div>
+<div class="tip" id="fs39">val eq_mp_rule : th1:thm -&gt; th2:thm -&gt; thm</div>
+<div class="tip" id="fs40">val emt19 : thm</div>
+<div class="tip" id="fs41">val truth_thm : thm</div>
+<div class="tip" id="fs42">val emt20 : thm</div>
+<div class="tip" id="fs43">val disch_rule : tm:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs44">val emt21 : thm</div>
+<div class="tip" id="fs45">val not_intro_rule : th:thm -&gt; thm</div>
+<div class="tip" id="fs46">val emt22 : thm</div>
+<div class="tip" id="fs47">val emt23 : thm</div>
+<div class="tip" id="fs48">val disj_cases_rule : th0:thm -&gt; th01:thm -&gt; th02:thm -&gt; thm</div>
+<div class="tip" id="fs49">val emt24 : thm</div>
+<div class="tip" id="fs50">val excluded_middle : thm</div>
+<div class="tip" id="fs51">val gen_rule : v:term -&gt; th:thm -&gt; thm</div>
+
+        </div>
+        <div class="span1"></div>
+      </div>
+    </div>
+  </body>
+</html>
