@@ -41,18 +41,18 @@
         <div class="span10" id="main">
           <h1>Verit&agrave;</h1>
 <p><span class="math">\(\vdash \top\)</span></p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">truth_thm</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs5', 7)" onmouseover="showTip(event, 'fs5', 7)" class="id">truth_thm</span>
 <span class="c">// |- true</span>
 
-<span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">true_def</span>                                            <span class="c">// |- true &lt;=&gt; (\(p:bool). p) = (\p. p)</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">tt1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="fn">sym_rule</span> <span onmouseout="hideTip(event, 'fs3', 6)" onmouseover="showTip(event, 'fs3', 6)" class="id">true_def</span>                         <span class="c">// |- (\(p:bool). p) = (\p. p) &lt;=&gt; true</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="id">tt2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="fn">refl_conv</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;\(p:bool).p&quot;</span><span class="pn">)</span><span class="pn">)</span>    <span class="c">// |- (\(p:bool). p) = (\p. p)</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="id">tt3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="fn">eq_mp_rule</span> <span onmouseout="hideTip(event, 'fs4', 12)" onmouseover="showTip(event, 'fs4', 12)" class="id">tt1</span> <span onmouseout="hideTip(event, 'fs6', 13)" onmouseover="showTip(event, 'fs6', 13)" class="id">tt2</span>                        <span class="c">// |- true</span>
+<span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="id">true_def</span>                                            <span class="c">// |- true &lt;=&gt; (\(p:bool). p) = (\p. p)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="id">tt1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="fn">sym_rule</span> <span onmouseout="hideTip(event, 'fs6', 11)" onmouseover="showTip(event, 'fs6', 11)" class="id">true_def</span>                         <span class="c">// |- (\(p:bool). p) = (\p. p) &lt;=&gt; true</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="id">tt2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="fn">refl_conv</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;\(p:bool).p&quot;</span><span class="pn">)</span><span class="pn">)</span>    <span class="c">// |- (\(p:bool). p) = (\p. p)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="id">tt3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="fn">eq_mp_rule</span> <span onmouseout="hideTip(event, 'fs7', 17)" onmouseover="showTip(event, 'fs7', 17)" class="id">tt1</span> <span onmouseout="hideTip(event, 'fs9', 18)" onmouseover="showTip(event, 'fs9', 18)" class="id">tt2</span>                        <span class="c">// |- true</span>
 </code></pre>
 <pre class="fssnip highlighted"><code lang="fsharp"></code></pre>
 <p><span class="math">\(\small{ 	\dfrac
 {\dfrac
-{\vdash\ \top\ \Leftrightarrow\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p) (true\_def)}
+{\vdash\ \top\ \Leftrightarrow\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)\; \mathbf{ true\_def}}
 {\vdash\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)\ \Leftrightarrow\ \top}
 \textsf{ sym_rule}
 \qquad
@@ -64,23 +64,26 @@
 \textsf{ eq_mp_rule} }\)</span></p>
 
           <div class="tip" id="fs1">namespace HOL</div>
-<div class="tip" id="fs2">val truth_thm : thm</div>
-<div class="tip" id="fs3">val true_def : thm</div>
-<div class="tip" id="fs4">val tt1 : thm</div>
-<div class="tip" id="fs5">val sym_rule : th:thm -&gt; thm</div>
-<div class="tip" id="fs6">val tt2 : thm</div>
-<div class="tip" id="fs7">val refl_conv : tm:term -&gt; thm</div>
-<div class="tip" id="fs8">val parse_term : x:string -&gt; term</div>
-<div class="tip" id="fs9">val tt3 : thm</div>
-<div class="tip" id="fs10">val eq_mp_rule : th1:thm -&gt; th2:thm -&gt; thm</div>
-<div class="tip" id="fs11">val th1 : thm * Graph&lt;Exp * string&gt;</div>
-<div class="tip" id="fs12">val sym_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
-<div class="tip" id="fs13">val mkGraph : v:&#39;a -&gt; xs:List&lt;Graph&lt;&#39;a&gt;&gt; -&gt; Graph&lt;&#39;a&gt;</div>
-<div class="tip" id="fs14">union case Exp.Th: thm -&gt; Exp</div>
-<div class="tip" id="fs15">val th2 : thm * Graph&lt;Exp * string&gt;</div>
-<div class="tip" id="fs16">val refl_conv_tr : t:term -&gt; thm * Graph&lt;Exp * string&gt;</div>
-<div class="tip" id="fs17">val th3 : thm * Graph&lt;Exp * string&gt;</div>
-<div class="tip" id="fs18">val eq_mp_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; th2:thm * g2:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs2">module CoreThry<br /><br />from HOL</div>
+<div class="tip" id="fs3">val load : (string * thm) list</div>
+<div class="tip" id="fs4">module Equal<br /><br />from HOL</div>
+<div class="tip" id="fs5">val truth_thm : thm</div>
+<div class="tip" id="fs6">val true_def : thm</div>
+<div class="tip" id="fs7">val tt1 : thm</div>
+<div class="tip" id="fs8">val sym_rule : th:thm -&gt; thm</div>
+<div class="tip" id="fs9">val tt2 : thm</div>
+<div class="tip" id="fs10">val refl_conv : tm:term -&gt; thm</div>
+<div class="tip" id="fs11">val parse_term : x:string -&gt; term</div>
+<div class="tip" id="fs12">val tt3 : thm</div>
+<div class="tip" id="fs13">val eq_mp_rule : th1:thm -&gt; th2:thm -&gt; thm</div>
+<div class="tip" id="fs14">val th1 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs15">val sym_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs16">val mkGraph : v:&#39;a -&gt; xs:List&lt;Graph&lt;&#39;a&gt;&gt; -&gt; Graph&lt;&#39;a&gt;</div>
+<div class="tip" id="fs17">union case Exp.Th: thm -&gt; Exp</div>
+<div class="tip" id="fs18">val th2 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs19">val refl_conv_tr : t:term -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs20">val th3 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs21">val eq_mp_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; th2:thm * g2:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
 
         </div>
         <div class="span1"></div>

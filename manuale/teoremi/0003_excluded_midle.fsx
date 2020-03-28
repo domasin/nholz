@@ -101,41 +101,21 @@ let th12 =
     assume_rule_tr
         (parse_term(@"(@x. (x <=> false) \/ p) 
             <=> false"))  
-
 let th13 = mk_eq_rule_tr th11 th12
-
 let th14 = 
     disj2_rule_tr (parse_term(@"x <=> true")) th1
-
 let th15 = 
     disj2_rule_tr (parse_term(@"x <=> false")) th1
-
 let th16 = deduct_antisym_rule_tr th14 th15
-
 let th17 = 
     mk_select_rule_tr 
         (parse_term(@"x:bool")) th16 
-
 let th18 = eq_mp_rule_tr th13 th17
-
-let truth_thm_gr = (truth_thm, mkGraph (Th truth_thm, "") [])
-
+let truth_thm_gr = (truth_thm, mkGraph (Th truth_thm, "truth\_thm") [])
 let th19 = eq_mp_rule_tr th18 truth_thm_gr
-
 let th20 = disch_rule_tr p th19
-
-//let not_intro_rule_tr (th1,g1) = 
-//    let th = th1 |> not_intro_rule
-//    (th, mkGraph (Th th,"not_intro_rule") [g1])
-
 let th21 = not_intro_rule_tr th20
-
 let th22 = disj2_rule_tr p th21
-
-//let disj_cases_rule_tr (th1,g1) (th2,g2) (th3,g3) = 
-//    let th = disj_cases_rule th1 th2 th3
-//    (th, mkGraph (Th th,"disj_cases_rule") [g1;g2;g3])
-
 let th23 = disj_cases_rule_tr th10 th22 th2
 let th24 = disj_cases_rule_tr th6 th23 th2
 let th25 = gen_rule_tr p th24

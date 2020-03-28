@@ -8,6 +8,9 @@ $\vdash \top$
 (***hide***)
 #load "../avvio.fsx"
 open HOL
+open HOL
+CoreThry.load
+Equal.load
 (***unhide***)
 
 truth_thm
@@ -28,7 +31,7 @@ let th3 = eq_mp_rule_tr th1 th2
 $
 \small{ 	\dfrac
 	{\dfrac
-		{\vdash\ \top\ \Leftrightarrow\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p) (true\_def)}
+		{\vdash\ \top\ \Leftrightarrow\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)\; \mathbf{ true\_def}}
 		{\vdash\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)\ \Leftrightarrow\ \top}
 		\textsf{ sym_rule}
 	\qquad

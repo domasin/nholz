@@ -58,7 +58,7 @@ let rec graphToLatex ntabs (g : Graph<Exp * string>) =
     match g with
     | Graph((p,s),xs) -> 
         match xs with
-        | [] -> (p |> printExp) + if s = "" then "" else " (" + s + ")"
+        | [] -> (p |> printExp) + if s = "" then "" else "\; \mathbf{ " + s + "}"
         | _ -> 
             let prec = 
                 xs
