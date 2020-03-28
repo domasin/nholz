@@ -13,7 +13,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js">
+	MathJax.Hub.Config({
+		config: ["TeX-AMS-MML_HTMLorMML.js"],
+		extensions: ["[a11y]/accessibility-menu.js"],
+		  menuSettings: {
+			collapsible: true,
+			autocollapse: true,
+			explorer: false
+		  }
+	});
+	</script>
 	
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="content/style.css" />
@@ -91,128 +102,140 @@
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs49', 101)" onmouseover="showTip(event, 'fs49', 101)" class="id">emt24</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs48', 102)" onmouseover="showTip(event, 'fs48', 102)" class="fn">disj_cases_rule</span> <span onmouseout="hideTip(event, 'fs21', 103)" onmouseover="showTip(event, 'fs21', 103)" class="id">emt6</span> <span onmouseout="hideTip(event, 'fs47', 104)" onmouseover="showTip(event, 'fs47', 104)" class="id">emt23</span> <span onmouseout="hideTip(event, 'fs12', 105)" onmouseover="showTip(event, 'fs12', 105)" class="id">emt2</span>        <span class="c">//                                    |- p \/ ~ p</span>
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs50', 106)" onmouseover="showTip(event, 'fs50', 106)" class="id">excluded_middle</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs51', 107)" onmouseover="showTip(event, 'fs51', 107)" class="fn">gen_rule</span> <span onmouseout="hideTip(event, 'fs11', 108)" onmouseover="showTip(event, 'fs11', 108)" class="id">p</span> <span onmouseout="hideTip(event, 'fs49', 109)" onmouseover="showTip(event, 'fs49', 109)" class="id">emt24</span>             <span class="c">//                                    |- !p. p \/ ~ p</span>
 </code></pre>
-<p><span class="math">\(\scriptsize{
+<pre class="fssnip highlighted"><code lang="fsharp"></code></pre>
+<p><span class="math">\(\small{ 	
 \dfrac
-{
-p
+{p:bool
 \qquad
 \dfrac
-{
-\dfrac
-{
-\dfrac
-{
-\dfrac
-{
-\dfrac
-{}
-{(3) \vdash \bot \Leftrightarrow \bot}
-\textsf{refl_conv}
-}
-{(4) \vdash (\bot \Leftrightarrow \bot) \vee p}
-\textsf{disj1_rule}
-}
-{(5) \vdash \exists x. (x \Leftrightarrow \bot) \vee p}
-\textsf{exists_rule}
-}
-{(6) \vdash ((\epsilon x. (x \Leftrightarrow \bot) \vee p)\Leftrightarrow \bot) \vee p}
-\textsf{select_rule}
+{\dfrac
+{\dfrac
+{\exists x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p
+\qquad
+\bot
 \qquad
 \dfrac
-{
-\dfrac
-{
-\dfrac
-{
-\dfrac
-{
-\dfrac
-{}
-{(7) (\top \Leftrightarrow \top)}
-\textsf{refl_conv}
-}
-{(8) (\top \Leftrightarrow \top) \vee p}
-\textsf{disj1_rule}
-}
-{(9) \exists x. (x \Leftrightarrow \top) \vee p}
-\textsf{exists_rule}
-}
-{(10) \vdash ((\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top) \vee p}
-\textsf{select_rule}
+{\dfrac
+{\bot}
+{\vdash\ \bot\ \Leftrightarrow\ \bot}
+\textsf{ refl_conv}
+\qquad
+p:bool}
+{\vdash\ (\bot\ \Leftrightarrow\ \bot)\ \vee\ p}
+\textsf{ disj1_rule}}
+{\vdash\ \exists x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p}
+\textsf{ exists_rule}}
+{\vdash\ ((\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot)\ \vee\ p}
+\textsf{ select_rule}
 \qquad
 \dfrac
-{
-\dfrac
-{
-\dfrac
-{
-\dfrac
-{
-\dfrac
-{
-\dfrac
-{
-(11) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top \vdash (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top
+{\dfrac
+{\dfrac
+{\exists x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p
 \qquad
-(12) (\epsilon x.\ (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot}
-{
-(13) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top,
-(\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot
-\vdash ((\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow (\epsilon x. (x \Leftrightarrow \bot) \vee p))  \Leftrightarrow (\top \Leftrightarrow \bot)
-}
-\textsf{mk_eq_rule}
+\top
 \qquad
 \dfrac
-{\dots}
-{(17) p \vdash (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow (\epsilon x. (x \Leftrightarrow \bot) \vee p)}
-\textsf{mk_select_rule}
-}
-{(18) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow, p \bot \vdash \top \Leftrightarrow \bot}
-\textsf{eq_mp_rule}
+{\dfrac
+{\top}
+{\vdash\ \top\ \Leftrightarrow\ \top}
+\textsf{ refl_conv}
 \qquad
-(truth\_tm) \vdash \top
-}
-{(19) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow, p \bot \vdash \bot}
-\textsf{eq_mp_rule}
-}
-{(20) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \rightarrow \bot}
-\textsf{disch_rule}
-}
-{(21) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash \neg p}
-\textsf{not_intro_rule}
-}
-{(22) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \vee \neg p}
-\textsf{disj2_rule}
+p:bool}
+{\vdash\ (\top\ \Leftrightarrow\ \top)\ \vee\ p}
+\textsf{ disj1_rule}}
+{\vdash\ \exists x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p}
+\textsf{ exists_rule}}
+{\vdash\ ((\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top)\ \vee\ p}
+\textsf{ select_rule}
 \qquad
 \dfrac
-{
-\dfrac
-{}
-{(1) p \vdash p}
-\textsf{assume_rule}
-}
-{(2) p \vdash p \vee \neg p}
-\textsf{disj1_rule}
-}
-{(23) (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \vee \neg p}
-\textsf{disj_cases_rule}
+{p:bool
 \qquad
 \dfrac
-{
+{\dfrac
+{p:bool
+\qquad
 \dfrac
-{}
-{(1) p \vdash p}
-\textsf{assume_rule}
-}
-{(2) p \vdash p \vee \neg p}
-\textsf{disj1_rule}
-}
-{\vdash p \vee \neg p}
-\textsf{disj_cases_rule}
-}
-{\vdash \forall p.\ p \vee \neg p}
-\textsf{ gen_rule}
-}\)</span></p>
+{\dfrac
+{\dfrac
+{\dfrac
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top\ \vdash\ (\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top}
+\textsf{ assume_rule}
+\qquad
+\dfrac
+{(\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot}
+\textsf{ assume_rule}}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ ((\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p))\ \Leftrightarrow\ (\top\ \Leftrightarrow\ \bot)}
+\textsf{ mk_eq_rule}
+\qquad
+\dfrac
+{x:bool
+\qquad
+\dfrac
+{\dfrac
+{x\ \Leftrightarrow\ \top
+\qquad
+\dfrac
+{p:bool}
+{p\ \vdash\ p}
+\textsf{ assume_rule}}
+{p\ \vdash\ (x\ \Leftrightarrow\ \top)\ \vee\ p}
+\textsf{ disj2_rule}
+\qquad
+\dfrac
+{x\ \Leftrightarrow\ \bot
+\qquad
+\dfrac
+{p:bool}
+{p\ \vdash\ p}
+\textsf{ assume_rule}}
+{p\ \vdash\ (x\ \Leftrightarrow\ \bot)\ \vee\ p}
+\textsf{ disj2_rule}}
+{p\ \vdash\ (x\ \Leftrightarrow\ \top)\ \vee\ p\ \Leftrightarrow\ (x\ \Leftrightarrow\ \bot)\ \vee\ p}
+\textsf{ deduct_antisym_rule}}
+{p\ \vdash\ (\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)}
+\textsf{ mk_select_rule}}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot,\ p\ \vdash\ \top\ \Leftrightarrow\ \bot}
+\textsf{ eq_mp_rule}
+\qquad
+\vdash\ \top}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot,\ p\ \vdash\ \bot}
+\textsf{ eq_mp_rule}}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ p\ \Rightarrow\ \bot}
+\textsf{ disch_rule}}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ \neg\ p}
+\textsf{ not_intro_rule}}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ p\ \vee\ \neg\ p}
+\textsf{ disj2_rule}
+\qquad
+\dfrac
+{\dfrac
+{p:bool}
+{p\ \vdash\ p}
+\textsf{ assume_rule}
+\qquad
+\neg\ p}
+{p\ \vdash\ p\ \vee\ \neg\ p}
+\textsf{ disj1_rule}}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ p\ \vee\ \neg\ p}
+\textsf{ disj_cases_rule}
+\qquad
+\dfrac
+{\dfrac
+{p:bool}
+{p\ \vdash\ p}
+\textsf{ assume_rule}
+\qquad
+\neg\ p}
+{p\ \vdash\ p\ \vee\ \neg\ p}
+\textsf{ disj1_rule}}
+{\vdash\ p\ \vee\ \neg\ p}
+\textsf{ disj_cases_rule}}
+{\vdash\ \forall\ p.\ p\ \vee\ \neg\ p}
+\textsf{ gen_rule} }\)</span></p>
 
           <div class="tip" id="fs1">namespace HOL</div>
 <div class="tip" id="fs2">module CoreThry<br /><br />from HOL</div>
@@ -265,6 +288,55 @@ p
 <div class="tip" id="fs49">val emt24 : thm</div>
 <div class="tip" id="fs50">val excluded_middle : thm</div>
 <div class="tip" id="fs51">val gen_rule : v:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs52">val th1 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs53">val assume_rule_tr : t:term -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs54">val th2 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs55">val disj1_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; t:term -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs56">val th3 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs57">val refl_conv_tr : t:term -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs58">val th4 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs59">val th5 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs60">val exists_rule_tr : t1:term * t2:term -&gt; th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs61">val th6 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs62">val select_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs63">val th7 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs64">val th8 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs65">val th9 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs66">val th10 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs67">val th11 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs68">val th12 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs69">val th13 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs70">val mk_eq_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; th2:thm * g2:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs71">val th14 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs72">val disj2_rule_tr : t:term -&gt; th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs73">val th15 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs74">val th16 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs75">val deduct_antisym_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; th2:thm * g2:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs76">val th17 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs77">val mk_select_rule_tr : t:term -&gt; th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs78">val th18 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs79">val eq_mp_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; th2:thm * g2:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs80">val truth_thm_gr : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs81">val mkGraph : v:&#39;a -&gt; xs:List&lt;Graph&lt;&#39;a&gt;&gt; -&gt; Graph&lt;&#39;a&gt;</div>
+<div class="tip" id="fs82">union case Exp.Th: thm -&gt; Exp</div>
+<div class="tip" id="fs83">val th19 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs84">val th20 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs85">val disch_rule_tr : t:term -&gt; th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs86">val not_intro_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs87">val th1 : thm</div>
+<div class="tip" id="fs88">val g1 : Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs89">val th : thm</div>
+<div class="tip" id="fs90">val th21 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs91">val th22 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs92">val disj_cases_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; th2:thm * g2:Graph&lt;Exp * string&gt; -&gt; th3:thm * g3:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs93">val th2 : thm</div>
+<div class="tip" id="fs94">val g2 : Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs95">val th3 : thm</div>
+<div class="tip" id="fs96">val g3 : Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs97">val th23 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs98">val th24 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs99">val th25 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs100">val gen_rule_tr : t:term -&gt; th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
 
         </div>
         <div class="span1"></div>

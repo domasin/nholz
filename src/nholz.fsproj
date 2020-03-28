@@ -44,6 +44,7 @@
     <Compile Include="NatArith.fs" />
     <Compile Include="NatRel.fs" />
     <Compile Include="NatEval.fs" />
+    <Compile Include="ProofUtils.fs" />
   </ItemGroup>
 
 </Project>

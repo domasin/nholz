@@ -76,128 +76,206 @@ let emt23 = disj_cases_rule emt10 emt22 emt2       // (@x. (x <=> false) \/ p) <
 let emt24 = disj_cases_rule emt6 emt23 emt2        //                                    |- p \/ ~ p
 let excluded_middle = gen_rule p emt24             //                                    |- !p. p \/ ~ p
 
+(***hide***)
+let th1 = assume_rule_tr p
+let th2 = disj1_rule_tr th1 (mk_not p)
+let th3 = "false" |> parse_term |> refl_conv_tr
+let th4 = disj1_rule_tr th3 p 
+let th5 =                                                                            
+    exists_rule_tr                                                                      
+        ((parse_term(@"?x. (x <=> false) \/ p")),                                     
+            (parse_term(@"false"))) th4  
+let th6 = select_rule_tr th5
+let th7 = refl_conv_tr (parse_term(@"true")) 
+let th8 = disj1_rule_tr th7 p
+let th9 =                                                                            
+    exists_rule_tr                                                                       
+        ((parse_term(@"?x. (x <=> true) \/ p")),                                      
+            (parse_term(@"true"))) th8  
+let th10 = select_rule_tr th9
+let th11 = 
+    assume_rule_tr
+        (parse_term(@"(@x. (x <=> true) \/ p) 
+            <=> true"))    
+let th12 = 
+    assume_rule_tr
+        (parse_term(@"(@x. (x <=> false) \/ p) 
+            <=> false"))  
+
+let th13 = mk_eq_rule_tr th11 th12
+
+let th14 = 
+    disj2_rule_tr (parse_term(@"x <=> true")) th1
+
+let th15 = 
+    disj2_rule_tr (parse_term(@"x <=> false")) th1
+
+let th16 = deduct_antisym_rule_tr th14 th15
+
+let th17 = 
+    mk_select_rule_tr 
+        (parse_term(@"x:bool")) th16 
+
+let th18 = eq_mp_rule_tr th13 th17
+
+let truth_thm_gr = (truth_thm, mkGraph (Th truth_thm, "") [])
+
+let th19 = eq_mp_rule_tr th18 truth_thm_gr
+
+let th20 = disch_rule_tr p th19
+
+//let not_intro_rule_tr (th1,g1) = 
+//    let th = th1 |> not_intro_rule
+//    (th, mkGraph (Th th,"not_intro_rule") [g1])
+
+let th21 = not_intro_rule_tr th20
+
+let th22 = disj2_rule_tr p th21
+
+//let disj_cases_rule_tr (th1,g1) (th2,g2) (th3,g3) = 
+//    let th = disj_cases_rule th1 th2 th3
+//    (th, mkGraph (Th th,"disj_cases_rule") [g1;g2;g3])
+
+let th23 = disj_cases_rule_tr th10 th22 th2
+let th24 = disj_cases_rule_tr th6 th23 th2
+let th25 = gen_rule_tr p th24
+
+(***unhide***)
+
 (**
-$\scriptsize{
+$
+\small{ 	
 \dfrac
-{
-    p
-    \qquad
-    \dfrac
-        {
-            \dfrac
-                {
-                    \dfrac
-                        {
-                            \dfrac
-                                {
-                                    \dfrac
-                                        {}
-                                        {(3) \vdash \bot \Leftrightarrow \bot}
-                                        \textsf{refl_conv}
-                                }
-                                {(4) \vdash (\bot \Leftrightarrow \bot) \vee p}
-                                \textsf{disj1_rule}
-                        }
-                        {(5) \vdash \exists x. (x \Leftrightarrow \bot) \vee p}
-                        \textsf{exists_rule}
-                }
-                {(6) \vdash ((\epsilon x. (x \Leftrightarrow \bot) \vee p)\Leftrightarrow \bot) \vee p}
-                \textsf{select_rule}
-            \qquad 
-            \dfrac
-                {
-                    \dfrac
-                        {
-                            \dfrac
-                                {
-                                    \dfrac
-                                        {
-                                            \dfrac
-                                                {}
-                                                {(7) (\top \Leftrightarrow \top)}
-                                                \textsf{refl_conv}
-                                        }
-                                        {(8) (\top \Leftrightarrow \top) \vee p}
-                                        \textsf{disj1_rule}
-                                }
-                                {(9) \exists x. (x \Leftrightarrow \top) \vee p}
-                                \textsf{exists_rule}
-                        }
-                        {(10) \vdash ((\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top) \vee p}
-                        \textsf{select_rule}
-                    \qquad
-                        \dfrac
-                        {
-                            \dfrac
-                            {
-                                \dfrac
-                                {
-                                    \dfrac
-                                    {
-                                        \dfrac
-                                            {
-                                                \dfrac
-                                                {
-                                                    (11) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top \vdash (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top
-                                                    \qquad
-                                                    (12) (\epsilon x.\ (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot}
-                                                {
-                                                    (13) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top,
-                                                    (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot 
-                                                    \vdash ((\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow (\epsilon x. (x \Leftrightarrow \bot) \vee p))  \Leftrightarrow (\top \Leftrightarrow \bot)
-                                                }
-                                                \textsf{mk_eq_rule}
-                                                \qquad
-                                                \dfrac
-                                                    {\dots}
-                                                    {(17) p \vdash (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow (\epsilon x. (x \Leftrightarrow \bot) \vee p)}
-                                                    \textsf{mk_select_rule}
-                                            }
-                                            {(18) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow, p \bot \vdash \top \Leftrightarrow \bot}
-                                            \textsf{eq_mp_rule}
-                                        \qquad
-                                        (truth\_tm) \vdash \top
-                                    }
-                                    {(19) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow, p \bot \vdash \bot}
-                                    \textsf{eq_mp_rule}
-                                }
-                                {(20) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \rightarrow \bot}
-                                \textsf{disch_rule}
-                            }
-                            {(21) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash \neg p}
-                            \textsf{not_intro_rule}
-                        }
-                        {(22) (\epsilon x. (x \Leftrightarrow \top) \vee p) \Leftrightarrow \top, (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \vee \neg p}
-                        \textsf{disj2_rule}
-                    \qquad
-                    \dfrac
-                    {
-                        \dfrac
-                            {}
-                            {(1) p \vdash p}
-                            \textsf{assume_rule}
-                    }
-                    {(2) p \vdash p \vee \neg p}
-                    \textsf{disj1_rule}
-                }
-                {(23) (\epsilon x. (x \Leftrightarrow \bot) \vee p) \Leftrightarrow \bot \vdash p \vee \neg p}
-                \textsf{disj_cases_rule}
-            \qquad
-            \dfrac
-                {
-                    \dfrac
-                        {}
-                        {(1) p \vdash p}
-                        \textsf{assume_rule}
-                }
-                {(2) p \vdash p \vee \neg p}
-                \textsf{disj1_rule}
-        }
-        {\vdash p \vee \neg p}
-        \textsf{disj_cases_rule}
-    }
-    {\vdash \forall p.\ p \vee \neg p}
-    \textsf{ gen_rule}
-}
+	{p:bool
+	\qquad
+	\dfrac
+		{\dfrac
+			{\dfrac
+				{\exists x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p
+				\qquad
+				\bot
+				\qquad
+				\dfrac
+					{\dfrac
+						{\bot}
+						{\vdash\ \bot\ \Leftrightarrow\ \bot}
+						\textsf{ refl_conv}
+					\qquad
+					p:bool}
+					{\vdash\ (\bot\ \Leftrightarrow\ \bot)\ \vee\ p}
+					\textsf{ disj1_rule}}
+				{\vdash\ \exists x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p}
+				\textsf{ exists_rule}}
+			{\vdash\ ((\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot)\ \vee\ p}
+			\textsf{ select_rule}
+		\qquad
+		\dfrac
+			{\dfrac
+				{\dfrac
+					{\exists x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p
+					\qquad
+					\top
+					\qquad
+					\dfrac
+						{\dfrac
+							{\top}
+							{\vdash\ \top\ \Leftrightarrow\ \top}
+							\textsf{ refl_conv}
+						\qquad
+						p:bool}
+						{\vdash\ (\top\ \Leftrightarrow\ \top)\ \vee\ p}
+						\textsf{ disj1_rule}}
+					{\vdash\ \exists x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p}
+					\textsf{ exists_rule}}
+				{\vdash\ ((\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top)\ \vee\ p}
+				\textsf{ select_rule}
+			\qquad
+			\dfrac
+				{p:bool
+				\qquad
+				\dfrac
+					{\dfrac
+						{p:bool
+						\qquad
+						\dfrac
+							{\dfrac
+								{\dfrac
+									{\dfrac
+										{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top}
+										{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top\ \vdash\ (\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top}
+										\textsf{ assume_rule}
+									\qquad
+									\dfrac
+										{(\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot}
+										{(\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot}
+										\textsf{ assume_rule}}
+									{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ ((\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p))\ \Leftrightarrow\ (\top\ \Leftrightarrow\ \bot)}
+									\textsf{ mk_eq_rule}
+								\qquad
+								\dfrac
+									{x:bool
+									\qquad
+									\dfrac
+										{\dfrac
+											{x\ \Leftrightarrow\ \top
+											\qquad
+											\dfrac
+												{p:bool}
+												{p\ \vdash\ p}
+												\textsf{ assume_rule}}
+											{p\ \vdash\ (x\ \Leftrightarrow\ \top)\ \vee\ p}
+											\textsf{ disj2_rule}
+										\qquad
+										\dfrac
+											{x\ \Leftrightarrow\ \bot
+											\qquad
+											\dfrac
+												{p:bool}
+												{p\ \vdash\ p}
+												\textsf{ assume_rule}}
+											{p\ \vdash\ (x\ \Leftrightarrow\ \bot)\ \vee\ p}
+											\textsf{ disj2_rule}}
+										{p\ \vdash\ (x\ \Leftrightarrow\ \top)\ \vee\ p\ \Leftrightarrow\ (x\ \Leftrightarrow\ \bot)\ \vee\ p}
+										\textsf{ deduct_antisym_rule}}
+									{p\ \vdash\ (\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)}
+									\textsf{ mk_select_rule}}
+								{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot,\ p\ \vdash\ \top\ \Leftrightarrow\ \bot}
+								\textsf{ eq_mp_rule}
+							\qquad
+							\vdash\ \top}
+							{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot,\ p\ \vdash\ \bot}
+							\textsf{ eq_mp_rule}}
+						{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ p\ \Rightarrow\ \bot}
+						\textsf{ disch_rule}}
+					{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ \neg\ p}
+					\textsf{ not_intro_rule}}
+				{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ p\ \vee\ \neg\ p}
+				\textsf{ disj2_rule}
+			\qquad
+			\dfrac
+				{\dfrac
+					{p:bool}
+					{p\ \vdash\ p}
+					\textsf{ assume_rule}
+				\qquad
+				\neg\ p}
+				{p\ \vdash\ p\ \vee\ \neg\ p}
+				\textsf{ disj1_rule}}
+			{(\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ p\ \vee\ \neg\ p}
+			\textsf{ disj_cases_rule}
+		\qquad
+		\dfrac
+			{\dfrac
+				{p:bool}
+				{p\ \vdash\ p}
+				\textsf{ assume_rule}
+			\qquad
+			\neg\ p}
+			{p\ \vdash\ p\ \vee\ \neg\ p}
+			\textsf{ disj1_rule}}
+		{\vdash\ p\ \vee\ \neg\ p}
+		\textsf{ disj_cases_rule}}
+	{\vdash\ \forall\ p.\ p\ \vee\ \neg\ p}
+	\textsf{ gen_rule} }
 $
 *)
