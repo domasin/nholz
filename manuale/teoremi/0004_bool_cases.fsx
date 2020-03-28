@@ -59,7 +59,7 @@ $
 		{\dfrac
 			{p:bool
 			\qquad
-			\vdash\ \forall\ p.\ p\ \vee\ \neg\ p}
+			\vdash\ \forall\ p.\ p\ \vee\ \neg\ p\; \mathbf{ excluded\_middle\_thm}}
 			{\vdash\ p\ \vee\ \neg\ p}
 			\textsf{ spec_rule}
 		\qquad

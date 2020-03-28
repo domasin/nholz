@@ -13,7 +13,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js">
+	MathJax.Hub.Config({
+		config: ["TeX-AMS-MML_HTMLorMML.js"],
+		extensions: ["[a11y]/accessibility-menu.js"],
+		  menuSettings: {
+			collapsible: true,
+			autocollapse: true,
+			explorer: false
+		  }
+	});
+	</script>
 	
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="content/style.css" />
@@ -30,49 +41,106 @@
         <div class="span10" id="main">
           <h1>Bool Cases</h1>
 <p><span class="math">\(\vdash \forall p.\ (p \Leftrightarrow \top) \vee (p \Leftrightarrow \bot)\)</span></p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">bool_cases_thm</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs8', 12)" onmouseover="showTip(event, 'fs8', 12)" class="id">bool_cases_thm</span>
 <span class="c">// |- !p. (p &lt;=&gt; true) \/ (p &lt;=&gt; false)</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">p</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="fn">mk_var</span> <span class="pn">(</span><span class="s">&quot;p&quot;</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">bool_ty</span><span class="pn">)</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="id">tm1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="fn">spec_rule</span> <span onmouseout="hideTip(event, 'fs3', 8)" onmouseover="showTip(event, 'fs3', 8)" class="id">p</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="id">excluded_middle_thm</span>                   <span class="c">//     |- p \/ ~ p</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="id">tm2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="fn">eqt_intro_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="fn">assume_rule</span> <span onmouseout="hideTip(event, 'fs3', 13)" onmouseover="showTip(event, 'fs3', 13)" class="id">p</span><span class="pn">)</span>                    <span class="c">//   p |- p &lt;=&gt; true</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="id">tm3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="fn">disj1_rule</span> <span onmouseout="hideTip(event, 'fs9', 16)" onmouseover="showTip(event, 'fs9', 16)" class="id">tm2</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;p &lt;=&gt; false&quot;</span><span class="pn">)</span><span class="pn">)</span>       <span class="c">//   p |- (p &lt;=&gt; true) \/ (p &lt;=&gt; false)</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="id">tm4</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 19)" onmouseover="showTip(event, 'fs16', 19)" class="fn">eqf_intro_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 20)" onmouseover="showTip(event, 'fs11', 20)" class="fn">assume_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;~ p&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span> <span class="c">// ~ p |- p &lt;=&gt; false</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="id">tm5</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="fn">disj2_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 24)" onmouseover="showTip(event, 'fs14', 24)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;p &lt;=&gt; true&quot;</span><span class="pn">)</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs15', 25)" onmouseover="showTip(event, 'fs15', 25)" class="id">tm4</span>        <span class="c">// ~ p |- (p &lt;=&gt; true) \/ (p &lt;=&gt; false)</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 26)" onmouseover="showTip(event, 'fs19', 26)" class="id">tm</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 27)" onmouseover="showTip(event, 'fs20', 27)" class="fn">disj_cases_rule</span> <span onmouseout="hideTip(event, 'fs6', 28)" onmouseover="showTip(event, 'fs6', 28)" class="id">tm1</span> <span onmouseout="hideTip(event, 'fs12', 29)" onmouseover="showTip(event, 'fs12', 29)" class="id">tm3</span> <span onmouseout="hideTip(event, 'fs17', 30)" onmouseover="showTip(event, 'fs17', 30)" class="id">tm5</span>                        <span class="c">//     |- (p &lt;=&gt; true) \/ (p &lt;=&gt; false)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 13)" onmouseover="showTip(event, 'fs9', 13)" class="id">p</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="fn">mk_var</span> <span class="pn">(</span><span class="s">&quot;p&quot;</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="id">bool_ty</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 16)" onmouseover="showTip(event, 'fs12', 16)" class="id">tm1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="fn">spec_rule</span> <span onmouseout="hideTip(event, 'fs9', 18)" onmouseover="showTip(event, 'fs9', 18)" class="id">p</span> <span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="id">excluded_middle_thm</span>                   <span class="c">//     |- p \/ ~ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 20)" onmouseover="showTip(event, 'fs15', 20)" class="id">tm2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="fn">eqt_intro_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="fn">assume_rule</span> <span onmouseout="hideTip(event, 'fs9', 23)" onmouseover="showTip(event, 'fs9', 23)" class="id">p</span><span class="pn">)</span>                    <span class="c">//   p |- p &lt;=&gt; true</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 24)" onmouseover="showTip(event, 'fs18', 24)" class="id">tm3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs19', 25)" onmouseover="showTip(event, 'fs19', 25)" class="fn">disj1_rule</span> <span onmouseout="hideTip(event, 'fs15', 26)" onmouseover="showTip(event, 'fs15', 26)" class="id">tm2</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs20', 27)" onmouseover="showTip(event, 'fs20', 27)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;p &lt;=&gt; false&quot;</span><span class="pn">)</span><span class="pn">)</span>       <span class="c">//   p |- (p &lt;=&gt; true) \/ (p &lt;=&gt; false)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 28)" onmouseover="showTip(event, 'fs21', 28)" class="id">tm4</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs22', 29)" onmouseover="showTip(event, 'fs22', 29)" class="fn">eqf_intro_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 30)" onmouseover="showTip(event, 'fs17', 30)" class="fn">assume_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs20', 31)" onmouseover="showTip(event, 'fs20', 31)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;~ p&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span> <span class="c">// ~ p |- p &lt;=&gt; false</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 32)" onmouseover="showTip(event, 'fs23', 32)" class="id">tm5</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 33)" onmouseover="showTip(event, 'fs24', 33)" class="fn">disj2_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs20', 34)" onmouseover="showTip(event, 'fs20', 34)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;p &lt;=&gt; true&quot;</span><span class="pn">)</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs21', 35)" onmouseover="showTip(event, 'fs21', 35)" class="id">tm4</span>        <span class="c">// ~ p |- (p &lt;=&gt; true) \/ (p &lt;=&gt; false)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 36)" onmouseover="showTip(event, 'fs25', 36)" class="id">tm6</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 37)" onmouseover="showTip(event, 'fs26', 37)" class="fn">disj_cases_rule</span> <span onmouseout="hideTip(event, 'fs12', 38)" onmouseover="showTip(event, 'fs12', 38)" class="id">tm1</span> <span onmouseout="hideTip(event, 'fs18', 39)" onmouseover="showTip(event, 'fs18', 39)" class="id">tm3</span> <span onmouseout="hideTip(event, 'fs23', 40)" onmouseover="showTip(event, 'fs23', 40)" class="id">tm5</span>                       <span class="c">//     |- (p &lt;=&gt; true) \/ (p &lt;=&gt; false)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 41)" onmouseover="showTip(event, 'fs27', 41)" class="id">tm7</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs28', 42)" onmouseover="showTip(event, 'fs28', 42)" class="fn">gen_rule</span> <span onmouseout="hideTip(event, 'fs9', 43)" onmouseover="showTip(event, 'fs9', 43)" class="id">p</span> <span onmouseout="hideTip(event, 'fs25', 44)" onmouseover="showTip(event, 'fs25', 44)" class="id">tm6</span>
 </code></pre>
-<p><span class="math">\(\scriptsize{
+<pre class="fssnip highlighted"><code lang="fsharp"></code></pre>
+<p><span class="math">\(\small{ 	\dfrac
+{p:bool
+\qquad
 \dfrac
-{
-\dfrac{}{\vdash p \vee \neg p}\textsf{excluded_middle_thm}
+{\dfrac
+{p:bool
 \qquad
-p \vdash (p \leftrightarrow \top) \vee (p \leftrightarrow \bot)
+\vdash\ \forall\ p.\ p\ \vee\ \neg\ p\; \mathbf{ excluded\_middle\_thm}}
+{\vdash\ p\ \vee\ \neg\ p}
+\textsf{ spec_rule}
 \qquad
-\neg p \vdash (p \leftrightarrow \top) \vee (p \leftrightarrow \bot)
-}
-{\vdash p \leftrightarrow \top \vee p \leftrightarrow \bot}\textsf{disj_cases_rule}
-}\)</span></p>
+\dfrac
+{\dfrac
+{\dfrac
+{p:bool}
+{p\ \vdash\ p}
+\textsf{ assume_rule}}
+{p\ \vdash\ p\ \Leftrightarrow\ \top}
+\textsf{ eqt_intro_rule}
+\qquad
+p\ \Leftrightarrow\ \bot}
+{p\ \vdash\ (p\ \Leftrightarrow\ \top)\ \vee\ (p\ \Leftrightarrow\ \bot)}
+\textsf{ disj1_rule}
+\qquad
+\dfrac
+{p\ \Leftrightarrow\ \top
+\qquad
+\dfrac
+{\dfrac
+{\neg\ p}
+{\neg\ p\ \vdash\ \neg\ p}
+\textsf{ assume_rule}}
+{\neg\ p\ \vdash\ p\ \Leftrightarrow\ \bot}
+\textsf{ eqf_intro_rule}}
+{\neg\ p\ \vdash\ (p\ \Leftrightarrow\ \top)\ \vee\ (p\ \Leftrightarrow\ \bot)}
+\textsf{ disj2_rule}}
+{\vdash\ (p\ \Leftrightarrow\ \top)\ \vee\ (p\ \Leftrightarrow\ \bot)}
+\textsf{ disj_cases_rule}}
+{\vdash\ \forall\ p.\ (p\ \Leftrightarrow\ \top)\ \vee\ (p\ \Leftrightarrow\ \bot)}
+\textsf{ gen_rule} }\)</span></p>
 
           <div class="tip" id="fs1">namespace HOL</div>
-<div class="tip" id="fs2">val bool_cases_thm : thm</div>
-<div class="tip" id="fs3">val p : term</div>
-<div class="tip" id="fs4">val mk_var : x:string * ty:hol_type -&gt; term</div>
-<div class="tip" id="fs5">val bool_ty : hol_type</div>
-<div class="tip" id="fs6">val tm1 : thm</div>
-<div class="tip" id="fs7">val spec_rule : tm:term -&gt; th:thm -&gt; thm</div>
-<div class="tip" id="fs8">val excluded_middle_thm : thm</div>
-<div class="tip" id="fs9">val tm2 : thm</div>
-<div class="tip" id="fs10">val eqt_intro_rule : th:thm -&gt; thm</div>
-<div class="tip" id="fs11">val assume_rule : tm:term -&gt; thm</div>
-<div class="tip" id="fs12">val tm3 : thm</div>
-<div class="tip" id="fs13">val disj1_rule : th:thm -&gt; tm:term -&gt; thm</div>
-<div class="tip" id="fs14">val parse_term : x:string -&gt; term</div>
-<div class="tip" id="fs15">val tm4 : thm</div>
-<div class="tip" id="fs16">val eqf_intro_rule : th:thm -&gt; thm</div>
-<div class="tip" id="fs17">val tm5 : thm</div>
-<div class="tip" id="fs18">val disj2_rule : tm:term -&gt; th:thm -&gt; thm</div>
-<div class="tip" id="fs19">val tm : thm</div>
-<div class="tip" id="fs20">val disj_cases_rule : th0:thm -&gt; th01:thm -&gt; th02:thm -&gt; thm</div>
+<div class="tip" id="fs2">module CoreThry<br /><br />from HOL</div>
+<div class="tip" id="fs3">val load : (string * thm) list</div>
+<div class="tip" id="fs4">module Equal<br /><br />from HOL</div>
+<div class="tip" id="fs5">module Bool<br /><br />from HOL</div>
+<div class="tip" id="fs6">module BoolAlg<br /><br />from HOL</div>
+<div class="tip" id="fs7">module BoolClass<br /><br />from HOL</div>
+<div class="tip" id="fs8">val bool_cases_thm : thm</div>
+<div class="tip" id="fs9">val p : term</div>
+<div class="tip" id="fs10">val mk_var : x:string * ty:hol_type -&gt; term</div>
+<div class="tip" id="fs11">val bool_ty : hol_type</div>
+<div class="tip" id="fs12">val tm1 : thm</div>
+<div class="tip" id="fs13">val spec_rule : tm:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs14">val excluded_middle_thm : thm</div>
+<div class="tip" id="fs15">val tm2 : thm</div>
+<div class="tip" id="fs16">val eqt_intro_rule : th:thm -&gt; thm</div>
+<div class="tip" id="fs17">val assume_rule : tm:term -&gt; thm</div>
+<div class="tip" id="fs18">val tm3 : thm</div>
+<div class="tip" id="fs19">val disj1_rule : th:thm -&gt; tm:term -&gt; thm</div>
+<div class="tip" id="fs20">val parse_term : x:string -&gt; term</div>
+<div class="tip" id="fs21">val tm4 : thm</div>
+<div class="tip" id="fs22">val eqf_intro_rule : th:thm -&gt; thm</div>
+<div class="tip" id="fs23">val tm5 : thm</div>
+<div class="tip" id="fs24">val disj2_rule : tm:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs25">val tm6 : thm</div>
+<div class="tip" id="fs26">val disj_cases_rule : th0:thm -&gt; th01:thm -&gt; th02:thm -&gt; thm</div>
+<div class="tip" id="fs27">val tm7 : thm</div>
+<div class="tip" id="fs28">val gen_rule : v:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs29">val excluded_middle_thm_gr : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs30">val mkGraph : v:&#39;a -&gt; xs:List&lt;Graph&lt;&#39;a&gt;&gt; -&gt; Graph&lt;&#39;a&gt;</div>
+<div class="tip" id="fs31">union case Exp.Th: thm -&gt; Exp</div>
+<div class="tip" id="fs32">val th1 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs33">val spec_rule_tr : t:term -&gt; th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs34">val th2 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs35">val eqt_intro_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs36">val assume_rule_tr : t:term -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs37">val th3 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs38">val disj1_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; t:term -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs39">val th4 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs40">val eqf_intro_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs41">val th5 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs42">val disj2_rule_tr : t:term -&gt; th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs43">val th6 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs44">val disj_cases_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; th2:thm * g2:Graph&lt;Exp * string&gt; -&gt; th3:thm * g3:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs45">val th7 : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs46">val gen_rule_tr : t:term -&gt; th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
 
         </div>
         <div class="span1"></div>
