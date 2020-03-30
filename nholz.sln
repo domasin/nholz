@@ -39,6 +39,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{FD66B3EA-1
 		docs\0002_truth.html = docs\0002_truth.html
 		docs\0003_excluded_midle.html = docs\0003_excluded_midle.html
 		docs\0004_bool_cases.html = docs\0004_bool_cases.html
+		docs\0005_disj_zero.html = docs\0005_disj_zero.html
+		docs\0006_disj_id.html = docs\0006_disj_id.html
+		docs\0007_disj_idem.html = docs\0007_disj_idem.html
 		docs\1_Introduzione.html = docs\1_Introduzione.html
 		docs\3_Liguaggio_HOL.html = docs\3_Liguaggio_HOL.html
 		docs\A5_Inference_Rules.html = docs\A5_Inference_Rules.html
@@ -69,6 +72,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "teoremi", "teoremi", "{45C5
 		manuale\teoremi\0002_truth.fsx = manuale\teoremi\0002_truth.fsx
 		manuale\teoremi\0003_excluded_midle.fsx = manuale\teoremi\0003_excluded_midle.fsx
 		manuale\teoremi\0004_bool_cases.fsx = manuale\teoremi\0004_bool_cases.fsx
+		manuale\teoremi\0005_disj_zero.fsx = manuale\teoremi\0005_disj_zero.fsx
+		manuale\teoremi\0006_disj_id.fsx = manuale\teoremi\0006_disj_id.fsx
+		manuale\teoremi\0007_disj_idem.fsx = manuale\teoremi\0007_disj_idem.fsx
 	EndProjectSection
 EndProject
 Global

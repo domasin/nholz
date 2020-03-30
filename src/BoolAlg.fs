@@ -250,10 +250,9 @@ let conj_contr_thm =
                 (conjunct1_rule th1) ))))
     )
 
-(* disj_id_thm                                                                *)
-(*                                                                            *)
-(*    |- !p. p \/ false <=> p                                                 *)
-
+//  disj_id_thm               
+//                            
+/// |- !p. p \/ false <=> p
 let disj_id_thm = 
     save_thm ("disj_id_thm",
       gen_rule p
@@ -266,10 +265,9 @@ let disj_id_thm =
             (contr_rule p (assume_rule (parse_term(@"false")))) ))
     )
 
-(* disj_zero_thm                                                              *)
-(*                                                                            *)
-(*    |- !p. p \/ true <=> true                                               *)
-
+//  disj_zero_thm               
+//                              
+/// |- !p. p \/ true <=> true
 let disj_zero_thm = 
     save_thm ("disj_zero_thm",
       gen_rule p
@@ -278,10 +276,9 @@ let disj_zero_thm =
           truth_thm )
     )
 
-(* disj_idem_thm                                                              *)
-(*                                                                            *)
-(*    |- !p. p \/ p <=> p                                                     *)
-
+//  disj_idem_thm          
+//                         
+/// |- !p. p \/ p <=> p 
 let disj_idem_thm = 
     save_thm ("disj_idem_thm",
       let th1 = assume_rule p in

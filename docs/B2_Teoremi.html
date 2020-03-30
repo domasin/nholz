@@ -13,7 +13,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js">
+	MathJax.Hub.Config({
+		config: ["TeX-AMS-MML_HTMLorMML.js"],
+		extensions: ["[a11y]/accessibility-menu.js"],
+		  menuSettings: {
+			collapsible: true,
+			autocollapse: true,
+			explorer: false
+		  }
+	});
+	</script>
 	
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="content/style.css" />
@@ -43,16 +54,25 @@
 <p><strong><a href="0004_bool_cases.html">bool_cases_thm</a></strong></p>
 <p><span class="math">\(\vdash \forall p.\ (p \Leftrightarrow \top) \vee (p \Leftrightarrow \bot)\)</span></p>
 <p>Per ogni proposizione, o essa equivale a true oppure equivale a false</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">cond_false_thm</span>
+<p><strong><a href="0005_disj_zero.html">disj_zero_thm</a></strong></p>
+<p><span class="math">\(\vdash \forall p.\ p \vee \top \Leftrightarrow \top\)</span></p>
+<p><strong><a href="0006_disj_id.html">disj_id_thm</a></strong></p>
+<p><span class="math">\(\vdash \forall p.\ p \vee \bot \Leftrightarrow p\)</span></p>
+<p><strong><a href="0007_disj_idem.html">disj _idem_thm</a></strong></p>
+<p><span class="math">\(\vdash \forall p.\ p \vee p \Leftrightarrow p\)</span></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">disj_idem_thm</span>
+<span class="c">// |- !p. p \/ p &lt;=&gt; p</span>
+
+<span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">cond_false_thm</span>
 <span class="c">// |- !(t1:&#39;a) t2. (if false then t1 else t2) = t2</span>
 
-<span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">cond_idem_thm</span>
+<span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">cond_idem_thm</span>
 <span class="c">// |- !p (t:&#39;a). (if p then t else t) = t</span>
 
-<span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">cond_not_thm</span>
+<span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">cond_not_thm</span>
 <span class="c">// |- !p (t1:&#39;a) t2. (if (~ p) then t1 else t2) = (if p then t2 else t1)</span>
 
-<span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">cond_true_thm</span>
+<span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="id">cond_true_thm</span>
 <span class="c">// |- !(t1:&#39;a) t2. (if true then t1 else t2) = t1</span>
 
 <span class="c">//conj_absorb_disj_thm</span>
@@ -96,17 +116,6 @@
 
 <span class="c">//disj_dist_right_conj_thm</span>
 <span class="c">//   |- !p q r. p \/ (q /\ r) &lt;=&gt; (p \/ q) /\ (p \/ r)</span>
-
-<span class="c">//disj_id_thm</span>
-<span class="c">//   |- !p. p \/ false &lt;=&gt; p</span>
-
-<span class="c">//disj_idem_thm</span>
-<span class="c">//   |- !p. p \/ p &lt;=&gt; p</span>
-
-<span class="c">//disj_zero_thm</span>
-<span class="c">//   |- !p. p \/ true &lt;=&gt; true</span>
-
-
 
 <span class="c">//exists_dist_disj_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool) Q. (?x. P x \/ Q x) &lt;=&gt; (?x. P x) \/ (?x. Q x)</span>
@@ -206,10 +215,11 @@
 </code></pre>
 
           <div class="tip" id="fs1">namespace HOL</div>
-<div class="tip" id="fs2">val cond_false_thm : thm</div>
-<div class="tip" id="fs3">val cond_idem_thm : thm</div>
-<div class="tip" id="fs4">val cond_not_thm : thm</div>
-<div class="tip" id="fs5">val cond_true_thm : thm</div>
+<div class="tip" id="fs2">val disj_idem_thm : thm</div>
+<div class="tip" id="fs3">val cond_false_thm : thm</div>
+<div class="tip" id="fs4">val cond_idem_thm : thm</div>
+<div class="tip" id="fs5">val cond_not_thm : thm</div>
+<div class="tip" id="fs6">val cond_true_thm : thm</div>
 
         </div>
         <div class="span1"></div>

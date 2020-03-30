@@ -32,12 +32,28 @@ Per ogni proposizione, o essa &egrave; dimostrabile o lo &egrave; la sua negazio
 $\vdash \forall p.\ (p \Leftrightarrow \top) \vee (p \Leftrightarrow \bot)$
 
 Per ogni proposizione, o essa equivale a true oppure equivale a false
+
+**[disj\_zero\_thm](0005_disj_zero.html)**
+
+$\vdash \forall p.\ p \vee \top \Leftrightarrow \top$
+
+**[disj\_id\_thm](0006_disj_id.html)**
+
+$\vdash \forall p.\ p \vee \bot \Leftrightarrow p$
+
+**[disj _idem\_thm](0007_disj_idem.html)**
+
+$\vdash \forall p.\ p \vee p \Leftrightarrow p$
+
 *)
 
 (***hide***)
 #load "avvio.fsx"
 open HOL
 (***unhide***)
+
+disj_idem_thm
+// |- !p. p \/ p <=> p
 
 cond_false_thm
 // |- !(t1:'a) t2. (if false then t1 else t2) = t2
@@ -92,17 +108,6 @@ cond_true_thm
 
 //disj_dist_right_conj_thm
 //   |- !p q r. p \/ (q /\ r) <=> (p \/ q) /\ (p \/ r)
-
-//disj_id_thm
-//   |- !p. p \/ false <=> p
-
-//disj_idem_thm
-//   |- !p. p \/ p <=> p
-
-//disj_zero_thm
-//   |- !p. p \/ true <=> true
-
-
 
 //exists_dist_disj_thm
 //   |- !(P:'a->bool) Q. (?x. P x \/ Q x) <=> (?x. P x) \/ (?x. Q x)
