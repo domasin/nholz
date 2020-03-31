@@ -422,7 +422,82 @@ Regola di metaconversione.
 Prende una regola di conversione `term -> thm` e un teorema e applica `eq_mp_rule` alla conclusione 
 convertita e al teorema stesso.
 
+Bool
+------------
+
+**eqt\_elim\_rule**
+
+$\dfrac
+{A \vdash p \Leftrightarrow \top}
+{A \vdash p}
+\textsf{ eqt_elim_rule}
+$
+
+Questa &egrave; la regola di eliminazione di equivalenza a vero. Prende un 
+teoram di guguaglianza con ha `true` sul lato destro, e restituisce un 
+teorema che afferma che il lato sinistro vale, sotto le stesse assunzioni.
+
+Si veda anche: eqt\_intro\_rule, eqf\_elim\_rule.
+
+**undisch\_rule**
+
+$\dfrac
+{A \vdash p \Rightarrow q}
+{A \cup \{p\} \vdash q}
+\textsf{ undisch_rule}
+$
+
+Questa &egrave; la regola di anti-scaricamento. Prende un teorema di implicazione, 
+e rimuove l'antecedente dalla conclusione e lo aggiunge nelle assunzioni.
+
+Si veda anche: disch\_rule, mp\_rule, prove\_asm\_rule.
+
+**add\_asm\_rule**
+
+$\dfrac
+{q \qquad A \vdash p}
+{A \cup \{q\} \vdash p}
+\textsf{ add_asm_rule}
+$
+
+Questa &egrave; la regola di aggiunta di un'assunzione. Prende un termine booleano 
+e un teorema e restituisce lo stesso teorema ma con il termine fornito aggiunto 
+alle sue assunzioni. Il teorema restituito in output coincide con quello fornito in input 
+se il termine &egrave; gi&agrave; presente nelle assunzioni.
+
+**prove\_asm\_rule**
+
+$\dfrac
+{A_1 \vdash p \qquad A_2 \vdash q}
+{A_1 \cup (A_2 \setminus \{p\}) \vdash q}
+\textsf{ prove_asm_rule}
+$
+
+Questa &egrave; la regola di assunzione provata. Prende due teoremi, e 
+restituisce il secondo teorema ma con la conclusione del primo teorema 
+rimossa (se presente) dalle sue assunzioni a cui sono aggiunte le assunzioni 
+del primo teorema. Si noti che la conclusione del primo teorema non deve 
+essere nelle assunzioni del secondo affinch&egrave; questa regola abbia 
+successo.
+
+Si veda anche: mp\_rule, undisch\_rule.
+
 *)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
  
@@ -440,28 +515,14 @@ convertita e al teorema stesso.
 
 
 
-(**
 
-| Bool.add\_asm\_rule 
---------------
-
-Questa &egrave; la regola di aggiunta di un'assunzione. Prende un termine booleano 
-e un teorema e restituisce lo stesso teorema ma con il termine fornito aggiunto 
-alle sue assunzioni. Il teorema restituito in output coincide con quello fornito in input 
-se il termine &egrave; gi&agrave; presente nelle assunzioni.
-
-*)
 
 
 #I "../bin/netstandard2.0"
 #r "nholz.dll"
 open HOL
 
-add_asm_rule
 
-//  `q`   A |- p
-//  ------------
-//  A u {q} |- p
 
 (**
 
@@ -790,25 +851,6 @@ eqf_intro_rule
 //      A |- ~ p                                                           
 //  ----------------                                                       
 //  A |- p <=> false   
-
-(**
-
-| Bool.eqt\_elim\_rule                          
--------------------
-
-Questa &egrave; la regola di eliminazione di equivalenza a vero. Prende un 
-teoram di guguaglianza con ha `true` sul lato destro, e restituisce un 
-teorema che afferma che il lato sinistro vale, sotto le stesse assunzioni.
-
-Si veda anche: eqt\_intro\_rule, eqf\_elim\_rule.
-
-*)
-
-eqt_elim_rule
-
-//  A |- p <=> true                                                       
-//  ---------------                                                       
-//      A |- p       
 
 (**
 
@@ -1775,30 +1817,6 @@ not_intro_rule
 
 (**
 
-| Bool.prove\_asm\_rule
--------------------
-
-Questa &egrave; la regola di assunzione provata. Prende due teoremi, e 
-restituisce il secondo teorema ma con la conclusione del primo teorema 
-rimossa (se presente) dalle sue assunzioni a cui sono aggiunte le assunzioni 
-del primo teorema. Si noti che la conclusione del primo teorema non deve 
-essere nelle assunzioni del secondo affinch&egrave; questa regola abbia 
-successo.
-
-Si veda anche: mp\_rule, undisch\_rule.
-
-*)
-
-prove_asm_rule
-
-//  A1 |- p    A2 |- q                                                     
-//  ------------------                                                     
-//  A1 u (A2\{p}) |- q   
-
-
-
-(**
-
 | BoolClass.select\_rule
 -------------------
 
@@ -1857,23 +1875,7 @@ sym_conv
 //   ----------------------                                                
 //   |- t1 = t2 <=> t2 = t1      
 
-(**
 
-| Bool.undisch\_rule
--------------------
-
-Questa &egrave; la regola di scaricamento. Prende un teorema di implicazione, 
-e rimuove l'antecedente dalla conclusione e lo aggiunge nelle assunzioni.
-
-Si veda anche: disch\_rule, mp\_rule, prove\_asm\_rule.
-
-*)
-
-undisch_rule
-
-//  A |- p ==> q                                                           
-//  ------------                                                           
-//  A u {p} |- q   
 
 
 

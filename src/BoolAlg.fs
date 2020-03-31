@@ -25,10 +25,9 @@ let q = parse_term(@"q:bool")
 let r = parse_term(@"r:bool")
 let x = parse_term(@"x:'a")
 
-(* not_true_thm : thm                                                         *)
-(*                                                                            *)
-(*    |- ~ true <=> false                                                     *)
-
+//  not_true_thm : thm    
+//                        
+/// |- ~ true <=> false
 let not_true_thm = 
     save_thm ("not_true_thm",
       (* |- ~ true <=> false         *)
@@ -42,10 +41,9 @@ let not_true_thm =
           truth_thm )
     )
 
-(* not_false_thm : thm                                                        *)
-(*                                                                            *)
-(*    |- ~ false <=> true                                                     *)
-
+//  not_false_thm : thm   
+//                        
+/// |- ~ false <=> true
 let not_false_thm = 
     save_thm ("not_false_thm",
       (* |- ~ false <=> true         *)
@@ -56,10 +54,9 @@ let not_false_thm =
         truth_thm
     )
 
-(* true_not_eq_false_thm : thm                                                *)
-(*                                                                            *)
-(*    |- ~ (true <=> false)                                                   *)
-
+//  true_not_eq_false_thm : thm
+//                             
+/// |- ~ (true <=> false)   
 let true_not_eq_false_thm = 
     save_thm ("true_not_eq_false_thm",
       eqf_elim_rule
@@ -70,10 +67,9 @@ let true_not_eq_false_thm =
          (eq_mp_rule (assume_rule (parse_term(@"true <=> false"))) truth_thm) )
     )
 
-(* not_dist_disj_thm : thm                                                    *)
-(*                                                                            *)
-(*    |- !p q. ~ (p \/ q) <=> ~ p /\ ~ q                                      *)
-
+//  not_dist_disj_thm : thm              
+//                                       
+/// |- !p q. ~ (p \/ q) <=> ~ p /\ ~ q
 let not_dist_disj_thm = 
     save_thm ("not_dist_disj_thm",
       let th1 = assume_rule (parse_term(@"~ p /\ ~ q")) in
@@ -100,10 +96,9 @@ let not_dist_disj_thm =
               (disj2_rule p (assume_rule q)) )))
     )
 
-(* conj_id_thm                                                                *)
-(*                                                                            *)
-(*    |- !p. p /\ true <=> p                                                  *)
-
+//  conj_id_thm              
+//                           
+/// |- !p. p /\ true <=> p
 let conj_id_thm = 
     save_thm ("conj_id_thm",
       gen_rule p
@@ -112,10 +107,9 @@ let conj_id_thm =
           (conjunct1_rule (assume_rule (parse_term(@"p /\ true")))) )
     )
 
-(* conj_zero_thm                                                              *)
-(*                                                                            *)
-(*    |- !p. p /\ false <=> false                                             *)
-
+//  conj_zero_thm                 
+//                                
+/// |- !p. p /\ false <=> false
 let conj_zero_thm = 
     save_thm ("conj_zero_thm",
       gen_rule p
@@ -124,10 +118,9 @@ let conj_zero_thm =
           (conjunct2_rule (assume_rule (parse_term(@"p /\ false")))) )
     )
 
-(* conj_idem_thm                                                              *)
-(*                                                                            *)
-(*    |- !p. p /\ p <=> p                                                     *)
-
+//  conj_idem_thm         
+//                        
+/// |- !p. p /\ p <=> p
 let conj_idem_thm = 
     save_thm ("conj_idem_thm",
       gen_rule p
@@ -136,10 +129,9 @@ let conj_idem_thm =
           (conjunct1_rule (assume_rule (parse_term(@"p /\ p")))) )
     )
 
-(* conj_comm_thm                                                              *)
-(*                                                                            *)
-(*    |- !p q. p /\ q <=> q /\ p                                              *)
-
+//  conj_comm_thm             
+//                            
+/// |- !p q. p /\ q <=> q /\ p
 let conj_comm_thm = 
     save_thm ("conj_comm_thm",
       let th1 = assume_rule (parse_term(@"p /\ q")) in
@@ -151,10 +143,9 @@ let conj_comm_thm =
         (deduct_antisym_rule th3 th2)
     )
 
-(* conj_assoc_thm                                                             *)
-(*                                                                            *)
-(*    |- !p q r. p /\ (q /\ r) <=> (p /\ q) /\ r                              *)
-
+//  conj_assoc_thm                                                             *)
+//                                                                             *)
+/// |- !p q r. p /\ (q /\ r) <=> (p /\ q) /\ r                              *)
 let conj_assoc_thm = 
     save_thm ("conj_assoc_thm",
       let th1 = assume_rule (parse_term(@"p /\ (q /\ r)")) in
@@ -175,10 +166,9 @@ let conj_assoc_thm =
             (conjunct2_rule (conjunct2_rule th1)) ))
     )
 
-(* conj_absorb_disj_thm                                                       *)
-(*                                                                            *)
-(*    |- !p q. p /\ (p \/ q) <=> p                                            *)
-
+//  conj_absorb_disj_thm                                                       *)
+//                                                                             *)
+/// |- !p q. p /\ (p \/ q) <=> p                                            *)
 let conj_absorb_disj_thm = 
     save_thm ("conj_absorb_disj_thm",
       let th1 = assume_rule p in
@@ -188,10 +178,9 @@ let conj_absorb_disj_thm =
           (conjunct1_rule (assume_rule (parse_term(@"p /\ (p \/ q)")))) )
     )
 
-(* conj_dist_right_disj_thm                                                   *)
-(*                                                                            *)
-(*    |- !p q r. p /\ (q \/ r) <=> (p /\ q) \/ (p /\ r)                       *)
-
+//  conj_dist_right_disj_thm                         
+//                                                   
+/// |- !p q r. p /\ (q \/ r) <=> (p /\ q) \/ (p /\ r)
 let conj_dist_right_disj_thm = 
     save_thm ("conj_dist_right_disj_thm",
       let th1 = assume_rule (parse_term(@"(p /\ q) \/ (p /\ r)")) in
@@ -218,10 +207,9 @@ let conj_dist_right_disj_thm =
               (conj_rule (conjunct1_rule th2) (assume_rule r)) )))
     )
 
-(* conj_dist_left_disj_thm                                                    *)
-(*                                                                            *)
-(*    |- !p q r. (p \/ q) /\ r <=> (p /\ r) \/ (q /\ r)                       *)
-
+//  conj_dist_left_disj_thm                             
+//                                                      
+/// |- !p q r. (p \/ q) /\ r <=> (p /\ r) \/ (q /\ r)
 let conj_dist_left_disj_thm = 
     save_thm ("conj_dist_left_disj_thm",
       list_gen_rule [p;q;r]
@@ -233,10 +221,9 @@ let conj_dist_left_disj_thm =
                (list_spec_rule [r;q] conj_comm_thm) ])
     )
 
-(* conj_contr_thm                                                             *)
-(*                                                                            *)
-(*    |- !p. p /\ ~ p <=> false                                               *)
-
+//  conj_contr_thm           
+//                           
+/// |- !p. p /\ ~ p <=> false
 let conj_contr_thm = 
     save_thm ("conj_contr_thm",
       let th1 = assume_rule (parse_term(@"p /\ ~p")) in
@@ -288,10 +275,9 @@ let disj_idem_thm =
           (disj_cases_rule (assume_rule (parse_term(@"p \/ p"))) th1 th1) )
     )
 
-(* disj_comm_thm                                                              *)
-(*                                                                            *)
-(*    |- !p q. p \/ q <=> q \/ p                                              *)
-
+//  disj_comm_thm                
+//                               
+/// |- !p q. p \/ q <=> q \/ p
 let disj_comm_thm = 
     save_thm ("disj_comm_thm",
       let th1 = disj_cases_rule                     (* p \/ q |- q \/ p      *)
@@ -303,10 +289,9 @@ let disj_comm_thm =
         (deduct_antisym_rule th2 th1)
     )
 
-(* disj_assoc_thm                                                             *)
-(*                                                                            *)
-(*    |- !p q r. p \/ (q \/ r) <=> (p \/ q) \/ r                              *)
-
+//  disj_assoc_thm                               
+//                                               
+/// |- !p q r. p \/ (q \/ r) <=> (p \/ q) \/ r
 let disj_assoc_thm = 
     save_thm ("disj_assoc_thm",
       list_gen_rule [p;q;r]
@@ -329,10 +314,9 @@ let disj_assoc_thm =
               (disj2_rule (parse_term(@"p \/ q")) (assume_rule r)) )))
     )
 
-(* disj_absorb_conj_thm                                                       *)
-(*                                                                            *)
-(*    |- !p q. p \/ (p /\ q) <=> p                                            *)
-
+//  disj_absorb_conj_thm           
+//                                 
+/// |- !p q. p \/ (p /\ q) <=> p
 let disj_absorb_conj_thm = 
     save_thm ("disj_absorb_conj_thm",
       list_gen_rule [p;q]
@@ -345,10 +329,9 @@ let disj_absorb_conj_thm =
              (conjunct1_rule (assume_rule (parse_term(@"p /\ q")))) ))
     )
 
-(* disj_dist_right_conj_thm                                                   *)
-(*                                                                            *)
-(*    |- !p q r. p \/ (q /\ r) <=> (p \/ q) /\ (p \/ r)                       *)
-
+//  disj_dist_right_conj_thm                            
+//                                                      
+/// |- !p q r. p \/ (q /\ r) <=> (p \/ q) /\ (p \/ r)
 let disj_dist_right_conj_thm = 
     save_thm ("disj_dist_right_conj_thm",
       let th1 = assume_rule (parse_term(@"(p \/ q) /\ (p \/ r)")) in
@@ -376,10 +359,9 @@ let disj_dist_right_conj_thm =
               (disj2_rule p (conjunct2_rule (assume_rule (parse_term(@"q /\ r"))))) )))
     )
 
-(* disj_dist_left_conj_thm                                                    *)
-(*                                                                            *)
-(*    |- !p q r. (p /\ q) \/ r <=> (p \/ r) /\ (q \/ r)                       *)
-
+//  disj_dist_left_conj_thm                             
+//                                                      
+/// |- !p q r. (p /\ q) \/ r <=> (p \/ r) /\ (q \/ r)
 let disj_dist_left_conj_thm = 
     save_thm ("disj_dist_left_conj_thm",
       list_gen_rule [p;q;r]
@@ -391,19 +373,17 @@ let disj_dist_left_conj_thm =
                (list_spec_rule [r;q] disj_comm_thm) ])
     )
 
-(* imp_right_zero_thm                                                         *)
-(*                                                                            *)
-(*    |- !p. p ==> true                                                       *)
-
+//  imp_right_zero_thm  
+//                      
+/// |- !p. p ==> true
 let imp_right_zero_thm = 
     save_thm ("imp_right_zero_thm",
       gen_rule p (disch_rule p truth_thm)
     )
 
-(* imp_left_id_thm                                                            *)
-(*                                                                            *)
-(*    |- !p. (true ==> p) <=> p                                               *)
-
+//  imp_left_id_thm             
+//                              
+/// |- !p. (true ==> p) <=> p
 let imp_left_id_thm = 
     save_thm ("imp_left_id_thm",
       gen_rule p
@@ -412,28 +392,25 @@ let imp_left_id_thm =
           (mp_rule (assume_rule (parse_term(@"true ==> p"))) truth_thm) )
     )
 
-(* imp_left_zero_thm                                                          *)
-(*                                                                            *)
-(*    |- !p. false ==> p                                                      *)
-
+//  imp_left_zero_thm    
+//                       
+/// |- !p. false ==> p
 let imp_left_zero_thm = 
     save_thm ("imp_left_zero_thm",
       gen_rule p (disch_rule (parse_term(@"false")) (contr_rule p (assume_rule (parse_term(@"false")))))
     )
 
-(* imp_refl_thm                                                               *)
-(*                                                                            *)
-(*    |- !p. p ==> p                                                          *)
-
+//  imp_refl_thm     
+//                   
+/// |- !p. p ==> p
 let imp_refl_thm = 
     save_thm ("imp_refl_thm",
       gen_rule p (disch_rule p (assume_rule p))
     )
 
-(* imp_dist_left_disj_thm                                                     *)
-(*                                                                            *)
-(*    |- !p q r. (p \/ q ==> r) <=> (p ==> r) /\ (q ==> r)                    *)
-
+//  imp_dist_left_disj_thm                                 
+//                                                         
+/// |- !p q r. (p \/ q ==> r) <=> (p ==> r) /\ (q ==> r)
 let imp_dist_left_disj_thm = 
     save_thm ("imp_dist_left_disj_thm",
       let th1 = assume_rule (parse_term(@"(p ==> r) /\ (q ==> r)")) in
@@ -457,10 +434,9 @@ let imp_dist_left_disj_thm =
               th2 )))
     )
 
-(* imp_dist_right_conj_thm                                                    *)
-(*                                                                            *)
-(*    |- !p q r. (p ==> q /\ r) <=> (p ==> q) /\ (p ==> r)                    *)
-
+//  imp_dist_right_conj_thm                                
+//                                                         
+/// |- !p q r. (p ==> q /\ r) <=> (p ==> q) /\ (p ==> r)
 let imp_dist_right_conj_thm = 
     save_thm ("imp_dist_right_conj_thm",
       let th1 = assume_rule (parse_term(@"(p ==> q) /\ (p ==> r)")) in
@@ -478,10 +454,9 @@ let imp_dist_right_conj_thm =
             (disch_rule p (conjunct2_rule (undisch_rule th2))) ))
     )
 
-(* forall_dist_conj_thm                                                       *)
-(*                                                                            *)
-(*    |- !P Q. (!x. P x /\ Q x) <=> (!x. P x) /\ (!x. Q x)                    *)
-
+//  forall_dist_conj_thm                                   
+//                                                         
+/// |- !P Q. (!x. P x /\ Q x) <=> (!x. P x) /\ (!x. Q x)
 let forall_dist_conj_thm = 
     save_thm ("forall_dist_conj_thm",
       let th1 = assume_rule (parse_term(@"(!(x:'a). P x) /\ (!(x:'a). Q x)")) in
@@ -499,10 +474,9 @@ let forall_dist_conj_thm =
             (gen_rule x (conjunct2_rule (spec_rule x th2))) ))
     )
 
-(* forall_one_point_thm                                                       *)
-(*                                                                            *)
-(*    |- !P a. (!x. x = a ==> P x) <=> P a                                    *)
-
+//  forall_one_point_thm                   
+//                                         
+/// |- !P a. (!x. x = a ==> P x) <=> P a
 let forall_one_point_thm = 
     save_thm ("forall_one_point_thm",
       let a = (parse_term(@"a:'a"))  
@@ -520,10 +494,9 @@ let forall_one_point_thm =
            (refl_conv a) ))
     )
 
-(* forall_null_thm                                                            *)
-(*                                                                            *)
-(*    |- !t. (!(x:'a). t) <=> t                                               *)
-
+//  forall_null_thm             
+//                              
+/// |- !t. (!(x:'a). t) <=> t
 let forall_null_thm = 
     save_thm ("forall_null_thm",
       let t = (parse_term(@"t:bool")) 

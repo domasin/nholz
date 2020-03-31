@@ -91,10 +91,9 @@ let exists_rule (tm1,tm2) th =       (* ?x. p    t    A |- p[t/x]   *)
                            with binding var occurrences replaced with witness term") in
         internal_err func
 
-(* select_eq_thm                                                              *)
-(*                                                                            *)
-(*    |- !(a:'a). (@x. x = a) = a                                             *)
-
+//  select_eq_thm                 
+//                                
+/// |- !(a:'a). (@x. x = a) = a
 let select_eq_thm = 
     save_thm ("select_eq_thm",
       let a = (parse_term(@"a:'a")) in
@@ -104,10 +103,9 @@ let select_eq_thm =
          (exists_rule ((parse_term(@"?(x:'a).x=a")),a) (refl_conv a)) )
     )
 
-(* exists_dist_disj_thm                                                       *)
-(*                                                                            *)
-(*    |- !P Q. (?x. P x \/ Q x) <=> (?x. P x) \/ (?x. Q x)                    *)
-
+//  exists_dist_disj_thm                                   
+//                                                         
+/// |- !P Q. (?x. P x \/ Q x) <=> (?x. P x) \/ (?x. Q x)
 let exists_dist_disj_thm = 
     save_thm ("exists_dist_disj_thm",
       let px = (parse_term(@"(P:'a->bool) x")) 
@@ -137,10 +135,9 @@ let exists_dist_disj_thm =
               (disj2_rule tm1 (exists_rule (tm2,x) (assume_rule qx))) )))
     )
 
-(* exists_one_point_thm                                                       *)
-(*                                                                            *)
-(*    |- !P a. (?x. x = a /\ P x) <=> P a                                     *)
-
+//  exists_one_point_thm                  
+//                                        
+/// |- !P a. (?x. x = a /\ P x) <=> P a
 let exists_one_point_thm = 
     save_thm ("exists_one_point_thm",
       let tm = (parse_term(@"?(x:'a). x = a /\ P x")) in
@@ -155,10 +152,9 @@ let exists_one_point_thm =
                     (conjunct2_rule s1)) )))
     )
 
-(* exists_null_thm                                                            *)
-(*                                                                            *)
-(*    |- !t. (?x. t) <=> t                                                    *)
-
+//  exists_null_thm        
+//                         
+/// |- !t. (?x. t) <=> t
 let exists_null_thm = 
     save_thm ("exists_null_thm",
       let s1 = assume_rule (parse_term(@"t:bool")) in
@@ -168,10 +164,9 @@ let exists_null_thm =
          (choose_rule ((parse_term(@"x:'a")), assume_rule (parse_term(@"?(x:'a).t"))) s1))
     )
 
-(* uexists_thm1                                                               *)
-(*                                                                            *)
-(*    |- !P. (?!x. P x) <=> (?x. P x /\ (!y. P y ==> y = x))                  *)
-
+//  uexists_thm1                                             
+//                                                           
+/// |- !P. (?!x. P x) <=> (?x. P x /\ (!y. P y ==> y = x))
 let uexists_thm1 = 
     save_thm ("uexists_thm1",
       let p = (parse_term(@"P:'a->bool")) in
@@ -180,10 +175,9 @@ let uexists_thm1 =
          (gen_rule p (app_beta_rhs_rule uexists_def p)) )
     )
 
-(* uexists_thm2                                                               *)
-(*                                                                            *)
-(*    |- !P. (?!x. P x) <=> (?x. !y. P y <=> x = y)                           *)
-
+//  uexists_thm2                                    
+//                                                  
+/// |- !P. (?!x. P x) <=> (?x. !y. P y <=> x = y)
 let uexists_thm2 = 
     save_thm ("uexists_thm2",
       let y = (parse_term(@"y:'a"))  
@@ -210,10 +204,9 @@ let uexists_thm2 =
                  (sym_rule (undisch_rule (spec_rule y (conjunct2_rule s2)))) )) )))
     )
 
-(* uexists_thm3                                                               *)
-(*                                                                            *)
-(*    |- !P. (?!x. P x) <=> (?x. P x) /\ (!x x'. P x /\ P x' ==> x = x')      *)
-
+//  uexists_thm3                                                         
+//                                                                       
+/// |- !P. (?!x. P x) <=> (?x. P x) /\ (!x x'. P x /\ P x' ==> x = x')
 let uexists_thm3 = 
     save_thm ("uexists_thm3",
       let x = (parse_term(@"x:'a"))  
@@ -254,10 +247,9 @@ let uexists_thm3 =
       ))
     )
 
-(* uexists_one_point_thm                                                      *)
-(*                                                                            *)
-(*    |- !P a. (?!x. x = a /\ P x) <=> P a                                    *)
-
+//  uexists_one_point_thm                  
+//                                         
+/// |- !P a. (?!x. x = a /\ P x) <=> P a
 let uexists_one_point_thm = 
     save_thm ("uexists_one_point_thm",
       let x' = (parse_term(@"x':'a"))  
@@ -280,10 +272,9 @@ let uexists_one_point_thm =
             spec_rule (parse_term(@"(P:'a->bool) a")) conj_id_thm ])
     )
 
-(* skolem_thm                                                                 *)
-(*                                                                            *)
-(*    |- !P. (!x. ?y. P x y) <=> (?f. !x. P x (f x))                          *)
-
+//  skolem_thm                                       
+//                                                   
+/// |- !P. (!x. ?y. P x y) <=> (?f. !x. P x (f x))
 let skolem_thm = 
     save_thm ("skolem_thm",
       gen_rule (parse_term(@"P:'a->'b->bool"))
@@ -302,10 +293,9 @@ let skolem_thm =
                  (spec_rule (parse_term(@"x:'a")) (assume_rule (parse_term(@"!(x:'a). ?(y:'b). P x y")))) )))))
     )
 
-(* unique_skolem_thm                                                          *)
-(*                                                                            *)
-(*    |- !P. (!x. ?!y. P x y) <=> (?f. !x y. P x y <=> f x = y)               *)
-
+//  unique_skolem_thm                                           
+//                                                              
+/// |- !P. (!x. ?!y. P x y) <=> (?f. !x y. P x y <=> f x = y)
 let unique_skolem_thm = 
     save_thm ("unique_skolem_thm",
       let tm1 = (parse_term(@"?f. !(x:'a) (y:'b). P x y <=> f x = y")) in
@@ -322,10 +312,9 @@ let unique_skolem_thm =
           (refl_conv tm1) )
     )
 
-(* not_dist_exists_thm : thm                                                  *)
-(*                                                                            *)
-(*    |- !P. ~ (?x. P x) <=> (!x. ~ P x)                                      *)
-
+//  not_dist_exists_thm : thm            
+//                                       
+/// |- !P. ~ (?x. P x) <=> (!x. ~ P x)
 let not_dist_exists_thm = 
     save_thm ("not_dist_exists_thm",
       let x = (parse_term(@"x:'a")) 
@@ -470,10 +459,9 @@ let ccontr_rule tm th =            (* p    A |- false   *)
         let () = assert1 (concl th = false_tm)      (func,"Arg 2 not `false`") in
         internal_err func
 
-(* not_dneg_thm : thm                                                         *)
-(*                                                                            *)
-(*    |- !p. ~ ~ p <=> p                                                      *)
-
+//  not_dneg_thm : thm   
+//                       
+/// |- !p. ~ ~ p <=> p
 let not_dneg_thm = 
     save_thm ("not_dneg_thm",
       let p = (parse_term(@"p:bool")) in
@@ -493,10 +481,9 @@ let not_dneg_thm =
            (undisch_rule (not_elim_rule (assume_rule (parse_term(@"~ ~ p"))))) ))
     )
 
-(* imp_disj_thm                                                               *)
-(*                                                                            *)
-(*    |- !p q. (p ==> q) <=> (~ p \/ q)                                       *)
-
+//  imp_disj_thm                        
+//                                      
+/// |- !p q. (p ==> q) <=> (~ p \/ q)
 let imp_disj_thm = 
     save_thm ("imp_disj_thm",
       let p = (parse_term(@"p:bool")) 
@@ -518,10 +505,9 @@ let imp_disj_thm =
             (disj1_rule (assume_rule (parse_term(@"~ p"))) q) ))
     )
 
-(* not_dist_conj_thm : thm                                                    *)
-(*                                                                            *)
-(*    |- !p q. ~ (p /\ q) <=> ~ p \/ ~ q                                      *)
-
+//  not_dist_conj_thm : thm              
+//                                       
+/// |- !p q. ~ (p /\ q) <=> ~ p \/ ~ q
 let not_dist_conj_thm = 
     save_thm ("not_dist_conj_thm",
       let p = (parse_term(@"p:bool")) 
@@ -547,10 +533,9 @@ let not_dist_conj_thm =
             (disj1_rule (assume_rule (parse_term(@"~ p"))) (parse_term(@"~ q"))) ))
     )
 
-(* not_dist_forall_thm : thm                                                  *)
-(*                                                                            *)
-(*    |- !P. ~ (!x. P x) <=> (?x. ~ P x)                                      *)
-
+//  not_dist_forall_thm : thm            
+//                                       
+/// |- !P. ~ (!x. P x) <=> (?x. ~ P x)
 let not_dist_forall_thm = 
     save_thm ("not_dist_forall_thm",
       let x = (parse_term(@"x:'a")) 

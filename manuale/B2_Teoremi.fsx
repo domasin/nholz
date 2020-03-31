@@ -41,7 +41,7 @@ $\vdash \forall p.\ p \vee \top \Leftrightarrow \top$
 
 $\vdash \forall p.\ p \vee \bot \Leftrightarrow p$
 
-**[disj _idem\_thm](0007_disj_idem.html)**
+**[disj\_idem\_thm](0007_disj_idem.html)**
 
 $\vdash \forall p.\ p \vee p \Leftrightarrow p$
 
@@ -51,9 +51,6 @@ $\vdash \forall p.\ p \vee p \Leftrightarrow p$
 #load "avvio.fsx"
 open HOL
 (***unhide***)
-
-disj_idem_thm
-// |- !p. p \/ p <=> p
 
 cond_false_thm
 // |- !(t1:'a) t2. (if false then t1 else t2) = t2
@@ -67,142 +64,140 @@ cond_not_thm
 cond_true_thm
 // |- !(t1:'a) t2. (if true then t1 else t2) = t1
 
-//conj_absorb_disj_thm
-//   |- !p q. p /\ (p \/ q) <=> p
+conj_absorb_disj_thm
+// |- !p q. p /\ (p \/ q) <=> p
 
-//conj_assoc_thm
+conj_assoc_thm
 //   |- !p q r. p /\ (q /\ r) <=> (p /\ q) /\ r
 
-//conj_comm_thm
+conj_comm_thm
 //   |- !p q. p /\ q <=> q /\ p
 
-//conj_contr_thm
+conj_contr_thm
 //   |- !p. p /\ ~ p <=> false
 
-//conj_dist_left_disj_thm
+conj_dist_left_disj_thm
 //   |- !p q r. (p \/ q) /\ r <=> (p /\ r) \/ (q /\ r)
 
-//conj_dist_right_disj_thm
+conj_dist_right_disj_thm
 //   |- !p q r. p /\ (q \/ r) <=> (p /\ q) \/ (p /\ r)
 
-//conj_id_thm
+conj_id_thm
 //   |- !p. p /\ true <=> p
 
-//conj_idem_thm
+conj_idem_thm
 //   |- !p. p /\ p <=> p
 
-//conj_zero_thm
+conj_zero_thm
 //   |- !p. p /\ false <=> false
 
-//disj_absorb_conj_thm
+disj_absorb_conj_thm
 //   |- !p q. p \/ (p /\ q) <=> p
 
-//disj_assoc_thm
+disj_assoc_thm
 //   |- !p q r. p \/ (q \/ r) <=> (p \/ q) \/ r
 
-//disj_comm_thm
+disj_comm_thm
 //   |- !p q. p \/ q <=> q \/ p
 
-//disj_dist_left_conj_thm
+disj_dist_left_conj_thm
 //   |- !p q r. (p /\ q) \/ r <=> (p \/ r) /\ (q \/ r)
 
-//disj_dist_right_conj_thm
+disj_dist_right_conj_thm
 //   |- !p q r. p \/ (q /\ r) <=> (p \/ q) /\ (p \/ r)
 
-//exists_dist_disj_thm
+exists_dist_disj_thm
 //   |- !(P:'a->bool) Q. (?x. P x \/ Q x) <=> (?x. P x) \/ (?x. Q x)
 
-//exists_null_thm
+exists_null_thm
 //   |- !t. (?(x:'a). t) <=> t
 
-//exists_one_point_thm
+exists_one_point_thm
 //   |- !(P:'a->bool) a. (?x. x = a /\ P x) <=> P a
 
 //exists_value_thm
 //   |- !(x:'a). ?y. y = x
 
-//forall_dist_conj_thm
+forall_dist_conj_thm
 //   |- !(P:'a->bool) Q. (!x. P x /\ Q x) <=> (!x. P x) /\ (!x. Q x)
 
-//forall_null_thm
+forall_null_thm
 //   |- !t. (!(x:'a). t) <=> t
 
-//forall_one_point_thm
+forall_one_point_thm
 //   |- !(P:'a->bool) a. (!x. x = a ==> P x) <=> P a
 
 //imp_alt_def_thm
 //   |- $==> = (\p q. p /\ q <=> p)
 
-//imp_disj_thm
+imp_disj_thm
 //   |- !p q. (p ==> q) <=> (~ p \/ q)
 
-//imp_dist_left_disj_thm
+imp_dist_left_disj_thm
 //   |- !p q r. (p \/ q ==> r) <=> (p ==> r) /\ (q ==> r)
 
-//imp_dist_right_conj_thm
+imp_dist_right_conj_thm
 //   |- !p q r. (p ==> q /\ r) <=> (p ==> q) /\ (p ==> r)
 
 //imp_imp_thm
 //   |- !p q r. (p ==> q ==> r) <=> (p /\ q ==> r)
 
-//imp_left_id_thm
+imp_left_id_thm
 //   |- !p. (true ==> p) <=> p
 
-//imp_left_zero_thm
+imp_left_zero_thm
 //   |- !p. false ==> p
 
-//imp_refl_thm
+imp_refl_thm
 //   |- !p. p ==> p
 
-//imp_right_zero_thm
+imp_right_zero_thm
 //   |- !p. p ==> true
 
-//not_dist_conj_thm
+not_dist_conj_thm
 //   |- !p q. ~ (p /\ q) <=> ~ p \/ ~ q
 
-//not_dist_disj_thm
+not_dist_disj_thm
 //   |- !p q. ~ (p \/ q) <=> ~ p /\ ~ q
 
-//not_dist_exists_thm
+not_dist_exists_thm
 //   |- !(P:'a->bool). ~ (?x. P x) <=> (!x. ~ P x)
 
-//not_dist_forall_thm
+not_dist_forall_thm
 //   |- !(P:'a->bool). ~ (!x. P x) <=> (?x. ~ P x)
 
-//not_dneg_thm
+not_dneg_thm
 //   |- !p. ~ ~ p <=> p
 
-//not_false_thm
+not_false_thm
 //   |- ~ false <=> true
 
-//not_true_thm
+not_true_thm
 //   |- ~ true <=> false
 
-//select_eq_thm
+select_eq_thm
 //   |- !(a:'a). (@x. x = a) = a
 
-//skolem_thm
+skolem_thm
 //   |- !(P:'a->'b->bool). (!x. ?y. P x y) <=> (?f. !x. P x (f x))
 
-//true_not_eq_false_thm
+true_not_eq_false_thm
 //   |- ~ (true <=> false)
 
-
-
-//uexists_thm1
+uexists_thm1
 //   |- !(P:'a->bool). (?!x. P x) <=> (?x. P x /\ (!y. P y ==> y = x))
 
-//uexists_thm2
+uexists_thm2
 //   |- !(P:'a->bool). (?!x. P x) <=> (?x. !y. P y <=> x = y)
 
-//uexists_thm3
+uexists_thm3
 //   |- !(P:'a->bool). (?!x. P x)
 //                     <=> (?x. P x) /\ (!x' x''. P x' /\ P x'' ==> x' = x'')
 
-//uexists_one_point_thm
+uexists_one_point_thm
 //   |- !(P:'a->bool) a. (?!x. x = a /\ P x) <=> P a
 
-//unique_skolem_thm : thm =
+unique_skolem_thm
 //   |- !(P:'a->'b->bool). (!x. ?!y. P x y) <=> (?f. !x y. P x y <=> f x = y)
 
 
