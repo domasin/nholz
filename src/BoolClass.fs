@@ -13,12 +13,12 @@
 (* http://github.com/domasin/nholz                                        *)
 (* ========================================================================== *)
 
-///This module derives further predicate logic theorems and inference rules.
-///Unlike all preceding derivations, these all use the Axiom of Choice (i.e.
-///'select_ax'), and thus could be considered as classical logic.  However, 
-///note that some of these (such as 'exists_rule') are actually derivable in
-///intuitionistic logic if an alternative definition of existential         
-///quantification is used (as in HOL Light).                                                                                        
+/// This module derives further predicate logic theorems and inference rules.
+/// Unlike all preceding derivations, these all use the Axiom of Choice (i.e.
+/// 'select_ax'), and thus could be considered as classical logic.  However, 
+/// note that some of these (such as 'exists_rule') are actually derivable in
+/// intuitionistic logic if an alternative definition of existential         
+/// quantification is used (as in HOL Light).                                                                                        
 [<AutoOpen>]
 module HOL.BoolClass
 

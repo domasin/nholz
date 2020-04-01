@@ -482,31 +482,304 @@ successo.
 
 Si veda anche: mp\_rule, undisch\_rule.
 
+**eq\_imp\_rule1**
+
+$\dfrac
+{A \vdash p \Leftrightarrow q}
+{A \vdash p \Rightarrow q}
+\textsf{ eq_imp_rule1}
+$
+
+Questa &egrave; la prima regola di eliminazione dell'equivalenza.
+Prende un teorema che afferma l'equivalenza di due termini booleani, e 
+restituisce un teorema che afferna che il sinistro implica il destro, 
+sotto le stesse assunzioni.
+
+Si veda anche: eq\_imp\_rule2, imp\_antisym\_rule, eq\_mp\_rule, undisch\_rule, mk\_imp\_rule.
+
+**eq\_imp\_rule2**
+
+$\dfrac
+{A \vdash p \Leftrightarrow q}
+{A \vdash q \Rightarrow p}
+\textsf{ eq_imp_rule2}
+$
+
+Questa &egrave; la seconda regola di eliminazione dell'equivalenza.
+Prende un teorema che afferma l'equivalenza di due termini booleani, e 
+restituisce un teorema che afferna che il destro implica il sinistro, 
+sotto le stesse assunzioni.
+
+Si veda anche: eq\_imp\_rule1, imp\_antisym\_rule, eq\_mp\_rule, undisch\_rule, mk\_imp\_rule.
+
+**not\_intro\_rule**
+
+$\dfrac
+{A \vdash p \Rightarrow \bot}
+{A \vdash \neg p}
+\textsf{ not_intro_rule}
+$
+
+Questa &egrave; la regola di introduzione della negazione logica. Prende un 
+teorema di implicazione dove il lato destro &egrave; `false`, e restituisce la 
+negazione logica del lato sinistro, sotto le stesse assunzioni.
+
+Si veda anche: not\_elim\_rule, eqf\_elim\_rule, eqf\_intro\_rule, deduct\_contrapos\_rule.
+
+**not\_elim\_rule**
+
+$\dfrac
+{A \vdash \neg p}
+{A \vdash p \Rightarrow \bot}
+\textsf{ not_elim_rule}
+$
+
+Questa &egrave; la regola di eliminazione della negazione logica. Prende 
+un teorema di negazione logica, e restituisce un'implicazione con 
+il termine negato sul lato sinistro e `false` sul lato destro, sotto le 
+stesse assunzioni.
+
+Si veda anche: not\_intro\_rule, eqf\_intro\_rule, eqf\_elim\_rule.
+
+**deduct\_contrapos\_rule**
+
+$\dfrac
+{q \qquad A \vdash p}
+{A \cup \{\neg p\} \setminus \{q\} \vdash \neg q}
+\textsf{ deduct_contrapos_rule}
+$
+
+Questa &egrave; la regola di contraddizione per la deduzione. Scambia e 
+nega logicamente il termine dell'assunzione fornita e la conclusione del 
+teorema fornito. Si noti che il termine fornito non deve essere presente 
+nelle assunzioni del teorema di input perhc&eacute; la regola abbia successo. 
+Se la negazione logica della conclusione del teorema in input coincide con 
+il termine fornito, allora non occorrer&agrave; nelle assunzioni del teorema 
+risultante.
+
+See also: not\_intro\_rule, disch\_rule, contr\_rule, ccontr\_rule.
+
+**eqf\_elim\_rule**
+
+$\dfrac
+{A \vdash p \Leftrightarrow \bot}
+{A \vdash \neg p}
+\textsf{ eqf_elim_rule}
+$
+
+Questa &egrave; la regola di eliminazione di equivalenza a falso. Prende un 
+teoram di equivalenza con la `false` sulla destra, e restituisce la negazione 
+logica del lato sinistro, sotto le stesse assunzioni.
+
+Si veda anche: eqf\_intro\_rule, not\_intro\_rule, not\_elim\_rule, mk\_not\_rule,
+eqt\_elim\_rule, deduct\_contrapos\_rule.
+
+**imp\_trans\_rule**
+
+$\dfrac
+{A_1 \vdash p \Rightarrow q \qquad A_2 \vdash q \Rightarrow r}
+{A_1 \cup A_2 \vdash p \Rightarrow r}
+\textsf{ imp_trans_rule}
+$
+
+Questa &egrave; la regola di transitivt&agrave; per l'implicazione. Prende due 
+teoremi d'implicazione come argomenti, dove il lato destro del primo teorema 
+&egrave; lo stesso (modulo alfa-equivalenza) del lato sinistro del secondo. 
+Restituisce un teorema che afferma che il lato sinistro del primo teorema 
+implica il lato destro del secondo, sotto l'unione delle assunzione dei due 
+teoremi.
+
+Si veda anche: list\_imp\_trans\_rule, eq\_trans\_rule, disch\_rule, imp\_anitsym\_asm\_rule.
+
+**list\_imp\_trans\_rule**
+
+Si veda anche: imp\_trans\_rule.
+
+**list\_spec\_rule**
+
+$\dfrac
+{[t_1;t_2;\dots] \qquad A \vdash \forall x_1\ x_2\ \dots p}
+{A \vdash p[t_1/x_1; t_2/x_2; \dots]}
+\textsf{ list_spec_rule}
+$
+
+Questa &egrave; la regola di eliminazine universale composta. Spoglia il 
+quantificatore universale pi&ugrave; esterno del teorema fornito per 
+ogni elemento nella lista di termini fornita, sostituendo nel corpo ciascuna 
+occorrenza di una variabile legata eliminata con il corrispondente elemento 
+nella lista di termini. Il tipo di ogni termine nella lista deve essere 
+uguale al tipo della sua corrispondente variabile.
+
+Si veda anche: spec\_rule, spec\_all\_rule, bspec\_rule, list\_gen\_rule.
+
+**spec\_all\_rule**
+
+$\dfrac
+{A \vdash \forall x_1\ x_2 \dots x_n.\ p}
+{A \vdash p}
+\textsf{ spec_all_rule}
+$
+
+Questa &egrave; la regola composta di eliminazione di default del quantificatore 
+universale. Elimina tutti i quantificatori universali esterni dal teorema fornito. 
+Si noti che il teorema fornito non deve necessariamente essere una quantificazione 
+universale perch&egrave; il teorema abbia successo (in  questo caso il teorema 
+risultante &egrave; semplicemente lo stesso del teorema fornito):
+
+Si veda anche: spec\_rule, list\_spec\_rule, bspec\_rule, list\_gen\_rule.
+
+**bspec\_rule**                                 
+
+$\dfrac
+{\lambda y.\ t \qquad A \vdash \forall x.\ p}
+{A \vdash p[\lambda y.\ t\ /\ x; t[s/y] /\ x\ s]}
+\textsf{ bspec_rule}
+$
+
+Questa &egrave; la regola di eliminazione del quantifcatore universale con 
+beta-riduzione. Toglie il quantificatore universale pi&ugrave; esterno dal 
+teorema fornito, e sostituisce nel corpo ogni occorrenza della variabile legata 
+eliminata con il termine fornito. Se il termine in input &egrave; una lambda 
+astrazione, esegue anche la beta riduzione di ogni occorrenza sostituita che 
+sia applicata ad un argomento. Il tipo del termine fornito deve essere uguale 
+al tipo della variabile legata eliminata.
+
+Si veda anche: spec\_rule, list\_spec\_rule, spec\_all\_rule, gen\_rule.
+
+**contr\_rule**
+
+$\dfrac
+{p \qquad A \vdash \bot}
+{A \vdash p}
+\textsf{ contr_rule}
+$
+
+Questa &egrave; la regola di contraddizione della logica intuizionista. Prende 
+un termine booleano e un teorema con falso come conclusione. Restituisce un 
+teorema con il termine fornito come sua conclusione, sotto le stess assunzioni 
+del teorema fornito.
+
+See also: ccontr\_rule, deduct\_contrapos\_rule.
+
+**eta\_conv**
+
+$\dfrac
+{\lambda x.\ f\ x}
+{A \vdash (\lambda x.\ f\ x) = f}
+\textsf{ eta_conv}
+$
+
+Questa &egrave; la regola di eta riduzione. Prende un termine di lambda 
+astrazione, dove il corpo &egrave; un'applicazione di funzione, e la variabile 
+legata &egrave; il sottotermine argomento dell'applicazione della funzione e 
+non &egrave; libera nel sottotermine funzione. Restituisce un teoream che 
+afferma che il termine &egrave; uguale al sottotermine funzione, senza alcuna 
+assunzione.
+
+Si veda anche: beta\_conv.
+
+**imp\_antisym\_rule**
+
+$\dfrac
+{A_1 \vdash p \Rightarrow q \qquad A_2 \vdash q \Rightarrow p}
+{A_1 \cup A_2 \vdash p \Leftrightarrow q}
+\textsf{ imp_antisym_rule}
+$
+
+Questa &egrave; la regola di antisimmetria per l'implicazione. Prende due 
+teoremi di implicazione come argomenti, dove il lato sinistro di ciascuno 
+&egrave; lo stesso (modulo alfa-equivalenza) del lato destro dell'altro. 
+Restituisce 
+
+Si veda anche: list\_gen\_rule, spec\_rule, mk\_forall\_rule.
+
+**deduct\_antisym\_rule**
+
+$\dfrac
+{A_1 \vdash p  \qquad A_2 \vdash q }
+{A_1 \setminus \{q\} \cup A_2 \setminus \{p\} \vdash p \Leftrightarrow q}
+\textsf{ deduct_antisym_rule}
+$
+
+Questa &egrave; la regola di antisimmetria per la deduzione. Prende due 
+teoremi come argomenti. Restituisce un teorema che afferma che le conclusioni 
+fornite sono equivalente, sotto l'unione delle assunzioni ma con la conclusione 
+di un teorema rimossa dalle assunzioni dell'altro
+
+See also: imp\_antisym\_rule, undisch\_rule.
+
+**sym\_conv**
+
+$\dfrac
+{t_1 = t_2}
+{\vdash t_1 = t_2 \Leftrightarrow t_2 = t_2}
+\textsf{ sym_conv}
+$
+
+Questa &egrave; la conversione di simmetria per l'uguaglianza. Trasforma il 
+termine di ugualianza fornito scambiando il lato sinistro con il destro, senza 
+alcuna assunzione.
+
+Si veda anche: sym\_rule, refl\_conv.
+
+**eqt\_intro\_rule**
+
+$\dfrac
+{A \vdash p}
+{A \vdash p \Leftrightarrow \top}
+\textsf{ eqt_intro_rule}
+$
+
+Questa &egrave; la regola di introduzione di equivalenza a vero. Prende un 
+qualsiasi teorema, e restituisce il teorema che afferma che la conclusione 
+&egrave; equivalente a `true`, sotto le stesse assunzioni.
+
+Si veda anche: eqt\_elim\_rule, eq\f_intro\_rule.
+
+**eqf\_intro\_rule**                     
+
+$\dfrac
+{A \vdash \neg p}
+{A \vdash p \Leftrightarrow \bot}
+\textsf{ eqf_intro_rule}
+$
+
+Questa &egrave; la regola di introduzione di equivalenza a falso. Prende un 
+teoram con la negazione logica come sua conclusione, e restituisce un teoram 
+che afferma che il corpo della negazione &egrave; equivalente a `false`, sotto 
+le stesse assunzioni.
+
+Si veda anche: eqf\_elim\_rule, not\_elim\_rule, not\_intro\_rule, mk\_not\_rule,
+eqt\_intro\_rule.
+
+**gen\_rule**
+
+$\dfrac
+{x \qquad A \vdash p}
+{A \vdash \forall x.\ p}
+\textsf{ gen_rule}
+$
+
+per x non libera in A 
+
+Questa &egrave; di introduzione del quantificatore universale. Quantifica 
+universamente il teorema fornito con la variabile legata fornita sotto le 
+stesse assunzioni. La variabile legata non deve comparire libera nelle 
+assunzioni.
+
+Si veda anche: list\_gen\_rule, spec\_rule, mk\_forall\_rule.
+
 *)
 
 
 
+                          
+                                         
 
 
 
 
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
- 
-
+                               
 
 
 
@@ -522,30 +795,6 @@ Si veda anche: mp\_rule, undisch\_rule.
 #r "nholz.dll"
 open HOL
 
-
-
-(**
-
-| Bool.bspec\_rule                                        
--------------------
-
-Questa &egrave; la regola di eliminazione del quantifcatore universale con 
-beta-riduzione. Toglie il quantificatore universale pi&ugrave; esterno dal 
-teorema fornito, e sostituisce nel corpo ogni occorrenza della variabile legata 
-eliminata con il termine fornito. Se il termine in input &egrave; una lambda 
-astrazione, esegue anche la beta riduzione di ogni occorrenza sostituita che 
-sia applicata ad un argomento. Il tipo del termine fornito deve essere uguale 
-al tipo della variabile legata eliminata.
-
-Si veda anche: spec\_rule, list\_spec\_rule, spec\_all\_rule, gen\_rule.
-
-*)
-
-bspec_rule
-
-//         `\y. t`   A |- !x. p
-//   --------------------------------
-//   A |- p[ \y.t / x; t[s/y] / x s ]
 
 (**
 
@@ -650,69 +899,6 @@ conjunct2_rule
 
 (**
 
-| Bool.contr\_rule                                      
--------------------
-
-Questa &egrave; la regola di contraddizione della logica intuizionista. Prende 
-un termine booleano e un teorema con falso come conclusione. Restituisce un 
-teorema con il termine fornito come sua conclusione, sotto le stess assunzioni 
-del teorema fornito.
-
-See also: ccontr\_rule, deduct\_contrapos\_rule.
-
-*)
-
-contr_rule
-
-//  `p`   A |- false                                                       
-//  ----------------                                                       
-//       A |- p        
-
-(**
-
-| Bool.deduct\_antisym\_rule                                      
--------------------
-
-Questa &egrave; la regola di antisimmetria per la deduzione. Prende due 
-teoremi come argomenti. Restituisce un teorema che afferma che le conclusioni 
-fornite sono equivalente, sotto l'unione delle assunzioni ma con la conclusione 
-di un teorema rimossa dalle assunzioni dell'altro
-
-See also: imp\_antisym\_rule, undisch\_rule.
-
-*)
-
-deduct_antisym_rule
-
-//       A1 |- p    A2 |- q      
-//   --------------------------              
-//   A1\{q} u A2\{p} |- p <=> q   
-
-(**
-
-| Bool.deduct\_contrapos\_rule                                      
--------------------
-
-Questa &egrave; la regola di contraddizione per la deduzione. Scambia e 
-nega logicamente il termine dell'assunzione fornita e la conclusione del 
-teorema fornito. Si noti che il termine fornito non deve essere presente 
-nelle assunzioni del teorema di input perhc&eacute; la regola abbia successo. 
-Se la negazione logica della conclusione del teorema in input coincide con 
-il termine fornito, allora non occorrer&agrave; nelle assunzioni del teorema 
-risultante.
-
-See also: not\_intro\_rule, disch\_rule, contr\_rule, ccontr\_rule.
-
-*)
-
-deduct_contrapos_rule
-
-//       `q`   A |- p                                                     
-//   ---------------------                                                
-//   (A u {~p})\{q} |- ~ q      
-
-(**
-
 | Bool.disj1\_rule                                     
 -------------------
 
@@ -769,129 +955,11 @@ disj_cases_rule
 //  A |- p \/ q    A1 |- r    A2 |- r                                       
 //  ---------------------------------                                       
 //      A u A1\{p} u A2\{q} |- r     
-
-(**
-
-| Bool.eq\_imp\_rule1                                 
--------------------
-
-Questa &egrave; la prima regola di eliminazione dell'equivalenza.
-Prende un teorema che afferma l'equivalenza di due termini booleani, e 
-restituisce un teorema che afferna che il sinistro implica il destro, 
-sotto le stesse assunzioni.
-
-Si veda anche: eq\_imp\_rule2, imp\_antisym\_rule, eq\_mp\_rule, undisch\_rule, mk\_imp\_rule.
-
-*)
-
-eq_imp_rule1
-
-// A |- p <=> q
-// ------------
-// A |- p ==> q
-
-(**
-
-| Bool.eq\_imp\_rule2                                 
--------------------
-
-Questa &egrave; la seconda regola di eliminazione dell'equivalenza.
-Prende un teorema che afferma l'equivalenza di due termini booleani, e 
-restituisce un teorema che afferna che il destro implica il sinistro, 
-sotto le stesse assunzioni.
-
-Si veda anche: eq\_imp\_rule1, imp\_antisym\_rule, eq\_mp\_rule, undisch\_rule, mk\_imp\_rule.
-
-*)
-
-eq_imp_rule2
-
-// A |- p <=> q
-// ------------
-// A |- q ==> p
+ 
 
 
-(**
 
-| Bool.eqf\_elim\_rule                              
--------------------
 
-Questa &egrave; la regola di eliminazione di equivalenza a falso. Prende un 
-teoram di equivalenza con la `false` sulla destra, e restituisce la negazione 
-logica del lato sinistro, sotto le stesse assunzioni.
-
-Si veda anche: eqf\_intro\_rule, not\_intro\_rule, not\_elim\_rule, mk\_not\_rule,
-eqt\_elim\_rule, deduct\_contrapos\_rule.
-
-*)
-
-eqf_elim_rule
-
-//  A |- p <=> false                                                     
-//  ----------------                                                     
-//      A |- ~ p       
-
-(**
-
-| Bool.eqf\_intro\_rule                            
--------------------
-
-Questa &egrave; la regola di introduzione di equivalenza a falso. Prende un 
-teoram con la negazione logica come sua conclusione, e restituisce un teoram 
-che afferma che il corpo della negazione &egrave; equivalente a `false`, sotto 
-le stesse assunzioni.
-
-Si veda anche: eqf\_elim\_rule, not\_elim\_rule, not\_intro\_rule, mk\_not\_rule,
-eqt\_intro\_rule.
-
-*)
-
-eqf_intro_rule
-
-//      A |- ~ p                                                           
-//  ----------------                                                       
-//  A |- p <=> false   
-
-(**
-
-| Bool.eqt\_intro\_rule                        
--------------------
-
-Questa &egrave; la regola di introduzione di equivalenza a vero. Prende un 
-qualsiasi teorema, e restituisce il teorema che afferma che la conclusione 
-&egrave; equivalente a `true`, sotto le stesse assunzioni.
-
-Si veda anche: eqt\_elim\_rule, eq\f_intro\_rule.
-
-*)
-
-eqt_intro_rule
-
-//       A |- p                                                         
-//  ---------------                                                     
-//  A |- p <=> true      
-
-(**
-
-| Bool.eta\_conv                       
--------------------
-
-Questa &egrave; la regola di eta riduzione. Prende un termine di lambda 
-astrazione, dove il corpo &egrave; un'applicazione di funzione, e la variabile 
-legata &egrave; il sottotermine argomento dell'applicazione della funzione e 
-non &egrave; libera nel sottotermine funzione. Restituisce un teoream che 
-afferma che il termine &egrave; uguale al sottotermine funzione, senza alcuna 
-assunzione.
-
-Si veda anche: beta\_conv.
-
-*)
-
-eta_conv
-
-//     `\x. f x`                                                           
-//  ----------------                                                       
-//  |- (\x. f x) = f   
 
 
 (**
@@ -1191,117 +1259,6 @@ exists_rule
 //  `?x. p`   `t`   A |- p[t/x]                                            
 //  ---------------------------                                            
 //          A |- ?x. p    
-
-(**
-
-| Bool.gen\_rule                  
--------------------
-
-Questa &egrave; di introduzione del quantificatore universale. Quantifica 
-universamente il teorema fornito con la variabile legata fornita sotto le 
-stesse assunzioni. La variabile legata non deve comparire libera nelle 
-assunzioni.
-
-Si veda anche: list\_gen\_rule, spec\_rule, mk\_forall\_rule.
-
-*)
-
-gen_rule
-
-// `x`   A |- p         [ "x" not free in `A` ]                           
-// ------------                                                           
-//  A |- !x. p        
-
-
-(**
-
-| Bool.imp\_antisym\_rule                  
--------------------
-
-Questa &egrave; la regola di antisimmetria per l'implicazione. Prende due 
-teoremi di implicazione come argomenti, dove il lato sinistro di ciascuno 
-&egrave; lo stesso (modulo alfa-equivalenza) del lato destro dell'altro. 
-Restituisce 
-
-Si veda anche: list\_gen\_rule, spec\_rule, mk\_forall\_rule.
-
-*)
-
-imp_antisym_rule
-
-//   A1 |- p ==> q    A2 |- q ==> p                                       
-//   ------------------------------                                       
-//         A1 u A2 |- p <=> q   
-
-(**
-
-| Bool.imp\_trans\_rule                 
--------------------
-
-Questa &egrave; la regola di transitivt&agrave; per l'implicazione. Prende due 
-teoremi d'implicazione come argomenti, dove il lato destro del primo teorema 
-&egrave; lo stesso (modulo alfa-equivalenza) del lato sinistro del secondo. 
-Restituisce un teorema che afferma che il lato sinistro del primo teorema 
-implica il lato destro del secondo, sotto l'unione delle assunzione dei due 
-teoremi.
-
-Si veda anche: list\_imp\_trans\_rule, eq\_trans\_rule, disch\_rule, imp\_anitsym\_asm\_rule.
-
-*)
-
-imp_trans_rule
-
-//  A1 |- p ==> q    A2 |- q ==> r                                        
-//  ------------------------------                                        
-//        A1 u A2 |- p ==> r        
-
-(**
-
-| Bool.inst\_rule                 
--------------------
-
-...
-
-Si veda anche: gen_rule, list_spec_rule.
-
-*)
-
-list_gen_rule
-
-(**
-
-| Bool.list\_imp\_trans\_rule            
--------------------
-
-...
-
-Si veda anche: imp\_trans\_rule.
-
-*)
-
-list_imp_trans_rule
-
-(**
-
-| Bool.list\_spec\_rule          
--------------------
-
-Questa &egrave; la regola di eliminazine universale composta. Spoglia il 
-quantificatore universale pi&ugrave; esterno del teorema fornito per 
-ogni elemento nella lista di termini fornita, sostituendo nel corpo ciascuna 
-occorrenza di una variabile legata eliminata con il corrispondente elemento 
-nella lista di termini. Il tipo di ogni termine nella lista deve essere 
-uguale al tipo della sua corrispondente variabile.
-
-Si veda anche: spec\_rule, spec\_all\_rule, bspec\_rule, list\_gen\_rule.
-
-*)
-
-list_spec_rule
-
-//  [`t1`;`t2`;..]   A |- !x1 x2 .. . p                                   
-//  -----------------------------------                                   
-//         A |- p[t1/x1;t2/x2;..]    
 
 
 
@@ -1773,47 +1730,7 @@ mk_uexists_rule
 
 //      `x`   A |- p1 <=> p2        [ "x" not free in `A` ]               
 //  ----------------------------                                          
-//  A |- (?!x. p1) <=> (?!x. p2)             
-
-(**
-
-| Bool.not\_elim\_rule
--------------------
-
-Questa &egrave; la regola di eliminazione della negazione logica. Prende 
-un teorema di negazione logica, e restituisce un'implicazione con 
-il termine negato sul lato sinistro e `false` sul lato destro, sotto le 
-stesse assunzioni.
-
-Si veda anche: not\_intro\_rule, eqf\_intro\_rule, eqf\_elim\_rule.
-
-*)
-
-not_elim_rule
-
-//      A |- ~ p                                                          
-//  ----------------                                                      
-//  A |- p ==> false     
-
-
-(**
-
-| Bool.not\_intro\_rule
--------------------
-
-Questa &egrave; la regola di introduzione della negazione logica. Prende un 
-teorema di implicazione dove il lato destro &egrave; `false`, e restituisce la 
-negazione logica del lato sinistro, sotto le stesse assunzioni.
-
-Si veda anche: not\_elim\_rule, eqf\_elim\_rule, eqf\_intro\_rule, deduct\_contrapos\_rule.
-
-*)
-
-not_intro_rule
-
-//  A |- p ==> false                                                      
-//  ----------------                                                      
-//      A |- ~ p     
+//  A |- (?!x. p1) <=> (?!x. p2)              
 
 (**
 
@@ -1834,48 +1751,4 @@ select_rule
 //     A |- ?x. p                                                         
 //  ----------------                                                      
 //  A |- p[(@x.p)/x]   
-
-(**
-
-| Bool.spec\_all\_rule
--------------------
-
-Questa &egrave; la regola composta di eliminazione di default del quantificatore 
-universale. Elimina tutti i quantificatori universali esterni dal teorema fornito. 
-Si noti che il teorema fornito non deve necessariamente essere una quantificazione 
-universale perch&egrave; il teorema abbia successo (in  questo caso il teorema 
-risultante &egrave; semplicemente lo stesso del teorema fornito):
-
-Si veda anche: spec\_rule, list\_spec\_rule, bspec\_rule, list\_gen\_rule.
-
-*)
-
-spec_all_rule
-
-//  A |- !x1 x2 .. xn. p                                                  
-//  --------------------                                                  
-//         A |- p  
-
-(**
-
-| Bool.sym\_conv
--------------------
-
-Questa &egrave; la conversione di simmetria per l'uguaglianza. Trasforma il 
-termine di ugualianza fornito scambiando il lato sinistro con il destro, senza 
-alcuna assunzione.
-
-Si veda anche: sym\_rule, refl\_conv.
-
-*)
-
-sym_conv
-
-//          `t1 = t2`                                                      
-//   ----------------------                                                
-//   |- t1 = t2 <=> t2 = t1      
-
-
-
-
 

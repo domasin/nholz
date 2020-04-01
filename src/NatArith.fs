@@ -146,10 +146,9 @@ let add_comm_thm =
                   ])))))
     )
 
-(* add_assoc_thm                                                              *)
-(*                                                                            *)
-(*    |- !l m n. l + (m + n) = (l + m) + n                                    *)
-
+//  add_assoc_thm                          
+//                                         
+/// |- !l m n. l + (m + n) = (l + m) + n
 let add_assoc_thm = 
     save_thm ("add_assoc_thm",
       list_gen_rule [(parse_term(@"l:nat"));m]

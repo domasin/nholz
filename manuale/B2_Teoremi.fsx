@@ -2,49 +2,68 @@
 TEOREMI
 =============
 
+**[truth\_thm](0001_truth.html)**
+
+$\vdash \top$
+
+true &egrave; derivabile.
+
 Lambda Calcolo
 ------------
 
-**[fun\_eq\_thm](0001_fun_eq.html)**
+**[fun\_eq\_thm](0002_fun_eq.html)**
 
 $\vdash \forall (f:\alpha \rightarrow \beta)\ g.\ f = g\ \Leftrightarrow\ (\forall x.\ f\ x = g\ x)$
 
 L'euivalenza tra funzione corrisponde all'equivalenza dei loro valori a parit&agrave; di argomento.
 
 
-Logica Predicativa
+Propriet&agrave; algebriche degli operatori logici
 ------------
 
-**[truth\_thm](0002_truth.html)**
+**[disj\_id\_thm](0016_disj_id.html)**
 
-$\vdash \top$
+$\vdash \forall p.\ p \vee \bot \Leftrightarrow p$
 
-true &egrave; derivabile.
+**[disj\_zero\_thm](0017_disj_zero.html)**
 
-**[excluded\_middle\_thm](0003_excluded_midle.html)**
+$\vdash \forall p.\ p \vee \top \Leftrightarrow \top$
+
+**[disj\_idem\_thm](0018_disj_idem.html)**
+
+$\vdash \forall p.\ p \vee p \Leftrightarrow p$
+
+...
+
+Logica classica
+----------------
+
+Tutti i teoremi seguenti sono derivati attraverso l'assioma di scelta e per tanto 
+possono essere considerati come logica classica.
+
+Va comunque notato che alcuni sono di fatto derivabili nella logica intuizionista 
+se si utilizza una definizione alternativa dell quantificatore esistenziale 
+(come in HOL Light).
+
+**[excluded\_middle\_thm](0044_excluded_midle.html)**
 
 $\vdash \forall p.\ p \vee \neg p$
 
 Per ogni proposizione, o essa &egrave; dimostrabile o lo &egrave; la sua negazione
 
-**[bool\_cases\_thm](0004_bool_cases.html)**
+**[bool\_cases\_thm](0045_bool_cases.html)**
 
 $\vdash \forall p.\ (p \Leftrightarrow \top) \vee (p \Leftrightarrow \bot)$
 
 Per ogni proposizione, o essa equivale a true oppure equivale a false
 
-**[disj\_zero\_thm](0005_disj_zero.html)**
+...
 
-$\vdash \forall p.\ p \vee \top \Leftrightarrow \top$
+*)
 
-**[disj\_id\_thm](0006_disj_id.html)**
-
-$\vdash \forall p.\ p \vee \bot \Leftrightarrow p$
-
-**[disj\_idem\_thm](0007_disj_idem.html)**
-
-$\vdash \forall p.\ p \vee p \Leftrightarrow p$
-
+(**
+Work in progress
+-----
 *)
 
 (***hide***)
@@ -201,41 +220,45 @@ unique_skolem_thm
 //   |- !(P:'a->'b->bool). (!x. ?!y. P x y) <=> (?f. !x y. P x y <=> f x = y)
 
 
-(***hide***)
-//********************************************************************************
 
-//PAIRS
 
-//fst_snd_thm
+(**
+PAIRS
+----
+*)
+
+fst_snd_thm
 //   |- !(p:'a#'b). (FST p, SND p) = p
 
-//fst_thm
+fst_thm
 //   |- !(x:'a) (y:'b). FST (x,y) = x
 
-//pair_eq_thm
+pair_eq_thm
 //   |- !(x:'a) (y:'b) u v. (x,y) = (u,v) <=> x = u /\ y = v
 
-//pair_surjective_thm
+pair_surjective_thm
 //   |- !(p:'a#'b). ?x y. p = (x,y)
 
-//snd_thm
+snd_thm
 //   |- !(x:'a) (y:'b). SND (x,y) = y
 
-//********************************************************************************
+(**
+INDIVIDUALS
+----
+*)
 
-//INDIVIDUALS
-
-//ind_suc_injective_thm
+ind_suc_injective_thm
 //   |- !i j. IND_SUC i = IND_SUC j <=> i = j
 
-//ind_suc_not_zero_thm
+ind_suc_not_zero_thm
 //   |- !i. ~ (IND_SUC i = IND_ZERO)
 
-//********************************************************************************
+(**
+NATURAL NUMBERS
+----
+*)
 
-//NATURAL NUMBERS
-
-//add_assoc_thm
+add_assoc_thm
 //   |- !l m n. l + (m + n) = (l + m) + n
 
 //add_comm_thm

@@ -35,13 +35,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "it", "it", "{40DAE171-1C4D-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{FD66B3EA-18DF-4072-8DB1-39615AEA55AB}"
 	ProjectSection(SolutionItems) = preProject
-		docs\0001_fun_eq.html = docs\0001_fun_eq.html
-		docs\0002_truth.html = docs\0002_truth.html
-		docs\0003_excluded_midle.html = docs\0003_excluded_midle.html
-		docs\0004_bool_cases.html = docs\0004_bool_cases.html
-		docs\0005_disj_zero.html = docs\0005_disj_zero.html
-		docs\0006_disj_id.html = docs\0006_disj_id.html
-		docs\0007_disj_idem.html = docs\0007_disj_idem.html
+		docs\0001_truth.html = docs\0001_truth.html
+		docs\0002_fun_eq.html = docs\0002_fun_eq.html
+		docs\0016_disj_id.html = docs\0016_disj_id.html
+		docs\0017_disj_zero.html = docs\0017_disj_zero.html
+		docs\0018_disj_idem.html = docs\0018_disj_idem.html
+		docs\0044_excluded_midle.html = docs\0044_excluded_midle.html
+		docs\0045_bool_cases.html = docs\0045_bool_cases.html
 		docs\1_Introduzione.html = docs\1_Introduzione.html
 		docs\3_Liguaggio_HOL.html = docs\3_Liguaggio_HOL.html
 		docs\A5_Inference_Rules.html = docs\A5_Inference_Rules.html
@@ -68,13 +68,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "teoremi", "teoremi", "{45C51ED2-5DF6-44E6-B236-069DFB94A683}"
 	ProjectSection(SolutionItems) = preProject
-		manuale\teoremi\0001_fun_eq.fsx = manuale\teoremi\0001_fun_eq.fsx
-		manuale\teoremi\0002_truth.fsx = manuale\teoremi\0002_truth.fsx
-		manuale\teoremi\0003_excluded_midle.fsx = manuale\teoremi\0003_excluded_midle.fsx
-		manuale\teoremi\0004_bool_cases.fsx = manuale\teoremi\0004_bool_cases.fsx
-		manuale\teoremi\0005_disj_zero.fsx = manuale\teoremi\0005_disj_zero.fsx
-		manuale\teoremi\0006_disj_id.fsx = manuale\teoremi\0006_disj_id.fsx
-		manuale\teoremi\0007_disj_idem.fsx = manuale\teoremi\0007_disj_idem.fsx
+		manuale\teoremi\0001_truth.fsx = manuale\teoremi\0001_truth.fsx
+		manuale\teoremi\0002_fun_eq.fsx = manuale\teoremi\0002_fun_eq.fsx
+		manuale\teoremi\0016_disj_id.fsx = manuale\teoremi\0016_disj_id.fsx
+		manuale\teoremi\0017_disj_zero.fsx = manuale\teoremi\0017_disj_zero.fsx
+		manuale\teoremi\0018_disj_idem.fsx = manuale\teoremi\0018_disj_idem.fsx
+		manuale\teoremi\0044_excluded_midle.fsx = manuale\teoremi\0044_excluded_midle.fsx
+		manuale\teoremi\0045_bool_cases.fsx = manuale\teoremi\0045_bool_cases.fsx
 	EndProjectSection
 EndProject
 Global

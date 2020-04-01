@@ -117,10 +117,9 @@ let ind_zero_tm = (parse_term(@"IND_ZERO"))
 
 let ind_suc_fn = (parse_term(@"IND_SUC"))
 
-(* ind_suc_injective_thm : thm                                                *)
-(*                                                                            *)
-(*    |- !i j. IND_SUC i = IND_SUC j <=> i = j                                *)
-
+//  ind_suc_injective_thm : thm                
+//                                             
+/// |- !i j. IND_SUC i = IND_SUC j <=> i = j
 let ind_suc_injective_thm = 
     save_thm ("ind_suc_injective_thm",
       let i = (parse_term(@"i:ind")) 
@@ -144,10 +143,9 @@ let ind_suc_injective_thm =
               (assume_rule (parse_term(@"(i:ind)=j"))) )))
     )
 
-(* ind_suc_not_zero_thm : thm                                                 *)
-(*                                                                            *)
-(*    |- !i. ~(IND_SUC i = IND_ZERO)                                          *)
-
+//  ind_suc_not_zero_thm : thm       
+//                                   
+/// |- !i. ~(IND_SUC i = IND_ZERO)
 let ind_suc_not_zero_thm = 
     save_thm ("ind_suc_not_zero_thm",
       conjunct2_rule ind_suc_zero_spec

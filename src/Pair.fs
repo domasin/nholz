@@ -287,10 +287,9 @@ let pair_eq_thm =
             (conj_rule (refl_conv x) (refl_conv y)) ))
     )
 
-(* pair_surjective_thm                                                        *)
-(*                                                                            *)
-(*    |- !p. ?x y. p = (x,y)                                                  *)
-
+//  pair_surjective_thm      
+//                           
+/// |- !p. ?x y. p = (x,y)
 let pair_surjective_thm = 
     save_thm ("pair_surjective_thm",
       let a = (parse_term(@"a:'a")) 
@@ -350,10 +349,9 @@ let fst_def = new_const_definition (parse_term(@"FST = \(p:'a#'b). @x. ?y. p = (
 /// |- SND = (\(p:'a#'b). @y. ?x. p = (x,y))
 let snd_def = new_const_definition (parse_term(@"SND = \(p:'a#'b). @y. ?x. p = (x,y)"))
 
-(* fst_thm                                                                    *)
-(*                                                                            *)
-(*    |- !x y. FST (x,y) = x                                                  *)
-
+//  fst_thm               
+//                        
+/// |- !x y. FST (x,y) = x
 let fst_thm = 
     save_thm ("fst_thm",
       let x = (parse_term(@"x:'a")) 
@@ -387,10 +385,9 @@ let fst_thm =
           ] )
     )
 
-(* snd_thm                                                                    *)
-(*                                                                            *)
-(*    |- !x y. SND (x,y) = y                                                  *)
-
+//  snd_thm                  
+//                           
+/// |- !x y. SND (x,y) = y
 let snd_thm = 
     save_thm ("snd_thm",
       let x = (parse_term(@"x:'a"))
@@ -423,10 +420,9 @@ let snd_thm =
          ] )
     )
 
-(* fst_snd_thm                                                                *)
-(*                                                                            *)
-(*    |- !p. (FST p, SND p) = p                                               *)
-
+//  fst_snd_thm                 
+//                              
+/// |- !p. (FST p, SND p) = p
 let fst_snd_thm = 
     save_thm ("fst_snd_thm",
       let x = (parse_term(@"x:'a")) 
