@@ -33,6 +33,10 @@ $\vdash \forall p.\ p \vee \top \Leftrightarrow \top$
 
 $\vdash \forall p.\ p \vee p \Leftrightarrow p$
 
+**[not\_true\_thm](0003_not_true.html)**
+
+$\vdash \neg \top \Leftrightarrow \bot$
+
 ...
 
 Logica classica
@@ -191,8 +195,7 @@ not_dneg_thm
 not_false_thm
 //   |- ~ false <=> true
 
-not_true_thm
-//   |- ~ true <=> false
+
 
 select_eq_thm
 //   |- !(a:'a). (@x. x = a) = a

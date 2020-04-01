@@ -8,7 +8,6 @@ $\vdash \top$
 (***hide***)
 #load "../avvio.fsx"
 open HOL
-open HOL
 CoreThry.load
 Equal.load
 (***unhide***)
