@@ -42,11 +42,19 @@ $\forall p\ q.\ \neg (p \vee q) \Leftrightarrow \neg p \wedge \neg q$
 
 la negazione di una disgiunzione equivale alla congiunzione delle negazioni
 
+**[conj\_id\_thm](0007_conj_id.html)**
+
+$\forall p.\ p \wedge \top \Leftrightarrow p$
+
+vero &egrave; l'identit&agrave; della congiunzione
+
 work in prog...
 
 **[disj\_id\_thm](0016_disj_id.html)**
 
 $\vdash \forall p.\ p \vee \bot \Leftrightarrow p$
+
+falso &egrave; l'identit&agrave; della disgiunzione
 
 **[disj\_zero\_thm](0017_disj_zero.html)**
 
@@ -126,8 +134,7 @@ conj_dist_left_disj_thm
 conj_dist_right_disj_thm
 //   |- !p q r. p /\ (q \/ r) <=> (p /\ q) \/ (p /\ r)
 
-conj_id_thm
-//   |- !p. p /\ true <=> p
+
 
 conj_idem_thm
 //   |- !p. p /\ p <=> p

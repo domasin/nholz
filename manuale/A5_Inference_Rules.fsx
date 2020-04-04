@@ -773,7 +773,7 @@ Si veda anche: list\_gen\_rule, spec\_rule, mk\_forall\_rule.
 
 $\dfrac
 {[x_1;x_2;\dots] \qquad A \vdash p}
-{A \vdash \forall x_1\ x_2\ \dost\ .\ p}
+{A \vdash \forall x_1\ x_2\ \dots\ .\ p}
 \textsf{ gen_rule}
 $
 
@@ -783,7 +783,7 @@ per x non libera in A
 
 $\dfrac
 {A_1 \vdash p \qquad A_2 \vdash q}
-{A_1 \cup \A_2 \vdash p \wedge q}
+{A_1 \cup A_2 \vdash p \wedge q}
 \textsf{ conj_rule}
 $
 

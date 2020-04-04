@@ -59,9 +59,13 @@
 <p><strong><a href="0006_not_dist_disj.html">not_dist_disj_thm</a></strong></p>
 <p><span class="math">\(\forall p\ q.\ \neg (p \vee q) \Leftrightarrow \neg p \wedge \neg q\)</span></p>
 <p>la negazione di una disgiunzione equivale alla congiunzione delle negazioni</p>
+<p><strong><a href="0007_conj_id.html">conj_id_thm</a></strong></p>
+<p><span class="math">\(\forall p.\ p \wedge \top \Leftrightarrow p\)</span></p>
+<p>vero &egrave; l'identit&agrave; della congiunzione</p>
 <p>work in prog...</p>
 <p><strong><a href="0016_disj_id.html">disj_id_thm</a></strong></p>
 <p><span class="math">\(\vdash \forall p.\ p \vee \bot \Leftrightarrow p\)</span></p>
+<p>falso &egrave; l'identit&agrave; della disgiunzione</p>
 <p><strong><a href="0017_disj_zero.html">disj_zero_thm</a></strong></p>
 <p><span class="math">\(\vdash \forall p.\ p \vee \top \Leftrightarrow \top\)</span></p>
 <p><strong><a href="0018_disj_idem.html">disj_idem_thm</a></strong></p>
@@ -111,139 +115,138 @@ se si utilizza una definizione alternativa dell quantificatore esistenziale
 <span onmouseout="hideTip(event, 'fs11', 11)" onmouseover="showTip(event, 'fs11', 11)" class="id">conj_dist_right_disj_thm</span>
 <span class="c">//   |- !p q r. p /\ (q \/ r) &lt;=&gt; (p /\ q) \/ (p /\ r)</span>
 
-<span onmouseout="hideTip(event, 'fs12', 12)" onmouseover="showTip(event, 'fs12', 12)" class="id">conj_id_thm</span>
-<span class="c">//   |- !p. p /\ true &lt;=&gt; p</span>
 
-<span onmouseout="hideTip(event, 'fs13', 13)" onmouseover="showTip(event, 'fs13', 13)" class="id">conj_idem_thm</span>
+
+<span onmouseout="hideTip(event, 'fs12', 12)" onmouseover="showTip(event, 'fs12', 12)" class="id">conj_idem_thm</span>
 <span class="c">//   |- !p. p /\ p &lt;=&gt; p</span>
 
-<span onmouseout="hideTip(event, 'fs14', 14)" onmouseover="showTip(event, 'fs14', 14)" class="id">conj_zero_thm</span>
+<span onmouseout="hideTip(event, 'fs13', 13)" onmouseover="showTip(event, 'fs13', 13)" class="id">conj_zero_thm</span>
 <span class="c">//   |- !p. p /\ false &lt;=&gt; false</span>
 
-<span onmouseout="hideTip(event, 'fs15', 15)" onmouseover="showTip(event, 'fs15', 15)" class="id">disj_absorb_conj_thm</span>
+<span onmouseout="hideTip(event, 'fs14', 14)" onmouseover="showTip(event, 'fs14', 14)" class="id">disj_absorb_conj_thm</span>
 <span class="c">//   |- !p q. p \/ (p /\ q) &lt;=&gt; p</span>
 
-<span onmouseout="hideTip(event, 'fs16', 16)" onmouseover="showTip(event, 'fs16', 16)" class="id">disj_assoc_thm</span>
+<span onmouseout="hideTip(event, 'fs15', 15)" onmouseover="showTip(event, 'fs15', 15)" class="id">disj_assoc_thm</span>
 <span class="c">//   |- !p q r. p \/ (q \/ r) &lt;=&gt; (p \/ q) \/ r</span>
 
-<span onmouseout="hideTip(event, 'fs17', 17)" onmouseover="showTip(event, 'fs17', 17)" class="id">disj_comm_thm</span>
+<span onmouseout="hideTip(event, 'fs16', 16)" onmouseover="showTip(event, 'fs16', 16)" class="id">disj_comm_thm</span>
 <span class="c">//   |- !p q. p \/ q &lt;=&gt; q \/ p</span>
 
-<span onmouseout="hideTip(event, 'fs18', 18)" onmouseover="showTip(event, 'fs18', 18)" class="id">disj_dist_left_conj_thm</span>
+<span onmouseout="hideTip(event, 'fs17', 17)" onmouseover="showTip(event, 'fs17', 17)" class="id">disj_dist_left_conj_thm</span>
 <span class="c">//   |- !p q r. (p /\ q) \/ r &lt;=&gt; (p \/ r) /\ (q \/ r)</span>
 
-<span onmouseout="hideTip(event, 'fs19', 19)" onmouseover="showTip(event, 'fs19', 19)" class="id">disj_dist_right_conj_thm</span>
+<span onmouseout="hideTip(event, 'fs18', 18)" onmouseover="showTip(event, 'fs18', 18)" class="id">disj_dist_right_conj_thm</span>
 <span class="c">//   |- !p q r. p \/ (q /\ r) &lt;=&gt; (p \/ q) /\ (p \/ r)</span>
 
-<span onmouseout="hideTip(event, 'fs20', 20)" onmouseover="showTip(event, 'fs20', 20)" class="id">exists_dist_disj_thm</span>
+<span onmouseout="hideTip(event, 'fs19', 19)" onmouseover="showTip(event, 'fs19', 19)" class="id">exists_dist_disj_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool) Q. (?x. P x \/ Q x) &lt;=&gt; (?x. P x) \/ (?x. Q x)</span>
 
-<span onmouseout="hideTip(event, 'fs21', 21)" onmouseover="showTip(event, 'fs21', 21)" class="id">exists_null_thm</span>
+<span onmouseout="hideTip(event, 'fs20', 20)" onmouseover="showTip(event, 'fs20', 20)" class="id">exists_null_thm</span>
 <span class="c">//   |- !t. (?(x:&#39;a). t) &lt;=&gt; t</span>
 
-<span onmouseout="hideTip(event, 'fs22', 22)" onmouseover="showTip(event, 'fs22', 22)" class="id">exists_one_point_thm</span>
+<span onmouseout="hideTip(event, 'fs21', 21)" onmouseover="showTip(event, 'fs21', 21)" class="id">exists_one_point_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool) a. (?x. x = a /\ P x) &lt;=&gt; P a</span>
 
 <span class="c">//exists_value_thm</span>
 <span class="c">//   |- !(x:&#39;a). ?y. y = x</span>
 
-<span onmouseout="hideTip(event, 'fs23', 23)" onmouseover="showTip(event, 'fs23', 23)" class="id">forall_dist_conj_thm</span>
+<span onmouseout="hideTip(event, 'fs22', 22)" onmouseover="showTip(event, 'fs22', 22)" class="id">forall_dist_conj_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool) Q. (!x. P x /\ Q x) &lt;=&gt; (!x. P x) /\ (!x. Q x)</span>
 
-<span onmouseout="hideTip(event, 'fs24', 24)" onmouseover="showTip(event, 'fs24', 24)" class="id">forall_null_thm</span>
+<span onmouseout="hideTip(event, 'fs23', 23)" onmouseover="showTip(event, 'fs23', 23)" class="id">forall_null_thm</span>
 <span class="c">//   |- !t. (!(x:&#39;a). t) &lt;=&gt; t</span>
 
-<span onmouseout="hideTip(event, 'fs25', 25)" onmouseover="showTip(event, 'fs25', 25)" class="id">forall_one_point_thm</span>
+<span onmouseout="hideTip(event, 'fs24', 24)" onmouseover="showTip(event, 'fs24', 24)" class="id">forall_one_point_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool) a. (!x. x = a ==&gt; P x) &lt;=&gt; P a</span>
 
 <span class="c">//imp_alt_def_thm</span>
 <span class="c">//   |- $==&gt; = (\p q. p /\ q &lt;=&gt; p)</span>
 
-<span onmouseout="hideTip(event, 'fs26', 26)" onmouseover="showTip(event, 'fs26', 26)" class="id">imp_disj_thm</span>
+<span onmouseout="hideTip(event, 'fs25', 25)" onmouseover="showTip(event, 'fs25', 25)" class="id">imp_disj_thm</span>
 <span class="c">//   |- !p q. (p ==&gt; q) &lt;=&gt; (~ p \/ q)</span>
 
-<span onmouseout="hideTip(event, 'fs27', 27)" onmouseover="showTip(event, 'fs27', 27)" class="id">imp_dist_left_disj_thm</span>
+<span onmouseout="hideTip(event, 'fs26', 26)" onmouseover="showTip(event, 'fs26', 26)" class="id">imp_dist_left_disj_thm</span>
 <span class="c">//   |- !p q r. (p \/ q ==&gt; r) &lt;=&gt; (p ==&gt; r) /\ (q ==&gt; r)</span>
 
-<span onmouseout="hideTip(event, 'fs28', 28)" onmouseover="showTip(event, 'fs28', 28)" class="id">imp_dist_right_conj_thm</span>
+<span onmouseout="hideTip(event, 'fs27', 27)" onmouseover="showTip(event, 'fs27', 27)" class="id">imp_dist_right_conj_thm</span>
 <span class="c">//   |- !p q r. (p ==&gt; q /\ r) &lt;=&gt; (p ==&gt; q) /\ (p ==&gt; r)</span>
 
 <span class="c">//imp_imp_thm</span>
 <span class="c">//   |- !p q r. (p ==&gt; q ==&gt; r) &lt;=&gt; (p /\ q ==&gt; r)</span>
 
-<span onmouseout="hideTip(event, 'fs29', 29)" onmouseover="showTip(event, 'fs29', 29)" class="id">imp_left_id_thm</span>
+<span onmouseout="hideTip(event, 'fs28', 28)" onmouseover="showTip(event, 'fs28', 28)" class="id">imp_left_id_thm</span>
 <span class="c">//   |- !p. (true ==&gt; p) &lt;=&gt; p</span>
 
-<span onmouseout="hideTip(event, 'fs30', 30)" onmouseover="showTip(event, 'fs30', 30)" class="id">imp_left_zero_thm</span>
+<span onmouseout="hideTip(event, 'fs29', 29)" onmouseover="showTip(event, 'fs29', 29)" class="id">imp_left_zero_thm</span>
 <span class="c">//   |- !p. false ==&gt; p</span>
 
-<span onmouseout="hideTip(event, 'fs31', 31)" onmouseover="showTip(event, 'fs31', 31)" class="id">imp_refl_thm</span>
+<span onmouseout="hideTip(event, 'fs30', 30)" onmouseover="showTip(event, 'fs30', 30)" class="id">imp_refl_thm</span>
 <span class="c">//   |- !p. p ==&gt; p</span>
 
-<span onmouseout="hideTip(event, 'fs32', 32)" onmouseover="showTip(event, 'fs32', 32)" class="id">imp_right_zero_thm</span>
+<span onmouseout="hideTip(event, 'fs31', 31)" onmouseover="showTip(event, 'fs31', 31)" class="id">imp_right_zero_thm</span>
 <span class="c">//   |- !p. p ==&gt; true</span>
 
-<span onmouseout="hideTip(event, 'fs33', 33)" onmouseover="showTip(event, 'fs33', 33)" class="id">not_dist_conj_thm</span>
+<span onmouseout="hideTip(event, 'fs32', 32)" onmouseover="showTip(event, 'fs32', 32)" class="id">not_dist_conj_thm</span>
 <span class="c">//   |- !p q. ~ (p /\ q) &lt;=&gt; ~ p \/ ~ q</span>
 
 
 
-<span onmouseout="hideTip(event, 'fs34', 34)" onmouseover="showTip(event, 'fs34', 34)" class="id">not_dist_exists_thm</span>
+<span onmouseout="hideTip(event, 'fs33', 33)" onmouseover="showTip(event, 'fs33', 33)" class="id">not_dist_exists_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool). ~ (?x. P x) &lt;=&gt; (!x. ~ P x)</span>
 
-<span onmouseout="hideTip(event, 'fs35', 35)" onmouseover="showTip(event, 'fs35', 35)" class="id">not_dist_forall_thm</span>
+<span onmouseout="hideTip(event, 'fs34', 34)" onmouseover="showTip(event, 'fs34', 34)" class="id">not_dist_forall_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool). ~ (!x. P x) &lt;=&gt; (?x. ~ P x)</span>
 
-<span onmouseout="hideTip(event, 'fs36', 36)" onmouseover="showTip(event, 'fs36', 36)" class="id">not_dneg_thm</span>
+<span onmouseout="hideTip(event, 'fs35', 35)" onmouseover="showTip(event, 'fs35', 35)" class="id">not_dneg_thm</span>
 <span class="c">//   |- !p. ~ ~ p &lt;=&gt; p</span>
 
-<span onmouseout="hideTip(event, 'fs37', 37)" onmouseover="showTip(event, 'fs37', 37)" class="id">select_eq_thm</span>
+<span onmouseout="hideTip(event, 'fs36', 36)" onmouseover="showTip(event, 'fs36', 36)" class="id">select_eq_thm</span>
 <span class="c">//   |- !(a:&#39;a). (@x. x = a) = a</span>
 
-<span onmouseout="hideTip(event, 'fs38', 38)" onmouseover="showTip(event, 'fs38', 38)" class="id">skolem_thm</span>
+<span onmouseout="hideTip(event, 'fs37', 37)" onmouseover="showTip(event, 'fs37', 37)" class="id">skolem_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;&#39;b-&gt;bool). (!x. ?y. P x y) &lt;=&gt; (?f. !x. P x (f x))</span>
 
-<span onmouseout="hideTip(event, 'fs39', 39)" onmouseover="showTip(event, 'fs39', 39)" class="id">uexists_thm1</span>
+<span onmouseout="hideTip(event, 'fs38', 38)" onmouseover="showTip(event, 'fs38', 38)" class="id">uexists_thm1</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool). (?!x. P x) &lt;=&gt; (?x. P x /\ (!y. P y ==&gt; y = x))</span>
 
-<span onmouseout="hideTip(event, 'fs40', 40)" onmouseover="showTip(event, 'fs40', 40)" class="id">uexists_thm2</span>
+<span onmouseout="hideTip(event, 'fs39', 39)" onmouseover="showTip(event, 'fs39', 39)" class="id">uexists_thm2</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool). (?!x. P x) &lt;=&gt; (?x. !y. P y &lt;=&gt; x = y)</span>
 
-<span onmouseout="hideTip(event, 'fs41', 41)" onmouseover="showTip(event, 'fs41', 41)" class="id">uexists_thm3</span>
+<span onmouseout="hideTip(event, 'fs40', 40)" onmouseover="showTip(event, 'fs40', 40)" class="id">uexists_thm3</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool). (?!x. P x)</span>
 <span class="c">//                     &lt;=&gt; (?x. P x) /\ (!x&#39; x&#39;&#39;. P x&#39; /\ P x&#39;&#39; ==&gt; x&#39; = x&#39;&#39;)</span>
 
-<span onmouseout="hideTip(event, 'fs42', 42)" onmouseover="showTip(event, 'fs42', 42)" class="id">uexists_one_point_thm</span>
+<span onmouseout="hideTip(event, 'fs41', 41)" onmouseover="showTip(event, 'fs41', 41)" class="id">uexists_one_point_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool) a. (?!x. x = a /\ P x) &lt;=&gt; P a</span>
 
-<span onmouseout="hideTip(event, 'fs43', 43)" onmouseover="showTip(event, 'fs43', 43)" class="id">unique_skolem_thm</span>
+<span onmouseout="hideTip(event, 'fs42', 42)" onmouseover="showTip(event, 'fs42', 42)" class="id">unique_skolem_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;&#39;b-&gt;bool). (!x. ?!y. P x y) &lt;=&gt; (?f. !x y. P x y &lt;=&gt; f x = y)</span>
 </code></pre>
 <h2>PAIRS</h2>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs44', 44)" onmouseover="showTip(event, 'fs44', 44)" class="id">fst_snd_thm</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs43', 43)" onmouseover="showTip(event, 'fs43', 43)" class="id">fst_snd_thm</span>
 <span class="c">//   |- !(p:&#39;a#&#39;b). (FST p, SND p) = p</span>
 
-<span onmouseout="hideTip(event, 'fs45', 45)" onmouseover="showTip(event, 'fs45', 45)" class="id">fst_thm</span>
+<span onmouseout="hideTip(event, 'fs44', 44)" onmouseover="showTip(event, 'fs44', 44)" class="id">fst_thm</span>
 <span class="c">//   |- !(x:&#39;a) (y:&#39;b). FST (x,y) = x</span>
 
-<span onmouseout="hideTip(event, 'fs46', 46)" onmouseover="showTip(event, 'fs46', 46)" class="id">pair_eq_thm</span>
+<span onmouseout="hideTip(event, 'fs45', 45)" onmouseover="showTip(event, 'fs45', 45)" class="id">pair_eq_thm</span>
 <span class="c">//   |- !(x:&#39;a) (y:&#39;b) u v. (x,y) = (u,v) &lt;=&gt; x = u /\ y = v</span>
 
-<span onmouseout="hideTip(event, 'fs47', 47)" onmouseover="showTip(event, 'fs47', 47)" class="id">pair_surjective_thm</span>
+<span onmouseout="hideTip(event, 'fs46', 46)" onmouseover="showTip(event, 'fs46', 46)" class="id">pair_surjective_thm</span>
 <span class="c">//   |- !(p:&#39;a#&#39;b). ?x y. p = (x,y)</span>
 
-<span onmouseout="hideTip(event, 'fs48', 48)" onmouseover="showTip(event, 'fs48', 48)" class="id">snd_thm</span>
+<span onmouseout="hideTip(event, 'fs47', 47)" onmouseover="showTip(event, 'fs47', 47)" class="id">snd_thm</span>
 <span class="c">//   |- !(x:&#39;a) (y:&#39;b). SND (x,y) = y</span>
 </code></pre>
 <h2>INDIVIDUALS</h2>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs49', 49)" onmouseover="showTip(event, 'fs49', 49)" class="id">ind_suc_injective_thm</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs48', 48)" onmouseover="showTip(event, 'fs48', 48)" class="id">ind_suc_injective_thm</span>
 <span class="c">//   |- !i j. IND_SUC i = IND_SUC j &lt;=&gt; i = j</span>
 
-<span onmouseout="hideTip(event, 'fs50', 50)" onmouseover="showTip(event, 'fs50', 50)" class="id">ind_suc_not_zero_thm</span>
+<span onmouseout="hideTip(event, 'fs49', 49)" onmouseover="showTip(event, 'fs49', 49)" class="id">ind_suc_not_zero_thm</span>
 <span class="c">//   |- !i. ~ (IND_SUC i = IND_ZERO)</span>
 </code></pre>
 <h2>NATURAL NUMBERS</h2>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs51', 51)" onmouseover="showTip(event, 'fs51', 51)" class="id">add_assoc_thm</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs50', 50)" onmouseover="showTip(event, 'fs50', 50)" class="id">add_assoc_thm</span>
 <span class="c">//   |- !l m n. l + (m + n) = (l + m) + n</span>
 
 <span class="c">//add_comm_thm</span>
@@ -470,46 +473,45 @@ se si utilizza una definizione alternativa dell quantificatore esistenziale
 <div class="tip" id="fs9">val conj_contr_thm : thm</div>
 <div class="tip" id="fs10">val conj_dist_left_disj_thm : thm</div>
 <div class="tip" id="fs11">val conj_dist_right_disj_thm : thm</div>
-<div class="tip" id="fs12">val conj_id_thm : thm</div>
-<div class="tip" id="fs13">val conj_idem_thm : thm</div>
-<div class="tip" id="fs14">val conj_zero_thm : thm</div>
-<div class="tip" id="fs15">val disj_absorb_conj_thm : thm</div>
-<div class="tip" id="fs16">val disj_assoc_thm : thm</div>
-<div class="tip" id="fs17">val disj_comm_thm : thm</div>
-<div class="tip" id="fs18">val disj_dist_left_conj_thm : thm</div>
-<div class="tip" id="fs19">val disj_dist_right_conj_thm : thm</div>
-<div class="tip" id="fs20">val exists_dist_disj_thm : thm</div>
-<div class="tip" id="fs21">val exists_null_thm : thm</div>
-<div class="tip" id="fs22">val exists_one_point_thm : thm</div>
-<div class="tip" id="fs23">val forall_dist_conj_thm : thm</div>
-<div class="tip" id="fs24">val forall_null_thm : thm</div>
-<div class="tip" id="fs25">val forall_one_point_thm : thm</div>
-<div class="tip" id="fs26">val imp_disj_thm : thm</div>
-<div class="tip" id="fs27">val imp_dist_left_disj_thm : thm</div>
-<div class="tip" id="fs28">val imp_dist_right_conj_thm : thm</div>
-<div class="tip" id="fs29">val imp_left_id_thm : thm</div>
-<div class="tip" id="fs30">val imp_left_zero_thm : thm</div>
-<div class="tip" id="fs31">val imp_refl_thm : thm</div>
-<div class="tip" id="fs32">val imp_right_zero_thm : thm</div>
-<div class="tip" id="fs33">val not_dist_conj_thm : thm</div>
-<div class="tip" id="fs34">val not_dist_exists_thm : thm</div>
-<div class="tip" id="fs35">val not_dist_forall_thm : thm</div>
-<div class="tip" id="fs36">val not_dneg_thm : thm</div>
-<div class="tip" id="fs37">val select_eq_thm : thm</div>
-<div class="tip" id="fs38">val skolem_thm : thm</div>
-<div class="tip" id="fs39">val uexists_thm1 : thm</div>
-<div class="tip" id="fs40">val uexists_thm2 : thm</div>
-<div class="tip" id="fs41">val uexists_thm3 : thm</div>
-<div class="tip" id="fs42">val uexists_one_point_thm : thm</div>
-<div class="tip" id="fs43">val unique_skolem_thm : thm</div>
-<div class="tip" id="fs44">val fst_snd_thm : thm</div>
-<div class="tip" id="fs45">val fst_thm : thm</div>
-<div class="tip" id="fs46">val pair_eq_thm : thm</div>
-<div class="tip" id="fs47">val pair_surjective_thm : thm</div>
-<div class="tip" id="fs48">val snd_thm : thm</div>
-<div class="tip" id="fs49">val ind_suc_injective_thm : thm</div>
-<div class="tip" id="fs50">val ind_suc_not_zero_thm : thm</div>
-<div class="tip" id="fs51">val add_assoc_thm : thm</div>
+<div class="tip" id="fs12">val conj_idem_thm : thm</div>
+<div class="tip" id="fs13">val conj_zero_thm : thm</div>
+<div class="tip" id="fs14">val disj_absorb_conj_thm : thm</div>
+<div class="tip" id="fs15">val disj_assoc_thm : thm</div>
+<div class="tip" id="fs16">val disj_comm_thm : thm</div>
+<div class="tip" id="fs17">val disj_dist_left_conj_thm : thm</div>
+<div class="tip" id="fs18">val disj_dist_right_conj_thm : thm</div>
+<div class="tip" id="fs19">val exists_dist_disj_thm : thm</div>
+<div class="tip" id="fs20">val exists_null_thm : thm</div>
+<div class="tip" id="fs21">val exists_one_point_thm : thm</div>
+<div class="tip" id="fs22">val forall_dist_conj_thm : thm</div>
+<div class="tip" id="fs23">val forall_null_thm : thm</div>
+<div class="tip" id="fs24">val forall_one_point_thm : thm</div>
+<div class="tip" id="fs25">val imp_disj_thm : thm</div>
+<div class="tip" id="fs26">val imp_dist_left_disj_thm : thm</div>
+<div class="tip" id="fs27">val imp_dist_right_conj_thm : thm</div>
+<div class="tip" id="fs28">val imp_left_id_thm : thm</div>
+<div class="tip" id="fs29">val imp_left_zero_thm : thm</div>
+<div class="tip" id="fs30">val imp_refl_thm : thm</div>
+<div class="tip" id="fs31">val imp_right_zero_thm : thm</div>
+<div class="tip" id="fs32">val not_dist_conj_thm : thm</div>
+<div class="tip" id="fs33">val not_dist_exists_thm : thm</div>
+<div class="tip" id="fs34">val not_dist_forall_thm : thm</div>
+<div class="tip" id="fs35">val not_dneg_thm : thm</div>
+<div class="tip" id="fs36">val select_eq_thm : thm</div>
+<div class="tip" id="fs37">val skolem_thm : thm</div>
+<div class="tip" id="fs38">val uexists_thm1 : thm</div>
+<div class="tip" id="fs39">val uexists_thm2 : thm</div>
+<div class="tip" id="fs40">val uexists_thm3 : thm</div>
+<div class="tip" id="fs41">val uexists_one_point_thm : thm</div>
+<div class="tip" id="fs42">val unique_skolem_thm : thm</div>
+<div class="tip" id="fs43">val fst_snd_thm : thm</div>
+<div class="tip" id="fs44">val fst_thm : thm</div>
+<div class="tip" id="fs45">val pair_eq_thm : thm</div>
+<div class="tip" id="fs46">val pair_surjective_thm : thm</div>
+<div class="tip" id="fs47">val snd_thm : thm</div>
+<div class="tip" id="fs48">val ind_suc_injective_thm : thm</div>
+<div class="tip" id="fs49">val ind_suc_not_zero_thm : thm</div>
+<div class="tip" id="fs50">val add_assoc_thm : thm</div>
 
         </div>
         <div class="span1"></div>

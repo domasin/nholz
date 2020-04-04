@@ -586,13 +586,13 @@ assunzioni.</p>
 <p><strong>list_gen_rule</strong></p>
 <p><span class="math">\(\dfrac
 {[x_1;x_2;\dots] \qquad A \vdash p}
-{A \vdash \forall x_1\ x_2\ \dost\ .\ p}
+{A \vdash \forall x_1\ x_2\ \dots\ .\ p}
 \textsf{ gen_rule}\)</span></p>
 <p>per x non libera in A</p>
 <p><strong>conj_rule</strong></p>
 <p><span class="math">\(\dfrac
 {A_1 \vdash p \qquad A_2 \vdash q}
-{A_1 \cup \A_2 \vdash p \wedge q}
+{A_1 \cup A_2 \vdash p \wedge q}
 \textsf{ conj_rule}\)</span></p>
 <p>Questa &egrave; la regola di e-introduzione. Congiunge i due teoremi forniti
 e unisce le loro assunzioni.</p>
@@ -647,7 +647,7 @@ termine booleano fornito al lato sinistro del teorema in input.</p>
 {y \qquad A_1 \vdash \exists x.\ p \qquad A_2 \vdash q}
 {A_1 \cup A_2 \setminus \{p[y/x]\} \vdash q}
 \textsf{ choose_rule}\)</span></p>
-<p>con <span class="math">\(y\)</span> non libera in: <span class="math">\(\exists x.\ p\)</span>, <span class="math">\(q\)</span> o <span class="math">\(A2 \setminus \{p[y/x]\}\)</span></p>
+<p>con <span class="math">\(y\)</span> non libera in: <span class="math">\(\exists x.\ p\)</span>, <span class="math">\(q\)</span> o <span class="math">\(A_2 \setminus \{p[y/x]\}\)</span></p>
 <p>Questa &egrave; la regola di eliminazione del quantificatore esistenziale.
 Rimuove, dalle assunzioni di un teorema principale fornito, il corpo di un
 teorema esistenziale fornito (ma con tutte le occorrenze della variabile
