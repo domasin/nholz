@@ -19,6 +19,7 @@ let substs =
     [
         "\\", "\\lambda "
         "\\lambda /","\\vee"
+        "/\\lambda ","\\wedge"
         "~", "\\neg"
         "'a","\\alpha"
         "'b", "\\beta"
@@ -182,3 +183,27 @@ let contr_rule_tr t (th1,g1) =
 let eqf_elim_rule_tr (th1,g1) = 
     let th = th1 |> eqf_elim_rule
     (th, mkGraph (Th th,"eqf_elim_rule") [g1])
+
+let undisch_rule_tr (th1,g1) = 
+    let th = th1 |> undisch_rule
+    (th, mkGraph (Th th,"undisch_rule") [g1])
+
+let conjunct1_rule_tr (th1,g1) = 
+    let th = th1 |> conjunct1_rule
+    (th, mkGraph (Th th,"conjunct1_rule") [g1])
+
+let conjunct2_rule_tr (th1,g1) = 
+    let th = th1 |> conjunct2_rule
+    (th, mkGraph (Th th,"conjunct2_rule") [g1])
+
+let conj_rule_tr (th1,g1) (th2,g2) = 
+    let th = conj_rule th1 th2
+    (th, mkGraph (Th th,"conj_rule") [g1;g2])
+
+let deduct_contrapos_rule_tr t (th1,g1) = 
+    let th = th1 |> deduct_contrapos_rule t
+    (th, mkGraph (Th th,"deduct_contrapos_rule") [mkGraph (Te t,"") [];g1])
+
+let not_elim_rule_tr (th1,g1) = 
+    let th = th1 |> not_elim_rule
+    (th, mkGraph (Th th,"not_elim_rule") [g1])

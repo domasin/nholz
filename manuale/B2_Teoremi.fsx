@@ -36,7 +36,13 @@ $\vdash \neg (\top \Leftrightarrow \bot)$
 
 vero non equivale a falso
 
-...
+**[not\_dist\_disj\_thm](0006_not_dist_disj.html)**
+
+$\forall p\ q.\ \neg (p \vee q) \Leftrightarrow \neg p \wedge \neg q$
+
+la negazione di una disgiunzione equivale alla congiunzione delle negazioni
+
+work in prog...
 
 **[disj\_id\_thm](0016_disj_id.html)**
 
@@ -195,8 +201,7 @@ imp_right_zero_thm
 not_dist_conj_thm
 //   |- !p q. ~ (p /\ q) <=> ~ p \/ ~ q
 
-not_dist_disj_thm
-//   |- !p q. ~ (p \/ q) <=> ~ p /\ ~ q
+
 
 not_dist_exists_thm
 //   |- !(P:'a->bool). ~ (?x. P x) <=> (!x. ~ P x)

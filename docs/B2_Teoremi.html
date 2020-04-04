@@ -56,7 +56,10 @@
 <p><strong><a href="0005_true_not_eq_false.html">true_not_eq_false_thm</a></strong></p>
 <p><span class="math">\(\vdash \neg (\top \Leftrightarrow \bot)\)</span></p>
 <p>vero non equivale a falso</p>
-<p>...</p>
+<p><strong><a href="0006_not_dist_disj.html">not_dist_disj_thm</a></strong></p>
+<p><span class="math">\(\forall p\ q.\ \neg (p \vee q) \Leftrightarrow \neg p \wedge \neg q\)</span></p>
+<p>la negazione di una disgiunzione equivale alla congiunzione delle negazioni</p>
+<p>work in prog...</p>
 <p><strong><a href="0016_disj_id.html">disj_id_thm</a></strong></p>
 <p><span class="math">\(\vdash \forall p.\ p \vee \bot \Leftrightarrow p\)</span></p>
 <p><strong><a href="0017_disj_zero.html">disj_zero_thm</a></strong></p>
@@ -183,65 +186,64 @@ se si utilizza una definizione alternativa dell quantificatore esistenziale
 <span onmouseout="hideTip(event, 'fs33', 33)" onmouseover="showTip(event, 'fs33', 33)" class="id">not_dist_conj_thm</span>
 <span class="c">//   |- !p q. ~ (p /\ q) &lt;=&gt; ~ p \/ ~ q</span>
 
-<span onmouseout="hideTip(event, 'fs34', 34)" onmouseover="showTip(event, 'fs34', 34)" class="id">not_dist_disj_thm</span>
-<span class="c">//   |- !p q. ~ (p \/ q) &lt;=&gt; ~ p /\ ~ q</span>
 
-<span onmouseout="hideTip(event, 'fs35', 35)" onmouseover="showTip(event, 'fs35', 35)" class="id">not_dist_exists_thm</span>
+
+<span onmouseout="hideTip(event, 'fs34', 34)" onmouseover="showTip(event, 'fs34', 34)" class="id">not_dist_exists_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool). ~ (?x. P x) &lt;=&gt; (!x. ~ P x)</span>
 
-<span onmouseout="hideTip(event, 'fs36', 36)" onmouseover="showTip(event, 'fs36', 36)" class="id">not_dist_forall_thm</span>
+<span onmouseout="hideTip(event, 'fs35', 35)" onmouseover="showTip(event, 'fs35', 35)" class="id">not_dist_forall_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool). ~ (!x. P x) &lt;=&gt; (?x. ~ P x)</span>
 
-<span onmouseout="hideTip(event, 'fs37', 37)" onmouseover="showTip(event, 'fs37', 37)" class="id">not_dneg_thm</span>
+<span onmouseout="hideTip(event, 'fs36', 36)" onmouseover="showTip(event, 'fs36', 36)" class="id">not_dneg_thm</span>
 <span class="c">//   |- !p. ~ ~ p &lt;=&gt; p</span>
 
-<span onmouseout="hideTip(event, 'fs38', 38)" onmouseover="showTip(event, 'fs38', 38)" class="id">select_eq_thm</span>
+<span onmouseout="hideTip(event, 'fs37', 37)" onmouseover="showTip(event, 'fs37', 37)" class="id">select_eq_thm</span>
 <span class="c">//   |- !(a:&#39;a). (@x. x = a) = a</span>
 
-<span onmouseout="hideTip(event, 'fs39', 39)" onmouseover="showTip(event, 'fs39', 39)" class="id">skolem_thm</span>
+<span onmouseout="hideTip(event, 'fs38', 38)" onmouseover="showTip(event, 'fs38', 38)" class="id">skolem_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;&#39;b-&gt;bool). (!x. ?y. P x y) &lt;=&gt; (?f. !x. P x (f x))</span>
 
-<span onmouseout="hideTip(event, 'fs40', 40)" onmouseover="showTip(event, 'fs40', 40)" class="id">uexists_thm1</span>
+<span onmouseout="hideTip(event, 'fs39', 39)" onmouseover="showTip(event, 'fs39', 39)" class="id">uexists_thm1</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool). (?!x. P x) &lt;=&gt; (?x. P x /\ (!y. P y ==&gt; y = x))</span>
 
-<span onmouseout="hideTip(event, 'fs41', 41)" onmouseover="showTip(event, 'fs41', 41)" class="id">uexists_thm2</span>
+<span onmouseout="hideTip(event, 'fs40', 40)" onmouseover="showTip(event, 'fs40', 40)" class="id">uexists_thm2</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool). (?!x. P x) &lt;=&gt; (?x. !y. P y &lt;=&gt; x = y)</span>
 
-<span onmouseout="hideTip(event, 'fs42', 42)" onmouseover="showTip(event, 'fs42', 42)" class="id">uexists_thm3</span>
+<span onmouseout="hideTip(event, 'fs41', 41)" onmouseover="showTip(event, 'fs41', 41)" class="id">uexists_thm3</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool). (?!x. P x)</span>
 <span class="c">//                     &lt;=&gt; (?x. P x) /\ (!x&#39; x&#39;&#39;. P x&#39; /\ P x&#39;&#39; ==&gt; x&#39; = x&#39;&#39;)</span>
 
-<span onmouseout="hideTip(event, 'fs43', 43)" onmouseover="showTip(event, 'fs43', 43)" class="id">uexists_one_point_thm</span>
+<span onmouseout="hideTip(event, 'fs42', 42)" onmouseover="showTip(event, 'fs42', 42)" class="id">uexists_one_point_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;bool) a. (?!x. x = a /\ P x) &lt;=&gt; P a</span>
 
-<span onmouseout="hideTip(event, 'fs44', 44)" onmouseover="showTip(event, 'fs44', 44)" class="id">unique_skolem_thm</span>
+<span onmouseout="hideTip(event, 'fs43', 43)" onmouseover="showTip(event, 'fs43', 43)" class="id">unique_skolem_thm</span>
 <span class="c">//   |- !(P:&#39;a-&gt;&#39;b-&gt;bool). (!x. ?!y. P x y) &lt;=&gt; (?f. !x y. P x y &lt;=&gt; f x = y)</span>
 </code></pre>
 <h2>PAIRS</h2>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs45', 45)" onmouseover="showTip(event, 'fs45', 45)" class="id">fst_snd_thm</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs44', 44)" onmouseover="showTip(event, 'fs44', 44)" class="id">fst_snd_thm</span>
 <span class="c">//   |- !(p:&#39;a#&#39;b). (FST p, SND p) = p</span>
 
-<span onmouseout="hideTip(event, 'fs46', 46)" onmouseover="showTip(event, 'fs46', 46)" class="id">fst_thm</span>
+<span onmouseout="hideTip(event, 'fs45', 45)" onmouseover="showTip(event, 'fs45', 45)" class="id">fst_thm</span>
 <span class="c">//   |- !(x:&#39;a) (y:&#39;b). FST (x,y) = x</span>
 
-<span onmouseout="hideTip(event, 'fs47', 47)" onmouseover="showTip(event, 'fs47', 47)" class="id">pair_eq_thm</span>
+<span onmouseout="hideTip(event, 'fs46', 46)" onmouseover="showTip(event, 'fs46', 46)" class="id">pair_eq_thm</span>
 <span class="c">//   |- !(x:&#39;a) (y:&#39;b) u v. (x,y) = (u,v) &lt;=&gt; x = u /\ y = v</span>
 
-<span onmouseout="hideTip(event, 'fs48', 48)" onmouseover="showTip(event, 'fs48', 48)" class="id">pair_surjective_thm</span>
+<span onmouseout="hideTip(event, 'fs47', 47)" onmouseover="showTip(event, 'fs47', 47)" class="id">pair_surjective_thm</span>
 <span class="c">//   |- !(p:&#39;a#&#39;b). ?x y. p = (x,y)</span>
 
-<span onmouseout="hideTip(event, 'fs49', 49)" onmouseover="showTip(event, 'fs49', 49)" class="id">snd_thm</span>
+<span onmouseout="hideTip(event, 'fs48', 48)" onmouseover="showTip(event, 'fs48', 48)" class="id">snd_thm</span>
 <span class="c">//   |- !(x:&#39;a) (y:&#39;b). SND (x,y) = y</span>
 </code></pre>
 <h2>INDIVIDUALS</h2>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs50', 50)" onmouseover="showTip(event, 'fs50', 50)" class="id">ind_suc_injective_thm</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs49', 49)" onmouseover="showTip(event, 'fs49', 49)" class="id">ind_suc_injective_thm</span>
 <span class="c">//   |- !i j. IND_SUC i = IND_SUC j &lt;=&gt; i = j</span>
 
-<span onmouseout="hideTip(event, 'fs51', 51)" onmouseover="showTip(event, 'fs51', 51)" class="id">ind_suc_not_zero_thm</span>
+<span onmouseout="hideTip(event, 'fs50', 50)" onmouseover="showTip(event, 'fs50', 50)" class="id">ind_suc_not_zero_thm</span>
 <span class="c">//   |- !i. ~ (IND_SUC i = IND_ZERO)</span>
 </code></pre>
 <h2>NATURAL NUMBERS</h2>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs52', 52)" onmouseover="showTip(event, 'fs52', 52)" class="id">add_assoc_thm</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs51', 51)" onmouseover="showTip(event, 'fs51', 51)" class="id">add_assoc_thm</span>
 <span class="c">//   |- !l m n. l + (m + n) = (l + m) + n</span>
 
 <span class="c">//add_comm_thm</span>
@@ -490,25 +492,24 @@ se si utilizza una definizione alternativa dell quantificatore esistenziale
 <div class="tip" id="fs31">val imp_refl_thm : thm</div>
 <div class="tip" id="fs32">val imp_right_zero_thm : thm</div>
 <div class="tip" id="fs33">val not_dist_conj_thm : thm</div>
-<div class="tip" id="fs34">val not_dist_disj_thm : thm</div>
-<div class="tip" id="fs35">val not_dist_exists_thm : thm</div>
-<div class="tip" id="fs36">val not_dist_forall_thm : thm</div>
-<div class="tip" id="fs37">val not_dneg_thm : thm</div>
-<div class="tip" id="fs38">val select_eq_thm : thm</div>
-<div class="tip" id="fs39">val skolem_thm : thm</div>
-<div class="tip" id="fs40">val uexists_thm1 : thm</div>
-<div class="tip" id="fs41">val uexists_thm2 : thm</div>
-<div class="tip" id="fs42">val uexists_thm3 : thm</div>
-<div class="tip" id="fs43">val uexists_one_point_thm : thm</div>
-<div class="tip" id="fs44">val unique_skolem_thm : thm</div>
-<div class="tip" id="fs45">val fst_snd_thm : thm</div>
-<div class="tip" id="fs46">val fst_thm : thm</div>
-<div class="tip" id="fs47">val pair_eq_thm : thm</div>
-<div class="tip" id="fs48">val pair_surjective_thm : thm</div>
-<div class="tip" id="fs49">val snd_thm : thm</div>
-<div class="tip" id="fs50">val ind_suc_injective_thm : thm</div>
-<div class="tip" id="fs51">val ind_suc_not_zero_thm : thm</div>
-<div class="tip" id="fs52">val add_assoc_thm : thm</div>
+<div class="tip" id="fs34">val not_dist_exists_thm : thm</div>
+<div class="tip" id="fs35">val not_dist_forall_thm : thm</div>
+<div class="tip" id="fs36">val not_dneg_thm : thm</div>
+<div class="tip" id="fs37">val select_eq_thm : thm</div>
+<div class="tip" id="fs38">val skolem_thm : thm</div>
+<div class="tip" id="fs39">val uexists_thm1 : thm</div>
+<div class="tip" id="fs40">val uexists_thm2 : thm</div>
+<div class="tip" id="fs41">val uexists_thm3 : thm</div>
+<div class="tip" id="fs42">val uexists_one_point_thm : thm</div>
+<div class="tip" id="fs43">val unique_skolem_thm : thm</div>
+<div class="tip" id="fs44">val fst_snd_thm : thm</div>
+<div class="tip" id="fs45">val fst_thm : thm</div>
+<div class="tip" id="fs46">val pair_eq_thm : thm</div>
+<div class="tip" id="fs47">val pair_surjective_thm : thm</div>
+<div class="tip" id="fs48">val snd_thm : thm</div>
+<div class="tip" id="fs49">val ind_suc_injective_thm : thm</div>
+<div class="tip" id="fs50">val ind_suc_not_zero_thm : thm</div>
+<div class="tip" id="fs51">val add_assoc_thm : thm</div>
 
         </div>
         <div class="span1"></div>
