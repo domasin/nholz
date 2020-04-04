@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <!--
-      The Funzioni equivalenti
+      The Equivalenza tra funzioni
  parameters will be replaced with the
       document title extracted from the <h1> element or
       file name, if there is no <h1> heading
     -->
-    <title>Funzioni equivalenti
+    <title>Equivalenza tra funzioni
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
@@ -39,26 +39,29 @@
       <div class="row" style="margin-top:30px;">
         <div class="span1"></div>
         <div class="span10" id="main">
-          <h1>Funzioni equivalenti</h1>
+          <h1>Equivalenza tra funzioni</h1>
 <p><span class="math">\(\vdash \forall (f:\alpha \rightarrow \beta)\ g.\ f = g\ \Leftrightarrow\ (\forall x.\ f\ x = g\ x)\)</span></p>
-<p>L'euivalenza tra funzione corrisponde all'equivalenza dei loro valori a parit&agrave; di argomento.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="id">x</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;x:&#39;a&quot;</span><span class="pn">)</span> 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="id">f</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 9)" onmouseover="showTip(event, 'fs6', 9)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;f:&#39;a-&gt;&#39;b&quot;</span><span class="pn">)</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="id">g</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 11)" onmouseover="showTip(event, 'fs6', 11)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;g:&#39;a-&gt;&#39;b&quot;</span><span class="pn">)</span>
+<p>L'euivalenza tra funzioni corrisponde all'equivalenza dei loro valori a parit&agrave; di argomento.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="id">fun_eq_thm</span>
+<span class="c">// |- !(f:&#39;a-&gt;&#39;b) g. f = g &lt;=&gt; (!x. f x = g x)</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="id">th1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 13)" onmouseover="showTip(event, 'fs6', 13)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;\x. (f:&#39;a-&gt;&#39;b) x&quot;</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="fn">eta_conv</span>  <span class="c">// 1                |- (\x. (f:&#39;a-&gt;&#39;b) x) = f                  </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="id">th2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 16)" onmouseover="showTip(event, 'fs12', 16)" class="fn">sym_rule</span> <span onmouseout="hideTip(event, 'fs9', 17)" onmouseover="showTip(event, 'fs9', 17)" class="id">th1</span>                                 <span class="c">// 2                |- (f:&#39;a-&gt;&#39;b) = (\x. f x)                  </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="id">th3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 19)" onmouseover="showTip(event, 'fs6', 19)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;!x. (f:&#39;a-&gt;&#39;b) x = g x&quot;</span><span class="pn">)</span> 
-            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs14', 20)" onmouseover="showTip(event, 'fs14', 20)" class="fn">assume_rule</span>                             <span class="c">// 3  !x. f x = g x |- !x. f x = (g:&#39;a-&gt;&#39;b) x                  </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="id">th4</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 22)" onmouseover="showTip(event, 'fs16', 22)" class="fn">spec_rule</span> <span onmouseout="hideTip(event, 'fs5', 23)" onmouseover="showTip(event, 'fs5', 23)" class="id">x</span> <span onmouseout="hideTip(event, 'fs13', 24)" onmouseover="showTip(event, 'fs13', 24)" class="id">th3</span>                              <span class="c">// 4  !x. f x = g x |- f x = (g:&#39;a-&gt;&#39;b) x                      </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 25)" onmouseover="showTip(event, 'fs17', 25)" class="id">th5</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 26)" onmouseover="showTip(event, 'fs18', 26)" class="fn">mk_abs_rule</span> <span onmouseout="hideTip(event, 'fs5', 27)" onmouseover="showTip(event, 'fs5', 27)" class="id">x</span> <span onmouseout="hideTip(event, 'fs15', 28)" onmouseover="showTip(event, 'fs15', 28)" class="id">th4</span>                            <span class="c">// 5  !x. f x = g x |- (\x. f x) = (\x. (g:&#39;a-&gt;&#39;b) x)          </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 29)" onmouseover="showTip(event, 'fs19', 29)" class="id">th6</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 30)" onmouseover="showTip(event, 'fs6', 30)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;\x. (g:&#39;a-&gt;&#39;b) x&quot;</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 31)" onmouseover="showTip(event, 'fs10', 31)" class="fn">eta_conv</span>  <span class="c">// 6                |- (\x. (g:&#39;a-&gt;&#39;b) x) = g                  </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 32)" onmouseover="showTip(event, 'fs20', 32)" class="id">th7</span> <span class="o">=</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs11', 33)" onmouseover="showTip(event, 'fs11', 33)" class="id">th2</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs17', 34)" onmouseover="showTip(event, 'fs17', 34)" class="id">th5</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs19', 35)" onmouseover="showTip(event, 'fs19', 35)" class="id">th6</span><span class="pn">]</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 36)" onmouseover="showTip(event, 'fs21', 36)" class="fn">list_trans_rule</span>           <span class="c">// 7  !x. f x = g x |- f = (g:&#39;a-&gt;&#39;b)                          </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 37)" onmouseover="showTip(event, 'fs22', 37)" class="id">th8</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 38)" onmouseover="showTip(event, 'fs6', 38)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;(f:&#39;a-&gt;&#39;b)=g&quot;</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs14', 39)" onmouseover="showTip(event, 'fs14', 39)" class="fn">assume_rule</span>   <span class="c">// 8          f = g |- f = (g:&#39;a-&gt;&#39;b)                          </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 40)" onmouseover="showTip(event, 'fs23', 40)" class="id">th9</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 41)" onmouseover="showTip(event, 'fs24', 41)" class="fn">mk_comb1_rule</span> <span onmouseout="hideTip(event, 'fs22', 42)" onmouseover="showTip(event, 'fs22', 42)" class="id">th8</span> <span onmouseout="hideTip(event, 'fs5', 43)" onmouseover="showTip(event, 'fs5', 43)" class="id">x</span>                          <span class="c">// 9          f = g |- f x = (g:&#39;a-&gt;&#39;b) x                      </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 44)" onmouseover="showTip(event, 'fs25', 44)" class="id">th10</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 45)" onmouseover="showTip(event, 'fs26', 45)" class="fn">gen_rule</span> <span onmouseout="hideTip(event, 'fs5', 46)" onmouseover="showTip(event, 'fs5', 46)" class="id">x</span> <span onmouseout="hideTip(event, 'fs23', 47)" onmouseover="showTip(event, 'fs23', 47)" class="id">th9</span>                              <span class="c">// 10         f = g |- !x. f x = (g:&#39;a-&gt;&#39;b) x                  </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 48)" onmouseover="showTip(event, 'fs27', 48)" class="id">th11</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs28', 49)" onmouseover="showTip(event, 'fs28', 49)" class="fn">deduct_antisym_rule</span> <span onmouseout="hideTip(event, 'fs20', 50)" onmouseover="showTip(event, 'fs20', 50)" class="id">th7</span> <span onmouseout="hideTip(event, 'fs25', 51)" onmouseover="showTip(event, 'fs25', 51)" class="id">th10</span>                <span class="c">// 11               |- f = (g:&#39;a-&gt;&#39;b) &lt;=&gt; (!x. f x = g x)      </span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 52)" onmouseover="showTip(event, 'fs29', 52)" class="id">th</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 53)" onmouseover="showTip(event, 'fs30', 53)" class="fn">list_gen_rule</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs7', 54)" onmouseover="showTip(event, 'fs7', 54)" class="id">f</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs8', 55)" onmouseover="showTip(event, 'fs8', 55)" class="id">g</span><span class="pn">]</span> <span onmouseout="hideTip(event, 'fs27', 56)" onmouseover="showTip(event, 'fs27', 56)" class="id">th11</span>                      <span class="c">//                  |- !(f:&#39;a-&gt;&#39;b) g. f = g &lt;=&gt; (!x. f x = g x)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="id">x</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;x:&#39;a&quot;</span><span class="pn">)</span> 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="id">f</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 12)" onmouseover="showTip(event, 'fs8', 12)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;f:&#39;a-&gt;&#39;b&quot;</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="id">g</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 14)" onmouseover="showTip(event, 'fs8', 14)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;g:&#39;a-&gt;&#39;b&quot;</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="id">th1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 16)" onmouseover="showTip(event, 'fs8', 16)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;\x. (f:&#39;a-&gt;&#39;b) x&quot;</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="fn">eta_conv</span>  <span class="c">// 1                |- (\x. (f:&#39;a-&gt;&#39;b) x) = f                  </span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="id">th2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="fn">sym_rule</span> <span onmouseout="hideTip(event, 'fs11', 20)" onmouseover="showTip(event, 'fs11', 20)" class="id">th1</span>                                 <span class="c">// 2                |- (f:&#39;a-&gt;&#39;b) = (\x. f x)                  </span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="id">th3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 22)" onmouseover="showTip(event, 'fs8', 22)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;!x. (f:&#39;a-&gt;&#39;b) x = g x&quot;</span><span class="pn">)</span> 
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="fn">assume_rule</span>                             <span class="c">// 3  !x. f x = g x |- !x. f x = (g:&#39;a-&gt;&#39;b) x                  </span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 24)" onmouseover="showTip(event, 'fs17', 24)" class="id">th4</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 25)" onmouseover="showTip(event, 'fs18', 25)" class="fn">spec_rule</span> <span onmouseout="hideTip(event, 'fs7', 26)" onmouseover="showTip(event, 'fs7', 26)" class="id">x</span> <span onmouseout="hideTip(event, 'fs15', 27)" onmouseover="showTip(event, 'fs15', 27)" class="id">th3</span>                              <span class="c">// 4  !x. f x = g x |- f x = (g:&#39;a-&gt;&#39;b) x                      </span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 28)" onmouseover="showTip(event, 'fs19', 28)" class="id">th5</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 29)" onmouseover="showTip(event, 'fs20', 29)" class="fn">mk_abs_rule</span> <span onmouseout="hideTip(event, 'fs7', 30)" onmouseover="showTip(event, 'fs7', 30)" class="id">x</span> <span onmouseout="hideTip(event, 'fs17', 31)" onmouseover="showTip(event, 'fs17', 31)" class="id">th4</span>                            <span class="c">// 5  !x. f x = g x |- (\x. f x) = (\x. (g:&#39;a-&gt;&#39;b) x)          </span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 32)" onmouseover="showTip(event, 'fs21', 32)" class="id">th6</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 33)" onmouseover="showTip(event, 'fs8', 33)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;\x. (g:&#39;a-&gt;&#39;b) x&quot;</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 34)" onmouseover="showTip(event, 'fs12', 34)" class="fn">eta_conv</span>  <span class="c">// 6                |- (\x. (g:&#39;a-&gt;&#39;b) x) = g                  </span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 35)" onmouseover="showTip(event, 'fs22', 35)" class="id">th7</span> <span class="o">=</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs13', 36)" onmouseover="showTip(event, 'fs13', 36)" class="id">th2</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs19', 37)" onmouseover="showTip(event, 'fs19', 37)" class="id">th5</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs21', 38)" onmouseover="showTip(event, 'fs21', 38)" class="id">th6</span><span class="pn">]</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 39)" onmouseover="showTip(event, 'fs23', 39)" class="fn">list_trans_rule</span>           <span class="c">// 7  !x. f x = g x |- f = (g:&#39;a-&gt;&#39;b)                          </span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 40)" onmouseover="showTip(event, 'fs24', 40)" class="id">th8</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 41)" onmouseover="showTip(event, 'fs8', 41)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;(f:&#39;a-&gt;&#39;b)=g&quot;</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 42)" onmouseover="showTip(event, 'fs16', 42)" class="fn">assume_rule</span>   <span class="c">// 8          f = g |- f = (g:&#39;a-&gt;&#39;b)                          </span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 43)" onmouseover="showTip(event, 'fs25', 43)" class="id">th9</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 44)" onmouseover="showTip(event, 'fs26', 44)" class="fn">mk_comb1_rule</span> <span onmouseout="hideTip(event, 'fs24', 45)" onmouseover="showTip(event, 'fs24', 45)" class="id">th8</span> <span onmouseout="hideTip(event, 'fs7', 46)" onmouseover="showTip(event, 'fs7', 46)" class="id">x</span>                          <span class="c">// 9          f = g |- f x = (g:&#39;a-&gt;&#39;b) x                      </span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 47)" onmouseover="showTip(event, 'fs27', 47)" class="id">th10</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs28', 48)" onmouseover="showTip(event, 'fs28', 48)" class="fn">gen_rule</span> <span onmouseout="hideTip(event, 'fs7', 49)" onmouseover="showTip(event, 'fs7', 49)" class="id">x</span> <span onmouseout="hideTip(event, 'fs25', 50)" onmouseover="showTip(event, 'fs25', 50)" class="id">th9</span>                              <span class="c">// 10         f = g |- !x. f x = (g:&#39;a-&gt;&#39;b) x                  </span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 51)" onmouseover="showTip(event, 'fs29', 51)" class="id">th11</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 52)" onmouseover="showTip(event, 'fs30', 52)" class="fn">deduct_antisym_rule</span> <span onmouseout="hideTip(event, 'fs22', 53)" onmouseover="showTip(event, 'fs22', 53)" class="id">th7</span> <span onmouseout="hideTip(event, 'fs27', 54)" onmouseover="showTip(event, 'fs27', 54)" class="id">th10</span>                <span class="c">// 11               |- f = (g:&#39;a-&gt;&#39;b) &lt;=&gt; (!x. f x = g x)      </span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 55)" onmouseover="showTip(event, 'fs31', 55)" class="id">th</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 56)" onmouseover="showTip(event, 'fs32', 56)" class="fn">list_gen_rule</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs9', 57)" onmouseover="showTip(event, 'fs9', 57)" class="id">f</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs10', 58)" onmouseover="showTip(event, 'fs10', 58)" class="id">g</span><span class="pn">]</span> <span onmouseout="hideTip(event, 'fs29', 59)" onmouseover="showTip(event, 'fs29', 59)" class="id">th11</span>                      <span class="c">//                  |- !(f:&#39;a-&gt;&#39;b) g. f = g &lt;=&gt; (!x. f x = g x)</span>
 </code></pre>
 <pre class="fssnip highlighted"><code lang="fsharp"></code></pre>
 <p><span class="math">\(\small{ 	\dfrac
@@ -121,32 +124,34 @@ x:\alpha}
 <div class="tip" id="fs2">module CoreThry<br /><br />from HOL</div>
 <div class="tip" id="fs3">val load : (string * thm) list</div>
 <div class="tip" id="fs4">module Equal<br /><br />from HOL</div>
-<div class="tip" id="fs5">val x : term</div>
-<div class="tip" id="fs6">val parse_term : x:string -&gt; term</div>
-<div class="tip" id="fs7">val f : term</div>
-<div class="tip" id="fs8">val g : term</div>
-<div class="tip" id="fs9">val th1 : thm</div>
-<div class="tip" id="fs10">val eta_conv : tm:term -&gt; thm</div>
-<div class="tip" id="fs11">val th2 : thm</div>
-<div class="tip" id="fs12">val sym_rule : th:thm -&gt; thm</div>
-<div class="tip" id="fs13">val th3 : thm</div>
-<div class="tip" id="fs14">val assume_rule : tm:term -&gt; thm</div>
-<div class="tip" id="fs15">val th4 : thm</div>
-<div class="tip" id="fs16">val spec_rule : tm:term -&gt; th:thm -&gt; thm</div>
-<div class="tip" id="fs17">val th5 : thm</div>
-<div class="tip" id="fs18">val mk_abs_rule : v:term -&gt; th:thm -&gt; thm</div>
-<div class="tip" id="fs19">val th6 : thm</div>
-<div class="tip" id="fs20">val th7 : thm</div>
-<div class="tip" id="fs21">val list_trans_rule : ths:thm list -&gt; thm</div>
-<div class="tip" id="fs22">val th8 : thm</div>
-<div class="tip" id="fs23">val th9 : thm</div>
-<div class="tip" id="fs24">val mk_comb1_rule : th:thm -&gt; tm:term -&gt; thm</div>
-<div class="tip" id="fs25">val th10 : thm</div>
-<div class="tip" id="fs26">val gen_rule : v:term -&gt; th:thm -&gt; thm</div>
-<div class="tip" id="fs27">val th11 : thm</div>
-<div class="tip" id="fs28">val deduct_antisym_rule : th01:thm -&gt; th02:thm -&gt; thm</div>
-<div class="tip" id="fs29">val th : thm</div>
-<div class="tip" id="fs30">val list_gen_rule : tms:term list -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs5">module Bool<br /><br />from HOL</div>
+<div class="tip" id="fs6">val fun_eq_thm : thm</div>
+<div class="tip" id="fs7">val x : term</div>
+<div class="tip" id="fs8">val parse_term : x:string -&gt; term</div>
+<div class="tip" id="fs9">val f : term</div>
+<div class="tip" id="fs10">val g : term</div>
+<div class="tip" id="fs11">val th1 : thm</div>
+<div class="tip" id="fs12">val eta_conv : tm:term -&gt; thm</div>
+<div class="tip" id="fs13">val th2 : thm</div>
+<div class="tip" id="fs14">val sym_rule : th:thm -&gt; thm</div>
+<div class="tip" id="fs15">val th3 : thm</div>
+<div class="tip" id="fs16">val assume_rule : tm:term -&gt; thm</div>
+<div class="tip" id="fs17">val th4 : thm</div>
+<div class="tip" id="fs18">val spec_rule : tm:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs19">val th5 : thm</div>
+<div class="tip" id="fs20">val mk_abs_rule : v:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs21">val th6 : thm</div>
+<div class="tip" id="fs22">val th7 : thm</div>
+<div class="tip" id="fs23">val list_trans_rule : ths:thm list -&gt; thm</div>
+<div class="tip" id="fs24">val th8 : thm</div>
+<div class="tip" id="fs25">val th9 : thm</div>
+<div class="tip" id="fs26">val mk_comb1_rule : th:thm -&gt; tm:term -&gt; thm</div>
+<div class="tip" id="fs27">val th10 : thm</div>
+<div class="tip" id="fs28">val gen_rule : v:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs29">val th11 : thm</div>
+<div class="tip" id="fs30">val deduct_antisym_rule : th01:thm -&gt; th02:thm -&gt; thm</div>
+<div class="tip" id="fs31">val th : thm</div>
+<div class="tip" id="fs32">val list_gen_rule : tms:term list -&gt; th:thm -&gt; thm</div>
 
         </div>
         <div class="span1"></div>

@@ -6,20 +6,37 @@ TEOREMI
 
 $\vdash \top$
 
-true &egrave; derivabile.
-
-Lambda Calcolo
-------------
+vero &egrave; derivabile
 
 **[fun\_eq\_thm](0002_fun_eq.html)**
 
 $\vdash \forall (f:\alpha \rightarrow \beta)\ g.\ f = g\ \Leftrightarrow\ (\forall x.\ f\ x = g\ x)$
 
-L'euivalenza tra funzione corrisponde all'equivalenza dei loro valori a parit&agrave; di argomento.
+L'euivalenza tra funzioni corrisponde all'equivalenza dei loro valori a parit&agrave; di argomento
 
 
 Propriet&agrave; algebriche degli operatori logici
 ------------
+
+**[not\_true\_thm](0003_not_true.html)**
+
+$\vdash \neg \top \Leftrightarrow \bot$
+
+non vero equivale a falso
+
+**[not\_false\_thm](0004_not_false.html)**
+
+$\vdash \neg \bot \Leftrightarrow \top$
+
+non falso equivale a vero
+
+**[true\_not\_eq\_false\_thm](0005_true_not_eq_false.html)**
+
+$\vdash \neg (\top \Leftrightarrow \bot)$
+
+vero non equivale a falso
+
+...
 
 **[disj\_id\_thm](0016_disj_id.html)**
 
@@ -33,9 +50,7 @@ $\vdash \forall p.\ p \vee \top \Leftrightarrow \top$
 
 $\vdash \forall p.\ p \vee p \Leftrightarrow p$
 
-**[not\_true\_thm](0003_not_true.html)**
 
-$\vdash \neg \top \Leftrightarrow \bot$
 
 ...
 
@@ -192,19 +207,11 @@ not_dist_forall_thm
 not_dneg_thm
 //   |- !p. ~ ~ p <=> p
 
-not_false_thm
-//   |- ~ false <=> true
-
-
-
 select_eq_thm
 //   |- !(a:'a). (@x. x = a) = a
 
 skolem_thm
 //   |- !(P:'a->'b->bool). (!x. ?y. P x y) <=> (?f. !x. P x (f x))
-
-true_not_eq_false_thm
-//   |- ~ (true <=> false)
 
 uexists_thm1
 //   |- !(P:'a->bool). (?!x. P x) <=> (?x. P x /\ (!y. P y ==> y = x))

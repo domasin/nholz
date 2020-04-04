@@ -422,7 +422,7 @@ Regola di metaconversione.
 Prende una regola di conversione `term -> thm` e un teorema e applica `eq_mp_rule` alla conclusione 
 convertita e al teorema stesso.
 
-Bool
+Logica
 ------------
 
 **eqt\_elim\_rule**
@@ -769,59 +769,108 @@ assunzioni.
 
 Si veda anche: list\_gen\_rule, spec\_rule, mk\_forall\_rule.
 
-*)
+**list\_gen\_rule**
 
+$\dfrac
+{[x_1;x_2;\dots] \qquad A \vdash p}
+{A \vdash \forall x_1\ x_2\ \dost\ .\ p}
+\textsf{ gen_rule}
+$
 
+per x non libera in A 
 
-                          
-                                         
+**conj\_rule**
 
+$\dfrac
+{A_1 \vdash p \qquad A_2 \vdash q}
+{A_1 \cup \A_2 \vdash p \wedge q}
+\textsf{ conj_rule}
+$
 
+Questa &egrave; la regola di e-introduzione. Congiunge i due teoremi forniti
+e unisce le loro assunzioni.
 
+Si veda anche: conjunct1\_rule, conjunct2\_rule, mk\_conj\_rule.
 
-                               
+**conjunct1\_rule**
 
+$\dfrac
+{A \vdash p \wedge q}
+{A \vdash p}
+\textsf{ conjunct1_rule}
+$
 
+Questa &egrave; la regola di e-eliminazione a sinistra. Rimuove il 
+congiunto a destra dal teorema di congiuzione fornito.
 
-    
+Si veda anche: conjunct2\_rule, conjunct\_rule, mk\_conj\_rule.
 
+**conjunct2\_rule**
 
+$\dfrac
+{A \vdash p \wedge q}
+{A \vdash q}
+\textsf{ conjunct2_rule}
+$
 
+Questa &egrave; la regola di e-eliminazione a destra. Rimuove il 
+congiunto a sinistra dal teorema di congiuzione fornito.
 
+Si veda anche: conjunct1\_rule, conjunct\_rule, mk\_conj\_rule.
 
+**disj\_cases\_rule**
 
+$\dfrac
+{A \vdash p \vee q \qquad A_1 \vdash r \qquad A_2 \vdash r}
+{A \cup A_1 \setminus \{p\} \cup A_2 \setminus \{q\} \vdash r}
+\textsf{ disj_cases_rule}
+$
 
-#I "../bin/netstandard2.0"
-#r "nholz.dll"
-open HOL
+Questa &egrave; la regola di o-eliminazione. Prende un teorema di disgiunzione 
+e due teoremi extra che condividono la stessa conclusione. Restituisce un 
+teorema con la stessa conclusione dei teoremi extra. Le assunzioni del teorema 
+restituito sono l'unione delle assunzioni dei teoremi extra, ma con il 
+lato sinistro del teorema di disgiunzione rimosso dalle assunzioni del primo 
+e il lato destro rimosso da quelle del secondo, e unite insieme con le 
+assunzioni del teorema di disgiunzione.
 
+Si veda anche: disj1\_rule, disj2\_rule, mk\_disj\_rule.
 
-(**
+**Bool.disj1\_rule**
 
-| BoolClass.ccontr\_rule                                        
--------------------
+$\dfrac
+{A \vdash p \qquad q}
+{A \vdash p \vee q}
+\textsf{ disj1_rule}
+$
 
-Questa &egrave; la regola contraddizione della logica classica. Prende un termine 
-booleano e un teorema con falso come sua conclusione. Restituisce un teorema con 
-il termine fornito come sua conclusione, e con le stesse assunzioni del teorema 
-fornito ma con la negazione logica del termine fornito rimossa. Si noti che la 
-negazione logica del termine fornito non deve essere nelle assunzioni del teorema 
-affinch&eacute; questa regola abbia successo.
+Questa &egrave; la regola di o-introduzione per il lato sinistro. Disgiunge il 
+termine booleano fornito al lato destro del teorema in input.
 
-Si veda anche: contr\_rule, deduct\_contrapos\_rule.
+Si veda anche: disj2\_rule, disj\_cases\_rule, mk\_disj1\_rule.
 
-*)
+**Bool.disj2\_rule**
 
-ccontr_rule
+$\dfrac
+{p \qquad A \vdash q}
+{A \vdash p \vee q}
+\textsf{ disj2_rule}
+$
 
-//  `p`   A |- false
-//  ----------------
-//    A\{~p} |- p
+Questa &egrave; la regola di o-introduzione per il lato destro. Disgiunge il 
+termine booleano fornito al lato sinistro del teorema in input.
 
-(**
+Si veda anche: disj2\_rule, disj\_cases\_rule, mk\_disj1\_rule.
 
-| Bool.choose\_rule                                        
--------------------
+**choose\_rule**
+
+$\dfrac
+{y \qquad A_1 \vdash \exists x.\ p \qquad A_2 \vdash q}
+{A_1 \cup A_2 \setminus \{p[y/x]\} \vdash q}
+\textsf{ choose_rule}
+$
+
+con $y$ non libera in: $\exists x.\ p$, $q$ o $A_2 \setminus \{p[y/x]\}$
 
 Questa &egrave; la regola di eliminazione del quantificatore esistenziale.
 Rimuove, dalle assunzioni di un teorema principale fornito, il corpo di un 
@@ -835,136 +884,372 @@ del teorema principale affinch&eacute; questa regola abbia successo.
 
 See also: exists\_rule, mk_exists\_rule.
 
+Regole di congruenza per l'uguaglianza
+------------------
+
+**mk\_bin\_rule**
+
+$\dfrac
+{f \qquad A_1 \vdash s_1 = s_2 \qquad A_2 \vdash t_1 = t_2}
+{A_1 \cup A_2 \vdash f\ s_1\ t_1 = f\ s_2\ t_2}
+\textsf{ mk_bin_rule}
+$
+
+Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di 
+funzione binaria. Prende un termine di funzione binaria e due teoremi di 
+eguaglianza, e applica la funzione nella forma curried ai corrispondenti 
+lati di ciascun teorema, sotto l'unione delle loro assunzioni. Il tipo 
+della funzione fornita deve avere essere binario nella forma curried, con i tipi 
+del primo e del secondo dominio uguali al tipo di ciascun lato del teorema 
+corrispondente.
+
+
+Si veda anche: mk\_comb\_rule.
+
+**mk\_bin1\_rule**
+
+$\dfrac
+{f \qquad \vdash s_1 = s_2 \qquad t}
+{\vdash f\ s_1\ t = f\ s_2\ t}
+\textsf{ mk_bin1_rule}
+$
+
+Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di 
+funzione binaria sul lato sinistro. Prende un termine di funzione binaria, un 
+teorema di uguaglianza e un termine, e applica la funzione in forma curried 
+ai lati corrispondenti del teorema come suo lato sinistro e il termine fornito 
+come lato destro. Il tipo della funzione fornita deve avere essere binario 
+nella forma curried, con il tipo del primo dominio uguale al tipo di ciascun 
+lato del teorema e il secondo dominio uguale al tipo del termine argomento 
+aggiunto a destra.
+
+
+Si veda anche: mk\_bin2\_rule, mk\_bin\_rule, mk\_comb\_rule.
+
+**mk\_bin2\_rule**
+
+$\dfrac
+{f \qquad s \qquad \vdash t_1 = t_2}
+{\vdash f\ s\ t_1 = f\ s\ t_2}
+\textsf{ mk_bin2_rule}
+$
+
+Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di 
+funzione binaria sul lato destro. Prende un termine di funzione binaria, un 
+teorema di uguaglianza e un termine, e applica la funzione in forma curried 
+al termine fornito sul lato sinistro e ai lati corrispondenti del teorema 
+come suo lato destro. Il tipo della funzione fornita deve avere essere binario 
+nella forma curried, con il tipo del primo dominio uguale al tipo del termine 
+argomento a sinistra, e il tipo del secondo dominio uguale al tipo di ciascun 
+lato del teorema.
+
+Si veda anche: mk\_bin1\_rule, mk\_bin\_rule, mk\_comb\_rule.
+
+**mk\_eq\_rule**
+
+$\dfrac
+{A_1 \vdash s_1 = s_2 \qquad A_2 \vdash t_1 = t_2}
+{A_1 \cup A_2 \vdash s_1 = t_1 \Leftrightarrow s_2 = t_2}
+\textsf{ mk_eq_rule}
+$
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza. 
+Prende due teoremi di uguaglianza, e uguaglia i corrispondenti lati del 
+primo teorema con quelli del secondo, unendone le assunzioni. I tipi di 
+ciascun lato di ogni equazione devono essere uguali.
+
+Si veda anche: mk\_eq1\_rule, mk\_eq2\_rule, mk\_eq\_rule.
+
+**mk\_eq1\_rule**
+
+$\dfrac
+{A \vdash s_1 = s_2 \qquad t}
+{A \vdash s_1 = t \Leftrightarrow s_2 = t}
+\textsf{ mk_eq1_rule}
+$
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza 
+sul lato sinistro. Prende un teorema di uguaglianza e un termine, e uguaglia 
+ogni lato del teorema con il termine fornito. Il tipo del termine fornito 
+deve essere uguale al tipo di ciascun lato del teorema fornito.
+
+Si veda anche: mk\_eq2\_rule, mk\_eq\_rule, mk\_eq1\_rule.
+
+**mk\_eq2\_rule**
+
+$\dfrac
+{s \qquad A \vdash t_1 = t_2}
+{A \vdash s = t_1 \Leftrightarrow s = t_2}
+\textsf{ mk_eq2_rule}
+$
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza 
+sul lato destro. Prende un termine e un teorema di eguaglianza, e uguaglia 
+il termine a ciascun lato del teorema. Il tipo del termine fornito deve 
+essere uguale al tipo di cascun lato del teorema fornito.
+
+Si veda anche: mk\_eq1\_rule, mk\_eq\_rule, mk\_eq1\_rule.
+
+**EqCong.mk\_not\_rule**
+
+$\dfrac
+{A \vdash p_1 \Leftrightarrow p_2}
+{A \vdash \neg p_1 \Leftrightarrow \neg p_2}
+\textsf{ mk_not_rule}
+$
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la negazione 
+logica, Prende un teorema di eguaglianza booleana, e nega logicamente 
+ciascun lato del teorema.
+
+Si veda anche: mk\_comb\_rule, eqf\_intro\_rule, eqf\_elim\_rule.
+
+**mk\_conj\_rule**
+
+$\dfrac
+{A_1 \vdash p_1 \Leftrightarrow p_2 \qquad A_2 \vdash q_1 \Leftrightarrow q_2}
+{A_1 \cup A_2 \vdash p_1 \wedge p_2 \Leftrightarrow q_1 \wedge q_2 }
+\textsf{ mk_conj_rule}
+$
+
+Questa &egrave; la regola di congruenza per la congiunzione. Prende due teoremi 
+di egualianza boolena, e congiunge i corrispondenti lati del rpimo teorema 
+con quelli del secondo, unendone le assunzioni.
+
+Si veda anche: mk\_conj1\_rule, mk\_conj2\_rule, mk\_bin\_rule, conj\_rule.
+
+**mk\_conj1\_rule**
+
+$\dfrac
+{A \vdash p_1 \Leftrightarrow p_2 \qquad q}
+{A \vdash p_1 \wedge q \Leftrightarrow p_2 \wedge q}
+\textsf{ mk_conj1_rule}
+$
+
+Questa &egrave; la regola di congruenza per il lato sinistro della congiunzione. 
+Prende un teorema di eguaglianza booleana e un termine booleano, e congiunge 
+ciaszun lato del teorema con il termine fornito
+
+Si veda anche: mk\_conj2\_rule, mk\_conj\_rule, mk\_bin1\_rule, conj\_rule.
+
+**mk\_conj2\_rule**
+
+$\dfrac
+{p \quad A \vdash q_1 \Leftrightarrow q_2}
+{A \vdash p \wedge q_1 \Leftrightarrow p \wedge q_2}
+\textsf{ mk_conj2_rule}
+$
+
+Questa &egrave; la regola di congruenza per il lato destro della congiunzione. 
+Prende un termine booleano e un teorema di eguaglianza booleana, e congiunge il 
+termine fornito con ciascun lato del teorema.
+
+Si veda anche: mk\_conj1\_rule, mk\_conj\_rule, mk\_bin1\_rule, conj\_rule.
+
+**mk\_disj\_rule**
+
+$\dfrac
+{A_1 \vdash p_1 \Leftrightarrow p_2 \quad A_2 \vdash q_1 \Leftrightarrow q_2}
+{A_1 \cup A_2 \vdash p_1 \vee q_1 \Leftrightarrow p_2 \vee q_2}
+\textsf{ mk_disj_rule}
+$
+
+Questa &egrave; la regola di congruenza per la disgiunzione, Prende due 
+teoremi di eguaglianza booleana, e disgiunge i corrispondenti lati del 
+primo teorema con quelli del secondo, unendone le assunzioni.
+
+Si veda anche: mk\_disj1\_rule, mk\_disj2\_rule, mk\_bin\_rule, disj1\_rule, disj2\_rule.
+
+**mk\_disj1\_rule**
+
+$\dfrac
+{A \vdash p_1 \Leftrightarrow p_2 \quad q}
+{A \vdash p_1 \vee q \Leftrightarrow p_2 \vee q}
+\textsf{ mk_disj1_rule}
+$
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la disgiunzione sul 
+lato sinistro. Prende un teorema di eguaglianza booleana e un termine booleano, 
+e disgiunge ogni lato del teorema con il termine fornito.
+
+Si veda anche: mk\_disj2\_rule, mk\_disj\_rule, mk\_bin1\_rule, disj1\_rule.
+
+**mk\_disj2\_rule**
+
+$\dfrac
+{p \qquad A \vdash q_1 \Leftrightarrow q_2}
+{A \vdash p \vee q_1 \Leftrightarrow p \vee q_2}
+\textsf{ mk_disj2_rule}
+$
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la disgiunzione sul 
+lato destro. Prende un termine booleano e un teorema di eguaglianza booleana, 
+e disgiunge il termine fornito con ogni lato del teorema.
+
+Si veda anche: mk\_disj1\_rule, mk\_disj\_rule, mk\_bin1\_rule, disj2\_rule.
+
+**mk\_imp\_rule**
+
+$\dfrac
+{A_1 \vdash p_1 \Leftrightarrow p_2 \quad A_2 \vdash q_1 \Leftrightarrow q_2}
+{A_1 \cup A_2 \vdash p_1 \Rightarrow q_1 \Leftrightarrow p_2 \Rightarrow q_2}
+\textsf{ mk_imp_rule}
+$
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione. 
+Prende due teoremi di eguaglianza booleana, e crea l'implicazione dai 
+corrispondeti lati del primo e del secondo teorema, unendone le assunzioni.
+
+Si veda anche: mk\_imp1\_rule, mk\_imp2\_rule, mk\_bin\_rule.
+
+**mk\_imp1\_rule**
+
+$\dfrac
+{A \vdash p_1 \Leftrightarrow p_2 \quad q}
+{A \vdash p_1 \Rightarrow q \Leftrightarrow p_2 \Rightarrow q}
+\textsf{ mk_imp1_rule}
+$
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione 
+su lato sinistro. Prende un teorema di eguaglianza booleana e un termine 
+booleano, e crea le implicazioni da ogni lato del teorema, con il lato 
+del teorema come antecedente e il termine come conseguente.
+
+Si veda anche: mk\_imp2\_rule, mk\_imp\_rule, mk\_bin1\_rule
+
+**mk\_imp2\_rule**
+
+$\dfrac
+{p \qquad A \vdash q_1 \Leftrightarrow q_2}
+{A \vdash p \Rightarrow q_1 \Leftrightarrow p \Rightarrow q_2}
+\textsf{ mk_imp2_rule}
+$
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione 
+su lato destro. Prende un termine booleano e un teorema di eguaglianza 
+booleana, e rende il termine un antecedente di ciascun lato del teorema.
+
+Si veda anche: mk\_imp1\_rule, mk\_imp\_rule, mk\_bin2\_rule
+
+**mk\_forall\_rule**
+
+$\dfrac
+{x \qquad A \vdash p_1 \Leftrightarrow p_2}
+{A \vdash (\forall x.\ p_1) \Leftrightarrow (\forall x.\ p_2) }
+\textsf{ mk_forall_rule}
+$
+
+per `x` non libera in `A`
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione 
+universale. Prende una variabile e un teorema di uguaglianza, e quantifica 
+universalmente la variabile su entrambi i lati del teorema. La variabile 
+non deve occorrere libera nelle assunzioni del teorema fornito
+
+Si veda anche: mk\_abs\_rule, mk\_comb\_rule, gen\_rule.
+
+**mk\_exists\_rule**
+
+$\dfrac
+{x \qquad A \vdash p_1 \Leftrightarrow p_2}
+{A \vdash (\exists x.\ p_1) \Leftrightarrow (\exists x.\ p_2) }
+\textsf{ mk_exists_rule}
+$
+
+per `x` non libera in `A`
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione 
+esistenziale. Prende una variabile e un teorema di uguaglianza, e quantifica 
+in modo esistenzaiale la variabile su entrambi i lati del teorema. La variabile 
+non deve occorrere libera nelle assunzioni del teorema fornito
+
+Si veda anche: mk\_uexists\_rule, mk\_abs\_rule, mk\_comb\_rule, exists\_rule.
+
+**mk\_uexists\_rule**
+
+$\dfrac
+{x \qquad A \vdash p_1 \Leftrightarrow p_2}
+{A \vdash (\exists ! x.\ p_1) \Leftrightarrow (\exists ! x.\ p_2) }
+\textsf{ mk_uexists_rule}
+$
+
+per `x` non libera in `A`
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione 
+esistenziale univoca. Prende una variabile e un teorema di eguaglianza, e 
+quantifica con quantificatore esistenziale univoco la variabile su 
+entrambi i lato del teorema. La variabile non deve occorrere libera 
+nelle assunzioni del teorema fornito.
+
+Si veda anche: mk\_exists\_rule, mk\_abs\_rule, mk\_comb\_rule       
+
+**mk\_select\_rule**
+
+$\dfrac
+{x \qquad A \vdash p_1 \Leftrightarrow p_2}
+{A \vdash (\epsilon x.\ p_1) \Leftrightarrow (\epsilon x.\ p_2) }
+\textsf{ mk_uexists_rule}
+$
+
+per `x` non libera in `A`
+
+Questa &egrave; la regola di congruenza dell'eguaglianza per la selezione.
+Prende una variabile e un teorema di eguaglianza, e seleziona la variabile 
+da entrambi i lati del teorema. La variabile non deve occorrere libera 
+nelle assunzioni del teorema.
+
+Si veda anche: mk\_abs\_rule, mk\_comb\_rule.
+
+Logica classica
+------------------
+
+**select\_rule**
+
+$\dfrac
+{A \vdash \exists x.\ p}
+{A \vdash p[(\epsilon x. p)/x]}
+\textsf{ select_rule}
+$
+
+Questa &egrave; la regola di selezione esistenziale. Elimina il 
+quantificatore esistenziale del teorema fornito, e sostituisce nel corpo 
+ogni occorrenza della variabile legata con l'operatore di selezione 
+applicato al corpo originario (con la stessa variabile legata).
+
+Si veda anche: exists\_rule.
+
+**ccontr\_rule**
+
+$\dfrac
+{p \qquad A \vdash \bot}
+{A \setminus \{\neg p\} \vdash p}
+\textsf{ ccontr_rule}
+$
+
+Questa &egrave; la regola contraddizione della logica classica. Prende un termine 
+booleano e un teorema con falso come sua conclusione. Restituisce un teorema con 
+il termine fornito come sua conclusione, e con le stesse assunzioni del teorema 
+fornito ma con la negazione logica del termine fornito rimossa. Si noti che la 
+negazione logica del termine fornito non deve essere necessariamente presente 
+nelle assunzioni del teorema affinch&eacute; questa regola abbia successo.
+
+Si veda anche: contr\_rule, deduct\_contrapos\_rule.
+
+
+
+work in progress...
 *)
 
-choose_rule
 
-//    `y`   A1 |- ?x. p    A2 |- q      [ con "y" non libera in:                    
-//    -----------------------------         `?x. p`, `q` o `A2\{p[y/x]}` ]   
-//        A1 u A2\{p[y/x]} |- q               
+
+
+#I "../bin/netstandard2.0"
+#r "nholz.dll"
+open HOL
 
 (**
 
-| Bool.conj\_rule                                       
--------------------
-
-Questa &egrave; la regola di e-introduzione. Congiunge i due teoremi forniti
-e unisce le loro assunzioni.
-
-Si veda anche: conjunct1\_rule, conjunct2\_rule, mk\_conj\_rule.
-
-*)
-
-conj_rule
-
-//   A1 |- p    A2 |- q                                                   
-//   ------------------                                                   
-//   A1 u A2 |- p /\ q 
-
-(**
-
-| Bool.conjunct1\_rule                                      
--------------------
-
-Questa &egrave; la regola di e-eliminazione a sinistra. Rimuove il 
-congiunto a destra dal teorema di congiuzione fornito.
-
-Si veda anche: conjunct2\_rule, conjunct\_rule, mk\_conj\_rule.
-
-*)
-
-conjunct1_rule
-
-//   A |- p /\ q                                                             
-//   -----------                                                             
-//     A |- p   
-
-(**
-
-| Bool.conjunct2\_rule                                      
--------------------
-
-Questa &egrave; la regola di e-eliminazione a destra. Rimuove il 
-congiunto a sinistra dal teorema di congiuzione fornito.
-
-Si veda anche: conjunct1\_rule, conjunct\_rule, mk\_conj\_rule.
-
-*)
-
-conjunct2_rule
-
-//   A |- p /\ q                                                             
-//   -----------                                                             
-//     A |- q   
-
-(**
-
-| Bool.disj1\_rule                                     
--------------------
-
-Questa &egrave; la regola di o-introduzione per il lato sinistro. Disgiunge il 
-termine booleano fornito al lato destro del teorema in input.
-
-Si veda anche: disj2\_rule, disj\_cases\_rule, mk\_disj1\_rule.
-
-*)
-
-disj1_rule
-
-//    A |- p   `q`
-//    ------------
-//    A |- p \/ q
-
-(**
-
-| Bool.disj2\_rule                                     
--------------------
-
-Questa &egrave; la regola di o-introduzione per il lato destro. Disgiunge il 
-termine booleano fornito al lato sinistro del teorema in input.
-
-Si veda anche: disj2\_rule, disj\_cases\_rule, mk\_disj1\_rule.
-
-*)
-
-disj2_rule
-
-//   `p`   A |- q                                                           
-//   ------------                                                           
-//   A |- p \/ q      
-
-(**
-
-| Bool.disj\_cases\_rule                                    
--------------------
-
-Questa &egrave; la regola di o-eliminazione. Prende un teorema di disgiunzione 
-e due teoremi extra che condividono la stessa conclusione. Restituisce un 
-teorema con la stessa conclusione dei teoremi extra. Le assunzioni del teorema 
-restituito sono l'unione delle assunzioni dei teoremi extra, ma con il 
-lato sinistro del teorema di disgiunzione rimosso dalle assunzioni del primo 
-e il lato destro rimosso da quelle del secondo, e unite insieme con le 
-assunzioni del teorema di disgiunzione.
-
-Si veda anche: disj1\_rule, disj2\_rule, mk\_disj\_rule.
-
-*)
-
-disj_cases_rule
-
-//  A |- p \/ q    A1 |- r    A2 |- r                                       
-//  ---------------------------------                                       
-//      A u A1\{p} u A2\{q} |- r     
- 
-
-
-
-
-
-
-(**
-
-| NatEval.eta\_conv                       
+| NatEval.eval\_add\_conv                  
 -------------------
 
 Questa &egrave; la conversione di valutazione per l'addizione numerale. Prende 
@@ -1005,7 +1290,7 @@ eval_even_conv
 
 (**
 
-| NatEval.eval\_even\_conv                     
+| NatEval.eval\_exp\_conv                     
 -------------------
 
 Questa &egrave; la conversione di valutazione per l'esponenziazione numerale.
@@ -1085,7 +1370,7 @@ eval_le_conv
 
 (**
 
-| NatEval.eval\_le\_conv                    
+| NatEval.eval\_lt\_conv                    
 -------------------
 
 Questa &egrave; la conversione di valutazione per il confronto minore-di.
@@ -1220,7 +1505,7 @@ eval_sub_conv
 
 (**
 
-| NatEval.eval\_sub\_conv                  
+| NatEval.eval\_suc\_conv                  
 -------------------
 
 Questa &egrave; la conversione di valutazione per il successore numerale. Prende 
@@ -1260,378 +1545,6 @@ exists_rule
 //  ---------------------------                                            
 //          A |- ?x. p    
 
-
-
-
-(**
-
-| EqCong.mk\_bin\_rule             
--------------------
-
-Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di 
-funzione binaria. Prende un termine di funzione binaria e due teoremi di 
-eguaglianza, e applica la funzione nella forma curried ai corrispondenti 
-lati di ciascun teorema, sotto l'unione delle loro assunzioni. Il tipo 
-della funzione fornita deve avere essere binario nella forma curried, con i tipi 
-del primo e del secondo dominio uguali al tipo di ciascun lato del teorema 
-corrispondente.
-
-
-Si veda anche: mk\_comb\_rule.
-
-*)
-
-mk_bin_rule
-
-//  `f`   A1 |- s1 = s2    A2 |- t1 = t2                                  
-//  ------------------------------------                                  
-//      A1 u A2 |- f s1 t1 = f s2 t2    
-
-(**
-
-| EqCong.mk\_bin1\_rule             
--------------------
-
-Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di 
-funzione binaria sul lato sinistro. Prende un termine di funzione binaria, un 
-teorema di uguaglianza e un termine, e applica la funzione in forma curried 
-ai lati corrispondenti del teorema come suo lato sinistro e il termine fornito 
-come lato destro. Il tipo della funzione fornita deve avere essere binario 
-nella forma curried, con il tipo del primo dominio uguale al tipo di ciascun 
-lato del teorema e il secondo dominio uguale al tipo del termine argomento 
-aggiunto a destra.
-
-
-Si veda anche: mk\_bin2\_rule, mk\_bin\_rule, mk\_comb\_rule.
-
-*)
-
-mk_bin1_rule
-
-//  `f`   |- s1 = s2   `t`                                                
-//  ----------------------                                                
-//    |- f s1 t = f s2 t         
-
-(**
-
-| EqCong.mk\_bin2\_rule             
--------------------
-
-Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di 
-funzione binaria sul lato destro. Prende un termine di funzione binaria, un 
-teorema di uguaglianza e un termine, e applica la funzione in forma curried 
-al termine fornito sul lato sinistro e ai lati corrispondenti del teorema 
-come suo lato destro. Il tipo della funzione fornita deve avere essere binario 
-nella forma curried, con il tipo del primo dominio uguale al tipo del termine 
-argomento a sinistra, e il tipo del secondo dominio uguale al tipo di ciascun 
-lato del teorema.
-
-Si veda anche: mk\_bin1\_rule, mk\_bin\_rule, mk\_comb\_rule.
-
-*)
-
-mk_bin2_rule
-
-// `f`   `s`   |- t1 = t2                                                 
-// ----------------------                                                 
-//   |- f s t1 = f s t2   
-
-
-
-
-(**
-
-| EqCong.mk\_conj\_rule         
--------------------
-
-Questa &egrave; la regola di congruenza per la congiunzione. Prende due teoremi 
-di egualianza boolena, e congiunge i corrispondenti lati del rpimo teorema 
-con quelli del secondo, unendone le assunzioni.
-
-Si veda anche: mk\_conj1\_rule, mk\_conj2\_rule, mk\_bin\_rule, conj\_rule.
-
-*)
-
-mk_conj_rule
-
-//  A1 |- p1 <=> p2    A2 |- q1 <=> q2                                   
-//  ----------------------------------                                   
-//   A1 u A2 |- p1 /\ q1 <=> p2 /\ q2  
-
-(**
-
-| EqCong.mk\_conj1\_rule        
--------------------
-
-Questa &egrave; la regola di congruenza per il lato sinistro della congiunzione. 
-Prende un teorema di eguaglianza booleana e un termine booleano, e congiunge 
-ciaszun lato del teorema con il termine fornito
-
-Si veda anche: mk\_conj2\_rule, mk\_conj\_rule, mk\_bin1\_rule, conj\_rule.
-
-*)
-
-mk_conj1_rule
-
-//    A |- p1 <=> p2   `q`                                                 
-//  ------------------------                                               
-//  A |- p1 /\ q <=> p2 /\ q     
-
-(**
-
-| EqCong.mk\_conj1\_rule        
--------------------
-
-Questa &egrave; la regola di congruenza per il lato destro della congiunzione. 
-Prende un termine booleano e un teorema di eguaglianza booleana, e congiunge il 
-termine fornito con ciascun lato del teorema.
-
-Si veda anche: mk\_conj1\_rule, mk\_conj\_rule, mk\_bin1\_rule, conj\_rule.
-
-*)
-
-mk_conj2_rule
-
-//    `p`   A |- q1 <=> q2                                             
-//  ------------------------                                           
-//  A |- p /\ q1 <=> p /\ q2   
-
-(**
-
-| EqCong.mk\_disj\_rule        
--------------------
-
-Questa &egrave; la regola di congruenza per la disgiunzione, Prende due 
-teoremi di eguaglianza booleana, e disgiunge i corrispondenti lati del 
-primo teorema con quelli del secondo, unendone le assunzioni.
-
-Si veda anche: mk\_disj1\_rule, mk\_disj2\_rule, mk\_bin\_rule, disj1\_rule, disj2\_rule.
-
-*)
-
-mk_disj_rule
-
-//  A1 |- p1 <=> p2    A2 |- q1 <=> q2                                   
-//  ----------------------------------                                   
-//   A1 u A2 |- p1 \/ q1 <=> p2 \/ q2    
-
-(**
-
-| EqCong.mk\_disj1\_rule       
--------------------
-
-Questa &egrave; la regola di congruenza dell'eguaglianza per la disgiunzione sul 
-lato sinistro. Prende un teorema di eguaglianza booleana e un termine booleano, 
-e disgiunge ogni lato del teorema con il termine fornito.
-
-Si veda anche: mk\_disj2\_rule, mk\_disj\_rule, mk\_bin1\_rule, disj1\_rule.
-
-*)
-
-mk_disj1_rule
-
-//     A |- p1 <=> p2   `q`                                                 
-//   ------------------------                                               
-//   A |- p1 \/ q <=> p2 \/ q  
-
-(**
-
-| EqCong.mk\_disj2\_rule       
--------------------
-
-Questa &egrave; la regola di congruenza dell'eguaglianza per la disgiunzione sul 
-lato destro. Prende un termine booleano e un teorema di eguaglianza booleana, 
-e disgiunge il termine fornito con ogni lato del teorema.
-
-Si veda anche: mk\_disj1\_rule, mk\_disj\_rule, mk\_bin1\_rule, disj2\_rule.
-
-*)
-
-mk_disj2_rule
-
-//    `p`   A |- q1 <=> q2                                             
-//  ------------------------                                           
-//  A |- p \/ q1 <=> p \/ q2   
-
-(**
-
-| EqCong.mk\_eq\_rule       
--------------------
-
-Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza. 
-Prende due teoremi di uguaglianza, e uguaglia i corrispondenti lati del 
-primo teorema con quelli del secondo, unendone le assunzioni. I tipi di 
-ciascun lato di ogni equazione devono essere uguali.
-
-Si veda anche: mk\_eq1\_rule, mk\_eq2\_rule, mk\_eq\_rule.
-
-*)
-
-mk_eq_rule
-
-//  A1 |- s1 = s2    A2 |- t1 = t2                                          
-//  ------------------------------                                          
-//  A1 u A2 |- s1 = t1 <=> s2 = t2  
-
-(**
-
-| EqCong.mk\_eq1\_rule    
--------------------
-
-Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza 
-sul lato sinistro. Prende un teorema di uguaglianza e un termine, e uguaglia 
-ogni lato del teorema con il termine fornito. Il tipo del termine fornito 
-deve essere uguale al tipo di ciascun lato del teorema fornito.
-
-Si veda anche: mk\_eq2\_rule, mk\_eq\_rule, mk\_eq1\_rule.
-
-*)
-
-mk_eq1_rule
-
-//   A |- s1 = s2   `t`                                                   
-// ----------------------                                                 
-// A |- s1 = t <=> s2 = t  
-
-(**
-
-| EqCong.mk\_eq2\_rule     
--------------------
-
-Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza 
-sul lato destro. Prende un termine e un teorema di eguaglianza, e uguaglia 
-il termine a ciascun lato del teorema. Il tipo del termine fornito deve 
-essere uguale al tipo di cascun lato del teorema fornito.
-
-Si veda anche: mk\_eq1\_rule, mk\_eq\_rule, mk\_eq1\_rule.
-
-*)
-
-mk_eq2_rule
-
-//    `s`   A |- t1 = t2                                                   
-//  ----------------------                                                 
-//  A |- s = t1 <=> s = t2    
-
-(**
-
-| EqCong.mk\_exists\_rule    
--------------------
-
-Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione 
-esistenziale. Prende una variabile e un teorema di uguaglianza, e quantifica 
-in modo esistenzaiale la variabile su entrambi i lati del teorema. La variabile 
-non deve occorrere libera nelle assunzioni del teorema fornito
-
-Si veda anche: mk\_uexists\_rule, mk\_abs\_rule, mk\_comb\_rule, exists\_rule.
-
-*)
-
-mk_exists_rule
-
-//     `x`   A |- p1 <=> p2         [ "x" not free in `A` ]                
-//  --------------------------                                             
-//  A |- (?x. p1) <=> (?x. p2)  
-
-
-(**
-
-| EqCong.mk\_forall\_rule  
--------------------
-
-Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione 
-universale. Prende una variabile e un teorema di uguaglianza, e quantifica 
-universalmente la variabile su entrambi i lati del teorema. La variabile 
-non deve occorrere libera nelle assunzioni del teorema fornito
-
-Si veda anche: mk\_abs\_rule, mk\_comb\_rule, gen\_rule.
-
-*)
-
-mk_forall_rule
-
-//     `x`   A |- p1 <=> p2         [ "x" not free in `A` ]              
-//  --------------------------                                           
-//  A |- (!x. p1) <=> (!x. p2)    
-
-(**
-
-| EqCong.mk\_imp\_rule 
--------------------
-
-Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione. 
-Prende due teoremi di eguaglianza booleana, e crea l'implicazione dai 
-corrispondeti lati del primo e del secondo teorema, unendone le assunzioni.
-
-Si veda anche: mk\_imp1\_rule, mk\_imp2\_rule, mk\_bin\_rule.
-
-*)
-
-mk_imp_rule
-
-//  A1 |- p1 <=> p2    A2 |- q1 <=> q2                                    
-//  ----------------------------------                                    
-//  A1 u A2 |- p1 ==> q1 <=> p2 ==> q2 
-
-
-(**
-
-| EqCong.mk\_imp1\_rule 
--------------------
-
-Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione 
-su lato sinistro. Prende un teorema di eguaglianza booleana e un termine 
-booleano, e crea le implicazioni da ogni lato del teorema, con il lato 
-del teorema come antecedente e il termine come conseguente.
-
-Si veda anche: mk\_imp2\_rule, mk\_imp\_rule, mk\_bin1\_rule
-
-*)
-
-mk_imp1_rule
-
-//    A |- p1 <=> p2   `q`                                               
-// --------------------------                                            
-// A |- p1 ==> q <=> p2 ==> q    
-
-(**
-
-| EqCong.mk\_imp2\_rule 
--------------------
-
-Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione 
-su lato destro. Prende un termine booleano e un teorema di eguaglianza 
-booleana, e rende il termine un antecedente di ciascun lato del teorema.
-
-Si veda anche: mk\_imp1\_rule, mk\_imp\_rule, mk\_bin2\_rule
-
-*)
-
-mk_imp2_rule
-
-//    `p`   A |- q1 <=> q2                                            
-//  --------------------------                                        
-//  A |- p ==> q1 <=> p ==> q2  
-
-
-(**
-
-| EqCong.mk\_not\_rule 
--------------------
-
-Questa &egrave; la regola di congruenza dell'eguaglianza per la negazione 
-logica, Prende un teorema di eguaglianza booleana, e nega logicamente 
-ciascun lato del teorema.
-
-Si veda anche: mk\_comb\_rule, eqf\_intro\_rule, eqf\_elim\_rule.
-
-*)
-
-mk_not_rule
-
-//    A |- p1 <=> p2                                                      
-//  ------------------                                                    
-//  A |- ~ p1 <=> ~ p2   
 
 (**
 
@@ -1690,65 +1603,5 @@ mk_pair2_rule
 ///    --------------------                                                   
 ///    A |- (x,y1) = (x,y2)  
 
-(**
-
-| EqCong.mk\_select\_rule
--------------------
-
-Questa &egrave; la regola di congruenza dell'eguaglianza per la selezione.
-Prende una variabile e un teorema di eguaglianza, e seleziona la variabile 
-da entrambi i lati del teorema. La variabile non deve occorrere libera 
-nelle assunzioni del teorema.
-
-Si veda anche: mk\_abs\_rule, mk\_comb\_rule.
-
-*)
-
-mk_select_rule
-
-//    `x`   A |- p1 <=> p2        [ "x" not free in `A` ]                
-//  ------------------------                                             
-//  A |- (@x. p1) = (@x. p2)     
-
-
-(**
-
-| EqCong.mk\_uexists\_rule
--------------------
-
-Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione 
-esistenziale univoca. Prende una variabile e un teorema di eguaglianza, e 
-quantifica con quantificatore esistenziale univoco la variabile su 
-entrambi i lato del teorema. La variabile non deve occorrere libera 
-nelle assunzioni del teorema fornito.
-
-Si veda anche: mk\_exists\_rule, mk\_abs\_rule, mk\_comb\_rule
-
-*)
-
-mk_uexists_rule
-
-//      `x`   A |- p1 <=> p2        [ "x" not free in `A` ]               
-//  ----------------------------                                          
-//  A |- (?!x. p1) <=> (?!x. p2)              
-
-(**
-
-| BoolClass.select\_rule
--------------------
-
-Questa &egrave; la regola di selezione esistenziale. Elimina il 
-quantificatore esistenziale del teorema fornito, e sostituisce nel corpo 
-ogni occorrenza della variabile legata con l'operatore di selezione 
-applicato al corpo originario (con la stessa variabile legata).
-
-Si veda anche: exists\_rule.
-
-*)
-
-select_rule
-
-//     A |- ?x. p                                                         
-//  ----------------                                                      
-//  A |- p[(@x.p)/x]   
+   
 

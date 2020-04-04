@@ -1,5 +1,5 @@
 (**
-Non vero
+Non vero equivale a falso
 =============
 
 $\vdash \neg \top \Leftrightarrow \bot$
@@ -17,9 +17,10 @@ not_true_thm
 //   |- ~ true <=> false
 
 
-let truth_thm_gr = (truth_thm, mkGraph (Th truth_thm, "truth\_thm") [])
+let truth_thm_tr = (truth_thm, mkGraph (Th truth_thm, "truth\_thm") [])
 
 let th = 
+    (* |- ~ true <=> false         *)
     deduct_antisym_rule_tr
         (* false |- ~ true             *)
         (contr_rule_tr (parse_term(@"~ true")) (assume_rule_tr (parse_term(@"false"))))
@@ -27,7 +28,7 @@ let th =
         (eq_mp_rule_tr
           (* ~ true |- true <=> false    *)
           (eqf_intro_rule_tr (assume_rule_tr (parse_term(@"~ true"))))
-           truth_thm_gr )
+           truth_thm_tr )
 
 (**
 $

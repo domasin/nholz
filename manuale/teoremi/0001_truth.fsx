@@ -1,5 +1,5 @@
 (**
-Verit&agrave;
+Vero
 =============
 
 $\vdash \top$

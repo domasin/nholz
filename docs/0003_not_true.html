@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <!--
-      The Non vero
+      The Non vero equivale a falso
  parameters will be replaced with the
       document title extracted from the <h1> element or
       file name, if there is no <h1> heading
     -->
-    <title>Non vero
+    <title>Non vero equivale a falso
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
@@ -39,15 +39,16 @@
       <div class="row" style="margin-top:30px;">
         <div class="span1"></div>
         <div class="span10" id="main">
-          <h1>Non vero</h1>
+          <h1>Non vero equivale a falso</h1>
 <p><span class="math">\(\vdash \neg \top \Leftrightarrow \bot\)</span></p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="id">not_true_thm</span>
 <span class="c">//   |- ~ true &lt;=&gt; false</span>
 
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="id">truth_thm_gr</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="id">truth_thm</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="fn">mkGraph</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="uc">Th</span> <span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="id">truth_thm</span><span class="pn">,</span> <span class="s">&quot;truth\_thm&quot;</span><span class="pn">)</span> <span class="pn">[</span><span class="pn">]</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="id">truth_thm_tr</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="id">truth_thm</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="fn">mkGraph</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="uc">Th</span> <span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="id">truth_thm</span><span class="pn">,</span> <span class="s">&quot;truth\_thm&quot;</span><span class="pn">)</span> <span class="pn">[</span><span class="pn">]</span><span class="pn">)</span>
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="id">th</span> <span class="o">=</span> 
+    <span class="c">(* |- ~ true &lt;=&gt; false         *)</span>
     <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="fn">deduct_antisym_rule_tr</span>
         <span class="c">(* false |- ~ true             *)</span>
         <span class="pn">(</span><span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="fn">contr_rule_tr</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;~ true&quot;</span><span class="pn">)</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="fn">assume_rule_tr</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;false&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span>
@@ -55,7 +56,7 @@
         <span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 20)" onmouseover="showTip(event, 'fs16', 20)" class="fn">eq_mp_rule_tr</span>
           <span class="c">(* ~ true |- true &lt;=&gt; false    *)</span>
           <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 21)" onmouseover="showTip(event, 'fs17', 21)" class="fn">eqf_intro_rule_tr</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="fn">assume_rule_tr</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 23)" onmouseover="showTip(event, 'fs14', 23)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;~ true&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span>
-           <span onmouseout="hideTip(event, 'fs7', 24)" onmouseover="showTip(event, 'fs7', 24)" class="id">truth_thm_gr</span> <span class="pn">)</span>
+           <span onmouseout="hideTip(event, 'fs7', 24)" onmouseover="showTip(event, 'fs7', 24)" class="id">truth_thm_tr</span> <span class="pn">)</span>
 </code></pre>
 <p><span class="math">\(\small{ 	
 \dfrac
@@ -90,7 +91,7 @@
 <div class="tip" id="fs4">module Equal<br /><br />from HOL</div>
 <div class="tip" id="fs5">module Bool<br /><br />from HOL</div>
 <div class="tip" id="fs6">val not_true_thm : thm</div>
-<div class="tip" id="fs7">val truth_thm_gr : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs7">val truth_thm_tr : thm * Graph&lt;Exp * string&gt;</div>
 <div class="tip" id="fs8">val truth_thm : thm</div>
 <div class="tip" id="fs9">val mkGraph : v:&#39;a -&gt; xs:List&lt;Graph&lt;&#39;a&gt;&gt; -&gt; Graph&lt;&#39;a&gt;</div>
 <div class="tip" id="fs10">union case Exp.Th: thm -&gt; Exp</div>

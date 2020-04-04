@@ -1,10 +1,10 @@
 (**
-Funzioni equivalenti
+Equivalenza tra funzioni
 =============
 
 $\vdash \forall (f:\alpha \rightarrow \beta)\ g.\ f = g\ \Leftrightarrow\ (\forall x.\ f\ x = g\ x)$
 
-L'euivalenza tra funzione corrisponde all'equivalenza dei loro valori a parit&agrave; di argomento.
+L'euivalenza tra funzioni corrisponde all'equivalenza dei loro valori a parit&agrave; di argomento.
 *)
 
 (***hide***)
@@ -12,7 +12,11 @@ L'euivalenza tra funzione corrisponde all'equivalenza dei loro valori a parit&ag
 open HOL
 CoreThry.load
 Equal.load
+Bool.load
 (***unhide***)
+
+fun_eq_thm
+// |- !(f:'a->'b) g. f = g <=> (!x. f x = g x)
 
 let x = parse_term(@"x:'a") 
 let f = parse_term(@"f:'a->'b")

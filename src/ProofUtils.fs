@@ -178,3 +178,7 @@ let eqf_intro_rule_tr (th1,g1) =
 let contr_rule_tr t (th1,g1) = 
     let th = th1 |> contr_rule t
     (th, mkGraph (Th th,"contr_rule") [mkGraph (Te t,"") [];g1])
+
+let eqf_elim_rule_tr (th1,g1) = 
+    let th = th1 |> eqf_elim_rule
+    (th, mkGraph (Th th,"eqf_elim_rule") [g1])
