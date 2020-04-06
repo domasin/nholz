@@ -2,6 +2,15 @@
 TEOREMI
 =============
 
+Per i teoremi gi&agrave; documentati, cliccando sul nome del teorema si apre una pagina 
+di dettaglio con l'esposizione della dimostrazione a codice e un rendering della dimostrazione nel calcolo 
+dei sequenti. 
+
+(Si noti che queste pagine di dettaglio utilizzano un'estensione al sistema base che 
+costruisce un albero della dimostrazione, con regole di inferenza del tipo `..._tr` che 
+rispetto alle corrispondenti regole senza `_tr` mantengono una memoria dei passi di dimostrazione e 
+sono utilizzate solo a scopo di documentazione.)
+
 **[truth\_thm](0001_truth.html)**
 
 $\vdash \top$
@@ -40,7 +49,7 @@ vero non equivale a falso
 
 $\forall p\ q.\ \neg (p \vee q) \Leftrightarrow \neg p \wedge \neg q$
 
-la negazione di una disgiunzione equivale alla congiunzione delle negazioni
+ditribuzione della negazione sulla disgiunzione
 
 **[conj\_id\_thm](0007_conj_id.html)**
 
@@ -71,7 +80,7 @@ $\vdash \forall p.\ p \vee p \Leftrightarrow p$
 Logica classica
 ----------------
 
-Tutti i teoremi seguenti sono derivati attraverso l'assioma di scelta e per tanto 
+Tutti i teoremi seguenti sono derivati attraverso l'assioma di scelta e pertanto 
 possono essere considerati come logica classica.
 
 Va comunque notato che alcuni sono di fatto derivabili nella logica intuizionista 

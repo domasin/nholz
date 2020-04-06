@@ -10,21 +10,23 @@ $\vdash \top$
 open HOL
 CoreThry.load
 Equal.load
+Bool.load
 (***unhide***)
 
 truth_thm
 // |- true
 
-true_def                                            // |- true <=> (\(p:bool). p) = (\p. p)
-let tt1 = sym_rule true_def                         // |- (\(p:bool). p) = (\p. p) <=> true
-let tt2 = refl_conv (parse_term(@"\(p:bool).p"))    // |- (\(p:bool). p) = (\p. p)
-let tt3 = eq_mp_rule tt1 tt2                        // |- true
+let true_def_tr = true_def, mkGraph (Th true_def, "true\_def") []
 
-(***hide***)
-let th1 = sym_rule_tr (true_def, mkGraph (Th true_def, "true\_def") [])
-let th2 = @"\(p:bool).p" |> parse_term |> refl_conv_tr
-let th3 = eq_mp_rule_tr th1 th2
-(***unhide***)
+let th = 
+    (* |- true                        *)
+    eq_mp_rule_tr
+      (* |- (\p. p) = (\p. p) <=> true  *)
+      (sym_rule_tr true_def_tr)
+      (* |- (\p. p) = (\p. p)           *)
+      (refl_conv_tr (parse_term(@"\(p:bool).p")))
+
+th |> print_graph
 
 (**
 $

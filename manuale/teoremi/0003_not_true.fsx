@@ -30,6 +30,8 @@ let th =
           (eqf_intro_rule_tr (assume_rule_tr (parse_term(@"~ true"))))
            truth_thm_tr )
 
+th |> print_graph
+
 (**
 $
 \small{ 	

@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "manuale", "manuale", "{08F9
 		manuale\B1_Teorie.fsx = manuale\B1_Teorie.fsx
 		manuale\B2_Teoremi.fsx = manuale\B2_Teoremi.fsx
 		manuale\index.fsx = manuale\index.fsx
+		manuale\tactics.fsx = manuale\tactics.fsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "it", "it", "{40DAE171-1C4D-4008-A9E0-F611A61032AF}"

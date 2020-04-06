@@ -1,5 +1,5 @@
 (**
-la negazione di una disgiunzione equivale alla congiunzione delle negazioni
+ditribuzione della negazione sulla disgiunzione
 =============
 
 $\forall p\ q.\ \neg (p \vee q) \Leftrightarrow \neg p \wedge \neg q$

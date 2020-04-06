@@ -79,13 +79,12 @@ let thm_eq (x:thm) (y:thm) = (compare x y = 0)
 
 
 // prim_refl_conv : term -> thm 
-//                              
-//       `t`                    
-//    --------                  
-//    |- t = t                  
 //
-///This is the reflexivity rule for equality.  It takes a term, and returns a *)
-///There are no restrictions on the supplied term. 
+/// This is the reflexivity rule for equality.  It takes a term, and returns a
+/// There are no restrictions on the supplied term. 
+///       `t`                    
+///    --------                  
+///    |- t = t  
 let prim_refl_conv tm =
     let c1 = mk_eq (tm,tm) in
     Theorem ([],c1)
