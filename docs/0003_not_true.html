@@ -44,8 +44,7 @@
 <pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="id">not_true_thm</span>
 <span class="c">//   |- ~ true &lt;=&gt; false</span>
 
-
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="id">truth_thm_tr</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="id">truth_thm</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="fn">mkGraph</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="uc">Th</span> <span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="id">truth_thm</span><span class="pn">,</span> <span class="s">&quot;truth\_thm&quot;</span><span class="pn">)</span> <span class="pn">[</span><span class="pn">]</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="id">truth_thm_tr</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="id">truth_thm</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="fn">mkTree</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="uc">Th</span> <span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="id">truth_thm</span><span class="pn">,</span> <span class="s">&quot;truth\_thm&quot;</span><span class="pn">)</span> <span class="pn">[</span><span class="pn">]</span><span class="pn">)</span>
 
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="id">th</span> <span class="o">=</span> 
     <span class="c">(* |- ~ true &lt;=&gt; false         *)</span>
@@ -57,6 +56,8 @@
           <span class="c">(* ~ true |- true &lt;=&gt; false    *)</span>
           <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 21)" onmouseover="showTip(event, 'fs17', 21)" class="fn">eqf_intro_rule_tr</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="fn">assume_rule_tr</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 23)" onmouseover="showTip(event, 'fs14', 23)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;~ true&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span>
            <span onmouseout="hideTip(event, 'fs7', 24)" onmouseover="showTip(event, 'fs7', 24)" class="id">truth_thm_tr</span> <span class="pn">)</span>
+
+<span onmouseout="hideTip(event, 'fs11', 25)" onmouseover="showTip(event, 'fs11', 25)" class="id">th</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 26)" onmouseover="showTip(event, 'fs18', 26)" class="fn">print_tree</span>
 </code></pre>
 <p><span class="math">\(\small{ 	
 \dfrac
@@ -91,17 +92,18 @@
 <div class="tip" id="fs4">module Equal<br /><br />from HOL</div>
 <div class="tip" id="fs5">module Bool<br /><br />from HOL</div>
 <div class="tip" id="fs6">val not_true_thm : thm</div>
-<div class="tip" id="fs7">val truth_thm_tr : thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs7">val truth_thm_tr : thm * (Exp * string) Tree</div>
 <div class="tip" id="fs8">val truth_thm : thm</div>
-<div class="tip" id="fs9">val mkGraph : v:&#39;a -&gt; xs:List&lt;Graph&lt;&#39;a&gt;&gt; -&gt; Graph&lt;&#39;a&gt;</div>
+<div class="tip" id="fs9">val mkTree : v:&#39;a -&gt; xs:&#39;a Tree list -&gt; &#39;a Tree</div>
 <div class="tip" id="fs10">union case Exp.Th: thm -&gt; Exp</div>
-<div class="tip" id="fs11">val th : thm * Graph&lt;Exp * string&gt;</div>
-<div class="tip" id="fs12">val deduct_antisym_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; th2:thm * g2:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
-<div class="tip" id="fs13">val contr_rule_tr : t:term -&gt; th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs11">val th : thm * (Exp * string) Tree</div>
+<div class="tip" id="fs12">val deduct_antisym_rule_tr : th1:thm * g1:(Exp * string) Tree -&gt; th2:thm * g2:(Exp * string) Tree -&gt; thm * (Exp * string) Tree</div>
+<div class="tip" id="fs13">val contr_rule_tr : t:term -&gt; th1:thm * g1:(Exp * string) Tree -&gt; thm * (Exp * string) Tree</div>
 <div class="tip" id="fs14">val parse_term : x:string -&gt; term</div>
-<div class="tip" id="fs15">val assume_rule_tr : t:term -&gt; thm * Graph&lt;Exp * string&gt;</div>
-<div class="tip" id="fs16">val eq_mp_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; th2:thm * g2:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
-<div class="tip" id="fs17">val eqf_intro_rule_tr : th1:thm * g1:Graph&lt;Exp * string&gt; -&gt; thm * Graph&lt;Exp * string&gt;</div>
+<div class="tip" id="fs15">val assume_rule_tr : t:term -&gt; thm * (Exp * string) Tree</div>
+<div class="tip" id="fs16">val eq_mp_rule_tr : th1:thm * g1:(Exp * string) Tree -&gt; th2:thm * g2:(Exp * string) Tree -&gt; thm * (Exp * string) Tree</div>
+<div class="tip" id="fs17">val eqf_intro_rule_tr : th1:thm * g1:(Exp * string) Tree -&gt; thm * (Exp * string) Tree</div>
+<div class="tip" id="fs18">val print_tree : t:thm * g:(Exp * string) Tree -&gt; string</div>
 
         </div>
         <div class="span1"></div>

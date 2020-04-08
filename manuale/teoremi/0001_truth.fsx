@@ -16,7 +16,7 @@ Bool.load
 truth_thm
 // |- true
 
-let true_def_tr = true_def, mkGraph (Th true_def, "true\_def") []
+let true_def_tr = true_def, mkTree(Th true_def, "true\_def") []
 
 let th = 
     (* |- true                        *)
@@ -26,7 +26,7 @@ let th =
       (* |- (\p. p) = (\p. p)           *)
       (refl_conv_tr (parse_term(@"\(p:bool).p")))
 
-th |> print_graph
+th |> print_tree
 
 (**
 $

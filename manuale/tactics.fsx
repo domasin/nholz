@@ -31,6 +31,11 @@ e2 (ACCEPT_TAC true_def)
 e2 REFL_TAC
 top_thm()
 
+g ("p = p" |> parse_term)
+top_realgoal()
+e2 REFL_TAC
+top_thm()
+
 let truth_thm_tr = (truth_thm, mkGraph (Th truth_thm, "truth\_thm") [])
 
 let th = 
@@ -63,7 +68,6 @@ let (CONTR_TAC: thm_tactic) =
         null_meta,[],propagate_thm th
     with Failure _ -> failwith "CONTR_TAC"
 
-dest_eq (parse_term @"~ true <=> false")
 
 g (parse_term @"~ true <=> false")
 e2 deduct_antisym_rule_tac

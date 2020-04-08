@@ -16,8 +16,7 @@ Bool.load
 not_true_thm
 //   |- ~ true <=> false
 
-
-let truth_thm_tr = (truth_thm, mkGraph (Th truth_thm, "truth\_thm") [])
+let truth_thm_tr = (truth_thm, mkTree (Th truth_thm, "truth\_thm") [])
 
 let th = 
     (* |- ~ true <=> false         *)
@@ -30,7 +29,7 @@ let th =
           (eqf_intro_rule_tr (assume_rule_tr (parse_term(@"~ true"))))
            truth_thm_tr )
 
-th |> print_graph
+th |> print_tree
 
 (**
 $

@@ -45,10 +45,10 @@
     <Compile Include="NatRel.fs" />
     <Compile Include="NatEval.fs" />
     <Compile Include="ProofUtils.fs" />
-    <Compile Include="Nets.fs" />
+    <!--<Compile Include="Nets.fs" />
     <Compile Include="Conversions.fs" />
     <Compile Include="Instantiations.fs" />
-    <Compile Include="Tactics.fs" />
+    <Compile Include="Tactics.fs" />-->
   </ItemGroup>
 
 </Project>
