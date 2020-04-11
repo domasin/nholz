@@ -16,20 +16,27 @@ Bool.load
 not_true_thm
 //   |- ~ true <=> false
 
-let truth_thm_tr = (truth_thm, mkTree (Th truth_thm, "truth\_thm") [])
+(**
+Backward proof with tree
+*)
 
-let th = 
-    (* |- ~ true <=> false         *)
-    deduct_antisym_rule_tr
-        (* false |- ~ true             *)
-        (contr_rule_tr (parse_term(@"~ true")) (assume_rule_tr (parse_term(@"false"))))
-        (* ~ true |- false             *)
-        (eq_mp_rule_tr
-          (* ~ true |- true <=> false    *)
-          (eqf_intro_rule_tr (assume_rule_tr (parse_term(@"~ true"))))
-           truth_thm_tr )
+([],@"~ true <=> false")                                    |> start_proof
+(* |- ~ true <=> false         *)
+|> deduct_antisym_rule_bk [] []
+    (* false |- ~ true             *)
+    |> contr_rule_bk ("false" |> parse_term)                |> right
+        |> assume_rule_bk                                   |> lower |> prove |> lower |> prove |> right
+    (* ~ true |- false             *)
+    |> eq_mp_rule_bk ("true" |> mkGoal [])
+            (* ~ true |- true <=> false    *)
+            |> eqf_intro_rule_bk
+                |> assume_rule_bk                           |> lower |> prove |> lower |> prove |> right
+            (* |- true  *)
+            |> by truth_thm "truth\_thm"                    |> lower |> prove |> lower |> prove
+|> view
+|> loc_thm |> Option.get
 
-th |> print_tree
+//val it : thm = |- ~ true <=> false
 
 (**
 $
@@ -57,7 +64,38 @@ $
 		\vdash\ \top\; \mathbf{ truth\_thm}}
 		{\neg\ \top\ \vdash\ \bot}
 		\textsf{ eq_mp_rule}}
-	{\vdash\ \neg\ \top\ \Leftrightarrow\ \bot}
+	{\color{red}{\vdash\ \neg\ \top\ \Leftrightarrow\ \bot}}
 	\textsf{ deduct_antisym_rule} }
 $
 *)
+
+(**
+Forward proof with tree
+*)
+
+//(* |- ~ true <=> false         *)
+deduct_antisym_rule_fd
+    (* false |- ~ true             *)
+    (contr_rule_fd (parse_term(@"~ true")) (assume_rule_fd (parse_term(@"false"))))
+    (* ~ true |- false             *)
+    (eq_mp_rule_fd
+        (* ~ true |- true <=> false    *)
+        (eqf_intro_rule_fd (assume_rule_fd (parse_term(@"~ true"))))
+        (truth_thm |> thm_fd "truth\_thm") )
+|> zipper |> view |> loc_thm |> Option.get
+
+(**
+Classic forward proof without tree
+*)
+
+//(* |- ~ true <=> false         *)
+deduct_antisym_rule
+  (* false |- ~ true             *)
+  (contr_rule (parse_term(@"~ true")) (assume_rule (parse_term(@"false"))))
+  (* ~ true |- false             *)
+  (eq_mp_rule
+    (* ~ true |- true <=> false    *)
+    (eqf_intro_rule (assume_rule (parse_term(@"~ true"))))
+    truth_thm )
+
+//val it : thm = |- ~ true <=> false

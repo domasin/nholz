@@ -89,6 +89,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "teoremi", "teoremi", "{45C5
 		manuale\teoremi\0045_bool_cases.fsx = manuale\teoremi\0045_bool_cases.fsx
 	EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "nholz.tests", "nholz.tests\nholz.tests.fsproj", "{96A946EE-74FC-4835-A380-1468AA276C59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{FE08D053-5F0F-4169-9D63-0D8CA77010AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE08D053-5F0F-4169-9D63-0D8CA77010AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE08D053-5F0F-4169-9D63-0D8CA77010AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96A946EE-74FC-4835-A380-1468AA276C59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96A946EE-74FC-4835-A380-1468AA276C59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96A946EE-74FC-4835-A380-1468AA276C59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96A946EE-74FC-4835-A380-1468AA276C59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

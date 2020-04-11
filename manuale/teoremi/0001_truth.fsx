@@ -5,6 +5,8 @@ Vero
 $\vdash \top$
 *)
 
+
+
 (***hide***)
 #load "../avvio.fsx"
 open HOL
@@ -16,21 +18,29 @@ Bool.load
 truth_thm
 // |- true
 
-let true_def_tr = true_def, mkTree(Th true_def, "true\_def") []
+(**
+Backward proof with tree
+*)
 
-let th = 
-    (* |- true                        *)
-    eq_mp_rule_tr
-      (* |- (\p. p) = (\p. p) <=> true  *)
-      (sym_rule_tr true_def_tr)
-      (* |- (\p. p) = (\p. p)           *)
-      (refl_conv_tr (parse_term(@"\(p:bool).p")))
+([],"true")
+|> start_proof
+(* |- true                        *)
+|> eq_mp_rule_bk ("(\(p:bool). p) = \p. p" |> mkGoal [])
+    (* |- (\p. p) = (\p. p) <=> true  *)
+    |> sym_rule_bk
+        (* |- true <=> (\(p:bool). p) = (\p. p) *)
+        |> by true_def "true\_def"                          |> lower |> prove |> right
+    (* |- (\p. p) = (\p. p)           *)
+    |> refl_conv_bk                                         |> lower |> prove |> lower |> prove
+|> view
+|> loc_thm |> Option.get
 
-th |> print_tree
+// val it : thm = |- true
 
 (**
 $
-\small{ 	\dfrac
+\small{ 	
+\dfrac
 	{\dfrac
 		{\vdash\ \top\ \Leftrightarrow\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)\; \mathbf{ true\_def}}
 		{\vdash\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)\ \Leftrightarrow\ \top}
@@ -40,7 +50,35 @@ $
 		{\lambda\ (p:bool).\ p}
 		{\vdash\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)}
 		\textsf{ refl_conv}}
-	{\vdash\ \top}
-	\textsf{ eq_mp_rule} }
+	{\color{red}{\vdash\ \top}}
+	\textsf{ eq_mp_rule} 
+}
 $
 *)
+
+(**
+Forward proof with tree
+*)
+
+//(* |- true                        *)
+eq_mp_rule_fd
+    (* |- (\p. p) = (\p. p) <=> true  *)
+    (sym_rule_fd (true_def |> thm_fd "true\_def"))
+    (* |- (\p. p) = (\p. p)           *)
+    (refl_conv_fd (parse_term(@"\(p:bool).p")))
+|> zipper |> view |> loc_thm |> Option.get
+
+//val it : thm = |- true
+
+(**
+Classic forward proof without tree
+*)
+
+//(* |- true                        *)
+eq_mp_rule
+    (* |- (\p. p) = (\p. p) <=> true  *)
+    (sym_rule true_def)
+    (* |- (\p. p) = (\p. p)           *)
+    (refl_conv (parse_term(@"\(p:bool).p")))
+
+// val it : thm = |- true
