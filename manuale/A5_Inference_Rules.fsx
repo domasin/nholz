@@ -774,10 +774,10 @@ Si veda anche: list\_gen\_rule, spec\_rule, mk\_forall\_rule.
 $\dfrac
 {[x_1;x_2;\dots] \qquad A \vdash p}
 {A \vdash \forall x_1\ x_2\ \dots\ .\ p}
-\textsf{ gen_rule}
+\textsf{ list_gen_rule}
 $
 
-per x non libera in A 
+per $x_1, x_2, \dtos$ non libere in A 
 
 **conj\_rule**
 

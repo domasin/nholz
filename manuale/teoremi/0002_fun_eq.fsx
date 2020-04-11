@@ -22,6 +22,14 @@ let x = parse_term(@"x:'a")
 let f = parse_term(@"f:'a->'b")
 let g = parse_term(@"g:'a->'b")
 
+([],@"!(f:'a->'b) g. f = g <=> (!x. f x = g x)") 
+|> start_proof
+|> list_gen_rule_bk
+|> right
+|> deduct_antisym_rule_bk [] []
+
+|> view
+
 let th = 
     (* |- !f g. f = g <=> (!x. f x = g x) *)
     (list_gen_rule_tr [f;g]

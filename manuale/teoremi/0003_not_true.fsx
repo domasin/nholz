@@ -24,7 +24,7 @@ Backward proof with tree
 (* |- ~ true <=> false         *)
 |> deduct_antisym_rule_bk [] []
     (* false |- ~ true             *)
-    |> contr_rule_bk ("false" |> parse_term)                |> right
+    |> contr_rule_bk                                        |> right
         |> assume_rule_bk                                   |> lower |> prove |> lower |> prove |> right
     (* ~ true |- false             *)
     |> eq_mp_rule_bk ("true" |> mkGoal [])

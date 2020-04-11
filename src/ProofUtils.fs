@@ -92,6 +92,7 @@ type Exp =
     | NullExp
     | Th  of thm
     | Te of term
+    | TeLst of term list
     | Goal of (term list) * term
 
 type InfRule = 
@@ -100,6 +101,7 @@ type InfRule =
     | ThmFn of (thm -> thm)
     | ThmThmFn of (thm -> thm -> thm)
     | TmThmFn of (term -> thm -> thm)
+    | TmLstThmFn of (term list -> thm -> thm)
 
 type Proof = (Exp * string * InfRule)
 type goal = (term list) * term
@@ -148,6 +150,11 @@ let rec printExp e =
             |> List.map (fun t1 -> (Te t1) |> printExp)
             |> List.fold (fun acc t1 -> if acc = "" then t1 else acc + "," + t1) ""
         asl + "\\ ?\\ " + (Te t |> printExp)
+    | TeLst vv -> 
+        let lstStr = 
+            vv |> List.map (fun x -> (Te x) |> printExp)
+            |> List.fold (fun acc t1 -> if acc = "" then t1 else acc + "," + t1) ""
+        "[" + lstStr + "]"
     | NullExp -> ""
 
 let rec treeToLatex ntabs exp (tr : Proof Tree) = 
@@ -409,14 +416,14 @@ let deduct_antisym_rule_bk asl1 asl2 loc =
 
 let contr_rule_fd = tmThmFnForward "contr_rule" (TmThmFn contr_rule)
 
-let contr_rule_bk t1 loc = 
+let contr_rule_bk loc = 
     let (Loc(Tree((ex,_,_),children), _)) = loc
     match ex with
     | Goal(asl,t) ->
         loc
         |> change (Tree ((Goal (asl,t), "contr_rule", TmThmFn contr_rule),children))
         |> insert_down (mkTree(Te t, "", NullFun) []) 
-        |> insert_right (mkTree(Goal(asl,t1), "", NullFun) []) 
+        |> insert_right (mkTree(Goal(asl,("false" |> parse_term)), "", NullFun) []) 
         //|> fun x -> if !showProof then view x else x
     | _ -> failwith "not a goal"
 
@@ -471,6 +478,18 @@ let add_asm_rule_bk t1 loc =
         |> change (Tree ((Goal (asl,t), "add_asm_rule", TmThmFn add_asm_rule),children))
         |> insert_down (mkTree(Te t1, "", NullFun) []) 
         |> insert_right (mkTree(Goal(asl1,t), "", NullFun) []) 
+        //|> fun x -> if !showProof then view x else x
+    | _ -> failwith "not a goal"
+
+let list_gen_rule_bk loc = 
+    let (Loc(Tree((ex,_,_),children), _)) = loc
+    match ex with
+    | Goal(asl,t) ->
+        let (vv,t1) = t |> strip_forall
+        loc
+        |> change (Tree ((Goal (asl,t), "list_gen", TmLstThmFn list_gen_rule),children))
+        |> insert_down (mkTree(TeLst vv, "", NullFun) []) 
+        |> insert_right (mkTree(Goal(asl,t1), "", NullFun) []) 
         //|> fun x -> if !showProof then view x else x
     | _ -> failwith "not a goal"
 
