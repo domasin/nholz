@@ -20,19 +20,20 @@ not_true_thm
 Backward proof with tree
 *)
 
-([],@"~ true <=> false")                                    |> start_proof
+([],@"~ true <=> false")                                    
+|> start_proof
 (* |- ~ true <=> false         *)
 |> deduct_antisym_rule_bk [] []
     (* false |- ~ true             *)
-    |> contr_rule_bk                                        |> right
-        |> assume_rule_bk                                   |> lower |> prove |> lower |> prove |> right
+    |> contr_rule_bk                                        
+        |> assume_rule_bk                                   |> prove
     (* ~ true |- false             *)
     |> eq_mp_rule_bk ("true" |> mkGoal [])
             (* ~ true |- true <=> false    *)
             |> eqf_intro_rule_bk
-                |> assume_rule_bk                           |> lower |> prove |> lower |> prove |> right
+                |> assume_rule_bk                           |> prove
             (* |- true  *)
-            |> by truth_thm "truth\_thm"                    |> lower |> prove |> lower |> prove
+            |> by truth_thm "truth\_thm"                    |> prove
 |> view
 |> loc_thm |> Option.get
 

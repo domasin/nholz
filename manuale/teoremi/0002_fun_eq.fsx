@@ -27,6 +27,13 @@ let g = parse_term(@"g:'a->'b")
 |> list_gen_rule_bk
 |> right
 |> deduct_antisym_rule_bk [] []
+|> focus_goal
+|> trans_rule_bk "(\x. (g:'a->'b) x)"
+|> trans_rule_bk "(\x. (f:'a->'b) x)"
+|> add_asm_rule_bk ("!x. f x = (g:'a->'b) x" |> parse_term)
+|> sym_rule_bk
+|> eta_conv_bk
+|> prove
 
 |> view
 

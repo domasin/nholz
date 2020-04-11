@@ -6,10 +6,11 @@ Per i teoremi gi&agrave; documentati, cliccando sul nome del teorema si apre una
 di dettaglio con l'esposizione della dimostrazione a codice e un rendering della dimostrazione nel calcolo 
 dei sequenti. 
 
-(Si noti che queste pagine di dettaglio utilizzano un'estensione al sistema base che 
-costruisce un albero della dimostrazione, con regole di inferenza del tipo `..._tr` che 
-rispetto alle corrispondenti regole senza `_tr` mantengono una memoria dei passi di dimostrazione e 
-sono utilizzate solo a scopo di documentazione.)
+Laddove sono disponibili, per le regole di inferenza utilizzate, vengono usate delle estensioni 
+al sistema base con dimostrazioni ad albero, strategie di dimostrazioni all'indietro e un opzione `view`
+di visualizzazione dell'albero di dimostrazione in LaTeX.
+
+Queste estensioni non sono derivate da Hol Zero e sono in corso di implementazione. 
 
 **[truth\_thm](0001_truth.html)**
 

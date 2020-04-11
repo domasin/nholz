@@ -10,9 +10,9 @@ let relative subdir = Path.Combine(__SOURCE_DIRECTORY__, subdir)
 
 /// Processes a single F# Script file and produce HTML output
 let processScriptAsHtml (docfile) =
-  let file = Path.Combine(__SOURCE_DIRECTORY__, "manuale\\teoremi\\" + docfile + ".fsx")
+  let file = Path.Combine(__SOURCE_DIRECTORY__, "manuale\\" + docfile + ".fsx")
   let output = relative ("docs/" + docfile + ".html")
   let template = relative "manuale/template-file.html"
   RazorLiterate.ProcessScriptFile(file, template, output, lineNumbers=false)
 
-processScriptAsHtml (@"0003_not_true")
+processScriptAsHtml (@"B2_Teoremi")
