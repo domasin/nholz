@@ -26,7 +26,7 @@ let ``truth_thm backward gives truth_thm`` () =
     ([],"true")
     |> start_proof
     (* |- true                        *)
-    |> eq_mp_rule_bk ("(\(p:bool). p) = \p. p" |> mkGoal [])
+    |> eq_mp_rule_bk [] [] "(\(p:bool). p) = \p. p"
         (* |- (\p. p) = (\p. p) <=> true  *)
         |> sym_rule_bk
             (* |- true <=> (\(p:bool). p) = (\p. p) *)
@@ -55,6 +55,65 @@ let ``truth_thm forward gives truth_thm`` () =
     |> should equal true
 
 [<Fact>]
+let ``fun_eq_thm backward gives fun_eq_thm`` () =
+    let _t1 = CoreThry.load   
+    let _t2 = Equal.load      
+    let _t3 = Bool.load   
+
+    ([],@"!(f:'a->'b) g. f = g <=> (!x. f x = g x)") 
+    |> start_proof
+    |> list_gen_rule_bk
+        |> deduct_antisym_rule_bk [] []
+            |> trans_rule_bk "(\x. (g:'a->'b) x)"
+                |> trans_rule_bk "(\x. (f:'a->'b) x)"
+                    |> add_asm_rule_bk 0
+                        |> sym_rule_bk
+                        |> eta_conv_bk
+                    |> mk_abs_rule_bk
+                        |> spec_rule_bk ("x:'a" |> parse_term)
+                            |> assume_rule_bk
+                |> add_asm_rule_bk 0
+                    |> eta_conv_bk
+            |> gen_rule_bk
+                |> mk_comb1_rule_bk
+                    |> assume_rule_bk
+    //|> view
+    |> loc_thm |> Option.get
+    |> fun x -> x = fun_eq_thm
+    |> should equal true
+
+[<Fact>]
+let ``fun_eq_thm forward gives fun_eq_thm`` () =
+    let _t1 = CoreThry.load   
+    let _t2 = Equal.load      
+    let _t3 = Bool.load 
+
+    let x = parse_term(@"x:'a") 
+    let f = parse_term(@"f:'a->'b")
+    let g = parse_term(@"g:'a->'b")
+    
+    (* |- !f g. f = g <=> (!x. f x = g x) *)
+    (list_gen_rule_fd [f;g]
+      (deduct_antisym_rule_fd
+        (* !x. f x = g x |- f = g                 *)
+        (list_trans_rule_fd
+           [ (*               |- f = (\x. f x)      *)
+             sym_rule_fd (eta_conv_fd (parse_term(@"\x. (f:'a->'b) x")));
+             (* !x. f x = g x |- ... = (\x. g x)    *)
+             mk_abs_rule_fd x
+               (spec_rule_fd x (assume_rule_fd (parse_term(@"!x. (f:'a->'b) x = g x"))));
+             (*               |- ... = g            *)
+             eta_conv_fd (parse_term(@"\x. (g:'a->'b) x")) 
+             ])
+        (* f = g |- !x. f x = g x                 *)
+        (gen_rule_fd x
+          (mk_comb1_rule_fd (assume_rule_fd (parse_term(@"(f:'a->'b)=g"))) x) )))
+    |> zipper
+    |> loc_thm |> Option.get
+    |> fun x -> x = fun_eq_thm
+    |> should equal true
+
+[<Fact>]
 let ``not_true_thm backward gives not_true_thm`` () =
     let _t1 = CoreThry.load   
     let _t2 = Equal.load      
@@ -68,7 +127,7 @@ let ``not_true_thm backward gives not_true_thm`` () =
         |> contr_rule_bk                                        
             |> assume_rule_bk
         (* ~ true |- false             *)
-        |> eq_mp_rule_bk ("true" |> mkGoal [])
+        |> eq_mp_rule_bk [0] [] "true"
                 (* ~ true |- true <=> false    *)
                 |> eqf_intro_rule_bk
                     |> assume_rule_bk

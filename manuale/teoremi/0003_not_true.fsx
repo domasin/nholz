@@ -28,7 +28,7 @@ Backward proof with tree
     |> contr_rule_bk
         |> assume_rule_bk
     (* ~ true |- false             *)
-    |> eq_mp_rule_bk ("true" |> mkGoal [])
+    |> eq_mp_rule_bk [0] [] "true"
             (* ~ true |- true <=> false    *)
             |> eqf_intro_rule_bk
                 |> assume_rule_bk

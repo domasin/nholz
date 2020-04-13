@@ -25,7 +25,7 @@ Backward proof with tree
 ([],"true")
 |> start_proof
 (* |- true                        *)
-|> eq_mp_rule_bk ("(\(p:bool). p) = \p. p" |> mkGoal [])
+|> eq_mp_rule_bk [] [] "(\(p:bool). p) = \p. p"
     (* |- (\p. p) = (\p. p) <=> true  *)
     |> sym_rule_bk
         (* |- true <=> (\(p:bool). p) = (\p. p) *)

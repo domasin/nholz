@@ -495,21 +495,20 @@ let sym_rule_bk =
 
 let eq_mp_rule_fd t1 t2 = thmThmFnForward "eq_mp_rule" (ThmThmFn eq_mp_rule) t1 t2
 
-let eq_mp_rule_bk g2 = //thmThmFnBackward "eq_mp_rule" (ThmThmFn eq_mp_rule) g2
+let eq_mp_rule_bk ind1 ind2 t2 = //thmThmFnBackward "eq_mp_rule" (ThmThmFn eq_mp_rule) g2
     fun (loc: Proof Location) -> 
         let (Loc(Tree((ex,_,_),children), _)) = loc
         match ex with
         | Goal(asl,t) ->
-            match g2 with
-            | Goal(asl2,t2) -> 
-                let asl1 = 
-                    asl |> List.filter (fun x -> not (asl2 |> List.contains x))
-                let g1 = Goal (asl1,(mk_eq (t2,t)))
-                loc
-                |> change (Tree ((Goal (asl,t), "eq_mp_rule", ThmThmFn eq_mp_rule),children))
-                |> insert_down (mkTree(g1, "", NullFun) []) 
-                |> insert_right (mkTree(g2, "", NullFun) []) 
-            | _-> failwith "the given is not a goal"
+            let asl1 = ind1 |> List.map (fun x -> asl.[x])
+            let asl2 = ind2 |> List.map (fun x -> asl.[x])
+            let t2' = t2 |> parse_term
+            let g1 = Goal(asl1, mk_eq (t2',t))
+            let g2 = Goal(asl2, t2')
+            loc
+            |> change (Tree ((Goal (asl,t), "eq_mp_rule", ThmThmFn eq_mp_rule),children))
+            |> insert_down (mkTree(g1, "", NullFun) []) 
+            |> insert_right (mkTree(g2, "", NullFun) []) 
         | _ -> failwith "not a goal"
 
 let assume_rule_fd t = tmFnForward "assume_rule" (TmFn assume_rule) t
@@ -595,6 +594,19 @@ let disch_rule_bk =
             |> insert_down (mkTree((Te t1),"", NullFun) []) 
             |> insert_right (mkTree(Goal (asl2@[t1],t2),"", NullFun) []) 
             |> right
+        | _ -> failwith "can't apply rule"
+
+let undisch_rule_bk ind = 
+    fun (loc: Proof Location) -> 
+        let (Loc(Tree((ex,_,_),children), _)) = loc
+        match ex with
+        | Goal(asl,t)  ->
+            let asl' = asl.[ind]
+            let t1 = mk_imp (asl',t)
+            let asl2 = asl |> List.filter (fun x -> x <> asl')
+            loc
+            |> change (Tree ((ex, "undisch_rule", ThmFn undisch_rule),children))
+            |> insert_down (mkTree(Goal (asl2,t1),"", NullFun) []) 
         | _ -> failwith "can't apply rule"
 
 let add_asm_rule_bk ind (loc: Proof Location) = 
@@ -720,6 +732,18 @@ let mk_comb1_rule_bk loc =
         |> insert_right (mkTree(Te x, "", NullFun) []) 
         //|> fun x -> if !showProof then view x else x
     | _ -> failwith "not a goal"
+
+let eqf_elim_rule_bk = 
+    fun (loc: Proof Location) -> 
+        let (Loc(Tree((ex,_,_),children), _)) = loc
+        match ex with
+        | Goal(asl,t) ->
+            let t1 = mk_eq (t |> dest_not,false_tm)
+            let g1 = Goal (asl,t1)
+            loc
+            |> change (Tree ((Goal (asl,t), "eqf_elim_rule", ThmFn eqf_elim_rule),children))
+            |> insert_down (mkTree(g1, "", NullFun) []) 
+        | _ -> failwith "not a goal"
 
 let assume_rule_tr t = 
     let th = t |> assume_rule
