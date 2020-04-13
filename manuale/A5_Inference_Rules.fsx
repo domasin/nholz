@@ -50,7 +50,7 @@ Si veda anche: mk\_comb1\_rule, mk\_comb2\_rule, mk\_bin\_rule, mk\_abs\_rule.
 
 $\dfrac
 {x \qquad A \vdash t_1 = t_2}
-{A \vdash (\lambda x.\ t_1 = t_2)}
+{A \vdash (\lambda x.\ t_1) = (\lambda x.\ t_2))}
 \textsf{ mk_abs_rule}
 $
 
@@ -595,6 +595,21 @@ Si veda anche: list\_imp\_trans\_rule, eq\_trans\_rule, disch\_rule, imp\_anitsy
 
 Si veda anche: imp\_trans\_rule.
 
+**spec\_rule**
+
+$\dfrac
+{t \qquad A \vdash \forall x\ \dots p}
+{A \vdash p[t/x]}
+\textsf{ spec_rule}
+$
+
+Questa &egrave; la regola di eliminazine universale. Spoglia il 
+quantificatore universale pi&ugrave; esterno del teorema, e sostituisce nel corpo ciascuna 
+occorrenza della variabile legata eliminata con il termine fornito. 
+Il tipo del termine fornito deve essere uguale al tipo della variabile eliminata.
+
+Si veda anche: spec\_rule, spec\_all\_rule, bspec\_rule, list\_gen\_rule.
+
 **list\_spec\_rule**
 
 $\dfrac
@@ -777,7 +792,7 @@ $\dfrac
 \textsf{ list_gen_rule}
 $
 
-per $x_1, x_2, \dtos$ non libere in A 
+per $x_1, x_2, \dots$ non libere in A 
 
 **conj\_rule**
 

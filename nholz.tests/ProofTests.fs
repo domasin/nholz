@@ -30,9 +30,9 @@ let ``truth_thm backward gives truth_thm`` () =
         (* |- (\p. p) = (\p. p) <=> true  *)
         |> sym_rule_bk
             (* |- true <=> (\(p:bool). p) = (\p. p) *)
-            |> by true_def "true\_def"                          |> prove
+            |> by true_def "true\_def"
         (* |- (\p. p) = (\p. p)           *)
-        |> refl_conv_bk                                         |> prove
+        |> refl_conv_bk
     //|> view
     |> loc_thm |> Option.get
     |> fun x -> x = truth_thm
@@ -66,14 +66,14 @@ let ``not_true_thm backward gives not_true_thm`` () =
     |> deduct_antisym_rule_bk [] []
         (* false |- ~ true             *)
         |> contr_rule_bk                                        
-            |> assume_rule_bk                                   |> prove
+            |> assume_rule_bk
         (* ~ true |- false             *)
         |> eq_mp_rule_bk ("true" |> mkGoal [])
                 (* ~ true |- true <=> false    *)
                 |> eqf_intro_rule_bk
-                    |> assume_rule_bk                           |> prove
+                    |> assume_rule_bk
                 (* |- true  *)
-                |> by truth_thm "truth\_thm"                    |> prove
+                |> by truth_thm "truth\_thm"
     //|> view
     |> loc_thm |> Option.get
     |> fun x -> x = not_true_thm
@@ -107,12 +107,12 @@ let ``not_false_thm backward gives not_false_thm`` () =
     ([],"~ false <=> true")
     |> start_proof
     |> deduct_antisym_rule_bk [] []
-        |> add_asm_rule_bk ("true" |> parse_term)
+        |> add_asm_rule_bk 0
             |> not_intro_rule_bk
                 |> disch_rule_bk                        
-                    |> assume_rule_bk                   |> prove
-        |> add_asm_rule_bk ("~ false" |> parse_term)        
-            |> by truth_thm "truth\_thm"                |> prove
+                    |> assume_rule_bk
+        |> add_asm_rule_bk 0       
+            |> by truth_thm "truth\_thm"
     //|> view
     |> loc_thm |> Option.get
     |> fun x -> x = not_false_thm

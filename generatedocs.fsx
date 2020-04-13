@@ -15,4 +15,4 @@ let processScriptAsHtml (docfile) =
   let template = relative "manuale/template-file.html"
   RazorLiterate.ProcessScriptFile(file, template, output, lineNumbers=false)
 
-processScriptAsHtml (@"B2_Teoremi")
+processScriptAsHtml (@"A5_Inference_Rules")

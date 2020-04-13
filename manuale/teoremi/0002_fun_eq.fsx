@@ -18,23 +18,47 @@ Bool.load
 fun_eq_thm
 // |- !(f:'a->'b) g. f = g <=> (!x. f x = g x)
 
+([],@"!(f:'a->'b) g. f = g <=> (!x. f x = g x)") 
+|> start_proof
+|> list_gen_rule_bk
+    |> deduct_antisym_rule_bk [] []
+        |> trans_rule_bk "(\x. (g:'a->'b) x)"
+            |> trans_rule_bk "(\x. (f:'a->'b) x)"
+                |> add_asm_rule_bk 0
+                    |> sym_rule_bk
+                    |> eta_conv_bk
+                |> mk_abs_rule_bk
+                    |> spec_rule_bk ("x:'a" |> parse_term)
+                        |> assume_rule_bk
+            |> add_asm_rule_bk 0
+                |> eta_conv_bk
+        |> gen_rule_bk
+            |> mk_comb1_rule_bk
+                |> assume_rule_bk
+
+|> view
+
 let x = parse_term(@"x:'a") 
 let f = parse_term(@"f:'a->'b")
 let g = parse_term(@"g:'a->'b")
 
-([],@"!(f:'a->'b) g. f = g <=> (!x. f x = g x)") 
-|> start_proof
-|> list_gen_rule_bk
-|> right
-|> deduct_antisym_rule_bk [] []
-|> focus_goal
-|> trans_rule_bk "(\x. (g:'a->'b) x)"
-|> trans_rule_bk "(\x. (f:'a->'b) x)"
-|> add_asm_rule_bk ("!x. f x = (g:'a->'b) x" |> parse_term)
-|> sym_rule_bk
-|> eta_conv_bk
-|> prove
-
+(* |- !f g. f = g <=> (!x. f x = g x) *)
+(list_gen_rule_fd [f;g]
+  (deduct_antisym_rule_fd
+    (* !x. f x = g x |- f = g                 *)
+    (list_trans_rule_fd
+       [ (*               |- f = (\x. f x)      *)
+         sym_rule_fd (eta_conv_fd (parse_term(@"\x. (f:'a->'b) x")));
+         (* !x. f x = g x |- ... = (\x. g x)    *)
+         mk_abs_rule_fd x
+           (spec_rule_fd x (assume_rule_fd (parse_term(@"!x. (f:'a->'b) x = g x"))));
+         (*               |- ... = g            *)
+         eta_conv_fd (parse_term(@"\x. (g:'a->'b) x")) 
+         ])
+    (* f = g |- !x. f x = g x                 *)
+    (gen_rule_fd x
+      (mk_comb1_rule_fd (assume_rule_fd (parse_term(@"(f:'a->'b)=g"))) x) )))
+|> zipper
 |> view
 
 let th = 

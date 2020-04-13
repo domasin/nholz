@@ -29,9 +29,9 @@ Backward proof with tree
     (* |- (\p. p) = (\p. p) <=> true  *)
     |> sym_rule_bk
         (* |- true <=> (\(p:bool). p) = (\p. p) *)
-        |> by true_def "true\_def"                          |> prove
+        |> by true_def "true\_def"
     (* |- (\p. p) = (\p. p)           *)
-    |> refl_conv_bk                                         |> prove
+    |> refl_conv_bk
 |> view
 |> loc_thm |> Option.get
 

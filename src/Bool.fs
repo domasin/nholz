@@ -425,18 +425,17 @@ let imp_trans_rule tha thb =      (* A1 |- p ==> q    A2 |- q ==> r   *)
 
 let list_imp_trans_rule ths = foldl1 imp_trans_rule ths
 
-(* spec_rule : term -> thm -> thm                                             *)
-(*                                                                            *)
-(* This is the universal elimination rule.  It strips off the outermost       *)
-(* universal quantifier from the supplied theorem, and replaces in the body   *)
-(* each occurrence of the stripped binding variable with the supplied term.   *)
-(* The type of the supplied term must equal the type of the stripped binding  *)
-(* variable.                                                                  *)
-(*                                                                            *)
-(*    `t`   A |- !x. p                                                        *)
-(*    ----------------                                                        *)
-(*      A |- p[t/x]                                                           *)
-
+//  spec_rule : term -> thm -> thm                                           
+//                                                                           
+/// This is the universal elimination rule.  It strips off the outermost     
+/// universal quantifier from the supplied theorem, and replaces in the body 
+/// each occurrence of the stripped binding variable with the supplied term. 
+/// The type of the supplied term must equal the type of the stripped binding
+/// variable.                                                                
+///                                                                          
+///    `t`   A |- !x. p                                                      
+///    ----------------                                                      
+///      A |- p[t/x]                                                         
 let spec_rule tm th =             (* x     A |- !x. p        *)
     try
         let (v,p) = dest_forall (concl th) in

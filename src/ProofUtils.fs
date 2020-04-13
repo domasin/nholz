@@ -92,7 +92,9 @@ type Exp =
     | NullExp
     | Th  of thm
     | Te of term
+    | Tye of hol_type
     | TeLst of term list
+    | InstTyLst of (hol_type * hol_type) list
     | Goal of (term list) * term
 
 type InfRule = 
@@ -101,7 +103,10 @@ type InfRule =
     | ThmFn of (thm -> thm)
     | ThmThmFn of (thm -> thm -> thm)
     | TmThmFn of (term -> thm -> thm)
+    | ThmTmFn of (thm -> term -> thm)
     | TmLstThmFn of (term list -> thm -> thm)
+    | ThmLstFn of (thm list -> thm)
+    | InstTyLstThmFn of ((hol_type * hol_type) list -> thm -> thm)
 
 type Proof = (Exp * string * InfRule)
 type goal = (term list) * term
@@ -144,6 +149,7 @@ let rec printExp e =
     match e with
     | Th t -> t |> print_thm |> strTolatex
     | Te t -> t |> print_term |> strTolatex
+    | Tye t -> t |> print_type |> strTolatex
     | Goal (xs,t) -> 
         let asl = 
             xs
@@ -153,6 +159,11 @@ let rec printExp e =
     | TeLst vv -> 
         let lstStr = 
             vv |> List.map (fun x -> (Te x) |> printExp)
+            |> List.fold (fun acc t1 -> if acc = "" then t1 else acc + "," + t1) ""
+        "[" + lstStr + "]"
+    | InstTyLst vv -> 
+        let lstStr = 
+            vv |> List.map (fun (x,y) -> ((Tye x) |> printExp) + "," + ((Tye y) |> printExp))
             |> List.fold (fun acc t1 -> if acc = "" then t1 else acc + "," + t1) ""
         "[" + lstStr + "]"
     | NullExp -> ""
@@ -229,6 +240,15 @@ let prove' (loc:Proof Location) =
                     loc |> change (Tree ((Th (f t t2), label, just_fn),children))
                 | _ -> failwith "child2 is not thm"
             | _ -> failwith "child1 is not tm"
+        | ThmTmFn f -> 
+            let child2 = child |> right
+            match child with
+            | (Loc (Tree ((Th t, _, _),_),_)) -> 
+                match child2 with
+                | (Loc (Tree ((Te t2, _, _),_),_)) -> 
+                    loc |> change (Tree ((Th (f t t2), label, just_fn),children))
+                | _ -> failwith "child2 is not tm"
+            | _ -> failwith "child1 is not thm"
         | TmLstThmFn f -> 
             let child2 = child |> right
             match child with
@@ -238,10 +258,25 @@ let prove' (loc:Proof Location) =
                     loc |> change (Tree ((Th (f t t2), label, just_fn),children))
                 | _ -> failwith "child2 is not thm"
             | _ -> failwith "child1 is not tm"
+        | InstTyLstThmFn f -> 
+            let child2 = child |> right
+            match child with
+            | (Loc (Tree ((InstTyLst t, _, _),_),_)) -> 
+                match child2 with
+                | (Loc (Tree ((Th t2, _, _),_),_)) -> 
+                    loc |> change (Tree ((Th (f t t2), label, just_fn),children))
+                | _ -> failwith "child2 is not thm"
+            | _ -> failwith "child1 is not tm"
+        | ThmLstFn f -> failwith "ThmLstFn prove not implemented"
         | NullFun -> failwith "no rule given"
         
     | _ -> failwith "not a goal"
 
+
+let is_goal (loc:Proof Location) = 
+    match loc with
+    | Loc(Tree((Goal (asl,t),_,_),_), _) -> true
+    | _ -> false
 
 
 let loc_thm (loc:Proof Location) = 
@@ -276,7 +311,8 @@ let rec prove (loc:Proof Location) =
             loc |> lower |> prove' |> prove
         with _ -> loc
     try
-        newLoc |> right
+        if newLoc |> right |> is_goal then newLoc |> right
+        else newLoc |> prove
     with _ -> newLoc
 
 let mkGoal xs t = 
@@ -309,12 +345,22 @@ let rec findExp x (loc:Proof Location) =
 let select exp loc = (findExp exp loc) |> Option.get
 
 let thm_fd lbl th = 
-    mkTree(Th th, lbl, NullFun) []
+    let (tr: Proof Tree) = mkTree(Th th, lbl, NullFun) []
+    tr
 
 let term_fd t = 
     mkTree(Te t, "", NullFun) []
 
-let by thm lbl loc = change (thm |> thm_fd lbl) loc
+let termlst_fd xs = 
+    mkTree(TeLst xs, "", NullFun) []
+
+let instTyLst_fd t = 
+    mkTree(InstTyLst t, "", NullFun) []
+
+let by thm lbl loc = 
+    loc
+    |> change (thm |> thm_fd lbl)
+    |> prove
 
 let tmFnForward lbl jf t = 
     match jf with
@@ -357,6 +403,54 @@ let tmThmFnForward lbl jf t t2 =
         tr
     | _ -> failwith "not ThmFn"
 
+let thmTmFnForward lbl jf tr1 t = 
+    match jf with
+    | ThmTmFn f -> 
+        let th1 = tr1 |> zipper |> loc_thm |> Option.get
+        let th = f th1 t
+        let (tr:Proof Tree) = 
+            mkTree 
+                (Th th,lbl,ThmTmFn f) 
+                [tr1; t |> term_fd]
+        tr
+    | _ -> failwith "not ThmFn"
+
+let TmLstThmFnForward lbl jf xs t2 = 
+    match jf with
+    | TmLstThmFn f -> 
+        let th2 = t2 |> zipper |> loc_thm |> Option.get
+        //let tlst = xs |> List.map (fun x -> x |> parse_term)
+        let th = f xs th2
+        let (tr:Proof Tree) = 
+            mkTree 
+                (Th th,lbl,TmLstThmFn f) 
+                [xs |> termlst_fd; t2]
+        tr
+    | _ -> failwith "not ThmFn"
+
+let ThmLstFnForward lbl jf xs = 
+    match jf with
+    | ThmLstFn f -> 
+        let th = f (xs |> List.map (fun x -> x |> zipper |> loc_thm |> Option.get))
+        let (tr:Proof Tree) = 
+            mkTree 
+                (Th th,lbl,ThmLstFn f) xs
+        tr
+    | _ -> failwith "not ThmFn"
+    
+
+let instTyLstThmFnForward lbl jf xs t2 = 
+    match jf with
+    | InstTyLstThmFn f -> 
+        let th2 = t2 |> zipper |> loc_thm |> Option.get
+        let th = f xs th2
+        let (tr:Proof Tree) = 
+            mkTree 
+                (Th th,lbl,InstTyLstThmFn f) 
+                [xs |> instTyLst_fd; t2]
+        tr
+    | _ -> failwith "not ThmFn"
+
 (* Rules *)
 
 let accept thm str loc = 
@@ -382,6 +476,7 @@ let refl_conv_bk =
             loc
             |> change (Tree ((Goal (asl,t), "refl_conv", TmFn refl_conv),children))
             |> insert_down (mkTree((Te ant),"", NullFun) []) 
+            |> prove
         | _ -> failwith "not a goal"
 
 let sym_rule_fd = thmFnForward "sym_rule" (ThmFn sym_rule)
@@ -427,7 +522,10 @@ let assume_rule_bk =
             loc
             |> change (Tree ((ex, "assume_rule", TmFn assume_rule),children))
             |> insert_down (mkTree((Te t),"", NullFun) []) 
+            |> prove
         | _ -> failwith "can't apply rule"
+
+let inst_type_rule_fd xs = instTyLstThmFnForward "inst_type_rule" (InstTyLstThmFn inst_type_rule) xs
 
 let deduct_antisym_rule_fd t1 t2 = thmThmFnForward "deduct_antisym_rule" (ThmThmFn deduct_antisym_rule) t1 t2
 
@@ -499,10 +597,11 @@ let disch_rule_bk =
             |> right
         | _ -> failwith "can't apply rule"
 
-let add_asm_rule_bk t1 (loc: Proof Location) = 
+let add_asm_rule_bk ind (loc: Proof Location) = 
     let (Loc(Tree((ex,_,_),children), _)) = loc
     match ex with
     | Goal(asl,t) ->
+        let t1 = asl.[ind]
         let asl1 = asl |> List.filter (fun x -> x <> t1)
         loc
         |> change (Tree ((Goal (asl,t), "add_asm_rule", TmThmFn add_asm_rule),children))
@@ -512,17 +611,21 @@ let add_asm_rule_bk t1 (loc: Proof Location) =
         //|> fun x -> if !showProof then view x else x
     | _ -> failwith "not a goal"
 
+let list_gen_rule_fd = TmLstThmFnForward "list_gen_rule" (TmLstThmFn list_gen_rule)
+
 let list_gen_rule_bk loc = 
     let (Loc(Tree((ex,_,_),children), _)) = loc
     match ex with
     | Goal(asl,t) ->
         let (vv,t1) = t |> strip_forall
         loc
-        |> change (Tree ((Goal (asl,t), "list_gen", TmLstThmFn list_gen_rule),children))
+        |> change (Tree ((Goal (asl,t), "list_gen_rule", TmLstThmFn list_gen_rule),children))
         |> insert_down (mkTree(TeLst vv, "", NullFun) []) 
         |> insert_right (mkTree(Goal(asl,t1), "", NullFun) []) 
-        //|> fun x -> if !showProof then view x else x
+        |> right
     | _ -> failwith "not a goal"
+
+let list_trans_rule_fd = ThmLstFnForward "list_trans_rule" (ThmLstFn list_trans_rule)
 
 let trans_rule_bk t' loc = 
     let (Loc(Tree((ex,_,_),children), _)) = loc
@@ -539,6 +642,8 @@ let trans_rule_bk t' loc =
         
     | _ -> failwith "not a goal"
 
+let eta_conv_fd t = tmFnForward "eta_conv" (TmFn eta_conv) t
+
 let eta_conv_bk = 
     fun (loc: Proof Location) -> 
         let (Loc(Tree((ex,_,_),children), _)) = loc
@@ -548,7 +653,73 @@ let eta_conv_bk =
             loc
             |> change (Tree ((Goal (asl,t), "eta_conv", TmFn eta_conv),children))
             |> insert_down (mkTree((Te ant),"", NullFun) []) 
+            |> prove
         | _ -> failwith "not a goal"
+
+let mk_abs_rule_fd = tmThmFnForward "mk_abs_rule" (TmThmFn mk_abs_rule)
+
+let mk_abs_rule_bk loc = 
+    let (Loc(Tree((ex,_,_),children), _)) = loc
+    match ex with
+    | Goal(asl,t) ->
+        let (t1',t2') = dest_eq t
+        let (x,t1) = t1' |> dest_abs
+        let (_,t2) = t2' |> dest_abs
+        let eqTm = mk_eq (t1,t2) 
+        loc
+        |> change (Tree ((Goal (asl,t), "mk_abs_rule", TmThmFn mk_abs_rule),children))
+        |> insert_down (mkTree(Te x, "", NullFun) []) 
+        |> insert_right (mkTree(Goal(asl,eqTm), "", NullFun) []) 
+        |> right
+        //|> fun x -> if !showProof then view x else x
+    | _ -> failwith "not a goal"
+
+let spec_rule_fd = tmThmFnForward "spec_rule" (TmThmFn spec_rule)
+
+let spec_rule_bk tx loc = 
+    let (Loc(Tree((ex,_,_),children), _)) = loc
+    match ex with
+    | Goal(asl,t) ->
+        let t2 = mk_forall (tx,t)
+        loc
+        |> change (Tree ((Goal (asl,t), "spec_rule", TmThmFn spec_rule),children))
+        |> insert_down (mkTree(Te tx, "", NullFun) []) 
+        |> insert_right (mkTree(Goal(asl,t2), "", NullFun) []) 
+        |> right
+        //|> fun x -> if !showProof then view x else x
+    | _ -> failwith "not a goal"
+
+let gen_rule_fd = tmThmFnForward "gen_rule" (TmThmFn gen_rule)
+
+let gen_rule_bk loc = 
+    let (Loc(Tree((ex,_,_),children), _)) = loc
+    match ex with
+    | Goal(asl,t) ->
+        let (x,t') = t |> dest_forall
+        loc
+        |> change (Tree ((Goal (asl,t), "gen_rule", TmThmFn gen_rule),children))
+        |> insert_down (mkTree(Te x, "", NullFun) []) 
+        |> insert_right (mkTree(Goal(asl,t'), "", NullFun) []) 
+        |> right
+        //|> fun x -> if !showProof then view x else x
+    | _ -> failwith "not a goal"
+
+let mk_comb1_rule_fd = thmTmFnForward "mk_comb1_rule" (ThmTmFn mk_comb1_rule)
+
+let mk_comb1_rule_bk loc = 
+    let (Loc(Tree((ex,_,_),children), _)) = loc
+    match ex with
+    | Goal(asl,t) ->
+        let (t1,t2) = t |> dest_eq
+        let (t11,x) = t1 |> dest_comb
+        let (t21,_) = t2 |> dest_comb
+        let tg = mk_eq (t11,t21)
+        loc
+        |> change (Tree ((Goal (asl,t), "mk_comb1_rule", ThmTmFn mk_comb1_rule),children))
+        |> insert_down (mkTree(Goal(asl,tg), "", NullFun) []) 
+        |> insert_right (mkTree(Te x, "", NullFun) []) 
+        //|> fun x -> if !showProof then view x else x
+    | _ -> failwith "not a goal"
 
 let assume_rule_tr t = 
     let th = t |> assume_rule

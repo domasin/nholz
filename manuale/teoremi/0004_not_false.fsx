@@ -23,12 +23,12 @@ Backward proof with tree
 ([],"~ false <=> true")
 |> start_proof
 |> deduct_antisym_rule_bk [] []
-    |> add_asm_rule_bk ("true" |> parse_term)
+    |> add_asm_rule_bk 0
         |> not_intro_rule_bk
-            |> disch_rule_bk                        
-                |> assume_rule_bk                       |> prove
-    |> add_asm_rule_bk ("~ false" |> parse_term)        
-        |> by truth_thm "truth\_thm"                    |> prove
+            |> disch_rule_bk
+                |> assume_rule_bk
+    |> add_asm_rule_bk 0        
+        |> by truth_thm "truth\_thm"
 |> view
 |> loc_thm |> Option.get
 

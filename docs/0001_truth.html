@@ -52,11 +52,11 @@
     <span class="c">(* |- (\p. p) = (\p. p) &lt;=&gt; true  *)</span>
     <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="fn">sym_rule_bk</span>
         <span class="c">(* |- true &lt;=&gt; (\(p:bool). p) = (\p. p) *)</span>
-        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="fn">by</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="id">true_def</span> <span class="s">&quot;true\_def&quot;</span>                          <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="fn">prove</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="fn">by</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="id">true_def</span> <span class="s">&quot;true\_def&quot;</span>
     <span class="c">(* |- (\p. p) = (\p. p)           *)</span>
-    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs14', 16)" onmouseover="showTip(event, 'fs14', 16)" class="fn">refl_conv_bk</span>                                         <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="fn">prove</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="fn">view</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 19)" onmouseover="showTip(event, 'fs16', 19)" class="fn">loc_thm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 20)" onmouseover="showTip(event, 'fs17', 20)" class="m">Option</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 21)" onmouseover="showTip(event, 'fs18', 21)" class="id">get</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="fn">refl_conv_bk</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs14', 16)" onmouseover="showTip(event, 'fs14', 16)" class="fn">view</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 17)" onmouseover="showTip(event, 'fs15', 17)" class="fn">loc_thm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 18)" onmouseover="showTip(event, 'fs16', 18)" class="m">Option</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 19)" onmouseover="showTip(event, 'fs17', 19)" class="id">get</span>
 
 <span class="c">// val it : thm = |- true</span>
 </code></pre>
@@ -76,22 +76,22 @@
 }\)</span></p>
 <p>Forward proof with tree</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//(* |- true                        *)</span>
-<span onmouseout="hideTip(event, 'fs19', 22)" onmouseover="showTip(event, 'fs19', 22)" class="fn">eq_mp_rule_fd</span>
+<span onmouseout="hideTip(event, 'fs18', 20)" onmouseover="showTip(event, 'fs18', 20)" class="fn">eq_mp_rule_fd</span>
     <span class="c">(* |- (\p. p) = (\p. p) &lt;=&gt; true  *)</span>
-    <span class="pn">(</span><span onmouseout="hideTip(event, 'fs20', 23)" onmouseover="showTip(event, 'fs20', 23)" class="fn">sym_rule_fd</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs12', 24)" onmouseover="showTip(event, 'fs12', 24)" class="id">true_def</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 25)" onmouseover="showTip(event, 'fs21', 25)" class="fn">thm_fd</span> <span class="s">&quot;true\_def&quot;</span><span class="pn">)</span><span class="pn">)</span>
+    <span class="pn">(</span><span onmouseout="hideTip(event, 'fs19', 21)" onmouseover="showTip(event, 'fs19', 21)" class="fn">sym_rule_fd</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs12', 22)" onmouseover="showTip(event, 'fs12', 22)" class="id">true_def</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 23)" onmouseover="showTip(event, 'fs20', 23)" class="fn">thm_fd</span> <span class="s">&quot;true\_def&quot;</span><span class="pn">)</span><span class="pn">)</span>
     <span class="c">(* |- (\p. p) = (\p. p)           *)</span>
-    <span class="pn">(</span><span onmouseout="hideTip(event, 'fs22', 26)" onmouseover="showTip(event, 'fs22', 26)" class="fn">refl_conv_fd</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs23', 27)" onmouseover="showTip(event, 'fs23', 27)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;\(p:bool).p&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 28)" onmouseover="showTip(event, 'fs24', 28)" class="fn">zipper</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 29)" onmouseover="showTip(event, 'fs15', 29)" class="fn">view</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 30)" onmouseover="showTip(event, 'fs16', 30)" class="fn">loc_thm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 31)" onmouseover="showTip(event, 'fs17', 31)" class="m">Option</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 32)" onmouseover="showTip(event, 'fs18', 32)" class="id">get</span>
+    <span class="pn">(</span><span onmouseout="hideTip(event, 'fs21', 24)" onmouseover="showTip(event, 'fs21', 24)" class="fn">refl_conv_fd</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs22', 25)" onmouseover="showTip(event, 'fs22', 25)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;\(p:bool).p&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 26)" onmouseover="showTip(event, 'fs23', 26)" class="fn">zipper</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs14', 27)" onmouseover="showTip(event, 'fs14', 27)" class="fn">view</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 28)" onmouseover="showTip(event, 'fs15', 28)" class="fn">loc_thm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 29)" onmouseover="showTip(event, 'fs16', 29)" class="m">Option</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 30)" onmouseover="showTip(event, 'fs17', 30)" class="id">get</span>
 
 <span class="c">//val it : thm = |- true</span>
 </code></pre>
 <p>Classic forward proof without tree</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//(* |- true                        *)</span>
-<span onmouseout="hideTip(event, 'fs25', 33)" onmouseover="showTip(event, 'fs25', 33)" class="fn">eq_mp_rule</span>
+<span onmouseout="hideTip(event, 'fs24', 31)" onmouseover="showTip(event, 'fs24', 31)" class="fn">eq_mp_rule</span>
     <span class="c">(* |- (\p. p) = (\p. p) &lt;=&gt; true  *)</span>
-    <span class="pn">(</span><span onmouseout="hideTip(event, 'fs26', 34)" onmouseover="showTip(event, 'fs26', 34)" class="fn">sym_rule</span> <span onmouseout="hideTip(event, 'fs12', 35)" onmouseover="showTip(event, 'fs12', 35)" class="id">true_def</span><span class="pn">)</span>
+    <span class="pn">(</span><span onmouseout="hideTip(event, 'fs25', 32)" onmouseover="showTip(event, 'fs25', 32)" class="fn">sym_rule</span> <span onmouseout="hideTip(event, 'fs12', 33)" onmouseover="showTip(event, 'fs12', 33)" class="id">true_def</span><span class="pn">)</span>
     <span class="c">(* |- (\p. p) = (\p. p)           *)</span>
-    <span class="pn">(</span><span onmouseout="hideTip(event, 'fs27', 36)" onmouseover="showTip(event, 'fs27', 36)" class="fn">refl_conv</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs23', 37)" onmouseover="showTip(event, 'fs23', 37)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;\(p:bool).p&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span>
+    <span class="pn">(</span><span onmouseout="hideTip(event, 'fs26', 34)" onmouseover="showTip(event, 'fs26', 34)" class="fn">refl_conv</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs22', 35)" onmouseover="showTip(event, 'fs22', 35)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;\(p:bool).p&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span>
 
 <span class="c">// val it : thm = |- true</span>
 </code></pre>
@@ -106,23 +106,22 @@
 <div class="tip" id="fs8">val eq_mp_rule_bk : g2:Exp -&gt; loc:Proof Location -&gt; Proof Location</div>
 <div class="tip" id="fs9">val mkGoal : xs:string list -&gt; t:string -&gt; Exp</div>
 <div class="tip" id="fs10">val sym_rule_bk : loc:Proof Location -&gt; Proof Location</div>
-<div class="tip" id="fs11">val by : thm:thm -&gt; lbl:&#39;a -&gt; loc:(Exp * &#39;a * InfRule) Location -&gt; (Exp * &#39;a * InfRule) Location</div>
+<div class="tip" id="fs11">val by : thm:thm -&gt; lbl:string -&gt; loc:(Exp * string * InfRule) Location -&gt; Proof Location</div>
 <div class="tip" id="fs12">val true_def : thm</div>
-<div class="tip" id="fs13">val prove : loc:Proof Location -&gt; Proof Location</div>
-<div class="tip" id="fs14">val refl_conv_bk : loc:Proof Location -&gt; Proof Location</div>
-<div class="tip" id="fs15">val view : loc:Proof Location -&gt; Proof Location</div>
-<div class="tip" id="fs16">val loc_thm : loc:Proof Location -&gt; thm option</div>
-<div class="tip" id="fs17">module Option<br /><br />from Microsoft.FSharp.Core</div>
-<div class="tip" id="fs18">val get : option:&#39;T option -&gt; &#39;T</div>
-<div class="tip" id="fs19">val eq_mp_rule_fd : t1:Proof Tree -&gt; t2:Proof Tree -&gt; Proof Tree</div>
-<div class="tip" id="fs20">val sym_rule_fd : (Proof Tree -&gt; Proof Tree)</div>
-<div class="tip" id="fs21">val thm_fd : lbl:&#39;a -&gt; th:thm -&gt; (Exp * &#39;a * InfRule) Tree</div>
-<div class="tip" id="fs22">val refl_conv_fd : t:term -&gt; Proof Tree</div>
-<div class="tip" id="fs23">val parse_term : x:string -&gt; term</div>
-<div class="tip" id="fs24">val zipper : t:&#39;a Tree -&gt; &#39;a Location</div>
-<div class="tip" id="fs25">val eq_mp_rule : th1:thm -&gt; th2:thm -&gt; thm</div>
-<div class="tip" id="fs26">val sym_rule : th:thm -&gt; thm</div>
-<div class="tip" id="fs27">val refl_conv : tm:term -&gt; thm</div>
+<div class="tip" id="fs13">val refl_conv_bk : loc:Proof Location -&gt; Proof Location</div>
+<div class="tip" id="fs14">val view : loc:Proof Location -&gt; Proof Location</div>
+<div class="tip" id="fs15">val loc_thm : loc:Proof Location -&gt; thm option</div>
+<div class="tip" id="fs16">module Option<br /><br />from Microsoft.FSharp.Core</div>
+<div class="tip" id="fs17">val get : option:&#39;T option -&gt; &#39;T</div>
+<div class="tip" id="fs18">val eq_mp_rule_fd : t1:Proof Tree -&gt; t2:Proof Tree -&gt; Proof Tree</div>
+<div class="tip" id="fs19">val sym_rule_fd : (Proof Tree -&gt; Proof Tree)</div>
+<div class="tip" id="fs20">val thm_fd : lbl:&#39;a -&gt; th:thm -&gt; (Exp * &#39;a * InfRule) Tree</div>
+<div class="tip" id="fs21">val refl_conv_fd : t:term -&gt; Proof Tree</div>
+<div class="tip" id="fs22">val parse_term : x:string -&gt; term</div>
+<div class="tip" id="fs23">val zipper : t:&#39;a Tree -&gt; &#39;a Location</div>
+<div class="tip" id="fs24">val eq_mp_rule : th1:thm -&gt; th2:thm -&gt; thm</div>
+<div class="tip" id="fs25">val sym_rule : th:thm -&gt; thm</div>
+<div class="tip" id="fs26">val refl_conv : tm:term -&gt; thm</div>
 
         </div>
         <div class="span1"></div>

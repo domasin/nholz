@@ -71,7 +71,7 @@ tipo dei lati sinistro e destro del secondo teorema.</p>
 <p>Si veda anche: mk_comb1_rule, mk_comb2_rule, mk_bin_rule, mk_abs_rule.</p>
 <p><span class="math">\(\dfrac
 {x \qquad A \vdash t_1 = t_2}
-{A \vdash (\lambda x.\ t_1 = t_2)}
+{A \vdash (\lambda x.\ t_1) = (\lambda x.\ t_2))}
 \textsf{ mk_abs_rule}\)</span></p>
 <p>(per x non libera in A)</p>
 <p>Questa &egrave; la regola di congruenza di eguaglianza per la lambda astrazione.
@@ -465,6 +465,16 @@ teoremi.</p>
 <p>Si veda anche: list_imp_trans_rule, eq_trans_rule, disch_rule, imp_anitsym_asm_rule.</p>
 <p><strong>list_imp_trans_rule</strong></p>
 <p>Si veda anche: imp_trans_rule.</p>
+<p><strong>spec_rule</strong></p>
+<p><span class="math">\(\dfrac
+{t \qquad A \vdash \forall x\ \dots p}
+{A \vdash p[t/x]}
+\textsf{ spec_rule}\)</span></p>
+<p>Questa &egrave; la regola di eliminazine universale. Spoglia il
+quantificatore universale pi&ugrave; esterno del teorema, e sostituisce nel corpo ciascuna
+occorrenza della variabile legata eliminata con il termine fornito.
+Il tipo del termine fornito deve essere uguale al tipo della variabile eliminata.</p>
+<p>Si veda anche: spec_rule, spec_all_rule, bspec_rule, list_gen_rule.</p>
 <p><strong>list_spec_rule</strong></p>
 <p><span class="math">\(\dfrac
 {[t_1;t_2;\dots] \qquad A \vdash \forall x_1\ x_2\ \dots p}
@@ -587,8 +597,8 @@ assunzioni.</p>
 <p><span class="math">\(\dfrac
 {[x_1;x_2;\dots] \qquad A \vdash p}
 {A \vdash \forall x_1\ x_2\ \dots\ .\ p}
-\textsf{ gen_rule}\)</span></p>
-<p>per x non libera in A</p>
+\textsf{ list_gen_rule}\)</span></p>
+<p>per <span class="math">\(x_1, x_2, \dots\)</span> non libere in A</p>
 <p><strong>conj_rule</strong></p>
 <p><span class="math">\(\dfrac
 {A_1 \vdash p \qquad A_2 \vdash q}
