@@ -19,31 +19,57 @@ not_dist_disj_thm
 let p = parse_term(@"p:bool")
 let q = parse_term(@"q:bool")
 
-let th = 
-    let th1 = assume_rule_tr (parse_term(@"~ p /\ ~ q")) in
-    list_gen_rule_tr [p;q]
-      (deduct_antisym_rule_tr
-        (* ~ p /\ ~ q |- ~ (p \/ q)        *)
-        (not_intro_rule_tr
-          (disch_rule_tr (parse_term(@"p \/ q"))
-            (* ~ p /\ ~ q, p \/ q |- false   *)
-            (disj_cases_rule_tr (assume_rule_tr (parse_term(@"p \/ q")))
-              (* ~ p /\ ~ q, p |- false        *)
-              (undisch_rule_tr (not_elim_rule_tr (conjunct1_rule_tr th1)))
-              (* ~ p /\ ~ q, q |- false        *)
-              (undisch_rule_tr (not_elim_rule_tr (conjunct2_rule_tr th1))) )))
-        (* ~ (p \/ q) |- ~ p /\ ~ q        *)
-        (conj_rule_tr
-          (* ~ (p \/ q) |- ~ p               *)
-          (deduct_contrapos_rule_tr p
-            (* p |- p \/ q                      *)
-            (disj1_rule_tr (assume_rule_tr p) q) )
-          (* ~ (p \/ q) |- ~ q               *)
-          (deduct_contrapos_rule_tr q
-            (* q |- p \/ q                      *)
-            (disj2_rule_tr p (assume_rule_tr q)) )))
+let th1 = assume_rule_fd (parse_term(@"~ p /\ ~ q")) in
+list_gen_rule_fd [p;q]
+  (deduct_antisym_rule_fd
+    (* ~ p /\ ~ q |- ~ (p \/ q)        *)
+    (not_intro_rule_fd
+      (disch_rule_fd (parse_term(@"p \/ q"))
+        (* ~ p /\ ~ q, p \/ q |- false   *)
+        (disj_cases_rule_fd (assume_rule_fd (parse_term(@"p \/ q")))
+          (* ~ p /\ ~ q, p |- false        *)
+          (undisch_rule_fd (not_elim_rule_fd (conjunct1_rule_fd th1)))
+          (* ~ p /\ ~ q, q |- false        *)
+          (undisch_rule_fd (not_elim_rule_fd (conjunct2_rule_fd th1))) )))
+    (* ~ (p \/ q) |- ~ p /\ ~ q        *)
+    (conj_rule_fd
+      (* ~ (p \/ q) |- ~ p               *)
+      (deduct_contrapos_rule_fd p
+        (* p |- p \/ q                      *)
+        (disj1_rule_fd (assume_rule_fd p) q) )
+      (* ~ (p \/ q) |- ~ q               *)
+      (deduct_contrapos_rule_fd q
+        (* q |- p \/ q                      *)
+        (disj2_rule_fd p (assume_rule_fd q)) )))
+|> zipper
+|> view
 
-th |> print_graph
+
+//let th = 
+//    let th1 = assume_rule_tr (parse_term(@"~ p /\ ~ q")) in
+//    list_gen_rule_tr [p;q]
+//      (deduct_antisym_rule_tr
+//        (* ~ p /\ ~ q |- ~ (p \/ q)        *)
+//        (not_intro_rule_tr
+//          (disch_rule_tr (parse_term(@"p \/ q"))
+//            (* ~ p /\ ~ q, p \/ q |- false   *)
+//            (disj_cases_rule_tr (assume_rule_tr (parse_term(@"p \/ q")))
+//              (* ~ p /\ ~ q, p |- false        *)
+//              (undisch_rule_tr (not_elim_rule_tr (conjunct1_rule_tr th1)))
+//              (* ~ p /\ ~ q, q |- false        *)
+//              (undisch_rule_tr (not_elim_rule_tr (conjunct2_rule_tr th1))) )))
+//        (* ~ (p \/ q) |- ~ p /\ ~ q        *)
+//        (conj_rule_tr
+//          (* ~ (p \/ q) |- ~ p               *)
+//          (deduct_contrapos_rule_tr p
+//            (* p |- p \/ q                      *)
+//            (disj1_rule_tr (assume_rule_tr p) q) )
+//          (* ~ (p \/ q) |- ~ q               *)
+//          (deduct_contrapos_rule_tr q
+//            (* q |- p \/ q                      *)
+//            (disj2_rule_tr p (assume_rule_tr q)) )))
+
+//th |> print_graph
 
 (**
 $\small{ 	

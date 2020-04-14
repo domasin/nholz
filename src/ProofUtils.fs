@@ -102,6 +102,7 @@ type InfRule =
     | TmFn of (term -> thm)
     | ThmFn of (thm -> thm)
     | ThmThmFn of (thm -> thm -> thm)
+    | ThmThmThmFn of (thm -> thm -> thm -> thm)
     | TmThmFn of (term -> thm -> thm)
     | ThmTmFn of (thm -> term -> thm)
     | TmLstThmFn of (term list -> thm -> thm)
@@ -229,6 +230,19 @@ let prove' (loc:Proof Location) =
                 match child2 with
                 | (Loc (Tree ((Th t2, _, _),_),_)) -> 
                     loc |> change (Tree ((Th (f t t2), label, just_fn),children))
+                | _ -> failwith "child2 is not thm"
+            | _ -> failwith "child1 is not thm"
+        | ThmThmThmFn f -> 
+            let child2 = child |> right
+            let child3 = child2 |> right
+            match child with
+            | (Loc (Tree ((Th t, _, _),_),_)) -> 
+                match child2 with
+                | (Loc (Tree ((Th t2, _, _),_),_)) -> 
+                    match child3 with
+                    | (Loc (Tree ((Th t3, _, _),_),_)) -> 
+                        loc |> change (Tree ((Th (f t t2 t3), label, just_fn),children))
+                    | _ -> failwith "child3 is not thm"
                 | _ -> failwith "child2 is not thm"
             | _ -> failwith "child1 is not thm"
         | TmThmFn f -> 
@@ -387,6 +401,20 @@ let thmThmFnForward lbl jf t1 t2 =
         let (tr:Proof Tree) = 
             mkTree 
                 (Th th,lbl,ThmThmFn f) 
+                [t1; t2]
+        tr
+    | _ -> failwith "not ThmFn"
+
+let thmThmThmFnForward lbl jf t1 t2 t3 = 
+    match jf with
+    | ThmThmThmFn f -> 
+        let th1 = t1 |> zipper |> loc_thm |> Option.get
+        let th2 = t2 |> zipper |> loc_thm |> Option.get
+        let th3 = t3 |> zipper |> loc_thm |> Option.get
+        let th = f th1 th2 th3
+        let (tr:Proof Tree) = 
+            mkTree 
+                (Th th,lbl,ThmThmThmFn f) 
                 [t1; t2]
         tr
     | _ -> failwith "not ThmFn"
@@ -575,7 +603,7 @@ let not_intro_rule_bk =
         | Goal(asl,t)  ->
             let t1 = mk_imp (dest_not t,false_tm)
             loc
-            |> change (Tree ((ex, "not_intro", ThmFn not_intro_rule),children))
+            |> change (Tree ((ex, "not_intro_rule", ThmFn not_intro_rule),children))
             |> insert_down (mkTree(Goal (asl,t1),"", NullFun) [])   
             //|> fun x -> if !showProof then view x else x
         | _ -> failwith "can't apply rule"
@@ -595,6 +623,8 @@ let disch_rule_bk =
             |> insert_right (mkTree(Goal (asl2@[t1],t2),"", NullFun) []) 
             |> right
         | _ -> failwith "can't apply rule"
+
+let undisch_rule_fd = thmFnForward "undisch_rule" (ThmFn undisch_rule)
 
 let undisch_rule_bk ind = 
     fun (loc: Proof Location) -> 
@@ -733,6 +763,8 @@ let mk_comb1_rule_bk loc =
         //|> fun x -> if !showProof then view x else x
     | _ -> failwith "not a goal"
 
+let eqf_elim_rule_fd = thmFnForward "eqf_elim_rule" (ThmFn eqf_elim_rule)
+
 let eqf_elim_rule_bk = 
     fun (loc: Proof Location) -> 
         let (Loc(Tree((ex,_,_),children), _)) = loc
@@ -744,6 +776,29 @@ let eqf_elim_rule_bk =
             |> change (Tree ((Goal (asl,t), "eqf_elim_rule", ThmFn eqf_elim_rule),children))
             |> insert_down (mkTree(g1, "", NullFun) []) 
         | _ -> failwith "not a goal"
+
+let eqt_intro_rule_fd = thmFnForward "eqt_intro_rule" (ThmFn eqt_intro_rule)
+
+let eqt_intro_rule_bk = 
+    fun (loc: Proof Location) -> 
+        let (Loc(Tree((ex,_,_),children), _)) = loc
+        match ex with
+        | Goal(asl,t) ->
+            let (t1,_) = t |> dest_eq
+            let g1 = Goal (asl,t1)
+            loc
+            |> change (Tree ((Goal (asl,t), "eqt_intro_rule", ThmFn eqt_intro_rule),children))
+            |> insert_down (mkTree(g1, "", NullFun) []) 
+        | _ -> failwith "not a goal"
+
+let not_elim_rule_fd = thmFnForward "not_elim_rule" (ThmFn not_elim_rule)
+let conjunct1_rule_fd = thmFnForward "conjunct1_rule" (ThmFn conjunct1_rule)
+let conjunct2_rule_fd = thmFnForward "conjunct2_rule" (ThmFn conjunct2_rule)
+let conj_rule_fd = thmThmFnForward "conj_rule" (ThmThmFn conj_rule)
+let deduct_contrapos_rule_fd = tmThmFnForward "deduct_contrapos_rule" (TmThmFn deduct_contrapos_rule)
+let disj1_rule_fd = thmTmFnForward "disj1_rule" (ThmTmFn disj1_rule)
+let disj2_rule_fd = tmThmFnForward "disj2_rule" (TmThmFn disj2_rule)
+let disj_cases_rule_fd = thmThmThmFnForward "disj_cases_rule" (ThmThmThmFn disj_cases_rule)
 
 let assume_rule_tr t = 
     let th = t |> assume_rule

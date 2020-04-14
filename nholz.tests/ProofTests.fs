@@ -192,3 +192,48 @@ let ``not_false_thm forward gives not_false_thm`` () =
     |> zipper |> loc_thm |> Option.get
     |> fun x -> x = not_false_thm
     |> should equal true
+
+[<Fact>]
+let ``true_not_eq_false_thm backward gives true_not_eq_false_thm`` () =
+    let _t1 = CoreThry.load   
+    let _t2 = Equal.load      
+    let _t3 = Bool.load 
+
+    ([],"~ (true <=> false)")
+    |> start_proof
+    |> eqf_elim_rule_bk
+        |> deduct_antisym_rule_bk [] []
+            (* false |- true <=> false         *)
+            |> sym_rule_bk
+                |> eqt_intro_rule_bk
+                    |> assume_rule_bk
+            (* true <=> false |- false         *)
+            |> eq_mp_rule_bk [0] [] "true"
+                |> assume_rule_bk
+                    //|> add_asm_rule_bk 0
+                |> by truth_thm "truth\_thm"
+    //|> view
+    |> loc_thm |> Option.get
+    |> fun x -> x = true_not_eq_false_thm
+    |> should equal true
+
+[<Fact>]
+let ``true_not_eq_false_thm forward gives true_not_eq_false_thm`` () =
+    let _t1 = CoreThry.load   
+    let _t2 = Equal.load      
+    let _t3 = Bool.load 
+
+    eqf_elim_rule_fd
+        (deduct_antisym_rule_fd
+              (* false |- true <=> false         *)
+              (sym_rule_fd 
+                (eqt_intro_rule_fd 
+                    (assume_rule_fd (parse_term(@"false")))))
+              (* true <=> false |- false         *)
+              (eq_mp_rule_fd 
+                (assume_rule_fd(parse_term(@"true <=> false"))) 
+                    (truth_thm |> thm_fd "truth\_thm") ) )
+    |> zipper 
+    |> loc_thm |> Option.get
+    |> fun x -> x = true_not_eq_false_thm
+    |> should equal true
