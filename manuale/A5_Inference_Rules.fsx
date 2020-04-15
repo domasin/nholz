@@ -425,8 +425,6 @@ convertita e al teorema stesso.
 Logica
 ------------
 
-**eqt\_elim\_rule**
-
 $\dfrac
 {A \vdash p \Leftrightarrow \top}
 {A \vdash p}
@@ -439,8 +437,6 @@ teorema che afferma che il lato sinistro vale, sotto le stesse assunzioni.
 
 Si veda anche: eqt\_intro\_rule, eqf\_elim\_rule.
 
-**undisch\_rule**
-
 $\dfrac
 {A \vdash p \Rightarrow q}
 {A \cup \{p\} \vdash q}
@@ -452,8 +448,6 @@ e rimuove l'antecedente dalla conclusione e lo aggiunge nelle assunzioni.
 
 Si veda anche: disch\_rule, mp\_rule, prove\_asm\_rule.
 
-**add\_asm\_rule**
-
 $\dfrac
 {q \qquad A \vdash p}
 {A \cup \{q\} \vdash p}
@@ -464,8 +458,6 @@ Questa &egrave; la regola di aggiunta di un'assunzione. Prende un termine boolea
 e un teorema e restituisce lo stesso teorema ma con il termine fornito aggiunto 
 alle sue assunzioni. Il teorema restituito in output coincide con quello fornito in input 
 se il termine &egrave; gi&agrave; presente nelle assunzioni.
-
-**prove\_asm\_rule**
 
 $\dfrac
 {A_1 \vdash p \qquad A_2 \vdash q}
@@ -482,8 +474,6 @@ successo.
 
 Si veda anche: mp\_rule, undisch\_rule.
 
-**eq\_imp\_rule1**
-
 $\dfrac
 {A \vdash p \Leftrightarrow q}
 {A \vdash p \Rightarrow q}
@@ -496,8 +486,6 @@ restituisce un teorema che afferna che il sinistro implica il destro,
 sotto le stesse assunzioni.
 
 Si veda anche: eq\_imp\_rule2, imp\_antisym\_rule, eq\_mp\_rule, undisch\_rule, mk\_imp\_rule.
-
-**eq\_imp\_rule2**
 
 $\dfrac
 {A \vdash p \Leftrightarrow q}
@@ -512,8 +500,6 @@ sotto le stesse assunzioni.
 
 Si veda anche: eq\_imp\_rule1, imp\_antisym\_rule, eq\_mp\_rule, undisch\_rule, mk\_imp\_rule.
 
-**not\_intro\_rule**
-
 $\dfrac
 {A \vdash p \Rightarrow \bot}
 {A \vdash \neg p}
@@ -525,8 +511,6 @@ teorema di implicazione dove il lato destro &egrave; `false`, e restituisce la
 negazione logica del lato sinistro, sotto le stesse assunzioni.
 
 Si veda anche: not\_elim\_rule, eqf\_elim\_rule, eqf\_intro\_rule, deduct\_contrapos\_rule.
-
-**not\_elim\_rule**
 
 $\dfrac
 {A \vdash \neg p}
@@ -540,8 +524,6 @@ il termine negato sul lato sinistro e `false` sul lato destro, sotto le
 stesse assunzioni.
 
 Si veda anche: not\_intro\_rule, eqf\_intro\_rule, eqf\_elim\_rule.
-
-**deduct\_contrapos\_rule**
 
 $\dfrac
 {q \qquad A \vdash p}
@@ -559,8 +541,6 @@ risultante.
 
 See also: not\_intro\_rule, disch\_rule, contr\_rule, ccontr\_rule.
 
-**eqf\_elim\_rule**
-
 $\dfrac
 {A \vdash p \Leftrightarrow \bot}
 {A \vdash \neg p}
@@ -573,8 +553,6 @@ logica del lato sinistro, sotto le stesse assunzioni.
 
 Si veda anche: eqf\_intro\_rule, not\_intro\_rule, not\_elim\_rule, mk\_not\_rule,
 eqt\_elim\_rule, deduct\_contrapos\_rule.
-
-**imp\_trans\_rule**
 
 $\dfrac
 {A_1 \vdash p \Rightarrow q \qquad A_2 \vdash q \Rightarrow r}
@@ -595,8 +573,6 @@ Si veda anche: list\_imp\_trans\_rule, eq\_trans\_rule, disch\_rule, imp\_anitsy
 
 Si veda anche: imp\_trans\_rule.
 
-**spec\_rule**
-
 $\dfrac
 {t \qquad A \vdash \forall x\ \dots p}
 {A \vdash p[t/x]}
@@ -609,8 +585,6 @@ occorrenza della variabile legata eliminata con il termine fornito.
 Il tipo del termine fornito deve essere uguale al tipo della variabile eliminata.
 
 Si veda anche: spec\_rule, spec\_all\_rule, bspec\_rule, list\_gen\_rule.
-
-**list\_spec\_rule**
 
 $\dfrac
 {[t_1;t_2;\dots] \qquad A \vdash \forall x_1\ x_2\ \dots p}
@@ -627,8 +601,6 @@ uguale al tipo della sua corrispondente variabile.
 
 Si veda anche: spec\_rule, spec\_all\_rule, bspec\_rule, list\_gen\_rule.
 
-**spec\_all\_rule**
-
 $\dfrac
 {A \vdash \forall x_1\ x_2 \dots x_n.\ p}
 {A \vdash p}
@@ -642,8 +614,6 @@ universale perch&egrave; il teorema abbia successo (in  questo caso il teorema
 risultante &egrave; semplicemente lo stesso del teorema fornito):
 
 Si veda anche: spec\_rule, list\_spec\_rule, bspec\_rule, list\_gen\_rule.
-
-**bspec\_rule**                                 
 
 $\dfrac
 {\lambda y.\ t \qquad A \vdash \forall x.\ p}
@@ -661,8 +631,6 @@ al tipo della variabile legata eliminata.
 
 Si veda anche: spec\_rule, list\_spec\_rule, spec\_all\_rule, gen\_rule.
 
-**contr\_rule**
-
 $\dfrac
 {p \qquad A \vdash \bot}
 {A \vdash p}
@@ -675,8 +643,6 @@ teorema con il termine fornito come sua conclusione, sotto le stess assunzioni
 del teorema fornito.
 
 See also: ccontr\_rule, deduct\_contrapos\_rule.
-
-**eta\_conv**
 
 $\dfrac
 {\lambda x.\ f\ x}
@@ -693,8 +659,6 @@ assunzione.
 
 Si veda anche: beta\_conv.
 
-**imp\_antisym\_rule**
-
 $\dfrac
 {A_1 \vdash p \Rightarrow q \qquad A_2 \vdash q \Rightarrow p}
 {A_1 \cup A_2 \vdash p \Leftrightarrow q}
@@ -707,8 +671,6 @@ teoremi di implicazione come argomenti, dove il lato sinistro di ciascuno
 Restituisce 
 
 Si veda anche: list\_gen\_rule, spec\_rule, mk\_forall\_rule.
-
-**deduct\_antisym\_rule**
 
 $\dfrac
 {A_1 \vdash p  \qquad A_2 \vdash q }
@@ -723,8 +685,6 @@ di un teorema rimossa dalle assunzioni dell'altro
 
 See also: imp\_antisym\_rule, undisch\_rule.
 
-**sym\_conv**
-
 $\dfrac
 {t_1 = t_2}
 {\vdash t_1 = t_2 \Leftrightarrow t_2 = t_2}
@@ -737,8 +697,6 @@ alcuna assunzione.
 
 Si veda anche: sym\_rule, refl\_conv.
 
-**eqt\_intro\_rule**
-
 $\dfrac
 {A \vdash p}
 {A \vdash p \Leftrightarrow \top}
@@ -750,8 +708,6 @@ qualsiasi teorema, e restituisce il teorema che afferma che la conclusione
 &egrave; equivalente a `true`, sotto le stesse assunzioni.
 
 Si veda anche: eqt\_elim\_rule, eq\f_intro\_rule.
-
-**eqf\_intro\_rule**                     
 
 $\dfrac
 {A \vdash \neg p}
@@ -766,8 +722,6 @@ le stesse assunzioni.
 
 Si veda anche: eqf\_elim\_rule, not\_elim\_rule, not\_intro\_rule, mk\_not\_rule,
 eqt\_intro\_rule.
-
-**gen\_rule**
 
 $\dfrac
 {x \qquad A \vdash p}
@@ -784,8 +738,6 @@ assunzioni.
 
 Si veda anche: list\_gen\_rule, spec\_rule, mk\_forall\_rule.
 
-**list\_gen\_rule**
-
 $\dfrac
 {[x_1;x_2;\dots] \qquad A \vdash p}
 {A \vdash \forall x_1\ x_2\ \dots\ .\ p}
@@ -793,8 +745,6 @@ $\dfrac
 $
 
 per $x_1, x_2, \dots$ non libere in A 
-
-**conj\_rule**
 
 $\dfrac
 {A_1 \vdash p \qquad A_2 \vdash q}
@@ -807,8 +757,6 @@ e unisce le loro assunzioni.
 
 Si veda anche: conjunct1\_rule, conjunct2\_rule, mk\_conj\_rule.
 
-**conjunct1\_rule**
-
 $\dfrac
 {A \vdash p \wedge q}
 {A \vdash p}
@@ -820,8 +768,6 @@ congiunto a destra dal teorema di congiuzione fornito.
 
 Si veda anche: conjunct2\_rule, conjunct\_rule, mk\_conj\_rule.
 
-**conjunct2\_rule**
-
 $\dfrac
 {A \vdash p \wedge q}
 {A \vdash q}
@@ -832,8 +778,6 @@ Questa &egrave; la regola di e-eliminazione a destra. Rimuove il
 congiunto a sinistra dal teorema di congiuzione fornito.
 
 Si veda anche: conjunct1\_rule, conjunct\_rule, mk\_conj\_rule.
-
-**disj\_cases\_rule**
 
 $\dfrac
 {A \vdash p \vee q \qquad A_1 \vdash r \qquad A_2 \vdash r}
@@ -851,8 +795,6 @@ assunzioni del teorema di disgiunzione.
 
 Si veda anche: disj1\_rule, disj2\_rule, mk\_disj\_rule.
 
-**Bool.disj1\_rule**
-
 $\dfrac
 {A \vdash p \qquad q}
 {A \vdash p \vee q}
@@ -864,8 +806,6 @@ termine booleano fornito al lato destro del teorema in input.
 
 Si veda anche: disj2\_rule, disj\_cases\_rule, mk\_disj1\_rule.
 
-**Bool.disj2\_rule**
-
 $\dfrac
 {p \qquad A \vdash q}
 {A \vdash p \vee q}
@@ -876,8 +816,6 @@ Questa &egrave; la regola di o-introduzione per il lato destro. Disgiunge il
 termine booleano fornito al lato sinistro del teorema in input.
 
 Si veda anche: disj2\_rule, disj\_cases\_rule, mk\_disj1\_rule.
-
-**choose\_rule**
 
 $\dfrac
 {y \qquad A_1 \vdash \exists x.\ p \qquad A_2 \vdash q}
@@ -902,8 +840,6 @@ See also: exists\_rule, mk_exists\_rule.
 Regole di congruenza per l'uguaglianza
 ------------------
 
-**mk\_bin\_rule**
-
 $\dfrac
 {f \qquad A_1 \vdash s_1 = s_2 \qquad A_2 \vdash t_1 = t_2}
 {A_1 \cup A_2 \vdash f\ s_1\ t_1 = f\ s_2\ t_2}
@@ -918,10 +854,7 @@ della funzione fornita deve avere essere binario nella forma curried, con i tipi
 del primo e del secondo dominio uguali al tipo di ciascun lato del teorema 
 corrispondente.
 
-
 Si veda anche: mk\_comb\_rule.
-
-**mk\_bin1\_rule**
 
 $\dfrac
 {f \qquad \vdash s_1 = s_2 \qquad t}
@@ -941,8 +874,6 @@ aggiunto a destra.
 
 Si veda anche: mk\_bin2\_rule, mk\_bin\_rule, mk\_comb\_rule.
 
-**mk\_bin2\_rule**
-
 $\dfrac
 {f \qquad s \qquad \vdash t_1 = t_2}
 {\vdash f\ s\ t_1 = f\ s\ t_2}
@@ -960,8 +891,6 @@ lato del teorema.
 
 Si veda anche: mk\_bin1\_rule, mk\_bin\_rule, mk\_comb\_rule.
 
-**mk\_eq\_rule**
-
 $\dfrac
 {A_1 \vdash s_1 = s_2 \qquad A_2 \vdash t_1 = t_2}
 {A_1 \cup A_2 \vdash s_1 = t_1 \Leftrightarrow s_2 = t_2}
@@ -974,8 +903,6 @@ primo teorema con quelli del secondo, unendone le assunzioni. I tipi di
 ciascun lato di ogni equazione devono essere uguali.
 
 Si veda anche: mk\_eq1\_rule, mk\_eq2\_rule, mk\_eq\_rule.
-
-**mk\_eq1\_rule**
 
 $\dfrac
 {A \vdash s_1 = s_2 \qquad t}
@@ -990,8 +917,6 @@ deve essere uguale al tipo di ciascun lato del teorema fornito.
 
 Si veda anche: mk\_eq2\_rule, mk\_eq\_rule, mk\_eq1\_rule.
 
-**mk\_eq2\_rule**
-
 $\dfrac
 {s \qquad A \vdash t_1 = t_2}
 {A \vdash s = t_1 \Leftrightarrow s = t_2}
@@ -1005,8 +930,6 @@ essere uguale al tipo di cascun lato del teorema fornito.
 
 Si veda anche: mk\_eq1\_rule, mk\_eq\_rule, mk\_eq1\_rule.
 
-**EqCong.mk\_not\_rule**
-
 $\dfrac
 {A \vdash p_1 \Leftrightarrow p_2}
 {A \vdash \neg p_1 \Leftrightarrow \neg p_2}
@@ -1018,8 +941,6 @@ logica, Prende un teorema di eguaglianza booleana, e nega logicamente
 ciascun lato del teorema.
 
 Si veda anche: mk\_comb\_rule, eqf\_intro\_rule, eqf\_elim\_rule.
-
-**mk\_conj\_rule**
 
 $\dfrac
 {A_1 \vdash p_1 \Leftrightarrow p_2 \qquad A_2 \vdash q_1 \Leftrightarrow q_2}
@@ -1033,8 +954,6 @@ con quelli del secondo, unendone le assunzioni.
 
 Si veda anche: mk\_conj1\_rule, mk\_conj2\_rule, mk\_bin\_rule, conj\_rule.
 
-**mk\_conj1\_rule**
-
 $\dfrac
 {A \vdash p_1 \Leftrightarrow p_2 \qquad q}
 {A \vdash p_1 \wedge q \Leftrightarrow p_2 \wedge q}
@@ -1046,8 +965,6 @@ Prende un teorema di eguaglianza booleana e un termine booleano, e congiunge
 ciaszun lato del teorema con il termine fornito
 
 Si veda anche: mk\_conj2\_rule, mk\_conj\_rule, mk\_bin1\_rule, conj\_rule.
-
-**mk\_conj2\_rule**
 
 $\dfrac
 {p \quad A \vdash q_1 \Leftrightarrow q_2}
@@ -1061,8 +978,6 @@ termine fornito con ciascun lato del teorema.
 
 Si veda anche: mk\_conj1\_rule, mk\_conj\_rule, mk\_bin1\_rule, conj\_rule.
 
-**mk\_disj\_rule**
-
 $\dfrac
 {A_1 \vdash p_1 \Leftrightarrow p_2 \quad A_2 \vdash q_1 \Leftrightarrow q_2}
 {A_1 \cup A_2 \vdash p_1 \vee q_1 \Leftrightarrow p_2 \vee q_2}
@@ -1074,8 +989,6 @@ teoremi di eguaglianza booleana, e disgiunge i corrispondenti lati del
 primo teorema con quelli del secondo, unendone le assunzioni.
 
 Si veda anche: mk\_disj1\_rule, mk\_disj2\_rule, mk\_bin\_rule, disj1\_rule, disj2\_rule.
-
-**mk\_disj1\_rule**
 
 $\dfrac
 {A \vdash p_1 \Leftrightarrow p_2 \quad q}
@@ -1089,8 +1002,6 @@ e disgiunge ogni lato del teorema con il termine fornito.
 
 Si veda anche: mk\_disj2\_rule, mk\_disj\_rule, mk\_bin1\_rule, disj1\_rule.
 
-**mk\_disj2\_rule**
-
 $\dfrac
 {p \qquad A \vdash q_1 \Leftrightarrow q_2}
 {A \vdash p \vee q_1 \Leftrightarrow p \vee q_2}
@@ -1103,8 +1014,6 @@ e disgiunge il termine fornito con ogni lato del teorema.
 
 Si veda anche: mk\_disj1\_rule, mk\_disj\_rule, mk\_bin1\_rule, disj2\_rule.
 
-**mk\_imp\_rule**
-
 $\dfrac
 {A_1 \vdash p_1 \Leftrightarrow p_2 \quad A_2 \vdash q_1 \Leftrightarrow q_2}
 {A_1 \cup A_2 \vdash p_1 \Rightarrow q_1 \Leftrightarrow p_2 \Rightarrow q_2}
@@ -1116,8 +1025,6 @@ Prende due teoremi di eguaglianza booleana, e crea l'implicazione dai
 corrispondeti lati del primo e del secondo teorema, unendone le assunzioni.
 
 Si veda anche: mk\_imp1\_rule, mk\_imp2\_rule, mk\_bin\_rule.
-
-**mk\_imp1\_rule**
 
 $\dfrac
 {A \vdash p_1 \Leftrightarrow p_2 \quad q}
@@ -1132,8 +1039,6 @@ del teorema come antecedente e il termine come conseguente.
 
 Si veda anche: mk\_imp2\_rule, mk\_imp\_rule, mk\_bin1\_rule
 
-**mk\_imp2\_rule**
-
 $\dfrac
 {p \qquad A \vdash q_1 \Leftrightarrow q_2}
 {A \vdash p \Rightarrow q_1 \Leftrightarrow p \Rightarrow q_2}
@@ -1145,8 +1050,6 @@ su lato destro. Prende un termine booleano e un teorema di eguaglianza
 booleana, e rende il termine un antecedente di ciascun lato del teorema.
 
 Si veda anche: mk\_imp1\_rule, mk\_imp\_rule, mk\_bin2\_rule
-
-**mk\_forall\_rule**
 
 $\dfrac
 {x \qquad A \vdash p_1 \Leftrightarrow p_2}
@@ -1163,8 +1066,6 @@ non deve occorrere libera nelle assunzioni del teorema fornito
 
 Si veda anche: mk\_abs\_rule, mk\_comb\_rule, gen\_rule.
 
-**mk\_exists\_rule**
-
 $\dfrac
 {x \qquad A \vdash p_1 \Leftrightarrow p_2}
 {A \vdash (\exists x.\ p_1) \Leftrightarrow (\exists x.\ p_2) }
@@ -1179,8 +1080,6 @@ in modo esistenzaiale la variabile su entrambi i lati del teorema. La variabile
 non deve occorrere libera nelle assunzioni del teorema fornito
 
 Si veda anche: mk\_uexists\_rule, mk\_abs\_rule, mk\_comb\_rule, exists\_rule.
-
-**mk\_uexists\_rule**
 
 $\dfrac
 {x \qquad A \vdash p_1 \Leftrightarrow p_2}
@@ -1197,8 +1096,6 @@ entrambi i lato del teorema. La variabile non deve occorrere libera
 nelle assunzioni del teorema fornito.
 
 Si veda anche: mk\_exists\_rule, mk\_abs\_rule, mk\_comb\_rule       
-
-**mk\_select\_rule**
 
 $\dfrac
 {x \qquad A \vdash p_1 \Leftrightarrow p_2}
@@ -1218,8 +1115,6 @@ Si veda anche: mk\_abs\_rule, mk\_comb\_rule.
 Logica classica
 ------------------
 
-**select\_rule**
-
 $\dfrac
 {A \vdash \exists x.\ p}
 {A \vdash p[(\epsilon x. p)/x]}
@@ -1232,8 +1127,6 @@ ogni occorrenza della variabile legata con l'operatore di selezione
 applicato al corpo originario (con la stessa variabile legata).
 
 Si veda anche: exists\_rule.
-
-**ccontr\_rule**
 
 $\dfrac
 {p \qquad A \vdash \bot}

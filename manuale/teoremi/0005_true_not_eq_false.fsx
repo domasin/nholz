@@ -72,7 +72,6 @@ $
 
 (**
 Forward proof with tree
-
 *)
 
 eqf_elim_rule_fd

@@ -192,7 +192,7 @@ let view (loc:Proof Location) =
     let (Loc(Tree((exp,_,_),_), _)) = loc
     let proof = loc |> root
     let proofStr = proof |> treeToLatex 1 exp
-    let html = sprintf "<!DOCTYPE html><html><head><script type=\"text/javascript\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js\">MathJax.Hub.Config({ config: [\"TeX-AMS-MML_HTMLorMML.js\"], 	extensions: [\"[a11y]/accessibility-menu.js\"], menuSettings: {	collapsible: true,	autocollapse: true,	explorer: true } });</script></head><body>\\[ \\small{ 	%s } \\]</body></html>" proofStr
+    let html = sprintf "<!DOCTYPE html><html><head><script type=\"text/javascript\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js\">MathJax.Hub.Config({ config: [\"TeX-AMS-MML_HTMLorMML.js\"], 	extensions: [\"[a11y]/accessibility-menu.js\"], menuSettings: {	collapsible: true,	autocollapse: true,	explorer: false } });</script></head><body>\\[ \\small{ 	%s } \\]</body></html>" proofStr
     let path = System.IO.Path.GetTempFileName() + ".html"
     let mutable file = File.CreateText(path)
     file.WriteLine(html)
@@ -325,7 +325,8 @@ let rec prove (loc:Proof Location) =
             loc |> lower |> prove' |> prove
         with _ -> loc
     try
-        if newLoc |> right |> is_goal then newLoc |> right
+        if newLoc |> is_goal then newLoc
+        elif newLoc |> right |> is_goal then newLoc |> right
         else newLoc |> prove
     with _ -> newLoc
 
@@ -415,7 +416,7 @@ let thmThmThmFnForward lbl jf t1 t2 t3 =
         let (tr:Proof Tree) = 
             mkTree 
                 (Th th,lbl,ThmThmThmFn f) 
-                [t1; t2]
+                [t1; t2; t3]
         tr
     | _ -> failwith "not ThmFn"
 
@@ -792,13 +793,128 @@ let eqt_intro_rule_bk =
         | _ -> failwith "not a goal"
 
 let not_elim_rule_fd = thmFnForward "not_elim_rule" (ThmFn not_elim_rule)
-let conjunct1_rule_fd = thmFnForward "conjunct1_rule" (ThmFn conjunct1_rule)
-let conjunct2_rule_fd = thmFnForward "conjunct2_rule" (ThmFn conjunct2_rule)
-let conj_rule_fd = thmThmFnForward "conj_rule" (ThmThmFn conj_rule)
-let deduct_contrapos_rule_fd = tmThmFnForward "deduct_contrapos_rule" (TmThmFn deduct_contrapos_rule)
-let disj1_rule_fd = thmTmFnForward "disj1_rule" (ThmTmFn disj1_rule)
-let disj2_rule_fd = tmThmFnForward "disj2_rule" (TmThmFn disj2_rule)
+
+let not_elim_rule_bk = 
+    fun (loc: Proof Location) -> 
+        let (Loc(Tree((ex,_,_),children), _)) = loc
+        match ex with
+        | Goal(asl,t) ->
+            let (t1,_) = t |> dest_imp 
+            let g1 = Goal (asl,t1 |> mk_not)
+            loc
+            |> change (Tree ((Goal (asl,t), "not_elim_rule", ThmFn not_elim_rule),children))
+            |> insert_down (mkTree(g1, "", NullFun) []) 
+        | _ -> failwith "not a goal"
+
 let disj_cases_rule_fd = thmThmThmFnForward "disj_cases_rule" (ThmThmThmFn disj_cases_rule)
+
+let disj_cases_rule_bk ind1 ind2 ind3 disj1 disj2 loc = 
+    let (Loc(Tree((ex,_,_),children), _)) = loc
+    match ex with
+    | Goal(asl,t) ->
+        let disj1Tm = (disj1 |> parse_term)
+        let disj2Tm = (disj2 |> parse_term)
+        let disj = mk_disj (disj1Tm, disj2Tm)
+        let asl1 = ind1 |> List.map (fun x -> asl.[x])
+        let asl2 = (ind2 |> List.map (fun x -> asl.[x]))@[disj1Tm]
+        let asl3 = (ind3 |> List.map (fun x -> asl.[x]))@[disj2Tm]
+        loc
+        |> change (Tree ((Goal (asl,t), "disj_cases_rule", ThmThmThmFn disj_cases_rule),children))
+        |> insert_down (mkTree(Goal (asl1,disj), "", NullFun) []) 
+        |> insert_right (mkTree(Goal(asl2,t), "", NullFun) []) 
+        |> right
+        |> insert_right (mkTree(Goal(asl3,t), "", NullFun) []) 
+        |> left
+        //|> fun x -> if !showProof then view x else x
+    | _ -> failwith "not a goal"
+
+let conjunct1_rule_fd = thmFnForward "conjunct1_rule" (ThmFn conjunct1_rule)
+
+let conjunct1_rule_bk t2 = 
+    fun (loc: Proof Location) -> 
+        let (Loc(Tree((ex,_,_),children), _)) = loc
+        match ex with
+        | Goal(asl,t) ->
+            let g1 = Goal (asl,mk_conj (t, t2 |> parse_term))
+            loc
+            |> change (Tree ((Goal (asl,t), "conjunct1_rule", ThmFn conjunct1_rule),children))
+            |> insert_down (mkTree(g1, "", NullFun) []) 
+        | _ -> failwith "not a goal"
+
+let conjunct2_rule_fd = thmFnForward "conjunct2_rule" (ThmFn conjunct2_rule)
+
+let conjunct2_rule_bk t1 = 
+    fun (loc: Proof Location) -> 
+        let (Loc(Tree((ex,_,_),children), _)) = loc
+        match ex with
+        | Goal(asl,t) ->
+            let g1 = Goal (asl,mk_conj (t1 |> parse_term, t))
+            loc
+            |> change (Tree ((Goal (asl,t), "conjunct2_rule", ThmFn conjunct2_rule),children))
+            |> insert_down (mkTree(g1, "", NullFun) []) 
+        | _ -> failwith "not a goal"
+
+let conj_rule_fd = thmThmFnForward "conj_rule" (ThmThmFn conj_rule)
+
+let conj_rule_bk ind1 ind2 loc = 
+    let (Loc(Tree((ex,_,_),children), _)) = loc
+    match ex with
+    | Goal(asl,t) ->
+        let asl1 = ind1 |> List.map (fun x -> asl.[x])
+        let asl2 = ind2 |> List.map (fun x -> asl.[x])
+        let (t1,t2) = t |> dest_conj
+        loc
+        |> change (Tree ((Goal (asl,t), "conj_rule", ThmThmFn conj_rule),children))
+        |> insert_down (mkTree(Goal(asl1,t1), "", NullFun) []) 
+        |> insert_right (mkTree(Goal(asl2,t2), "", NullFun) []) 
+        //|> fun x -> if !showProof then view x else x
+    | _ -> failwith "not a goal"
+
+let deduct_contrapos_rule_fd = tmThmFnForward "deduct_contrapos_rule" (TmThmFn deduct_contrapos_rule)
+
+let deduct_contrapos_rule_bk ind loc = 
+    let (Loc(Tree((ex,_,_),children), _)) = loc
+    match ex with
+    | Goal(asl,t) ->
+        let t1 = t |> dest_not
+        let t2 = asl.[ind] |> dest_not
+        let asl2 = (asl |> List.filter (fun x -> x <> asl.[ind]))@[t1]
+        loc
+        |> change (Tree ((Goal (asl,t), "deduct_contrapos_rule", TmThmFn deduct_contrapos_rule),children))
+        |> insert_down (mkTree(Te t1, "", NullFun) []) 
+        |> insert_right (mkTree(Goal(asl2,t2), "", NullFun) []) 
+        |> right
+        //|> fun x -> if !showProof then view x else x
+    | _ -> failwith "not a goal"
+
+let disj1_rule_fd = thmTmFnForward "disj1_rule" (ThmTmFn disj1_rule)
+
+let disj1_rule_bk loc = 
+    let (Loc(Tree((ex,_,_),children), _)) = loc
+    match ex with
+    | Goal(asl,t) ->
+        let (t1,t2) = t |> dest_disj
+        loc
+        |> change (Tree ((Goal (asl,t), "disj1_rule", ThmTmFn disj1_rule),children))
+        |> insert_down (mkTree(Goal(asl,t1), "", NullFun) []) 
+        |> insert_right (mkTree(Te t2, "", NullFun) []) 
+        //|> fun x -> if !showProof then view x else x
+    | _ -> failwith "not a goal"
+
+let disj2_rule_fd = tmThmFnForward "disj2_rule" (TmThmFn disj2_rule)
+
+let disj2_rule_bk loc = 
+    let (Loc(Tree((ex,_,_),children), _)) = loc
+    match ex with
+    | Goal(asl,t) ->
+        let (t1,t2) = t |> dest_disj
+        loc
+        |> change (Tree ((Goal (asl,t), "disj2_rule", TmThmFn disj2_rule),children))
+        |> insert_down (mkTree(Te t1, "", NullFun) []) 
+        |> insert_right (mkTree(Goal(asl,t2), "", NullFun) []) 
+        |> right
+        //|> fun x -> if !showProof then view x else x
+    | _ -> failwith "not a goal"
 
 let assume_rule_tr t = 
     let th = t |> assume_rule

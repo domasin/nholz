@@ -237,3 +237,81 @@ let ``true_not_eq_false_thm forward gives true_not_eq_false_thm`` () =
     |> loc_thm |> Option.get
     |> fun x -> x = true_not_eq_false_thm
     |> should equal true
+
+[<Fact>]
+let ``not_dist_disj_thm backward gives not_dist_disj_thm`` () =
+    let _t1 = CoreThry.load   
+    let _t2 = Equal.load      
+    let _t3 = Bool.load 
+
+    ([],"!p q. ~ (p \/ q) <=> ~ p /\ ~ q")
+    |> start_proof
+    |> list_gen_rule_bk
+        |> deduct_antisym_rule_bk [] []
+            (* ~ p /\ ~ q |- ~ (p \/ q)        *)
+            |> not_intro_rule_bk
+                |> disch_rule_bk
+                    (* ~ p /\ ~ q, p \/ q |- false   *)
+                    |> disj_cases_rule_bk [1] [0] [0] "p:bool" "q:bool"
+                        |> assume_rule_bk
+                        (* ~ p /\ ~ q, p |- false        *)
+                        |> undisch_rule_bk 1
+                            |> not_elim_rule_bk
+                                |> conjunct1_rule_bk "~ q"
+                                    |> assume_rule_bk
+                        (* ~ p /\ ~ q, q |- false        *)
+                        |> undisch_rule_bk 1
+                            |> not_elim_rule_bk
+                                |> conjunct2_rule_bk "~ p"
+                                    |> assume_rule_bk
+            (* ~ (p \/ q) |- ~ p /\ ~ q        *)
+            |> conj_rule_bk [0] [0]
+                (* ~ (p \/ q) |- ~ p               *)
+                |> deduct_contrapos_rule_bk 0
+                    (* p |- p \/ q                      *)
+                    |> disj1_rule_bk
+                        |> assume_rule_bk
+                (* ~ (p \/ q) |- ~ q               *)
+                |> deduct_contrapos_rule_bk 0
+                    (* q |- p \/ q                      *)
+                    |> disj2_rule_bk
+                        |> assume_rule_bk
+    //|> view
+    |> loc_thm |> Option.get
+    |> fun x -> x = not_dist_disj_thm
+    |> should equal true
+
+[<Fact>]
+let ``not_dist_disj_thm forward gives not_dist_disj_thm`` () =
+    let _t1 = CoreThry.load   
+    let _t2 = Equal.load      
+    let _t3 = Bool.load 
+
+    let p = parse_term(@"p:bool")
+    let q = parse_term(@"q:bool")
+    
+    list_gen_rule_fd [p;q]
+      (deduct_antisym_rule_fd
+        (* ~ p /\ ~ q |- ~ (p \/ q)        *)
+        (not_intro_rule_fd
+          (disch_rule_fd (parse_term(@"p \/ q"))
+            (* ~ p /\ ~ q, p \/ q |- false   *)
+            (disj_cases_rule_fd (assume_rule_fd (parse_term(@"p \/ q")))
+              (* ~ p /\ ~ q, p |- false        *)
+              (undisch_rule_fd (not_elim_rule_fd (conjunct1_rule_fd (assume_rule_fd (parse_term(@"~ p /\ ~ q"))))))
+              (* ~ p /\ ~ q, q |- false        *)
+              (undisch_rule_fd (not_elim_rule_fd (conjunct2_rule_fd (assume_rule_fd (parse_term(@"~ p /\ ~ q")))))) )))
+        (* ~ (p \/ q) |- ~ p /\ ~ q        *)
+        (conj_rule_fd
+          (* ~ (p \/ q) |- ~ p               *)
+          (deduct_contrapos_rule_fd p
+            (* p |- p \/ q                      *)
+            (disj1_rule_fd (assume_rule_fd p) q) )
+          (* ~ (p \/ q) |- ~ q               *)
+          (deduct_contrapos_rule_fd q
+            (* q |- p \/ q                      *)
+            (disj2_rule_fd p (assume_rule_fd q)) )))
+    |> zipper 
+    |> loc_thm |> Option.get
+    |> fun x -> x = not_dist_disj_thm
+    |> should equal true
