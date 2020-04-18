@@ -39,20 +39,18 @@ Backward proof with tree
 
 (**
 $
-\small{ 	
-\dfrac
-	{\dfrac
+\small{ 	\color{green}{\dfrac
+	{\color{green}{\dfrac
 		{\vdash\ \top\ \Leftrightarrow\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)\; \mathbf{ true\_def}}
 		{\vdash\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)\ \Leftrightarrow\ \top}
-		\textsf{ sym_rule}
+		\textsf{ sym_rule}}
 	\qquad
-	\dfrac
+	\color{green}{\dfrac
 		{\lambda\ (p:bool).\ p}
 		{\vdash\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)}
-		\textsf{ refl_conv}}
-	{\color{red}{\vdash\ \top}}
-	\textsf{ eq_mp_rule} 
-}
+		\textsf{ refl_conv}}}
+	{\vdash\ \top}
+	\textsf{ eq_mp_rule}} }
 $
 *)
 

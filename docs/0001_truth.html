@@ -60,20 +60,18 @@
 
 <span class="c">// val it : thm = |- true</span>
 </code></pre>
-<p><span class="math">\(\small{ 	
-\dfrac
-{\dfrac
+<p><span class="math">\(\small{ 	\color{green}{\dfrac
+{\color{green}{\dfrac
 {\vdash\ \top\ \Leftrightarrow\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)\; \mathbf{ true\_def}}
 {\vdash\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)\ \Leftrightarrow\ \top}
-\textsf{ sym_rule}
+\textsf{ sym_rule}}
 \qquad
-\dfrac
+\color{green}{\dfrac
 {\lambda\ (p:bool).\ p}
 {\vdash\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)}
-\textsf{ refl_conv}}
-{\color{red}{\vdash\ \top}}
-\textsf{ eq_mp_rule}
-}\)</span></p>
+\textsf{ refl_conv}}}
+{\vdash\ \top}
+\textsf{ eq_mp_rule}} }\)</span></p>
 <p>Forward proof with tree</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//(* |- true                        *)</span>
 <span onmouseout="hideTip(event, 'fs17', 19)" onmouseover="showTip(event, 'fs17', 19)" class="fn">eq_mp_rule_fd</span>

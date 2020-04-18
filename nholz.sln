@@ -44,6 +44,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{FD66B3EA-1
 		docs\0005_true_not_eq_false.html = docs\0005_true_not_eq_false.html
 		docs\0006_not_dist_disj.html = docs\0006_not_dist_disj.html
 		docs\0007_conj_id.html = docs\0007_conj_id.html
+		docs\0008_conj_zero.html = docs\0008_conj_zero.html
+		docs\0009_conj_idem.html = docs\0009_conj_idem.html
+		docs\0010_conj_comm.html = docs\0010_conj_comm.html
+		docs\0011_conj_assoc.html = docs\0011_conj_assoc.html
+		docs\0012_conj_absorb_disj.html = docs\0012_conj_absorb_disj.html
+		docs\0013_conj_dist_right_disj.html = docs\0013_conj_dist_right_disj.html
 		docs\0016_disj_id.html = docs\0016_disj_id.html
 		docs\0017_disj_zero.html = docs\0017_disj_zero.html
 		docs\0018_disj_idem.html = docs\0018_disj_idem.html
@@ -82,6 +88,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "teoremi", "teoremi", "{45C5
 		manuale\teoremi\0005_true_not_eq_false.fsx = manuale\teoremi\0005_true_not_eq_false.fsx
 		manuale\teoremi\0006_not_dist_disj.fsx = manuale\teoremi\0006_not_dist_disj.fsx
 		manuale\teoremi\0007_conj_id.fsx = manuale\teoremi\0007_conj_id.fsx
+		manuale\teoremi\0008_conj_zero.fsx = manuale\teoremi\0008_conj_zero.fsx
+		manuale\teoremi\0009_conj_idem.fsx = manuale\teoremi\0009_conj_idem.fsx
+		manuale\teoremi\0010_conj_comm.fsx = manuale\teoremi\0010_conj_comm.fsx
+		manuale\teoremi\0011_conj_assoc.fsx = manuale\teoremi\0011_conj_assoc.fsx
+		manuale\teoremi\0012_conj_absorb_disj.fsx = manuale\teoremi\0012_conj_absorb_disj.fsx
+		manuale\teoremi\0013_conj_dist_right_disj.fsx = manuale\teoremi\0013_conj_dist_right_disj.fsx
+		manuale\teoremi\0014_conj_dist_left_disj.fsx = manuale\teoremi\0014_conj_dist_left_disj.fsx
 		manuale\teoremi\0016_disj_id.fsx = manuale\teoremi\0016_disj_id.fsx
 		manuale\teoremi\0017_disj_zero.fsx = manuale\teoremi\0017_disj_zero.fsx
 		manuale\teoremi\0018_disj_idem.fsx = manuale\teoremi\0018_disj_idem.fsx
@@ -89,7 +102,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "teoremi", "teoremi", "{45C5
 		manuale\teoremi\0045_bool_cases.fsx = manuale\teoremi\0045_bool_cases.fsx
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "nholz.tests", "nholz.tests\nholz.tests.fsproj", "{96A946EE-74FC-4835-A380-1468AA276C59}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "nholz.tests", "nholz.tests\nholz.tests.fsproj", "{96A946EE-74FC-4835-A380-1468AA276C59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

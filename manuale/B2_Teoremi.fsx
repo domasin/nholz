@@ -58,6 +58,12 @@ $\forall p.\ p \wedge \top \Leftrightarrow p$
 
 vero &egrave; l'identit&agrave; della congiunzione
 
+**[conj\_zero\_thm](0008_conj_zero.html)**
+
+$\forall p.\ p \wedge \bot \Leftrightarrow \bot$
+
+congiunzione zero
+
 work in prog...
 
 **[disj\_id\_thm](0016_disj_id.html)**
@@ -149,8 +155,7 @@ conj_dist_right_disj_thm
 conj_idem_thm
 //   |- !p. p /\ p <=> p
 
-conj_zero_thm
-//   |- !p. p /\ false <=> false
+
 
 disj_absorb_conj_thm
 //   |- !p q. p \/ (p /\ q) <=> p
