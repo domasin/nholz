@@ -16,6 +16,10 @@ Bool.load
 conj_zero_thm
 //   |- !p. p /\ false <=> false
 
+(**
+Backward proof with tree
+*)
+
 ([],"!p. p /\ false <=> false")
 |> start_proof
 |> gen_rule_bk
@@ -24,8 +28,13 @@ conj_zero_thm
 |> assume_rule_bk
 |> conjunct2_rule_bk "p:bool"
 |> assume_rule_bk
-
 |> view
+
+(**
+$
+
+$
+*)
 
 gen_rule_fd p
     (deduct_antisym_rule_fd
