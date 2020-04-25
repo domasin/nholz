@@ -105,6 +105,7 @@ type InfRule =
     | ThmThmFn of (thm -> thm -> thm)
     | ThmThmThmFn of (thm -> thm -> thm -> thm)
     | TmThmFn of (term -> thm -> thm)
+    | TmThmThmFn of (term -> thm -> thm -> thm)
     | ThmTmFn of (thm -> term -> thm)
     | TmLstThmFn of (term list -> thm -> thm)
     | ThmLstFn of (thm list -> thm)
@@ -219,6 +220,51 @@ let view (loc:Proof Location) =
     file.Flush()
     System.Diagnostics.Process.Start(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",path) |> ignore
     loc
+
+let linearizeProof (tr: Proof Tree) = 
+
+    let listToString xs = 
+        match xs with
+        | [] -> ""
+        | _ -> xs |> List.fold (fun acc x -> if acc = "" then x.ToString()  else acc + "," + x.ToString()) ""
+
+    let rec treeToList acc (tr: Proof Tree) = 
+        match tr with
+        | Tree(x,[]) -> 
+            match x with
+            | (Th _,_,_) -> 
+                acc@[x,[]]
+            | _ -> acc
+        | Tree(x,xs) -> 
+            xs
+            |> List.map (fun x -> x |> treeToList acc)
+            |> List.concat
+            |> fun lst -> lst@[x,xs |> List.map (fun (Tree(e,_)) -> e)]
+
+    let remapChild (xs:(Proof * Proof list) list) = 
+        let indexed = 
+            xs 
+            |> List.mapi (fun i x -> (i,x))
+        indexed 
+        |> List.map (fun (i,((e,l,f),cs)) -> (i,((e,l,f),cs |> List.map (fun (c,_,_) -> 
+                        indexed 
+                        |> List.filter (fun (i',((e',_,_),_)) -> e' = c && i' < i) 
+                        |> List.map (fun (i',(_,_)) -> i') 
+                        |> List.rev |> fun x -> if x = [] then 9999999 else (x |> List.head)) |> List.filter (fun x -> x <> 9999999))))
+    tr
+    |> treeToList []
+    |> remapChild
+    |> List.iter 
+        (
+            fun p -> 
+                match p with
+                | (i,((Th t,lbl,_),childs)) -> 
+                    let (asms,concl) = dest_thm t
+                    let asmStr = asms |> List.fold (fun acc x -> if acc = "" then x |> print_term else acc + ", " + (x |> print_term) ) ""
+                    let conclStr = concl |> print_term
+                    printfn "%-5i %30s |- %-50s %-25s %-10s" i asmStr conclStr lbl (childs |> listToString)
+                | _ -> ()
+        )
 
 let start_proof (xs,s) = 
     let asl = xs |> List.map (fun x -> x |> parse_term)
@@ -446,6 +492,19 @@ let thmThmThmFnForward lbl jf t1 t2 t3 =
         tr
     | _ -> failwith "not ThmFn"
 
+let TmThmThmFnFnForward lbl jf t1 t2 t3 = 
+    match jf with
+    | TmThmThmFn f -> 
+        let th2 = t2 |> zipper |> loc_thm |> Option.get
+        let th3 = t3 |> zipper |> loc_thm |> Option.get
+        let th = f t1 th2 th3
+        let (tr:Proof Tree) = 
+            mkTree 
+                (Th th,lbl,TmThmThmFn f) 
+                [t1 |> term_fd; t2; t3]
+        tr
+    | _ -> failwith "not ThmFn"
+
 let tmThmFnForward lbl jf t t2 = 
     match jf with
     | TmThmFn f -> 
@@ -579,6 +638,24 @@ let eq_mp_rule_bk ind1 ind2 t2 = //thmThmFnBackward "eq_mp_rule" (ThmThmFn eq_mp
             |> insert_right (mkTree(g2, "", NullFun) []) 
         | _ -> failwith "not a goal"
 
+let mp_rule_fd t1 t2 = thmThmFnForward "eq_mp_rule" (ThmThmFn mp_rule) t1 t2
+
+let mp_rule_bk ind1 ind2 t2 = //thmThmFnBackward "eq_mp_rule" (ThmThmFn eq_mp_rule) g2
+    fun (loc: Proof Location) -> 
+        let (Loc(Tree((ex,_,_),children), _)) = loc
+        match ex with
+        | Goal(asl,t) ->
+            let asl1 = ind1 |> List.map (fun x -> asl.[x])
+            let asl2 = ind2 |> List.map (fun x -> asl.[x])
+            let t2' = t2 |> parse_term
+            let g1 = Goal(asl1, mk_imp (t2',t))
+            let g2 = Goal(asl2, t2')
+            loc
+            |> change (Tree ((Goal (asl,t), "mp_rule", ThmThmFn mp_rule),children))
+            |> insert_down (mkTree(g1, "", NullFun) []) 
+            |> insert_right (mkTree(g2, "", NullFun) []) 
+        | _ -> failwith "not a goal"
+
 let assume_rule_fd t = tmFnForward "assume_rule" (TmFn assume_rule) t
 
 let assume_rule_bk = 
@@ -708,6 +785,10 @@ let list_gen_rule_bk loc =
     | _ -> failwith "not a goal"
 
 let list_trans_rule_fd = ThmLstFnForward "list_trans_rule" (ThmLstFn list_trans_rule)
+
+let list_spec_rule_fd = TmLstThmFnForward "list_spec_rule" (TmLstThmFn list_spec_rule)
+
+let mk_bin_rule_fd = TmThmThmFnFnForward "mk_bin_rule" (TmThmThmFn mk_bin_rule)
 
 let trans_rule_bk t' loc = 
     let (Loc(Tree((ex,_,_),children), _)) = loc

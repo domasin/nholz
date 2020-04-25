@@ -98,6 +98,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "teoremi", "teoremi", "{45C5
 		manuale\teoremi\0016_disj_id.fsx = manuale\teoremi\0016_disj_id.fsx
 		manuale\teoremi\0017_disj_zero.fsx = manuale\teoremi\0017_disj_zero.fsx
 		manuale\teoremi\0018_disj_idem.fsx = manuale\teoremi\0018_disj_idem.fsx
+		manuale\teoremi\0025_imp_left_id.fsx = manuale\teoremi\0025_imp_left_id.fsx
 		manuale\teoremi\0044_excluded_midle.fsx = manuale\teoremi\0044_excluded_midle.fsx
 		manuale\teoremi\0045_bool_cases.fsx = manuale\teoremi\0045_bool_cases.fsx
 	EndProjectSection
