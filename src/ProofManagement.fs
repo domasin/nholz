@@ -605,21 +605,42 @@ let eqf_elim_rule_bk =
 
 let spec_rule_fd = tmThmFnForward "spec_rule" (TmThmFn spec_rule)
 
-let spec_rule_bk tx loc = 
+let spec_rule_bk (ts,xs) loc = 
     let (Loc(Tree((ex,_,_),children), _)) = loc
     match ex with
-    | Goal(asl,t) ->
-        let t2 = mk_forall (tx,t)
+    | Goal(asl,g) ->
+        let t = ts |> parse_term
+        let x = xs |> parse_term
+        let t' = g |> subst [t,x]
+        printfn "%s" (t' |> print_term)
+        let t2 = mk_forall (x,t')
         loc
-        |> change (Tree ((Goal (asl,t), "spec_rule", TmThmFn spec_rule),children))
-        |> insert_down (mkTree(Te tx, "", NullFun) []) 
+        |> change (Tree ((Goal (asl,g), "spec_rule", TmThmFn spec_rule),children))
+        |> insert_down (mkTree(Te t, "", NullFun) []) 
         |> insert_right (mkTree(Goal(asl,t2), "", NullFun) []) 
         |> right
         //|> fun x -> if !showProof then view x else x
     | _ -> failwith "not a goal"
 
 let list_spec_rule_fd = TmLstThmFnForward "list_spec_rule" (TmLstThmFn list_spec_rule)
+
 // TODO list_spec_rule_bk
+let list_spec_rule_bk txs loc = 
+    let (Loc(Tree((ex,_,_),children), _)) = loc
+    match ex with
+    | Goal(asl,g) ->
+        let txy = txs |> List.map (fun (x,y) -> (x |> parse_term), (y |> parse_term))
+        let tx = txy |> List.map (fun (x,_) -> x) 
+        let t = g |> subst txy
+        let vars = t |> all_vars
+        let t2 = list_mk_forall (vars,t)
+        loc
+        |> change (Tree ((Goal (asl,g), "list_spec_rule", TmLstThmFn list_spec_rule),children))
+        |> insert_down (mkTree(TeLst tx, "", NullFun) []) 
+        |> insert_right (mkTree(Goal(asl,t2), "", NullFun) []) 
+        |> right
+    | _ -> failwith "not a goal"
+
 
 // TODO spec_all_rule
 // TODO bspec_rule
@@ -825,5 +846,25 @@ let disj2_rule_bk loc =
 let mk_bin_rule_fd = TmThmThmFnFnForward "mk_bin_rule" (TmThmThmFn mk_bin_rule)
 // TODO mk_bin_rule_bk
 
+let mk_bin_rule_bk ind1 ind2 loc = 
+    let (Loc(Tree((ex,_,_),children), _)) = loc
+    match ex with
+    | Goal(asl,gt) ->
+        let (fs1t1,fs2t2) = gt |> dest_eq
+        let (fs1,t1) = fs1t1 |> dest_comb
+        let (fs2,t2) = fs2t2 |> dest_comb
+        let (f,s1) = fs1 |> dest_comb
+        let (_,s2) = fs2 |> dest_comb
+        let s1_eq_s2 = mk_eq(s1,s2)
+        let t1_eq_t2 = mk_eq(t1,t2)
+        let asl1 = ind1 |> List.map (fun x -> asl.[x])
+        let asl2 = ind2 |> List.map (fun x -> asl.[x])
+        loc
+        |> change (Tree ((Goal (asl,gt), "mk_bin_rule", TmThmThmFn mk_bin_rule),children))
+        |> insert_down (mkTree(Te f, "", NullFun) []) 
+        |> insert_right (mkTree(Goal(asl1,s1_eq_s2), "", NullFun) []) 
+        |> right
+        |> insert_right (mkTree(Goal(asl2,t1_eq_t2), "", NullFun) []) 
+    | _ -> failwith "not a goal"
 
 

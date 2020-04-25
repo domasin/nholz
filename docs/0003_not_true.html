@@ -58,38 +58,40 @@
             <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="fn">eqf_intro_rule_bk</span>
                 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 15)" onmouseover="showTip(event, 'fs10', 15)" class="fn">assume_rule_bk</span>
             <span class="c">(* |- true  *)</span>
-            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="fn">by</span> <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="id">truth_thm</span> <span class="s">&quot;truth\_thm&quot;</span>
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="fn">by</span> <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="id">truth_thm</span> <span class="s">&quot;truth_thm&quot;</span>
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="fn">view</span>
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 19)" onmouseover="showTip(event, 'fs16', 19)" class="fn">loc_thm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 20)" onmouseover="showTip(event, 'fs17', 20)" class="m">Option</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 21)" onmouseover="showTip(event, 'fs18', 21)" class="id">get</span>
 
 <span class="c">//val it : thm = |- ~ true &lt;=&gt; false</span>
 </code></pre>
-<p><span class="math">\(\small{ 	
-\dfrac
-{\dfrac
+<p><span class="math">\(\small{ 	\color{green}{\dfrac
+{\color{green}{\dfrac
 {\neg\ \top
 \qquad
-\dfrac
+\color{green}{\dfrac
 {\bot}
 {\bot\ \vdash\ \bot}
-\textsf{ assume_rule}}
+\textsf{ assume_rule}}}
 {\bot\ \vdash\ \neg\ \top}
-\textsf{ contr_rule}
+\textsf{ contr_rule}}
 \qquad
-\dfrac
-{\dfrac
-{\dfrac
+\color{green}{\dfrac
+{\color{green}{\dfrac
+{\color{green}{\dfrac
 {\neg\ \top}
 {\neg\ \top\ \vdash\ \neg\ \top}
-\textsf{ assume_rule}}
+\textsf{ assume_rule}}}
 {\neg\ \top\ \vdash\ \top\ \Leftrightarrow\ \bot}
-\textsf{ eqf_intro_rule}
+\textsf{ eqf_intro_rule}}
 \qquad
-\vdash\ \top\; \mathbf{ truth\_thm}}
+\dfrac
+{}
+{\vdash\ \top}
+\textsf{ truth_thm}}
 {\neg\ \top\ \vdash\ \bot}
-\textsf{ eq_mp_rule}}
-{\color{red}{\vdash\ \neg\ \top\ \Leftrightarrow\ \bot}}
-\textsf{ deduct_antisym_rule} }\)</span></p>
+\textsf{ eq_mp_rule}}}
+{\vdash\ \neg\ \top\ \Leftrightarrow\ \bot}
+\textsf{ deduct_antisym_rule}} }\)</span></p>
 <p>Forward proof with tree</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//(* |- ~ true &lt;=&gt; false         *)</span>
 <span onmouseout="hideTip(event, 'fs19', 22)" onmouseover="showTip(event, 'fs19', 22)" class="fn">deduct_antisym_rule_fd</span>
@@ -123,7 +125,7 @@
 <div class="tip" id="fs5">module Bool<br /><br />from HOL</div>
 <div class="tip" id="fs6">val not_true_thm : thm</div>
 <div class="tip" id="fs7">val start_proof : xs:string list * s:string -&gt; Proof Location</div>
-<div class="tip" id="fs8">val deduct_antisym_rule_bk : asl1:term list -&gt; asl2:term list -&gt; loc:(Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
+<div class="tip" id="fs8">val deduct_antisym_rule_bk : ind1:int list -&gt; ind2:int list -&gt; loc:(Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
 <div class="tip" id="fs9">val contr_rule_bk : loc:(Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
 <div class="tip" id="fs10">val assume_rule_bk : loc:Proof Location -&gt; Proof Location</div>
 <div class="tip" id="fs11">val eq_mp_rule_bk : ind1:int list -&gt; ind2:int list -&gt; t2:string -&gt; loc:Proof Location -&gt; Proof Location</div>

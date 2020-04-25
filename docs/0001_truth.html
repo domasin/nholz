@@ -52,7 +52,7 @@
     <span class="c">(* |- (\p. p) = (\p. p) &lt;=&gt; true  *)</span>
     <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="fn">sym_rule_bk</span>
         <span class="c">(* |- true &lt;=&gt; (\(p:bool). p) = (\p. p) *)</span>
-        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="fn">by</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="id">true_def</span> <span class="s">&quot;true\_def&quot;</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="fn">by</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="id">true_def</span> <span class="s">&quot;true_def&quot;</span>
     <span class="c">(* |- (\p. p) = (\p. p)           *)</span>
     <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="fn">refl_conv_bk</span>
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="fn">view</span>
@@ -62,7 +62,10 @@
 </code></pre>
 <p><span class="math">\(\small{ 	\color{green}{\dfrac
 {\color{green}{\dfrac
-{\vdash\ \top\ \Leftrightarrow\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)\; \mathbf{ true\_def}}
+{\dfrac
+{}
+{\vdash\ \top\ \Leftrightarrow\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)}
+\textsf{ true_def}}
 {\vdash\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)\ \Leftrightarrow\ \top}
 \textsf{ sym_rule}}
 \qquad

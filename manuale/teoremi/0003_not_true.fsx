@@ -33,7 +33,7 @@ Backward proof with tree
             |> eqf_intro_rule_bk
                 |> assume_rule_bk
             (* |- true  *)
-            |> by truth_thm "truth\_thm"
+            |> by truth_thm "truth_thm"
 |> view
 |> loc_thm |> Option.get
 
@@ -41,32 +41,34 @@ Backward proof with tree
 
 (**
 $
-\small{ 	
-\dfrac
-	{\dfrac
+\small{ 	\color{green}{\dfrac
+	{\color{green}{\dfrac
 		{\neg\ \top
 		\qquad
-		\dfrac
+		\color{green}{\dfrac
 			{\bot}
 			{\bot\ \vdash\ \bot}
-			\textsf{ assume_rule}}
+			\textsf{ assume_rule}}}
 		{\bot\ \vdash\ \neg\ \top}
-		\textsf{ contr_rule}
+		\textsf{ contr_rule}}
 	\qquad
-	\dfrac
-		{\dfrac
-			{\dfrac
+	\color{green}{\dfrac
+		{\color{green}{\dfrac
+			{\color{green}{\dfrac
 				{\neg\ \top}
 				{\neg\ \top\ \vdash\ \neg\ \top}
-				\textsf{ assume_rule}}
+				\textsf{ assume_rule}}}
 			{\neg\ \top\ \vdash\ \top\ \Leftrightarrow\ \bot}
-			\textsf{ eqf_intro_rule}
+			\textsf{ eqf_intro_rule}}
 		\qquad
-		\vdash\ \top\; \mathbf{ truth\_thm}}
+		\dfrac
+			{}
+			{\vdash\ \top}
+			\textsf{ truth_thm}}
 		{\neg\ \top\ \vdash\ \bot}
-		\textsf{ eq_mp_rule}}
-	{\color{red}{\vdash\ \neg\ \top\ \Leftrightarrow\ \bot}}
-	\textsf{ deduct_antisym_rule} }
+		\textsf{ eq_mp_rule}}}
+	{\vdash\ \neg\ \top\ \Leftrightarrow\ \bot}
+	\textsf{ deduct_antisym_rule}} }
 $
 *)
 

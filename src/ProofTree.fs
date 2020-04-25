@@ -120,8 +120,12 @@ let rec treeToLatex ntabs exp (tr : Proof Tree) =
     | Tree((p,s,_),xs) -> 
         match xs with
         | [] -> 
-            let expStr = if p = exp && (exp |> is_goal) then "\color{red}{" + (p |> printExp)  + "}" else (p |> printExp) 
-            expStr + if s = "" then "" else "\; \mathbf{ " + s + "}"
+            match p with
+            | Goal(_,_) -> if p = exp then "\color{red}{" + (p |> printExp)  + "}" else (p |> printExp) 
+            | Th _ -> sprintf "\\dfrac\n%s{%s}\n%s{%s}\n%s\\textsf{ %s}" tabs "" tabs (p |> printExp) tabs s
+            | _ -> p |> printExp
+            //let expStr = if p = exp && (exp |> is_goal) then "\color{red}{" + (p |> printExp)  + "}" else (p |> printExp) 
+            //expStr + if s = "" then "" else "\; \texttt{ " + s + "}"
         | _ -> 
             let prec = 
                 xs

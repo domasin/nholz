@@ -32,7 +32,7 @@ Backward proof with tree
                     |> sym_rule_bk
                     |> eta_conv_bk
                 |> mk_abs_rule_bk
-                    |> spec_rule_bk ("x:'a" |> parse_term)
+                    |> spec_rule_bk ("x:'a","x:'a")
                         |> assume_rule_bk
             |> add_asm_rule_bk 0
                 |> eta_conv_bk

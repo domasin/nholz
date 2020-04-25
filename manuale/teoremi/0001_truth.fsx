@@ -29,7 +29,7 @@ Backward proof with tree
     (* |- (\p. p) = (\p. p) <=> true  *)
     |> sym_rule_bk
         (* |- true <=> (\(p:bool). p) = (\p. p) *)
-        |> by true_def "true\_def"
+        |> by true_def "true_def"
     (* |- (\p. p) = (\p. p)           *)
     |> refl_conv_bk
 |> view
@@ -41,7 +41,10 @@ Backward proof with tree
 $
 \small{ 	\color{green}{\dfrac
 	{\color{green}{\dfrac
-		{\vdash\ \top\ \Leftrightarrow\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)\; \mathbf{ true\_def}}
+		{\dfrac
+			{}
+			{\vdash\ \top\ \Leftrightarrow\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)}
+			\textsf{ true_def}}
 		{\vdash\ (\lambda\ (p:bool).\ p)\ =\ (\lambda\ p.\ p)\ \Leftrightarrow\ \top}
 		\textsf{ sym_rule}}
 	\qquad
