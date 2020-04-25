@@ -26,8 +26,6 @@ imp_left_id_thm
 |> root
 |> linearizeProof
 
-"(true ==> p) <=> p" |> parse_term |> dest_imp
-
 ([],"!p. true ==> (p <=> p)")
 |> start_proof
 |> gen_rule_bk

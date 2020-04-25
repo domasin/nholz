@@ -1,270 +1,5 @@
 ﻿[<AutoOpen>]
-module HOL.ProofUtils
-
-open System.IO
-
-type 'a Tree = Tree of 'a * 'a Tree list
-
-type 'a Path = 
-    | Top 
-    | NodePath of 'a * 'a Tree list * 'a Path * 'a Tree list
-
-type 'a Location = Loc of 'a Tree * 'a Path
-
-let mkTree v xs = Tree(v,xs)
-
-let left (Loc(t, p)) = 
-    match p with
-    | Top -> failwith "left at top"
-    | NodePath(v,l::left, up, right) -> Loc(l, NodePath(v,left, up, t::right))
-    | NodePath(v,[], up, right) -> failwith "left of first"
-
-let right (Loc(t, p)) = 
-    match p with 
-    | Top -> failwith "right at top"
-    | NodePath(v,left, up, r::right) -> Loc(r, NodePath(v,t::left, up, right))
-    | _ -> failwith "right of last"
-
-let down (Loc(t, p)) = 
-    match t with
-    | Tree(_,[]) -> failwith "down with Tree"
-    | Tree(v,t1::trees) -> Loc(t1, NodePath(v,[], p, trees))
-
-let up (Loc(t,p)) = 
-    match p with
-    | Top -> failwith "up of top"
-    | NodePath(v,left,up,right) -> 
-        Loc(Tree(v, ((left |> List.rev)@[t]) @ right),up)
-
-let rec root (Loc (t, p) as l) = 
-    match p with 
-    | Top -> t
-    | _ -> root (up l) 
-
-let zipper t = Loc(t, Top)
-
-let change t (Loc(_, p)) = Loc(t, p)
-
-let insert_right r (Loc(t, p)) = 
-    match p with
-    | Top -> failwith "insert at top"
-    | NodePath(v,left, up, right) -> Loc(t, NodePath(v,left, up, r::right))
-
-let insert_left l (Loc(t, p)) =
-    match p with
-    | Top -> failwith "insert at top"
-    | NodePath(v,left, up, right) -> Loc(t, NodePath(v,l::left, up, right))
-
-let insert_down t1 (Loc(t, p)) = 
-    match t with
-    | Tree (v,[]) -> Loc(t1, NodePath(v,[], p, []))
-    | Tree(v,ss) -> failwith "non empty"
-
-let delete (Loc(_, p)) =
-    match p with 
-    | Top -> failwith "delete at top"
-    | NodePath(v,left, up, r::right) -> Loc(r, NodePath(v,left, up, right))
-    | NodePath(v,l::left, up, []) -> Loc(l, NodePath(v,left, up, []))
-    | NodePath(v,[], up, []) -> Loc(Tree (v,[]), up)
-
-let rec findNodePath (x:'a) (zipper:'a Location) =
-    let (Loc(Tree(value,NodePaths), path)) = zipper
-    if value = x then Some zipper
-    else
-        match NodePaths with
-        | [] -> 
-            //printf " |> right "
-            match path with
-            | NodePath(v,left,up,[]) -> None
-            | _ -> zipper |> right |> (findNodePath x)
-        | _ ->
-            //printf " |> down "
-            let down = zipper |> down |> findNodePath x
-            match down with
-            | Some x -> Some x
-            | None -> 
-                //printfn " |> right "
-                zipper |> right |> (findNodePath x)
-
-(* Proof Tree Implementation *)
-
-type Exp = 
-    | NullExp
-    | Th  of thm
-    | Te of term
-    | Tye of hol_type
-    | TeLst of term list
-    | InstTyLst of (hol_type * hol_type) list
-    | InstTmLst of (term * term) list
-    | Goal of (term list) * term
-
-type InfRule = 
-    | NullFun
-    | TmFn of (term -> thm)
-    | ThmFn of (thm -> thm)
-    | ThmThmFn of (thm -> thm -> thm)
-    | ThmThmThmFn of (thm -> thm -> thm -> thm)
-    | TmThmFn of (term -> thm -> thm)
-    | TmThmThmFn of (term -> thm -> thm -> thm)
-    | ThmTmFn of (thm -> term -> thm)
-    | TmLstThmFn of (term list -> thm -> thm)
-    | ThmLstFn of (thm list -> thm)
-    | InstTyLstThmFn of ((hol_type * hol_type) list -> thm -> thm)
-    | InstTmLstThmFn of ((term * term) list -> thm -> thm)
-
-type Proof = (Exp * string * InfRule)
-type goal = (term list) * term
-
-let exp (loc:Proof Location) = 
-    match loc with
-    | Loc(Tree((e,_,_),_), _) -> e
-
-let is_goal (exp:Exp) = 
-    match exp with
-    | Goal (_,_) -> true
-    | _ -> false
-
-let showProof = ref false
-
-(* Latex printing *)
-
-let substs = 
-    [
-        "\\", "\\lambda "
-        "\\lambda /","\\vee"
-        "/\\lambda ","\\wedge"
-        "~", "\\neg"
-        "'a","\\alpha"
-        "'b", "\\beta"
-        "!", "\\forall "
-        "==>","\\Rightarrow"
-        "<=>", "\\Leftrightarrow"
-        "->", "\\rightarrow"
-        "|-", "\\vdash"
-        " ", "\\ "
-        "true", "\\top"
-        "false", "\\bot"
-        "?", "\\exists "
-        "@", "\\epsilon "
-    ]
-
-let replace (x:string) (y:string) (s:string) = 
-    s.Replace(x,y)
-
-let strTolatex (s:string) = 
-    substs
-    |> List.fold 
-        (
-            fun acc (x,y) -> acc |> replace x y
-        ) s
-
-let rec printExp e = 
-    match e with
-    | Th t -> t |> print_thm |> strTolatex
-    | Te t -> t |> print_term |> strTolatex
-    | Tye t -> t |> print_type |> strTolatex
-    | Goal (xs,t) -> 
-        let asl = 
-            xs
-            |> List.map (fun t1 -> (Te t1) |> printExp)
-            |> List.fold (fun acc t1 -> if acc = "" then t1 else acc + "," + t1) ""
-        asl + "\\ ?\\ " + (Te t |> printExp)
-    | TeLst vv -> 
-        let lstStr = 
-            vv |> List.map (fun x -> (Te x) |> printExp)
-            |> List.fold (fun acc t1 -> if acc = "" then t1 else acc + ";" + t1) ""
-        "[" + lstStr + "]"
-    | InstTyLst vv -> 
-        let lstStr = 
-            vv |> List.map (fun (x,y) -> "(" + ((Tye x) |> printExp) + "," + ((Tye y) |> printExp) + ")")
-            |> List.fold (fun acc t1 -> if acc = "" then t1 else acc + ";" + t1) ""
-        "[" + lstStr + "]"
-    | InstTmLst vv -> 
-        let lstStr = 
-            vv |> List.map (fun (x,y) -> "(" + ((Te x) |> printExp) + "," + ((Te y) |> printExp) + ")")
-            |> List.fold (fun acc t1 -> if acc = "" then t1 else acc + ";" + t1) ""
-        "[" + lstStr + "]"
-    | NullExp -> ""
-
-let rec treeToLatex ntabs exp (tr : Proof Tree) = 
-    let tabs = "\t" |> String.replicate ntabs
-    match tr with
-    | Tree((p,s,_),xs) -> 
-        match xs with
-        | [] -> 
-            let expStr = if p = exp && (exp |> is_goal) then "\color{red}{" + (p |> printExp)  + "}" else (p |> printExp) 
-            expStr + if s = "" then "" else "\; \mathbf{ " + s + "}"
-        | _ -> 
-            let prec = 
-                xs
-                |> List.fold 
-                    (
-                        fun acc x -> 
-                            (
-                                if acc = "" then "" 
-                                else acc + ("\n"+ tabs + "\qquad\n" + tabs)) + (x |> treeToLatex (ntabs+1) exp)) ""
-            match p with
-            | Th _ -> 
-                sprintf "\\color{green}{\\dfrac\n%s{%s}\n%s{%s}\n%s\\textsf{ %s}}" tabs prec tabs (p |> printExp) tabs s
-            | _ -> 
-                sprintf "\\dfrac\n%s{%s}\n%s{%s}\n%s\\textsf{ %s}" tabs prec tabs (if p = exp && (exp |> is_goal) then "\color{red}{" + (p |> printExp)  + "}" else (p |> printExp) ) tabs s
-
-let view (loc:Proof Location) =
-    let (Loc(Tree((exp,_,_),_), _)) = loc
-    let proof = loc |> root
-    let proofStr = proof |> treeToLatex 1 exp
-    let html = sprintf "<!DOCTYPE html><html><head><script type=\"text/javascript\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js\">MathJax.Hub.Config({ config: [\"TeX-AMS-MML_HTMLorMML.js\"], 	extensions: [\"[a11y]/accessibility-menu.js\"], menuSettings: {	collapsible: true,	autocollapse: true,	explorer: false } });</script></head><body>\\[ \\small{ 	%s } \\]</body></html>" proofStr
-    let path = System.IO.Path.GetTempFileName() + ".html"
-    let mutable file = File.CreateText(path)
-    file.WriteLine(html)
-    file.Flush()
-    System.Diagnostics.Process.Start(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",path) |> ignore
-    loc
-
-let linearizeProof (tr: Proof Tree) = 
-
-    let listToString xs = 
-        match xs with
-        | [] -> ""
-        | _ -> xs |> List.fold (fun acc x -> if acc = "" then x.ToString()  else acc + "," + x.ToString()) ""
-
-    let rec treeToList acc (tr: Proof Tree) = 
-        match tr with
-        | Tree(x,[]) -> 
-            match x with
-            | (Th _,_,_) -> 
-                acc@[x,[]]
-            | _ -> acc
-        | Tree(x,xs) -> 
-            xs
-            |> List.map (fun x -> x |> treeToList acc)
-            |> List.concat
-            |> fun lst -> lst@[x,xs |> List.map (fun (Tree(e,_)) -> e)]
-
-    let remapChild (xs:(Proof * Proof list) list) = 
-        let indexed = 
-            xs 
-            |> List.mapi (fun i x -> (i,x))
-        indexed 
-        |> List.map (fun (i,((e,l,f),cs)) -> (i,((e,l,f),cs |> List.map (fun (c,_,_) -> 
-                        indexed 
-                        |> List.filter (fun (i',((e',_,_),_)) -> e' = c && i' < i) 
-                        |> List.map (fun (i',(_,_)) -> i') 
-                        |> List.rev |> fun x -> if x = [] then 9999999 else (x |> List.head)) |> List.filter (fun x -> x <> 9999999))))
-    tr
-    |> treeToList []
-    |> remapChild
-    |> List.iter 
-        (
-            fun p -> 
-                match p with
-                | (i,((Th t,lbl,_),childs)) -> 
-                    let (asms,concl) = dest_thm t
-                    let asmStr = asms |> List.fold (fun acc x -> if acc = "" then x |> print_term else acc + ", " + (x |> print_term) ) ""
-                    let conclStr = concl |> print_term
-                    printfn "%-5i %30s |- %-50s %-25s %-10s" i asmStr conclStr lbl (childs |> listToString)
-                | _ -> ()
-        )
+module HOL.ProofManagement
 
 let start_proof (xs,s) = 
     let asl = xs |> List.map (fun x -> x |> parse_term)
@@ -311,6 +46,19 @@ let prove' (loc:Proof Location) =
                     | _ -> failwith "child3 is not thm"
                 | _ -> failwith "child2 is not thm"
             | _ -> failwith "child1 is not thm"
+        | TmThmThmFn f -> 
+            let child2 = child |> right
+            let child3 = child2 |> right
+            match child with
+            | (Loc (Tree ((Te t, _, _),_),_)) -> 
+                match child2 with
+                | (Loc (Tree ((Th t2, _, _),_),_)) -> 
+                    match child3 with
+                    | (Loc (Tree ((Th t3, _, _),_),_)) -> 
+                        loc |> change (Tree ((Th (f t t2 t3), label, just_fn),children))
+                    | _ -> failwith "child3 is not thm"
+                | _ -> failwith "child2 is not thm"
+            | _ -> failwith "child1 is not tm"
         | TmThmFn f -> 
             let child2 = child |> right
             match child with
@@ -361,21 +109,6 @@ let prove' (loc:Proof Location) =
         
     | _ -> failwith "not a goal"
 
-let loc_thm (loc:Proof Location) = 
-    match loc with
-    | Loc(Tree((Th t,_,_),_), _) -> Some t
-    | _ -> None
-
-let loc_term (loc:Proof Location) = 
-    match loc with
-    | Loc(Tree((Te t,_,_),_), _) -> Some t
-    | _ -> None
-
-let loc_goal (loc:Proof Location) = 
-    match loc with
-    | Loc(Tree((Goal (asl,t),_,_),_), _) -> Some (Goal (asl,t))
-    | _ -> None
-
 let focus_goal (loc:Proof Location) = 
     let exp = loc |> loc_goal |> Option.get
     match exp with
@@ -383,9 +116,6 @@ let focus_goal (loc:Proof Location) =
         let (tr:Proof Tree) = mkTree(Goal(asl,t),"",NullFun) []
         tr |> zipper 
     | _ -> failwith "focus_goal"
-    
-
-let lower : (Proof Location -> Proof Location) = up
 
 let rec prove (loc:Proof Location) = 
     let newLoc = 
@@ -397,11 +127,6 @@ let rec prove (loc:Proof Location) =
         elif newLoc |> right |> exp |> is_goal then newLoc |> right
         else newLoc |> prove
     with _ -> newLoc
-
-let mkGoal xs t = 
-    let asl = xs |> List.map (fun x -> x |> parse_term)
-    let t = t |> parse_term
-    Goal (asl,t)
 
 let rec findExp x (loc:Proof Location) =
     let (Loc(Tree((exp,_,_),NodePaths), path)) = loc
@@ -436,7 +161,6 @@ let term_fd t =
 
 let termlst_fd xs = 
     mkTree(TeLst xs, "", NullFun) []
-
 
 let instTermlst_fd xs = 
     mkTree(InstTmLst xs, "", NullFun) []
@@ -564,7 +288,6 @@ let ThmLstFnForward lbl jf xs =
                 (Th th,lbl,ThmLstFn f) xs
         tr
     | _ -> failwith "not ThmFn"
-    
 
 let instTyLstThmFnForward lbl jf xs t2 = 
     match jf with
@@ -578,21 +301,7 @@ let instTyLstThmFnForward lbl jf xs t2 =
         tr
     | _ -> failwith "not ThmFn"
 
-(* Rules *)
-
-let accept thm str loc = 
-    let (Loc(Tree((ex,label,just_fn),children), path)) = loc
-    match ex with
-    | Goal(asl,t) ->
-        let (asl1,t2) = dest_thm thm
-        if asl1 = asl && t = t2 then
-            loc
-            |> change (Tree ((Th thm, str, NullFun),children))
-        else failwith "don't match"
-    | _ -> failwith "not a goal"
-
 let refl_conv_fd t = tmFnForward "refl_conv" (TmFn refl_conv) t
-//let refl_conv_bk = tmFnBackward "refl_conv" (TmFn refl_conv)
 
 let refl_conv_bk = 
     fun (loc: Proof Location) -> 
@@ -622,7 +331,7 @@ let sym_rule_bk =
 
 let eq_mp_rule_fd t1 t2 = thmThmFnForward "eq_mp_rule" (ThmThmFn eq_mp_rule) t1 t2
 
-let eq_mp_rule_bk ind1 ind2 t2 = //thmThmFnBackward "eq_mp_rule" (ThmThmFn eq_mp_rule) g2
+let eq_mp_rule_bk ind1 ind2 t2 = 
     fun (loc: Proof Location) -> 
         let (Loc(Tree((ex,_,_),children), _)) = loc
         match ex with
@@ -640,7 +349,7 @@ let eq_mp_rule_bk ind1 ind2 t2 = //thmThmFnBackward "eq_mp_rule" (ThmThmFn eq_mp
 
 let mp_rule_fd t1 t2 = thmThmFnForward "eq_mp_rule" (ThmThmFn mp_rule) t1 t2
 
-let mp_rule_bk ind1 ind2 t2 = //thmThmFnBackward "eq_mp_rule" (ThmThmFn eq_mp_rule) g2
+let mp_rule_bk ind1 ind2 t2 = 
     fun (loc: Proof Location) -> 
         let (Loc(Tree((ex,_,_),children), _)) = loc
         match ex with
