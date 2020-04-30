@@ -1,5 +1,7 @@
 (**
+Propriet&agrave; associativa della congiuzione
 
+$\forall p\ q.\ p \wedge (q \wedge r) \Leftrightarrow (p \wedge q) \wedge r$
 *)
 
 (***hide***)
@@ -12,7 +14,6 @@ Bool.load
 
 conj_assoc_thm
 //   |- !p q r. p /\ (q /\ r) <=> (p /\ q) /\ r
-
 
 ([],"!p q r. p /\ (q /\ r) <=> (p /\ q) /\ r")
 |> start_proof
@@ -28,7 +29,6 @@ conj_assoc_thm
 |> assume_rule_bk
 |> conjunct2_rule_bk @"p /\ q"
 |> assume_rule_bk
-//|> focus_goal
 |> conj_rule_bk [0] [0]
 |> conj_rule_bk [0] [0]
 |> conjunct1_rule_bk @"q /\ r"
@@ -42,12 +42,105 @@ conj_assoc_thm
 
 |> view
 
-let th1 = disj_cases_rule_fd                     (* p \/ q |- q \/ p      *)
-            (assume_rule_fd (parse_term(@"p \/ q")))
-            (disj2_rule_fd q (assume_rule_fd p))
-            (disj1_rule_fd (assume_rule_fd q) p) in
-let th2 = inst_rule_fd [(p,q);(q,p)] th1 in      (* q \/ p |- p \/ q      *)
-list_gen_rule_fd [p;q]
-  (deduct_antisym_rule_fd th2 th1)
+(**
+$
+\small{ 	\color{green}{\dfrac
+	{[p:bool;q:bool;r:bool]
+	\qquad
+	\color{green}{\dfrac
+		{\color{green}{\dfrac
+			{\color{green}{\dfrac
+				{\color{green}{\dfrac
+					{\color{green}{\dfrac
+						{(p\ \wedge\ q)\ \wedge\ r}
+						{(p\ \wedge\ q)\ \wedge\ r\ \vdash\ (p\ \wedge\ q)\ \wedge\ r}
+						\textsf{ assume_rule}}}
+					{(p\ \wedge\ q)\ \wedge\ r\ \vdash\ p\ \wedge\ q}
+					\textsf{ conjunct1_rule}}}
+				{(p\ \wedge\ q)\ \wedge\ r\ \vdash\ p}
+				\textsf{ conjunct1_rule}}
+			\qquad
+			\color{green}{\dfrac
+				{\color{green}{\dfrac
+					{\color{green}{\dfrac
+						{\color{green}{\dfrac
+							{(p\ \wedge\ q)\ \wedge\ r}
+							{(p\ \wedge\ q)\ \wedge\ r\ \vdash\ (p\ \wedge\ q)\ \wedge\ r}
+							\textsf{ assume_rule}}}
+						{(p\ \wedge\ q)\ \wedge\ r\ \vdash\ p\ \wedge\ q}
+						\textsf{ conjunct1_rule}}}
+					{(p\ \wedge\ q)\ \wedge\ r\ \vdash\ q}
+					\textsf{ conjunct2_rule}}
+				\qquad
+				\color{green}{\dfrac
+					{\color{green}{\dfrac
+						{(p\ \wedge\ q)\ \wedge\ r}
+						{(p\ \wedge\ q)\ \wedge\ r\ \vdash\ (p\ \wedge\ q)\ \wedge\ r}
+						\textsf{ assume_rule}}}
+					{(p\ \wedge\ q)\ \wedge\ r\ \vdash\ r}
+					\textsf{ conjunct2_rule}}}
+				{(p\ \wedge\ q)\ \wedge\ r\ \vdash\ q\ \wedge\ r}
+				\textsf{ conj_rule}}}
+			{(p\ \wedge\ q)\ \wedge\ r\ \vdash\ p\ \wedge\ q\ \wedge\ r}
+			\textsf{ conj_rule}}
+		\qquad
+		\color{green}{\dfrac
+			{\color{green}{\dfrac
+				{\color{green}{\dfrac
+					{\color{green}{\dfrac
+						{p\ \wedge\ q\ \wedge\ r}
+						{p\ \wedge\ q\ \wedge\ r\ \vdash\ p\ \wedge\ q\ \wedge\ r}
+						\textsf{ assume_rule}}}
+					{p\ \wedge\ q\ \wedge\ r\ \vdash\ p}
+					\textsf{ conjunct1_rule}}
+				\qquad
+				\color{green}{\dfrac
+					{\color{green}{\dfrac
+						{\color{green}{\dfrac
+							{p\ \wedge\ q\ \wedge\ r}
+							{p\ \wedge\ q\ \wedge\ r\ \vdash\ p\ \wedge\ q\ \wedge\ r}
+							\textsf{ assume_rule}}}
+						{p\ \wedge\ q\ \wedge\ r\ \vdash\ q\ \wedge\ r}
+						\textsf{ conjunct2_rule}}}
+					{p\ \wedge\ q\ \wedge\ r\ \vdash\ q}
+					\textsf{ conjunct1_rule}}}
+				{p\ \wedge\ q\ \wedge\ r\ \vdash\ p\ \wedge\ q}
+				\textsf{ conj_rule}}
+			\qquad
+			\color{green}{\dfrac
+				{\color{green}{\dfrac
+					{\color{green}{\dfrac
+						{p\ \wedge\ q\ \wedge\ r}
+						{p\ \wedge\ q\ \wedge\ r\ \vdash\ p\ \wedge\ q\ \wedge\ r}
+						\textsf{ assume_rule}}}
+					{p\ \wedge\ q\ \wedge\ r\ \vdash\ q\ \wedge\ r}
+					\textsf{ conjunct2_rule}}}
+				{p\ \wedge\ q\ \wedge\ r\ \vdash\ r}
+				\textsf{ conjunct2_rule}}}
+			{p\ \wedge\ q\ \wedge\ r\ \vdash\ (p\ \wedge\ q)\ \wedge\ r}
+			\textsf{ conj_rule}}}
+		{\vdash\ p\ \wedge\ q\ \wedge\ r\ \Leftrightarrow\ (p\ \wedge\ q)\ \wedge\ r}
+		\textsf{ deduct_antisym_rule}}}
+	{\vdash\ \forall\ p\ q\ r.\ p\ \wedge\ q\ \wedge\ r\ \Leftrightarrow\ (p\ \wedge\ q)\ \wedge\ r}
+	\textsf{ list_gen_rule}} }
+$
+*)
+
+let th1 = assume_rule_fd (parse_term(@"p /\ (q /\ r)")) in
+let th2 = assume_rule_fd (parse_term(@"(p /\ q) /\ r")) in
+list_gen_rule_fd [p;q;r]
+  (deduct_antisym_rule_fd
+    (* (p /\ q) /\ r |- p /\ (q /\ r)           *)
+    (conj_rule_fd
+      (conjunct1_rule_fd (conjunct1_rule_fd th2))
+      (conj_rule_fd
+        (conjunct2_rule_fd (conjunct1_rule_fd th2))
+        (conjunct2_rule_fd th2) ))
+    (* (p /\ q) /\ r |- (p /\ q) /\ r           *)
+    (conj_rule_fd
+      (conj_rule_fd
+        (conjunct1_rule_fd th1)
+        (conjunct1_rule_fd (conjunct2_rule_fd th1)) )
+      (conjunct2_rule_fd (conjunct2_rule_fd th1)) ))
 |> zipper
 |> view

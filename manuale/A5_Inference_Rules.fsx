@@ -1129,6 +1129,18 @@ applicato al corpo originario (con la stessa variabile legata).
 Si veda anche: exists\_rule.
 
 $\dfrac
+{\exists x.\ p \qquad t \qquad A \vdash p[t/x]}
+{A \vdash \exists x.\ p}
+\textsf{ exists_rule}
+$
+
+Questa &egrave; la regola di intruduzione esistenzial. Prende un termine esistenziale,
+un termine testimone e un teorema, dove la conclusionde del teorema &egrave; il corpo 
+del termine esistenziale ma con il termine testimone che sostituisce le occorrenze 
+della sua variabile legata. Restituisce un teorema che afferma che il termine esistenziale 
+fornito vale, sotto le stesse assunzioni del teorema fornito.
+
+$\dfrac
 {p \qquad A \vdash \bot}
 {A \setminus \{\neg p\} \vdash p}
 \textsf{ ccontr_rule}
@@ -1447,11 +1459,6 @@ Si veda anche: choose\_rule, select\_rule, mk\_exists\_rule.
 
 *)
 
-exists_rule
-
-//  `?x. p`   `t`   A |- p[t/x]                                            
-//  ---------------------------                                            
-//          A |- ?x. p    
 
 
 (**

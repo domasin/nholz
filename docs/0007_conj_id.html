@@ -51,7 +51,7 @@
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="fn">deduct_antisym_rule_bk</span> <span class="pn">[</span><span class="pn">]</span> <span class="pn">[</span><span class="pn">]</span>
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="fn">conj_rule_bk</span> <span class="pn">[</span><span class="n">0</span><span class="pn">]</span> <span class="pn">[</span><span class="pn">]</span>
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="fn">assume_rule_bk</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="fn">by</span> <span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="id">truth_thm</span> <span class="s">&quot;truth\_thm&quot;</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="fn">by</span> <span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="id">truth_thm</span> <span class="s">&quot;truth_thm&quot;</span>
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs14', 16)" onmouseover="showTip(event, 'fs14', 16)" class="fn">conjunct1_rule_bk</span> <span class="s">&quot;true&quot;</span>
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="fn">assume_rule_bk</span>
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="fn">view</span>
@@ -69,7 +69,10 @@
 {p\ \vdash\ p}
 \textsf{ assume_rule}}
 \qquad
-\vdash\ \top\; \mathbf{ truth\_thm}}
+\dfrac
+{}
+{\vdash\ \top}
+\textsf{ truth_thm}}
 {p\ \vdash\ p\ \wedge\ \top}
 \textsf{ conj_rule}}
 \qquad
@@ -84,10 +87,11 @@
 \textsf{ deduct_antisym_rule}}}
 {\vdash\ \forall\ p.\ p\ \wedge\ \top\ \Leftrightarrow\ p}
 \textsf{ gen_rule}} }\)</span></p>
+<p>Forward proof with tree</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs19', 22)" onmouseover="showTip(event, 'fs19', 22)" class="fn">gen_rule_fd</span> <span onmouseout="hideTip(event, 'fs20', 23)" onmouseover="showTip(event, 'fs20', 23)" class="id">p</span>
     <span class="pn">(</span><span onmouseout="hideTip(event, 'fs21', 24)" onmouseover="showTip(event, 'fs21', 24)" class="fn">deduct_antisym_rule_fd</span>
         <span class="c">(* p |- p /\ true *)</span>
-        <span class="pn">(</span><span onmouseout="hideTip(event, 'fs22', 25)" onmouseover="showTip(event, 'fs22', 25)" class="fn">conj_rule_fd</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs20', 26)" onmouseover="showTip(event, 'fs20', 26)" class="id">p</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 27)" onmouseover="showTip(event, 'fs23', 27)" class="fn">assume_rule_fd</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs13', 28)" onmouseover="showTip(event, 'fs13', 28)" class="id">truth_thm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 29)" onmouseover="showTip(event, 'fs24', 29)" class="fn">thm_fd</span> <span class="s">&quot;truth\_thm&quot;</span><span class="pn">)</span><span class="pn">)</span>
+        <span class="pn">(</span><span onmouseout="hideTip(event, 'fs22', 25)" onmouseover="showTip(event, 'fs22', 25)" class="fn">conj_rule_fd</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs20', 26)" onmouseover="showTip(event, 'fs20', 26)" class="id">p</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 27)" onmouseover="showTip(event, 'fs23', 27)" class="fn">assume_rule_fd</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs13', 28)" onmouseover="showTip(event, 'fs13', 28)" class="id">truth_thm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 29)" onmouseover="showTip(event, 'fs24', 29)" class="fn">thm_fd</span> <span class="s">&quot;truth_thm&quot;</span><span class="pn">)</span><span class="pn">)</span>
         <span class="c">(* p /\ true |- p *)</span>
         <span class="pn">(</span><span onmouseout="hideTip(event, 'fs25', 30)" onmouseover="showTip(event, 'fs25', 30)" class="fn">conjunct1_rule_fd</span> <span class="pn">(</span><span class="s">@&quot;p /\ true&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs26', 31)" onmouseover="showTip(event, 'fs26', 31)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 32)" onmouseover="showTip(event, 'fs23', 32)" class="fn">assume_rule_fd</span><span class="pn">)</span><span class="pn">)</span>
     <span class="pn">)</span>
@@ -114,7 +118,7 @@
 <div class="tip" id="fs6">val conj_id_thm : thm</div>
 <div class="tip" id="fs7">val start_proof : xs:string list * s:string -&gt; Proof Location</div>
 <div class="tip" id="fs8">val gen_rule_bk : loc:(Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
-<div class="tip" id="fs9">val deduct_antisym_rule_bk : asl1:term list -&gt; asl2:term list -&gt; loc:(Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
+<div class="tip" id="fs9">val deduct_antisym_rule_bk : ind1:int list -&gt; ind2:int list -&gt; loc:(Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
 <div class="tip" id="fs10">val conj_rule_bk : ind1:int list -&gt; ind2:int list -&gt; loc:(Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
 <div class="tip" id="fs11">val assume_rule_bk : loc:Proof Location -&gt; Proof Location</div>
 <div class="tip" id="fs12">val by : thm:thm -&gt; lbl:string -&gt; loc:Proof Location -&gt; Proof Location</div>

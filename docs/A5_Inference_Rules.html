@@ -836,6 +836,15 @@ ogni occorrenza della variabile legata con l'operatore di selezione
 applicato al corpo originario (con la stessa variabile legata).</p>
 <p>Si veda anche: exists_rule.</p>
 <p><span class="math">\(\dfrac
+{\exists x.\ p \qquad t \qquad A \vdash p[t/x]}
+{A \vdash \exists x.\ p}
+\textsf{ exists_rule}\)</span></p>
+<p>Questa &egrave; la regola di intruduzione esistenzial. Prende un termine esistenziale,
+un termine testimone e un teorema, dove la conclusionde del teorema &egrave; il corpo
+del termine esistenziale ma con il termine testimone che sostituisce le occorrenze
+della sua variabile legata. Restituisce un teorema che afferma che il termine esistenziale
+fornito vale, sotto le stesse assunzioni del teorema fornito.</p>
+<p><span class="math">\(\dfrac
 {p \qquad A \vdash \bot}
 {A \setminus \{\neg p\} \vdash p}
 \textsf{ ccontr_rule}\)</span></p>
@@ -1026,18 +1035,12 @@ che sostituisce le occorrenze della sua variabile legata. Restituisce un teorema
 che afferma che il termine esistenziale fornito vale, sotto le stesse
 assunzioni del teorema fornito.</p>
 <p>Si veda anche: choose_rule, select_rule, mk_exists_rule.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="fn">exists_rule</span>
-
-<span class="c">//  `?x. p`   `t`   A |- p[t/x]                                            </span>
-<span class="c">//  ---------------------------                                            </span>
-<span class="c">//          A |- ?x. p    </span>
-</code></pre>
 <h2>| Pair.mk_pair_rule</h2>
 <p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'accoppiamento.
 Prende due teoremi di uguaglianza, e accoppia i corrispondenti lati del
 primo teorema con quelli del secondo, unendone le assunzioni</p>
 <p>Si veda anche: mk_pair1_rule, mk_pair2_rule, mk_bin_rule.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="fn">mk_pair_rule</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="fn">mk_pair_rule</span>
 
 <span class="c">//  A1 |- x1 = x2    A2 |- y1 = y2                                       </span>
 <span class="c">//  ------------------------------                                       </span>
@@ -1048,7 +1051,7 @@ primo teorema con quelli del secondo, unendone le assunzioni</p>
 sinistra. Prende un teorema di uguaglianza e un termine, e accoppia ogni
 lato del teorema con il termine.</p>
 <p>Si veda anche: mk_pair2_rule, mk_pair_rule, mk_bin1_rule.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="fn">mk_pair1_rule</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="fn">mk_pair1_rule</span>
 
 <span class="c">//    A |- x1 = x2   `y`                                                  </span>
 <span class="c">//   --------------------                                                 </span>
@@ -1059,7 +1062,7 @@ lato del teorema con il termine.</p>
 destra. Prende un termine un teorema di uguaglianza, e accoppia il termine
 con ogni lato del teorema.</p>
 <p>Si veda anche: mk_pair1_rule, mk_pair_rule, mk_bin2_rule.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs19', 24)" onmouseover="showTip(event, 'fs19', 24)" class="fn">mk_pair2_rule</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="fn">mk_pair2_rule</span>
 
 <span class="c">///     `x`   A |- y1 = y2                                                    </span>
 <span class="c">///    --------------------                                                   </span>
@@ -1083,10 +1086,9 @@ con ogni lato del teorema.</p>
 <div class="tip" id="fs13">val eval_pre_conv : tm:term -&gt; thm</div>
 <div class="tip" id="fs14">val eval_sub_conv : tm:term -&gt; thm</div>
 <div class="tip" id="fs15">val eval_suc_conv : tm:term -&gt; thm</div>
-<div class="tip" id="fs16">val exists_rule : tm1:term * tm2:term -&gt; th:thm -&gt; thm</div>
-<div class="tip" id="fs17">val mk_pair_rule : th1:thm -&gt; th2:thm -&gt; thm</div>
-<div class="tip" id="fs18">val mk_pair1_rule : th1:thm -&gt; tm:term -&gt; thm</div>
-<div class="tip" id="fs19">val mk_pair2_rule : tm:term -&gt; th2:thm -&gt; thm</div>
+<div class="tip" id="fs16">val mk_pair_rule : th1:thm -&gt; th2:thm -&gt; thm</div>
+<div class="tip" id="fs17">val mk_pair1_rule : th1:thm -&gt; tm:term -&gt; thm</div>
+<div class="tip" id="fs18">val mk_pair2_rule : tm:term -&gt; th2:thm -&gt; thm</div>
 
         </div>
         <div class="span1"></div>

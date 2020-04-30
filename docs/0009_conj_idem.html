@@ -43,8 +43,9 @@
 <p><span class="math">\(\forall p.\ p \wedge p \Leftrightarrow p\)</span></p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="id">conj_idem_thm</span>
 <span class="c">//   |- !p. p /\ p &lt;=&gt; p</span>
-
-<span class="pn">(</span><span class="pn">[</span><span class="pn">]</span><span class="pn">,</span><span class="s">&quot;!p. p /\ p &lt;=&gt; p&quot;</span><span class="pn">)</span>
+</code></pre>
+<p>Backward proof with tree</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">(</span><span class="pn">[</span><span class="pn">]</span><span class="pn">,</span><span class="s">&quot;!p. p /\ p &lt;=&gt; p&quot;</span><span class="pn">)</span>
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="fn">start_proof</span>
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="fn">gen_rule_bk</span>
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="fn">deduct_antisym_rule_bk</span> <span class="pn">[</span><span class="pn">]</span> <span class="pn">[</span><span class="pn">]</span>
@@ -56,6 +57,48 @@
 
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="fn">view</span>
 </code></pre>
+<p><span class="math">\(\small{ 	\color{green}{\dfrac
+{p:bool
+\qquad
+\color{green}{\dfrac
+{\color{green}{\dfrac
+{\color{green}{\dfrac
+{p:bool}
+{p\ \vdash\ p}
+\textsf{ assume_rule}}
+\qquad
+\color{green}{\dfrac
+{p:bool}
+{p\ \vdash\ p}
+\textsf{ assume_rule}}}
+{p\ \vdash\ p\ \wedge\ p}
+\textsf{ conj_rule}}
+\qquad
+\color{green}{\dfrac
+{\color{green}{\dfrac
+{p\ \wedge\ p}
+{p\ \wedge\ p\ \vdash\ p\ \wedge\ p}
+\textsf{ assume_rule}}}
+{p\ \wedge\ p\ \vdash\ p}
+\textsf{ conjunct1_rule}}}
+{\vdash\ p\ \wedge\ p\ \Leftrightarrow\ p}
+\textsf{ deduct_antisym_rule}}}
+{\vdash\ \forall\ p.\ p\ \wedge\ p\ \Leftrightarrow\ p}
+\textsf{ gen_rule}} }\)</span></p>
+<p>Forward proof with tree</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs14', 18)" onmouseover="showTip(event, 'fs14', 18)" class="fn">gen_rule_fd</span> <span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="id">p</span>
+    <span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 20)" onmouseover="showTip(event, 'fs16', 20)" class="fn">deduct_antisym_rule_fd</span>
+      <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 21)" onmouseover="showTip(event, 'fs17', 21)" class="fn">conj_rule_fd</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 22)" onmouseover="showTip(event, 'fs18', 22)" class="fn">assume_rule_fd</span> <span onmouseout="hideTip(event, 'fs15', 23)" onmouseover="showTip(event, 'fs15', 23)" class="id">p</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 24)" onmouseover="showTip(event, 'fs18', 24)" class="fn">assume_rule_fd</span> <span onmouseout="hideTip(event, 'fs15', 25)" onmouseover="showTip(event, 'fs15', 25)" class="id">p</span><span class="pn">)</span><span class="pn">)</span>
+      <span class="pn">(</span><span onmouseout="hideTip(event, 'fs19', 26)" onmouseover="showTip(event, 'fs19', 26)" class="fn">conjunct1_rule_fd</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 27)" onmouseover="showTip(event, 'fs18', 27)" class="fn">assume_rule_fd</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs20', 28)" onmouseover="showTip(event, 'fs20', 28)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;p /\ p&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span> <span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 29)" onmouseover="showTip(event, 'fs21', 29)" class="fn">zipper</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 30)" onmouseover="showTip(event, 'fs13', 30)" class="fn">view</span>
+</code></pre>
+<p>Classic forward proof without tree</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs22', 31)" onmouseover="showTip(event, 'fs22', 31)" class="fn">gen_rule</span> <span onmouseout="hideTip(event, 'fs15', 32)" onmouseover="showTip(event, 'fs15', 32)" class="id">p</span>
+<span class="pn">(</span><span onmouseout="hideTip(event, 'fs23', 33)" onmouseover="showTip(event, 'fs23', 33)" class="fn">deduct_antisym_rule</span>
+  <span class="pn">(</span><span onmouseout="hideTip(event, 'fs24', 34)" onmouseover="showTip(event, 'fs24', 34)" class="fn">conj_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs25', 35)" onmouseover="showTip(event, 'fs25', 35)" class="fn">assume_rule</span> <span onmouseout="hideTip(event, 'fs15', 36)" onmouseover="showTip(event, 'fs15', 36)" class="id">p</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs25', 37)" onmouseover="showTip(event, 'fs25', 37)" class="fn">assume_rule</span> <span onmouseout="hideTip(event, 'fs15', 38)" onmouseover="showTip(event, 'fs15', 38)" class="id">p</span><span class="pn">)</span><span class="pn">)</span>
+  <span class="pn">(</span><span onmouseout="hideTip(event, 'fs26', 39)" onmouseover="showTip(event, 'fs26', 39)" class="fn">conjunct1_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs25', 40)" onmouseover="showTip(event, 'fs25', 40)" class="fn">assume_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs20', 41)" onmouseover="showTip(event, 'fs20', 41)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;p /\ p&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span> <span class="pn">)</span>
+</code></pre>
 
           <div class="tip" id="fs1">namespace HOL</div>
 <div class="tip" id="fs2">module CoreThry<br /><br />from HOL</div>
@@ -65,11 +108,24 @@
 <div class="tip" id="fs6">val conj_idem_thm : thm</div>
 <div class="tip" id="fs7">val start_proof : xs:string list * s:string -&gt; Proof Location</div>
 <div class="tip" id="fs8">val gen_rule_bk : loc:(Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
-<div class="tip" id="fs9">val deduct_antisym_rule_bk : asl1:term list -&gt; asl2:term list -&gt; loc:(Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
+<div class="tip" id="fs9">val deduct_antisym_rule_bk : ind1:int list -&gt; ind2:int list -&gt; loc:(Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
 <div class="tip" id="fs10">val conj_rule_bk : ind1:int list -&gt; ind2:int list -&gt; loc:(Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
 <div class="tip" id="fs11">val assume_rule_bk : loc:Proof Location -&gt; Proof Location</div>
 <div class="tip" id="fs12">val conjunct1_rule_bk : t2:string -&gt; loc:Proof Location -&gt; Proof Location</div>
 <div class="tip" id="fs13">val view : loc:Proof Location -&gt; Proof Location</div>
+<div class="tip" id="fs14">val gen_rule_fd : (term -&gt; Proof Tree -&gt; Proof Tree)</div>
+<div class="tip" id="fs15">val p : term</div>
+<div class="tip" id="fs16">val deduct_antisym_rule_fd : t1:Proof Tree -&gt; t2:Proof Tree -&gt; Proof Tree</div>
+<div class="tip" id="fs17">val conj_rule_fd : (Proof Tree -&gt; Proof Tree -&gt; Proof Tree)</div>
+<div class="tip" id="fs18">val assume_rule_fd : t:term -&gt; Proof Tree</div>
+<div class="tip" id="fs19">val conjunct1_rule_fd : (Proof Tree -&gt; Proof Tree)</div>
+<div class="tip" id="fs20">val parse_term : x:string -&gt; term</div>
+<div class="tip" id="fs21">val zipper : t:&#39;a Tree -&gt; &#39;a Location</div>
+<div class="tip" id="fs22">val gen_rule : v:term -&gt; th:thm -&gt; thm</div>
+<div class="tip" id="fs23">val deduct_antisym_rule : th01:thm -&gt; th02:thm -&gt; thm</div>
+<div class="tip" id="fs24">val conj_rule : th01:thm -&gt; th02:thm -&gt; thm</div>
+<div class="tip" id="fs25">val assume_rule : tm:term -&gt; thm</div>
+<div class="tip" id="fs26">val conjunct1_rule : th:thm -&gt; thm</div>
 
         </div>
         <div class="span1"></div>

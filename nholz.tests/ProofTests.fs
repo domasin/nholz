@@ -70,7 +70,7 @@ let ``fun_eq_thm backward gives fun_eq_thm`` () =
                         |> sym_rule_bk
                         |> eta_conv_bk
                     |> mk_abs_rule_bk
-                        |> spec_rule_bk ("x:'a","x:'a")
+                        |> spec_rule_bk ("x:'a","x:'a") "!(x:a). (f:a->b) x = g x"
                             |> assume_rule_bk
                 |> add_asm_rule_bk 0
                     |> eta_conv_bk
@@ -315,3 +315,111 @@ let ``not_dist_disj_thm forward gives not_dist_disj_thm`` () =
     |> loc_thm |> Option.get
     |> fun x -> x = not_dist_disj_thm
     |> should equal true
+
+[<Fact>]
+let ``conj_id_thm backward gives conj_id_thm`` () =
+    let _t1 = CoreThry.load   
+    let _t2 = Equal.load      
+    let _t3 = Bool.load 
+
+    ([],"!p. p /\ true <=> p")
+    |> start_proof
+    |> gen_rule_bk
+    |> deduct_antisym_rule_bk [] []
+    |> conj_rule_bk [0] []
+    |> assume_rule_bk
+    |> by truth_thm "truth_thm"
+    |> conjunct1_rule_bk "true"
+    |> assume_rule_bk
+    //|> view
+    |> loc_thm |> Option.get
+    |> fun x -> x = conj_id_thm
+    |> should equal true
+
+[<Fact>]
+let ``conj_id_thm forward gives conj_id_thm`` () =
+    let _t1 = CoreThry.load   
+    let _t2 = Equal.load      
+    let _t3 = Bool.load 
+
+    gen_rule_fd p
+        (deduct_antisym_rule_fd
+            (* p |- p /\ true *)
+            (conj_rule_fd (p |> assume_rule_fd) (truth_thm |> thm_fd "truth_thm"))
+            (* p /\ true |- p *)
+            (conjunct1_rule_fd (@"p /\ true" |> parse_term |> assume_rule_fd))
+        )
+    |> zipper 
+    |> loc_thm |> Option.get
+    |> fun x -> x = conj_id_thm
+    |> should equal true
+
+[<Fact>]
+let ``conj_zero_thm backward gives conj_zero_thm`` () =
+    let _t1 = CoreThry.load   
+    let _t2 = Equal.load      
+    let _t3 = Bool.load 
+
+    ([],"!p. p /\ false <=> false")
+    |> start_proof
+    |> gen_rule_bk
+    |> deduct_antisym_rule_bk [] []
+    |> contr_rule_bk
+    |> assume_rule_bk
+    |> conjunct2_rule_bk "p:bool"
+    |> assume_rule_bk
+    //|> view
+    |> loc_thm |> Option.get
+    |> fun x -> x = conj_zero_thm
+    |> should equal true
+
+[<Fact>]
+let ``conj_zero_thm forward gives conj_zero_thm`` () =
+    let _t1 = CoreThry.load   
+    let _t2 = Equal.load      
+    let _t3 = Bool.load 
+
+    gen_rule_fd p
+        (deduct_antisym_rule_fd
+          (contr_rule_fd (parse_term(@"p /\ false")) (assume_rule_fd false_tm))
+          (conjunct2_rule_fd (assume_rule_fd (parse_term(@"p /\ false")))) )
+    |> zipper 
+    |> loc_thm |> Option.get
+    |> fun x -> x = conj_zero_thm
+    |> should equal true
+
+[<Fact>]
+let ``conj_idem_thm backward gives conj_idem_thm`` () =
+    let _t1 = CoreThry.load   
+    let _t2 = Equal.load      
+    let _t3 = Bool.load 
+
+    ([],"!p. p /\ p <=> p")
+    |> start_proof
+    |> gen_rule_bk
+    |> deduct_antisym_rule_bk [] []
+    |> conj_rule_bk [0] [0]
+    |> assume_rule_bk
+    |> assume_rule_bk
+    |> conjunct1_rule_bk "p:bool"
+    |> assume_rule_bk
+    //|> view
+    |> loc_thm |> Option.get
+    |> fun x -> x = conj_idem_thm
+    |> should equal true
+
+[<Fact>]
+let ``conj_idem_thm forward gives conj_idem_thm`` () =
+    let _t1 = CoreThry.load   
+    let _t2 = Equal.load      
+    let _t3 = Bool.load 
+
+    gen_rule_fd p
+        (deduct_antisym_rule_fd
+          (conj_rule_fd (assume_rule_fd p) (assume_rule_fd p))
+          (conjunct1_rule_fd (assume_rule_fd (parse_term(@"p /\ p")))) )
+    |> zipper 
+    |> loc_thm |> Option.get
+    |> fun x -> x = conj_idem_thm
+    |> should equal true
+

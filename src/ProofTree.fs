@@ -18,7 +18,9 @@ type InfRule =
     | ThmThmFn of (thm -> thm -> thm)
     | ThmThmThmFn of (thm -> thm -> thm -> thm)
     | TmThmFn of (term -> thm -> thm)
+    | TmTmThmFn of ((term * term) -> thm -> thm)
     | TmThmThmFn of (term -> thm -> thm -> thm)
+    | TmThm2ThmFn of ((term * thm) -> thm -> thm)
     | ThmTmFn of (thm -> term -> thm)
     | TmLstThmFn of (term list -> thm -> thm)
     | ThmLstFn of (thm list -> thm)
@@ -67,7 +69,7 @@ let substs =
         "!", "\\forall "
         "==>","\\Rightarrow"
         "<=>", "\\Leftrightarrow"
-        "->", "\\rightarrow"
+        "->", " \\rightarrow "
         "|-", "\\vdash"
         " ", "\\ "
         "true", "\\top"

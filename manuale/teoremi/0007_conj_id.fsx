@@ -26,7 +26,7 @@ Backward proof with tree
 |> deduct_antisym_rule_bk [] []
 |> conj_rule_bk [0] []
 |> assume_rule_bk
-|> by truth_thm "truth\_thm"
+|> by truth_thm "truth_thm"
 |> conjunct1_rule_bk "true"
 |> assume_rule_bk
 |> view
@@ -46,7 +46,10 @@ $
 				{p\ \vdash\ p}
 				\textsf{ assume_rule}}
 			\qquad
-			\vdash\ \top\; \mathbf{ truth\_thm}}
+			\dfrac
+				{}
+				{\vdash\ \top}
+				\textsf{ truth_thm}}
 			{p\ \vdash\ p\ \wedge\ \top}
 			\textsf{ conj_rule}}
 		\qquad
@@ -64,10 +67,14 @@ $
 $
 *)
 
+(**
+Forward proof with tree
+*)
+
 gen_rule_fd p
     (deduct_antisym_rule_fd
         (* p |- p /\ true *)
-        (conj_rule_fd (p |> assume_rule_fd) (truth_thm |> thm_fd "truth\_thm"))
+        (conj_rule_fd (p |> assume_rule_fd) (truth_thm |> thm_fd "truth_thm"))
         (* p /\ true |- p *)
         (conjunct1_rule_fd (@"p /\ true" |> parse_term |> assume_rule_fd))
     )
