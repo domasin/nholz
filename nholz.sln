@@ -62,6 +62,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{FD66B3EA-1
 		docs\B1_Teorie.html = docs\B1_Teorie.html
 		docs\B2_Teoremi.html = docs\B2_Teoremi.html
 		docs\index.html = docs\index.html
+		docs\Teorie.xlsx = docs\Teorie.xlsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{DAD11A7D-1280-4F63-BBB5-828EB9EAAA1A}"
@@ -100,6 +101,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "teoremi", "teoremi", "{45C5
 		manuale\teoremi\0016_disj_id.fsx = manuale\teoremi\0016_disj_id.fsx
 		manuale\teoremi\0017_disj_zero.fsx = manuale\teoremi\0017_disj_zero.fsx
 		manuale\teoremi\0018_disj_idem.fsx = manuale\teoremi\0018_disj_idem.fsx
+		manuale\teoremi\0019_disj_assoc.fsx = manuale\teoremi\0019_disj_assoc.fsx
+		manuale\teoremi\0020_disj_absorb_conj.fsx = manuale\teoremi\0020_disj_absorb_conj.fsx
+		manuale\teoremi\0021_disj_dist_right_conj.fsx = manuale\teoremi\0021_disj_dist_right_conj.fsx
+		manuale\teoremi\0022_disj_dist_left_conj.fsx = manuale\teoremi\0022_disj_dist_left_conj.fsx
 		manuale\teoremi\0023_imp_right_zero.fsx = manuale\teoremi\0023_imp_right_zero.fsx
 		manuale\teoremi\0024_disj_comm.fsx = manuale\teoremi\0024_disj_comm.fsx
 		manuale\teoremi\0025_imp_left_id.fsx = manuale\teoremi\0025_imp_left_id.fsx

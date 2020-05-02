@@ -11,6 +11,7 @@ Bool.load
 (***unhide***)
 
 conj_contr_thm
+//|- !p. p /\ ~ p <=> false
 
 ([],"!p. p /\ ~ p <=> false")
 |> start_proof
