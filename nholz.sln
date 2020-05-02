@@ -50,6 +50,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{FD66B3EA-1
 		docs\0011_conj_assoc.html = docs\0011_conj_assoc.html
 		docs\0012_conj_absorb_disj.html = docs\0012_conj_absorb_disj.html
 		docs\0013_conj_dist_right_disj.html = docs\0013_conj_dist_right_disj.html
+		docs\0014_conj_dist_left_disj.html = docs\0014_conj_dist_left_disj.html
 		docs\0016_disj_id.html = docs\0016_disj_id.html
 		docs\0017_disj_zero.html = docs\0017_disj_zero.html
 		docs\0018_disj_idem.html = docs\0018_disj_idem.html
