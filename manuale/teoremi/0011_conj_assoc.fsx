@@ -1,5 +1,6 @@
 (**
 Propriet&agrave; associativa della congiuzione
+=============================================
 
 $\forall p\ q.\ p \wedge (q \wedge r) \Leftrightarrow (p \wedge q) \wedge r$
 *)
@@ -14,6 +15,10 @@ Bool.load
 
 conj_assoc_thm
 //   |- !p q r. p /\ (q /\ r) <=> (p /\ q) /\ r
+
+(**
+Backward proof with tree
+*)
 
 ([],"!p q r. p /\ (q /\ r) <=> (p /\ q) /\ r")
 |> start_proof
@@ -39,7 +44,6 @@ conj_assoc_thm
 |> conjunct2_rule_bk @"q:bool"
 |> conjunct2_rule_bk @"p:bool"
 |> assume_rule_bk
-
 |> view
 
 (**
@@ -126,6 +130,10 @@ $
 $
 *)
 
+(**
+Forward proof with tree
+*)
+
 let th1 = assume_rule_fd (parse_term(@"p /\ (q /\ r)")) in
 let th2 = assume_rule_fd (parse_term(@"(p /\ q) /\ r")) in
 list_gen_rule_fd [p;q;r]
@@ -144,3 +152,24 @@ list_gen_rule_fd [p;q;r]
       (conjunct2_rule_fd (conjunct2_rule_fd th1)) ))
 |> zipper
 |> view
+
+(**
+Classic forward proof without tree
+*)
+
+let th1' = assume_rule (parse_term(@"p /\ (q /\ r)")) in
+let th2' = assume_rule (parse_term(@"(p /\ q) /\ r")) in
+list_gen_rule [p;q;r]
+  (deduct_antisym_rule
+    (* (p /\ q) /\ r |- p /\ (q /\ r)           *)
+    (conj_rule
+      (conjunct1_rule (conjunct1_rule th2'))
+      (conj_rule
+        (conjunct2_rule (conjunct1_rule th2'))
+        (conjunct2_rule th2') ))
+    (* (p /\ q) /\ r |- (p /\ q) /\ r           *)
+    (conj_rule
+      (conj_rule
+        (conjunct1_rule th1')
+        (conjunct1_rule (conjunct2_rule th1')) )
+      (conjunct2_rule (conjunct2_rule th1')) ))

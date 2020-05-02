@@ -28,7 +28,7 @@ Backward proof with tree
             |> disch_rule_bk
                 |> assume_rule_bk
     |> add_asm_rule_bk 0        
-        |> by truth_thm "truth\_thm"
+        |> by truth_thm "truth_thm"
 |> view
 |> loc_thm |> Option.get
 
@@ -36,41 +36,43 @@ Backward proof with tree
 
 (**
 $
-\small{ 	
-\dfrac
-	{\dfrac
+\small{ 	\color{green}{\dfrac
+	{\color{green}{\dfrac
 		{\top
 		\qquad
-		\dfrac
-			{\dfrac
+		\color{green}{\dfrac
+			{\color{green}{\dfrac
 				{\bot
 				\qquad
-				\dfrac
+				\color{green}{\dfrac
 					{\bot}
 					{\bot\ \vdash\ \bot}
-					\textsf{ assume_rule}}
+					\textsf{ assume_rule}}}
 				{\vdash\ \bot\ \Rightarrow\ \bot}
-				\textsf{ disch_rule}}
+				\textsf{ disch_rule}}}
 			{\vdash\ \neg\ \bot}
-			\textsf{ not_intro}}
+			\textsf{ not_intro_rule}}}
 		{\top\ \vdash\ \neg\ \bot}
-		\textsf{ add_asm_rule}
+		\textsf{ add_asm_rule}}
 	\qquad
-	\dfrac
+	\color{green}{\dfrac
 		{\neg\ \bot
 		\qquad
-		\vdash\ \top\; \mathbf{ truth\_thm}}
+		\dfrac
+			{}
+			{\vdash\ \top}
+			\textsf{ truth_thm}}
 		{\neg\ \bot\ \vdash\ \top}
-		\textsf{ add_asm_rule}}
-	{\color{red}{\vdash\ \neg\ \bot\ \Leftrightarrow\ \top}}
-	\textsf{ deduct_antisym_rule} }
+		\textsf{ add_asm_rule}}}
+	{\vdash\ \neg\ \bot\ \Leftrightarrow\ \top}
+	\textsf{ deduct_antisym_rule}} }
 $
 *)
 
 (**
 Forward proof with tree
 
-(slightly smaller since we apply `deduct_antisym_rule` without assumptions.)
+(`deduct_antisym_rule_fd` can be applied without assumptions.)
 *)
 
 //(* |- ~ false <=> true         *)
@@ -78,30 +80,33 @@ deduct_antisym_rule_fd
   (* |- ~ false            *)
   (not_intro_rule_fd (disch_rule_fd (parse_term(@"false")) (assume_rule_fd (parse_term(@"false")))))
   (* |- true               *)
-  (truth_thm |> thm_fd "truth\_thm")
+  (truth_thm |> thm_fd "truth_thm")
 |> zipper |> view |> loc_thm |> Option.get
 
 //val it : thm = |- ~ false <=> true
 
 (**
 $
-\small{ 	\dfrac
-	{\dfrac
-		{\dfrac
+\small{ 	\color{green}{\dfrac
+	{\color{green}{\dfrac
+		{\color{green}{\dfrac
 			{\bot
 			\qquad
-			\dfrac
+			\color{green}{\dfrac
 				{\bot}
 				{\bot\ \vdash\ \bot}
-				\textsf{ assume_rule}}
+				\textsf{ assume_rule}}}
 			{\vdash\ \bot\ \Rightarrow\ \bot}
-			\textsf{ disch_rule}}
+			\textsf{ disch_rule}}}
 		{\vdash\ \neg\ \bot}
-		\textsf{ not_intro_rule}
+		\textsf{ not_intro_rule}}
 	\qquad
-	\vdash\ \top\; \mathbf{ truth\_thm}}
-	{\color{red}{\vdash\ \neg\ \bot\ \Leftrightarrow\ \top}}
-	\textsf{ deduct_antisym_rule} }
+	\dfrac
+		{}
+		{\vdash\ \top}
+		\textsf{ truth_thm}}
+	{\vdash\ \neg\ \bot\ \Leftrightarrow\ \top}
+	\textsf{ deduct_antisym_rule}} }
 $
 *)
 

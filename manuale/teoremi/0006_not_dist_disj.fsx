@@ -54,99 +54,123 @@ Backward proof with tree
                     |> assume_rule_bk
 
 |> view
-|> loc_thm |> Option.get
 
 //val it : thm = |- !p q. ~ (p \/ q) <=> ~ p /\ ~ q
 
 (**
 $
-\small{ 	
-\dfrac
-	{[p:bool,q:bool]
+\small{ 	\color{green}{\dfrac
+	{[p:bool;q:bool]
 	\qquad
-	\dfrac
-		{\dfrac
-			{\dfrac
+	\color{green}{\dfrac
+		{\color{green}{\dfrac
+			{\color{green}{\dfrac
 				{p\ \vee\ q
 				\qquad
-				\dfrac
-					{\dfrac
+				\color{green}{\dfrac
+					{\color{green}{\dfrac
 						{p\ \vee\ q}
 						{p\ \vee\ q\ \vdash\ p\ \vee\ q}
-						\textsf{ assume_rule}
+						\textsf{ assume_rule}}
 					\qquad
-					\dfrac
-						{\dfrac
-							{\dfrac
-								{\dfrac
+					\color{green}{\dfrac
+						{\color{green}{\dfrac
+							{\color{green}{\dfrac
+								{\color{green}{\dfrac
 									{\neg\ p\ \wedge\ \neg\ q}
 									{\neg\ p\ \wedge\ \neg\ q\ \vdash\ \neg\ p\ \wedge\ \neg\ q}
-									\textsf{ assume_rule}}
+									\textsf{ assume_rule}}}
 								{\neg\ p\ \wedge\ \neg\ q\ \vdash\ \neg\ p}
-								\textsf{ conjunct1_rule}}
+								\textsf{ conjunct1_rule}}}
 							{\neg\ p\ \wedge\ \neg\ q\ \vdash\ p\ \Rightarrow\ \bot}
-							\textsf{ not_elim_rule}}
+							\textsf{ not_elim_rule}}}
 						{\neg\ p\ \wedge\ \neg\ q,\ p\ \vdash\ \bot}
-						\textsf{ undisch_rule}
+						\textsf{ undisch_rule}}
 					\qquad
-					\dfrac
-						{\dfrac
-							{\dfrac
-								{\dfrac
+					\color{green}{\dfrac
+						{\color{green}{\dfrac
+							{\color{green}{\dfrac
+								{\color{green}{\dfrac
 									{\neg\ p\ \wedge\ \neg\ q}
 									{\neg\ p\ \wedge\ \neg\ q\ \vdash\ \neg\ p\ \wedge\ \neg\ q}
-									\textsf{ assume_rule}}
+									\textsf{ assume_rule}}}
 								{\neg\ p\ \wedge\ \neg\ q\ \vdash\ \neg\ q}
-								\textsf{ conjunct2_rule}}
+								\textsf{ conjunct2_rule}}}
 							{\neg\ p\ \wedge\ \neg\ q\ \vdash\ q\ \Rightarrow\ \bot}
-							\textsf{ not_elim_rule}}
+							\textsf{ not_elim_rule}}}
 						{\neg\ p\ \wedge\ \neg\ q,\ q\ \vdash\ \bot}
-						\textsf{ undisch_rule}}
+						\textsf{ undisch_rule}}}
 					{p\ \vee\ q,\ \neg\ p\ \wedge\ \neg\ q\ \vdash\ \bot}
-					\textsf{ disj_cases_rule}}
+					\textsf{ disj_cases_rule}}}
 				{\neg\ p\ \wedge\ \neg\ q\ \vdash\ p\ \vee\ q\ \Rightarrow\ \bot}
-				\textsf{ disch_rule}}
+				\textsf{ disch_rule}}}
 			{\neg\ p\ \wedge\ \neg\ q\ \vdash\ \neg\ (p\ \vee\ q)}
-			\textsf{ not_intro_rule}
+			\textsf{ not_intro_rule}}
 		\qquad
-		\dfrac
-			{\dfrac
+		\color{green}{\dfrac
+			{\color{green}{\dfrac
 				{p:bool
 				\qquad
-				\dfrac
-					{\dfrac
+				\color{green}{\dfrac
+					{\color{green}{\dfrac
 						{p:bool}
 						{p\ \vdash\ p}
-						\textsf{ assume_rule}
+						\textsf{ assume_rule}}
 					\qquad
 					q:bool}
 					{p\ \vdash\ p\ \vee\ q}
-					\textsf{ disj1_rule}}
+					\textsf{ disj1_rule}}}
 				{\neg\ (p\ \vee\ q)\ \vdash\ \neg\ p}
-				\textsf{ deduct_contrapos_rule}
+				\textsf{ deduct_contrapos_rule}}
 			\qquad
-			\dfrac
+			\color{green}{\dfrac
 				{q:bool
 				\qquad
-				\dfrac
+				\color{green}{\dfrac
 					{p:bool
 					\qquad
-					\dfrac
+					\color{green}{\dfrac
 						{q:bool}
 						{q\ \vdash\ q}
-						\textsf{ assume_rule}}
+						\textsf{ assume_rule}}}
 					{q\ \vdash\ p\ \vee\ q}
-					\textsf{ disj2_rule}}
+					\textsf{ disj2_rule}}}
 				{\neg\ (p\ \vee\ q)\ \vdash\ \neg\ q}
-				\textsf{ deduct_contrapos_rule}}
+				\textsf{ deduct_contrapos_rule}}}
 			{\neg\ (p\ \vee\ q)\ \vdash\ \neg\ p\ \wedge\ \neg\ q}
-			\textsf{ conj_rule}}
+			\textsf{ conj_rule}}}
 		{\vdash\ \neg\ (p\ \vee\ q)\ \Leftrightarrow\ \neg\ p\ \wedge\ \neg\ q}
-		\textsf{ deduct_antisym_rule}}
-	{\color{red}{\vdash\ \forall\ p\ q.\ \neg\ (p\ \vee\ q)\ \Leftrightarrow\ \neg\ p\ \wedge\ \neg\ q}}
-	\textsf{ list_gen_rule} }
+		\textsf{ deduct_antisym_rule}}}
+	{\vdash\ \forall\ p\ q.\ \neg\ (p\ \vee\ q)\ \Leftrightarrow\ \neg\ p\ \wedge\ \neg\ q}
+	\textsf{ list_gen_rule}} }
 $
 *)
+
+it
+|> root
+|> linearizeProof
+
+// 0                             p \/ q |- p \/ q                                             assume_rule                         
+// 1                         ~ p /\ ~ q |- ~ p /\ ~ q                                         assume_rule                         
+// 2                         ~ p /\ ~ q |- ~ p                                                conjunct1_rule            1         
+// 3                         ~ p /\ ~ q |- p ==> false                                        not_elim_rule             2         
+// 4                 ~ p /\ ~ q, p:bool |- false                                              undisch_rule              3         
+// 5                         ~ p /\ ~ q |- ~ p /\ ~ q                                         assume_rule                         
+// 6                         ~ p /\ ~ q |- ~ q                                                conjunct2_rule            5         
+// 7                         ~ p /\ ~ q |- q ==> false                                        not_elim_rule             6         
+// 8                 ~ p /\ ~ q, q:bool |- false                                              undisch_rule              7         
+// 9                 p \/ q, ~ p /\ ~ q |- false                                              disj_cases_rule           0,4,8     
+// 10                        ~ p /\ ~ q |- p \/ q ==> false                                   disch_rule                9         
+// 11                        ~ p /\ ~ q |- ~ (p \/ q)                                         not_intro_rule            10        
+// 12                            p:bool |- p:bool                                             assume_rule                         
+// 13                            p:bool |- p \/ q                                             disj1_rule                12        
+// 14                        ~ (p \/ q) |- ~ p                                                deduct_contrapos_rule     13        
+// 15                            q:bool |- q:bool                                             assume_rule                         
+// 16                            q:bool |- p \/ q                                             disj2_rule                15        
+// 17                        ~ (p \/ q) |- ~ q                                                deduct_contrapos_rule     16        
+// 18                        ~ (p \/ q) |- ~ p /\ ~ q                                         conj_rule                 14,17     
+// 19                                   |- ~ (p \/ q) <=> ~ p /\ ~ q                          deduct_antisym_rule       11,18     
+// 20                                   |- !p q. ~ (p \/ q) <=> ~ p /\ ~ q                    list_gen_rule             19        
 
 (**
 Forward proof with tree

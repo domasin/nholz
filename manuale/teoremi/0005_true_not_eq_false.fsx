@@ -32,7 +32,7 @@ Backward proof with tree
         |> eq_mp_rule_bk [0] [] "true"
             |> assume_rule_bk
                 //|> add_asm_rule_bk 0
-            |> by truth_thm "truth\_thm"
+            |> by truth_thm "truth_thm"
 |> view
 |> loc_thm |> Option.get
 
@@ -40,33 +40,35 @@ Backward proof with tree
 
 (**
 $
-\small{ 	
-\dfrac
-	{\dfrac
-		{\dfrac
-			{\dfrac
-				{\dfrac
+\small{ 	\color{green}{\dfrac
+	{\color{green}{\dfrac
+		{\color{green}{\dfrac
+			{\color{green}{\dfrac
+				{\color{green}{\dfrac
 					{\bot}
 					{\bot\ \vdash\ \bot}
-					\textsf{ assume_rule}}
+					\textsf{ assume_rule}}}
 				{\bot\ \vdash\ \bot\ \Leftrightarrow\ \top}
-				\textsf{ eqt_intro_rule}}
+				\textsf{ eqt_intro_rule}}}
 			{\bot\ \vdash\ \top\ \Leftrightarrow\ \bot}
-			\textsf{ sym_rule}
+			\textsf{ sym_rule}}
 		\qquad
-		\dfrac
-			{\dfrac
+		\color{green}{\dfrac
+			{\color{green}{\dfrac
 				{\top\ \Leftrightarrow\ \bot}
 				{\top\ \Leftrightarrow\ \bot\ \vdash\ \top\ \Leftrightarrow\ \bot}
-				\textsf{ assume_rule}
+				\textsf{ assume_rule}}
 			\qquad
-			\vdash\ \top\; \mathbf{ truth\_thm}}
+			\dfrac
+				{}
+				{\vdash\ \top}
+				\textsf{ truth_thm}}
 			{\top\ \Leftrightarrow\ \bot\ \vdash\ \bot}
-			\textsf{ eq_mp_rule}}
+			\textsf{ eq_mp_rule}}}
 		{\vdash\ (\top\ \Leftrightarrow\ \bot)\ \Leftrightarrow\ \bot}
-		\textsf{ deduct_antisym_rule}}
-	{\color{red}{\vdash\ \neg\ (\top\ \Leftrightarrow\ \bot)}}
-	\textsf{ eqf_elim_rule} }
+		\textsf{ deduct_antisym_rule}}}
+	{\vdash\ \neg\ (\top\ \Leftrightarrow\ \bot)}
+	\textsf{ eqf_elim_rule}} }
 $
 *)
 
@@ -79,7 +81,7 @@ eqf_elim_rule_fd
       (* false |- true <=> false         *)
       (sym_rule_fd (eqt_intro_rule_fd (assume_rule_fd (parse_term(@"false")))))
       (* true <=> false |- false         *)
-      (eq_mp_rule_fd (assume_rule_fd(parse_term(@"true <=> false"))) (truth_thm |> thm_fd "truth\_thm") ) )
+      (eq_mp_rule_fd (assume_rule_fd(parse_term(@"true <=> false"))) (truth_thm |> thm_fd "truth_thm") ) )
 |> zipper 
 //|> view //equals backward version
 |> loc_thm |> Option.get

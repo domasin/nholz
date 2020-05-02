@@ -64,6 +64,42 @@ $\forall p.\ p \wedge \bot \Leftrightarrow \bot$
 
 congiunzione zero
 
+**[conj\_idem\_thm](0009_conj_idem.html)**
+
+$\forall p.\ p \wedge p \Leftrightarrow p$
+
+congiunzione idem
+
+**[conj\_comm\_thm](0010_conj_comm.html)**
+
+$\forall p.\ p \wedge q \Leftrightarrow q \wedge p$
+
+commutativit&agrave; della congiunzione
+
+**[conj\_assoc\_thm](0011_conj_assoc.html)**
+
+$\forall p\ q\ r.\ p \wedge (q \wedge r) \Leftrightarrow (p \wedge q) \wedge r$
+
+associativit&agrave; della congiunzione
+
+**[conj\_absorb\_disj\_thm](0012_conj_absorb_disj.html)**
+
+$\forall p\ q.\ p \wedge (p \vee q) \Leftrightarrow p$
+
+assorbimento della disgiunzione nella congiunzione
+
+**[conj\_dist\_right\_disj\_thm](0013_conj_dist_right_disj.html)**
+
+$\forall p\ q\ r.\ p \wedge (q \vee r) \Leftrightarrow (p \wedge q) \vee (p \wedge r)$
+
+distributivit&agrave; a destra della congiunzione sulla disgiunzione
+
+**[conj\_dist\_left\_disj\_thm](0014_conj_dist_left_disj.html)**
+
+$\forall p\ q\ r.\ (p \vee q) \wedge r \Leftrightarrow (p \wedge r) \vee (q \wedge r)$
+
+distributivit&agrave; a sinistra della congiunzione sulla disgiunzione
+
 work in prog...
 
 **[disj\_id\_thm](0016_disj_id.html)**
@@ -132,29 +168,9 @@ cond_not_thm
 cond_true_thm
 // |- !(t1:'a) t2. (if true then t1 else t2) = t1
 
-conj_absorb_disj_thm
-// |- !p q. p /\ (p \/ q) <=> p
-
-conj_assoc_thm
-//   |- !p q r. p /\ (q /\ r) <=> (p /\ q) /\ r
-
-conj_comm_thm
-//   |- !p q. p /\ q <=> q /\ p
 
 conj_contr_thm
 //   |- !p. p /\ ~ p <=> false
-
-conj_dist_left_disj_thm
-//   |- !p q r. (p \/ q) /\ r <=> (p /\ r) \/ (q /\ r)
-
-conj_dist_right_disj_thm
-//   |- !p q r. p /\ (q \/ r) <=> (p /\ q) \/ (p /\ r)
-
-
-
-conj_idem_thm
-//   |- !p. p /\ p <=> p
-
 
 
 disj_absorb_conj_thm
