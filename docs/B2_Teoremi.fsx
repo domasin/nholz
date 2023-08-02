@@ -12,7 +12,7 @@ di visualizzazione dell'albero di dimostrazione in LaTeX.
 
 Queste estensioni non sono derivate da Hol Zero e sono in corso di implementazione. 
 
-**[truth\_thm](0001_truth.html)**
+**[truth\_thm](teoremi\0001_truth.html)**
 
 $\vdash \top$
 

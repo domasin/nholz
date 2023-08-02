@@ -17,110 +17,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "experiments", "experiments"
 		sections\it\prop_rules.fsx = sections\it\prop_rules.fsx
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "manuale", "manuale", "{08F988BE-4817-4730-BF1E-A8333BEA87E2}"
-	ProjectSection(SolutionItems) = preProject
-		manuale\1_Introduzione.fsx = manuale\1_Introduzione.fsx
-		manuale\3_Liguaggio_HOL.fsx = manuale\3_Liguaggio_HOL.fsx
-		manuale\A5_Inference_Rules.fsx = manuale\A5_Inference_Rules.fsx
-		manuale\avvio.fsx = manuale\avvio.fsx
-		manuale\B1_Teorie.fsx = manuale\B1_Teorie.fsx
-		manuale\B2_Teoremi.fsx = manuale\B2_Teoremi.fsx
-		manuale\goaltree.fsx = manuale\goaltree.fsx
-		manuale\index.fsx = manuale\index.fsx
-		manuale\tactics.fsx = manuale\tactics.fsx
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "it", "it", "{40DAE171-1C4D-4008-A9E0-F611A61032AF}"
 	ProjectSection(SolutionItems) = preProject
 		sections\it\prop.fsx = sections\it\prop.fsx
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{FD66B3EA-18DF-4072-8DB1-39615AEA55AB}"
-	ProjectSection(SolutionItems) = preProject
-		docs\0001_truth.html = docs\0001_truth.html
-		docs\0002_fun_eq.html = docs\0002_fun_eq.html
-		docs\0003_not_true.html = docs\0003_not_true.html
-		docs\0004_not_false.html = docs\0004_not_false.html
-		docs\0005_true_not_eq_false.html = docs\0005_true_not_eq_false.html
-		docs\0006_not_dist_disj.html = docs\0006_not_dist_disj.html
-		docs\0007_conj_id.html = docs\0007_conj_id.html
-		docs\0008_conj_zero.html = docs\0008_conj_zero.html
-		docs\0009_conj_idem.html = docs\0009_conj_idem.html
-		docs\0010_conj_comm.html = docs\0010_conj_comm.html
-		docs\0011_conj_assoc.html = docs\0011_conj_assoc.html
-		docs\0012_conj_absorb_disj.html = docs\0012_conj_absorb_disj.html
-		docs\0013_conj_dist_right_disj.html = docs\0013_conj_dist_right_disj.html
-		docs\0014_conj_dist_left_disj.html = docs\0014_conj_dist_left_disj.html
-		docs\0016_disj_id.html = docs\0016_disj_id.html
-		docs\0017_disj_zero.html = docs\0017_disj_zero.html
-		docs\0018_disj_idem.html = docs\0018_disj_idem.html
-		docs\0044_excluded_midle.html = docs\0044_excluded_midle.html
-		docs\0045_bool_cases.html = docs\0045_bool_cases.html
-		docs\1_Introduzione.html = docs\1_Introduzione.html
-		docs\3_Liguaggio_HOL.html = docs\3_Liguaggio_HOL.html
-		docs\A5_Inference_Rules.html = docs\A5_Inference_Rules.html
-		docs\B1_Teorie.html = docs\B1_Teorie.html
-		docs\B2_Teoremi.html = docs\B2_Teoremi.html
-		docs\index.html = docs\index.html
-		docs\Teorie.xlsx = docs\Teorie.xlsx
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{DAD11A7D-1280-4F63-BBB5-828EB9EAAA1A}"
-	ProjectSection(SolutionItems) = preProject
-		docs\content\style.css = docs\content\style.css
-		docs\content\tips.js = docs\content\tips.js
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docsscipt", "docsscipt", "{F084FA05-9794-421F-ADDC-4561CD56A2FB}"
-	ProjectSection(SolutionItems) = preProject
-		generatedocs.fsx = generatedocs.fsx
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{69403268-3CC0-4F03-B2AF-BB616DEC0B2D}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "teoremi", "teoremi", "{45C51ED2-5DF6-44E6-B236-069DFB94A683}"
-	ProjectSection(SolutionItems) = preProject
-		manuale\teoremi\0001_truth.fsx = manuale\teoremi\0001_truth.fsx
-		manuale\teoremi\0002_fun_eq.fsx = manuale\teoremi\0002_fun_eq.fsx
-		manuale\teoremi\0003_not_true.fsx = manuale\teoremi\0003_not_true.fsx
-		manuale\teoremi\0004_not_false.fsx = manuale\teoremi\0004_not_false.fsx
-		manuale\teoremi\0005_true_not_eq_false.fsx = manuale\teoremi\0005_true_not_eq_false.fsx
-		manuale\teoremi\0006_not_dist_disj.fsx = manuale\teoremi\0006_not_dist_disj.fsx
-		manuale\teoremi\0007_conj_id.fsx = manuale\teoremi\0007_conj_id.fsx
-		manuale\teoremi\0008_conj_zero.fsx = manuale\teoremi\0008_conj_zero.fsx
-		manuale\teoremi\0009_conj_idem.fsx = manuale\teoremi\0009_conj_idem.fsx
-		manuale\teoremi\0010_conj_comm.fsx = manuale\teoremi\0010_conj_comm.fsx
-		manuale\teoremi\0011_conj_assoc.fsx = manuale\teoremi\0011_conj_assoc.fsx
-		manuale\teoremi\0012_conj_absorb_disj.fsx = manuale\teoremi\0012_conj_absorb_disj.fsx
-		manuale\teoremi\0013_conj_dist_right_disj.fsx = manuale\teoremi\0013_conj_dist_right_disj.fsx
-		manuale\teoremi\0014_conj_dist_left_disj.fsx = manuale\teoremi\0014_conj_dist_left_disj.fsx
-		manuale\teoremi\0015_conj_contr.fsx = manuale\teoremi\0015_conj_contr.fsx
-		manuale\teoremi\0016_disj_id.fsx = manuale\teoremi\0016_disj_id.fsx
-		manuale\teoremi\0017_disj_zero.fsx = manuale\teoremi\0017_disj_zero.fsx
-		manuale\teoremi\0018_disj_idem.fsx = manuale\teoremi\0018_disj_idem.fsx
-		manuale\teoremi\0019_disj_assoc.fsx = manuale\teoremi\0019_disj_assoc.fsx
-		manuale\teoremi\0020_disj_absorb_conj.fsx = manuale\teoremi\0020_disj_absorb_conj.fsx
-		manuale\teoremi\0021_disj_dist_right_conj.fsx = manuale\teoremi\0021_disj_dist_right_conj.fsx
-		manuale\teoremi\0022_disj_dist_left_conj.fsx = manuale\teoremi\0022_disj_dist_left_conj.fsx
-		manuale\teoremi\0023_imp_right_zero.fsx = manuale\teoremi\0023_imp_right_zero.fsx
-		manuale\teoremi\0024_disj_comm.fsx = manuale\teoremi\0024_disj_comm.fsx
-		manuale\teoremi\0025_imp_left_id.fsx = manuale\teoremi\0025_imp_left_id.fsx
-		manuale\teoremi\0026_imp_left_zero.fsx = manuale\teoremi\0026_imp_left_zero.fsx
-		manuale\teoremi\0027_imp_refl.fsx = manuale\teoremi\0027_imp_refl.fsx
-		manuale\teoremi\0028_imp_dist_left_disj.fsx = manuale\teoremi\0028_imp_dist_left_disj.fsx
-		manuale\teoremi\0029_imp_dist_right_conj.fsx = manuale\teoremi\0029_imp_dist_right_conj.fsx
-		manuale\teoremi\0030_forall_dist_conj.fsx = manuale\teoremi\0030_forall_dist_conj.fsx
-		manuale\teoremi\0031_forall_one_point.fsx = manuale\teoremi\0031_forall_one_point.fsx
-		manuale\teoremi\0032_forall_null.fsx = manuale\teoremi\0032_forall_null.fsx
-		manuale\teoremi\0033_select_eq.fsx = manuale\teoremi\0033_select_eq.fsx
-		manuale\teoremi\0034_exists_dist_disj.fsx = manuale\teoremi\0034_exists_dist_disj.fsx
-		manuale\teoremi\0035_exists_one_point.fsx = manuale\teoremi\0035_exists_one_point.fsx
-		manuale\teoremi\0036_exists_null.fsx = manuale\teoremi\0036_exists_null.fsx
-		manuale\teoremi\0044_excluded_midle.fsx = manuale\teoremi\0044_excluded_midle.fsx
-		manuale\teoremi\0045_bool_cases.fsx = manuale\teoremi\0045_bool_cases.fsx
 	EndProjectSection
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "nholz.tests", "nholz.tests\nholz.tests.fsproj", "{96A946EE-74FC-4835-A380-1468AA276C59}"
@@ -145,8 +49,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{40DAE171-1C4D-4008-A9E0-F611A61032AF} = {056F303E-08C0-476E-9A7E-2C71BC0F49A2}
-		{DAD11A7D-1280-4F63-BBB5-828EB9EAAA1A} = {FD66B3EA-18DF-4072-8DB1-39615AEA55AB}
-		{45C51ED2-5DF6-44E6-B236-069DFB94A683} = {08F988BE-4817-4730-BF1E-A8333BEA87E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C78457C6-63C7-4158-B6B2-4CDEE07ED89D}

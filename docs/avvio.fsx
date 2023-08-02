@@ -1,4 +1,4 @@
-#I "../bin/netstandard2.0"
+#I "../src/bin/Debug/net7.0"
 #r "nholz.dll"
 open HOL
 fsi.AddPrinter print_type

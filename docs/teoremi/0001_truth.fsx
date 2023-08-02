@@ -16,7 +16,7 @@ Bool.load
 (***unhide***)
 
 truth_thm
-// |- true
+(*** include-fsi-output ***)
 
 (**
 Backward proof with tree

@@ -69,7 +69,7 @@ e importare i relativi moduli:
 
 *)
 
-#I "../bin/netstandard2.0"
+#I "../src/bin/Debug/net7.0"
 #r "nholz.dll"
 open HOL
 
@@ -127,7 +127,7 @@ scorrono velocemente sullo schermo.
 
 (**
 
-il sistema &egrave; quindi pronto per ricevere i comandi dall'utente.
+il sistema è quindi pronto per ricevere i comandi dall'utente.
 Questi comandi sono di fatto espressioni F#.
 
 1.3 Panoramica d'uso
@@ -150,7 +150,7 @@ minore di `y` e `y` &egrave; minore di `z` allora `x` &egrave; minore di `z`'':
 *)
 
 @"!x y z. x < y /\ y < z ==> x < z" |> parse_term
-//val it : term = `!x y z. x < y /\ y < z ==> x < z`
+(*** include-fsi-output ***)
 
 (**
 
@@ -189,14 +189,14 @@ per evitare qualsiasi ambiguit&agrave; circa i tipi di ogni sottotermine.
 *)
 
 "!(w:nat) (x:nat) y z. w = x /\ y = z" |> parse_term
-// val it : term = `!(w:nat) x (y:'1) z. w = x /\ y = z`
+(*** include-fsi-output ***)
 
 (**
 I tipi HOL possono essere scritti fuori dal contesto di un termine usando la funzone `parse_type`. 
 *)
 
 "nat#nat->bool" |> parse_type
-// val it : hol_type = `:nat#nat->bool`
+(*** include-fsi-output ***)
 
 (**
 1.3.2 Teoremi, Dimostrazioni ed Asserzioni
@@ -212,7 +212,7 @@ nell'Appendice B2.
 *)
 
 excluded_middle_thm
-// val it : thm = |- !p. p \/ ~ p
+(*** include-fsi-output ***)
 
 (**
 Le regole di inferenza della logica HOL sono implementate in NHOLZ come funzioni F# che prendono 
