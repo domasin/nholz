@@ -1,0 +1,2546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Equal (nholz)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="nholz">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz/img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/nholz/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/nholz/"><img id="fsdocs-logo" src="/nholz/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/tactics.html">
+    tactics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/3_Liguaggio_HOL.html">
+    LINGUAGGIO HOL
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/avvio.html">
+    avvio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B1_Teorie.html">
+    TEORIE
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/1_Introduzione.html">
+    Introduzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B2_Teoremi.html">
+    TEOREMI
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/goaltree.html">
+    goaltree
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/A5_Inference_Rules.html">
+    Regole d&#39;inferenza
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0018_disj_idem.html">
+    Disj Idem
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0033_select_eq.html">
+    0033_select_eq
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0032_forall_null.html">
+    0032_forall_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0001_truth.html">
+    Vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0019_disj_assoc.html">
+    0019_disj_assoc
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0007_conj_id.html">
+    vero &amp;egrave; l&#39;identit&amp;agrave; della congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0028_imp_dist_left_disj.html">
+    0028_imp_dist_left_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0021_disj_dist_right_conj.html">
+    0021_disj_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0017_disj_zero.html">
+    Disj Zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0010_conj_comm.html">
+    Propriet&amp;agrave; commutatativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0031_forall_one_point.html">
+    0031_forall_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0005_true_not_eq_false.html">
+    Vero non equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0027_imp_refl.html">
+    0027_imp_refl
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0008_conj_zero.html">
+    congiunzione zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0014_conj_dist_left_disj.html">
+    distributivit&amp;agrave; a sinistra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0016_disj_id.html">
+    Disj Id
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0015_conj_contr.html">
+    0015_conj_contr
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0012_conj_absorb_disj.html">
+    assorbimento della disgiunzione nella congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0009_conj_idem.html">
+    congiunzione della stessa proposizione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0030_forall_dist_conj.html">
+    0030_forall_dist_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0026_imp_left_zero.html">
+    0026_imp_left_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0020_disj_absorb_conj.html">
+    0020_disj_absorb_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0036_exists_null.html">
+    0036_exists_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0025_imp_left_id.html">
+    0025_imp_left_id
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0029_imp_dist_right_conj.html">
+    0029_imp_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0004_not_false.html">
+    Non falso equivale a vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0034_exists_dist_disj.html">
+    0034_exists_dist_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0024_disj_comm.html">
+    commutabilit&amp;agrave; della disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0006_not_dist_disj.html">
+    distribuzione della negazione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0011_conj_assoc.html">
+    Propriet&amp;agrave; associativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0022_disj_dist_left_conj.html">
+    0022_disj_dist_left_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0003_not_true.html">
+    Non vero equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0023_imp_right_zero.html">
+    0023_imp_right_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0013_conj_dist_right_disj.html">
+    distributivit&amp;agrave; a destra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0044_excluded_midle.html">
+    Terzo escluso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0035_exists_one_point.html">
+    0035_exists_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0045_bool_cases.html">
+    Bool Cases
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0002_fun_eq.html">
+    Equivalenza tra funzioni
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/nholz/">nholz</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h2>
+    Equal Module
+  </h2>
+  <dl class="fsdocs-metadata">
+    <dt>
+      Namespace: 
+      <a href="/nholz/reference/hol.html">
+        HOL
+      </a>
+    </dt>
+    <dt>
+      Assembly: nholz.dll
+    </dt>
+  </dl>
+  <div class="fsdocs-xmldoc">
+    <div>
+      <p class="fsdocs-summary">
+        
+This module adds more constants and inference rules for basic reasoning
+using equality.                                                                                                       
+
+      </p>
+    </div>
+  </div>
+  <div>
+    <h3>
+      Functions and values
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Function or value
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '224', 224)" onmouseover="showTip(event, '224', 224)">
+                <p>
+                  <a id="alpha_conv">
+                    <a href="#alpha_conv">
+                      <code><span>alpha_conv&#32;<span>u&#32;tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="224">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>alpha_conv&#32;<span>u&#32;tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        u
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Equal.alpha_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Equal.alpha_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the alpha renaming conversion.  It replaces the binding variable   
+ and all occurrences of it in the supplied lambda abstraction term (the 2nd 
+ argument) with the supplied variable (the 1st argument).  The supplied     
+ variable must have the same type as the original binding variable, and     
+ must not occur free in the original body.                                  
+                                                                            
+          `y`   `\x. t`                                                    
+    -------------------------                                              
+    |- (\x. t) = (\y. t[y/x])                                              
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    u
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '225', 225)" onmouseover="showTip(event, '225', 225)">
+                <p>
+                  <a id="alpha_link_conv">
+                    <a href="#alpha_link_conv">
+                      <code><span>alpha_link_conv&#32;<span>tm'&#32;tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="225">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>alpha_link_conv&#32;<span>tm'&#32;tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm'
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Equal.alpha_link_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Equal.alpha_link_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the alpha linking conversion.  It takes two alpha-equivalent terms 
+ and returns a theorem stating that the second is equal to the first, under 
+ no assumptions.  Fails if the supplied terms are not alpha-equivalent.     
+                                                                            
+    `t'`   `t`                                                              
+    ----------                                                              
+    |- t = t'                                                               
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm'
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '226', 226)" onmouseover="showTip(event, '226', 226)">
+                <p>
+                  <a id="app_beta_rhs_rule">
+                    <a href="#app_beta_rhs_rule">
+                      <code><span>app_beta_rhs_rule&#32;<span>th0&#32;z</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="226">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>app_beta_rhs_rule&#32;<span>th0&#32;z</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        th0
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        z
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Equal.app_beta_rhs_rule`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Equal.app_beta_rhs_rule\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This rule is for expanding a function defined in terms of a lambda         
+ abstraction.  It takes an equality theorem and a term argument, where the  
+ theorem RHS is a lambda abstraction with a binding variable of the same    
+ type as the term argument.  It returns a theorem stating that the theorem  
+ argument's LHS applied to the term argument is equal to the beta reduction 
+ of the lambda abstraction applied to the term argument.                    
+                                                                            
+    A |- f = (\v. t)   `s`                                                  
+    ----------------------                                                  
+      A |- f s = t[s/v]                                                     
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    th0
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    z
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '227', 227)" onmouseover="showTip(event, '227', 227)">
+                <p>
+                  <a id="app_beta_rule">
+                    <a href="#app_beta_rule">
+                      <code><span>app_beta_rule&#32;<span>th0&#32;tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="227">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>app_beta_rule&#32;<span>th0&#32;tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        th0
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Equal.app_beta_rule`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Equal.app_beta_rule\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ app_beta_rule : thm -> term -> thm  
+                                     
+    A |- (\v1. t1) = (\v2. t2)   `s` 
+    -------------------------------- 
+       A |- t1[s/v1] = t2[s/v2]      
+
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    th0
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '228', 228)" onmouseover="showTip(event, '228', 228)">
+                <p>
+                  <a id="beta_thm_rule">
+                    <a href="#beta_thm_rule">
+                      <code><span>beta_thm_rule&#32;<span>th0&#32;th</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="228">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>beta_thm_rule&#32;<span>th0&#32;th</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        th0
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        th
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  th0
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  th
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '229', 229)" onmouseover="showTip(event, '229', 229)">
+                <p>
+                  <a id="conv_rule">
+                    <a href="#conv_rule">
+                      <code><span>conv_rule&#32;<span>conv&#32;th</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="229">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>conv_rule&#32;<span>conv&#32;th</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        conv
+                      </b>
+                      :
+                      <code><span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;->&#32;<a href="/nholz/reference/hol-thm-thm.html">thm</a></span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        th
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  conv
+                </span>
+                :
+                <code><span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;->&#32;<a href="/nholz/reference/hol-thm-thm.html">thm</a></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  th
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '230', 230)" onmouseover="showTip(event, '230', 230)">
+                <p>
+                  <a id="dest_let">
+                    <a href="#dest_let">
+                      <code><span>dest_let&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="230">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>dest_let&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><span>(<span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;*&#32;<a href="/nholz/reference/hol-term-term.html">term</a></span>)</span>&#32;list</span>&#32;*&#32;<a href="/nholz/reference/hol-term-term.html">term</a></span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><span>(<span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;*&#32;<a href="/nholz/reference/hol-term-term.html">term</a></span>)</span>&#32;list</span>&#32;*&#32;<a href="/nholz/reference/hol-term-term.html">term</a></span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '231', 231)" onmouseover="showTip(event, '231', 231)">
+                <p>
+                  <a id="is_let">
+                    <a href="#is_let">
+                      <code><span>is_let&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="231">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>is_let&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '232', 232)" onmouseover="showTip(event, '232', 232)">
+                <p>
+                  <a id="let_def">
+                    <a href="#let_def">
+                      <code><span>let_def&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="232">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>let_def&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.Equal.let_def`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.Equal.let_def\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ The internal constant for let-expressions is called "LET".  It has special
+ support in the parser/printer, so that the quotation                      
+    `let x1 = s1 and x2 = s2 in t`                                         
+ is parsed/printed for the internal term                                   
+    `LET (LET (\x1 x2. t) s1) s2`.                                         
+
+ |- LET = (\(f:'a->'b) x. f x) 
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '233', 233)" onmouseover="showTip(event, '233', 233)">
+                <p>
+                  <a id="list_app_beta_rhs_rule">
+                    <a href="#list_app_beta_rhs_rule">
+                      <code><span>list_app_beta_rhs_rule&#32;<span>th0&#32;zs</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="233">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>list_app_beta_rhs_rule&#32;<span>th0&#32;zs</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        th0
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        zs
+                      </b>
+                      :
+                      <code><span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;list</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  th0
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  zs
+                </span>
+                :
+                <code><span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '234', 234)" onmouseover="showTip(event, '234', 234)">
+                <p>
+                  <a id="list_app_beta_rule">
+                    <a href="#list_app_beta_rule">
+                      <code><span>list_app_beta_rule&#32;<span>th0&#32;tms</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="234">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>list_app_beta_rule&#32;<span>th0&#32;tms</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        th0
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tms
+                      </b>
+                      :
+                      <code><span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;list</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  th0
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tms
+                </span>
+                :
+                <code><span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '235', 235)" onmouseover="showTip(event, '235', 235)">
+                <p>
+                  <a id="list_beta_thm_rule">
+                    <a href="#list_beta_thm_rule">
+                      <code><span>list_beta_thm_rule&#32;<span>th0&#32;ths</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="235">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>list_beta_thm_rule&#32;<span>th0&#32;ths</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        th0
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ths
+                      </b>
+                      :
+                      <code><span><a href="/nholz/reference/hol-thm-thm.html">thm</a>&#32;list</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  th0
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ths
+                </span>
+                :
+                <code><span><a href="/nholz/reference/hol-thm-thm.html">thm</a>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '236', 236)" onmouseover="showTip(event, '236', 236)">
+                <p>
+                  <a id="list_trans_rule">
+                    <a href="#list_trans_rule">
+                      <code><span>list_trans_rule&#32;<span>ths</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="236">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>list_trans_rule&#32;<span>ths</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        ths
+                      </b>
+                      :
+                      <code><span><a href="/nholz/reference/hol-thm-thm.html">thm</a>&#32;list</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ths
+                </span>
+                :
+                <code><span><a href="/nholz/reference/hol-thm-thm.html">thm</a>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '237', 237)" onmouseover="showTip(event, '237', 237)">
+                <p>
+                  <a id="load">
+                    <a href="#load">
+                      <code><span>load&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="237">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>load&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span>(<span>string&#32;*&#32;<a href="/nholz/reference/hol-thm-thm.html">thm</a></span>)</span>&#32;list</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.Equal.load`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.Equal.load\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ Force module evaluation
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><span>(<span>string&#32;*&#32;<a href="/nholz/reference/hol-thm-thm.html">thm</a></span>)</span>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '238', 238)" onmouseover="showTip(event, '238', 238)">
+                <p>
+                  <a id="mk_comb1_rule">
+                    <a href="#mk_comb1_rule">
+                      <code><span>mk_comb1_rule&#32;<span>th&#32;tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="238">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>mk_comb1_rule&#32;<span>th&#32;tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        th
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Equal.mk_comb1_rule`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Equal.mk_comb1_rule\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the equality congruence rule for function application functions.
+ It takes an equality theorem over functions and a term, and supplies the
+ term as the argument to each side of the theorem.  The type of the      
+ supplied term must be the same as the domain type of the functions.     
+                                                                         
+    A |- f1 = f2   `t`                                                   
+    ------------------                                                   
+     A |- f1 t = f2 t                                                    
+
+ See also: mk_comb2_rule, mk_comb_rule.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    th
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '239', 239)" onmouseover="showTip(event, '239', 239)">
+                <p>
+                  <a id="mk_comb2_rule">
+                    <a href="#mk_comb2_rule">
+                      <code><span>mk_comb2_rule&#32;<span>tm&#32;th</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="239">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>mk_comb2_rule&#32;<span>tm&#32;th</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        th
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Equal.mk_comb2_rule`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Equal.mk_comb2_rule\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the equality congruence rule for function application arguments.  
+ It takes a function term and an equality theorem, and applies the function
+ to each side of the theorem.  The domain type of the supplied function    
+ must be the same as the type of the theorem LHS/RHS.                      
+                                                                           
+    `f`   A |- t1 = t2                                                     
+    ------------------                                                     
+     A |- f t1 = f t2                                                      
+
+ See also: mk_comb1_rule, mk_comb_rule.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    th
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '240', 240)" onmouseover="showTip(event, '240', 240)">
+                <p>
+                  <a id="mk_let">
+                    <a href="#mk_let">
+                      <code><span>mk_let&#32;<span><span>(<span>vtms,&#32;tm0</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="240">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>mk_let&#32;<span><span>(<span>vtms,&#32;tm0</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        vtms
+                      </b>
+                      :
+                      <code><span><span>(<span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;*&#32;<a href="/nholz/reference/hol-term-term.html">term</a></span>)</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tm0
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  vtms
+                </span>
+                :
+                <code><span><span>(<span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;*&#32;<a href="/nholz/reference/hol-term-term.html">term</a></span>)</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm0
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '241', 241)" onmouseover="showTip(event, '241', 241)">
+                <p>
+                  <a id="onto_def">
+                    <a href="#onto_def">
+                      <code><span>onto_def&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="241">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>onto_def&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.Equal.onto_def`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.Equal.onto_def\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ ONTO
+
+ |- ONTO = (\(f:'a->'b). !y. ?x. y = f x)
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '242', 242)" onmouseover="showTip(event, '242', 242)">
+                <p>
+                  <a id="subs_conv">
+                    <a href="#subs_conv">
+                      <code><span>subs_conv&#32;<span>ths&#32;tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="242">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>subs_conv&#32;<span>ths&#32;tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        ths
+                      </b>
+                      :
+                      <code><span><a href="/nholz/reference/hol-thm-thm.html">thm</a>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Equal.subs_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Equal.subs_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the basic substitution conversion.  It takes a list of equality   
+ theorems and a term, and transforms the term by performing a single       
+ parallel substitution of its free subterms according to the equality      
+ theorems.  All free occurrences of equality theorem LHSs in the term get  
+ replaced.  The resulting theorem has the unioned assumptions of all the   
+ supplied theorems (regardless of whether they apply to the supplied       
+ theorem).                                                                 
+                                                                           
+ Binding variables in the resulting theorem's RHS are renamed as necessary 
+ to avoid variable capture.  Note that if one equality theorem's LHS occurs
+ free in another's, then the theorem with the larger LHS gets used in      
+ preference, and if two equality theorems have alpha-equivalent LHSs, then 
+ the earlier theorem in the list gets used in preference.  If no equality  
+ theorems apply, then the returned theorem's conclusion's RHS is the same  
+ as its LHS.                                                               
+                                                                           
+    A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`                               
+    ----------------------------------------                               
+     A1 u A2 u .. |- t = t[t1/s1,t2/s2,..]   
+
+ See also: subs_rule, subst_conv, inst_rule.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ths
+                  </span>
+                  :
+                  <code><span><a href="/nholz/reference/hol-thm-thm.html">thm</a>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '243', 243)" onmouseover="showTip(event, '243', 243)">
+                <p>
+                  <a id="subs_rule">
+                    <a href="#subs_rule">
+                      <code><span>subs_rule&#32;<span>ths&#32;th</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="243">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>subs_rule&#32;<span>ths&#32;th</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        ths
+                      </b>
+                      :
+                      <code><span><a href="/nholz/reference/hol-thm-thm.html">thm</a>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        th
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Equal.subs_rule`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Equal.subs_rule\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the basic substitution rule.  It takes a list of equality theorems
+ and a theorem, and performs a single parallel substitution of free        
+ subterms in the theorem's conclusion according to the equality theorems.  
+ All free occurrences of equality theorem LHSs in the theorem get replaced.
+ The resulting theorem has the unioned assumptions of all the supplied     
+ theorems (regardless of whether they apply to the supplied theorem).      
+                                                                           
+ Binding variables in the resulting theorem are renamed as necessary to    
+ avoid variable capture.  Note that if one equality theorem's LHS occurs   
+ free in another's, then the theorem with the larger LHS gets used in      
+ preference, and if two equality theorems have alpha-equivalent LHSs, then 
+ the earlier theorem in the list gets used in preference.  If no equality  
+ theorems apply, then the returned theorem's conclusion is the same as the 
+ input's.                                                                  
+                                                                           
+    A1 |- s1 = t1   A2 |- s2 = t2   ..    A |- t                           
+    --------------------------------------------                           
+         A1 u A2 u .. |- t[t1/s1,t2/s2,..]                                 
+
+ See also: subs_conv, subst_rule, inst_rule.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ths
+                  </span>
+                  :
+                  <code><span><a href="/nholz/reference/hol-thm-thm.html">thm</a>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    th
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '244', 244)" onmouseover="showTip(event, '244', 244)">
+                <p>
+                  <a id="subst_conv">
+                    <a href="#subst_conv">
+                      <code><span>subst_conv&#32;<span>vths&#32;tmp&#32;tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="244">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>subst_conv&#32;<span>vths&#32;tmp&#32;tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        vths
+                      </b>
+                      :
+                      <code><span><span>(<span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;*&#32;<a href="/nholz/reference/hol-thm-thm.html">thm</a></span>)</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tmp
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Equal.subst_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Equal.subst_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the template substitution conversion.  It takes a substitution    
+ scheme (in the form of an association list and a template term) followed  
+ by a main term, and transforms the main term by performing a single       
+ parallel substitution of its free subterms, according to the substitution 
+ scheme.  The template term determines which free occurrences of equality  
+ theorem LHSs in the main term get replaced, and reflects the syntactic    
+ structure of the term, except having template variable atoms in place of  
+ subterms due for replacement.  The association list maps each template    
+ variable to an equality theorem, with equality theorem LHS for the main   
+ term's original subterm and RHS for the subterm that replaces it.  The    
+ resulting theorem has the unioned assumptions of all the supplied theorems
+ (regardless of whether they apply to the supplied template).              
+                                                                           
+ Binding variables in the resulting theorem are renamed as necessary to    
+ avoid variable capture.  Note that if two entries appear in the           
+ association list for the same template variable, then the earlier entry   
+ gets used, and that entries for variables that don't appear in the        
+ template are ignored.  If no entries apply, then the returned theorem's   
+ conclusion's RHS is the same as its LHS.                                  
+                                                                           
+       `v1`           `v2`          ..                                     
+    A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`   `t[s1/v1,s2/v2,..]`         
+    --------------------------------------------------------------         
+        A1 u A2 u .. |- t[s1/v1,s2/v2,..] = t[t1/v1,t2/v2,..]              
+
+ See also: subst_rule, subs_conv, inst_rule.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    vths
+                  </span>
+                  :
+                  <code><span><span>(<span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;*&#32;<a href="/nholz/reference/hol-thm-thm.html">thm</a></span>)</span>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tmp
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '245', 245)" onmouseover="showTip(event, '245', 245)">
+                <p>
+                  <a id="subst_rule">
+                    <a href="#subst_rule">
+                      <code><span>subst_rule&#32;<span>vths&#32;tmp&#32;th</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="245">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>subst_rule&#32;<span>vths&#32;tmp&#32;th</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        vths
+                      </b>
+                      :
+                      <code><span><span>(<span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;*&#32;<a href="/nholz/reference/hol-thm-thm.html">thm</a></span>)</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tmp
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        th
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Equal.subst_rule`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Equal.subst_rule\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the template substitution rule.  It takes a substitution scheme    
+ (in the form of an association list and a template term) followed by a     
+ theorem, and performs a single parallel substitution of free subterms in   
+ the theorem's conclusion, according to the substitution scheme.  The       
+ template term determines which free occurrences of equality theorem LHSs   
+ in the supplied theorem get replaced, and reflects the syntactic structure 
+ of the theorem's conclusion, except having template variable atoms in      
+ place of subterms due for replacement.  The association list maps each     
+ template variable to an equality theorem, with equality theorem LHS for    
+ the supplied theorem's original subterm and RHS for the subterm that       
+ replaces it.  The resulting theorem has the unioned assumptions of all the 
+ supplied theorems (regardless of whether they apply to the supplied        
+ template).                                                                 
+                                                                            
+ Abstraction variables in the resulting theorem are renamed as necessary to 
+ avoid variable capture.  Note that if two entries appear in the            
+ association list for the same template variable, then the earlier entry    
+ gets used, and that entries for variables that don't appear in the         
+ template are ignored.  If no entries apply, then the returned theorem's    
+ conclusion is the same as the input's.                                     
+                                                                            
+      `v1`            `v2`          ..                                      
+    A1 |- s1 = t1   A2 |- s2 = t2   ..   `t`   A |- t[s1/v1,s2/v2,..]       
+    -----------------------------------------------------------------       
+                   A1 u A2 u .. |- t[t1/v1,t2/v2,..]                        
+
+ See also: subst_conv, subs_rule, inst_rule.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    vths
+                  </span>
+                  :
+                  <code><span><span>(<span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;*&#32;<a href="/nholz/reference/hol-thm-thm.html">thm</a></span>)</span>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tmp
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    th
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '246', 246)" onmouseover="showTip(event, '246', 246)">
+                <p>
+                  <a id="sym_rule">
+                    <a href="#sym_rule">
+                      <code><span>sym_rule&#32;<span>th</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="246">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>sym_rule&#32;<span>th</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        th
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Equal.sym_rule`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Equal.sym_rule\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the symmetry rule for equality.  It swaps the LHS with the RHS in 
+ the supplied equality theorem.                                            
+                                                                           
+    A |- t1 = t2                                                           
+    ------------                                                           
+    A |- t2 = t1                                                           
+
+ See also: sym_conv, refl_conv, trans_rule.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    th
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '247', 247)" onmouseover="showTip(event, '247', 247)">
+                <p>
+                  <a id="trans_rule">
+                    <a href="#trans_rule">
+                      <code><span>trans_rule&#32;<span>tha&#32;thb</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="247">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>trans_rule&#32;<span>tha&#32;thb</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tha
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        thb
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Equal.trans_rule`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Equal.trans_rule\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the transitivity rule for equality.  It takes two equality theorem 
+ arguments, where the first theorem's RHS is the same (modulo alpha-        
+ equivalence) as the second theorem's LHS.  It returns a theorem stating    
+ that the first theorem's LHS equals the second theorem's RHS, under the    
+ unioned assumptions of the two theorems.                                   
+                                                                            
+    A1 |- t1 = t2    A2 |- t2 = t3                                          
+    ------------------------------                                          
+          A1 u A2 |- t1 = t3                                                
+
+ See also: list_trans_rule, refl_conv, sym_rule, imp_trans_rule.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tha
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    thb
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>CoreThry (nholz)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="nholz">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz/img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/nholz/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/nholz/"><img id="fsdocs-logo" src="/nholz/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/tactics.html">
+    tactics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/3_Liguaggio_HOL.html">
+    LINGUAGGIO HOL
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/avvio.html">
+    avvio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B1_Teorie.html">
+    TEORIE
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/1_Introduzione.html">
+    Introduzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B2_Teoremi.html">
+    TEOREMI
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/goaltree.html">
+    goaltree
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/A5_Inference_Rules.html">
+    Regole d&#39;inferenza
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0018_disj_idem.html">
+    Disj Idem
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0033_select_eq.html">
+    0033_select_eq
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0032_forall_null.html">
+    0032_forall_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0001_truth.html">
+    Vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0019_disj_assoc.html">
+    0019_disj_assoc
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0007_conj_id.html">
+    vero &amp;egrave; l&#39;identit&amp;agrave; della congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0028_imp_dist_left_disj.html">
+    0028_imp_dist_left_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0021_disj_dist_right_conj.html">
+    0021_disj_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0017_disj_zero.html">
+    Disj Zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0010_conj_comm.html">
+    Propriet&amp;agrave; commutatativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0031_forall_one_point.html">
+    0031_forall_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0005_true_not_eq_false.html">
+    Vero non equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0027_imp_refl.html">
+    0027_imp_refl
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0008_conj_zero.html">
+    congiunzione zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0014_conj_dist_left_disj.html">
+    distributivit&amp;agrave; a sinistra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0016_disj_id.html">
+    Disj Id
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0015_conj_contr.html">
+    0015_conj_contr
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0012_conj_absorb_disj.html">
+    assorbimento della disgiunzione nella congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0009_conj_idem.html">
+    congiunzione della stessa proposizione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0030_forall_dist_conj.html">
+    0030_forall_dist_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0026_imp_left_zero.html">
+    0026_imp_left_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0020_disj_absorb_conj.html">
+    0020_disj_absorb_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0036_exists_null.html">
+    0036_exists_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0025_imp_left_id.html">
+    0025_imp_left_id
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0029_imp_dist_right_conj.html">
+    0029_imp_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0004_not_false.html">
+    Non falso equivale a vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0034_exists_dist_disj.html">
+    0034_exists_dist_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0024_disj_comm.html">
+    commutabilit&amp;agrave; della disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0006_not_dist_disj.html">
+    distribuzione della negazione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0011_conj_assoc.html">
+    Propriet&amp;agrave; associativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0022_disj_dist_left_conj.html">
+    0022_disj_dist_left_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0003_not_true.html">
+    Non vero equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0023_imp_right_zero.html">
+    0023_imp_right_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0013_conj_dist_right_disj.html">
+    distributivit&amp;agrave; a destra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0044_excluded_midle.html">
+    Terzo escluso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0035_exists_one_point.html">
+    0035_exists_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0045_bool_cases.html">
+    Bool Cases
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0002_fun_eq.html">
+    Equivalenza tra funzioni
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/nholz/">nholz</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h2>
+    CoreThry Module
+  </h2>
+  <dl class="fsdocs-metadata">
+    <dt>
+      Namespace: 
+      <a href="/nholz/reference/hol.html">
+        HOL
+      </a>
+    </dt>
+    <dt>
+      Assembly: nholz.dll
+    </dt>
+  </dl>
+  <div class="fsdocs-xmldoc">
+    <div>
+      <p class="fsdocs-summary">
+        
+This module completes the logical core for HOL by defining the core       
+theory.  This involves giving declarations, definitions and axioms for all
+the HOL theory objects anticipated by the language and inference kernels. 
+
+      </p>
+    </div>
+  </div>
+  <div>
+    <h3>
+      Functions and values
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Function or value
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '136', 136)" onmouseover="showTip(event, '136', 136)">
+                <p>
+                  <a id="bool_ty">
+                    <a href="#bool_ty">
+                      <code><span>bool_ty&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="136">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bool_ty&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-type-hol_type.html">hol_type</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-type-hol_type.html">hol_type</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '137', 137)" onmouseover="showTip(event, '137', 137)">
+                <p>
+                  <a id="conj_def">
+                    <a href="#conj_def">
+                      <code><span>conj_def&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="137">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>conj_def&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.CoreThry.conj_def`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.CoreThry.conj_def\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ Conjunction is defined here using implication and the universal         
+ quantifier, as the binary function that returns whether, for any boolean
+ value, the arguments together implying the value necessarily implies the
+ value.                                                                  
+
+ |- $/\ = (\p1 p2. !p. (p1 ==> (p2 ==> p)) ==> p)
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '138', 138)" onmouseover="showTip(event, '138', 138)">
+                <p>
+                  <a id="eta_ax">
+                    <a href="#eta_ax">
+                      <code><span>eta_ax&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="138">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eta_ax&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.CoreThry.eta_ax`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.CoreThry.eta_ax\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This axiom states that, for any given function, the lambda abstraction  
+ formed by applying the function to the binding variable is equal to the 
+ function.                                                               
+
+ |- !(f:'a->'b). (\x. f x) = f
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '139', 139)" onmouseover="showTip(event, '139', 139)">
+                <p>
+                  <a id="exists_def">
+                    <a href="#exists_def">
+                      <code><span>exists_def&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="139">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>exists_def&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.CoreThry.exists_def`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.CoreThry.exists_def\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ The existential quantifier is defined using just selection, as the      
+ function that returns whether any element selected as satisfying the    
+ function's predicate argument necessarily satisfies the predicate.  Note
+ that if there is no element satisfying the predicate, then not even the 
+ result of the selection operation can satisfy the predicate.            
+
+ |- $? = (\(P:'a->bool). P ($@ P))
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '140', 140)" onmouseover="showTip(event, '140', 140)">
+                <p>
+                  <a id="forall_def">
+                    <a href="#forall_def">
+                      <code><span>forall_def&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="140">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>forall_def&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.CoreThry.forall_def`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.CoreThry.forall_def\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ The universal quantifier is defined using equality and truth, simply as  
+ the function that returns whether its predicate argument returns true for
+ every input.                                                             
+
+ |- $! = (\(P:'a->bool). P = (\x. true))
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '141', 141)" onmouseover="showTip(event, '141', 141)">
+                <p>
+                  <a id="imp_antisym_ax">
+                    <a href="#imp_antisym_ax">
+                      <code><span>imp_antisym_ax&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="141">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>imp_antisym_ax&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.CoreThry.imp_antisym_ax`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.CoreThry.imp_antisym_ax\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This axiom states the antisymmetry property for implication.
+
+ |- !p1 p2. (p1 ==> p2) ==> ((p2 ==> p1) ==> (p1 <=> p2))
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '142', 142)" onmouseover="showTip(event, '142', 142)">
+                <p>
+                  <a id="load">
+                    <a href="#load">
+                      <code><span>load&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="142">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>load&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span>(<span>string&#32;*&#32;<a href="/nholz/reference/hol-thm-thm.html">thm</a></span>)</span>&#32;list</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span>(<span>string&#32;*&#32;<a href="/nholz/reference/hol-thm-thm.html">thm</a></span>)</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '143', 143)" onmouseover="showTip(event, '143', 143)">
+                <p>
+                  <a id="one_one_def">
+                    <a href="#one_one_def">
+                      <code><span>one_one_def&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="143">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>one_one_def&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.CoreThry.one_one_def`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.CoreThry.one_one_def\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ The one-to-one predicate is defined as the function that returns whether 
+ its function argument having the same result when applied to two elements
+ necessarily implies that the two elements are equal.                     
+
+ |- ONE_ONE = (\(f:'a->'b). !x1 x2. f x1 = f x2 ==> x1 = x2)
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '144', 144)" onmouseover="showTip(event, '144', 144)">
+                <p>
+                  <a id="select_ax">
+                    <a href="#select_ax">
+                      <code><span>select_ax&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="144">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>select_ax&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.CoreThry.select_ax`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.CoreThry.select_ax\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This axiom states a crucial property about the selection operator, namely
+ that any element satisfying a given predicate implies that the selected  
+ element for the predicate satisfies the predicate.  Note that it says    
+ nothing about when there is no element that can satisfy the predicate.   
+
+ |- !(P:'a->bool) x. P x ==> P ($@ P)
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '145', 145)" onmouseover="showTip(event, '145', 145)">
+                <p>
+                  <a id="true_def">
+                    <a href="#true_def">
+                      <code><span>true_def&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="145">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>true_def&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.CoreThry.true_def`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.CoreThry.true_def\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ It is the instance of the equality reflexive property for the boolean      
+ identity function.
+
+ |- true <=> (\(p:bool). p) = (\p. p)
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '146', 146)" onmouseover="showTip(event, '146', 146)">
+                <p>
+                  <a id="true_tm">
+                    <a href="#true_tm">
+                      <code><span>true_tm&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="146">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>true_tm&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '147', 147)" onmouseover="showTip(event, '147', 147)">
+                <p>
+                  <a id="type_definition_def">
+                    <a href="#type_definition_def">
+                      <code><span>type_definition_def&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="147">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>type_definition_def&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.CoreThry.type_definition_def`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.CoreThry.type_definition_def\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This predicate is used in the theorem created by the primitive type     
+ constant definition command to assert that there is a bijection from the
+ new type to its representation type.  It is defined as the function that
+ takes a characteristic function (a predicate for elements of the        
+ representation type) and a representation function (mapping elements of 
+ the new type to the representation type), and returns whether the       
+ representation function is one-to-one and maps onto precisely those     
+ elements in the representation type that satisfy the characteristic     
+ function.                                                               
+
+ |- TYPE_DEFINITION = (\P (rep:'b->'a). ONE_ONE rep /\ (!x. P x <=> (?y. x = rep y)))
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>

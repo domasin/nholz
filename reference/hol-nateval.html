@@ -1,0 +1,5335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>NatEval (nholz)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="nholz">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz/img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/nholz/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/nholz/"><img id="fsdocs-logo" src="/nholz/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/tactics.html">
+    tactics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/3_Liguaggio_HOL.html">
+    LINGUAGGIO HOL
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/avvio.html">
+    avvio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B1_Teorie.html">
+    TEORIE
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/1_Introduzione.html">
+    Introduzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B2_Teoremi.html">
+    TEOREMI
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/goaltree.html">
+    goaltree
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/A5_Inference_Rules.html">
+    Regole d&#39;inferenza
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0018_disj_idem.html">
+    Disj Idem
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0033_select_eq.html">
+    0033_select_eq
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0032_forall_null.html">
+    0032_forall_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0001_truth.html">
+    Vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0019_disj_assoc.html">
+    0019_disj_assoc
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0007_conj_id.html">
+    vero &amp;egrave; l&#39;identit&amp;agrave; della congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0028_imp_dist_left_disj.html">
+    0028_imp_dist_left_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0021_disj_dist_right_conj.html">
+    0021_disj_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0017_disj_zero.html">
+    Disj Zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0010_conj_comm.html">
+    Propriet&amp;agrave; commutatativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0031_forall_one_point.html">
+    0031_forall_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0005_true_not_eq_false.html">
+    Vero non equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0027_imp_refl.html">
+    0027_imp_refl
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0008_conj_zero.html">
+    congiunzione zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0014_conj_dist_left_disj.html">
+    distributivit&amp;agrave; a sinistra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0016_disj_id.html">
+    Disj Id
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0015_conj_contr.html">
+    0015_conj_contr
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0012_conj_absorb_disj.html">
+    assorbimento della disgiunzione nella congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0009_conj_idem.html">
+    congiunzione della stessa proposizione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0030_forall_dist_conj.html">
+    0030_forall_dist_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0026_imp_left_zero.html">
+    0026_imp_left_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0020_disj_absorb_conj.html">
+    0020_disj_absorb_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0036_exists_null.html">
+    0036_exists_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0025_imp_left_id.html">
+    0025_imp_left_id
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0029_imp_dist_right_conj.html">
+    0029_imp_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0004_not_false.html">
+    Non falso equivale a vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0034_exists_dist_disj.html">
+    0034_exists_dist_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0024_disj_comm.html">
+    commutabilit&amp;agrave; della disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0006_not_dist_disj.html">
+    distribuzione della negazione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0011_conj_assoc.html">
+    Propriet&amp;agrave; associativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0022_disj_dist_left_conj.html">
+    0022_disj_dist_left_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0003_not_true.html">
+    Non vero equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0023_imp_right_zero.html">
+    0023_imp_right_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0013_conj_dist_right_disj.html">
+    distributivit&amp;agrave; a destra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0044_excluded_midle.html">
+    Terzo escluso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0035_exists_one_point.html">
+    0035_exists_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0045_bool_cases.html">
+    Bool Cases
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0002_fun_eq.html">
+    Equivalenza tra funzioni
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/nholz/">nholz</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h2>
+    NatEval Module
+  </h2>
+  <dl class="fsdocs-metadata">
+    <dt>
+      Namespace: 
+      <a href="/nholz/reference/hol.html">
+        HOL
+      </a>
+    </dt>
+    <dt>
+      Assembly: nholz.dll
+    </dt>
+  </dl>
+  <div class="fsdocs-xmldoc">
+    <div>
+      <p class="fsdocs-summary">
+        
+This module defines conversions for evaluating arithmetic operations on 
+natual number numerals.  Because large proofs may involve heavy numeric 
+computation, special consideration is given to the efficieny of these   
+functions.                                                              
+
+      </p>
+    </div>
+  </div>
+  <div>
+    <h3>
+      Types
+    </h3>
+    <table class="table outer-list fsdocs-entity-list">
+      <thead>
+        <tr>
+          <td>
+            Type
+          </td>
+          <td>
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-entity-name">
+            <p>
+              <a name="destructed_bit">
+                <a href="/nholz/reference/hol-nateval-destructed_bit.html">
+                  destructed_bit
+                </a>
+              </a>
+            </p>
+          </td>
+          <td class="fsdocs-entity-xmldoc">
+            <div>
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.NatEval.destructed_bit`')">
+                <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.NatEval.destructed_bit\'/>')">
+                <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>
+      Functions and values
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Function or value
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '603', 603)" onmouseover="showTip(event, '603', 603)">
+                <p>
+                  <a id="add_id_thm0">
+                    <a href="#add_id_thm0">
+                      <code><span>add_id_thm0&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="603">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>add_id_thm0&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '604', 604)" onmouseover="showTip(event, '604', 604)">
+                <p>
+                  <a id="add_sub_lemma">
+                    <a href="#add_sub_lemma">
+                      <code><span>add_sub_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="604">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>add_sub_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '605', 605)" onmouseover="showTip(event, '605', 605)">
+                <p>
+                  <a id="add_zero_lemma">
+                    <a href="#add_zero_lemma">
+                      <code><span>add_zero_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="605">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>add_zero_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '606', 606)" onmouseover="showTip(event, '606', 606)">
+                <p>
+                  <a id="bit0_add_bit0_lemma">
+                    <a href="#bit0_add_bit0_lemma">
+                      <code><span>bit0_add_bit0_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="606">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit0_add_bit0_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '607', 607)" onmouseover="showTip(event, '607', 607)">
+                <p>
+                  <a id="bit0_add_bit1_lemma">
+                    <a href="#bit0_add_bit1_lemma">
+                      <code><span>bit0_add_bit1_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="607">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit0_add_bit1_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '608', 608)" onmouseover="showTip(event, '608', 608)">
+                <p>
+                  <a id="bit0_adddef_thm">
+                    <a href="#bit0_adddef_thm">
+                      <code><span>bit0_adddef_thm&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="608">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit0_adddef_thm&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '609', 609)" onmouseover="showTip(event, '609', 609)">
+                <p>
+                  <a id="bit0_eq_bit0_lemma">
+                    <a href="#bit0_eq_bit0_lemma">
+                      <code><span>bit0_eq_bit0_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="609">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit0_eq_bit0_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '610', 610)" onmouseover="showTip(event, '610', 610)">
+                <p>
+                  <a id="bit0_eq_bit1_lemma">
+                    <a href="#bit0_eq_bit1_lemma">
+                      <code><span>bit0_eq_bit1_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="610">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit0_eq_bit1_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '611', 611)" onmouseover="showTip(event, '611', 611)">
+                <p>
+                  <a id="bit0_eq_zero_lemma">
+                    <a href="#bit0_eq_zero_lemma">
+                      <code><span>bit0_eq_zero_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="611">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit0_eq_zero_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '612', 612)" onmouseover="showTip(event, '612', 612)">
+                <p>
+                  <a id="bit0_even_lemma">
+                    <a href="#bit0_even_lemma">
+                      <code><span>bit0_even_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="612">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit0_even_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '613', 613)" onmouseover="showTip(event, '613', 613)">
+                <p>
+                  <a id="bit0_le_bit0_lemma">
+                    <a href="#bit0_le_bit0_lemma">
+                      <code><span>bit0_le_bit0_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="613">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit0_le_bit0_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '614', 614)" onmouseover="showTip(event, '614', 614)">
+                <p>
+                  <a id="bit0_le_bit1_lemma">
+                    <a href="#bit0_le_bit1_lemma">
+                      <code><span>bit0_le_bit1_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="614">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit0_le_bit1_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '615', 615)" onmouseover="showTip(event, '615', 615)">
+                <p>
+                  <a id="bit0_lt_bit0_lemma">
+                    <a href="#bit0_lt_bit0_lemma">
+                      <code><span>bit0_lt_bit0_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="615">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit0_lt_bit0_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '616', 616)" onmouseover="showTip(event, '616', 616)">
+                <p>
+                  <a id="bit0_lt_bit1_lemma">
+                    <a href="#bit0_lt_bit1_lemma">
+                      <code><span>bit0_lt_bit1_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="616">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit0_lt_bit1_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '617', 617)" onmouseover="showTip(event, '617', 617)">
+                <p>
+                  <a id="bit0_mult_lemma">
+                    <a href="#bit0_mult_lemma">
+                      <code><span>bit0_mult_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="617">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit0_mult_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '618', 618)" onmouseover="showTip(event, '618', 618)">
+                <p>
+                  <a id="bit0_multdef_thm">
+                    <a href="#bit0_multdef_thm">
+                      <code><span>bit0_multdef_thm&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="618">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit0_multdef_thm&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '619', 619)" onmouseover="showTip(event, '619', 619)">
+                <p>
+                  <a id="bit0_not_odd_lemma">
+                    <a href="#bit0_not_odd_lemma">
+                      <code><span>bit0_not_odd_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="619">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit0_not_odd_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '620', 620)" onmouseover="showTip(event, '620', 620)">
+                <p>
+                  <a id="bit1_add_bit0_lemma">
+                    <a href="#bit1_add_bit0_lemma">
+                      <code><span>bit1_add_bit0_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="620">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_add_bit0_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '621', 621)" onmouseover="showTip(event, '621', 621)">
+                <p>
+                  <a id="bit1_add_bit1_lemma">
+                    <a href="#bit1_add_bit1_lemma">
+                      <code><span>bit1_add_bit1_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="621">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_add_bit1_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '622', 622)" onmouseover="showTip(event, '622', 622)">
+                <p>
+                  <a id="bit1_adddef_thm">
+                    <a href="#bit1_adddef_thm">
+                      <code><span>bit1_adddef_thm&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="622">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_adddef_thm&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '623', 623)" onmouseover="showTip(event, '623', 623)">
+                <p>
+                  <a id="bit1_eq_bit0_lemma">
+                    <a href="#bit1_eq_bit0_lemma">
+                      <code><span>bit1_eq_bit0_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="623">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_eq_bit0_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '624', 624)" onmouseover="showTip(event, '624', 624)">
+                <p>
+                  <a id="bit1_eq_bit1_lemma">
+                    <a href="#bit1_eq_bit1_lemma">
+                      <code><span>bit1_eq_bit1_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="624">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_eq_bit1_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '625', 625)" onmouseover="showTip(event, '625', 625)">
+                <p>
+                  <a id="bit1_eq_zero_lemma">
+                    <a href="#bit1_eq_zero_lemma">
+                      <code><span>bit1_eq_zero_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="625">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_eq_zero_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '626', 626)" onmouseover="showTip(event, '626', 626)">
+                <p>
+                  <a id="bit1_le_bit0_lemma">
+                    <a href="#bit1_le_bit0_lemma">
+                      <code><span>bit1_le_bit0_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="626">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_le_bit0_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '627', 627)" onmouseover="showTip(event, '627', 627)">
+                <p>
+                  <a id="bit1_le_bit1_lemma">
+                    <a href="#bit1_le_bit1_lemma">
+                      <code><span>bit1_le_bit1_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="627">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_le_bit1_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '628', 628)" onmouseover="showTip(event, '628', 628)">
+                <p>
+                  <a id="bit1_lt_bit0_lemma">
+                    <a href="#bit1_lt_bit0_lemma">
+                      <code><span>bit1_lt_bit0_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="628">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_lt_bit0_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '629', 629)" onmouseover="showTip(event, '629', 629)">
+                <p>
+                  <a id="bit1_lt_bit1_lemma">
+                    <a href="#bit1_lt_bit1_lemma">
+                      <code><span>bit1_lt_bit1_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="629">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_lt_bit1_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '630', 630)" onmouseover="showTip(event, '630', 630)">
+                <p>
+                  <a id="bit1_mult_bit1_lemma">
+                    <a href="#bit1_mult_bit1_lemma">
+                      <code><span>bit1_mult_bit1_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="630">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_mult_bit1_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '631', 631)" onmouseover="showTip(event, '631', 631)">
+                <p>
+                  <a id="bit1_multadddef_thm">
+                    <a href="#bit1_multadddef_thm">
+                      <code><span>bit1_multadddef_thm&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="631">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_multadddef_thm&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '632', 632)" onmouseover="showTip(event, '632', 632)">
+                <p>
+                  <a id="bit1_multdef_thm">
+                    <a href="#bit1_multdef_thm">
+                      <code><span>bit1_multdef_thm&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="632">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_multdef_thm&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '633', 633)" onmouseover="showTip(event, '633', 633)">
+                <p>
+                  <a id="bit1_not_even_lemma">
+                    <a href="#bit1_not_even_lemma">
+                      <code><span>bit1_not_even_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="633">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_not_even_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '634', 634)" onmouseover="showTip(event, '634', 634)">
+                <p>
+                  <a id="bit1_odd_lemma">
+                    <a href="#bit1_odd_lemma">
+                      <code><span>bit1_odd_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="634">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_odd_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '635', 635)" onmouseover="showTip(event, '635', 635)">
+                <p>
+                  <a id="bit1_squared_lemma">
+                    <a href="#bit1_squared_lemma">
+                      <code><span>bit1_squared_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="635">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>bit1_squared_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '636', 636)" onmouseover="showTip(event, '636', 636)">
+                <p>
+                  <a id="dest_bit">
+                    <a href="#dest_bit">
+                      <code><span>dest_bit&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="636">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>dest_bit&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-nateval-destructed_bit.html">destructed_bit</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-nateval-destructed_bit.html">destructed_bit</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '637', 637)" onmouseover="showTip(event, '637', 637)">
+                <p>
+                  <a id="dest_bit1">
+                    <a href="#dest_bit1">
+                      <code><span>dest_bit1&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="637">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>dest_bit1&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-nateval-destructed_bit.html">destructed_bit</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-nateval-destructed_bit.html">destructed_bit</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '638', 638)" onmouseover="showTip(event, '638', 638)">
+                <p>
+                  <a id="eq_refl_lemma">
+                    <a href="#eq_refl_lemma">
+                      <code><span>eq_refl_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="638">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eq_refl_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '639', 639)" onmouseover="showTip(event, '639', 639)">
+                <p>
+                  <a id="eval_add_conv">
+                    <a href="#eval_add_conv">
+                      <code><span>eval_add_conv&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="639">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_add_conv&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.NatEval.eval_add_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.NatEval.eval_add_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the evaluation conversion for numeral addition.  It takes a term  
+ of the form `m + n`, where "m" and "n" are both natural number numerals,  
+ and returns a theorem stating that this equals its numeral value, under no
+ assumptions.                                                              
+                                                                           
+       `m + n`                                                             
+    ------------                                                           
+    |- m + n = z                                                
+
+ See also: eval_sub_conv, eval_mult_conv, eval_exp_conv.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '640', 640)" onmouseover="showTip(event, '640', 640)">
+                <p>
+                  <a id="eval_add_conv0">
+                    <a href="#eval_add_conv0">
+                      <code><span>eval_add_conv0&#32;<span>tm1&#32;tm2</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="640">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_add_conv0&#32;<span>tm1&#32;tm2</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm1
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tm2
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm1
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm2
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '641', 641)" onmouseover="showTip(event, '641', 641)">
+                <p>
+                  <a id="eval_even_conv">
+                    <a href="#eval_even_conv">
+                      <code><span>eval_even_conv&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="641">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_even_conv&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.NatEval.eval_even_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.NatEval.eval_even_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the evaluation conversion for numeral evenness.  It takes a term
+ of the form `EVEN n`, where "n" is a natural number numeral, and returns
+ a theorem stating its boolean value, under no assumptions.              
+                                                                         
+        `EVEN n`                                                         
+    ---------------                                                      
+    |- EVEN n <=> z                                                      
+
+ See also: eval_odd_conv.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '642', 642)" onmouseover="showTip(event, '642', 642)">
+                <p>
+                  <a id="eval_even_conv0">
+                    <a href="#eval_even_conv0">
+                      <code><span>eval_even_conv0&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="642">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_even_conv0&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '643', 643)" onmouseover="showTip(event, '643', 643)">
+                <p>
+                  <a id="eval_exp_conv">
+                    <a href="#eval_exp_conv">
+                      <code><span>eval_exp_conv&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="643">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_exp_conv&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.NatEval.eval_exp_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.NatEval.eval_exp_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the evaluation conversion for numeral exponentiation.  It takes a
+ term of the form `m EXP n`, where "m" and "n" are both natural number    
+ numerals, and returns a theorem stating that this equals its numeral     
+ value, under no assumptions.                                             
+                                                                          
+       `m EXP n`                                                          
+    --------------                                                        
+    |- m EXP n = z                                                        
+
+ See also: eval_add_conv, eval_sub_conv, eval_mult_conv.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '644', 644)" onmouseover="showTip(event, '644', 644)">
+                <p>
+                  <a id="eval_exp_conv0">
+                    <a href="#eval_exp_conv0">
+                      <code><span>eval_exp_conv0&#32;<span>tm1&#32;tm2</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="644">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_exp_conv0&#32;<span>tm1&#32;tm2</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm1
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tm2
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm1
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm2
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '645', 645)" onmouseover="showTip(event, '645', 645)">
+                <p>
+                  <a id="eval_ge_conv">
+                    <a href="#eval_ge_conv">
+                      <code><span>eval_ge_conv&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="645">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_ge_conv&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.NatEval.eval_ge_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.NatEval.eval_ge_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the evaluation conversion for numeral greater-than-or-equal comparison.
+ It takes a term of the form `m >= n`, where "m" and "n" are both natural number
+ numerals, and returns a theorem stating that this input equals its boolean
+ value, under no assumptions.
+ 
+           `m >= n`
+       ---------------
+       |- m >= n <=> z
+
+ eval_ge_conv, eval_le_conv, eval_lt_conv, eval_nat_eq_conv.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '646', 646)" onmouseover="showTip(event, '646', 646)">
+                <p>
+                  <a id="eval_gt_conv">
+                    <a href="#eval_gt_conv">
+                      <code><span>eval_gt_conv&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="646">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_gt_conv&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.NatEval.eval_gt_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.NatEval.eval_gt_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the evaluation conversion for numeral greater-than comparison.  It takes
+ a term of the form `m > n`, where "m" and "n" are both natural number numerals,
+ and returns a theorem stating that this input equals its boolean value, under no
+ assumptions.                                                
+                   
+        `m > n`    
+    -------------- 
+    |- m > n <=> z 
+
+ eval_ge_conv, eval_le_conv, eval_lt_conv, eval_nat_eq_conv.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '647', 647)" onmouseover="showTip(event, '647', 647)">
+                <p>
+                  <a id="eval_le_conv">
+                    <a href="#eval_le_conv">
+                      <code><span>eval_le_conv&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="647">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_le_conv&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.NatEval.eval_le_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.NatEval.eval_le_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the evaluation conversion for numeral less-than-or-equal comparison.  It
+ takes a term of the form `m <= n`, where "m" and "n" are both natural number
+ numerals, and returns a theorem stating that this input equals its boolean
+ value, under no assumptions.                                                        
+                                                                           
+        `m <= n`                               
+    --------------                            
+    |- m <= n <=> z            
+
+ See also: eval_lt_conv, eval_ge_conv, eval_gt_conv, eval_nat_eq_conv.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '648', 648)" onmouseover="showTip(event, '648', 648)">
+                <p>
+                  <a id="eval_le_conv0">
+                    <a href="#eval_le_conv0">
+                      <code><span>eval_le_conv0&#32;<span>tm1&#32;tm2</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="648">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_le_conv0&#32;<span>tm1&#32;tm2</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm1
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tm2
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm1
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm2
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '649', 649)" onmouseover="showTip(event, '649', 649)">
+                <p>
+                  <a id="eval_lt_conv">
+                    <a href="#eval_lt_conv">
+                      <code><span>eval_lt_conv&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="649">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_lt_conv&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.NatEval.eval_lt_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.NatEval.eval_lt_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the evaluation conversion for numeral less-than-or-equal comparison.  It
+ takes a term of the form `m < n`, where "m" and "n" are both natural number
+ numerals, and returns a theorem stating that this input equals its boolean
+ value, under no assumptions.                                                        
+                                                                           
+        `m < n`                               
+    --------------                            
+    |- m < n <=> z            
+
+ See also: eval_le_conv, eval_ge_conv, eval_gt_conv, eval_nat_eq_conv.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '650', 650)" onmouseover="showTip(event, '650', 650)">
+                <p>
+                  <a id="eval_lt_conv0">
+                    <a href="#eval_lt_conv0">
+                      <code><span>eval_lt_conv0&#32;<span>tm1&#32;tm2</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="650">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_lt_conv0&#32;<span>tm1&#32;tm2</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm1
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tm2
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm1
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm2
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '651', 651)" onmouseover="showTip(event, '651', 651)">
+                <p>
+                  <a id="eval_mult_conv">
+                    <a href="#eval_mult_conv">
+                      <code><span>eval_mult_conv&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="651">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_mult_conv&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.NatEval.eval_mult_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.NatEval.eval_mult_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ eval_mult_conv : term -> thm                                             
+                                                                          
+ This is the evaluation conversion for numeral multiplication.  It takes a
+ term of the form `m * m`, where "m" and "n" are both natural number      
+ numerals, and returns a theorem stating that this equals its numeral     
+ value, under no assumptions.                                             
+                                                                          
+       `m * n`                                                            
+    ------------                                                          
+    |- m * n = z                                                          
+
+ See also: eval_add_conv, eval_sub_conv, eval_exp_conv.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '652', 652)" onmouseover="showTip(event, '652', 652)">
+                <p>
+                  <a id="eval_mult_conv0">
+                    <a href="#eval_mult_conv0">
+                      <code><span>eval_mult_conv0&#32;<span>tm1&#32;tm2</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="652">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_mult_conv0&#32;<span>tm1&#32;tm2</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm1
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tm2
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm1
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm2
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '653', 653)" onmouseover="showTip(event, '653', 653)">
+                <p>
+                  <a id="eval_nat_eq_conv">
+                    <a href="#eval_nat_eq_conv">
+                      <code><span>eval_nat_eq_conv&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="653">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_nat_eq_conv&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.NatEval.eval_nat_eq_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.NatEval.eval_nat_eq_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the evaluation conversion for numeric equality.  It takes a term  
+ of the form `m = n`, where "m" and "n" are both natural number numerals,  
+ and returns a theorem stating that this equals its boolean value, under no
+ assumptions.                                                              
+                                                                           
+        `m = n`                                                            
+    --------------                                                         
+    |- m = n <=> z                                    
+
+ See also: eval_le_conv, eval_lt_conv, eval_ge_conv, eval_gt_conv.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '654', 654)" onmouseover="showTip(event, '654', 654)">
+                <p>
+                  <a id="eval_nat_eq_conv0">
+                    <a href="#eval_nat_eq_conv0">
+                      <code><span>eval_nat_eq_conv0&#32;<span>tm1&#32;tm2</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="654">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_nat_eq_conv0&#32;<span>tm1&#32;tm2</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm1
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tm2
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm1
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm2
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '655', 655)" onmouseover="showTip(event, '655', 655)">
+                <p>
+                  <a id="eval_odd_conv">
+                    <a href="#eval_odd_conv">
+                      <code><span>eval_odd_conv&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="655">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_odd_conv&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.NatEval.eval_odd_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.NatEval.eval_odd_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the evaluation conversion for numeral oddness.  It takes a term of
+ the form `ODD n`, where "n" is a natural number numeral, and returns a    
+ theorem stating its boolean value, under no assumptions.                  
+                                                                           
+        `ODD n`                                                            
+    --------------                                                         
+    |- ODD n <=> z       
+
+ See also: eval_even_conv.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '656', 656)" onmouseover="showTip(event, '656', 656)">
+                <p>
+                  <a id="eval_odd_conv0">
+                    <a href="#eval_odd_conv0">
+                      <code><span>eval_odd_conv0&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="656">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_odd_conv0&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '657', 657)" onmouseover="showTip(event, '657', 657)">
+                <p>
+                  <a id="eval_pre_conv">
+                    <a href="#eval_pre_conv">
+                      <code><span>eval_pre_conv&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="657">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_pre_conv&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.NatEval.eval_pre_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.NatEval.eval_pre_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ eval_pre_conv : term -> thm                                           
+                                                                       
+ This is the evaluation conversion for numeral predecessor.  It takes a
+ term of the form `PRE n`, where "n" is a natural number numeral, and  
+ returns a theorem stating that this equals its numeral value, under no
+ assumptions.                                                          
+                                                                       
+       `PRE n`                                                         
+    ------------                                                       
+    |- PRE n = z                                                       
+
+ See also: eval_suc_conv.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '658', 658)" onmouseover="showTip(event, '658', 658)">
+                <p>
+                  <a id="eval_pre_conv0">
+                    <a href="#eval_pre_conv0">
+                      <code><span>eval_pre_conv0&#32;<span>tm0</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="658">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_pre_conv0&#32;<span>tm0</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm0
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm0
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '659', 659)" onmouseover="showTip(event, '659', 659)">
+                <p>
+                  <a id="eval_sub_conv">
+                    <a href="#eval_sub_conv">
+                      <code><span>eval_sub_conv&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="659">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_sub_conv&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.NatEval.eval_sub_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.NatEval.eval_sub_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the evaluation conversion for numeral subtraction.  It takes a
+ term of the form `m - n`, where "m" and "n" are both natural number   
+ numerals, and returns a theorem stating that this equals its numeral  
+ value, under no assumptions.                                          
+                                                                       
+       `m - n`                                                         
+    ------------                                                       
+    |- m - n = z                                                       
+
+ See also: eval_add_conv, eval_mult_conv, eval_exp_conv.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '660', 660)" onmouseover="showTip(event, '660', 660)">
+                <p>
+                  <a id="eval_sub_conv0">
+                    <a href="#eval_sub_conv0">
+                      <code><span>eval_sub_conv0&#32;<span>tm1&#32;tm2</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="660">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_sub_conv0&#32;<span>tm1&#32;tm2</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm1
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        tm2
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm1
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm2
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '661', 661)" onmouseover="showTip(event, '661', 661)">
+                <p>
+                  <a id="eval_suc_conv">
+                    <a href="#eval_suc_conv">
+                      <code><span>eval_suc_conv&#32;<span>tm</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="661">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_suc_conv&#32;<span>tm</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.NatEval.eval_suc_conv`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.NatEval.eval_suc_conv\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ This is the evaluation conversion for numeral successor.  It takes a term
+ of the form `SUC n`, where "n" is a natural number numeral, and returns a
+ theorem stating that this equals its numeral value, under no assumptions.
+                                                                          
+       `SUC n`                                                            
+    ------------                                                          
+    |- SUC n = z                                                          
+
+ See also: eval_pre_conv.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '662', 662)" onmouseover="showTip(event, '662', 662)">
+                <p>
+                  <a id="eval_suc_conv0">
+                    <a href="#eval_suc_conv0">
+                      <code><span>eval_suc_conv0&#32;<span>tm0</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="662">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>eval_suc_conv0&#32;<span>tm0</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        tm0
+                      </b>
+                      :
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  tm0
+                </span>
+                :
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '663', 663)" onmouseover="showTip(event, '663', 663)">
+                <p>
+                  <a id="exp_bit0_lemma">
+                    <a href="#exp_bit0_lemma">
+                      <code><span>exp_bit0_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="663">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>exp_bit0_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '664', 664)" onmouseover="showTip(event, '664', 664)">
+                <p>
+                  <a id="exp_bit1_lemma">
+                    <a href="#exp_bit1_lemma">
+                      <code><span>exp_bit1_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="664">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>exp_bit1_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '665', 665)" onmouseover="showTip(event, '665', 665)">
+                <p>
+                  <a id="exp_one_lemma">
+                    <a href="#exp_one_lemma">
+                      <code><span>exp_one_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="665">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>exp_one_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '666', 666)" onmouseover="showTip(event, '666', 666)">
+                <p>
+                  <a id="exp_zero_lemma">
+                    <a href="#exp_zero_lemma">
+                      <code><span>exp_zero_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="666">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>exp_zero_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '667', 667)" onmouseover="showTip(event, '667', 667)">
+                <p>
+                  <a id="ge_le_lemma">
+                    <a href="#ge_le_lemma">
+                      <code><span>ge_le_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="667">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>ge_le_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '668', 668)" onmouseover="showTip(event, '668', 668)">
+                <p>
+                  <a id="gt_lt_lemma">
+                    <a href="#gt_lt_lemma">
+                      <code><span>gt_lt_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="668">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>gt_lt_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '669', 669)" onmouseover="showTip(event, '669', 669)">
+                <p>
+                  <a id="l">
+                    <a href="#l">
+                      <code><span>l&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="669">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>l&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '670', 670)" onmouseover="showTip(event, '670', 670)">
+                <p>
+                  <a id="le_refl_lemma">
+                    <a href="#le_refl_lemma">
+                      <code><span>le_refl_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="670">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>le_refl_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '671', 671)" onmouseover="showTip(event, '671', 671)">
+                <p>
+                  <a id="le_zero_lemma">
+                    <a href="#le_zero_lemma">
+                      <code><span>le_zero_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="671">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>le_zero_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '672', 672)" onmouseover="showTip(event, '672', 672)">
+                <p>
+                  <a id="load">
+                    <a href="#load">
+                      <code><span>load&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="672">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>load&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span>(<span>string&#32;*&#32;<a href="/nholz/reference/hol-thm-thm.html">thm</a></span>)</span>&#32;list</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.NatEval.load`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.NatEval.load\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <p class="fsdocs-summary">
+                    
+ Force module evaluation
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><span>(<span>string&#32;*&#32;<a href="/nholz/reference/hol-thm-thm.html">thm</a></span>)</span>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '673', 673)" onmouseover="showTip(event, '673', 673)">
+                <p>
+                  <a id="lt_irrefl_lemma">
+                    <a href="#lt_irrefl_lemma">
+                      <code><span>lt_irrefl_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="673">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>lt_irrefl_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '674', 674)" onmouseover="showTip(event, '674', 674)">
+                <p>
+                  <a id="lt_zero_lemma">
+                    <a href="#lt_zero_lemma">
+                      <code><span>lt_zero_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="674">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>lt_zero_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '675', 675)" onmouseover="showTip(event, '675', 675)">
+                <p>
+                  <a id="m">
+                    <a href="#m">
+                      <code><span>m&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="675">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>m&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '676', 676)" onmouseover="showTip(event, '676', 676)">
+                <p>
+                  <a id="mmnn_add_lemma">
+                    <a href="#mmnn_add_lemma">
+                      <code><span>mmnn_add_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="676">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>mmnn_add_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '677', 677)" onmouseover="showTip(event, '677', 677)">
+                <p>
+                  <a id="mult_bit0_lemma">
+                    <a href="#mult_bit0_lemma">
+                      <code><span>mult_bit0_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="677">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>mult_bit0_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '678', 678)" onmouseover="showTip(event, '678', 678)">
+                <p>
+                  <a id="mult_id_thm0">
+                    <a href="#mult_id_thm0">
+                      <code><span>mult_id_thm0&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="678">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>mult_id_thm0&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '679', 679)" onmouseover="showTip(event, '679', 679)">
+                <p>
+                  <a id="mult_one_lemma">
+                    <a href="#mult_one_lemma">
+                      <code><span>mult_one_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="679">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>mult_one_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '680', 680)" onmouseover="showTip(event, '680', 680)">
+                <p>
+                  <a id="mult_zero_lemma">
+                    <a href="#mult_zero_lemma">
+                      <code><span>mult_zero_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="680">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>mult_zero_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '681', 681)" onmouseover="showTip(event, '681', 681)">
+                <p>
+                  <a id="mult_zero_thm0">
+                    <a href="#mult_zero_thm0">
+                      <code><span>mult_zero_thm0&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="681">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>mult_zero_thm0&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '682', 682)" onmouseover="showTip(event, '682', 682)">
+                <p>
+                  <a id="n">
+                    <a href="#n">
+                      <code><span>n&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="682">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>n&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '683', 683)" onmouseover="showTip(event, '683', 683)">
+                <p>
+                  <a id="one_mult_lemma">
+                    <a href="#one_mult_lemma">
+                      <code><span>one_mult_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="683">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>one_mult_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '684', 684)" onmouseover="showTip(event, '684', 684)">
+                <p>
+                  <a id="one_tm0">
+                    <a href="#one_tm0">
+                      <code><span>one_tm0&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="684">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>one_tm0&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '685', 685)" onmouseover="showTip(event, '685', 685)">
+                <p>
+                  <a id="pre_suc_lemma">
+                    <a href="#pre_suc_lemma">
+                      <code><span>pre_suc_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="685">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>pre_suc_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '686', 686)" onmouseover="showTip(event, '686', 686)">
+                <p>
+                  <a id="pre_zero_thm0">
+                    <a href="#pre_zero_thm0">
+                      <code><span>pre_zero_thm0&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="686">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>pre_zero_thm0&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '687', 687)" onmouseover="showTip(event, '687', 687)">
+                <p>
+                  <a id="sub_cancel_lemma">
+                    <a href="#sub_cancel_lemma">
+                      <code><span>sub_cancel_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="687">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>sub_cancel_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '688', 688)" onmouseover="showTip(event, '688', 688)">
+                <p>
+                  <a id="sub_floor_thm0">
+                    <a href="#sub_floor_thm0">
+                      <code><span>sub_floor_thm0&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="688">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>sub_floor_thm0&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '689', 689)" onmouseover="showTip(event, '689', 689)">
+                <p>
+                  <a id="sub_zero_lemma">
+                    <a href="#sub_zero_lemma">
+                      <code><span>sub_zero_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="689">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>sub_zero_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '690', 690)" onmouseover="showTip(event, '690', 690)">
+                <p>
+                  <a id="suc_bit0_lemma">
+                    <a href="#suc_bit0_lemma">
+                      <code><span>suc_bit0_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="690">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>suc_bit0_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '691', 691)" onmouseover="showTip(event, '691', 691)">
+                <p>
+                  <a id="suc_bit1_lemma">
+                    <a href="#suc_bit1_lemma">
+                      <code><span>suc_bit1_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="691">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>suc_bit1_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '692', 692)" onmouseover="showTip(event, '692', 692)">
+                <p>
+                  <a id="z">
+                    <a href="#z">
+                      <code><span>z&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="692">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>z&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '693', 693)" onmouseover="showTip(event, '693', 693)">
+                <p>
+                  <a id="zero_add_lemma">
+                    <a href="#zero_add_lemma">
+                      <code><span>zero_add_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="693">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>zero_add_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '694', 694)" onmouseover="showTip(event, '694', 694)">
+                <p>
+                  <a id="zero_eq_bit0_lemma">
+                    <a href="#zero_eq_bit0_lemma">
+                      <code><span>zero_eq_bit0_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="694">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>zero_eq_bit0_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '695', 695)" onmouseover="showTip(event, '695', 695)">
+                <p>
+                  <a id="zero_eq_bit1_lemma">
+                    <a href="#zero_eq_bit1_lemma">
+                      <code><span>zero_eq_bit1_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="695">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>zero_eq_bit1_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '696', 696)" onmouseover="showTip(event, '696', 696)">
+                <p>
+                  <a id="zero_even_lemma">
+                    <a href="#zero_even_lemma">
+                      <code><span>zero_even_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="696">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>zero_even_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '697', 697)" onmouseover="showTip(event, '697', 697)">
+                <p>
+                  <a id="zero_le_lemma">
+                    <a href="#zero_le_lemma">
+                      <code><span>zero_le_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="697">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>zero_le_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '698', 698)" onmouseover="showTip(event, '698', 698)">
+                <p>
+                  <a id="zero_lt_lemma">
+                    <a href="#zero_lt_lemma">
+                      <code><span>zero_lt_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="698">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>zero_lt_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '699', 699)" onmouseover="showTip(event, '699', 699)">
+                <p>
+                  <a id="zero_mult_lemma">
+                    <a href="#zero_mult_lemma">
+                      <code><span>zero_mult_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="699">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>zero_mult_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '700', 700)" onmouseover="showTip(event, '700', 700)">
+                <p>
+                  <a id="zero_not_odd_lemma">
+                    <a href="#zero_not_odd_lemma">
+                      <code><span>zero_not_odd_lemma&#32;<span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="700">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>zero_not_odd_lemma&#32;<span></span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>

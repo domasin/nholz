@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Clash (nholz)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="nholz">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz/img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/nholz/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/nholz/"><img id="fsdocs-logo" src="/nholz/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/tactics.html">
+    tactics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/3_Liguaggio_HOL.html">
+    LINGUAGGIO HOL
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/avvio.html">
+    avvio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B1_Teorie.html">
+    TEORIE
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/1_Introduzione.html">
+    Introduzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B2_Teoremi.html">
+    TEOREMI
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/goaltree.html">
+    goaltree
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/A5_Inference_Rules.html">
+    Regole d&#39;inferenza
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0018_disj_idem.html">
+    Disj Idem
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0033_select_eq.html">
+    0033_select_eq
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0032_forall_null.html">
+    0032_forall_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0001_truth.html">
+    Vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0019_disj_assoc.html">
+    0019_disj_assoc
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0007_conj_id.html">
+    vero &amp;egrave; l&#39;identit&amp;agrave; della congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0028_imp_dist_left_disj.html">
+    0028_imp_dist_left_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0021_disj_dist_right_conj.html">
+    0021_disj_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0017_disj_zero.html">
+    Disj Zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0010_conj_comm.html">
+    Propriet&amp;agrave; commutatativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0031_forall_one_point.html">
+    0031_forall_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0005_true_not_eq_false.html">
+    Vero non equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0027_imp_refl.html">
+    0027_imp_refl
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0008_conj_zero.html">
+    congiunzione zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0014_conj_dist_left_disj.html">
+    distributivit&amp;agrave; a sinistra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0016_disj_id.html">
+    Disj Id
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0015_conj_contr.html">
+    0015_conj_contr
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0012_conj_absorb_disj.html">
+    assorbimento della disgiunzione nella congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0009_conj_idem.html">
+    congiunzione della stessa proposizione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0030_forall_dist_conj.html">
+    0030_forall_dist_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0026_imp_left_zero.html">
+    0026_imp_left_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0020_disj_absorb_conj.html">
+    0020_disj_absorb_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0036_exists_null.html">
+    0036_exists_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0025_imp_left_id.html">
+    0025_imp_left_id
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0029_imp_dist_right_conj.html">
+    0029_imp_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0004_not_false.html">
+    Non falso equivale a vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0034_exists_dist_disj.html">
+    0034_exists_dist_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0024_disj_comm.html">
+    commutabilit&amp;agrave; della disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0006_not_dist_disj.html">
+    distribuzione della negazione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0011_conj_assoc.html">
+    Propriet&amp;agrave; associativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0022_disj_dist_left_conj.html">
+    0022_disj_dist_left_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0003_not_true.html">
+    Non vero equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0023_imp_right_zero.html">
+    0023_imp_right_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0013_conj_dist_right_disj.html">
+    distributivit&amp;agrave; a destra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0044_excluded_midle.html">
+    Terzo escluso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0035_exists_one_point.html">
+    0035_exists_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0045_bool_cases.html">
+    Bool Cases
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0002_fun_eq.html">
+    Equivalenza tra funzioni
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/nholz/">nholz</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h2>
+    Clash Type
+  </h2>
+  <dl class="fsdocs-metadata">
+    <dt>
+      Namespace: 
+      <a href="/nholz/reference/hol.html">
+        HOL
+      </a>
+    </dt>
+    <dt>
+      Assembly: nholz.dll
+    </dt>
+    <dt>
+      Parent Module: 
+      <a href="/nholz/reference/hol-utils1.html">
+        Utils1
+      </a>
+    </dt>
+    <dt>
+      Base Type: 
+      <code>exn</code>
+    </dt>
+    <dt>
+      All Interfaces: 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.runtime.serialization.iserializable">ISerializable</a></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.collections.istructuralequatable">IStructuralEquatable</a></code>
+    </dt>
+  </dl>
+  <div class="fsdocs-xmldoc">
+    <div>
+      <p class="fsdocs-summary">
+        
+      </p>
+    </div>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+    <h3>
+      Record fields
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Record Field
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '1505', 1505)" onmouseover="showTip(event, '1505', 1505)">
+                <p>
+                  <a id="Data0">
+                    <a href="#Data0">
+                      <code>Data0</code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1505">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code>Data0</code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Field type: 
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Field type: 
+                </span>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>

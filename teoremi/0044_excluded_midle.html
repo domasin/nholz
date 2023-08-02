@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Terzo escluso
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="nholz">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz/img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/nholz/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/nholz/"><img id="fsdocs-logo" src="/nholz/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/tactics.html">
+    tactics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/3_Liguaggio_HOL.html">
+    LINGUAGGIO HOL
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/avvio.html">
+    avvio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B1_Teorie.html">
+    TEORIE
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/1_Introduzione.html">
+    Introduzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B2_Teoremi.html">
+    TEOREMI
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/goaltree.html">
+    goaltree
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/A5_Inference_Rules.html">
+    Regole d&#39;inferenza
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0018_disj_idem.html">
+    Disj Idem
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0033_select_eq.html">
+    0033_select_eq
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0032_forall_null.html">
+    0032_forall_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0001_truth.html">
+    Vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0019_disj_assoc.html">
+    0019_disj_assoc
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0007_conj_id.html">
+    vero &amp;egrave; l&#39;identit&amp;agrave; della congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0028_imp_dist_left_disj.html">
+    0028_imp_dist_left_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0021_disj_dist_right_conj.html">
+    0021_disj_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0017_disj_zero.html">
+    Disj Zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0010_conj_comm.html">
+    Propriet&amp;agrave; commutatativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0031_forall_one_point.html">
+    0031_forall_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0005_true_not_eq_false.html">
+    Vero non equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0027_imp_refl.html">
+    0027_imp_refl
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0008_conj_zero.html">
+    congiunzione zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0014_conj_dist_left_disj.html">
+    distributivit&amp;agrave; a sinistra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0016_disj_id.html">
+    Disj Id
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0015_conj_contr.html">
+    0015_conj_contr
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0012_conj_absorb_disj.html">
+    assorbimento della disgiunzione nella congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0009_conj_idem.html">
+    congiunzione della stessa proposizione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0030_forall_dist_conj.html">
+    0030_forall_dist_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0026_imp_left_zero.html">
+    0026_imp_left_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0020_disj_absorb_conj.html">
+    0020_disj_absorb_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0036_exists_null.html">
+    0036_exists_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0025_imp_left_id.html">
+    0025_imp_left_id
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0029_imp_dist_right_conj.html">
+    0029_imp_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0004_not_false.html">
+    Non falso equivale a vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0034_exists_dist_disj.html">
+    0034_exists_dist_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0024_disj_comm.html">
+    commutabilit&amp;agrave; della disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0006_not_dist_disj.html">
+    distribuzione della negazione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0011_conj_assoc.html">
+    Propriet&amp;agrave; associativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0022_disj_dist_left_conj.html">
+    0022_disj_dist_left_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0003_not_true.html">
+    Non vero equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0023_imp_right_zero.html">
+    0023_imp_right_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0013_conj_dist_right_disj.html">
+    distributivit&amp;agrave; a destra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0044_excluded_midle.html">
+    Terzo escluso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0035_exists_one_point.html">
+    0035_exists_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0045_bool_cases.html">
+    Bool Cases
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0002_fun_eq.html">
+    Equivalenza tra funzioni
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/nholz/">nholz</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <h1><a name="Terzo-escluso" class="anchor" href="#Terzo-escluso">Terzo escluso</a></h1>
+<p><span class="math">\(\vdash \forall p.\ p \vee \neg p\)</span></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="id">excluded_middle_thm</span>
+<span class="c">// |- !p. p \/ ~ p</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="id">emt1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="fn">assume_rule</span> <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="id">p</span>                           <span class="c">//                                  p |- p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="id">emt2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="fn">disj1_rule</span> <span onmouseout="hideTip(event, 'fs10', 18)" onmouseover="showTip(event, 'fs10', 18)" class="id">emt1</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="fn">mk_not</span> <span onmouseout="hideTip(event, 'fs12', 20)" onmouseover="showTip(event, 'fs12', 20)" class="id">p</span><span class="pn">)</span>              <span class="c">//                                  p |- p \/ ~ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="id">emt3</span> <span class="o">=</span> <span class="s">&quot;false&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="fn">refl_conv</span>      <span class="c">//                                    |- false &lt;=&gt; false</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 24)" onmouseover="showTip(event, 'fs19', 24)" class="id">emt4</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 25)" onmouseover="showTip(event, 'fs14', 25)" class="fn">disj1_rule</span> <span onmouseout="hideTip(event, 'fs16', 26)" onmouseover="showTip(event, 'fs16', 26)" class="id">emt3</span> <span onmouseout="hideTip(event, 'fs12', 27)" onmouseover="showTip(event, 'fs12', 27)" class="id">p</span>                       <span class="c">//                                    |- (false &lt;=&gt; false) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 28)" onmouseover="showTip(event, 'fs20', 28)" class="id">emt5</span> <span class="o">=</span>                                                                            
+    <span onmouseout="hideTip(event, 'fs21', 29)" onmouseover="showTip(event, 'fs21', 29)" class="fn">exists_rule</span>                                                                       
+        <span class="pn">(</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 30)" onmouseover="showTip(event, 'fs17', 30)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;?x. (x &lt;=&gt; false) \/ p&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">,</span>                                     
+            <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 31)" onmouseover="showTip(event, 'fs17', 31)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;false&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs19', 32)" onmouseover="showTip(event, 'fs19', 32)" class="id">emt4</span>           <span class="c">//                                    |- ?x. (x &lt;=&gt; false) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 33)" onmouseover="showTip(event, 'fs22', 33)" class="id">emt6</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 34)" onmouseover="showTip(event, 'fs23', 34)" class="fn">select_rule</span> <span onmouseout="hideTip(event, 'fs20', 35)" onmouseover="showTip(event, 'fs20', 35)" class="id">emt5</span>                        <span class="c">//                                    |- ((@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 36)" onmouseover="showTip(event, 'fs24', 36)" class="id">emt7</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 37)" onmouseover="showTip(event, 'fs18', 37)" class="fn">refl_conv</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 38)" onmouseover="showTip(event, 'fs17', 38)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;true&quot;</span><span class="pn">)</span><span class="pn">)</span>         <span class="c">//                                    |- true &lt;=&gt; true</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 39)" onmouseover="showTip(event, 'fs25', 39)" class="id">emt8</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 40)" onmouseover="showTip(event, 'fs14', 40)" class="fn">disj1_rule</span> <span onmouseout="hideTip(event, 'fs24', 41)" onmouseover="showTip(event, 'fs24', 41)" class="id">emt7</span> <span onmouseout="hideTip(event, 'fs12', 42)" onmouseover="showTip(event, 'fs12', 42)" class="id">p</span>                       <span class="c">//                                    |- (true &lt;=&gt; true) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 43)" onmouseover="showTip(event, 'fs26', 43)" class="id">emt9</span> <span class="o">=</span>                                                                            
+    <span onmouseout="hideTip(event, 'fs21', 44)" onmouseover="showTip(event, 'fs21', 44)" class="fn">exists_rule</span>                                                                       
+        <span class="pn">(</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 45)" onmouseover="showTip(event, 'fs17', 45)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;?x. (x &lt;=&gt; true) \/ p&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">,</span>                                      
+            <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 46)" onmouseover="showTip(event, 'fs17', 46)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;true&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs25', 47)" onmouseover="showTip(event, 'fs25', 47)" class="id">emt8</span>            <span class="c">//                                    |- ?x. (x &lt;=&gt; true) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 48)" onmouseover="showTip(event, 'fs27', 48)" class="id">emt10</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 49)" onmouseover="showTip(event, 'fs23', 49)" class="fn">select_rule</span> <span onmouseout="hideTip(event, 'fs26', 50)" onmouseover="showTip(event, 'fs26', 50)" class="id">emt9</span>                       <span class="c">//                                    |- ((@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 51)" onmouseover="showTip(event, 'fs28', 51)" class="id">emt11</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs11', 52)" onmouseover="showTip(event, 'fs11', 52)" class="fn">assume_rule</span> 
+        <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 53)" onmouseover="showTip(event, 'fs17', 53)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;(@x. (x &lt;=&gt; true) \/ p) </span>
+<span class="s">            &lt;=&gt; true&quot;</span><span class="pn">)</span><span class="pn">)</span>                            <span class="c">//   (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true |- (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 54)" onmouseover="showTip(event, 'fs29', 54)" class="id">emt12</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs11', 55)" onmouseover="showTip(event, 'fs11', 55)" class="fn">assume_rule</span> 
+        <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 56)" onmouseover="showTip(event, 'fs17', 56)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;(@x. (x &lt;=&gt; false) \/ p) </span>
+<span class="s">            &lt;=&gt; false&quot;</span><span class="pn">)</span><span class="pn">)</span>                           <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false |- (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 57)" onmouseover="showTip(event, 'fs30', 57)" class="id">emt13</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs31', 58)" onmouseover="showTip(event, 'fs31', 58)" class="fn">mk_eq_rule</span> <span onmouseout="hideTip(event, 'fs28', 59)" onmouseover="showTip(event, 'fs28', 59)" class="id">emt11</span> <span onmouseout="hideTip(event, 'fs29', 60)" onmouseover="showTip(event, 'fs29', 60)" class="id">emt12</span>                 <span class="c">// (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true, </span>
+                                                   <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false </span>
+                                                   <span class="c">//                                    |- ((@x. (x &lt;=&gt; true) \/ p) </span>
+                                                   <span class="c">//                                         &lt;=&gt; (@x. (x &lt;=&gt; false) \/ p)) </span>
+                                                   <span class="c">//                                       &lt;=&gt; (true &lt;=&gt; false)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 61)" onmouseover="showTip(event, 'fs32', 61)" class="id">emt14</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs33', 62)" onmouseover="showTip(event, 'fs33', 62)" class="fn">disj2_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 63)" onmouseover="showTip(event, 'fs17', 63)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;x &lt;=&gt; true&quot;</span><span class="pn">)</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs10', 64)" onmouseover="showTip(event, 'fs10', 64)" class="id">emt1</span>    <span class="c">//                                  p |- (x &lt;=&gt; true) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs34', 65)" onmouseover="showTip(event, 'fs34', 65)" class="id">emt15</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs33', 66)" onmouseover="showTip(event, 'fs33', 66)" class="fn">disj2_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 67)" onmouseover="showTip(event, 'fs17', 67)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;x &lt;=&gt; false&quot;</span><span class="pn">)</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs10', 68)" onmouseover="showTip(event, 'fs10', 68)" class="id">emt1</span>   <span class="c">//                                  p |- (x &lt;=&gt; false) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 69)" onmouseover="showTip(event, 'fs35', 69)" class="id">emt16</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs36', 70)" onmouseover="showTip(event, 'fs36', 70)" class="fn">deduct_antisym_rule</span> <span onmouseout="hideTip(event, 'fs32', 71)" onmouseover="showTip(event, 'fs32', 71)" class="id">emt14</span> <span onmouseout="hideTip(event, 'fs34', 72)" onmouseover="showTip(event, 'fs34', 72)" class="id">emt15</span>        <span class="c">//                                  p |- (x &lt;=&gt; true) \/ p &lt;=&gt; (x &lt;=&gt; false) \/ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs37', 73)" onmouseover="showTip(event, 'fs37', 73)" class="id">emt17</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs38', 74)" onmouseover="showTip(event, 'fs38', 74)" class="fn">mk_select_rule</span> 
+        <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 75)" onmouseover="showTip(event, 'fs17', 75)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;x:bool&quot;</span><span class="pn">)</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs35', 76)" onmouseover="showTip(event, 'fs35', 76)" class="id">emt16</span>              <span class="c">//                                  p |- (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; (@x. (x &lt;=&gt; false) \/ p)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 77)" onmouseover="showTip(event, 'fs39', 77)" class="id">emt18</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs40', 78)" onmouseover="showTip(event, 'fs40', 78)" class="fn">eq_mp_rule</span> <span onmouseout="hideTip(event, 'fs30', 79)" onmouseover="showTip(event, 'fs30', 79)" class="id">emt13</span> <span onmouseout="hideTip(event, 'fs37', 80)" onmouseover="showTip(event, 'fs37', 80)" class="id">emt17</span>                 <span class="c">// (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true, </span>
+                                                   <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false,</span>
+                                                   <span class="c">// p</span>
+                                                   <span class="c">//                                    |- true &lt;=&gt; false</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs41', 81)" onmouseover="showTip(event, 'fs41', 81)" class="id">emt19</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs40', 82)" onmouseover="showTip(event, 'fs40', 82)" class="fn">eq_mp_rule</span> <span onmouseout="hideTip(event, 'fs39', 83)" onmouseover="showTip(event, 'fs39', 83)" class="id">emt18</span> <span onmouseout="hideTip(event, 'fs42', 84)" onmouseover="showTip(event, 'fs42', 84)" class="id">truth_thm</span>             <span class="c">// (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true, </span>
+                                                   <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false,</span>
+                                                   <span class="c">// p</span>
+                                                   <span class="c">//                                    |- false</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs43', 85)" onmouseover="showTip(event, 'fs43', 85)" class="id">emt20</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs44', 86)" onmouseover="showTip(event, 'fs44', 86)" class="fn">disch_rule</span> <span onmouseout="hideTip(event, 'fs12', 87)" onmouseover="showTip(event, 'fs12', 87)" class="id">p</span> <span onmouseout="hideTip(event, 'fs41', 88)" onmouseover="showTip(event, 'fs41', 88)" class="id">emt19</span>                     <span class="c">// (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true, </span>
+                                                   <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false</span>
+                                                   <span class="c">//                                    |- p ==&gt; false</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs45', 89)" onmouseover="showTip(event, 'fs45', 89)" class="id">emt21</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs46', 90)" onmouseover="showTip(event, 'fs46', 90)" class="fn">not_intro_rule</span> <span onmouseout="hideTip(event, 'fs43', 91)" onmouseover="showTip(event, 'fs43', 91)" class="id">emt20</span>                   <span class="c">// (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true, </span>
+                                                   <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false</span>
+                                                   <span class="c">//                                    |- ~ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs47', 92)" onmouseover="showTip(event, 'fs47', 92)" class="id">emt22</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs33', 93)" onmouseover="showTip(event, 'fs33', 93)" class="fn">disj2_rule</span> <span onmouseout="hideTip(event, 'fs12', 94)" onmouseover="showTip(event, 'fs12', 94)" class="id">p</span> <span onmouseout="hideTip(event, 'fs45', 95)" onmouseover="showTip(event, 'fs45', 95)" class="id">emt21</span>                     <span class="c">// (@x. (x &lt;=&gt; true) \/ p) &lt;=&gt; true, </span>
+                                                   <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false</span>
+                                                   <span class="c">//                                    |- p \/ ~ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs48', 96)" onmouseover="showTip(event, 'fs48', 96)" class="id">emt23</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 97)" onmouseover="showTip(event, 'fs49', 97)" class="fn">disj_cases_rule</span> <span onmouseout="hideTip(event, 'fs27', 98)" onmouseover="showTip(event, 'fs27', 98)" class="id">emt10</span> <span onmouseout="hideTip(event, 'fs47', 99)" onmouseover="showTip(event, 'fs47', 99)" class="id">emt22</span> <span onmouseout="hideTip(event, 'fs13', 100)" onmouseover="showTip(event, 'fs13', 100)" class="id">emt2</span>       <span class="c">// (@x. (x &lt;=&gt; false) \/ p) &lt;=&gt; false |- p \/ ~ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs50', 101)" onmouseover="showTip(event, 'fs50', 101)" class="id">emt24</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 102)" onmouseover="showTip(event, 'fs49', 102)" class="fn">disj_cases_rule</span> <span onmouseout="hideTip(event, 'fs22', 103)" onmouseover="showTip(event, 'fs22', 103)" class="id">emt6</span> <span onmouseout="hideTip(event, 'fs48', 104)" onmouseover="showTip(event, 'fs48', 104)" class="id">emt23</span> <span onmouseout="hideTip(event, 'fs13', 105)" onmouseover="showTip(event, 'fs13', 105)" class="id">emt2</span>        <span class="c">//                                    |- p \/ ~ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs51', 106)" onmouseover="showTip(event, 'fs51', 106)" class="id">excluded_middle</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs52', 107)" onmouseover="showTip(event, 'fs52', 107)" class="fn">gen_rule</span> <span onmouseout="hideTip(event, 'fs12', 108)" onmouseover="showTip(event, 'fs12', 108)" class="id">p</span> <span onmouseout="hideTip(event, 'fs50', 109)" onmouseover="showTip(event, 'fs50', 109)" class="id">emt24</span>             <span class="c">//                                    |- !p. p \/ ~ p</span>
+</code></pre>
+<pre class="fssnip highlighted"><code lang="fsharp"></code></pre>
+<p><span class="math">\(\small{ 	
+\dfrac
+{p:bool
+\qquad
+\dfrac
+{\dfrac
+{\dfrac
+{\exists x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p
+\qquad
+\bot
+\qquad
+\dfrac
+{\dfrac
+{\bot}
+{\vdash\ \bot\ \Leftrightarrow\ \bot}
+\textsf{ refl_conv}
+\qquad
+p:bool}
+{\vdash\ (\bot\ \Leftrightarrow\ \bot)\ \vee\ p}
+\textsf{ disj1_rule}}
+{\vdash\ \exists x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p}
+\textsf{ exists_rule}}
+{\vdash\ ((\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot)\ \vee\ p}
+\textsf{ select_rule}
+\qquad
+\dfrac
+{\dfrac
+{\dfrac
+{\exists x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p
+\qquad
+\top
+\qquad
+\dfrac
+{\dfrac
+{\top}
+{\vdash\ \top\ \Leftrightarrow\ \top}
+\textsf{ refl_conv}
+\qquad
+p:bool}
+{\vdash\ (\top\ \Leftrightarrow\ \top)\ \vee\ p}
+\textsf{ disj1_rule}}
+{\vdash\ \exists x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p}
+\textsf{ exists_rule}}
+{\vdash\ ((\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top)\ \vee\ p}
+\textsf{ select_rule}
+\qquad
+\dfrac
+{p:bool
+\qquad
+\dfrac
+{\dfrac
+{p:bool
+\qquad
+\dfrac
+{\dfrac
+{\dfrac
+{\dfrac
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top\ \vdash\ (\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top}
+\textsf{ assume_rule}
+\qquad
+\dfrac
+{(\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot}
+\textsf{ assume_rule}}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ ((\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p))\ \Leftrightarrow\ (\top\ \Leftrightarrow\ \bot)}
+\textsf{ mk_eq_rule}
+\qquad
+\dfrac
+{x:bool
+\qquad
+\dfrac
+{\dfrac
+{x\ \Leftrightarrow\ \top
+\qquad
+\dfrac
+{p:bool}
+{p\ \vdash\ p}
+\textsf{ assume_rule}}
+{p\ \vdash\ (x\ \Leftrightarrow\ \top)\ \vee\ p}
+\textsf{ disj2_rule}
+\qquad
+\dfrac
+{x\ \Leftrightarrow\ \bot
+\qquad
+\dfrac
+{p:bool}
+{p\ \vdash\ p}
+\textsf{ assume_rule}}
+{p\ \vdash\ (x\ \Leftrightarrow\ \bot)\ \vee\ p}
+\textsf{ disj2_rule}}
+{p\ \vdash\ (x\ \Leftrightarrow\ \top)\ \vee\ p\ \Leftrightarrow\ (x\ \Leftrightarrow\ \bot)\ \vee\ p}
+\textsf{ deduct_antisym_rule}}
+{p\ \vdash\ (\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)}
+\textsf{ mk_select_rule}}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot,\ p\ \vdash\ \top\ \Leftrightarrow\ \bot}
+\textsf{ eq_mp_rule}
+\qquad
+\vdash\ \top}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot,\ p\ \vdash\ \bot}
+\textsf{ eq_mp_rule}}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ p\ \Rightarrow\ \bot}
+\textsf{ disch_rule}}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ \neg\ p}
+\textsf{ not_intro_rule}}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \top)\ \vee\ p)\ \Leftrightarrow\ \top,\ (\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ p\ \vee\ \neg\ p}
+\textsf{ disj2_rule}
+\qquad
+\dfrac
+{\dfrac
+{p:bool}
+{p\ \vdash\ p}
+\textsf{ assume_rule}
+\qquad
+\neg\ p}
+{p\ \vdash\ p\ \vee\ \neg\ p}
+\textsf{ disj1_rule}}
+{(\epsilon x.\ (x\ \Leftrightarrow\ \bot)\ \vee\ p)\ \Leftrightarrow\ \bot\ \vdash\ p\ \vee\ \neg\ p}
+\textsf{ disj_cases_rule}
+\qquad
+\dfrac
+{\dfrac
+{p:bool}
+{p\ \vdash\ p}
+\textsf{ assume_rule}
+\qquad
+\neg\ p}
+{p\ \vdash\ p\ \vee\ \neg\ p}
+\textsf{ disj1_rule}}
+{\vdash\ p\ \vee\ \neg\ p}
+\textsf{ disj_cases_rule}}
+{\vdash\ \forall\ p.\ p\ \vee\ \neg\ p}
+\textsf{ gen_rule} }\)</span></p>
+
+            <div class="fsdocs-tip" id="fs1">namespace HOL</div>
+<div class="fsdocs-tip" id="fs2">module CoreThry
+
+from HOL<br /><em>&lt;summary&gt;
+This module completes the logical core for HOL by defining the core       
+theory.  This involves giving declarations, definitions and axioms for all
+the HOL theory objects anticipated by the language and inference kernels. 
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs3">val load: (string * thm) list</div>
+<div class="fsdocs-tip" id="fs4">module Equal
+
+from HOL<br /><em>&lt;summary&gt;
+This module adds more constants and inference rules for basic reasoning
+using equality.                                                                                                       
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs5">val load: (string * thm) list<br /><em>&lt;summary&gt;
+ Force module evaluation
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs6">module Bool
+
+from HOL<br /><em>&lt;summary&gt;
+This module extends the boolean-related theory by giving definitions for  
+classic predicate logic theory objects not introduced in &#39;CoreThry&#39;, and  
+adds various derived syntax functions, theorems and inference rules.  Note
+that derivations relying on the Axiom of Choice are separated out into the
+&#39;BoolClass&#39; module.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs7">module BoolAlg
+
+from HOL<br /><em>&lt;summary&gt;
+This module proves various algebraic property theorems for the predicate
+logic operators.                                                                  
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs8">module BoolClass
+
+from HOL<br /><em>&lt;summary&gt;
+ This module derives further predicate logic theorems and inference rules.
+ Unlike all preceding derivations, these all use the Axiom of Choice (i.e.
+ &#39;select_ax&#39;), and thus could be considered as classical logic.  However, 
+ note that some of these (such as &#39;exists_rule&#39;) are actually derivable in
+ intuitionistic logic if an alternative definition of existential         
+ quantification is used (as in HOL Light).                                                                                        
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs9">val excluded_middle_thm: thm<br /><em>&lt;summary&gt;
+    |- !p. p \/ ~p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs10">val emt1: thm</div>
+<div class="fsdocs-tip" id="fs11">val assume_rule: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the assumption rule.  It takes a boolean term, and returns a theorem
+ stating that the term holds under the single assumption of the term itself.
+
+     `p`
+   --------
+   {p} |- p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs12">val p: term</div>
+<div class="fsdocs-tip" id="fs13">val emt2: thm</div>
+<div class="fsdocs-tip" id="fs14">val disj1_rule: th: thm -&gt; tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the disjunction introduction rule for the LHS.  It disjoins the supplied
+ boolean term to the RHS of the supplied theorem.
+ 
+       A |- p   `q`
+       ------------
+       A |- p \/ q
+ 
+ See also: disj2_rule, disj_cases_rule, mk_disj1_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs15">val mk_not: tm0: term -&gt; term</div>
+<div class="fsdocs-tip" id="fs16">val emt3: thm</div>
+<div class="fsdocs-tip" id="fs17">val parse_term: x: string -&gt; term<br /><em>&lt;summary&gt;
+ This takes a string and parses it into an internal term.  The type     
+ analysis stage first detypes the preterm before inferring types (in    
+ &#39;resolve_preterm&#39;), since the syntax analysis stage gives all variables
+ and constants the null pretype.  Note that type inference is capable of
+ handling overloaded variables.                                         
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs18">val refl_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the reflexivity rule for equality.  It takes a term, and returns a
+ theorem stating that this term is equal to itself, under no assumptions.  There
+ are no restrictions on the supplied term.
+ 
+          `t`
+       --------
+       |- t = t
+ 
+ See also: eq_sym_conv, eq_sym_rule, eq_trans_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs19">val emt4: thm</div>
+<div class="fsdocs-tip" id="fs20">val emt5: thm</div>
+<div class="fsdocs-tip" id="fs21">val exists_rule: tm1: term * tm2: term -&gt; th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the existential introduction rule.  It takes an existential term, 
+ a witness term and a theorem, where the theorem&#39;s conclusion is the body  
+ of the existential term but with the witness term replacing occurrences of
+ its binding variable.  It returns a theorem stating that the supplied     
+ existential term holds, under the same assumptions as the supplied        
+ theorem.                                                                  
+                                                                           
+    `?x. p`   `t`   A |- p[t/x]                                            
+    ---------------------------                                            
+            A |- ?x. p                                                     
+ 
+ See also: choose_rule, select_rule, mk_exists_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs22">val emt6: thm</div>
+<div class="fsdocs-tip" id="fs23">val select_rule: th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the existential selection rule.  It strips off the existential   
+ quantifier from the supplied theorem, and replaces each occurrence of the
+ binding variable in the body with the selection operator applied to the  
+ original body (with the same binding variable).                          
+                                                                          
+       A |- ?x. p                                                         
+    ----------------                                                      
+    A |- p[(@x.p)/x]                                                      
+
+ See also: exists_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs24">val emt7: thm</div>
+<div class="fsdocs-tip" id="fs25">val emt8: thm</div>
+<div class="fsdocs-tip" id="fs26">val emt9: thm</div>
+<div class="fsdocs-tip" id="fs27">val emt10: thm</div>
+<div class="fsdocs-tip" id="fs28">val emt11: thm</div>
+<div class="fsdocs-tip" id="fs29">val emt12: thm</div>
+<div class="fsdocs-tip" id="fs30">val emt13: thm</div>
+<div class="fsdocs-tip" id="fs31">val mk_eq_rule: tha: thm -&gt; thb: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the equality congruence rule for equality.  It takes two equality  
+ theorems, and equates corresponding sides of the first theorem with the    
+ second, unioning the assumptions.  The types of each side of each equation 
+ must all be equal.                                                         
+                                                                            
+    A1 |- s1 = s2    A2 |- t1 = t2                                          
+    ------------------------------                                          
+    A1 u A2 |- s1 = t1 &amp;lt;=&amp;gt; s2 = t2                                          
+
+ See also: mk_eq1_rule, mk_eq2_rule, mk_eq_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs32">val emt14: thm</div>
+<div class="fsdocs-tip" id="fs33">val disj2_rule: tm: term -&gt; th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the disjunction introduction rule for the RHS.  It disjoins the   
+ supplied boolean term to LHS of the supplied theorem.                     
+                                                                           
+    `p`   A |- q                                                           
+    ------------                                                           
+    A |- p \/ q                                         
+
+ Si veda anche: disj1_rule, disj_cases_rule, mk_disj2_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs34">val emt15: thm</div>
+<div class="fsdocs-tip" id="fs35">val emt16: thm</div>
+<div class="fsdocs-tip" id="fs36">val deduct_antisym_rule: th01: thm -&gt; th02: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the antisymmetry rule for deduction.  It takes two theorem        
+ arguments.  It returns a theorem stating that the supplied conclusions are
+ equivalent, under the unioned assumptions but with each theorem&#39;s         
+ conclusion removed from the other&#39;s assumptions.                          
+                                                                           
+        A1 |- p    A2 |- q      
+    --------------------------              
+    A1\{q} u A2\{p} |- p &amp;lt;=&amp;gt; q                      
+
+ See also: imp_antisym_rule, undisch_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs37">val emt17: thm</div>
+<div class="fsdocs-tip" id="fs38">val mk_select_rule: v: term -&gt; th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the equality congruence rule for selection.  It takes a variable
+ and an equality theorem, and selects the variable from both sides of the
+ theorem.  The variable must not occur free in the assumptions of the    
+ supplied theorem.                                                       
+                                                                         
+      `x`   A |- p1 &amp;lt;=&amp;gt; p2        [ &quot;x&quot; not free in `A` ]                
+    ------------------------                                             
+    A |- (@x. p1) = (@x. p2)                                             
+
+ See also: mk_abs_rule, mk_comb_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs39">val emt18: thm</div>
+<div class="fsdocs-tip" id="fs40">val eq_mp_rule: th1: thm -&gt; th2: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the equality modus ponens rule.  It takes an equality theorem and a
+ second theorem, where the equality theorem&#39;s LHS is alpha-equivalent to the
+ conclusion of the second theorem.  It returns a theorem stating that the
+ equality theorem&#39;s RHS holds, under the unioned assumptions of the supplied
+ theorems.
+ 
+       A1 |- p &amp;lt;=&amp;gt; q    A2 |- p
+       ------------------------
+             A1 u A2 |- q
+ 
+ See also: mp_rule, eq_imp_rule1, eq_imp_rule2, imp_antisym_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs41">val emt19: thm</div>
+<div class="fsdocs-tip" id="fs42">val truth_thm: thm<br /><em>&lt;summary&gt;
+ |- true
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs43">val emt20: thm</div>
+<div class="fsdocs-tip" id="fs44">val disch_rule: tm: term -&gt; th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the implication introduction rule.  It takes a boolean term and a
+ theorem, and removes the term from the theorem&#39;s assumptions (if present) and
+ adds it as an antecedent of the conclusion.  Note that the term does not have to
+ be in the assumptions of the supplied theorem for the rule to succeed.
+ 
+         `p`   A |- q
+       ----------------
+       A\{p} |- p ==&amp;gt; q
+ 
+ See also: undisch_rule, mp_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs45">val emt21: thm</div>
+<div class="fsdocs-tip" id="fs46">val not_intro_rule: th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the logical negation introduction rule.  It takes an implication 
+ theorem where the RHS is falsity, and returns the logical negation of the
+ LHS, under the same assumptions.                                         
+                                                                          
+    A |- p ==&amp;gt; false                                                      
+    ----------------                                                      
+        A |- ~ p                                                          
+
+ See also: not_elim_rule, eqf_elim_rule, eqf_intro_rule, deduct_contrapos_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs47">val emt22: thm</div>
+<div class="fsdocs-tip" id="fs48">val emt23: thm</div>
+<div class="fsdocs-tip" id="fs49">val disj_cases_rule: th0: thm -&gt; th01: thm -&gt; th02: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the disjunction elimination rule.  It takes a disjunction theorem  
+ and two extra theorems that share the same conclusion.  It returns a       
+ theorem with the same conclusion as the extra theorems.  The assumptions   
+ of the returned theorem union the assumptions of the extra theorems, but   
+ with the disjunction theorem&#39;s LHS removed from the first&#39;s assumptions    
+ and its RHS removed from the second&#39;s, unioned together with the           
+ disjunction theorem&#39;s assumptions.                                         
+                                                                            
+    A |- p \/ q    A1 |- r    A2 |- r                                       
+    ---------------------------------                                       
+        A u A1\{p} u A2\{q} |- r                
+
+ See also: disj1_rule, disj2_rule, mk_disj_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs50">val emt24: thm</div>
+<div class="fsdocs-tip" id="fs51">val excluded_middle: thm</div>
+<div class="fsdocs-tip" id="fs52">val gen_rule: v: term -&gt; th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ gen_rule : term -&amp;gt; thm -&amp;gt; thm                                             
+                                                                           
+ This is the universal introduction rule.  It universally quantifies the   
+ supplied theorem with the supplied binding variable, under the same       
+ assumptions.  The binding variable must not occur free in the assumptions.
+                                                                           
+    `x`   A |- p         [ &quot;x&quot; not free in `A` ]                           
+    ------------                                                           
+     A |- !x. p                                                            
+
+ See also: list_gen_rule, spec_rule, mk_forall_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs53">val th1: obj</div>
+<div class="fsdocs-tip" id="fs54">val th2: obj</div>
+<div class="fsdocs-tip" id="fs55">val th3: obj</div>
+<div class="fsdocs-tip" id="fs56">val th4: obj</div>
+<div class="fsdocs-tip" id="fs57">val th5: obj</div>
+<div class="fsdocs-tip" id="fs58">val th6: obj</div>
+<div class="fsdocs-tip" id="fs59">val th7: obj</div>
+<div class="fsdocs-tip" id="fs60">val th8: obj</div>
+<div class="fsdocs-tip" id="fs61">val th9: obj</div>
+<div class="fsdocs-tip" id="fs62">val th10: obj</div>
+<div class="fsdocs-tip" id="fs63">val th11: obj</div>
+<div class="fsdocs-tip" id="fs64">val th12: obj</div>
+<div class="fsdocs-tip" id="fs65">val th13: obj</div>
+<div class="fsdocs-tip" id="fs66">val th14: obj</div>
+<div class="fsdocs-tip" id="fs67">val th15: obj</div>
+<div class="fsdocs-tip" id="fs68">val th16: obj</div>
+<div class="fsdocs-tip" id="fs69">val th17: obj</div>
+<div class="fsdocs-tip" id="fs70">val th18: obj</div>
+<div class="fsdocs-tip" id="fs71">val truth_thm_gr: thm * obj</div>
+<div class="fsdocs-tip" id="fs72">union case Exp.Th: thm -&gt; Exp</div>
+<div class="fsdocs-tip" id="fs73">val th19: obj</div>
+<div class="fsdocs-tip" id="fs74">val th20: obj</div>
+<div class="fsdocs-tip" id="fs75">val th21: obj</div>
+<div class="fsdocs-tip" id="fs76">val th22: obj</div>
+<div class="fsdocs-tip" id="fs77">val th23: obj</div>
+<div class="fsdocs-tip" id="fs78">val th24: obj</div>
+<div class="fsdocs-tip" id="fs79">val th25: obj</div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>

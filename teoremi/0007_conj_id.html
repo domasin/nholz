@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>vero &egrave; l'identit&agrave; della congiunzione
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="nholz">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz/img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/nholz/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/nholz/"><img id="fsdocs-logo" src="/nholz/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/tactics.html">
+    tactics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/3_Liguaggio_HOL.html">
+    LINGUAGGIO HOL
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/avvio.html">
+    avvio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B1_Teorie.html">
+    TEORIE
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/1_Introduzione.html">
+    Introduzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B2_Teoremi.html">
+    TEOREMI
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/goaltree.html">
+    goaltree
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/A5_Inference_Rules.html">
+    Regole d&#39;inferenza
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0018_disj_idem.html">
+    Disj Idem
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0033_select_eq.html">
+    0033_select_eq
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0032_forall_null.html">
+    0032_forall_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0001_truth.html">
+    Vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0019_disj_assoc.html">
+    0019_disj_assoc
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0007_conj_id.html">
+    vero &amp;egrave; l&#39;identit&amp;agrave; della congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0028_imp_dist_left_disj.html">
+    0028_imp_dist_left_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0021_disj_dist_right_conj.html">
+    0021_disj_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0017_disj_zero.html">
+    Disj Zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0010_conj_comm.html">
+    Propriet&amp;agrave; commutatativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0031_forall_one_point.html">
+    0031_forall_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0005_true_not_eq_false.html">
+    Vero non equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0027_imp_refl.html">
+    0027_imp_refl
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0008_conj_zero.html">
+    congiunzione zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0014_conj_dist_left_disj.html">
+    distributivit&amp;agrave; a sinistra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0016_disj_id.html">
+    Disj Id
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0015_conj_contr.html">
+    0015_conj_contr
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0012_conj_absorb_disj.html">
+    assorbimento della disgiunzione nella congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0009_conj_idem.html">
+    congiunzione della stessa proposizione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0030_forall_dist_conj.html">
+    0030_forall_dist_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0026_imp_left_zero.html">
+    0026_imp_left_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0020_disj_absorb_conj.html">
+    0020_disj_absorb_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0036_exists_null.html">
+    0036_exists_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0025_imp_left_id.html">
+    0025_imp_left_id
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0029_imp_dist_right_conj.html">
+    0029_imp_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0004_not_false.html">
+    Non falso equivale a vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0034_exists_dist_disj.html">
+    0034_exists_dist_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0024_disj_comm.html">
+    commutabilit&amp;agrave; della disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0006_not_dist_disj.html">
+    distribuzione della negazione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0011_conj_assoc.html">
+    Propriet&amp;agrave; associativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0022_disj_dist_left_conj.html">
+    0022_disj_dist_left_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0003_not_true.html">
+    Non vero equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0023_imp_right_zero.html">
+    0023_imp_right_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0013_conj_dist_right_disj.html">
+    distributivit&amp;agrave; a destra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0044_excluded_midle.html">
+    Terzo escluso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0035_exists_one_point.html">
+    0035_exists_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0045_bool_cases.html">
+    Bool Cases
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0002_fun_eq.html">
+    Equivalenza tra funzioni
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/nholz/">nholz</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <h1><a name="vero-egrave-l-identit-agrave-della-congiunzione" class="anchor" href="#vero-egrave-l-identit-agrave-della-congiunzione">vero &egrave; l'identit&agrave; della congiunzione</a></h1>
+<p><span class="math">\(\forall p.\ p \wedge \top \Leftrightarrow p\)</span></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="id">conj_id_thm</span>
+<span class="c">//   |- !p. p /\ true &lt;=&gt; p</span>
+</code></pre>
+<p>Backward proof with tree</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">(</span><span class="pn">[</span><span class="pn">]</span><span class="pn">,</span><span class="s">&quot;!p. p /\ true &lt;=&gt; p&quot;</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="fn">start_proof</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="fn">gen_rule_bk</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="fn">deduct_antisym_rule_bk</span> <span class="pn">[</span><span class="pn">]</span> <span class="pn">[</span><span class="pn">]</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="fn">conj_rule_bk</span> <span class="pn">[</span><span class="n">0</span><span class="pn">]</span> <span class="pn">[</span><span class="pn">]</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 13)" onmouseover="showTip(event, 'fs12', 13)" class="fn">assume_rule_bk</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 14)" onmouseover="showTip(event, 'fs13', 14)" class="fn">by</span> <span onmouseout="hideTip(event, 'fs14', 15)" onmouseover="showTip(event, 'fs14', 15)" class="id">truth_thm</span> <span class="s">&quot;truth_thm&quot;</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs15', 16)" onmouseover="showTip(event, 'fs15', 16)" class="fn">conjunct1_rule_bk</span> <span class="s">&quot;true&quot;</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="fn">assume_rule_bk</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 18)" onmouseover="showTip(event, 'fs16', 18)" class="fn">view</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 19)" onmouseover="showTip(event, 'fs17', 19)" class="fn">loc_thm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 20)" onmouseover="showTip(event, 'fs18', 20)" class="m">Option</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 21)" onmouseover="showTip(event, 'fs19', 21)" class="id">get</span>
+
+<span class="c">//val it : thm = |- !p. p /\ true &lt;=&gt; p</span>
+</code></pre>
+<p><span class="math">\(\small{ 	\color{green}{\dfrac
+{p:bool
+\qquad
+\color{green}{\dfrac
+{\color{green}{\dfrac
+{\color{green}{\dfrac
+{p:bool}
+{p\ \vdash\ p}
+\textsf{ assume_rule}}
+\qquad
+\dfrac
+{}
+{\vdash\ \top}
+\textsf{ truth_thm}}
+{p\ \vdash\ p\ \wedge\ \top}
+\textsf{ conj_rule}}
+\qquad
+\color{green}{\dfrac
+{\color{green}{\dfrac
+{p\ \wedge\ \top}
+{p\ \wedge\ \top\ \vdash\ p\ \wedge\ \top}
+\textsf{ assume_rule}}}
+{p\ \wedge\ \top\ \vdash\ p}
+\textsf{ conjunct1_rule}}}
+{\vdash\ p\ \wedge\ \top\ \Leftrightarrow\ p}
+\textsf{ deduct_antisym_rule}}}
+{\vdash\ \forall\ p.\ p\ \wedge\ \top\ \Leftrightarrow\ p}
+\textsf{ gen_rule}} }\)</span></p>
+<p>Forward proof with tree</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs20', 22)" onmouseover="showTip(event, 'fs20', 22)" class="fn">gen_rule_fd</span> <span onmouseout="hideTip(event, 'fs21', 23)" onmouseover="showTip(event, 'fs21', 23)" class="id">p</span>
+    <span class="pn">(</span><span onmouseout="hideTip(event, 'fs22', 24)" onmouseover="showTip(event, 'fs22', 24)" class="fn">deduct_antisym_rule_fd</span>
+        <span class="c">(* p |- p /\ true *)</span>
+        <span class="pn">(</span><span onmouseout="hideTip(event, 'fs23', 25)" onmouseover="showTip(event, 'fs23', 25)" class="fn">conj_rule_fd</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs21', 26)" onmouseover="showTip(event, 'fs21', 26)" class="id">p</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 27)" onmouseover="showTip(event, 'fs24', 27)" class="fn">assume_rule_fd</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 28)" onmouseover="showTip(event, 'fs14', 28)" class="id">truth_thm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 29)" onmouseover="showTip(event, 'fs25', 29)" class="fn">thm_fd</span> <span class="s">&quot;truth_thm&quot;</span><span class="pn">)</span><span class="pn">)</span>
+        <span class="c">(* p /\ true |- p *)</span>
+        <span class="pn">(</span><span onmouseout="hideTip(event, 'fs26', 30)" onmouseover="showTip(event, 'fs26', 30)" class="fn">conjunct1_rule_fd</span> <span class="pn">(</span><span class="s">@&quot;p /\ true&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs27', 31)" onmouseover="showTip(event, 'fs27', 31)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 32)" onmouseover="showTip(event, 'fs24', 32)" class="fn">assume_rule_fd</span><span class="pn">)</span><span class="pn">)</span>
+    <span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 33)" onmouseover="showTip(event, 'fs28', 33)" class="fn">zipper</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 34)" onmouseover="showTip(event, 'fs16', 34)" class="fn">view</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 35)" onmouseover="showTip(event, 'fs17', 35)" class="fn">loc_thm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 36)" onmouseover="showTip(event, 'fs18', 36)" class="m">Option</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 37)" onmouseover="showTip(event, 'fs19', 37)" class="id">get</span>
+
+<span class="c">//val it : thm = |- !p. p /\ true &lt;=&gt; p</span>
+</code></pre>
+<p>Classic forward proof without tree</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs29', 38)" onmouseover="showTip(event, 'fs29', 38)" class="fn">gen_rule</span> <span onmouseout="hideTip(event, 'fs21', 39)" onmouseover="showTip(event, 'fs21', 39)" class="id">p</span>
+    <span class="pn">(</span><span onmouseout="hideTip(event, 'fs30', 40)" onmouseover="showTip(event, 'fs30', 40)" class="fn">deduct_antisym_rule</span>
+      <span class="pn">(</span><span onmouseout="hideTip(event, 'fs31', 41)" onmouseover="showTip(event, 'fs31', 41)" class="fn">conj_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs32', 42)" onmouseover="showTip(event, 'fs32', 42)" class="fn">assume_rule</span> <span onmouseout="hideTip(event, 'fs21', 43)" onmouseover="showTip(event, 'fs21', 43)" class="id">p</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs14', 44)" onmouseover="showTip(event, 'fs14', 44)" class="id">truth_thm</span><span class="pn">)</span>
+      <span class="pn">(</span><span onmouseout="hideTip(event, 'fs33', 45)" onmouseover="showTip(event, 'fs33', 45)" class="fn">conjunct1_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs32', 46)" onmouseover="showTip(event, 'fs32', 46)" class="fn">assume_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs27', 47)" onmouseover="showTip(event, 'fs27', 47)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;p /\ true&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span> <span class="pn">)</span>
+
+<span class="c">//val it : thm = |- !p. p /\ true &lt;=&gt; p</span>
+</code></pre>
+
+            <div class="fsdocs-tip" id="fs1">namespace HOL</div>
+<div class="fsdocs-tip" id="fs2">module CoreThry
+
+from HOL<br /><em>&lt;summary&gt;
+This module completes the logical core for HOL by defining the core       
+theory.  This involves giving declarations, definitions and axioms for all
+the HOL theory objects anticipated by the language and inference kernels. 
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs3">val load: (string * thm) list</div>
+<div class="fsdocs-tip" id="fs4">module Equal
+
+from HOL<br /><em>&lt;summary&gt;
+This module adds more constants and inference rules for basic reasoning
+using equality.                                                                                                       
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs5">val load: (string * thm) list<br /><em>&lt;summary&gt;
+ Force module evaluation
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs6">module Bool
+
+from HOL<br /><em>&lt;summary&gt;
+This module extends the boolean-related theory by giving definitions for  
+classic predicate logic theory objects not introduced in &#39;CoreThry&#39;, and  
+adds various derived syntax functions, theorems and inference rules.  Note
+that derivations relying on the Axiom of Choice are separated out into the
+&#39;BoolClass&#39; module.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs7">val conj_id_thm: thm<br /><em>&lt;summary&gt;
+ |- !p. p /\ true &amp;lt;=&amp;gt; p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs8">val start_proof: xs: string list * s: string -&gt; Proof Location</div>
+<div class="fsdocs-tip" id="fs9">val gen_rule_bk: loc: (Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
+<div class="fsdocs-tip" id="fs10">val deduct_antisym_rule_bk: ind1: int list -&gt; ind2: int list -&gt; loc: (Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
+<div class="fsdocs-tip" id="fs11">val conj_rule_bk: ind1: int list -&gt; ind2: int list -&gt; loc: (Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
+<div class="fsdocs-tip" id="fs12">val assume_rule_bk: loc: Proof Location -&gt; Proof Location</div>
+<div class="fsdocs-tip" id="fs13">val by: thm: thm -&gt; lbl: string -&gt; loc: Proof Location -&gt; Proof Location</div>
+<div class="fsdocs-tip" id="fs14">val truth_thm: thm<br /><em>&lt;summary&gt;
+ |- true
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs15">val conjunct1_rule_bk: t2: string -&gt; loc: Proof Location -&gt; Proof Location</div>
+<div class="fsdocs-tip" id="fs16">val view: loc: Proof Location -&gt; Proof Location</div>
+<div class="fsdocs-tip" id="fs17">val loc_thm: loc: Proof Location -&gt; thm option</div>
+<div class="fsdocs-tip" id="fs18">module Option
+
+from Microsoft.FSharp.Core</div>
+<div class="fsdocs-tip" id="fs19">val get: option: &#39;T option -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs20">val gen_rule_fd: (term -&gt; Proof Tree -&gt; Proof Tree)</div>
+<div class="fsdocs-tip" id="fs21">val p: term</div>
+<div class="fsdocs-tip" id="fs22">val deduct_antisym_rule_fd: t1: Proof Tree -&gt; t2: Proof Tree -&gt; Proof Tree</div>
+<div class="fsdocs-tip" id="fs23">val conj_rule_fd: (Proof Tree -&gt; Proof Tree -&gt; Proof Tree)</div>
+<div class="fsdocs-tip" id="fs24">val assume_rule_fd: t: term -&gt; Proof Tree</div>
+<div class="fsdocs-tip" id="fs25">val thm_fd: lbl: string -&gt; th: thm -&gt; Proof Tree</div>
+<div class="fsdocs-tip" id="fs26">val conjunct1_rule_fd: (Proof Tree -&gt; Proof Tree)</div>
+<div class="fsdocs-tip" id="fs27">val parse_term: x: string -&gt; term<br /><em>&lt;summary&gt;
+ This takes a string and parses it into an internal term.  The type     
+ analysis stage first detypes the preterm before inferring types (in    
+ &#39;resolve_preterm&#39;), since the syntax analysis stage gives all variables
+ and constants the null pretype.  Note that type inference is capable of
+ handling overloaded variables.                                         
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs28">val zipper: t: &#39;a Tree -&gt; &#39;a Location</div>
+<div class="fsdocs-tip" id="fs29">val gen_rule: v: term -&gt; th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ gen_rule : term -&amp;gt; thm -&amp;gt; thm                                             
+                                                                           
+ This is the universal introduction rule.  It universally quantifies the   
+ supplied theorem with the supplied binding variable, under the same       
+ assumptions.  The binding variable must not occur free in the assumptions.
+                                                                           
+    `x`   A |- p         [ &quot;x&quot; not free in `A` ]                           
+    ------------                                                           
+     A |- !x. p                                                            
+
+ See also: list_gen_rule, spec_rule, mk_forall_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs30">val deduct_antisym_rule: th01: thm -&gt; th02: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the antisymmetry rule for deduction.  It takes two theorem        
+ arguments.  It returns a theorem stating that the supplied conclusions are
+ equivalent, under the unioned assumptions but with each theorem&#39;s         
+ conclusion removed from the other&#39;s assumptions.                          
+                                                                           
+        A1 |- p    A2 |- q      
+    --------------------------              
+    A1\{q} u A2\{p} |- p &amp;lt;=&amp;gt; q                      
+
+ See also: imp_antisym_rule, undisch_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs31">val conj_rule: th01: thm -&gt; th02: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the conjunction introduction rule.  It conjoins the two supplied
+ theorems and unions their assumptions.                                  
+                                                                         
+    A1 |- p    A2 |- q                                                   
+    ------------------                                                   
+    A1 u A2 |- p /\ q                                                    
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs32">val assume_rule: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the assumption rule.  It takes a boolean term, and returns a theorem
+ stating that the term holds under the single assumption of the term itself.
+
+     `p`
+   --------
+   {p} |- p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs33">val conjunct1_rule: th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the conjunction elimination rule for the LHS.  It removes the RHS  
+ conjunct from the supplied conjunction theorem.                            
+                                                                            
+    A |- p /\ q                                                             
+    -----------                                                             
+      A |- p                       
+
+ See also: conjunct2_rule, conjunct_rule, mk_conj_rule.
+&lt;/summary&gt;</em></div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>

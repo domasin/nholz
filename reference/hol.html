@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>HOL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="nholz">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz/img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/nholz/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/nholz/"><img id="fsdocs-logo" src="/nholz/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/tactics.html">
+    tactics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/3_Liguaggio_HOL.html">
+    LINGUAGGIO HOL
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/avvio.html">
+    avvio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B1_Teorie.html">
+    TEORIE
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/1_Introduzione.html">
+    Introduzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B2_Teoremi.html">
+    TEOREMI
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/goaltree.html">
+    goaltree
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/A5_Inference_Rules.html">
+    Regole d&#39;inferenza
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0018_disj_idem.html">
+    Disj Idem
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0033_select_eq.html">
+    0033_select_eq
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0032_forall_null.html">
+    0032_forall_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0001_truth.html">
+    Vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0019_disj_assoc.html">
+    0019_disj_assoc
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0007_conj_id.html">
+    vero &amp;egrave; l&#39;identit&amp;agrave; della congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0028_imp_dist_left_disj.html">
+    0028_imp_dist_left_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0021_disj_dist_right_conj.html">
+    0021_disj_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0017_disj_zero.html">
+    Disj Zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0010_conj_comm.html">
+    Propriet&amp;agrave; commutatativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0031_forall_one_point.html">
+    0031_forall_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0005_true_not_eq_false.html">
+    Vero non equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0027_imp_refl.html">
+    0027_imp_refl
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0008_conj_zero.html">
+    congiunzione zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0014_conj_dist_left_disj.html">
+    distributivit&amp;agrave; a sinistra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0016_disj_id.html">
+    Disj Id
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0015_conj_contr.html">
+    0015_conj_contr
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0012_conj_absorb_disj.html">
+    assorbimento della disgiunzione nella congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0009_conj_idem.html">
+    congiunzione della stessa proposizione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0030_forall_dist_conj.html">
+    0030_forall_dist_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0026_imp_left_zero.html">
+    0026_imp_left_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0020_disj_absorb_conj.html">
+    0020_disj_absorb_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0036_exists_null.html">
+    0036_exists_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0025_imp_left_id.html">
+    0025_imp_left_id
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0029_imp_dist_right_conj.html">
+    0029_imp_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0004_not_false.html">
+    Non falso equivale a vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0034_exists_dist_disj.html">
+    0034_exists_dist_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0024_disj_comm.html">
+    commutabilit&amp;agrave; della disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0006_not_dist_disj.html">
+    distribuzione della negazione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0011_conj_assoc.html">
+    Propriet&amp;agrave; associativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0022_disj_dist_left_conj.html">
+    0022_disj_dist_left_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0003_not_true.html">
+    Non vero equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0023_imp_right_zero.html">
+    0023_imp_right_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0013_conj_dist_right_disj.html">
+    distributivit&amp;agrave; a destra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0044_excluded_midle.html">
+    Terzo escluso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0035_exists_one_point.html">
+    0035_exists_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0045_bool_cases.html">
+    Bool Cases
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0002_fun_eq.html">
+    Equivalenza tra funzioni
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/nholz/">nholz</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h2 id="hol">
+    HOL Namespace
+  </h2>
+  <div class="fsdocs-xmldoc"></div>
+  <table class="table outer-list fsdocs-entity-list">
+    <thead>
+      <tr>
+        <td>
+          Modules
+        </td>
+        <td>
+          Description
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Bool">
+              <a href="/nholz/reference/hol-bool.html">
+                Bool
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Bool`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Bool\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module extends the boolean-related theory by giving definitions for  
+classic predicate logic theory objects not introduced in 'CoreThry', and  
+adds various derived syntax functions, theorems and inference rules.  Note
+that derivations relying on the Axiom of Choice are separated out into the
+'BoolClass' module.
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="BoolAlg">
+              <a href="/nholz/reference/hol-boolalg.html">
+                BoolAlg
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.BoolAlg`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.BoolAlg\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module proves various algebraic property theorems for the predicate
+logic operators.                                                                  
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="BoolClass">
+              <a href="/nholz/reference/hol-boolclass.html">
+                BoolClass
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.BoolClass`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.BoolClass\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+ This module derives further predicate logic theorems and inference rules.
+ Unlike all preceding derivations, these all use the Axiom of Choice (i.e.
+ 'select_ax'), and thus could be considered as classical logic.  However, 
+ note that some of these (such as 'exists_rule') are actually derivable in
+ intuitionistic logic if an alternative definition of existential         
+ quantification is used (as in HOL Light).                                                                                        
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="CoreThry">
+              <a href="/nholz/reference/hol-corethry.html">
+                CoreThry
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.CoreThry`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.CoreThry\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module completes the logical core for HOL by defining the core       
+theory.  This involves giving declarations, definitions and axioms for all
+the HOL theory objects anticipated by the language and inference kernels. 
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Def1">
+              <a href="/nholz/reference/hol-def1.html">
+                Def1
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Def1`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Def1\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module defines a command for defining type bijection constants for a
+given type constant definition.                                                                                                                                
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Def2">
+              <a href="/nholz/reference/hol-def2.html">
+                Def2
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Def2`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Def2\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module defines two specialised forms of definition for function    
+constants.  The first form is for non-recursive functions and the second
+is for recursive functions.                                                                                                                                                                                                                                   
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="DLTree">
+              <a href="/nholz/reference/hol-dltree.html">
+                DLTree
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.DLTree`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.DLTree\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+ Questo modulo costituisce una libreria di operazioni su alberi dinamici 
+ di ricerca - alberi binari auto-bilanciati che memorizzano informazioni 
+ su nodi ordinati in base a un indice rispetto alla relazione (<).
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Dmodes">
+              <a href="/nholz/reference/hol-dmodes.html">
+                Dmodes
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Dmodes`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Dmodes\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module implements the display modes mechanism, for configuring how  
+the pretty printers display types and terms.  Note that the display modes
+make no difference to the way that types and terms are parsed.   
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="EqCong">
+              <a href="/nholz/reference/hol-eqcong.html">
+                EqCong
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.EqCong`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.EqCong\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+ This module implements equality congruence rules for equality, function
+ application and predicate logic operators.  These are all trivial      
+ derivations of the primitive congruence rules 'mk_comb_rule' and       
+ 'mk_abs_rule' (see 'Thm' module) and the derived congruence rules      
+ 'mk_comb1_rule' and 'mk_comb2_rule' (see 'Equal' module).              
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Equal">
+              <a href="/nholz/reference/hol-equal.html">
+                Equal
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Equal`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Equal\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module adds more constants and inference rules for basic reasoning
+using equality.                                                                                                       
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Exn">
+              <a href="/nholz/reference/hol-exn.html">
+                Exn
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Exn`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Exn\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+ Questo modulo definisce tre nuove eccezioni di uso generale, insieme a una 
+ stampa di queste eccezioni.
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="GenericTree">
+              <a href="/nholz/reference/hol-generictree.html">
+                GenericTree
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.GenericTree`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.GenericTree\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Ind">
+              <a href="/nholz/reference/hol-ind.html">
+                Ind
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Ind`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Ind\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module extends the HOL logic with an infinite-cardinality base type,
+together with a zero and a successor function for this type.  These get  
+used in the 'Nat' module as the basis for defining the natural numbers.                                                                                                                                                                     
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Lexer">
+              <a href="/nholz/reference/hol-lexer.html">
+                Lexer
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Lexer`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Lexer\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module implements the lexical analysis stage, common to both HOL type
+and term quotation parsing.  The top-level type and term parsers are      
+implemented in the 'Parser' module.  The classification of characters,    
+used to determine how lexical tokens are formed, is implemented in the    
+'Names' module.           
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Lib">
+              <a href="/nholz/reference/hol-lib.html">
+                Lib
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Lib`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Lib\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+ Questo modulo definisce varie utilità di programmazione funzionale da 
+ usare nel corso dell'implementazione.
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Names">
+              <a href="/nholz/reference/hol-names.html">
+                Names
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Names`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Names\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module provides support for classifying HOL names for the purposes of
+parsing and printing.  This consists of tests for basic classes of name   
+and commands for setting identifier fixity and enumeration brackets.  This
+module is a trusted component of the system, since it is used in the      
+implementation of the pretty printer.          
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Nat">
+              <a href="/nholz/reference/hol-nat.html">
+                Nat
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Nat`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Nat\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module extends the HOL logic with the theory of natural numbers.    
+This involves giving theory object definitions for the naturals base type
+and the "ZERO" and "SUC" constants, based on the theory of individuals,  
+and proving a few important properties.                                                                                                                                                                                                      
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="NatArith">
+              <a href="/nholz/reference/hol-natarith.html">
+                NatArith
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.NatArith`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.NatArith\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module defines some classic natural number arithmetic operators,  
+using recursive function definition and the "SUC" and "ZERO" constants,
+and proves various basic properties about each operator.               
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="NatEval">
+              <a href="/nholz/reference/hol-nateval.html">
+                NatEval
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.NatEval`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.NatEval\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module defines conversions for evaluating arithmetic operations on 
+natual number numerals.  Because large proofs may involve heavy numeric 
+computation, special consideration is given to the efficieny of these   
+functions.                                                              
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="NatNumrl">
+              <a href="/nholz/reference/hol-natnumrl.html">
+                NatNumrl
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.NatNumrl`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.NatNumrl\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module defines the representation of natural number numerals.  This
+is based on the HOL functions "BIT0" and "BIT1".
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="NatRel">
+              <a href="/nholz/reference/hol-natrel.html">
+                NatRel
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.NatRel`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.NatRel\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module defines the classic natural number arithmetic relations and
+derives various basic properties about them.
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Pair">
+              <a href="/nholz/reference/hol-pair.html">
+                Pair
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Pair`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Pair\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+ This module extends the HOL logic with the theory of ordered pairs.  This 
+ involves giving theory object definitions for the product type operator,  
+ the pairing function and the constants "FST" and "SND", and proving a few 
+ basic properties.  Syntax functions and equality congruence rules are also
+ provided.                                                                                                                                                                                          
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Parser">
+              <a href="/nholz/reference/hol-parser.html">
+                Parser
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Parser`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Parser\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module implements syntax analysis and top-level parsing of type/term
+quotations into internal types/terms.  The syntax analysis functions take
+a list of lexical tokens as their source, and return a pretype/preterm   
+that gets passed on to type analysis.  Lexical analysis is implemented in
+the 'Lexer' module, and type analsyis (actually common to parsing and    
+printing) is implemented in the 'TypeAnal' module.           
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Preterm">
+              <a href="/nholz/reference/hol-preterm.html">
+                Preterm
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Preterm`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Preterm\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module defines the pretype and preterm datatypes (called 'pretype'   
+and 'preterm'), and various basic operations on them.  These are used     
+during parsing and printing as intermediate representations of types/terms
+between their quotation and internal representations.  They incorporate   
+extra datatype classes, that don't occur in the corresponding internal    
+datatypes and are only used during parsing and printing.  Being           
+intermediate datatypes, there is no need for well-formedness restrictions 
+on their constructors, and so the datatypes are not made abstract.
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Printer">
+              <a href="/nholz/reference/hol-printer.html">
+                Printer
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Printer`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Printer\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module implements the type, term and theorem pretty printers, for    
+outputting quotation representations of internal types/terms/theorems.    
+The printers take into account identifier fixity status and enumeration   
+bracket settings (see 'Names' module), certain special-case theory objects
+(whose declarations in later modules are anticipated here), and the       
+display modes (see 'DModes' module).  This module is a trusted component  
+of the system, since the user will normally rely on it to determine what  
+has been proved and what has been asserted.          
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="ProofManagement">
+              <a href="/nholz/reference/hol-proofmanagement.html">
+                ProofManagement
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.ProofManagement`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.ProofManagement\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="ProofTree">
+              <a href="/nholz/reference/hol-prooftree.html">
+                ProofTree
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.ProofTree`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.ProofTree\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Reader">
+              <a href="/nholz/reference/hol-reader.html">
+                Reader
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Reader`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Reader\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module provides library support for generic reader functions that  
+process data from a given source and return a read item and the source  
+correspondingly advanced, ready for the next item to be read.  This gets
+used in the HOL quotation lexer and parsers (see 'Lexer' and 'Parser'   
+modules respectively).            
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Store">
+              <a href="/nholz/reference/hol-store.html">
+                Store
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Store`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Store\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module implements databases for storing theorems and lemmas under a
+name index.  Like axioms, stored theorems are restricted to having no   
+free variables or assumptions, whereas stored lemmas are theorems that have 
+no such restrictions.                                                   
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Term">
+              <a href="/nholz/reference/hol-term.html">
+                Term
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Term`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Term\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module defines the internal representation of HOL terms.  This is    
+done by defining an abstract datatype for terms, and then primitive syntax
+functions for constructing and destructing terms, and support for constant
+declaration.  The primitive syntax constructors ensure that only well-    
+formed terms can be constructed.  This module is a trusted component of   
+the system.                                                               
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Thm">
+              <a href="/nholz/reference/hol-thm.html">
+                Thm
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Thm`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Thm\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module defines the basic mechanisms for logical deduction and theory 
+assertion.  As is characteristic of LCF-style theorem provers, this is    
+done by defining an abstract datatype for the internal representation of  
+HOL theorems.  The primitive constructors for this datatype are limited to
+the primitive inference rules and the primitive assertion commands.  Any  
+subsequent theorem-creating functions must ultimately be implemented in   
+terms of these constructors.  This module is a trusted component of the   
+system.                                                               
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Type">
+              <a href="/nholz/reference/hol-type.html">
+                Type
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Type`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Type\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module defines the internal representation of HOL types.  This is    
+done by defining an abstract datatype for types, and then primitive syntax
+functions for constructing and destructing types, and support for type    
+constant declaration.  The primitive syntax constructors ensure that only 
+well-formed types can be constructed.  This module is a trusted component 
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="TypeAnal">
+              <a href="/nholz/reference/hol-typeanal.html">
+                TypeAnal
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.TypeAnal`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.TypeAnal\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module defines type analysis routines for pretypes and preterms, used
+in parsing and printing type/term quotations.  The primary routines are   
+detyping, type unification, type inference and type consistency check.    
+This module is used in the implementation of the pretty printer, and is a 
+trusted component of the system.                              
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="TypeAnnot">
+              <a href="/nholz/reference/hol-typeannot.html">
+                TypeAnnot
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.TypeAnnot`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.TypeAnnot\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module defines type analysis routines for pretypes and preterms, used
+in parsing and printing type/term quotations.  The primary routines are   
+detyping, type unification, type inference and type consistency check.    
+This module is used in the implementation of the pretty printer, and is a 
+trusted component of the system.                                            
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Utils1">
+              <a href="/nholz/reference/hol-utils1.html">
+                Utils1
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Utils1`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Utils1\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module defines various basic operations on types and terms that get 
+used in the implementation of the primitive inference rules and primitive
+assertion commands in the 'Thm' module.  This module is a trusted        
+component of the system.
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Utils2">
+              <a href="/nholz/reference/hol-utils2.html">
+                Utils2
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Utils2`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Utils2\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+This module defines various basic useful operations on types, terms and theorems. 
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Wrap">
+              <a href="/nholz/reference/hol-wrap.html">
+                Wrap
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Wrap`')">
+              <img src="/nholz/content/img/copy-md.png" class="normal"/>
+              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Wrap\'/>')">
+              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <p class="fsdocs-summary">
+              
+The primitive inference rules and theory commands have minimal, stripped- 
+down functionality, to make the language and inference kernels as concise 
+as possible and their correctness as easy as possible to justify.  This   
+module adds basic wrappers around these primitives, giving the rules step 
+counting and the theory commands benign redefinition and slightly enhanced
+functionality. 
+
+            </p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
