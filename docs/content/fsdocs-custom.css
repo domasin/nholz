@@ -353,6 +353,11 @@ textarea {
     font-family: "Nunito", sans-serif;
 }
 
+p {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 code,
 pre {
     -moz-osx-font-smoothing: auto;
