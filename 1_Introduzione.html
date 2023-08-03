@@ -6,7 +6,7 @@
     <title>Introduzione
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="">
+    <meta name="author" content="nholz">
     <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -314,7 +314,14 @@
 
   </a>
 </li>
-                        {{fsdocs-list-of-namespaces}}
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
                     </ul>
                 </div>
             </aside>
@@ -428,7 +435,7 @@ Per esempio, il seguente termine significa ''per tutti i numeri naturali <code>x
 minore di <code>y</code> e <code>y</code> &egrave; minore di <code>z</code> allora <code>x</code> &egrave; minore di <code>z</code>'':</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="s">@&quot;!x y z. x &lt; y /\ y &lt; z ==&gt; x &lt; z&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 31)" onmouseover="showTip(event, 'fs21', 31)" class="fn">parse_term</span>
 </code></pre>
-Warning: Output, it-value and value references require --eval
+<table class="pre"><tr><td><pre><code>val it: term = `!x y z. x &lt; y /\ y &lt; z ==&gt; x &lt; z`</code></pre></td></tr></table>
 <p>Se si immette un termine mal formato si ricever&agrave; un messaggio di errore.</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="s">&quot;x =&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 32)" onmouseover="showTip(event, 'fs21', 32)" class="fn">parse_term</span>
 
@@ -454,11 +461,11 @@ determinabili. Di default i termini sono ristampati indietro con solamente le an
 per evitare qualsiasi ambiguit&agrave; circa i tipi di ogni sottotermine.</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="s">&quot;!(w:nat) (x:nat) y z. w = x /\ y = z&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 34)" onmouseover="showTip(event, 'fs21', 34)" class="fn">parse_term</span>
 </code></pre>
-Warning: Output, it-value and value references require --eval
+<table class="pre"><tr><td><pre><code>val it: term = `!(w:nat) x (y:'1) z. w = x /\ y = z`</code></pre></td></tr></table>
 <p>I tipi HOL possono essere scritti fuori dal contesto di un termine usando la funzone <code>parse_type</code>.</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="s">&quot;nat#nat-&gt;bool&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 35)" onmouseover="showTip(event, 'fs22', 35)" class="fn">parse_type</span>
 </code></pre>
-Warning: Output, it-value and value references require --eval
+<table class="pre"><tr><td><pre><code>val it: hol_type = `:nat#nat-&gt;bool`</code></pre></td></tr></table>
 <h2><a name="1-3-2-Teoremi-Dimostrazioni-ed-Asserzioni" class="anchor" href="#1-3-2-Teoremi-Dimostrazioni-ed-Asserzioni">1.3.2 Teoremi, Dimostrazioni ed Asserzioni</a></h2>
 <p>I teoremi HOL consistono di un insieme di termini di assunzione con valore booleano e di un termine conclusione con
 valore booleano, e sono riservati ad enunciati di cui si &egrave; stabilito che valgono (per dimostrazione o asserzione
@@ -468,7 +475,7 @@ contiene gi&agrave; oltre 100 teoremi pre-dimostrati, ognuno dei quali non ha as
 nell'Appendice B2.</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs23', 36)" onmouseover="showTip(event, 'fs23', 36)" class="id">excluded_middle_thm</span>
 </code></pre>
-Warning: Output, it-value and value references require --eval
+<table class="pre"><tr><td><pre><code>val it: thm = |- !p. p \/ ~ p</code></pre></td></tr></table>
 <p>Le regole di inferenza della logica HOL sono implementate in NHOLZ come funzioni F# che prendono
 teoremi e/o termini e restituiscono teoremi. Un passo di dimostrazione &egrave; eseguito semplicemente
 valutando l'applicazione di una tale funzione. Dettagli sulle regole d'inferenza sono forniti

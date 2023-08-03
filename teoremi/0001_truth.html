@@ -6,7 +6,7 @@
     <title>Vero
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="">
+    <meta name="author" content="nholz">
     <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -314,7 +314,14 @@
 
   </a>
 </li>
-                        {{fsdocs-list-of-namespaces}}
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
                     </ul>
                 </div>
             </aside>
@@ -326,7 +333,7 @@
 <p><span class="math">\(\vdash \top\)</span></p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="id">truth_thm</span>
 </code></pre>
-Warning: Output, it-value and value references require --eval
+<table class="pre"><tr><td><pre><code>val it: thm = |- true</code></pre></td></tr></table>
 <p>Backward proof with tree</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">(</span><span class="pn">[</span><span class="pn">]</span><span class="pn">,</span><span class="s">&quot;true&quot;</span><span class="pn">)</span>
 <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="fn">start_proof</span>
