@@ -353,11 +353,6 @@ textarea {
     font-family: "Nunito", sans-serif;
 }
 
-p {
-    text-align: justify;
-    text-justify: inter-word;
-}
-
 code,
 pre {
     -moz-osx-font-smoothing: auto;
@@ -13484,6 +13479,11 @@ em {
     font-weight: 900;
     font-size: 0.85rem;
     font-family: 'Roboto Mono', monospace;
+}
+
+#fsdocs-content p {
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 /* strings --- and stlyes for other string related formats */
