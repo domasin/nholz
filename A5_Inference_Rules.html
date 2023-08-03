@@ -6,16 +6,12 @@
     <title>Regole d'inferenza
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="nholz">
-
-    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
 
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-    <link rel="shortcut icon" type="image/x-icon" href="/nholz/img/favicon.ico">
-    <link type="text/css" rel="stylesheet" href="/nholz/content/navbar-fixed-left.css" />
     <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
     <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
     <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
@@ -27,35 +23,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
     <!-- END SEARCH BOX: this adds support for the search box -->
     
-</head>
+</head> 
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
-            <a href="/nholz/"><img id="fsdocs-logo" src="/nholz/img/logo.png" /></a>
-            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
-            <div id="header">
-                <div class="searchbox" id="fsdocs-searchbox">
-                    <label for="search-by">
-                        <i class="fas fa-search"></i>
-                    </label>
-                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
-                    <span data-search-clear="">
-                        <i class="fas fa-times"></i>
-                    </span>
+    <div class="columns is-fullheight m-0">
+        <div id="fsdocs-menu" class="column is-2 is-paddingless">
+            <aside class="menu">
+                <div class="container is-paddingless is-marginless has-background-dark">
+                    <a href="/nholz/">
+                        <figure class="image is-128x128 container">
+                            <img src="/nholz/img/logo.png">
+                        </figure>
+                    </a>
+                    <h2 class="title has-text-centered has-text-white pb-4">nholz</h2>
                 </div>
-            </div>
-
-            <!-- END SEARCH BOX: this adds support for the search box -->
-            <ul class="navbar-nav">
-                <li class="nav-header">Links</li>
-                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License</a></li>
-                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
-                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
-                <li class="nav-header">
+                <div class="content">
+                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+                    <div id="header">
+                        <div class="searchbox" id="fsdocs-searchbox">
+                            <label for="search-by">
+                                <i class="fas fa-search"></i>
+                            </label>
+                            <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
+                            <span data-search-clear="">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- END SEARCH BOX: this adds support for the search box -->
+                    <ul class="navbar-nav">
+                        <li class="nav-header">Links</li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
+                        <li class="nav-header">
   Documentation
 </li>             
 <li class="nav-item">
@@ -313,24 +314,15 @@
 
   </a>
 </li>
-                <li class="nav-header">
-  API Reference
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="/nholz/reference/index.html">
-    All Namespaces
-  </a>
-</li>
-            </ul>
+                        {{fsdocs-list-of-namespaces}}
+                    </ul>
+                </div>
+            </aside>
         </div>
-    </nav>
-    <div class="container">
-        <div class="masthead">
-            <h3 class="muted"><a href="/nholz/">nholz</a></h3>
-        </div>
-        <hr />
-        <div class="container" id="fsdocs-content">
-            <h1><a name="Regole-d-inferenza" class="anchor" href="#Regole-d-inferenza">Regole d'inferenza</a></h1>
+        <div class="column is-10 is-paddingless">
+            <div class="section pt-4">
+                <div class="container" id="fsdocs-content">
+                    <h1><a name="Regole-d-inferenza" class="anchor" href="#Regole-d-inferenza">Regole d'inferenza</a></h1>
 <p>Questa appendice fornisce una descrizione delle regole d'inferenza</p>
 <h2><a name="Regole-primitive" class="anchor" href="#Regole-primitive">Regole primitive</a></h2>
 <p><span class="math">\(\dfrac
@@ -1149,7 +1141,7 @@ nelle assunzioni del teorema affinch&eacute; questa regola abbia successo.</p>
 <p>work in progress...</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#I</span> <span class="s">&quot;../src/bin/Debug/net7.0&quot;</span>
 <span class="pp">#r</span> <span class="s">&quot;nholz.dll&quot;</span>
-<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">HOL</span>
+<span class="k">open</span> <span class="id">HOL</span>
 </code></pre>
 <h2><a name="NatEval-eval_add_conv" class="anchor" href="#NatEval-eval_add_conv">| NatEval.eval_add_conv</a></h2>
 <p>Questa &egrave; la conversione di valutazione per l'addizione numerale. Prende
@@ -1157,7 +1149,7 @@ un termine della forma <code>m + n</code>, dove <code>m</code> e <code>n</code> 
 e restituisce un teorema che afferma che questo equivale al suo valore numerale,
 senza assunzioni.</p>
 <p>Si veda anche: eval_sub_conv, eval_mult_conv, eval_exp_conv.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="fn">eval_add_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">eval_add_conv</span>
 
 <span class="c">///    `m + n`                                                             </span>
 <span class="c">/// ------------                                                           </span>
@@ -1169,7 +1161,7 @@ Prende un termine della forma <code>Even n</code>, dove <code>n</code> &egrave; 
 naturale, e restituisce un teorema che afferma il suo valore booleano,
 senza assunzioni.</p>
 <p>Si veda anche: eval_odd_conv.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="fn">eval_even_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">eval_even_conv</span>
 
 <span class="c">//     `EVEN n`                                                         </span>
 <span class="c">// ---------------                                                      </span>
@@ -1181,7 +1173,7 @@ Prende un termine della forma <code>m EXP n</code>, dove <code>m</code> e <code>
 di numeri naturali, e restituisce un teorema che afferma che questo equivale
 al suo valore, senza assunzioni.</p>
 <p>Si veda anche: eval_add_conv, eval_sub_conv, eval_mult_conv.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="fn">eval_exp_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">eval_exp_conv</span>
 
 <span class="c">//    `m EXP n`                                                          </span>
 <span class="c">// --------------                                                        </span>
@@ -1193,7 +1185,7 @@ Prende un termine della forma <code>m &gt;= n</code>, dove <code>m</code> e <cod
 di numeri naturali, e restituisce un teorema che afferma che questo equivale
 al suo valore booleano, senza assunzioni.</p>
 <p>Si veda anche: eval_gt_conv, eval_le_conv, eval_lt_conv, eval_nat_eq_conv.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="fn">eval_ge_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">eval_ge_conv</span>
 
 <span class="c">//      `m &gt;= n`</span>
 <span class="c">//  ---------------</span>
@@ -1205,7 +1197,7 @@ Prende un termine della forma <code>m &gt; n</code>, dove <code>m</code> e <code
 di numeri naturali, e restituisce un teorema che afferma che questo equivale
 al suo valore booleano, senza assunzioni.</p>
 <p>Si veda anche: eval_ge_conv, eval_le_conv, eval_lt_conv, eval_nat_eq_conv.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="fn">eval_gt_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">eval_gt_conv</span>
 
 <span class="c">//      `m &gt; n`    </span>
 <span class="c">//  -------------- </span>
@@ -1217,7 +1209,7 @@ Prende un termine della forma <code>m &lt;= n</code>, dove <code>m</code> e <cod
 di numeri naturali, e restituisce un teorema che afferma che questo equivale
 al suo valore booleano, senza assunzioni.</p>
 <p>Si veda anche: eval_lt_conv, eval_ge_conv, eval_gt_conv, eval_nat_eq_conv.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="fn">eval_le_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">eval_le_conv</span>
 
 <span class="c">//        `m &lt;= n`                               </span>
 <span class="c">//    --------------                            </span>
@@ -1229,17 +1221,17 @@ Prende un termine della forma <code>m &lt; n</code>, dove <code>m</code> e <code
 di numeri naturali, e restituisce un teorema che afferma che questo equivale
 al suo valore booleano, senza assunzioni.</p>
 <p>Si veda anche: eval_le_conv, eval_ge_conv, eval_gt_conv, eval_nat_eq_conv.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="fn">eval_lt_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">eval_lt_conv</span>
 
 <span class="c">//        `m &lt; n`                               </span>
 <span class="c">//    --------------                            </span>
 <span class="c">//    |- m &lt; n &lt;=&gt; z</span>
 </code></pre>
 <p>Es.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span class="s">&quot;12 &lt; 7&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="fn">eval_lt_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="s">&quot;12 &lt; 7&quot;</span> <span class="o">|&gt;</span> <span class="id">parse_term</span> <span class="o">|&gt;</span> <span class="id">eval_lt_conv</span>
 <span class="c">// val it : thm = |- 12 &lt; 7 &lt;=&gt; false</span>
 
-<span class="s">&quot;7 &lt; 12&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 12)" onmouseover="showTip(event, 'fs8', 12)" class="fn">eval_lt_conv</span>
+<span class="s">&quot;7 &lt; 12&quot;</span> <span class="o">|&gt;</span> <span class="id">parse_term</span> <span class="o">|&gt;</span> <span class="id">eval_lt_conv</span>
 <span class="c">// val it : thm = |- 7 &lt; 12 &lt;=&gt; true</span>
 </code></pre>
 <h2><a name="NatEval-eval_mult_conv" class="anchor" href="#NatEval-eval_mult_conv">| NatEval.eval_mult_conv</a></h2>
@@ -1248,14 +1240,14 @@ Prende un termine della forma <code>m * n</code>, dove <code>m</code> e <code>n<
 numeri naturali, e restituisce un teorema che afferma che questo equivale al
 suo valore numerale, senza assunzioni.</p>
 <p>Si veda anche: eval_add_conv, eval_sub_conv, eval_exp_conv.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="fn">eval_mult_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">eval_mult_conv</span>
 
 <span class="c">//     `m * n`                                                            </span>
 <span class="c">//  ------------                                                          </span>
 <span class="c">//  |- m * n = z</span>
 </code></pre>
 <p>Es.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span class="s">&quot;12 * 7&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 14)" onmouseover="showTip(event, 'fs9', 14)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 15)" onmouseover="showTip(event, 'fs10', 15)" class="fn">eval_mult_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="s">&quot;12 * 7&quot;</span> <span class="o">|&gt;</span> <span class="id">parse_term</span> <span class="o">|&gt;</span> <span class="id">eval_mult_conv</span>
 <span class="c">// val it : thm = |- 12 * 7 = 84</span>
 </code></pre>
 <h2><a name="NatEval-eval_nat_eq_conv" class="anchor" href="#NatEval-eval_nat_eq_conv">| NatEval.eval_nat_eq_conv</a></h2>
@@ -1264,7 +1256,7 @@ Prende un termine della forma <code>m = n</code>, dove <code>m</code> e <code>n<
 numeri naturali, e restituisce un teorema che afferma che questo equivale al
 suo valore booleano, senza assunzioni.</p>
 <p>Si veda anche: eval_le_conv, eval_lt_conv, eval_ge_conv, eval_gt_conv.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="fn">eval_nat_eq_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">eval_nat_eq_conv</span>
 
 <span class="c">//      `m = n`                                                            </span>
 <span class="c">//  --------------                                                         </span>
@@ -1276,7 +1268,7 @@ Prende un termine della forma <code>ODD n</code>, dove <code>n</code> &egrave; u
 naturale, e restituisce un teorema che afferma il suo valore booleano, senza
 assunzioni.</p>
 <p>Si veda anche: eval_even_conv.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="fn">eval_odd_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">eval_odd_conv</span>
 
 <span class="c">//      `ODD n`                                                            </span>
 <span class="c">//  --------------                                                         </span>
@@ -1288,7 +1280,7 @@ un termine della forma <code>PRE n</code>, dove <code>n</code> &amp;egrave, un n
 e restituisce un teorema che afferma che questo equivale al suo valore numerale,
 senza assunzioni.</p>
 <p>Si veda anche: eval_suc_conv.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="fn">eval_pre_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">eval_pre_conv</span>
 
 <span class="c">//     `PRE n`                                                         </span>
 <span class="c">//  ------------                                                       </span>
@@ -1300,7 +1292,7 @@ un termine della forma <code>m - n</code>, dove <code>m</code> e <code>n</code> 
 naturali, e restituisce un teorema che afferma che questo equivale al suo
 valore numerale, senza assunzioni.</p>
 <p>Si veda anche: eval_add_conv, eval_mult_conv, eval_exp_conv.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="fn">eval_sub_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">eval_sub_conv</span>
 
 <span class="c">//     `m - n`                                                         </span>
 <span class="c">//  ------------                                                       </span>
@@ -1312,7 +1304,7 @@ un termine della forma <code>SUCC n</code>, dove <code>n</code> &egrave; un nume
 e restituisce un teorema che afferma che questo equivale al suo valore numerale,
 senza assunzioni.</p>
 <p>Si veda anche: eval_add_conv, eval_mult_conv, eval_exp_conv.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs15', 20)" onmouseover="showTip(event, 'fs15', 20)" class="fn">eval_suc_conv</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">eval_suc_conv</span>
 
 <span class="c">//     `SUC n`                                                            </span>
 <span class="c">//  ------------                                                          </span>
@@ -1331,7 +1323,7 @@ assunzioni del teorema fornito.</p>
 Prende due teoremi di uguaglianza, e accoppia i corrispondenti lati del
 primo teorema con quelli del secondo, unendone le assunzioni</p>
 <p>Si veda anche: mk_pair1_rule, mk_pair2_rule, mk_bin_rule.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="fn">mk_pair_rule</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">mk_pair_rule</span>
 
 <span class="c">//  A1 |- x1 = x2    A2 |- y1 = y2                                       </span>
 <span class="c">//  ------------------------------                                       </span>
@@ -1342,7 +1334,7 @@ primo teorema con quelli del secondo, unendone le assunzioni</p>
 sinistra. Prende un teorema di uguaglianza e un termine, e accoppia ogni
 lato del teorema con il termine.</p>
 <p>Si veda anche: mk_pair2_rule, mk_pair_rule, mk_bin1_rule.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="fn">mk_pair1_rule</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">mk_pair1_rule</span>
 
 <span class="c">//    A |- x1 = x2   `y`                                                  </span>
 <span class="c">//   --------------------                                                 </span>
@@ -1353,7 +1345,7 @@ lato del teorema con il termine.</p>
 destra. Prende un termine un teorema di uguaglianza, e accoppia il termine
 con ogni lato del teorema.</p>
 <p>Si veda anche: mk_pair1_rule, mk_pair_rule, mk_bin2_rule.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="fn">mk_pair2_rule</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">mk_pair2_rule</span>
 
 <span class="c">///     `x`   A |- y1 = y2                                                    </span>
 <span class="c">///    --------------------                                                   </span>
@@ -1362,213 +1354,19 @@ con ogni lato del teorema.</p>
    
 </code></pre>
 
-            <div class="fsdocs-tip" id="fs1">namespace HOL</div>
-<div class="fsdocs-tip" id="fs2">val eval_add_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
- This is the evaluation conversion for numeral addition.  It takes a term  
- of the form `m + n`, where &quot;m&quot; and &quot;n&quot; are both natural number numerals,  
- and returns a theorem stating that this equals its numeral value, under no
- assumptions.                                                              
-                                                                           
-       `m + n`                                                             
-    ------------                                                           
-    |- m + n = z                                                
-
- See also: eval_sub_conv, eval_mult_conv, eval_exp_conv.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs3">val eval_even_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
- This is the evaluation conversion for numeral evenness.  It takes a term
- of the form `EVEN n`, where &quot;n&quot; is a natural number numeral, and returns
- a theorem stating its boolean value, under no assumptions.              
-                                                                         
-        `EVEN n`                                                         
-    ---------------                                                      
-    |- EVEN n &amp;lt;=&amp;gt; z                                                      
-
- See also: eval_odd_conv.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs4">val eval_exp_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
- This is the evaluation conversion for numeral exponentiation.  It takes a
- term of the form `m EXP n`, where &quot;m&quot; and &quot;n&quot; are both natural number    
- numerals, and returns a theorem stating that this equals its numeral     
- value, under no assumptions.                                             
-                                                                          
-       `m EXP n`                                                          
-    --------------                                                        
-    |- m EXP n = z                                                        
-
- See also: eval_add_conv, eval_sub_conv, eval_mult_conv.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs5">val eval_ge_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
- This is the evaluation conversion for numeral greater-than-or-equal comparison.
- It takes a term of the form `m &amp;gt;= n`, where &quot;m&quot; and &quot;n&quot; are both natural number
- numerals, and returns a theorem stating that this input equals its boolean
- value, under no assumptions.
- 
-           `m &amp;gt;= n`
-       ---------------
-       |- m &amp;gt;= n &amp;lt;=&amp;gt; z
-
- eval_ge_conv, eval_le_conv, eval_lt_conv, eval_nat_eq_conv.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs6">val eval_gt_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
- This is the evaluation conversion for numeral greater-than comparison.  It takes
- a term of the form `m &amp;gt; n`, where &quot;m&quot; and &quot;n&quot; are both natural number numerals,
- and returns a theorem stating that this input equals its boolean value, under no
- assumptions.                                                
-                   
-        `m &amp;gt; n`    
-    -------------- 
-    |- m &amp;gt; n &amp;lt;=&amp;gt; z 
-
- eval_ge_conv, eval_le_conv, eval_lt_conv, eval_nat_eq_conv.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs7">val eval_le_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
- This is the evaluation conversion for numeral less-than-or-equal comparison.  It
- takes a term of the form `m &amp;lt;= n`, where &quot;m&quot; and &quot;n&quot; are both natural number
- numerals, and returns a theorem stating that this input equals its boolean
- value, under no assumptions.                                                        
-                                                                           
-        `m &amp;lt;= n`                               
-    --------------                            
-    |- m &amp;lt;= n &amp;lt;=&amp;gt; z            
-
- See also: eval_lt_conv, eval_ge_conv, eval_gt_conv, eval_nat_eq_conv.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs8">val eval_lt_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
- This is the evaluation conversion for numeral less-than-or-equal comparison.  It
- takes a term of the form `m &amp;lt; n`, where &quot;m&quot; and &quot;n&quot; are both natural number
- numerals, and returns a theorem stating that this input equals its boolean
- value, under no assumptions.                                                        
-                                                                           
-        `m &amp;lt; n`                               
-    --------------                            
-    |- m &amp;lt; n &amp;lt;=&amp;gt; z            
-
- See also: eval_le_conv, eval_ge_conv, eval_gt_conv, eval_nat_eq_conv.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs9">val parse_term: x: string -&gt; term<br /><em>&lt;summary&gt;
- This takes a string and parses it into an internal term.  The type     
- analysis stage first detypes the preterm before inferring types (in    
- &#39;resolve_preterm&#39;), since the syntax analysis stage gives all variables
- and constants the null pretype.  Note that type inference is capable of
- handling overloaded variables.                                         
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs10">val eval_mult_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
- eval_mult_conv : term -&amp;gt; thm                                             
-                                                                          
- This is the evaluation conversion for numeral multiplication.  It takes a
- term of the form `m * m`, where &quot;m&quot; and &quot;n&quot; are both natural number      
- numerals, and returns a theorem stating that this equals its numeral     
- value, under no assumptions.                                             
-                                                                          
-       `m * n`                                                            
-    ------------                                                          
-    |- m * n = z                                                          
-
- See also: eval_add_conv, eval_sub_conv, eval_exp_conv.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs11">val eval_nat_eq_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
- This is the evaluation conversion for numeric equality.  It takes a term  
- of the form `m = n`, where &quot;m&quot; and &quot;n&quot; are both natural number numerals,  
- and returns a theorem stating that this equals its boolean value, under no
- assumptions.                                                              
-                                                                           
-        `m = n`                                                            
-    --------------                                                         
-    |- m = n &amp;lt;=&amp;gt; z                                    
-
- See also: eval_le_conv, eval_lt_conv, eval_ge_conv, eval_gt_conv.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs12">val eval_odd_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
- This is the evaluation conversion for numeral oddness.  It takes a term of
- the form `ODD n`, where &quot;n&quot; is a natural number numeral, and returns a    
- theorem stating its boolean value, under no assumptions.                  
-                                                                           
-        `ODD n`                                                            
-    --------------                                                         
-    |- ODD n &amp;lt;=&amp;gt; z       
-
- See also: eval_even_conv.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs13">val eval_pre_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
- eval_pre_conv : term -&amp;gt; thm                                           
-                                                                       
- This is the evaluation conversion for numeral predecessor.  It takes a
- term of the form `PRE n`, where &quot;n&quot; is a natural number numeral, and  
- returns a theorem stating that this equals its numeral value, under no
- assumptions.                                                          
-                                                                       
-       `PRE n`                                                         
-    ------------                                                       
-    |- PRE n = z                                                       
-
- See also: eval_suc_conv.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs14">val eval_sub_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
- This is the evaluation conversion for numeral subtraction.  It takes a
- term of the form `m - n`, where &quot;m&quot; and &quot;n&quot; are both natural number   
- numerals, and returns a theorem stating that this equals its numeral  
- value, under no assumptions.                                          
-                                                                       
-       `m - n`                                                         
-    ------------                                                       
-    |- m - n = z                                                       
-
- See also: eval_add_conv, eval_mult_conv, eval_exp_conv.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs15">val eval_suc_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
- This is the evaluation conversion for numeral successor.  It takes a term
- of the form `SUC n`, where &quot;n&quot; is a natural number numeral, and returns a
- theorem stating that this equals its numeral value, under no assumptions.
-                                                                          
-       `SUC n`                                                            
-    ------------                                                          
-    |- SUC n = z                                                          
-
- See also: eval_pre_conv.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs16">val mk_pair_rule: th1: thm -&gt; th2: thm -&gt; thm<br /><em>&lt;summary&gt;
- This is the equality congruence rule for pairing.  It takes two equality
- theorems, and pairs corresponding sides of the first theorem with the   
- second, unioning the assumptions.                                       
-                                                                         
-    A1 |- x1 = x2    A2 |- y1 = y2                                       
-    ------------------------------                                       
-     A1 u A2 |- (x1,y1) = (x2,y2)                                        
-
- See also: mk_pair1_rule, mk_pair2_rule, mk_bin_rule.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs17">val mk_pair1_rule: th1: thm -&gt; tm: term -&gt; thm<br /><em>&lt;summary&gt;
- This is the equality congruence rule for pair LHS.  It takes an equality
- theorem and a term, and pairs each side of the theorem with the term.   
-                                                                         
-     A |- x1 = x2   `y`                                                  
-    --------------------                                                 
-    A |- (x1,y) = (x2,y)                                                 
-
- See also: mk_pair2_rule, mk_pair_rule, mk_bin1_rule.
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs18">val mk_pair2_rule: tm: term -&gt; th2: thm -&gt; thm<br /><em>&lt;summary&gt;
- This is the equality congruence rule for pair RHS.  It takes a term and an
- equality theorem, and pairs the term with each side of the theorem.       
-                                                                           
-     `x`   A |- y1 = y2                                                    
-    --------------------                                                   
-    A |- (x,y1) = (x,y2)                                                   
-
- See also: mk_pair1_rule, mk_pair_rule, mk_bin2_rule.
-&lt;/summary&gt;</em></div>
-
+                </div>
+            </div>
         </div>
-
-        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
-        <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/';</script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
-        <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
-        <!-- END SEARCH BOX: this adds support for the search box -->
+        
     </div>
+
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/'</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+    <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+    <!-- END SEARCH BOX: this adds support for the search box -->
 </body>
 
 </html>
