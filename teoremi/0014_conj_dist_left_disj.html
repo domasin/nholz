@@ -6,15 +6,15 @@
     <title>distributivit&agrave; a sinistra della congiunzione sulla disgiunzione
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
+    <meta name="author" content="nholz">
+    <link rel="shortcut icon" type="image/x-icon" href="http://localhost:8901//img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
 
-    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
-    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
-    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <link type="text/css" rel="stylesheet" href="http://localhost:8901/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="http://localhost:8901/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="http://localhost:8901/content/fsdocs-tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -23,6 +23,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
     <!-- END SEARCH BOX: this adds support for the search box -->
     
+<script type="text/javascript">
+    var wsUri = "ws://localhost:8901/websocket";
+    function init()
+    {
+        websocket = new WebSocket(wsUri);
+        websocket.onclose = function(evt) { onClose(evt) };
+    }
+    function onClose(evt)
+    {
+        console.log('closing');
+        websocket.close();
+        document.location.reload();
+    }
+    window.addEventListener("load", init, false);
+</script>
+
 </head> 
 
 <body>
@@ -30,9 +46,9 @@
         <div id="fsdocs-menu" class="column is-2 is-paddingless">
             <aside class="menu">
                 <div class="container is-paddingless is-marginless has-background-dark">
-                    <a href="/nholz/">
+                    <a href="http://localhost:8901/">
                         <figure class="image is-128x128 container">
-                            <img src="/nholz/img/logo.png">
+                            <img src="http://localhost:8901/img/logo.png">
                         </figure>
                     </a>
                     <h2 class="title has-text-centered has-text-white pb-4">nholz</h2>
@@ -60,261 +76,268 @@
   Documentation
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/tactics.html">
+  <a class="nav-link" href="http://localhost:8901/tactics.html">
     tactics
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/3_Liguaggio_HOL.html">
+  <a class="nav-link" href="http://localhost:8901/3_Liguaggio_HOL.html">
     LINGUAGGIO HOL
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/avvio.html">
+  <a class="nav-link" href="http://localhost:8901/avvio.html">
     avvio
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/B1_Teorie.html">
+  <a class="nav-link" href="http://localhost:8901/B1_Teorie.html">
     TEORIE
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/1_Introduzione.html">
+  <a class="nav-link" href="http://localhost:8901/1_Introduzione.html">
     Introduzione
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/B2_Teoremi.html">
+  <a class="nav-link" href="http://localhost:8901/B2_Teoremi.html">
     TEOREMI
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/goaltree.html">
+  <a class="nav-link" href="http://localhost:8901/goaltree.html">
     goaltree
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/A5_Inference_Rules.html">
+  <a class="nav-link" href="http://localhost:8901/A5_Inference_Rules.html">
     Regole d&#39;inferenza
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0018_disj_idem.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0018_disj_idem.html">
     Disj Idem
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0033_select_eq.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0033_select_eq.html">
     0033_select_eq
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0032_forall_null.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0032_forall_null.html">
     0032_forall_null
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0001_truth.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0001_truth.html">
     Vero
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0019_disj_assoc.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0019_disj_assoc.html">
     0019_disj_assoc
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0007_conj_id.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0007_conj_id.html">
     vero &amp;egrave; l&#39;identit&amp;agrave; della congiunzione
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0028_imp_dist_left_disj.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0028_imp_dist_left_disj.html">
     0028_imp_dist_left_disj
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0021_disj_dist_right_conj.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0021_disj_dist_right_conj.html">
     0021_disj_dist_right_conj
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0017_disj_zero.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0017_disj_zero.html">
     Disj Zero
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0010_conj_comm.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0010_conj_comm.html">
     Propriet&amp;agrave; commutatativa della congiuzione
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0031_forall_one_point.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0031_forall_one_point.html">
     0031_forall_one_point
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0005_true_not_eq_false.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0005_true_not_eq_false.html">
     Vero non equivale a falso
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0027_imp_refl.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0027_imp_refl.html">
     0027_imp_refl
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0008_conj_zero.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0008_conj_zero.html">
     congiunzione zero
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0014_conj_dist_left_disj.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0014_conj_dist_left_disj.html">
     distributivit&amp;agrave; a sinistra della congiunzione sulla disgiunzione
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0016_disj_id.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0016_disj_id.html">
     Disj Id
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0015_conj_contr.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0015_conj_contr.html">
     0015_conj_contr
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0012_conj_absorb_disj.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0012_conj_absorb_disj.html">
     assorbimento della disgiunzione nella congiunzione
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0009_conj_idem.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0009_conj_idem.html">
     congiunzione della stessa proposizione
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0030_forall_dist_conj.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0030_forall_dist_conj.html">
     0030_forall_dist_conj
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0026_imp_left_zero.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0026_imp_left_zero.html">
     0026_imp_left_zero
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0020_disj_absorb_conj.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0020_disj_absorb_conj.html">
     0020_disj_absorb_conj
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0036_exists_null.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0036_exists_null.html">
     0036_exists_null
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0025_imp_left_id.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0025_imp_left_id.html">
     0025_imp_left_id
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0029_imp_dist_right_conj.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0029_imp_dist_right_conj.html">
     0029_imp_dist_right_conj
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0004_not_false.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0004_not_false.html">
     Non falso equivale a vero
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0034_exists_dist_disj.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0034_exists_dist_disj.html">
     0034_exists_dist_disj
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0024_disj_comm.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0024_disj_comm.html">
     commutabilit&amp;agrave; della disgiunzione
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0006_not_dist_disj.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0006_not_dist_disj.html">
     distribuzione della negazione sulla disgiunzione
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0011_conj_assoc.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0011_conj_assoc.html">
     Propriet&amp;agrave; associativa della congiuzione
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0022_disj_dist_left_conj.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0022_disj_dist_left_conj.html">
     0022_disj_dist_left_conj
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0003_not_true.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0003_not_true.html">
     Non vero equivale a falso
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0023_imp_right_zero.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0023_imp_right_zero.html">
     0023_imp_right_zero
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0013_conj_dist_right_disj.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0013_conj_dist_right_disj.html">
     distributivit&amp;agrave; a destra della congiunzione sulla disgiunzione
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0044_excluded_midle.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0044_excluded_midle.html">
     Terzo escluso
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0035_exists_one_point.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0035_exists_one_point.html">
     0035_exists_one_point
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0045_bool_cases.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0045_bool_cases.html">
     Bool Cases
 
   </a>
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/teoremi/0002_fun_eq.html">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0002_fun_eq.html">
     Equivalenza tra funzioni
 
   </a>
 </li>
-                        {{fsdocs-list-of-namespaces}}
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/reference/index.html">
+    All Namespaces
+  </a>
+</li>
                     </ul>
                 </div>
             </aside>
@@ -324,25 +347,25 @@
                 <div class="container" id="fsdocs-content">
                     <h1><a name="distributivit-agrave-a-sinistra-della-congiunzione-sulla-disgiunzione" class="anchor" href="#distributivit-agrave-a-sinistra-della-congiunzione-sulla-disgiunzione">distributivit&agrave; a sinistra della congiunzione sulla disgiunzione</a></h1>
 <p><span class="math">\(\forall p\ q\ r.\ (p \vee q) \wedge r \Leftrightarrow (p \wedge r) \vee (q \wedge r)\)</span></p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">conj_dist_left_disj_thm</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="id">conj_dist_left_disj_thm</span>
 <span class="c">//   |- !p q r. (p \/ q) /\ r &lt;=&gt; (p /\ r) \/ (q /\ r)</span>
 </code></pre>
 <p>Backward proof with tree</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">(</span><span class="pn">[</span><span class="pn">]</span><span class="pn">,</span><span class="s">&quot;!p q r. (p \/ q) /\ r &lt;=&gt; (p /\ r) \/ (q /\ r)&quot;</span><span class="pn">)</span>
-<span class="o">|&gt;</span> <span class="id">start_proof</span>
-<span class="o">|&gt;</span> <span class="id">list_gen_rule_bk</span>
-<span class="o">|&gt;</span> <span class="id">trans_rule_bk</span> <span class="s">&quot;(r /\ p) \/ (r /\ q)&quot;</span>
-<span class="o">|&gt;</span> <span class="id">trans_rule_bk</span> <span class="s">&quot;r /\ (p \/ q)&quot;</span>
-<span class="o">|&gt;</span> <span class="id">list_spec_rule_bk</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;p \/ q&quot;</span><span class="pn">,</span><span class="s">&quot;p:bool&quot;</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;r:bool&quot;</span><span class="pn">,</span><span class="s">&quot;q:bool&quot;</span><span class="pn">)</span><span class="pn">]</span>
-<span class="o">|&gt;</span> <span class="id">by</span> <span class="id">conj_comm_thm</span> <span class="s">&quot;conj_comm_thm&quot;</span>
-<span class="o">|&gt;</span> <span class="id">list_spec_rule_bk</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;r:bool&quot;</span><span class="pn">,</span><span class="s">&quot;p:bool&quot;</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;p:bool&quot;</span><span class="pn">,</span><span class="s">&quot;q:bool&quot;</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;q:bool&quot;</span><span class="pn">,</span><span class="s">&quot;r:bool&quot;</span><span class="pn">)</span><span class="pn">]</span>
-<span class="o">|&gt;</span> <span class="id">by</span> <span class="id">conj_dist_right_disj_thm</span> <span class="s">&quot;conj_dist_right_disj_thm&quot;</span>
-<span class="o">|&gt;</span> <span class="id">mk_bin_rule_bk</span> <span class="pn">[</span><span class="pn">]</span> <span class="pn">[</span><span class="pn">]</span>
-<span class="o">|&gt;</span> <span class="id">list_spec_rule_bk</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;r:bool&quot;</span><span class="pn">,</span><span class="s">&quot;p:bool&quot;</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;p:bool&quot;</span><span class="pn">,</span><span class="s">&quot;q:bool&quot;</span><span class="pn">)</span><span class="pn">]</span>
-<span class="o">|&gt;</span> <span class="id">by</span> <span class="id">conj_comm_thm</span> <span class="s">&quot;conj_comm_thm&quot;</span>
-<span class="o">|&gt;</span> <span class="id">list_spec_rule_bk</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;r:bool&quot;</span><span class="pn">,</span><span class="s">&quot;p:bool&quot;</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;q:bool&quot;</span><span class="pn">,</span><span class="s">&quot;q:bool&quot;</span><span class="pn">)</span><span class="pn">]</span>
-<span class="o">|&gt;</span> <span class="id">by</span> <span class="id">conj_comm_thm</span> <span class="s">&quot;conj_comm_thm&quot;</span>
-<span class="o">|&gt;</span> <span class="id">view</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="fn">start_proof</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="fn">list_gen_rule_bk</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="fn">trans_rule_bk</span> <span class="s">&quot;(r /\ p) \/ (r /\ q)&quot;</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="fn">trans_rule_bk</span> <span class="s">&quot;r /\ (p \/ q)&quot;</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="fn">list_spec_rule_bk</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;p \/ q&quot;</span><span class="pn">,</span><span class="s">&quot;p:bool&quot;</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;r:bool&quot;</span><span class="pn">,</span><span class="s">&quot;q:bool&quot;</span><span class="pn">)</span><span class="pn">]</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="fn">by</span> <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="id">conj_comm_thm</span> <span class="s">&quot;conj_comm_thm&quot;</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 18)" onmouseover="showTip(event, 'fs12', 18)" class="fn">list_spec_rule_bk</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;r:bool&quot;</span><span class="pn">,</span><span class="s">&quot;p:bool&quot;</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;p:bool&quot;</span><span class="pn">,</span><span class="s">&quot;q:bool&quot;</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;q:bool&quot;</span><span class="pn">,</span><span class="s">&quot;r:bool&quot;</span><span class="pn">)</span><span class="pn">]</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 19)" onmouseover="showTip(event, 'fs13', 19)" class="fn">by</span> <span onmouseout="hideTip(event, 'fs15', 20)" onmouseover="showTip(event, 'fs15', 20)" class="id">conj_dist_right_disj_thm</span> <span class="s">&quot;conj_dist_right_disj_thm&quot;</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="fn">mk_bin_rule_bk</span> <span class="pn">[</span><span class="pn">]</span> <span class="pn">[</span><span class="pn">]</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 22)" onmouseover="showTip(event, 'fs12', 22)" class="fn">list_spec_rule_bk</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;r:bool&quot;</span><span class="pn">,</span><span class="s">&quot;p:bool&quot;</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;p:bool&quot;</span><span class="pn">,</span><span class="s">&quot;q:bool&quot;</span><span class="pn">)</span><span class="pn">]</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 23)" onmouseover="showTip(event, 'fs13', 23)" class="fn">by</span> <span onmouseout="hideTip(event, 'fs14', 24)" onmouseover="showTip(event, 'fs14', 24)" class="id">conj_comm_thm</span> <span class="s">&quot;conj_comm_thm&quot;</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 25)" onmouseover="showTip(event, 'fs12', 25)" class="fn">list_spec_rule_bk</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;r:bool&quot;</span><span class="pn">,</span><span class="s">&quot;p:bool&quot;</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;q:bool&quot;</span><span class="pn">,</span><span class="s">&quot;q:bool&quot;</span><span class="pn">)</span><span class="pn">]</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 26)" onmouseover="showTip(event, 'fs13', 26)" class="fn">by</span> <span onmouseout="hideTip(event, 'fs14', 27)" onmouseover="showTip(event, 'fs14', 27)" class="id">conj_comm_thm</span> <span class="s">&quot;conj_comm_thm&quot;</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 28)" onmouseover="showTip(event, 'fs17', 28)" class="fn">view</span>
 </code></pre>
 <p><span class="math">\(\small{ 	\color{green}{\dfrac
 {[p:bool;q:bool;r:bool]
@@ -400,8 +423,8 @@
 {\vdash\ \forall\ p\ q\ r.\ (p\ \vee\ q)\ \wedge\ r\ \Leftrightarrow\ p\ \wedge\ r\ \vee\ q\ \wedge\ r}
 \textsf{ list_gen_rule}} }\)</span></p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="id">it</span>
-<span class="o">|&gt;</span> <span class="id">root</span>
-<span class="o">|&gt;</span> <span class="id">linearizeProof</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 29)" onmouseover="showTip(event, 'fs18', 29)" class="fn">root</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 30)" onmouseover="showTip(event, 'fs19', 30)" class="fn">linearizeProof</span>
 
 <span class="c">// 0    |- !p q. p /\ q &lt;=&gt; q /\ p                            conj_comm_thm                       </span>
 <span class="c">// 1    |- (p \/ q) /\ r &lt;=&gt; r /\ (p \/ q)                    list_spec_rule            0         </span>
@@ -417,38 +440,136 @@
 <span class="c">// 11   |- !p q r. (p \/ q) /\ r &lt;=&gt; p /\ r \/ q /\ r         list_gen_rule             10        </span>
 </code></pre>
 <p>Forward proof with tree</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">list_gen_rule_fd</span> <span class="pn">[</span><span class="id">p</span><span class="pn">;</span><span class="id">q</span><span class="pn">;</span><span class="id">r</span><span class="pn">]</span>
-    <span class="pn">(</span><span class="id">list_trans_rule_fd</span>
-       <span class="pn">[</span> <span class="id">list_spec_rule_fd</span> <span class="pn">[</span><span class="pn">(</span><span class="id">parse_term</span><span class="pn">(</span><span class="s">@&quot;p\/q&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">;</span><span class="id">r</span><span class="pn">]</span> <span class="pn">(</span><span class="id">conj_comm_thm</span> <span class="o">|&gt;</span> <span class="id">thm_fd</span> <span class="s">&quot;conj_comm_thm&quot;</span><span class="pn">)</span><span class="pn">;</span>
-         <span class="id">list_spec_rule_fd</span> <span class="pn">[</span><span class="id">r</span><span class="pn">;</span><span class="id">p</span><span class="pn">;</span><span class="id">q</span><span class="pn">]</span> <span class="pn">(</span><span class="id">conj_dist_right_disj_thm</span> <span class="o">|&gt;</span> <span class="id">thm_fd</span> <span class="s">&quot;conj_dist_right_disj_thm&quot;</span><span class="pn">)</span><span class="pn">;</span>
-         <span class="id">mk_bin_rule_fd</span> <span class="pn">(</span><span class="id">parse_term</span><span class="pn">(</span><span class="s">@&quot;$\/&quot;</span><span class="pn">)</span><span class="pn">)</span>
-           <span class="pn">(</span><span class="id">list_spec_rule_fd</span> <span class="pn">[</span><span class="id">r</span><span class="pn">;</span><span class="id">p</span><span class="pn">]</span> <span class="pn">(</span><span class="id">conj_comm_thm</span> <span class="o">|&gt;</span> <span class="id">thm_fd</span> <span class="s">&quot;conj_comm_thm&quot;</span><span class="pn">)</span><span class="pn">)</span>
-           <span class="pn">(</span><span class="id">list_spec_rule_fd</span> <span class="pn">[</span><span class="id">r</span><span class="pn">;</span><span class="id">q</span><span class="pn">]</span> <span class="pn">(</span><span class="id">conj_comm_thm</span> <span class="o">|&gt;</span> <span class="id">thm_fd</span> <span class="s">&quot;conj_comm_thm&quot;</span><span class="pn">)</span><span class="pn">)</span> <span class="pn">]</span><span class="pn">)</span>
-<span class="o">|&gt;</span> <span class="id">zipper</span>
-<span class="o">|&gt;</span> <span class="id">view</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs20', 31)" onmouseover="showTip(event, 'fs20', 31)" class="fn">list_gen_rule_fd</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs21', 32)" onmouseover="showTip(event, 'fs21', 32)" class="id">p</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs22', 33)" onmouseover="showTip(event, 'fs22', 33)" class="id">q</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs23', 34)" onmouseover="showTip(event, 'fs23', 34)" class="id">r</span><span class="pn">]</span>
+    <span class="pn">(</span><span onmouseout="hideTip(event, 'fs24', 35)" onmouseover="showTip(event, 'fs24', 35)" class="fn">list_trans_rule_fd</span>
+       <span class="pn">[</span> <span onmouseout="hideTip(event, 'fs25', 36)" onmouseover="showTip(event, 'fs25', 36)" class="fn">list_spec_rule_fd</span> <span class="pn">[</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs26', 37)" onmouseover="showTip(event, 'fs26', 37)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;p\/q&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs23', 38)" onmouseover="showTip(event, 'fs23', 38)" class="id">r</span><span class="pn">]</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 39)" onmouseover="showTip(event, 'fs14', 39)" class="id">conj_comm_thm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs27', 40)" onmouseover="showTip(event, 'fs27', 40)" class="fn">thm_fd</span> <span class="s">&quot;conj_comm_thm&quot;</span><span class="pn">)</span><span class="pn">;</span>
+         <span onmouseout="hideTip(event, 'fs25', 41)" onmouseover="showTip(event, 'fs25', 41)" class="fn">list_spec_rule_fd</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs23', 42)" onmouseover="showTip(event, 'fs23', 42)" class="id">r</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs21', 43)" onmouseover="showTip(event, 'fs21', 43)" class="id">p</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs22', 44)" onmouseover="showTip(event, 'fs22', 44)" class="id">q</span><span class="pn">]</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs15', 45)" onmouseover="showTip(event, 'fs15', 45)" class="id">conj_dist_right_disj_thm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs27', 46)" onmouseover="showTip(event, 'fs27', 46)" class="fn">thm_fd</span> <span class="s">&quot;conj_dist_right_disj_thm&quot;</span><span class="pn">)</span><span class="pn">;</span>
+         <span onmouseout="hideTip(event, 'fs28', 47)" onmouseover="showTip(event, 'fs28', 47)" class="fn">mk_bin_rule_fd</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs26', 48)" onmouseover="showTip(event, 'fs26', 48)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;$\/&quot;</span><span class="pn">)</span><span class="pn">)</span>
+           <span class="pn">(</span><span onmouseout="hideTip(event, 'fs25', 49)" onmouseover="showTip(event, 'fs25', 49)" class="fn">list_spec_rule_fd</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs23', 50)" onmouseover="showTip(event, 'fs23', 50)" class="id">r</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs21', 51)" onmouseover="showTip(event, 'fs21', 51)" class="id">p</span><span class="pn">]</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 52)" onmouseover="showTip(event, 'fs14', 52)" class="id">conj_comm_thm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs27', 53)" onmouseover="showTip(event, 'fs27', 53)" class="fn">thm_fd</span> <span class="s">&quot;conj_comm_thm&quot;</span><span class="pn">)</span><span class="pn">)</span>
+           <span class="pn">(</span><span onmouseout="hideTip(event, 'fs25', 54)" onmouseover="showTip(event, 'fs25', 54)" class="fn">list_spec_rule_fd</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs23', 55)" onmouseover="showTip(event, 'fs23', 55)" class="id">r</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs22', 56)" onmouseover="showTip(event, 'fs22', 56)" class="id">q</span><span class="pn">]</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 57)" onmouseover="showTip(event, 'fs14', 57)" class="id">conj_comm_thm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs27', 58)" onmouseover="showTip(event, 'fs27', 58)" class="fn">thm_fd</span> <span class="s">&quot;conj_comm_thm&quot;</span><span class="pn">)</span><span class="pn">)</span> <span class="pn">]</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs29', 59)" onmouseover="showTip(event, 'fs29', 59)" class="fn">zipper</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 60)" onmouseover="showTip(event, 'fs17', 60)" class="fn">view</span>
 </code></pre>
 <p>Classic forward proof without tree</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">list_gen_rule</span> <span class="pn">[</span><span class="id">p</span><span class="pn">;</span><span class="id">q</span><span class="pn">;</span><span class="id">r</span><span class="pn">]</span>
-  <span class="pn">(</span><span class="id">list_trans_rule</span>
-     <span class="pn">[</span> <span class="id">list_spec_rule</span> <span class="pn">[</span><span class="pn">(</span><span class="id">parse_term</span><span class="pn">(</span><span class="s">@&quot;p\/q&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">;</span><span class="id">r</span><span class="pn">]</span> <span class="id">conj_comm_thm</span><span class="pn">;</span>
-       <span class="id">list_spec_rule</span> <span class="pn">[</span><span class="id">r</span><span class="pn">;</span><span class="id">p</span><span class="pn">;</span><span class="id">q</span><span class="pn">]</span> <span class="id">conj_dist_right_disj_thm</span><span class="pn">;</span>
-       <span class="id">mk_bin_rule</span> <span class="pn">(</span><span class="id">parse_term</span><span class="pn">(</span><span class="s">@&quot;$\/&quot;</span><span class="pn">)</span><span class="pn">)</span>
-         <span class="pn">(</span><span class="id">list_spec_rule</span> <span class="pn">[</span><span class="id">r</span><span class="pn">;</span><span class="id">p</span><span class="pn">]</span> <span class="id">conj_comm_thm</span><span class="pn">)</span>
-         <span class="pn">(</span><span class="id">list_spec_rule</span> <span class="pn">[</span><span class="id">r</span><span class="pn">;</span><span class="id">q</span><span class="pn">]</span> <span class="id">conj_comm_thm</span><span class="pn">)</span> <span class="pn">]</span><span class="pn">)</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs30', 61)" onmouseover="showTip(event, 'fs30', 61)" class="fn">list_gen_rule</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs21', 62)" onmouseover="showTip(event, 'fs21', 62)" class="id">p</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs22', 63)" onmouseover="showTip(event, 'fs22', 63)" class="id">q</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs23', 64)" onmouseover="showTip(event, 'fs23', 64)" class="id">r</span><span class="pn">]</span>
+  <span class="pn">(</span><span onmouseout="hideTip(event, 'fs31', 65)" onmouseover="showTip(event, 'fs31', 65)" class="fn">list_trans_rule</span>
+     <span class="pn">[</span> <span onmouseout="hideTip(event, 'fs32', 66)" onmouseover="showTip(event, 'fs32', 66)" class="fn">list_spec_rule</span> <span class="pn">[</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs26', 67)" onmouseover="showTip(event, 'fs26', 67)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;p\/q&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs23', 68)" onmouseover="showTip(event, 'fs23', 68)" class="id">r</span><span class="pn">]</span> <span onmouseout="hideTip(event, 'fs14', 69)" onmouseover="showTip(event, 'fs14', 69)" class="id">conj_comm_thm</span><span class="pn">;</span>
+       <span onmouseout="hideTip(event, 'fs32', 70)" onmouseover="showTip(event, 'fs32', 70)" class="fn">list_spec_rule</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs23', 71)" onmouseover="showTip(event, 'fs23', 71)" class="id">r</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs21', 72)" onmouseover="showTip(event, 'fs21', 72)" class="id">p</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs22', 73)" onmouseover="showTip(event, 'fs22', 73)" class="id">q</span><span class="pn">]</span> <span onmouseout="hideTip(event, 'fs15', 74)" onmouseover="showTip(event, 'fs15', 74)" class="id">conj_dist_right_disj_thm</span><span class="pn">;</span>
+       <span onmouseout="hideTip(event, 'fs33', 75)" onmouseover="showTip(event, 'fs33', 75)" class="fn">mk_bin_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs26', 76)" onmouseover="showTip(event, 'fs26', 76)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;$\/&quot;</span><span class="pn">)</span><span class="pn">)</span>
+         <span class="pn">(</span><span onmouseout="hideTip(event, 'fs32', 77)" onmouseover="showTip(event, 'fs32', 77)" class="fn">list_spec_rule</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs23', 78)" onmouseover="showTip(event, 'fs23', 78)" class="id">r</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs21', 79)" onmouseover="showTip(event, 'fs21', 79)" class="id">p</span><span class="pn">]</span> <span onmouseout="hideTip(event, 'fs14', 80)" onmouseover="showTip(event, 'fs14', 80)" class="id">conj_comm_thm</span><span class="pn">)</span>
+         <span class="pn">(</span><span onmouseout="hideTip(event, 'fs32', 81)" onmouseover="showTip(event, 'fs32', 81)" class="fn">list_spec_rule</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs23', 82)" onmouseover="showTip(event, 'fs23', 82)" class="id">r</span><span class="pn">;</span><span onmouseout="hideTip(event, 'fs22', 83)" onmouseover="showTip(event, 'fs22', 83)" class="id">q</span><span class="pn">]</span> <span onmouseout="hideTip(event, 'fs14', 84)" onmouseover="showTip(event, 'fs14', 84)" class="id">conj_comm_thm</span><span class="pn">)</span> <span class="pn">]</span><span class="pn">)</span>
 </code></pre>
 
                 </div>
             </div>
         </div>
-        
+        <div class="fsdocs-tip" id="fs1">namespace HOL</div>
+<div class="fsdocs-tip" id="fs2">module CoreThry
+
+from HOL<br /><em>&lt;summary&gt;
+This module completes the logical core for HOL by defining the core       
+theory.  This involves giving declarations, definitions and axioms for all
+the HOL theory objects anticipated by the language and inference kernels. 
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs3">val load: (string * thm) list</div>
+<div class="fsdocs-tip" id="fs4">module Equal
+
+from HOL<br /><em>&lt;summary&gt;
+This module adds more constants and inference rules for basic reasoning
+using equality.                                                                                                       
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs5">val load: (string * thm) list<br /><em>&lt;summary&gt;
+ Force module evaluation
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs6">module Bool
+
+from HOL<br /><em>&lt;summary&gt;
+This module extends the boolean-related theory by giving definitions for  
+classic predicate logic theory objects not introduced in &#39;CoreThry&#39;, and  
+adds various derived syntax functions, theorems and inference rules.  Note
+that derivations relying on the Axiom of Choice are separated out into the
+&#39;BoolClass&#39; module.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs7">module BoolAlg
+
+from HOL<br /><em>&lt;summary&gt;
+This module proves various algebraic property theorems for the predicate
+logic operators.                                                                  
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs8">val conj_dist_left_disj_thm: thm<br /><em>&lt;summary&gt;
+ |- !p q r. (p \/ q) /\ r &amp;lt;=&amp;gt; (p /\ r) \/ (q /\ r)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs9">val start_proof: xs: string list * s: string -&gt; Proof Location</div>
+<div class="fsdocs-tip" id="fs10">val list_gen_rule_bk: loc: (Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
+<div class="fsdocs-tip" id="fs11">val trans_rule_bk: t&#39;: string -&gt; loc: (Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
+<div class="fsdocs-tip" id="fs12">val list_spec_rule_bk: txs: (string * string) list -&gt; loc: (Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
+<div class="fsdocs-tip" id="fs13">val by: thm: thm -&gt; lbl: string -&gt; loc: Proof Location -&gt; Proof Location</div>
+<div class="fsdocs-tip" id="fs14">val conj_comm_thm: thm<br /><em>&lt;summary&gt;
+ |- !p q. p /\ q &amp;lt;=&amp;gt; q /\ p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs15">val conj_dist_right_disj_thm: thm<br /><em>&lt;summary&gt;
+ |- !p q r. p /\ (q \/ r) &amp;lt;=&amp;gt; (p /\ q) \/ (p /\ r)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs16">val mk_bin_rule_bk: ind1: int list -&gt; ind2: int list -&gt; loc: (Exp * string * InfRule) Location -&gt; (Exp * string * InfRule) Location</div>
+<div class="fsdocs-tip" id="fs17">val view: loc: Proof Location -&gt; Proof Location</div>
+<div class="fsdocs-tip" id="fs18">val root: l: &#39;a Location -&gt; &#39;a Tree</div>
+<div class="fsdocs-tip" id="fs19">val linearizeProof: tr: Proof Tree -&gt; unit</div>
+<div class="fsdocs-tip" id="fs20">val list_gen_rule_fd: (term list -&gt; Proof Tree -&gt; Proof Tree)</div>
+<div class="fsdocs-tip" id="fs21">val p: term</div>
+<div class="fsdocs-tip" id="fs22">val q: term</div>
+<div class="fsdocs-tip" id="fs23">val r: term</div>
+<div class="fsdocs-tip" id="fs24">val list_trans_rule_fd: (Proof Tree list -&gt; Proof Tree)</div>
+<div class="fsdocs-tip" id="fs25">val list_spec_rule_fd: (term list -&gt; Proof Tree -&gt; Proof Tree)</div>
+<div class="fsdocs-tip" id="fs26">val parse_term: x: string -&gt; term<br /><em>&lt;summary&gt;
+ This takes a string and parses it into an internal term.  The type     
+ analysis stage first detypes the preterm before inferring types (in    
+ &#39;resolve_preterm&#39;), since the syntax analysis stage gives all variables
+ and constants the null pretype.  Note that type inference is capable of
+ handling overloaded variables.                                         
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs27">val thm_fd: lbl: string -&gt; th: thm -&gt; Proof Tree</div>
+<div class="fsdocs-tip" id="fs28">val mk_bin_rule_fd: (term -&gt; Proof Tree -&gt; Proof Tree -&gt; Proof Tree)</div>
+<div class="fsdocs-tip" id="fs29">val zipper: t: &#39;a Tree -&gt; &#39;a Location</div>
+<div class="fsdocs-tip" id="fs30">val list_gen_rule: tms: term list -&gt; th: thm -&gt; thm</div>
+<div class="fsdocs-tip" id="fs31">val list_trans_rule: ths: thm list -&gt; thm</div>
+<div class="fsdocs-tip" id="fs32">val list_spec_rule: tms: term list -&gt; th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the compound universal elimination rule.  It strips off an       
+ outermost universal quantifier from the supplied theorem for each item in
+ the supplied term list, replacing each occurrence of a stripped binding  
+ variable in the body with its corresponding item in the term list.  The  
+ type of each term in the term list must equal the type of its            
+ corresponding binding variable.                                          
+                                                                          
+    [`t1`;`t2`;..]   A |- !x1 x2 .. . p                                   
+    -----------------------------------                                   
+           A |- p[t1/x1;t2/x2;..]                                         
+
+ See also: spec_rule, spec_all_rule, bspec_rule, list_gen_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs33">val mk_bin_rule: f: term -&gt; th1: thm -&gt; th2: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the equality congruence rule for binary function application.  It
+ takes a binary function term and two equality theorems, and applies the  
+ function in curried form to corresponding sides of each theorem, under   
+ their unioned assumptions.  The type of the supplied function must be a  
+ binary curried function type, with first and second domain types equal to
+ the type of each side of their corresponding theorems.                   
+                                                                          
+    `f`   A1 |- s1 = s2    A2 |- t1 = t2                                  
+    ------------------------------------                                  
+        A1 u A2 |- f s1 t1 = f s2 t2                                      
+
+ See also: mk_bin1_rule, mk_bin2_rule, mk_comb_rule, mk_conj_rule, mk_disj_rule,
+ mk_imp_rule, mk_eq_rule, mk_pair_rule.
+&lt;/summary&gt;</em></div>
+
     </div>
 
     <!-- BEGIN SEARCH BOX: this adds support for the search box -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
-    <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/'</script>
+    <script type="text/javascript">var fsdocs_search_baseurl = 'http://localhost:8901/'</script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
-    <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+    <script type="text/javascript" src="http://localhost:8901/content/fsdocs-search.js"></script>
     <!-- END SEARCH BOX: this adds support for the search box -->
 </body>
 

@@ -6,14 +6,14 @@
     <title>HOL</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="nholz">
-    <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="http://localhost:8901//img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
 
-    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
-    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
-    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <link type="text/css" rel="stylesheet" href="http://localhost:8901/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="http://localhost:8901/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="http://localhost:8901/content/fsdocs-tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -22,6 +22,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
     <!-- END SEARCH BOX: this adds support for the search box -->
     
+<script type="text/javascript">
+    var wsUri = "ws://localhost:8901/websocket";
+    function init()
+    {
+        websocket = new WebSocket(wsUri);
+        websocket.onclose = function(evt) { onClose(evt) };
+    }
+    function onClose(evt)
+    {
+        console.log('closing');
+        websocket.close();
+        document.location.reload();
+    }
+    window.addEventListener("load", init, false);
+</script>
+
 </head> 
 
 <body>
@@ -29,9 +45,9 @@
         <div id="fsdocs-menu" class="column is-2 is-paddingless">
             <aside class="menu">
                 <div class="container is-paddingless is-marginless has-background-dark">
-                    <a href="/nholz/">
+                    <a href="http://localhost:8901/">
                         <figure class="image is-128x128 container">
-                            <img src="/nholz/img/logo.png">
+                            <img src="http://localhost:8901/img/logo.png">
                         </figure>
                     </a>
                     <h2 class="title has-text-centered has-text-white pb-4">nholz</h2>
@@ -55,12 +71,269 @@
                         <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License (MIT)</a></li>
                         <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
                         <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
-                        
+                        <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/tactics.html">
+    tactics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/3_Liguaggio_HOL.html">
+    LINGUAGGIO HOL
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/avvio.html">
+    avvio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/B1_Teorie.html">
+    TEORIE
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/1_Introduzione.html">
+    Introduzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/B2_Teoremi.html">
+    TEOREMI
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/goaltree.html">
+    goaltree
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/A5_Inference_Rules.html">
+    Regole d&#39;inferenza
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0018_disj_idem.html">
+    Disj Idem
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0033_select_eq.html">
+    0033_select_eq
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0032_forall_null.html">
+    0032_forall_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0001_truth.html">
+    Vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0019_disj_assoc.html">
+    0019_disj_assoc
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0007_conj_id.html">
+    vero &amp;egrave; l&#39;identit&amp;agrave; della congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0028_imp_dist_left_disj.html">
+    0028_imp_dist_left_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0021_disj_dist_right_conj.html">
+    0021_disj_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0017_disj_zero.html">
+    Disj Zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0010_conj_comm.html">
+    Propriet&amp;agrave; commutatativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0031_forall_one_point.html">
+    0031_forall_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0005_true_not_eq_false.html">
+    Vero non equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0027_imp_refl.html">
+    0027_imp_refl
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0008_conj_zero.html">
+    congiunzione zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0014_conj_dist_left_disj.html">
+    distributivit&amp;agrave; a sinistra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0016_disj_id.html">
+    Disj Id
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0015_conj_contr.html">
+    0015_conj_contr
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0012_conj_absorb_disj.html">
+    assorbimento della disgiunzione nella congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0009_conj_idem.html">
+    congiunzione della stessa proposizione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0030_forall_dist_conj.html">
+    0030_forall_dist_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0026_imp_left_zero.html">
+    0026_imp_left_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0020_disj_absorb_conj.html">
+    0020_disj_absorb_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0036_exists_null.html">
+    0036_exists_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0025_imp_left_id.html">
+    0025_imp_left_id
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0029_imp_dist_right_conj.html">
+    0029_imp_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0004_not_false.html">
+    Non falso equivale a vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0034_exists_dist_disj.html">
+    0034_exists_dist_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0024_disj_comm.html">
+    commutabilit&amp;agrave; della disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0006_not_dist_disj.html">
+    distribuzione della negazione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0011_conj_assoc.html">
+    Propriet&amp;agrave; associativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0022_disj_dist_left_conj.html">
+    0022_disj_dist_left_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0003_not_true.html">
+    Non vero equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0023_imp_right_zero.html">
+    0023_imp_right_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0013_conj_dist_right_disj.html">
+    distributivit&amp;agrave; a destra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0044_excluded_midle.html">
+    Terzo escluso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0035_exists_one_point.html">
+    0035_exists_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0045_bool_cases.html">
+    Bool Cases
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/teoremi/0002_fun_eq.html">
+    Equivalenza tra funzioni
+
+  </a>
+</li>
                         <li class="nav-header">
   API Reference
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/reference/index.html">
+  <a class="nav-link" href="http://localhost:8901/reference/index.html">
     All Namespaces
   </a>
 </li>
@@ -92,7 +365,7 @@
         <td class="fsdocs-entity-name">
           <p>
             <a name="Bool">
-              <a href="/nholz/reference/hol-bool.html">
+              <a href="http://localhost:8901/reference/hol-bool.html">
                 Bool
               </a>
             </a>
@@ -101,12 +374,12 @@
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Bool`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Bool\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -124,7 +397,7 @@ that derivations relying on the Axiom of Choice are separated out into the
         <td class="fsdocs-entity-name">
           <p>
             <a name="BoolAlg">
-              <a href="/nholz/reference/hol-boolalg.html">
+              <a href="http://localhost:8901/reference/hol-boolalg.html">
                 BoolAlg
               </a>
             </a>
@@ -133,12 +406,12 @@ that derivations relying on the Axiom of Choice are separated out into the
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.BoolAlg`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.BoolAlg\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -153,7 +426,7 @@ logic operators.
         <td class="fsdocs-entity-name">
           <p>
             <a name="BoolClass">
-              <a href="/nholz/reference/hol-boolclass.html">
+              <a href="http://localhost:8901/reference/hol-boolclass.html">
                 BoolClass
               </a>
             </a>
@@ -162,12 +435,12 @@ logic operators.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.BoolClass`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.BoolClass\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -186,7 +459,7 @@ logic operators.
         <td class="fsdocs-entity-name">
           <p>
             <a name="CoreThry">
-              <a href="/nholz/reference/hol-corethry.html">
+              <a href="http://localhost:8901/reference/hol-corethry.html">
                 CoreThry
               </a>
             </a>
@@ -195,12 +468,12 @@ logic operators.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.CoreThry`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.CoreThry\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -216,7 +489,7 @@ the HOL theory objects anticipated by the language and inference kernels.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Def1">
-              <a href="/nholz/reference/hol-def1.html">
+              <a href="http://localhost:8901/reference/hol-def1.html">
                 Def1
               </a>
             </a>
@@ -225,12 +498,12 @@ the HOL theory objects anticipated by the language and inference kernels.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Def1`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Def1\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -245,7 +518,7 @@ given type constant definition.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Def2">
-              <a href="/nholz/reference/hol-def2.html">
+              <a href="http://localhost:8901/reference/hol-def2.html">
                 Def2
               </a>
             </a>
@@ -254,12 +527,12 @@ given type constant definition.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Def2`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Def2\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -275,7 +548,7 @@ is for recursive functions.
         <td class="fsdocs-entity-name">
           <p>
             <a name="DLTree">
-              <a href="/nholz/reference/hol-dltree.html">
+              <a href="http://localhost:8901/reference/hol-dltree.html">
                 DLTree
               </a>
             </a>
@@ -284,12 +557,12 @@ is for recursive functions.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.DLTree`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.DLTree\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -305,7 +578,7 @@ is for recursive functions.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Dmodes">
-              <a href="/nholz/reference/hol-dmodes.html">
+              <a href="http://localhost:8901/reference/hol-dmodes.html">
                 Dmodes
               </a>
             </a>
@@ -314,12 +587,12 @@ is for recursive functions.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Dmodes`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Dmodes\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -335,7 +608,7 @@ make no difference to the way that types and terms are parsed.
         <td class="fsdocs-entity-name">
           <p>
             <a name="EqCong">
-              <a href="/nholz/reference/hol-eqcong.html">
+              <a href="http://localhost:8901/reference/hol-eqcong.html">
                 EqCong
               </a>
             </a>
@@ -344,12 +617,12 @@ make no difference to the way that types and terms are parsed.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.EqCong`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.EqCong\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -367,7 +640,7 @@ make no difference to the way that types and terms are parsed.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Equal">
-              <a href="/nholz/reference/hol-equal.html">
+              <a href="http://localhost:8901/reference/hol-equal.html">
                 Equal
               </a>
             </a>
@@ -376,12 +649,12 @@ make no difference to the way that types and terms are parsed.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Equal`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Equal\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -396,7 +669,7 @@ using equality.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Exn">
-              <a href="/nholz/reference/hol-exn.html">
+              <a href="http://localhost:8901/reference/hol-exn.html">
                 Exn
               </a>
             </a>
@@ -405,12 +678,12 @@ using equality.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Exn`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Exn\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -425,7 +698,7 @@ using equality.
         <td class="fsdocs-entity-name">
           <p>
             <a name="GenericTree">
-              <a href="/nholz/reference/hol-generictree.html">
+              <a href="http://localhost:8901/reference/hol-generictree.html">
                 GenericTree
               </a>
             </a>
@@ -434,12 +707,12 @@ using equality.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.GenericTree`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.GenericTree\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -451,7 +724,7 @@ using equality.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Ind">
-              <a href="/nholz/reference/hol-ind.html">
+              <a href="http://localhost:8901/reference/hol-ind.html">
                 Ind
               </a>
             </a>
@@ -460,12 +733,12 @@ using equality.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Ind`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Ind\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -481,7 +754,7 @@ used in the 'Nat' module as the basis for defining the natural numbers.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Lexer">
-              <a href="/nholz/reference/hol-lexer.html">
+              <a href="http://localhost:8901/reference/hol-lexer.html">
                 Lexer
               </a>
             </a>
@@ -490,12 +763,12 @@ used in the 'Nat' module as the basis for defining the natural numbers.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Lexer`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Lexer\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -513,7 +786,7 @@ used to determine how lexical tokens are formed, is implemented in the
         <td class="fsdocs-entity-name">
           <p>
             <a name="Lib">
-              <a href="/nholz/reference/hol-lib.html">
+              <a href="http://localhost:8901/reference/hol-lib.html">
                 Lib
               </a>
             </a>
@@ -522,12 +795,12 @@ used to determine how lexical tokens are formed, is implemented in the
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Lib`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Lib\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -542,7 +815,7 @@ used to determine how lexical tokens are formed, is implemented in the
         <td class="fsdocs-entity-name">
           <p>
             <a name="Names">
-              <a href="/nholz/reference/hol-names.html">
+              <a href="http://localhost:8901/reference/hol-names.html">
                 Names
               </a>
             </a>
@@ -551,12 +824,12 @@ used to determine how lexical tokens are formed, is implemented in the
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Names`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Names\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -574,7 +847,7 @@ implementation of the pretty printer.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Nat">
-              <a href="/nholz/reference/hol-nat.html">
+              <a href="http://localhost:8901/reference/hol-nat.html">
                 Nat
               </a>
             </a>
@@ -583,12 +856,12 @@ implementation of the pretty printer.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Nat`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Nat\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -605,7 +878,7 @@ and proving a few important properties.
         <td class="fsdocs-entity-name">
           <p>
             <a name="NatArith">
-              <a href="/nholz/reference/hol-natarith.html">
+              <a href="http://localhost:8901/reference/hol-natarith.html">
                 NatArith
               </a>
             </a>
@@ -614,12 +887,12 @@ and proving a few important properties.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.NatArith`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.NatArith\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -635,7 +908,7 @@ and proves various basic properties about each operator.
         <td class="fsdocs-entity-name">
           <p>
             <a name="NatEval">
-              <a href="/nholz/reference/hol-nateval.html">
+              <a href="http://localhost:8901/reference/hol-nateval.html">
                 NatEval
               </a>
             </a>
@@ -644,12 +917,12 @@ and proves various basic properties about each operator.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.NatEval`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.NatEval\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -666,7 +939,7 @@ functions.
         <td class="fsdocs-entity-name">
           <p>
             <a name="NatNumrl">
-              <a href="/nholz/reference/hol-natnumrl.html">
+              <a href="http://localhost:8901/reference/hol-natnumrl.html">
                 NatNumrl
               </a>
             </a>
@@ -675,12 +948,12 @@ functions.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.NatNumrl`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.NatNumrl\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -695,7 +968,7 @@ is based on the HOL functions "BIT0" and "BIT1".
         <td class="fsdocs-entity-name">
           <p>
             <a name="NatRel">
-              <a href="/nholz/reference/hol-natrel.html">
+              <a href="http://localhost:8901/reference/hol-natrel.html">
                 NatRel
               </a>
             </a>
@@ -704,12 +977,12 @@ is based on the HOL functions "BIT0" and "BIT1".
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.NatRel`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.NatRel\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -724,7 +997,7 @@ derives various basic properties about them.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Pair">
-              <a href="/nholz/reference/hol-pair.html">
+              <a href="http://localhost:8901/reference/hol-pair.html">
                 Pair
               </a>
             </a>
@@ -733,12 +1006,12 @@ derives various basic properties about them.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Pair`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Pair\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -756,7 +1029,7 @@ derives various basic properties about them.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Parser">
-              <a href="/nholz/reference/hol-parser.html">
+              <a href="http://localhost:8901/reference/hol-parser.html">
                 Parser
               </a>
             </a>
@@ -765,12 +1038,12 @@ derives various basic properties about them.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Parser`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Parser\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -789,7 +1062,7 @@ printing) is implemented in the 'TypeAnal' module.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Preterm">
-              <a href="/nholz/reference/hol-preterm.html">
+              <a href="http://localhost:8901/reference/hol-preterm.html">
                 Preterm
               </a>
             </a>
@@ -798,12 +1071,12 @@ printing) is implemented in the 'TypeAnal' module.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Preterm`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Preterm\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -824,7 +1097,7 @@ on their constructors, and so the datatypes are not made abstract.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Printer">
-              <a href="/nholz/reference/hol-printer.html">
+              <a href="http://localhost:8901/reference/hol-printer.html">
                 Printer
               </a>
             </a>
@@ -833,12 +1106,12 @@ on their constructors, and so the datatypes are not made abstract.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Printer`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Printer\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -859,7 +1132,7 @@ has been proved and what has been asserted.
         <td class="fsdocs-entity-name">
           <p>
             <a name="ProofManagement">
-              <a href="/nholz/reference/hol-proofmanagement.html">
+              <a href="http://localhost:8901/reference/hol-proofmanagement.html">
                 ProofManagement
               </a>
             </a>
@@ -868,12 +1141,12 @@ has been proved and what has been asserted.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.ProofManagement`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.ProofManagement\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -885,7 +1158,7 @@ has been proved and what has been asserted.
         <td class="fsdocs-entity-name">
           <p>
             <a name="ProofTree">
-              <a href="/nholz/reference/hol-prooftree.html">
+              <a href="http://localhost:8901/reference/hol-prooftree.html">
                 ProofTree
               </a>
             </a>
@@ -894,12 +1167,12 @@ has been proved and what has been asserted.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.ProofTree`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.ProofTree\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -911,7 +1184,7 @@ has been proved and what has been asserted.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Reader">
-              <a href="/nholz/reference/hol-reader.html">
+              <a href="http://localhost:8901/reference/hol-reader.html">
                 Reader
               </a>
             </a>
@@ -920,12 +1193,12 @@ has been proved and what has been asserted.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Reader`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Reader\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -943,7 +1216,7 @@ modules respectively).
         <td class="fsdocs-entity-name">
           <p>
             <a name="Store">
-              <a href="/nholz/reference/hol-store.html">
+              <a href="http://localhost:8901/reference/hol-store.html">
                 Store
               </a>
             </a>
@@ -952,12 +1225,12 @@ modules respectively).
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Store`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Store\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -974,7 +1247,7 @@ no such restrictions.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Term">
-              <a href="/nholz/reference/hol-term.html">
+              <a href="http://localhost:8901/reference/hol-term.html">
                 Term
               </a>
             </a>
@@ -983,12 +1256,12 @@ no such restrictions.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Term`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Term\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -1007,7 +1280,7 @@ the system.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Thm">
-              <a href="/nholz/reference/hol-thm.html">
+              <a href="http://localhost:8901/reference/hol-thm.html">
                 Thm
               </a>
             </a>
@@ -1016,12 +1289,12 @@ the system.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Thm`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Thm\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -1042,7 +1315,7 @@ system.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Type">
-              <a href="/nholz/reference/hol-type.html">
+              <a href="http://localhost:8901/reference/hol-type.html">
                 Type
               </a>
             </a>
@@ -1051,12 +1324,12 @@ system.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Type`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Type\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -1074,7 +1347,7 @@ well-formed types can be constructed.  This module is a trusted component
         <td class="fsdocs-entity-name">
           <p>
             <a name="TypeAnal">
-              <a href="/nholz/reference/hol-typeanal.html">
+              <a href="http://localhost:8901/reference/hol-typeanal.html">
                 TypeAnal
               </a>
             </a>
@@ -1083,12 +1356,12 @@ well-formed types can be constructed.  This module is a trusted component
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.TypeAnal`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.TypeAnal\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -1106,7 +1379,7 @@ trusted component of the system.
         <td class="fsdocs-entity-name">
           <p>
             <a name="TypeAnnot">
-              <a href="/nholz/reference/hol-typeannot.html">
+              <a href="http://localhost:8901/reference/hol-typeannot.html">
                 TypeAnnot
               </a>
             </a>
@@ -1115,12 +1388,12 @@ trusted component of the system.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.TypeAnnot`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.TypeAnnot\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -1138,7 +1411,7 @@ trusted component of the system.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Utils1">
-              <a href="/nholz/reference/hol-utils1.html">
+              <a href="http://localhost:8901/reference/hol-utils1.html">
                 Utils1
               </a>
             </a>
@@ -1147,12 +1420,12 @@ trusted component of the system.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Utils1`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Utils1\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -1169,7 +1442,7 @@ component of the system.
         <td class="fsdocs-entity-name">
           <p>
             <a name="Utils2">
-              <a href="/nholz/reference/hol-utils2.html">
+              <a href="http://localhost:8901/reference/hol-utils2.html">
                 Utils2
               </a>
             </a>
@@ -1178,12 +1451,12 @@ component of the system.
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Utils2`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Utils2\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -1197,7 +1470,7 @@ This module defines various basic useful operations on types, terms and theorems
         <td class="fsdocs-entity-name">
           <p>
             <a name="Wrap">
-              <a href="/nholz/reference/hol-wrap.html">
+              <a href="http://localhost:8901/reference/hol-wrap.html">
                 Wrap
               </a>
             </a>
@@ -1206,12 +1479,12 @@ This module defines various basic useful operations on types, terms and theorems
         <td class="fsdocs-entity-xmldoc">
           <div>
             <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Wrap`')">
-              <img src="/nholz/content/img/copy-md.png" class="normal"/>
-              <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
             </div>
             <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Wrap\'/>')">
-              <img src="/nholz/content/img/copy-xml.png" class="normal"/>
-              <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+              <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
+              <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
             </div>
             <p class="fsdocs-summary">
               
@@ -1237,10 +1510,10 @@ functionality.
 
     <!-- BEGIN SEARCH BOX: this adds support for the search box -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
-    <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/'</script>
+    <script type="text/javascript">var fsdocs_search_baseurl = 'http://localhost:8901/'</script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
-    <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+    <script type="text/javascript" src="http://localhost:8901/content/fsdocs-search.js"></script>
     <!-- END SEARCH BOX: this adds support for the search box -->
 </body>
 
