@@ -6,14 +6,14 @@
     <title>Names (nholz)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="nholz">
-    <link rel="shortcut icon" type="image/x-icon" href="http://localhost:8901//img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
 
-    <link type="text/css" rel="stylesheet" href="http://localhost:8901/content/fsdocs-default.css" />
-    <link type="text/css" rel="stylesheet" href="http://localhost:8901/content/fsdocs-custom.css" />
-    <script type="text/javascript" src="http://localhost:8901/content/fsdocs-tips.js"></script>
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -22,22 +22,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
     <!-- END SEARCH BOX: this adds support for the search box -->
     
-<script type="text/javascript">
-    var wsUri = "ws://localhost:8901/websocket";
-    function init()
-    {
-        websocket = new WebSocket(wsUri);
-        websocket.onclose = function(evt) { onClose(evt) };
-    }
-    function onClose(evt)
-    {
-        console.log('closing');
-        websocket.close();
-        document.location.reload();
-    }
-    window.addEventListener("load", init, false);
-</script>
-
 </head> 
 
 <body>
@@ -45,9 +29,9 @@
         <div id="fsdocs-menu" class="column is-2 is-paddingless">
             <aside class="menu">
                 <div class="container is-paddingless is-marginless has-background-dark">
-                    <a href="http://localhost:8901/">
+                    <a href="/nholz/">
                         <figure class="image is-128x128 container">
-                            <img src="http://localhost:8901/img/logo.png">
+                            <img src="/nholz/img/logo.png">
                         </figure>
                     </a>
                     <h2 class="title has-text-centered has-text-white pb-4">nholz</h2>
@@ -71,269 +55,12 @@
                         <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License (MIT)</a></li>
                         <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
                         <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
-                        <li class="nav-header">
-  Documentation
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/tactics.html">
-    tactics
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/3_Liguaggio_HOL.html">
-    LINGUAGGIO HOL
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/avvio.html">
-    avvio
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/B1_Teorie.html">
-    TEORIE
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/1_Introduzione.html">
-    Introduzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/B2_Teoremi.html">
-    TEOREMI
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/goaltree.html">
-    goaltree
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/A5_Inference_Rules.html">
-    Regole d&#39;inferenza
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0018_disj_idem.html">
-    Disj Idem
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0033_select_eq.html">
-    0033_select_eq
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0032_forall_null.html">
-    0032_forall_null
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0001_truth.html">
-    Vero
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0019_disj_assoc.html">
-    0019_disj_assoc
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0007_conj_id.html">
-    vero &amp;egrave; l&#39;identit&amp;agrave; della congiunzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0028_imp_dist_left_disj.html">
-    0028_imp_dist_left_disj
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0021_disj_dist_right_conj.html">
-    0021_disj_dist_right_conj
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0017_disj_zero.html">
-    Disj Zero
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0010_conj_comm.html">
-    Propriet&amp;agrave; commutatativa della congiuzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0031_forall_one_point.html">
-    0031_forall_one_point
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0005_true_not_eq_false.html">
-    Vero non equivale a falso
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0027_imp_refl.html">
-    0027_imp_refl
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0008_conj_zero.html">
-    congiunzione zero
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0014_conj_dist_left_disj.html">
-    distributivit&amp;agrave; a sinistra della congiunzione sulla disgiunzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0016_disj_id.html">
-    Disj Id
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0015_conj_contr.html">
-    0015_conj_contr
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0012_conj_absorb_disj.html">
-    assorbimento della disgiunzione nella congiunzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0009_conj_idem.html">
-    congiunzione della stessa proposizione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0030_forall_dist_conj.html">
-    0030_forall_dist_conj
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0026_imp_left_zero.html">
-    0026_imp_left_zero
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0020_disj_absorb_conj.html">
-    0020_disj_absorb_conj
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0036_exists_null.html">
-    0036_exists_null
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0025_imp_left_id.html">
-    0025_imp_left_id
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0029_imp_dist_right_conj.html">
-    0029_imp_dist_right_conj
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0004_not_false.html">
-    Non falso equivale a vero
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0034_exists_dist_disj.html">
-    0034_exists_dist_disj
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0024_disj_comm.html">
-    commutabilit&amp;agrave; della disgiunzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0006_not_dist_disj.html">
-    distribuzione della negazione sulla disgiunzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0011_conj_assoc.html">
-    Propriet&amp;agrave; associativa della congiuzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0022_disj_dist_left_conj.html">
-    0022_disj_dist_left_conj
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0003_not_true.html">
-    Non vero equivale a falso
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0023_imp_right_zero.html">
-    0023_imp_right_zero
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0013_conj_dist_right_disj.html">
-    distributivit&amp;agrave; a destra della congiunzione sulla disgiunzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0044_excluded_midle.html">
-    Terzo escluso
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0035_exists_one_point.html">
-    0035_exists_one_point
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0045_bool_cases.html">
-    Bool Cases
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0002_fun_eq.html">
-    Equivalenza tra funzioni
-
-  </a>
-</li>
+                        
                         <li class="nav-header">
   API Reference
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/reference/index.html">
+  <a class="nav-link" href="/nholz/reference/index.html">
     All Namespaces
   </a>
 </li>
@@ -351,7 +78,7 @@
   <dl class="fsdocs-metadata">
     <dt>
       Namespace: 
-      <a href="http://localhost:8901/reference/hol.html">
+      <a href="/nholz/reference/hol.html">
         HOL
       </a>
     </dt>
@@ -392,7 +119,7 @@ implementation of the pretty printer.
           <td class="fsdocs-entity-name">
             <p>
               <a name="assochand">
-                <a href="http://localhost:8901/reference/hol-names-assochand.html">
+                <a href="/nholz/reference/hol-names-assochand.html">
                   assochand
                 </a>
               </a>
@@ -401,12 +128,12 @@ implementation of the pretty printer.
           <td class="fsdocs-entity-xmldoc">
             <div>
               <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Names.assochand`')">
-                <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
               </div>
               <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Names.assochand\'/>')">
-                <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
               </div>
               <p class="fsdocs-summary">
                 
@@ -418,7 +145,7 @@ implementation of the pretty printer.
           <td class="fsdocs-entity-name">
             <p>
               <a name="fixity">
-                <a href="http://localhost:8901/reference/hol-names-fixity.html">
+                <a href="/nholz/reference/hol-names-fixity.html">
                   fixity
                 </a>
               </a>
@@ -427,12 +154,12 @@ implementation of the pretty printer.
           <td class="fsdocs-entity-xmldoc">
             <div>
               <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Names.fixity`')">
-                <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
               </div>
               <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Names.fixity\'/>')">
-                <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
               </div>
               <p class="fsdocs-summary">
                 
@@ -444,7 +171,7 @@ implementation of the pretty printer.
           <td class="fsdocs-entity-name">
             <p>
               <a name="hand">
-                <a href="http://localhost:8901/reference/hol-names-hand.html">
+                <a href="/nholz/reference/hol-names-hand.html">
                   hand
                 </a>
               </a>
@@ -453,12 +180,12 @@ implementation of the pretty printer.
           <td class="fsdocs-entity-xmldoc">
             <div>
               <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.Names.hand`')">
-                <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
               </div>
               <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.Names.hand\'/>')">
-                <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
               </div>
               <p class="fsdocs-summary">
                 
@@ -625,7 +352,7 @@ implementation of the pretty printer.
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><span>(<span>string&#32;*&#32;<a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></span>)</span>&#32;list</span></code>
+                    <code><span><span>(<span>string&#32;*&#32;<a href="/nholz/reference/hol-names-fixity.html">fixity</a></span>)</span>&#32;list</span></code>
                   </span>
                   <br/>
                 </div>
@@ -648,7 +375,7 @@ implementation of the pretty printer.
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span><span>(<span>string&#32;*&#32;<a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></span>)</span>&#32;list</span></code>
+                <code><span><span>(<span>string&#32;*&#32;<a href="/nholz/reference/hol-names-fixity.html">fixity</a></span>)</span>&#32;list</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -686,7 +413,7 @@ implementation of the pretty printer.
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><span>(<span>string&#32;*&#32;<a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></span>)</span>&#32;list</span></code>
+                    <code><span><span>(<span>string&#32;*&#32;<a href="/nholz/reference/hol-names-fixity.html">fixity</a></span>)</span>&#32;list</span></code>
                   </span>
                   <br/>
                 </div>
@@ -709,7 +436,7 @@ implementation of the pretty printer.
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span><span>(<span>string&#32;*&#32;<a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></span>)</span>&#32;list</span></code>
+                <code><span><span>(<span>string&#32;*&#32;<a href="/nholz/reference/hol-names-fixity.html">fixity</a></span>)</span>&#32;list</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -759,12 +486,12 @@ implementation of the pretty printer.
               <summary>
                 <div class="fsdocs-summary">
                   <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Names.get_enum_bracket_zero`')">
-                    <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
                   </div>
                   <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Names.get_enum_bracket_zero\'/>')">
-                    <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
                   </div>
                   <p class="fsdocs-summary">
                     
@@ -949,7 +676,7 @@ Gets the closing bracket given the opning one
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                    <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
                   </span>
                   <br/>
                 </div>
@@ -972,7 +699,7 @@ Gets the closing bracket given the opning one
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1010,7 +737,7 @@ Gets the closing bracket given the opning one
                   <br/>
                   <span>
                     Returns: 
-                    <code><span>int&#32;*&#32;<a href="http://localhost:8901/reference/hol-names-assochand.html">assochand</a></span></code>
+                    <code><span>int&#32;*&#32;<a href="/nholz/reference/hol-names-assochand.html">assochand</a></span></code>
                   </span>
                   <br/>
                 </div>
@@ -1033,7 +760,7 @@ Gets the closing bracket given the opning one
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span>int&#32;*&#32;<a href="http://localhost:8901/reference/hol-names-assochand.html">assochand</a></span></code>
+                <code><span>int&#32;*&#32;<a href="/nholz/reference/hol-names-assochand.html">assochand</a></span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1071,7 +798,7 @@ Gets the closing bracket given the opning one
                   <br/>
                   <span>
                     Returns: 
-                    <code><span>int&#32;*&#32;<a href="http://localhost:8901/reference/hol-names-assochand.html">assochand</a></span></code>
+                    <code><span>int&#32;*&#32;<a href="/nholz/reference/hol-names-assochand.html">assochand</a></span></code>
                   </span>
                   <br/>
                 </div>
@@ -1094,7 +821,7 @@ Gets the closing bracket given the opning one
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span>int&#32;*&#32;<a href="http://localhost:8901/reference/hol-names-assochand.html">assochand</a></span></code>
+                <code><span>int&#32;*&#32;<a href="/nholz/reference/hol-names-assochand.html">assochand</a></span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1132,7 +859,7 @@ Gets the closing bracket given the opning one
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                    <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1155,7 +882,7 @@ Gets the closing bracket given the opning one
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1613,14 +1340,14 @@ Gets the closing bracket given the opning one
                         fxty
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                      <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><span>int&#32;*&#32;<a href="http://localhost:8901/reference/hol-names-assochand.html">assochand</a></span></code>
+                    <code><span>int&#32;*&#32;<a href="/nholz/reference/hol-names-assochand.html">assochand</a></span></code>
                   </span>
                   <br/>
                 </div>
@@ -1634,7 +1361,7 @@ Gets the closing bracket given the opning one
                   fxty
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1643,7 +1370,7 @@ Gets the closing bracket given the opning one
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span>int&#32;*&#32;<a href="http://localhost:8901/reference/hol-names-assochand.html">assochand</a></span></code>
+                <code><span>int&#32;*&#32;<a href="/nholz/reference/hol-names-assochand.html">assochand</a></span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1857,7 +1584,7 @@ Gets the closing bracket given the opning one
                         fxty
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                      <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -1878,7 +1605,7 @@ Gets the closing bracket given the opning one
                   fxty
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -2223,7 +1950,7 @@ Gets the closing bracket given the opning one
                         fxty
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                      <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -2244,7 +1971,7 @@ Gets the closing bracket given the opning one
                   fxty
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -2467,7 +2194,7 @@ Gets the closing bracket given the opning one
                         fxty
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                      <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -2488,7 +2215,7 @@ Gets the closing bracket given the opning one
                   fxty
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -2589,7 +2316,7 @@ Gets the closing bracket given the opning one
                         fxty
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                      <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -2610,7 +2337,7 @@ Gets the closing bracket given the opning one
                   fxty
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -2650,7 +2377,7 @@ Gets the closing bracket given the opning one
                         fxty
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                      <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -2671,7 +2398,7 @@ Gets the closing bracket given the opning one
                   fxty
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -3077,7 +2804,7 @@ Gets the closing bracket given the opning one
                         fxty
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                      <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -3098,7 +2825,7 @@ Gets the closing bracket given the opning one
                   fxty
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -3152,12 +2879,12 @@ Gets the closing bracket given the opning one
               <summary>
                 <div class="fsdocs-summary">
                   <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Names.reset_fixity`')">
-                    <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
                   </div>
                   <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Names.reset_fixity\'/>')">
-                    <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
                   </div>
                   <p class="fsdocs-summary">
                     
@@ -3221,12 +2948,12 @@ fixity.  A note of the fixity change is reported, and unit is returned.
               <summary>
                 <div class="fsdocs-summary">
                   <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Names.reset_type_fixity`')">
-                    <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
                   </div>
                   <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Names.reset_type_fixity\'/>')">
-                    <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
                   </div>
                   <p class="fsdocs-summary">
                     
@@ -3314,12 +3041,12 @@ A note of the fixity change is reported, and unit is returned.
               <summary>
                 <div class="fsdocs-summary">
                   <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Names.set_enum_brackets`')">
-                    <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
                   </div>
                   <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Names.set_enum_brackets\'/>')">
-                    <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
                   </div>
                   <p class="fsdocs-summary">
                     
@@ -3405,7 +3132,7 @@ bracket declaration is reported, and unit is returned.
                         fxty
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                      <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -3419,12 +3146,12 @@ bracket declaration is reported, and unit is returned.
               <summary>
                 <div class="fsdocs-summary">
                   <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Names.set_fixity`')">
-                    <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
                   </div>
                   <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Names.set_fixity\'/>')">
-                    <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
                   </div>
                   <p class="fsdocs-summary">
                     
@@ -3453,7 +3180,7 @@ reported, and unit is returned.
                     fxty
                   </span>
                   :
-                  <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                  <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
                 </dt>
                 <dd class="fsdocs-param-docs"></dd>
               </dl>
@@ -3493,7 +3220,7 @@ reported, and unit is returned.
                         fxty
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                      <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -3507,12 +3234,12 @@ reported, and unit is returned.
               <summary>
                 <div class="fsdocs-summary">
                   <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Names.set_type_fixity`')">
-                    <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
                   </div>
                   <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Names.set_type_fixity\'/>')">
-                    <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
                   </div>
                   <p class="fsdocs-summary">
                     
@@ -3541,7 +3268,7 @@ and unit is returned.
                     fxty
                   </span>
                   :
-                  <code><a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></code>
+                  <code><a href="/nholz/reference/hol-names-fixity.html">fixity</a></code>
                 </dt>
                 <dd class="fsdocs-param-docs"></dd>
               </dl>
@@ -3568,7 +3295,7 @@ and unit is returned.
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><span><a href="http://localhost:8901/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;string</span>&gt;</span>&#32;ref</span></code>
+                    <code><span><span><a href="/nholz/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;string</span>&gt;</span>&#32;ref</span></code>
                   </span>
                   <br/>
                 </div>
@@ -3580,12 +3307,12 @@ and unit is returned.
               <summary>
                 <div class="fsdocs-summary">
                   <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.Names.the_enum_brackets`')">
-                    <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
                   </div>
                   <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.Names.the_enum_brackets\'/>')">
-                    <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
                   </div>
                   <p class="fsdocs-summary">
                     
@@ -3607,7 +3334,7 @@ closing enumeration brackets.
                   <span class="fsdocs-return-name">
                     Returns: 
                   </span>
-                  <code><span><span><a href="http://localhost:8901/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;string</span>&gt;</span>&#32;ref</span></code>
+                  <code><span><span><a href="/nholz/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;string</span>&gt;</span>&#32;ref</span></code>
                 </dt>
                 <dd class="fsdocs-return-docs"></dd>
               </dl>
@@ -3634,7 +3361,7 @@ closing enumeration brackets.
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><span><a href="http://localhost:8901/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;<span>(<span>string&#32;*&#32;<span>(<span>string&#32;*&#32;string</span>)</span></span>)</span></span>&gt;</span>&#32;ref</span></code>
+                    <code><span><span><a href="/nholz/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;<span>(<span>string&#32;*&#32;<span>(<span>string&#32;*&#32;string</span>)</span></span>)</span></span>&gt;</span>&#32;ref</span></code>
                   </span>
                   <br/>
                 </div>
@@ -3646,12 +3373,12 @@ closing enumeration brackets.
               <summary>
                 <div class="fsdocs-summary">
                   <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.Names.the_enum_db`')">
-                    <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
                   </div>
                   <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.Names.the_enum_db\'/>')">
-                    <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
                   </div>
                   <p class="fsdocs-summary">
                     
@@ -3668,7 +3395,7 @@ by empty structure constant name.
                   <span class="fsdocs-return-name">
                     Returns: 
                   </span>
-                  <code><span><span><a href="http://localhost:8901/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;<span>(<span>string&#32;*&#32;<span>(<span>string&#32;*&#32;string</span>)</span></span>)</span></span>&gt;</span>&#32;ref</span></code>
+                  <code><span><span><a href="/nholz/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;<span>(<span>string&#32;*&#32;<span>(<span>string&#32;*&#32;string</span>)</span></span>)</span></span>&gt;</span>&#32;ref</span></code>
                 </dt>
                 <dd class="fsdocs-return-docs"></dd>
               </dl>
@@ -3695,7 +3422,7 @@ by empty structure constant name.
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><span><a href="http://localhost:8901/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;<a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></span>&gt;</span>&#32;ref</span></code>
+                    <code><span><span><a href="/nholz/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;<a href="/nholz/reference/hol-names-fixity.html">fixity</a></span>&gt;</span>&#32;ref</span></code>
                   </span>
                   <br/>
                 </div>
@@ -3707,12 +3434,12 @@ by empty structure constant name.
               <summary>
                 <div class="fsdocs-summary">
                   <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.Names.the_fixities`')">
-                    <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
                   </div>
                   <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.Names.the_fixities\'/>')">
-                    <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
                   </div>
                   <p class="fsdocs-summary">
                     
@@ -3728,7 +3455,7 @@ Identifiers not occurring in the database have default nonfix fixity.
                   <span class="fsdocs-return-name">
                     Returns: 
                   </span>
-                  <code><span><span><a href="http://localhost:8901/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;<a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></span>&gt;</span>&#32;ref</span></code>
+                  <code><span><span><a href="/nholz/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;<a href="/nholz/reference/hol-names-fixity.html">fixity</a></span>&gt;</span>&#32;ref</span></code>
                 </dt>
                 <dd class="fsdocs-return-docs"></dd>
               </dl>
@@ -3755,7 +3482,7 @@ Identifiers not occurring in the database have default nonfix fixity.
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><span><a href="http://localhost:8901/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;<a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></span>&gt;</span>&#32;ref</span></code>
+                    <code><span><span><a href="/nholz/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;<a href="/nholz/reference/hol-names-fixity.html">fixity</a></span>&gt;</span>&#32;ref</span></code>
                   </span>
                   <br/>
                 </div>
@@ -3767,12 +3494,12 @@ Identifiers not occurring in the database have default nonfix fixity.
               <summary>
                 <div class="fsdocs-summary">
                   <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.Names.the_type_fixities`')">
-                    <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
                   </div>
                   <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.Names.the_type_fixities\'/>')">
-                    <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
                   </div>
                   <p class="fsdocs-summary">
                     
@@ -3789,7 +3516,7 @@ nonfix fixity.
                   <span class="fsdocs-return-name">
                     Returns: 
                   </span>
-                  <code><span><span><a href="http://localhost:8901/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;<a href="http://localhost:8901/reference/hol-names-fixity.html">fixity</a></span>&gt;</span>&#32;ref</span></code>
+                  <code><span><span><a href="/nholz/reference/hol-dltree-dltree-2.html">dltree</a>&lt;<span>string,&#32;<a href="/nholz/reference/hol-names-fixity.html">fixity</a></span>&gt;</span>&#32;ref</span></code>
                 </dt>
                 <dd class="fsdocs-return-docs"></dd>
               </dl>
@@ -3816,10 +3543,10 @@ nonfix fixity.
 
     <!-- BEGIN SEARCH BOX: this adds support for the search box -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
-    <script type="text/javascript">var fsdocs_search_baseurl = 'http://localhost:8901/'</script>
+    <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/'</script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
-    <script type="text/javascript" src="http://localhost:8901/content/fsdocs-search.js"></script>
+    <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
     <!-- END SEARCH BOX: this adds support for the search box -->
 </body>
 

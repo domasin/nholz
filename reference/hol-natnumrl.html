@@ -6,14 +6,14 @@
     <title>NatNumrl (nholz)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="nholz">
-    <link rel="shortcut icon" type="image/x-icon" href="http://localhost:8901//img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
 
-    <link type="text/css" rel="stylesheet" href="http://localhost:8901/content/fsdocs-default.css" />
-    <link type="text/css" rel="stylesheet" href="http://localhost:8901/content/fsdocs-custom.css" />
-    <script type="text/javascript" src="http://localhost:8901/content/fsdocs-tips.js"></script>
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -22,22 +22,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
     <!-- END SEARCH BOX: this adds support for the search box -->
     
-<script type="text/javascript">
-    var wsUri = "ws://localhost:8901/websocket";
-    function init()
-    {
-        websocket = new WebSocket(wsUri);
-        websocket.onclose = function(evt) { onClose(evt) };
-    }
-    function onClose(evt)
-    {
-        console.log('closing');
-        websocket.close();
-        document.location.reload();
-    }
-    window.addEventListener("load", init, false);
-</script>
-
 </head> 
 
 <body>
@@ -45,9 +29,9 @@
         <div id="fsdocs-menu" class="column is-2 is-paddingless">
             <aside class="menu">
                 <div class="container is-paddingless is-marginless has-background-dark">
-                    <a href="http://localhost:8901/">
+                    <a href="/nholz/">
                         <figure class="image is-128x128 container">
-                            <img src="http://localhost:8901/img/logo.png">
+                            <img src="/nholz/img/logo.png">
                         </figure>
                     </a>
                     <h2 class="title has-text-centered has-text-white pb-4">nholz</h2>
@@ -71,269 +55,12 @@
                         <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License (MIT)</a></li>
                         <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
                         <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
-                        <li class="nav-header">
-  Documentation
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/tactics.html">
-    tactics
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/3_Liguaggio_HOL.html">
-    LINGUAGGIO HOL
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/avvio.html">
-    avvio
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/B1_Teorie.html">
-    TEORIE
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/1_Introduzione.html">
-    Introduzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/B2_Teoremi.html">
-    TEOREMI
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/goaltree.html">
-    goaltree
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/A5_Inference_Rules.html">
-    Regole d&#39;inferenza
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0018_disj_idem.html">
-    Disj Idem
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0033_select_eq.html">
-    0033_select_eq
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0032_forall_null.html">
-    0032_forall_null
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0001_truth.html">
-    Vero
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0019_disj_assoc.html">
-    0019_disj_assoc
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0007_conj_id.html">
-    vero &amp;egrave; l&#39;identit&amp;agrave; della congiunzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0028_imp_dist_left_disj.html">
-    0028_imp_dist_left_disj
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0021_disj_dist_right_conj.html">
-    0021_disj_dist_right_conj
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0017_disj_zero.html">
-    Disj Zero
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0010_conj_comm.html">
-    Propriet&amp;agrave; commutatativa della congiuzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0031_forall_one_point.html">
-    0031_forall_one_point
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0005_true_not_eq_false.html">
-    Vero non equivale a falso
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0027_imp_refl.html">
-    0027_imp_refl
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0008_conj_zero.html">
-    congiunzione zero
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0014_conj_dist_left_disj.html">
-    distributivit&amp;agrave; a sinistra della congiunzione sulla disgiunzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0016_disj_id.html">
-    Disj Id
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0015_conj_contr.html">
-    0015_conj_contr
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0012_conj_absorb_disj.html">
-    assorbimento della disgiunzione nella congiunzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0009_conj_idem.html">
-    congiunzione della stessa proposizione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0030_forall_dist_conj.html">
-    0030_forall_dist_conj
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0026_imp_left_zero.html">
-    0026_imp_left_zero
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0020_disj_absorb_conj.html">
-    0020_disj_absorb_conj
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0036_exists_null.html">
-    0036_exists_null
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0025_imp_left_id.html">
-    0025_imp_left_id
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0029_imp_dist_right_conj.html">
-    0029_imp_dist_right_conj
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0004_not_false.html">
-    Non falso equivale a vero
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0034_exists_dist_disj.html">
-    0034_exists_dist_disj
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0024_disj_comm.html">
-    commutabilit&amp;agrave; della disgiunzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0006_not_dist_disj.html">
-    distribuzione della negazione sulla disgiunzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0011_conj_assoc.html">
-    Propriet&amp;agrave; associativa della congiuzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0022_disj_dist_left_conj.html">
-    0022_disj_dist_left_conj
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0003_not_true.html">
-    Non vero equivale a falso
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0023_imp_right_zero.html">
-    0023_imp_right_zero
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0013_conj_dist_right_disj.html">
-    distributivit&amp;agrave; a destra della congiunzione sulla disgiunzione
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0044_excluded_midle.html">
-    Terzo escluso
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0035_exists_one_point.html">
-    0035_exists_one_point
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0045_bool_cases.html">
-    Bool Cases
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/teoremi/0002_fun_eq.html">
-    Equivalenza tra funzioni
-
-  </a>
-</li>
+                        
                         <li class="nav-header">
   API Reference
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/reference/index.html">
+  <a class="nav-link" href="/nholz/reference/index.html">
     All Namespaces
   </a>
 </li>
@@ -351,7 +78,7 @@
   <dl class="fsdocs-metadata">
     <dt>
       Namespace: 
-      <a href="http://localhost:8901/reference/hol.html">
+      <a href="/nholz/reference/hol.html">
         HOL
       </a>
     </dt>
@@ -389,7 +116,7 @@ is based on the HOL functions "BIT0" and "BIT1".
           <td class="fsdocs-entity-name">
             <p>
               <a name="Big_intExtension">
-                <a href="http://localhost:8901/reference/hol-natnumrl-big_intextension.html">
+                <a href="/nholz/reference/hol-natnumrl-big_intextension.html">
                   Big_intExtension
                 </a>
               </a>
@@ -398,12 +125,12 @@ is based on the HOL functions "BIT0" and "BIT1".
           <td class="fsdocs-entity-xmldoc">
             <div>
               <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:HOL.NatNumrl.Big_intExtension`')">
-                <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
               </div>
               <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:HOL.NatNumrl.Big_intExtension\'/>')">
-                <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
               </div>
               <p class="fsdocs-summary">
                 
@@ -450,7 +177,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -462,12 +189,12 @@ is based on the HOL functions "BIT0" and "BIT1".
               <summary>
                 <div class="fsdocs-summary">
                   <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.NatNumrl.bit0_def`')">
-                    <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
                   </div>
                   <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.NatNumrl.bit0_def\'/>')">
-                    <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
                   </div>
                   <p class="fsdocs-summary">
                     
@@ -481,7 +208,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <span class="fsdocs-return-name">
                     Returns: 
                   </span>
-                  <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                 </dt>
                 <dd class="fsdocs-return-docs"></dd>
               </dl>
@@ -508,7 +235,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                   </span>
                   <br/>
                 </div>
@@ -521,7 +248,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -547,7 +274,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -559,12 +286,12 @@ is based on the HOL functions "BIT0" and "BIT1".
               <summary>
                 <div class="fsdocs-summary">
                   <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.NatNumrl.bit1_def`')">
-                    <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
                   </div>
                   <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.NatNumrl.bit1_def\'/>')">
-                    <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
                   </div>
                   <p class="fsdocs-summary">
                     
@@ -578,7 +305,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <span class="fsdocs-return-name">
                     Returns: 
                   </span>
-                  <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                 </dt>
                 <dd class="fsdocs-return-docs"></dd>
               </dl>
@@ -605,7 +332,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                   </span>
                   <br/>
                 </div>
@@ -618,7 +345,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -649,7 +376,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                         tm
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -670,7 +397,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   tm
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -710,7 +437,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                         tm
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -731,7 +458,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   tm
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -771,7 +498,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                         tm
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -792,7 +519,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   tm
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -832,7 +559,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                         tm
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -853,7 +580,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   tm
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -893,14 +620,14 @@ is based on the HOL functions "BIT0" and "BIT1".
                         tm
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                   </span>
                   <br/>
                 </div>
@@ -914,7 +641,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   tm
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -923,7 +650,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -954,7 +681,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                         tm
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -975,7 +702,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   tm
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1015,7 +742,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                         tm
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -1036,7 +763,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   tm
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1076,7 +803,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                         tm
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                     </span>
                     <br/>
                   </ul>
@@ -1097,7 +824,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   tm
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1132,7 +859,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><span>(<span>string&#32;*&#32;<a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></span>)</span>&#32;list</span></code>
+                    <code><span><span>(<span>string&#32;*&#32;<a href="/nholz/reference/hol-thm-thm.html">thm</a></span>)</span>&#32;list</span></code>
                   </span>
                   <br/>
                 </div>
@@ -1144,12 +871,12 @@ is based on the HOL functions "BIT0" and "BIT1".
               <summary>
                 <div class="fsdocs-summary">
                   <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.NatNumrl.load`')">
-                    <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
                   </div>
                   <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.NatNumrl.load\'/>')">
-                    <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
                   </div>
                   <p class="fsdocs-summary">
                     
@@ -1163,7 +890,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <span class="fsdocs-return-name">
                     Returns: 
                   </span>
-                  <code><span><span>(<span>string&#32;*&#32;<a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></span>)</span>&#32;list</span></code>
+                  <code><span><span>(<span>string&#32;*&#32;<a href="/nholz/reference/hol-thm-thm.html">thm</a></span>)</span>&#32;list</span></code>
                 </dt>
                 <dd class="fsdocs-return-docs"></dd>
               </dl>
@@ -1202,7 +929,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1225,7 +952,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1263,7 +990,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1286,7 +1013,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1324,7 +1051,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1347,7 +1074,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1385,7 +1112,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1408,7 +1135,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1439,14 +1166,14 @@ is based on the HOL functions "BIT0" and "BIT1".
                         tm
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                      <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1460,7 +1187,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   tm
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1469,7 +1196,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1495,7 +1222,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1508,7 +1235,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1534,7 +1261,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1547,7 +1274,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1573,7 +1300,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1586,7 +1313,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1612,7 +1339,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1624,12 +1351,12 @@ is based on the HOL functions "BIT0" and "BIT1".
               <summary>
                 <div class="fsdocs-summary">
                   <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:HOL.NatNumrl.numeral_def`')">
-                    <img src="http://localhost:8901/content/img/copy-md.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-md-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
                   </div>
                   <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:HOL.NatNumrl.numeral_def\'/>')">
-                    <img src="http://localhost:8901/content/img/copy-xml.png" class="normal"/>
-                    <img src="http://localhost:8901/content/img/copy-xml-hover.png" class="hover"/>
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
                   </div>
                   <p class="fsdocs-summary">
                     
@@ -1643,7 +1370,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <span class="fsdocs-return-name">
                     Returns: 
                   </span>
-                  <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                  <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                 </dt>
                 <dd class="fsdocs-return-docs"></dd>
               </dl>
@@ -1670,7 +1397,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1683,7 +1410,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1709,7 +1436,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1722,7 +1449,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1748,7 +1475,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1761,7 +1488,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1792,14 +1519,14 @@ is based on the HOL functions "BIT0" and "BIT1".
                         th
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1813,7 +1540,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   th
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1822,7 +1549,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1848,7 +1575,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1861,7 +1588,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1892,14 +1619,14 @@ is based on the HOL functions "BIT0" and "BIT1".
                         th
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1913,7 +1640,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   th
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1922,7 +1649,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1948,7 +1675,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -1961,7 +1688,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1992,14 +1719,14 @@ is based on the HOL functions "BIT0" and "BIT1".
                         th
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -2013,7 +1740,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   th
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -2022,7 +1749,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -2053,14 +1780,14 @@ is based on the HOL functions "BIT0" and "BIT1".
                         th
                       </b>
                       :
-                      <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                      <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -2074,7 +1801,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   th
                 </span>
                 :
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -2083,7 +1810,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -2109,7 +1836,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -2122,7 +1849,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -2148,7 +1875,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -2161,7 +1888,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -2187,7 +1914,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -2200,7 +1927,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -2226,7 +1953,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -2239,7 +1966,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -2265,7 +1992,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -2278,7 +2005,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -2304,7 +2031,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -2317,7 +2044,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -2343,7 +2070,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -2356,7 +2083,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -2382,7 +2109,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -2395,7 +2122,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -2421,7 +2148,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -2434,7 +2161,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -2460,7 +2187,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                    <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
                   </span>
                   <br/>
                 </div>
@@ -2473,7 +2200,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-thm-thm.html">thm</a></code>
+                <code><a href="/nholz/reference/hol-thm-thm.html">thm</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -2499,7 +2226,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                   <br/>
                   <span>
                     Returns: 
-                    <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                    <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
                   </span>
                   <br/>
                 </div>
@@ -2512,7 +2239,7 @@ is based on the HOL functions "BIT0" and "BIT1".
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><a href="http://localhost:8901/reference/hol-term-term.html">term</a></code>
+                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -2538,10 +2265,10 @@ is based on the HOL functions "BIT0" and "BIT1".
 
     <!-- BEGIN SEARCH BOX: this adds support for the search box -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
-    <script type="text/javascript">var fsdocs_search_baseurl = 'http://localhost:8901/'</script>
+    <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/'</script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
-    <script type="text/javascript" src="http://localhost:8901/content/fsdocs-search.js"></script>
+    <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
     <!-- END SEARCH BOX: this adds support for the search box -->
 </body>
 
