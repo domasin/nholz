@@ -16,9 +16,7 @@ $\dfrac
 \textsf{ refl_conv}
 $
 
-Questa &egrave; la regola di riflessivit&agrave; per l'uguaglianza. Prende un 
-termine, e restituisce un teorema che afferma che il termine &egrave; uguale a 
-se stesso, senza alcuna assunzione. Non ci sono restrizioni al termine fornito.
+Questa è la regola di riflessività per l'uguaglianza. Prende un termine, e restituisce un teorema che afferma che il termine è uguale a se stesso, senza alcuna assunzione. Non ci sono restrizioni al termine fornito.
 
 Si veda anche: sym\_conv, sym\_rule, trans\_rule.
 
@@ -28,11 +26,7 @@ $\dfrac
 \textsf{ beta_conv}
 $
 
-Questa &egrave; la conversione di beta riduzione. Prende una lambda astrazione 
-applicata a un termine, e restituisce un teorema che afferma che l'applicazione 
-&egrave; uguale al corpo della lambda astrazione con tutte le occorrenze della 
-variabile legata sostituita con l'argomento dell'apllicazione, senza alcuna 
-assunzione.
+Questa è la conversione di beta riduzione. Prende una lambda astrazione applicata a un termine, e restituisce un teorema che afferma che l'applicazione è uguale al corpo della lambda astrazione con tutte le occorrenze della variabile legata sostituita con l'argomento dell'apllicazione, senza alcuna assunzione.
 
 $\dfrac
 {A_1 \vdash f_1 = f_2 \qquad  A_2 \vdash t_1 = t_2}
@@ -40,7 +34,7 @@ $\dfrac
 \textsf{ mk_comb_rule}
 $
 
-Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di 
+Questa è la regola di congruenza di eguaglianza per l'applicazione di 
 funzione. Prende due teoremi di equivalenza, e applica i corrispondenti lati del 
 primo teorema a quelli del secondo, unendo le loro assunzioni. I lati sinistro e 
 destro del primo teorema devono essere funzioni con il tipo del dominio uguale al 
@@ -56,7 +50,7 @@ $
 
 (per x non libera in A)
 
-Questa &egrave; la regola di congruenza di eguaglianza per la lambda astrazione.
+Questa è la regola di congruenza di eguaglianza per la lambda astrazione.
 Prende una variabile e un teorema di uguaglianza, e astrae la variabile da 
 entrambi i lati del teorema. La variabile non deve occorrere libera nelle 
 assunzioni del teorema fornito.
@@ -69,7 +63,7 @@ $\dfrac
 \textsf{ assume_rule}
 $
 
-Questa &egrave; la regola di assunzione. Prende un termine booleano, e restituisce 
+Questa è la regola di assunzione. Prende un termine booleano, e restituisce 
 un teorema che afferma che il termine vale sotto la singola assunzione del termine 
 stesso.
 
@@ -81,7 +75,7 @@ $\dfrac
 \textsf{ disch_rule}
 $
 
-Questa &egrave; la regola d'intrdouzone dell'implicazione. Prende un termine booleano 
+Questa è la regola d'intrdouzone dell'implicazione. Prende un termine booleano 
 e un teorema, rimuove il termine (se presente) dalle assunzioni del teorema e lo 
 aggiunge come antecedente della conclusione. Si noti che il termine non deve essere 
 presente nelle assunzioni del teorema fornito perch&eacute; la regola abbia 
@@ -95,8 +89,8 @@ $\dfrac
 \textsf{ mp_rule}
 $
 
-Questa &egrave; la regola di modus ponens. Prende un teorema di implicazione ed 
-un secondo teorema, dove l'antecendente del teorema di implicazione &egrave; 
+Questa è la regola di modus ponens. Prende un teorema di implicazione ed 
+un secondo teorema, dove l'antecendente del teorema di implicazione è 
 alfa-equivalente alla conclusione del secondo teorema. Restituisce un teorema che 
 afferma che vale il conseguente del teorema di implicazione, sotto l'unione delle 
 assunzioni dei teoremi forniti.
@@ -109,8 +103,8 @@ $\dfrac
 \textsf{ eq_mp_rule}
 $
 
-Questa &egrave; la regola di modus ponens per l'uguaglianza. Prende un teorema di 
-uguaglianza e un secondo teorema, dove il lato sinistro del teorema &egrave; 
+Questa è la regola di modus ponens per l'uguaglianza. Prende un teorema di 
+uguaglianza e un secondo teorema, dove il lato sinistro del teorema è 
 alf-equivalente alla conclusione del secondo teorema. Restituisce un teorema che 
 aggerma la parte destra del teorema di uguaglianza vale, sotto l'unione delle 
 assunzioni dei teoremi forniti.
@@ -123,7 +117,7 @@ $\dfrac
 \textsf{ inst_rule}
 $
 
-Questa &egrave; la regola d'istanziazione della variabile. Prende una lista di 
+Questa è la regola d'istanziazione della variabile. Prende una lista di 
 instanziazioni di variabili e un teorema, ed esegue una singola instanziazione 
 parallela delle variabili libere nelle assunzioni e nella conclusione del teorema, 
 secondo la lista di instanziazioni. Tutte le occorrenze libere di elementi nel dominio 
@@ -132,11 +126,11 @@ della lista di instanziazione deve essere una variabile, e ciascun elemento nel 
 deve avere lo stesso tipo del corrispondente elemento del dominio.
 
 Le variabili legate nel teorema risultante sono rinominate a seconda delle 
-necessit&agrave; per evitare catture di variabili. Si noti che gli elementi della 
+necessità per evitare catture di variabili. Si noti che gli elementi della 
 lista che non possono essere applicati sono semplicemente ignorati, cos&igrave; 
 come lo sono gli elementi ripetuti per una data variabile (oltre al primo elemento). 
 Se nessun elemento della lista soddisfa i criteri, allora il teorema risultante 
-&egrave; lo stesso del teorema in input.
+è lo stesso del teorema in input.
 
 Si veda anche: inst\_type\_rule, subs\_rule, subst\_rule.
 
@@ -146,7 +140,7 @@ $\dfrac
 \textsf{ inst_type_rule}
 $
 
-Questa &egrave; la regola d'istanziazione delle variabili di tipo. Prende una lista di 
+Questa è la regola d'istanziazione delle variabili di tipo. Prende una lista di 
 instanziazioni di variabili di tipo e un teorema, ed esegue una singola instanziazione 
 parallela delle variabili di tipo nelle assunzioni e nella conclusione del teorema, secondo 
 la lista di instanziazione. Tutte le occorrenze di elementi nel dominio della lista 
@@ -154,11 +148,11 @@ di instanziazione sono sostituite nel teorema. Ciascun elemento del dominio dell
 lista deve essere una variabile di tipo.
 
 Le variabili legate nel teorema risultante sono rinominate a seconda delle 
-necessit&agrave; per evitare catture di variabili. Si noti che gli elementi della 
+necessità per evitare catture di variabili. Si noti che gli elementi della 
 lista che non possono essere applicati sono semplicemente ignorati, cos&igrave; 
 come lo sono gli elementi ripetuti per una data variabile (oltre al primo elemento). 
 Se nessun elemento della lista soddisfa i criteri, allora il teorema risultante 
-&egrave; lo stesso del teorema in input.
+è lo stesso del teorema in input.
 
 Si veda anche: inst\_rule.
 
@@ -171,7 +165,7 @@ $\dfrac
 \textsf{ mk_comb1_rule}
 $
 
-Questa &egrave; la regola di congruenza di eguaglianza di funzioni per l'applicazione di 
+Questa è la regola di congruenza di eguaglianza di funzioni per l'applicazione di 
 funzioni. Prende un teorema di equivalenza su funzioni e un termine, e fornisce 
 il termine come argomento a ciascun lato del teorema. Il tipo del termine fornito 
 deve essere lo stesso del tipo del dominio delle funzioni.
@@ -200,7 +194,7 @@ $\dfrac
 \textsf{ mk_comb2_rule}
 $
 
-Questa &egrave; la regola di congruenza di eguaglianza di argomenti per l'applicazione di 
+Questa è la regola di congruenza di eguaglianza di argomenti per l'applicazione di 
 funzioni. Prende un termine funzione e un teorema di uguaglianza, ed applica la 
 funzione a ciascun lato del teorema. Il tipo del dominio della funzione fornita deve 
 essere lo stesso del tipo dei lati sinitro e destro del teorema.
@@ -229,8 +223,8 @@ $\dfrac
 \textsf{ trans_rule}
 $
 
-Questa &egrave; la regola di transitivit&agrave; per l'uguaglianza. Prende 
-due teoremi di uguaglianza, dove il lato destro del primo teorema &egrave; 
+Questa è la regola di transitività per l'uguaglianza. Prende 
+due teoremi di uguaglianza, dove il lato destro del primo teorema è 
 lo stesso (modulo alfa-equivalenza) del lato sinistro del secondot. Restituisce 
 un teorema che afferma che il lato sinistro del primo teorema uguaglia il 
 lato destro del secondo teorema, sotto l'unione delle assunzioni dei due 
@@ -244,7 +238,7 @@ $\dfrac
 \textsf{ sym_rule}
 $
 
-Questa &egrave; la regola di simmetria per l'uguaglianza. Scambia il lato 
+Questa è la regola di simmetria per l'uguaglianza. Scambia il lato 
 sinistro con il destro nel teorema di uguaglianza fornito.
 
 Si veda anche: sym\_conv, refl\_conv, trans\_rule.
@@ -255,12 +249,12 @@ $\dfrac
 \textsf{ app_beta_rhs_rule}
 $
 
-Questa regola &egrave; utilizzata per espandere una funzione definita in termini 
+Questa regola è utilizzata per espandere una funzione definita in termini 
 di una lambda astrazione. Prende un teorema di uguaglianza e un termine, dove 
-la parte destra del teorema &egrave; una lambda astrazione con una variabile 
+la parte destra del teorema è una lambda astrazione con una variabile 
 legata dello stesso tipo del termine argomento. Restituisce un teorema che 
 afferma che l'argomento sinistro del teorema applicato al termine in input 
-&egrave; uguale alla beta riduzione della lambda astrazione applicata al termine 
+è uguale alla beta riduzione della lambda astrazione applicata al termine 
 in input.
 
 **list\_app\_beta\_rhs\_rule**
@@ -285,8 +279,8 @@ $\dfrac
 \textsf{ alpha_link_conv}
 $
 
-Questa &egrave; la regola di conversione alfa linking. Prende due termini 
-alfa-equivalentei e restituisce un terorema che afferma che il secondo &egrave; 
+Questa è la regola di conversione alfa linking. Prende due termini 
+alfa-equivalentei e restituisce un terorema che afferma che il secondo è 
 uguale al primo, senza alcuna assunzione. Fallisce se i termini forniti non sono 
 alfa equivalenti.
 
@@ -296,7 +290,7 @@ $\dfrac
 \textsf{ alpha_conv}
 $
 
-Questa &egrave; la regola di alfa conversione. Sostituisce la variabile legata 
+Questa è la regola di alfa conversione. Sostituisce la variabile legata 
 e tutte le sue occorrenze nel termine di lambda astrazione  fornito (il secondo 
 argomento) con la variabile fornita (come primo argomento).
 
@@ -308,7 +302,7 @@ $\dfrac
 \textsf{ subs_conv}
 $
 
-Questa &egrave; la conversione di sostituzione base. Prende una lista di 
+Questa è la conversione di sostituzione base. Prende una lista di 
 teoremi di eguaglianza e un termine, e trasofrma il termine eseguendo una 
 singola sostituzione parallela di tutti i suoi sottotermini liberi secondo 
 i teoremi di eguaglianza. Tutto le occorrenze libere dei lati sinistri dei 
@@ -317,13 +311,13 @@ ha l'unione delle assunzioni di tutti i teoremi forniti (indipendentemente
 dal fatto che esse si applichino al teorema).
 
 Le variabili legate nel lato destro del teorema risultante sono rinominate 
-a seconda delle necessit&agrave; per evitare catture di variabili. Si noti 
+a seconda delle necessità per evitare catture di variabili. Si noti 
 che se uno dei lati sinistri dei teorei di uguaglianza occorre libero 
 in uno degli altri, allora viene usato di preferenza il teorema con il lato 
 sinistro pi&ugrave; ampio, e se due teoremi di uguaglianza hanno lati sinistri 
-alfa-equivalenti, allora di preferenza &egrave; usato di preferenza il primo 
+alfa-equivalenti, allora di preferenza è usato di preferenza il primo 
 teorema nella lisa. Se nessuno dei teoremi di eguaglianza pu&ograve; essere 
-usato, allora il lato destro del teorema risultante &egrave; lo stesso del 
+usato, allora il lato destro del teorema risultante è lo stesso del 
 suo lato sinistro.
 
 Si veda anche: subs\_rule, subst\_conv, inst\_rule.
@@ -334,7 +328,7 @@ $\dfrac
 \textsf{ subs_rule}
 $
 
-Questa &egrave; la regola di sostituzione di base. Prende una lista di 
+Questa è la regola di sostituzione di base. Prende una lista di 
 teoremi di equivalenza e un teorema, ed esegue una singola sostituzione 
 parallela dei sottotermini liberi nella conclusione del teorema secondo i 
 teoremi di equivalenza. Tutte le occorrenze libere dei lati sinistri dei 
@@ -343,13 +337,13 @@ ha l'unione di tutte le assunzioni di tutti i teoremi forniti (indipendentemente
 dal fatto che questi si applichino o meno al teorema fornito).
 
 Le variabili legate nel teorema risultante sono rinominate 
-a seconda delle necessit&agrave; per evitare catture di variabili. Si noti 
+a seconda delle necessità per evitare catture di variabili. Si noti 
 che se uno dei lati sinistri dei teorei di uguaglianza occorre libero 
 in uno degli altri, allora viene usato di preferenza il teorema con il lato 
 sinistro pi&ugrave; ampio, e se due teoremi di uguaglianza hanno lati sinistri 
-alfa-equivalenti, allora di preferenza &egrave; usato di preferenza il primo 
+alfa-equivalenti, allora di preferenza è usato di preferenza il primo 
 teorema nella lisa. Se nessuno dei teoremi di eguaglianza pu&ograve; essere 
-usato, allora la conclusione del teorema risultante &egrave; la stessa 
+usato, allora la conclusione del teorema risultante è la stessa 
 dell'input.
 
 Si veda anche: subs\_conv, subst\_rule, inst\_rule.
@@ -360,7 +354,7 @@ $\dfrac
 \textsf{ subst_conv}
 $
 
-Questa &egrave; la conversione di sostituzione tramite template. Prende uno 
+Questa è la conversione di sostituzione tramite template. Prende uno 
 schema di sostituzione (nella forma di una lista di associazione e un termine 
 template) seguito da un termine principale, e trasforma il termine principale 
 con una singola sostituzione parallela di tutti i suoi sottotermini liberi, secondo 
@@ -376,11 +370,11 @@ assunzioni di tutti i teoremi forniti (indipenentemente dal fatto che essi
 si applichino al template fornito).
 
 Le variabili legate nel teorema risultante sono rinominate secondo le 
-necessit&agrave; per evitare catture di variabili. Si noti che se due elementi 
+necessità per evitare catture di variabili. Si noti che se due elementi 
 appaiono nella lista di associazione per la stessa variabile template, allora 
 viene usato il primo elemento, e che elementi per variabili che non appaiono 
 nel template sono ignorate. Se nessun elemento pu&ograve; essere applicato, 
-allora il lato destro della conclusione del teorema risultante &egrave; 
+allora il lato destro della conclusione del teorema risultante è 
 lo stesso del suo lato sinistro.
 
 Si veda anche: subst\_rule, subs\_conv, inst\_rule.
@@ -391,7 +385,7 @@ $\dfrac
 \textsf{ subst_rule}
 $
 
-Questa &egrave; la regola di sostituzione tramite template. Prende uno 
+Questa è la regola di sostituzione tramite template. Prende uno 
 schema di sostituzione (nella forma di una lista di associazione e di 
 un termine template) seguito da un teorema, ed esegue una singola sostituzione 
 parallela di tutti i sottotermini liberi nella conclusione del teorema, secondo 
@@ -406,11 +400,11 @@ ha l'unione delle assunzioni di tutti i teoremi forniti (indipenentemente dal
 fatto che essi si applichino al template fornito).
 
 Le variabili di astrazione nel teorema risultante sono rinominate secondo le 
-necessit&agrave; per evitare catture di variabili. Si noti che se due elementi 
+necessità per evitare catture di variabili. Si noti che se due elementi 
 appaiono nella lista di associazione per la stessa variabile template, allora 
 viene usato il primo elemento, e che elementi per variabili che non appaiono 
 nel template sono ignorate. Se nessun elemento pu&ograve; essere applicato, 
-allora il lato destro della conclusione del teorema risultante &egrave; 
+allora il lato destro della conclusione del teorema risultante è 
 lo stesso del suo lato sinistro.
 
 Si veda anche: subst\_conv, subs\_rule, inst\_rule.
@@ -431,7 +425,7 @@ $\dfrac
 \textsf{ eqt_elim_rule}
 $
 
-Questa &egrave; la regola di eliminazione di equivalenza a vero. Prende un 
+Questa è la regola di eliminazione di equivalenza a vero. Prende un 
 teoram di guguaglianza con ha `true` sul lato destro, e restituisce un 
 teorema che afferma che il lato sinistro vale, sotto le stesse assunzioni.
 
@@ -443,7 +437,7 @@ $\dfrac
 \textsf{ undisch_rule}
 $
 
-Questa &egrave; la regola di anti-scaricamento. Prende un teorema di implicazione, 
+Questa è la regola di anti-scaricamento. Prende un teorema di implicazione, 
 e rimuove l'antecedente dalla conclusione e lo aggiunge nelle assunzioni.
 
 Si veda anche: disch\_rule, mp\_rule, prove\_asm\_rule.
@@ -454,10 +448,10 @@ $\dfrac
 \textsf{ add_asm_rule}
 $
 
-Questa &egrave; la regola di aggiunta di un'assunzione. Prende un termine booleano 
+Questa è la regola di aggiunta di un'assunzione. Prende un termine booleano 
 e un teorema e restituisce lo stesso teorema ma con il termine fornito aggiunto 
 alle sue assunzioni. Il teorema restituito in output coincide con quello fornito in input 
-se il termine &egrave; gi&agrave; presente nelle assunzioni.
+se il termine è già presente nelle assunzioni.
 
 $\dfrac
 {A_1 \vdash p \qquad A_2 \vdash q}
@@ -465,11 +459,11 @@ $\dfrac
 \textsf{ prove_asm_rule}
 $
 
-Questa &egrave; la regola di assunzione provata. Prende due teoremi, e 
+Questa è la regola di assunzione provata. Prende due teoremi, e 
 restituisce il secondo teorema ma con la conclusione del primo teorema 
 rimossa (se presente) dalle sue assunzioni a cui sono aggiunte le assunzioni 
 del primo teorema. Si noti che la conclusione del primo teorema non deve 
-essere nelle assunzioni del secondo affinch&egrave; questa regola abbia 
+essere nelle assunzioni del secondo affinchè questa regola abbia 
 successo.
 
 Si veda anche: mp\_rule, undisch\_rule.
@@ -480,7 +474,7 @@ $\dfrac
 \textsf{ eq_imp_rule1}
 $
 
-Questa &egrave; la prima regola di eliminazione dell'equivalenza.
+Questa è la prima regola di eliminazione dell'equivalenza.
 Prende un teorema che afferma l'equivalenza di due termini booleani, e 
 restituisce un teorema che afferna che il sinistro implica il destro, 
 sotto le stesse assunzioni.
@@ -493,7 +487,7 @@ $\dfrac
 \textsf{ eq_imp_rule2}
 $
 
-Questa &egrave; la seconda regola di eliminazione dell'equivalenza.
+Questa è la seconda regola di eliminazione dell'equivalenza.
 Prende un teorema che afferma l'equivalenza di due termini booleani, e 
 restituisce un teorema che afferna che il destro implica il sinistro, 
 sotto le stesse assunzioni.
@@ -506,8 +500,8 @@ $\dfrac
 \textsf{ not_intro_rule}
 $
 
-Questa &egrave; la regola di introduzione della negazione logica. Prende un 
-teorema di implicazione dove il lato destro &egrave; `false`, e restituisce la 
+Questa è la regola di introduzione della negazione logica. Prende un 
+teorema di implicazione dove il lato destro è `false`, e restituisce la 
 negazione logica del lato sinistro, sotto le stesse assunzioni.
 
 Si veda anche: not\_elim\_rule, eqf\_elim\_rule, eqf\_intro\_rule, deduct\_contrapos\_rule.
@@ -518,7 +512,7 @@ $\dfrac
 \textsf{ not_elim_rule}
 $
 
-Questa &egrave; la regola di eliminazione della negazione logica. Prende 
+Questa è la regola di eliminazione della negazione logica. Prende 
 un teorema di negazione logica, e restituisce un'implicazione con 
 il termine negato sul lato sinistro e `false` sul lato destro, sotto le 
 stesse assunzioni.
@@ -531,12 +525,12 @@ $\dfrac
 \textsf{ deduct_contrapos_rule}
 $
 
-Questa &egrave; la regola di contraddizione per la deduzione. Scambia e 
+Questa è la regola di contraddizione per la deduzione. Scambia e 
 nega logicamente il termine dell'assunzione fornita e la conclusione del 
 teorema fornito. Si noti che il termine fornito non deve essere presente 
 nelle assunzioni del teorema di input perhc&eacute; la regola abbia successo. 
 Se la negazione logica della conclusione del teorema in input coincide con 
-il termine fornito, allora non occorrer&agrave; nelle assunzioni del teorema 
+il termine fornito, allora non occorrerà nelle assunzioni del teorema 
 risultante.
 
 See also: not\_intro\_rule, disch\_rule, contr\_rule, ccontr\_rule.
@@ -547,7 +541,7 @@ $\dfrac
 \textsf{ eqf_elim_rule}
 $
 
-Questa &egrave; la regola di eliminazione di equivalenza a falso. Prende un 
+Questa è la regola di eliminazione di equivalenza a falso. Prende un 
 teoram di equivalenza con la `false` sulla destra, e restituisce la negazione 
 logica del lato sinistro, sotto le stesse assunzioni.
 
@@ -560,9 +554,9 @@ $\dfrac
 \textsf{ imp_trans_rule}
 $
 
-Questa &egrave; la regola di transitivt&agrave; per l'implicazione. Prende due 
+Questa è la regola di transitivtà per l'implicazione. Prende due 
 teoremi d'implicazione come argomenti, dove il lato destro del primo teorema 
-&egrave; lo stesso (modulo alfa-equivalenza) del lato sinistro del secondo. 
+è lo stesso (modulo alfa-equivalenza) del lato sinistro del secondo. 
 Restituisce un teorema che afferma che il lato sinistro del primo teorema 
 implica il lato destro del secondo, sotto l'unione delle assunzione dei due 
 teoremi.
@@ -579,7 +573,7 @@ $\dfrac
 \textsf{ spec_rule}
 $
 
-Questa &egrave; la regola di eliminazine universale. Spoglia il 
+Questa è la regola di eliminazine universale. Spoglia il 
 quantificatore universale pi&ugrave; esterno del teorema, e sostituisce nel corpo ciascuna 
 occorrenza della variabile legata eliminata con il termine fornito. 
 Il tipo del termine fornito deve essere uguale al tipo della variabile eliminata.
@@ -592,7 +586,7 @@ $\dfrac
 \textsf{ list_spec_rule}
 $
 
-Questa &egrave; la regola di eliminazine universale composta. Spoglia il 
+Questa è la regola di eliminazine universale composta. Spoglia il 
 quantificatore universale pi&ugrave; esterno del teorema fornito per 
 ogni elemento nella lista di termini fornita, sostituendo nel corpo ciascuna 
 occorrenza di una variabile legata eliminata con il corrispondente elemento 
@@ -607,11 +601,11 @@ $\dfrac
 \textsf{ spec_all_rule}
 $
 
-Questa &egrave; la regola composta di eliminazione di default del quantificatore 
+Questa è la regola composta di eliminazione di default del quantificatore 
 universale. Elimina tutti i quantificatori universali esterni dal teorema fornito. 
 Si noti che il teorema fornito non deve necessariamente essere una quantificazione 
-universale perch&egrave; il teorema abbia successo (in  questo caso il teorema 
-risultante &egrave; semplicemente lo stesso del teorema fornito):
+universale perchè il teorema abbia successo (in  questo caso il teorema 
+risultante è semplicemente lo stesso del teorema fornito):
 
 Si veda anche: spec\_rule, list\_spec\_rule, bspec\_rule, list\_gen\_rule.
 
@@ -621,10 +615,10 @@ $\dfrac
 \textsf{ bspec_rule}
 $
 
-Questa &egrave; la regola di eliminazione del quantifcatore universale con 
+Questa è la regola di eliminazione del quantifcatore universale con 
 beta-riduzione. Toglie il quantificatore universale pi&ugrave; esterno dal 
 teorema fornito, e sostituisce nel corpo ogni occorrenza della variabile legata 
-eliminata con il termine fornito. Se il termine in input &egrave; una lambda 
+eliminata con il termine fornito. Se il termine in input è una lambda 
 astrazione, esegue anche la beta riduzione di ogni occorrenza sostituita che 
 sia applicata ad un argomento. Il tipo del termine fornito deve essere uguale 
 al tipo della variabile legata eliminata.
@@ -637,7 +631,7 @@ $\dfrac
 \textsf{ contr_rule}
 $
 
-Questa &egrave; la regola di contraddizione della logica intuizionista. Prende 
+Questa è la regola di contraddizione della logica intuizionista. Prende 
 un termine booleano e un teorema con falso come conclusione. Restituisce un 
 teorema con il termine fornito come sua conclusione, sotto le stess assunzioni 
 del teorema fornito.
@@ -650,11 +644,11 @@ $\dfrac
 \textsf{ eta_conv}
 $
 
-Questa &egrave; la regola di eta riduzione. Prende un termine di lambda 
-astrazione, dove il corpo &egrave; un'applicazione di funzione, e la variabile 
-legata &egrave; il sottotermine argomento dell'applicazione della funzione e 
-non &egrave; libera nel sottotermine funzione. Restituisce un teoream che 
-afferma che il termine &egrave; uguale al sottotermine funzione, senza alcuna 
+Questa è la regola di eta riduzione. Prende un termine di lambda 
+astrazione, dove il corpo è un'applicazione di funzione, e la variabile 
+legata è il sottotermine argomento dell'applicazione della funzione e 
+non è libera nel sottotermine funzione. Restituisce un teoream che 
+afferma che il termine è uguale al sottotermine funzione, senza alcuna 
 assunzione.
 
 Si veda anche: beta\_conv.
@@ -665,9 +659,9 @@ $\dfrac
 \textsf{ imp_antisym_rule}
 $
 
-Questa &egrave; la regola di antisimmetria per l'implicazione. Prende due 
+Questa è la regola di antisimmetria per l'implicazione. Prende due 
 teoremi di implicazione come argomenti, dove il lato sinistro di ciascuno 
-&egrave; lo stesso (modulo alfa-equivalenza) del lato destro dell'altro. 
+è lo stesso (modulo alfa-equivalenza) del lato destro dell'altro. 
 Restituisce 
 
 Si veda anche: list\_gen\_rule, spec\_rule, mk\_forall\_rule.
@@ -678,7 +672,7 @@ $\dfrac
 \textsf{ deduct_antisym_rule}
 $
 
-Questa &egrave; la regola di antisimmetria per la deduzione. Prende due 
+Questa è la regola di antisimmetria per la deduzione. Prende due 
 teoremi come argomenti. Restituisce un teorema che afferma che le conclusioni 
 fornite sono equivalente, sotto l'unione delle assunzioni ma con la conclusione 
 di un teorema rimossa dalle assunzioni dell'altro
@@ -691,7 +685,7 @@ $\dfrac
 \textsf{ sym_conv}
 $
 
-Questa &egrave; la conversione di simmetria per l'uguaglianza. Trasforma il 
+Questa è la conversione di simmetria per l'uguaglianza. Trasforma il 
 termine di ugualianza fornito scambiando il lato sinistro con il destro, senza 
 alcuna assunzione.
 
@@ -703,9 +697,9 @@ $\dfrac
 \textsf{ eqt_intro_rule}
 $
 
-Questa &egrave; la regola di introduzione di equivalenza a vero. Prende un 
+Questa è la regola di introduzione di equivalenza a vero. Prende un 
 qualsiasi teorema, e restituisce il teorema che afferma che la conclusione 
-&egrave; equivalente a `true`, sotto le stesse assunzioni.
+è equivalente a `true`, sotto le stesse assunzioni.
 
 Si veda anche: eqt\_elim\_rule, eq\f_intro\_rule.
 
@@ -715,9 +709,9 @@ $\dfrac
 \textsf{ eqf_intro_rule}
 $
 
-Questa &egrave; la regola di introduzione di equivalenza a falso. Prende un 
+Questa è la regola di introduzione di equivalenza a falso. Prende un 
 teoram con la negazione logica come sua conclusione, e restituisce un teoram 
-che afferma che il corpo della negazione &egrave; equivalente a `false`, sotto 
+che afferma che il corpo della negazione è equivalente a `false`, sotto 
 le stesse assunzioni.
 
 Si veda anche: eqf\_elim\_rule, not\_elim\_rule, not\_intro\_rule, mk\_not\_rule,
@@ -731,7 +725,7 @@ $
 
 per x non libera in A 
 
-Questa &egrave; di introduzione del quantificatore universale. Quantifica 
+Questa è di introduzione del quantificatore universale. Quantifica 
 universamente il teorema fornito con la variabile legata fornita sotto le 
 stesse assunzioni. La variabile legata non deve comparire libera nelle 
 assunzioni.
@@ -752,7 +746,7 @@ $\dfrac
 \textsf{ conj_rule}
 $
 
-Questa &egrave; la regola di e-introduzione. Congiunge i due teoremi forniti
+Questa è la regola di e-introduzione. Congiunge i due teoremi forniti
 e unisce le loro assunzioni.
 
 Si veda anche: conjunct1\_rule, conjunct2\_rule, mk\_conj\_rule.
@@ -763,7 +757,7 @@ $\dfrac
 \textsf{ conjunct1_rule}
 $
 
-Questa &egrave; la regola di e-eliminazione a sinistra. Rimuove il 
+Questa è la regola di e-eliminazione a sinistra. Rimuove il 
 congiunto a destra dal teorema di congiuzione fornito.
 
 Si veda anche: conjunct2\_rule, conjunct\_rule, mk\_conj\_rule.
@@ -774,7 +768,7 @@ $\dfrac
 \textsf{ conjunct2_rule}
 $
 
-Questa &egrave; la regola di e-eliminazione a destra. Rimuove il 
+Questa è la regola di e-eliminazione a destra. Rimuove il 
 congiunto a sinistra dal teorema di congiuzione fornito.
 
 Si veda anche: conjunct1\_rule, conjunct\_rule, mk\_conj\_rule.
@@ -785,7 +779,7 @@ $\dfrac
 \textsf{ disj_cases_rule}
 $
 
-Questa &egrave; la regola di o-eliminazione. Prende un teorema di disgiunzione 
+Questa è la regola di o-eliminazione. Prende un teorema di disgiunzione 
 e due teoremi extra che condividono la stessa conclusione. Restituisce un 
 teorema con la stessa conclusione dei teoremi extra. Le assunzioni del teorema 
 restituito sono l'unione delle assunzioni dei teoremi extra, ma con il 
@@ -801,7 +795,7 @@ $\dfrac
 \textsf{ disj1_rule}
 $
 
-Questa &egrave; la regola di o-introduzione per il lato sinistro. Disgiunge il 
+Questa è la regola di o-introduzione per il lato sinistro. Disgiunge il 
 termine booleano fornito al lato destro del teorema in input.
 
 Si veda anche: disj2\_rule, disj\_cases\_rule, mk\_disj1\_rule.
@@ -812,7 +806,7 @@ $\dfrac
 \textsf{ disj2_rule}
 $
 
-Questa &egrave; la regola di o-introduzione per il lato destro. Disgiunge il 
+Questa è la regola di o-introduzione per il lato destro. Disgiunge il 
 termine booleano fornito al lato sinistro del teorema in input.
 
 Si veda anche: disj2\_rule, disj\_cases\_rule, mk\_disj1\_rule.
@@ -825,11 +819,11 @@ $
 
 con $y$ non libera in: $\exists x.\ p$, $q$ o $A_2 \setminus \{p[y/x]\}$
 
-Questa &egrave; la regola di eliminazione del quantificatore esistenziale.
+Questa è la regola di eliminazione del quantificatore esistenziale.
 Rimuove, dalle assunzioni di un teorema principale fornito, il corpo di un 
 teorema esistenziale fornito (ma con tutte le occorrenze della variabile 
 legata sostituite con una variabile fornita), e aggiunge le assunzioni del 
-teorema esistenziale. Alla variabile fornita non &egrave; permesso di essere 
+teorema esistenziale. Alla variabile fornita non è permesso di essere 
 libera nella conclusione del teorema esistenziale o nelle altre assuzioni del 
 teorema principale originario o nella sua conclusione. Si noti che il corpo 
 alterato del teorema esistenziale non deve essere presente nelle assunzioni 
@@ -846,7 +840,7 @@ $\dfrac
 \textsf{ mk_bin_rule}
 $
 
-Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di 
+Questa è la regola di congruenza di eguaglianza per l'applicazione di 
 funzione binaria. Prende un termine di funzione binaria e due teoremi di 
 eguaglianza, e applica la funzione nella forma curried ai corrispondenti 
 lati di ciascun teorema, sotto l'unione delle loro assunzioni. Il tipo 
@@ -862,7 +856,7 @@ $\dfrac
 \textsf{ mk_bin1_rule}
 $
 
-Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di 
+Questa è la regola di congruenza di eguaglianza per l'applicazione di 
 funzione binaria sul lato sinistro. Prende un termine di funzione binaria, un 
 teorema di uguaglianza e un termine, e applica la funzione in forma curried 
 ai lati corrispondenti del teorema come suo lato sinistro e il termine fornito 
@@ -880,7 +874,7 @@ $\dfrac
 \textsf{ mk_bin2_rule}
 $
 
-Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di 
+Questa è la regola di congruenza di eguaglianza per l'applicazione di 
 funzione binaria sul lato destro. Prende un termine di funzione binaria, un 
 teorema di uguaglianza e un termine, e applica la funzione in forma curried 
 al termine fornito sul lato sinistro e ai lati corrispondenti del teorema 
@@ -897,7 +891,7 @@ $\dfrac
 \textsf{ mk_eq_rule}
 $
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza. 
+Questa è la regola di congruenza dell'eguaglianza per l'eguaglianza. 
 Prende due teoremi di uguaglianza, e uguaglia i corrispondenti lati del 
 primo teorema con quelli del secondo, unendone le assunzioni. I tipi di 
 ciascun lato di ogni equazione devono essere uguali.
@@ -910,7 +904,7 @@ $\dfrac
 \textsf{ mk_eq1_rule}
 $
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza 
+Questa è la regola di congruenza dell'eguaglianza per l'eguaglianza 
 sul lato sinistro. Prende un teorema di uguaglianza e un termine, e uguaglia 
 ogni lato del teorema con il termine fornito. Il tipo del termine fornito 
 deve essere uguale al tipo di ciascun lato del teorema fornito.
@@ -923,7 +917,7 @@ $\dfrac
 \textsf{ mk_eq2_rule}
 $
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza 
+Questa è la regola di congruenza dell'eguaglianza per l'eguaglianza 
 sul lato destro. Prende un termine e un teorema di eguaglianza, e uguaglia 
 il termine a ciascun lato del teorema. Il tipo del termine fornito deve 
 essere uguale al tipo di cascun lato del teorema fornito.
@@ -936,7 +930,7 @@ $\dfrac
 \textsf{ mk_not_rule}
 $
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per la negazione 
+Questa è la regola di congruenza dell'eguaglianza per la negazione 
 logica, Prende un teorema di eguaglianza booleana, e nega logicamente 
 ciascun lato del teorema.
 
@@ -948,7 +942,7 @@ $\dfrac
 \textsf{ mk_conj_rule}
 $
 
-Questa &egrave; la regola di congruenza per la congiunzione. Prende due teoremi 
+Questa è la regola di congruenza per la congiunzione. Prende due teoremi 
 di egualianza boolena, e congiunge i corrispondenti lati del rpimo teorema 
 con quelli del secondo, unendone le assunzioni.
 
@@ -960,7 +954,7 @@ $\dfrac
 \textsf{ mk_conj1_rule}
 $
 
-Questa &egrave; la regola di congruenza per il lato sinistro della congiunzione. 
+Questa è la regola di congruenza per il lato sinistro della congiunzione. 
 Prende un teorema di eguaglianza booleana e un termine booleano, e congiunge 
 ciaszun lato del teorema con il termine fornito
 
@@ -972,7 +966,7 @@ $\dfrac
 \textsf{ mk_conj2_rule}
 $
 
-Questa &egrave; la regola di congruenza per il lato destro della congiunzione. 
+Questa è la regola di congruenza per il lato destro della congiunzione. 
 Prende un termine booleano e un teorema di eguaglianza booleana, e congiunge il 
 termine fornito con ciascun lato del teorema.
 
@@ -984,7 +978,7 @@ $\dfrac
 \textsf{ mk_disj_rule}
 $
 
-Questa &egrave; la regola di congruenza per la disgiunzione, Prende due 
+Questa è la regola di congruenza per la disgiunzione, Prende due 
 teoremi di eguaglianza booleana, e disgiunge i corrispondenti lati del 
 primo teorema con quelli del secondo, unendone le assunzioni.
 
@@ -996,7 +990,7 @@ $\dfrac
 \textsf{ mk_disj1_rule}
 $
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per la disgiunzione sul 
+Questa è la regola di congruenza dell'eguaglianza per la disgiunzione sul 
 lato sinistro. Prende un teorema di eguaglianza booleana e un termine booleano, 
 e disgiunge ogni lato del teorema con il termine fornito.
 
@@ -1008,7 +1002,7 @@ $\dfrac
 \textsf{ mk_disj2_rule}
 $
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per la disgiunzione sul 
+Questa è la regola di congruenza dell'eguaglianza per la disgiunzione sul 
 lato destro. Prende un termine booleano e un teorema di eguaglianza booleana, 
 e disgiunge il termine fornito con ogni lato del teorema.
 
@@ -1020,7 +1014,7 @@ $\dfrac
 \textsf{ mk_imp_rule}
 $
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione. 
+Questa è la regola di congruenza dell'eguaglianza per l'implicazione. 
 Prende due teoremi di eguaglianza booleana, e crea l'implicazione dai 
 corrispondeti lati del primo e del secondo teorema, unendone le assunzioni.
 
@@ -1032,7 +1026,7 @@ $\dfrac
 \textsf{ mk_imp1_rule}
 $
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione 
+Questa è la regola di congruenza dell'eguaglianza per l'implicazione 
 su lato sinistro. Prende un teorema di eguaglianza booleana e un termine 
 booleano, e crea le implicazioni da ogni lato del teorema, con il lato 
 del teorema come antecedente e il termine come conseguente.
@@ -1045,7 +1039,7 @@ $\dfrac
 \textsf{ mk_imp2_rule}
 $
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione 
+Questa è la regola di congruenza dell'eguaglianza per l'implicazione 
 su lato destro. Prende un termine booleano e un teorema di eguaglianza 
 booleana, e rende il termine un antecedente di ciascun lato del teorema.
 
@@ -1059,7 +1053,7 @@ $
 
 per `x` non libera in `A`
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione 
+Questa è la regola di congruenza dell'eguaglianza per la quantificazione 
 universale. Prende una variabile e un teorema di uguaglianza, e quantifica 
 universalmente la variabile su entrambi i lati del teorema. La variabile 
 non deve occorrere libera nelle assunzioni del teorema fornito
@@ -1074,7 +1068,7 @@ $
 
 per `x` non libera in `A`
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione 
+Questa è la regola di congruenza dell'eguaglianza per la quantificazione 
 esistenziale. Prende una variabile e un teorema di uguaglianza, e quantifica 
 in modo esistenzaiale la variabile su entrambi i lati del teorema. La variabile 
 non deve occorrere libera nelle assunzioni del teorema fornito
@@ -1089,7 +1083,7 @@ $
 
 per `x` non libera in `A`
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione 
+Questa è la regola di congruenza dell'eguaglianza per la quantificazione 
 esistenziale univoca. Prende una variabile e un teorema di eguaglianza, e 
 quantifica con quantificatore esistenziale univoco la variabile su 
 entrambi i lato del teorema. La variabile non deve occorrere libera 
@@ -1105,7 +1099,7 @@ $
 
 per `x` non libera in `A`
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per la selezione.
+Questa è la regola di congruenza dell'eguaglianza per la selezione.
 Prende una variabile e un teorema di eguaglianza, e seleziona la variabile 
 da entrambi i lati del teorema. La variabile non deve occorrere libera 
 nelle assunzioni del teorema.
@@ -1121,7 +1115,7 @@ $\dfrac
 \textsf{ select_rule}
 $
 
-Questa &egrave; la regola di selezione esistenziale. Elimina il 
+Questa è la regola di selezione esistenziale. Elimina il 
 quantificatore esistenziale del teorema fornito, e sostituisce nel corpo 
 ogni occorrenza della variabile legata con l'operatore di selezione 
 applicato al corpo originario (con la stessa variabile legata).
@@ -1134,8 +1128,8 @@ $\dfrac
 \textsf{ exists_rule}
 $
 
-Questa &egrave; la regola di intruduzione esistenzial. Prende un termine esistenziale,
-un termine testimone e un teorema, dove la conclusionde del teorema &egrave; il corpo 
+Questa è la regola di intruduzione esistenzial. Prende un termine esistenziale,
+un termine testimone e un teorema, dove la conclusionde del teorema è il corpo 
 del termine esistenziale ma con il termine testimone che sostituisce le occorrenze 
 della sua variabile legata. Restituisce un teorema che afferma che il termine esistenziale 
 fornito vale, sotto le stesse assunzioni del teorema fornito.
@@ -1146,7 +1140,7 @@ $\dfrac
 \textsf{ ccontr_rule}
 $
 
-Questa &egrave; la regola contraddizione della logica classica. Prende un termine 
+Questa è la regola contraddizione della logica classica. Prende un termine 
 booleano e un teorema con falso come sua conclusione. Restituisce un teorema con 
 il termine fornito come sua conclusione, e con le stesse assunzioni del teorema 
 fornito ma con la negazione logica del termine fornito rimossa. Si noti che la 
@@ -1172,7 +1166,7 @@ open HOL
 | NatEval.eval\_add\_conv                  
 -------------------
 
-Questa &egrave; la conversione di valutazione per l'addizione numerale. Prende 
+Questa è la conversione di valutazione per l'addizione numerale. Prende 
 un termine della forma `m + n`, dove `m` e `n` sono entrambi numeri naturali, 
 e restituisce un teorema che afferma che questo equivale al suo valore numerale, 
 senza assunzioni.
@@ -1192,8 +1186,8 @@ eval_add_conv
 | NatEval.eval\_even\_conv                     
 -------------------
 
-Questa &egrave; la conversione di valutazione per la parit&agrave; per un numerale. 
-Prende un termine della forma `Even n`, dove `n` &egrave; un numerale per un numero 
+Questa è la conversione di valutazione per la parità per un numerale. 
+Prende un termine della forma `Even n`, dove `n` è un numerale per un numero 
 naturale, e restituisce un teorema che afferma il suo valore booleano, 
 senza assunzioni.
 
@@ -1213,7 +1207,7 @@ eval_even_conv
 | NatEval.eval\_exp\_conv                     
 -------------------
 
-Questa &egrave; la conversione di valutazione per l'esponenziazione numerale.
+Questa è la conversione di valutazione per l'esponenziazione numerale.
 Prende un termine della forma `m EXP n`, dove `m` e `n`sono entrambi numerali 
 di numeri naturali, e restituisce un teorema che afferma che questo equivale 
 al suo valore, senza assunzioni.
@@ -1233,7 +1227,7 @@ eval_exp_conv
 | NatEval.eval\_ge\_conv                     
 -------------------
 
-Questa &egrave; la conversione di valutazione il confronto maggiore-o-uguale-a.
+Questa è la conversione di valutazione il confronto maggiore-o-uguale-a.
 Prende un termine della forma `m >= n`, dove `m` e `n`sono entrambi numerali 
 di numeri naturali, e restituisce un teorema che afferma che questo equivale 
 al suo valore booleano, senza assunzioni.
@@ -1253,7 +1247,7 @@ eval_ge_conv
 | NatEval.eval\_gt\_conv                    
 -------------------
 
-Questa &egrave; la conversione di valutazione il confronto maggiore-di.
+Questa è la conversione di valutazione il confronto maggiore-di.
 Prende un termine della forma `m > n`, dove `m` e `n`sono entrambi numerali 
 di numeri naturali, e restituisce un teorema che afferma che questo equivale 
 al suo valore booleano, senza assunzioni.
@@ -1273,7 +1267,7 @@ eval_gt_conv
 | NatEval.eval\_le\_conv                    
 -------------------
 
-Questa &egrave; la conversione di valutazione per il confronto minore-o-uguale-a.
+Questa è la conversione di valutazione per il confronto minore-o-uguale-a.
 Prende un termine della forma `m <= n`, dove `m` e `n`sono entrambi numerali 
 di numeri naturali, e restituisce un teorema che afferma che questo equivale 
 al suo valore booleano, senza assunzioni.
@@ -1293,7 +1287,7 @@ eval_le_conv
 | NatEval.eval\_lt\_conv                    
 -------------------
 
-Questa &egrave; la conversione di valutazione per il confronto minore-di.
+Questa è la conversione di valutazione per il confronto minore-di.
 Prende un termine della forma `m < n`, dove `m` e `n`sono entrambi numerali 
 di numeri naturali, e restituisce un teorema che afferma che questo equivale 
 al suo valore booleano, senza assunzioni.
@@ -1321,7 +1315,7 @@ eval_lt_conv
 | NatEval.eval\_mult\_conv                
 -------------------
 
-Questa &egrave; la conversione di valutazione per la moltiplicazione numerale. 
+Questa è la conversione di valutazione per la moltiplicazione numerale. 
 Prende un termine della forma `m * n`, dove `m` e `n` sono entrambi numerali di 
 numeri naturali, e restituisce un teorema che afferma che questo equivale al 
 suo valore numerale, senza assunzioni.
@@ -1346,7 +1340,7 @@ eval_mult_conv
 | NatEval.eval\_nat\_eq\_conv                   
 -------------------
 
-Questa &egrave; la conversione di valutazione per l'eguaglianza numerica. 
+Questa è la conversione di valutazione per l'eguaglianza numerica. 
 Prende un termine della forma `m = n`, dove `m` e `n` sono entrambi numerali di 
 numeri naturali, e restituisce un teorema che afferma che questo equivale al 
 suo valore booleano, senza assunzioni.
@@ -1366,8 +1360,8 @@ eval_nat_eq_conv
 | NatEval.eval\_odd\_conv                   
 -------------------
 
-Questa &egrave; la conversione di valutazione per la disparit&agrave; numerale. 
-Prende un termine della forma `ODD n`, dove `n` &egrave; un numerale di un numero 
+Questa è la conversione di valutazione per la disparità numerale. 
+Prende un termine della forma `ODD n`, dove `n` è un numerale di un numero 
 naturale, e restituisce un teorema che afferma il suo valore booleano, senza 
 assunzioni.
 
@@ -1387,7 +1381,7 @@ eval_odd_conv
 | NatEval.eval\_pre\_conv                  
 -------------------
 
-Questa &egrave; la conversione di valutazione per il predcessore numerale. Prende 
+Questa è la conversione di valutazione per il predcessore numerale. Prende 
 un termine della forma `PRE n`, dove `n` &egrave, un numerale di un numero naturale, 
 e restituisce un teorema che afferma che questo equivale al suo valore numerale, 
 senza assunzioni.
@@ -1407,7 +1401,7 @@ eval_pre_conv
 | NatEval.eval\_sub\_conv                  
 -------------------
 
-Questa &egrave; la conversione di valutazione per la sottrazione numerale. Prende 
+Questa è la conversione di valutazione per la sottrazione numerale. Prende 
 un termine della forma `m - n`, dove `m` e `n` sono entrambi numerali di numeri 
 naturali, e restituisce un teorema che afferma che questo equivale al suo 
 valore numerale, senza assunzioni.
@@ -1428,8 +1422,8 @@ eval_sub_conv
 | NatEval.eval\_suc\_conv                  
 -------------------
 
-Questa &egrave; la conversione di valutazione per il successore numerale. Prende 
-un termine della forma `SUCC n`, dove `n` &egrave; un numerale per un numero naturale, 
+Questa è la conversione di valutazione per il successore numerale. Prende 
+un termine della forma `SUCC n`, dove `n` è un numerale per un numero naturale, 
 e restituisce un teorema che afferma che questo equivale al suo valore numerale, 
 senza assunzioni.
 
@@ -1448,9 +1442,9 @@ eval_suc_conv
 | BoolClass.eval\_sub\_conv                  
 -------------------
 
-Questa &egrave; di introduzione del quantificatore esistenziale. Prende 
+Questa è di introduzione del quantificatore esistenziale. Prende 
 un termine esistenziale, un termine testimone, e un teorema, dove la conclusione 
-del teorea &egrave; il corpo del termine esistenziale ma con il termine testimone 
+del teorea è il corpo del termine esistenziale ma con il termine testimone 
 che sostituisce le occorrenze della sua variabile legata. Restituisce un teorema 
 che afferma che il termine esistenziale fornito vale, sotto le stesse 
 assunzioni del teorema fornito.
@@ -1466,7 +1460,7 @@ Si veda anche: choose\_rule, select\_rule, mk\_exists\_rule.
 | Pair.mk\_pair\_rule
 -------------------
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per l'accoppiamento.
+Questa è la regola di congruenza dell'eguaglianza per l'accoppiamento.
 Prende due teoremi di uguaglianza, e accoppia i corrispondenti lati del 
 primo teorema con quelli del secondo, unendone le assunzioni
 
@@ -1485,7 +1479,7 @@ mk_pair_rule
 | Pair.mk\_pair1\_rule
 -------------------
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per la coppia a 
+Questa è la regola di congruenza dell'eguaglianza per la coppia a 
 sinistra. Prende un teorema di uguaglianza e un termine, e accoppia ogni 
 lato del teorema con il termine.
 
@@ -1504,7 +1498,7 @@ mk_pair1_rule
 | Pair.mk\_pair2\_rule
 -------------------
 
-Questa &egrave; la regola di congruenza dell'eguaglianza per la coppia a 
+Questa è la regola di congruenza dell'eguaglianza per la coppia a 
 destra. Prende un termine un teorema di uguaglianza, e accoppia il termine 
 con ogni lato del teorema.
 
