@@ -49,7 +49,7 @@ open Utils1
 ///This is the datatype for internal HOL theorems.  A theorem consists of a
 ///list of assumptions and a conclusion, all of which are boolean terms.   
 type thm = 
-    Theorem of term list * term
+    private Theorem of term list * term
     with
         override this.ToString() = 
             match this with
