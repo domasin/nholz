@@ -57,6 +57,7 @@ let () = prim_new_tyconst ("->", bigint(2))
 
 let () = prim_new_tyconst ("bool", bigint(0))
 
+/// The boolean base type, for representing the classic boolean values "true" and "false"
 let bool_ty = mk_comp_type ("bool",[])
 
 (* Equality *)

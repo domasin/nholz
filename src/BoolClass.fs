@@ -343,7 +343,7 @@ let not_dist_exists_thm =
 //  excluded_middle_thm : thm   
 //  The proof is roughly based on that from Radu Diaconescu (1975).
 //                                                                 
-///    |- !p. p \/ ~p
+/// |- !p. p \/ ~p
 let excluded_middle_thm = 
     save_thm ("excluded_middle_thm",
       let p = mk_var ("p",bool_ty) in

@@ -28,6 +28,7 @@ module HOL.Ind
 
 (* Individuals type *)
 
+/// An infinite-cardinality base type, called "ind" and referred to as "the individual types
 let ind_ty = new_tyconst ("ind",0)
 
 /// Infinity axiom

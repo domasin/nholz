@@ -97,6 +97,8 @@ let pair_rep_exists_lemma =
 let _ = set_type_fixity ("#", Infix (10,RightAssoc))
 
 /// |- ?(f:'a#'b->'a->'b->bool). TYPE_DEFINITION IsPairRep 
+/// 
+/// '#' is the product type operator: it denotes the cartesian product operation
 let prod_def = new_tyconst_definition ("#", pair_rep_exists_lemma)
 
 (* Product type bijections *)
