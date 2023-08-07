@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>La logica HOL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="nholz">
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head> 
+
+<body>
+    <div class="columns is-fullheight m-0">
+        <div id="fsdocs-menu" class="column is-2 is-paddingless">
+            <aside class="menu">
+                <div class="container is-paddingless is-marginless has-background-dark">
+                    <a href="/nholz/">
+                        <figure class="image is-128x128 container">
+                            <img src="/nholz/img/logo.png">
+                        </figure>
+                    </a>
+                    <h2 class="title has-text-centered has-text-white pb-4">nholz</h2>
+                </div>
+                <div class="content">
+                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+                    <div id="header">
+                        <div class="searchbox" id="fsdocs-searchbox">
+                            <label for="search-by">
+                                <i class="fas fa-search"></i>
+                            </label>
+                            <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
+                            <span data-search-clear="">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- END SEARCH BOX: this adds support for the search box -->
+                    <ul class="navbar-nav">
+                        <li class="nav-header">Links</li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/domasin/nholz/blob/master/LICENSE.txt">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/domasin/nholz">Source Repository</a></li>
+                        <li class="nav-header">
+  HOL Logic
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/001/000-HOLLogic.html">
+    La logica HOL
+  </a>
+</li>
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <div class="column is-10 is-paddingless">
+            <div class="section pt-4">
+                <div class="container" id="fsdocs-content">
+                    
+<h1><a name="La-logica-HOL" class="anchor" href="#La-logica-HOL">La logica HOL</a></h1>
+<p>La logica supportata dai sistemi HOL è una variante della teoria dei tipi semplici di Church.</p>
+<p>La sintsassi di HOL contiene categorie sintattiche di tipi e termini i cui elementi sono
+intesi denotare rispettivamente certi insiemi e elementi di insiemi. Di seguito sarà sviluppata questa interpretazione insiemisitica accanto alla descrizione della sintassi di del linguaggio, e più avanti, il sistema di dimostrazione implementato sarà mostrato essere valido per il ragionamento circa proprietà del modello insiemistico.</p>
+<h2><a name="Universo" class="anchor" href="#Universo">Universo</a></h2>
+<p>Il modello insiemistico è dato in termini di un insieme di insiemi fisso <span class="math">\(\cal U\)</span>, che sarà chiamato l'<em>universo</em> e che si assume avere le seguenti proprietà:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><p><strong>Inhab</strong></p></td>
+<td><p>Ogni elemento di <span class="math">\(\cal U\)</span> è un insieme non vuoto.</p></td>
+</tr>
+<tr class="even">
+<td><p><strong>Sub</strong></p></td>
+<td><p>Se <span class="math">\(X\in{\cal U}\)</span> e <span class="math">\(\emptyset\not=Y\subseteq X\)</span>, allora <span class="math">\(Y\in{\cal U}\)</span></p></td>
+</tr>
+<tr class="odd">
+<td><p><strong>Prod</strong></p></td>
+<td><p>Se <span class="math">\(X\in{\cal U}\)</span> e <span class="math">\(Y\in{\cal U}\)</span>, allora <span class="math">\(X \times Y\in{\cal U}\)</span>. L'insieme <span class="math">\(X\times Y\)</span> è il prodotto cartesiano, consistente di coppie ordinate <span class="math">\((x,y)\)</span> con <span class="math">\(x\in X\)</span> e <span class="math">\(y\in Y\)</span>, con l'usuale notazione insiemistica delle coppie ordinate, cioé <span class="math">\((x,y)=\{\{x\},\{x,y\}\}\)</span>.</p></td>
+</tr>
+<tr class="even">
+<td><p><strong>Pow</strong></p></td>
+<td><p>Se <span class="math">\(X\in{\cal U}\)</span>, allora anche l'insieme potenza <span class="math">\(P(X)=\{Y:Y\subseteq X\}\)</span> è un elemento di <span class="math">\(\cal U\)</span>.</p></td>
+</tr>
+<tr class="odd">
+<td><p><strong>Infty</strong></p></td>
+<td><p><span class="math">\(\cal U\)</span> contiene un distinto insieme infinito <span class="math">\(\cal I\)</span>.</p></td>
+</tr>
+<tr class="even">
+<td><p><strong>Choice</strong></p></td>
+<td><p>C'è un elemento distinto <span class="math">\(ch\in\prod_{X\in{\cal U}}X\)</span> (il prodotto cartesiano generalizzato). Gli elementi del prodotto <span class="math">\(\prod_{X\in{\cal U}}X\)</span> sono funzioni (dipendentemente tipizzate): così per tutti gli <span class="math">\(X\in{\cal U}\)</span>, <span class="math">\(X\)</span> è non vuoto per <em>Inhab</em> e <span class="math">\(ch(X)\in X\)</span> testimonia questo<sup><a href="##" title="Il prodotto cartesiano generalizzato  è definito come l'insieme di tutte le funzioni che mandano ciascun elemento X in U in un qualche elemento di X. Queste funzioni si possono, dunque, considerare come se scegliessero per ogni elemento X in U un elemento di X rappresentativo di tutto l'insieme X e per questo si parla di funzioni di scelta. Choice isola una di queste funzioni: ch.">†</a></sup>.</p></td>
+</tr>
+</tbody>
+</table>
+
+<p>Da queste assunzioni seguono, come conseguenze, anche le seguenti ulteriori proprietà che è utile esplicitare (e nominare per potervi fare riferimento velocemente):</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><p><strong>Fun</strong></p></td>
+<td><p>Se <span class="math">\(X\in{\cal U}\)</span> e <span class="math">\(Y\in{\cal U}\)</span>, allora <span class="math">\(X\rightarrow Y\in{\cal U}\)</span><sup><a href="##" title="Nella teoria degli insiemi le funzioni sono identificate dai loro grafi, che sono certi insiemi di coppie ordinate. Cosı̀ l’insieme X -&gt; Y di tutte le funzioni da un insieme X a un insieme Y è un sottoinsieme di P(X × Y); ed è un insieme non vuoto quando Y non è vuoto. Cosı̀ Sub, Prod e Pow insieme implicano che U soddisfi la proprietà Fun.">†</a></sup>.</p></td>
+</tr>
+<tr class="even">
+<td><p><strong>Unit</strong></p></td>
+<td><p><span class="math">\(\cal U\)</span> contiene un distinto insieme di un solo elemento <span class="math">\(1=\{0\}\)</span><sup><a href="##" title="Iterando Prod, si ottiene che il prodotto cartesiano di qualsiasi numero finito, diverso da zero, di insiemi in U è ancora in U. U contiene anche il prodotto cartesiano di nessun insieme, il che equivale a dire che contiene un insieme di un unico elemento (in virtù di Sub applicato a qualsiasi insieme in U e Infty garantisce che ce n’è uno); per precisione, Unit isola un particolare insieme di un solo elemento.">†</a></sup>.</p></td>
+</tr>
+<tr class="odd">
+<td><p><strong>Bool</strong></p></td>
+<td><p><span class="math">\(\cal U\)</span> contiene un distinto insieme di due elementi <span class="math">\(2=\{0,1\}\)</span><sup><a href="##" title="Analogamente a Unit, a causa di Sub e Infty, U contiene insiemi di due elementi, uno dei quali viene isolato.">†</a></sup>.</p></td>
+</tr>
+</tbody>
+</table>
+
+<h2><a name="Tipi" class="anchor" href="#Tipi">Tipi</a></h2>
+<p>I tipi della logica HOL sono espressioni che denotano insiemi (nell’universo U). Nel seguito il simbolo <span class="math">\(\sigma\)</span>, possibilmente decorato con sottoscritti o primi, è usato per variare su tipi arbitrari.</p>
+<p>Ci sono quattro specie di tipi nella logica HOL. Questi possono essere descritti informalmente dalla seguente grammatica BNF, in cui <span class="math">\(\alpha\)</span> varia su variabili di tipo, <span class="math">\(c\)</span> varia su tipi atomici e <span class="math">\(op\)</span> varia su operatori di tipo.</p>
+<p><span class="math">\[\sigma\quad ::=\quad {\mathord{\mathop{\alpha}\limits_{variabili\ di\ tipo}}}
+\quad\mid\quad{\mathord{\mathop{c}\limits_{tipi\ atomici}}}
+\quad\mid\quad\underbrace{(\sigma_1, \ldots , \sigma_n){op}}_{tipi\ composti}
+\quad\mid\quad\underbrace{\sigma_1\rightarrow\sigma_2}_{tipi\ funzione}\]</span></p>
+<ul>
+<li><p><strong>Variabili di tipo</strong>: stanno per insiemi arbitrari nell'universo.</p></li>
+<li><p><strong>Tipi atomici</strong>: denotano insiemi fissati nell'universo. Ogni teoria determina una particolare collezione di tipi atomici. Per esempio, i tipi atomici standard <span class="math">\(bool\)</span> (vedi <a href="/nholz/reference/hol-corethry.html#bool_ty">CoreThry.bool_ty</a>) e <span class="math">\(ind\)</span> (<a href="/nholz/reference/hol-ind.html#ind_ty">Ind.ind_ty</a>) denotano, rispettivamente, l'insieme distinto di <span class="math">\(2\)</span> elementi e l'insieme distinto infinito <span class="math">\(\cal I\)</span>.</p></li>
+<li><p><strong>Tipi composti</strong>: hanno la forma <span class="math">\((\sigma_1, \ldots, \sigma_n)op\)</span>, dove <span class="math">\(\sigma_1, \ldots, \sigma_n\)</span> sono tipi argomento e <span class="math">\(op\)</span> è un <em>operatore di tipo</em> di arietà <span class="math">\(n\)</span>. Gli operatori di tipo denotano operazioni per costruire insiemi. Il tipo <span class="math">\((\sigma_1, \ldots, \sigma_n)op\)</span> denota l'insieme che risulta dall'applicare l'operazione denotata da <span class="math">\(op\)</span> agli insiemi denotati da <span class="math">\(\sigma_1, \ldots, \sigma_n\)</span>. Per esempio, se indichiamo con <span class="math">\(prod\)</span> l'operatore di tipo di arietà <span class="math">\(2\)</span> che denota l'operazione di prodotto cartesiano, <span class="math">\((\sigma_1, \sigma_2)prod\)</span> indicherà il prodotto cartesiano degli insiemi denotati rispettivamente da <span class="math">\(\sigma_1\)</span> e <span class="math">\(\sigma_2\)</span> o, equivalentemente, l'insieme di coppie ordinate di elementi di <span class="math">\(\sigma_1\)</span> e <span class="math">\(\sigma_2\)</span>. <span class="math">\((\sigma_1, \sigma_2)prod\)</span> è anche scritto <span class="math">\(\sigma_1 \times \sigma_2\)</span>. Si noti che <span class="math">\(prod\)</span> qui è implementato con il simbolo '#' (<a href="/nholz/reference/hol-pair.html#prod_def">Pair.prod_def</a>).</p></li>
+<li><p><strong>Tipi funzione</strong>: Se <span class="math">\(\sigma_1\)</span> e <span class="math">\(\sigma_2\)</span> sono tipi, allora <span class="math">\(\sigma_1 \rightarrow \sigma_2\)</span> è il tipo funzione con <em>dominio</em> <span class="math">\(\sigma_1\)</span> e rango <span class="math">\(\sigma_2\)</span>. Esso denota l'insieme di tutte le funzioni (totali) dall'insieme denotato dal suo dominio all'insieme denotato dal suo rango. Si not che sintatticamente <span class="math">\(\rightarrow\)</span> è semplicmente un distinto operatore di tipo di arietà <span class="math">\(2\)</span> scritto con notazione infissa. E' isolato nelladefinizione dei tipi HOL perché denoterà sempre la stessa operazione in qualsiasi modello di una teoria HOL (si veda <a href="https://github.com/domasin/nholz/blob/master/src/CoreThry.fs#L41">CoreThry</a>) - contrariamente agli altri operatori di tipo che possono essere interpretati in modo differente in modelli differenti. (Si veda più avanti TODO indicare precisamente dove).</p></li>
+</ul>
+<p>Risulta conveniente identificare i tipi atomici con tipi composti costruiti con operatori di tipo <span class="math">\(0\)</span>-ari. Per esempio, il tipo atomico <span class="math">\(bool\)</span> dei valori di verità può essere considerato come un’abbreviazione per <span class="math">\(()bool\)</span>. Questa identificazione sarà fatta nei dettagli tecnici che seguono, ma nella presentazione informale i tipi atomici continueranno ad essere distinti dai tipi composti, e <span class="math">\(()c\)</span> sarà scritto come <span class="math">\(c\)</span>.</p>
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/'</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+    <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+    <!-- END SEARCH BOX: this adds support for the search box -->
+</body>
+
+</html>
