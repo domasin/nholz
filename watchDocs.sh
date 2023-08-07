@@ -1,0 +1,1 @@
+fsdocs watch --eval --clean --sourcerepo https://github.com/domasin/nholz/tree/master --parameters fsdocs-repository-link https://github.com/domasin/nholz fsdocs-license-link https://github.com/domasin/nholz/blob/master/LICENSE.txt

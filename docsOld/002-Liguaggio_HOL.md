@@ -1,20 +1,18 @@
-LINGUAGGIO HOL
-=============
+# Il LINGUAGGIO HOL
 
 Il linguaggio HOL è un potente linguaggio formale in grado di descrivere la maggior parte della matematica. Questo capitolo spiega il liguaggio e la versione di sintassi concreta usata dal sistema. Spiega inoltre varie operazioni che si possono eseguire sulle espressioni, e come configurare l'input e l'output.
 
-3.1 Sintassi lessicale
-------------
+## 3.1 Sintassi lessicale
 
 Questa sezione spiega la sintassi lessicale usata sia per i tipi che i termini (si vedano rispettivamente le sezioni 3.2.2 e 3.2.3). Per una grammatica formale della sintassi lessicale si veda l'Appendice C.
 
-**3.1.1 Token**
+### 3.1.1 Token
 
 I tipi e i termini si dividono in una lista di token lessicali. I token identificatori sono usati per riferirsi esplitamente a entità HOL (cioè variabili, costanti, variabili di tipo e costanti di tipo). I token parole riservate aiutano a dare una struttura sintattica. Qualsiasi tipo di spazio tra identificatori e/o token non viene a sua volta catturato in token.
 
 Per esempio il seguente termine (Esempio 3.1):
 
-`\x. y + foo x`
+    "\x. y + foo x" |> parse_term
 
 si divde in 7 token: `\`, `x`, `.`, `y`, `+`, `foo`, `x`. 
 
@@ -22,7 +20,7 @@ si divde in 7 token: `\`, `x`, `.`, `y`, `+`, `foo`, `x`.
 
 HOL è case sensitive sia nei confronti di nomi di entità che rispetto a parole riservate.
 
-**3.1.2 Nomi regolari e irregolari**
+### 3.1.2 Nomi regolari e irregolari
 
 Tutte le entità HOL hanno almeno un attributo nome, che nel sistema corrente è una sequenza 
 di caratteri ASCII. Non ci sono restrizioni sulla forma di questo nome - potenzialmente può coinvolgere qualsiasi combinazione di cifre, underscore, caratteri simbolici, spazi o persino caratteri non stampabili, così come caratteri alfanumerici.
@@ -45,7 +43,7 @@ Tutti gli altri nomi sono irregolari. Questi includono qualsiasi nome che conten
 - Caratteri di punteggiatura: `( ) , :`
 - Caratteri non stampabili: qualsiasi codice ASCII < 32 o > 126
 
-**3.1.3 Parole Riservate**
+### 3.1.3 Parole Riservate
 
 Ci sono tre forme di token di parola riservata:
 
@@ -62,11 +60,11 @@ Identificatori per entità con nomi che vanno in conflitto con parole riservate 
 
 Si noti che il token lessicale `=` è un caso speciale nella sintasi lessicale di HOL. Benchè sia normalmente un identificatore, e sia classificato come tale dalla sintassi lessicale, è di fatto una parola chiave quando occore come parte di una dichiarazione let (si veda la Sezione 3.4.2).
 
-**Giustapposizione di token**
+### 3.1.4 Giustapposizione di token
 
 Le quotazioni devono essere scritte con parentesi e spaziature sufficienti da distinguere token alfanumerici/numerici adiacenti o token simbolici adiacenti (sia che questi token siano identificatori o parole riservate). Per esempio, in `\ ^ . ^ = 5` (dove `^` di fatto è una variabile), è inserita una spaziatura tra `\` e`^`, e tra `^` e `.`, che sono tutti token simbolici
 
-**3.1.5 Quoting di identificatori**
+### 3.1.5 Quoting di identificatori
 
 Gli identificatori per entità con nomi irregolari o nomi che vanno in conflitto con parole riservate devono essere delimitati in modo speciale. Questo implica aggiungere un carattere di doppio apice all'inizio e alla fine del nome, come in `"then" = "foo x"` (che significa la variabile con nome `"then"` è uguale alla variabile chiamata `"foo x"`). Questo meccanismo è chiamato ''quoting di identificatore''.
 
@@ -76,7 +74,7 @@ Anche le variabili e le costanti con nomi numerici devono essere quotate (perch�
 
 Il quoting di nomi di entità che non lo richiedono (cioè quelle regolari, o con nomi che non vanno in conflitto) è permesso, e denota lo stessa cosa del nome non quotato.
 
-**3.1.6 Marcautre Speciali**
+### 3.1.6 Marcautre Speciali
 
 Gli identificatori possono avere un marcatore prefisso di un carattere per descrivere un'informazione extra. Il marcatore `$` indica che l'identificatore occore ''defixato'' (si veda la Sezione 3.5.8), come in `$=`. I marcatori `'` e `%` indicano rispettivamente che l'identificatore è per una variabile di tipo o per una variabile (si veda la Sezione 3.6.2), come in `'a` e `%x`.
 

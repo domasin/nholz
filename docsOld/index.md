@@ -1,9 +1,5 @@
-# NHOLZ
-
-
-[Che cos'è NHOLZ?](000/checosenholz.html)
-
-[La logica HOL](001/000-HOLLogic.html)
+Il sistema HOL
+==================
 
 1. [Introduzione](001-Introduzione.html)
 2. [Il linguaggio HOL](002-Liguaggio_HOL.html)
