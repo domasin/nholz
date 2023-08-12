@@ -1,4 +1,12 @@
 (** 
+---
+title: Logica proposizionale
+category: Casi di studio
+categoryindex: 2
+index: 1
+---
+
+
 Logica Proposizionale
 =======================
 
@@ -100,7 +108,13 @@ let atom_union f tm =
 La semantica della logica proposizionale
 ---------------------------------------
 
-Dal momento che le formule proposizionali intendono rappresentare asserzioni che possono essere vere o false, in ultima analisi il significato di una formula &egrave; semplicemente uno dei due valori di verit&agrave; "vero" e "falso". Comunque, esattamente come un'espressione algebrica x + y + 1 ha un significato definito solo quando sappiamo per che cosa stanno le variabili x e y, il significato di una formula proposizionale dipende dai valori di verit&agrave; assegnati alle sue formule atomiche. Questa assegnazione &egrave; codificata in una valutazione, che &egrave; una funzione dagli insiemi degli atomi all'insieme dei valori di verit&agrave; {falso,vero}. Data una formula `p` e una valutazione `v` valutiamo il valore di verit&agrave; complessivo con la seguente funzione definita ricorsivamente:
+Dal momento che le formule proposizionali intendono rappresentare asserzioni che possono essere vere o false, in ultima analisi 
+il significato di una formula &egrave; semplicemente uno dei due valori di verit&agrave; "vero" e "falso". Comunque, esattamente 
+come un'espressione algebrica x + y + 1 ha un significato definito solo quando sappiamo per che cosa stanno le variabili x e y, 
+il significato di una formula proposizionale dipende dai valori di verit&agrave; assegnati alle sue formule atomiche. Questa assegnazione 
+&egrave; codificata in una valutazione, che &egrave; una funzione dagli insiemi degli atomi all'insieme dei valori di verit&agrave; 
+{falso,vero}. Data una formula `p` e una valutazione `v` valutiamo il valore di verit&agrave; complessivo con la seguente funzione definita 
+ricorsivamente:
 *)
 
 let rec eval tm v =

@@ -9,8 +9,8 @@ index: 1
 
 La logica supportata dai sistemi HOL è una variante della teoria dei tipi semplici di Church. 
 
-La sintsassi di HOL contiene categorie sintattiche di tipi e termini i cui elementi sono
-intesi denotare rispettivamente certi insiemi e elementi di insiemi. Di seguito sarà sviluppata questa interpretazione insiemisitica accanto alla descrizione della sintassi di del linguaggio, e più avanti, il sistema di dimostrazione implementato sarà mostrato essere valido per il ragionamento circa proprietà del modello insiemistico.
+La sintassi di HOL contiene categorie sintattiche di tipi e termini i cui elementi sono
+intesi denotare rispettivamente certi insiemi e elementi di insiemi. Di seguito sarà sviluppata questa interpretazione insiemistica accanto alla descrizione della sintassi di del linguaggio, e più avanti, il sistema di dimostrazione implementato sarà mostrato essere valido per il ragionamento circa proprietà del modello insiemistico.
 
 ## Universo
 
@@ -19,7 +19,7 @@ Il modello insiemistico è dato in termini di un insieme di insiemi fisso $\cal 
 |---------------|-------------
 | **Inhab**     | Ogni elemento di $\cal U$ è un insieme non vuoto.
 | **Sub**       | Se $X\in{\cal U}$ e $\emptyset\not=Y\subseteq X$, allora $Y\in{\cal U}$  
-| **Prod**      | Se $X\in{\cal U}$ e $Y\in{\cal U}$, allora $X \times Y\in{\cal U}$. L'insieme $X\times Y$ è il prodotto cartesiano, consistente di coppie ordinate $(x,y)$ con $x\in X$ e $y\in Y$, con l'usuale notazione insiemistica delle coppie ordinate, cioé $(x,y)=\{\{x\},\{x,y\}\}$.
+| **Prod**      | Se $X\in{\cal U}$ e $Y\in{\cal U}$, allora $X \times Y\in{\cal U}$. L'insieme $X\times Y$ è il prodotto cartesiano, consistente di coppie ordinate $(x,y)$ con $x\in X$ e $y\in Y$, con l'usuale notazione insiemistica delle coppie ordinate, cioè $(x,y)=\{\{x\},\{x,y\}\}$.
 | **Pow**       | Se $X\in{\cal U}$, allora anche l'insieme potenza $P(X)=\{Y:Y\subseteq X\}$ è un elemento di $\cal U$.
 | **Infty**     | $\cal U$ contiene un distinto insieme infinito $\cal I$.
 | **Choice**    | C'è un elemento distinto $ch\in\prod_{X\in{\cal U}}X$ (il prodotto cartesiano generalizzato). Gli elementi del prodotto $\prod_{X\in{\cal U}}X$ sono funzioni (dipendentemente tipizzate): così per tutti gli $X\in{\cal U}$, $X$ è non vuoto per *Inhab* e $ch(X)\in X$ testimonia questo<sup>[†](## 'Il prodotto cartesiano generalizzato  è definito come l'insieme di tutte le funzioni che mandano ciascun elemento X in U in un qualche elemento di X. Queste funzioni si possono, dunque, considerare come se scegliessero per ogni elemento X in U un elemento di X rappresentativo di tutto l'insieme X e per questo si parla di funzioni di scelta. Choice isola una di queste funzioni: ch.')</sup>.
