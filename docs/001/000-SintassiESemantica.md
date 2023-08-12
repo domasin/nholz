@@ -1,5 +1,5 @@
 ---
-title: La logica HOL
+title: Sintassi e Semantica
 category: HOL Logic
 categoryindex: 1
 index: 1
@@ -51,3 +51,7 @@ $$\sigma\quad ::=\quad {\mathord{\mathop{\alpha}\limits_{variabili\ di\ tipo}}}
 * **Tipi funzione**: Se $\sigma_1$ e $\sigma_2$ sono tipi, allora $\sigma_1 \rightarrow \sigma_2$ è il tipo funzione con *dominio* $\sigma_1$ e rango $\sigma_2$. Esso denota l'insieme di tutte le funzioni (totali) dall'insieme denotato dal suo dominio all'insieme denotato dal suo rango. Si not che sintatticamente $\rightarrow$ è semplicmente un distinto operatore di tipo di arietà $2$ scritto con notazione infissa. E' isolato nelladefinizione dei tipi HOL perché denoterà sempre la stessa operazione in qualsiasi modello di una teoria HOL (si veda [CoreThry](https://github.com/domasin/nholz/blob/master/src/CoreThry.fs#L41)) - contrariamente agli altri operatori di tipo che possono essere interpretati in modo differente in modelli differenti. (Si veda più avanti TODO indicare precisamente dove).
 
 Risulta conveniente identificare i tipi atomici con tipi composti costruiti con operatori di tipo $0$-ari. Per esempio, il tipo atomico $bool$ dei valori di verità può essere considerato come un’abbreviazione per $()bool$. Questa identificazione sarà fatta nei dettagli tecnici che seguono, ma nella presentazione informale i tipi atomici continueranno ad essere distinti dai tipi composti, e $()c$ sarà scritto come $c$.
+
+### Strutture di tipo
+
+Il termine 'costante di tipo' è usato per comprendere sia i tipi atomici sia gli operatori di tipo. Si assume che sia dato un insieme infinito $TyNames$ dei *nomi delle costantti di tipo*. La lettera greca $v$ è usata per variare su membri arbitrari di $TyNames$, si continuerà ad usare $c$ per variare sui nomi dei tipi atomici (cioè costanti di tipo $0$-arie), e $op$ è usato per variare sui nomi degli operatori di tipo (cioè costanti di tipo $n$-arie, dove $n > 0$)

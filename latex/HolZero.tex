@@ -1,0 +1,73 @@
+% =====================================================================
+% HOL Manual LaTeX Source: logic
+% =====================================================================
+
+\documentclass[12pt,fleqn,oneside]{book}
+
+\usepackage[italian]{babel}         % lingua italiana
+\usepackage[latin1]{inputenc}
+
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{amsbsy}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newenvironment{proof1}[1][Dimostrazione]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+
+\usepackage{makeidx}
+\usepackage{alltt}
+\usepackage{./LaTeX/layout}
+\usepackage{graphicx}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+
+% ---------------------------------------------------------------------
+% Input defined macros and commands
+% ---------------------------------------------------------------------
+
+\input{./LaTeX/commands}
+\makeindex
+\begin{document}
+
+   \setlength{\unitlength}{1mm}           % unit of length = 1mm
+   \setlength{\baselineskip}{16pt}        % line spacing = 16pt
+
+   % ---------------------------------------------------------------------
+   % prelims
+   % ---------------------------------------------------------------------
+
+%   \pagenumbering{roman}                  % roman page numbers for prelims
+%   \setcounter{page}{1}                   % start at page 1
+
+   \include{title}                        % description title page
+   \include{preface}                      % preface to entire description
+   \tableofcontents                       % table of contents
+
+
+   \cleardoublepage
+%   \pagenumbering{arabic}                % arabic page numbers
+%   \setcounter{page}{1}
+
+   \include{introduzione}
+   \include{ml_library}
+   \include{language}
+   \include{logic}
+
+   % \appendix
+   %    \input{matembackground}
+   %    \input{lightOcaml}
+   %    \input{parsing_printing}
+
+   % \bibliographystyle{apalike}	% or "unsrt", "alpha", "abbrv", etc.
+   % \bibliography{biblio}		% use data in file "biblio.bib"
+   % \newcommand{\bibtitle}{Bibliografia}
+   % \addcontentsline{toc}{chapter}{\bibtitle}
+	
+	\printindex
+% \newcommand{\glossario}{Indice analitico}
+% \addcontentsline{toc}{chapter}{\glossario}
+
+\end{document}

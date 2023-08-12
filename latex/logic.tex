@@ -1,0 +1,406 @@
+\chapter{La logica HOL}
+
+La logica HOL è lo strumento per eseguire deduzioni nel linguaggio HOL. Questo capitolo descrive 
+la variante di HOL Zero della logica, e come usarla per costruire teorie e dimostrare teoremi.
+
+\section{Teoremi}
+
+I teoremi sono asserzioni che si è stabilito valere nella logica, o attraverso una dimostrazione 
+(si veda la Sezione 4.2) o attraverso un'asserzione. Essi hanno il datatype ML astratto {\tt thm}.
+
+Un teorema prende la forma di un insieme di assunzioni e una conclusione, ognuna delle quali sono 
+termini HOL booleani. Il significato di enunciati di questo tipo è che si può dimostrare che la 
+conclusione vale se valgono le assunzioni. Si noti che i teoremi non hanno mai assunzioni differenti 
+ma alfa equivalenti.
+
+\subsection{Stampa a video di un teorema}
+
+I teoremi sono scritti con un simbolo "`{\tt |-}"' che separa le assunzioni dalla conclusione, con le 
+assunzioni separate dal simbolo "`{\tt ,}"' (come in {\tt x = 5, y > 3 |- x * y > 15}. Si noti che, dal 
+momento che HOL Zero utilizza un'architettura di tipo LCF (si veda la Sezione 4.1.3), questo modo di 
+scrivere i teoremi può essere usato solo per stamparli a video e non per immetterli nel sistema.
+
+Un'altra conseguenza dell'architettura di tipo LCF l'etichettatura con il datatype ML {\tt thm}, mostrata 
+dall'interprete ML come parte della visualizzazione di un teorema, diventa un segno dell'autenticità che 
+un teorema è stato realmente stabilito valere nella logica (o per asserzione o per dimostrazione). 
+Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# excluded_middle_thm;;
+- : thm = |- !p. p \/ ~ p
+
+\end{verbatim}\end{hol}
+
+I modi di visualizzazione (si veda la Sezione 3.9) influiscono sul modo di visualizzare i teoremi allo 
+stesso modo in cui influiscono sulla visualizzazione delle term quotation.
+
+\subsection{Funzioni di utilità per i teoremi}
+
+La funzione di utilità {\tt dest\_thm} suddivide un dato teorema nelle sue assunzioni e nella sua conclusione. 
+L'utilità {\tt concl} restituisce soltanto la conclusione del teorema, e {\tt asms} soltanto le sue 
+assunzioni. Si noti che le assunzioni sono restituite come una lista, nonostante l'ordine degli elementi 
+nella lista sia irrilevante e non ci possano essere elementi ripetuti.
+
+\begin{hol}\begin{verbatim}
+
+# dest_thm excluded_middle_thm;;
+- : term list * term = ([], `!p. p \/ ~ p`)
+
+# concl excluded_middle_thm;;
+- : term = `!p. p \/ ~ p`
+
+\end{verbatim}\end{hol}
+
+L'utilità {\tt thm\_free\_vars} restituisce tutte le variabili libere di un dato teorema.
+
+\begin{hol}\begin{verbatim}
+
+# let th1 = trans_rule (assume_rule `f = (\x.x+y)`)
+											 (assume_rule `(\x.x+y) = g`);;
+val th1 : thm = (\x. x + y) = g, f = (\x. x + y) |- f = g
+
+# thm_free_vars th1;;
+- : term list = [`g:nat->nat`; `f:nat->nat`; `y:nat`]
+
+\end{verbatim}\end{hol}
+
+L'utilità {\tt thm\_alpha\_eq} restituisce se due dati teoremi sono alfa-equivalenti. L'alfa-equivalenza di 
+teoremi è definita sulla base dell'alfa-equivalenza dei termini (si veda la Sezione 3.3.5). Perché due 
+termini siano alfa-equivalenti, è necessario che la loro conclusione sia alfa-equivalente, e che gli insiemi delle 
+loro assunzioni abbiano la stessa dimensione e per ogni elemento in un insieme ci sia un elemento alfa-equivalente 
+nell'altro insieme.
+
+\begin{hol}\begin{verbatim}
+
+# thm_alpha_eq (assume_rule `!(x:'a).x=x`) (assume_rule `!(y:'a).y=y`);;
+- : bool = true
+
+\end{verbatim}\end{hol}
+
+\subsection{Costruzione di teoremi e architettura LCF}
+
+I teoremi possono essere costruiti in HOL Zero usando le sue regole di inferenza (si veda la Sezione 4.2) e/o 
+i comandi di asserzione (si veda la Sezione 4.4), oppure attraverso estensioni da parte dell'utente al codice 
+sorgente ML.
+
+HOL Zero è implementato secondo un'architettura di tipo LCF. Questo significa che, qualunque meccanismo sia 
+usato per costruire un teorema, è in un'ultima analisi fatto in termini delle regole primitive d'inferenza 
+(si veda la Sezione 4.2.2) e/o i comandi primitivi di asserzione (si veda la Sezione 4.4.7) della logica. 
+Questo si ottiene facendo del datatype ML per la rappresentazione interna dei teoremi un datatype astratto, con 
+le regole primitive di inferenza e i comandi primitivi di asserzione come suoi unici costruttori.
+
+Grazie a questa architettura di tipo LCF, qualsiasi preoccupazione circa la validità della deduzione in HOL Zero 
+è limitata alla correttezza del disegno e dell'implementazione delle primitive. Questo significa che gli utenti 
+possono implementare con sicurezza delle estensioni al sistema senza compromettere la validità del sistema 
+stesso.
+
+\subsection{Archiviazione dei teoremi}
+
+Esistono due strumenti per salvare teoremi con un nome come indice. Il primo è per salvare i risultati di un teorema 
+per un uso generale, e richiede che i suoi teoremi non abbiano variabili libere né assunzioni (assicurando in questo 
+modo che essi soddisfino gli standard minimi per catturare in modo pulito una proprietà generale). Tali teoremi 
+sono archiviati usando il comando {\tt save\_thm}.
+
+\begin{hol}\begin{verbatim}
+
+# save_thm ("sub_def_thm2", conjunct2_rule subtract_def);;
+[HZ] Storing theorem "sub_def_thm2".
+- : thm = |- !m n. m - SUC n = PRE (m - n)
+
+\end{verbatim}\end{hol}
+
+I teoremi generali archiviati possono essere estratti usando il comando {\tt get\_thm}. Il comando 
+{\tt get\_all\_thms} restituisce tutti i teoremi generali archiviati. Il sistema base di HOL Zero è fornito con 
+oltre 130 teoremi generali archiviati (si veda l'Appendice B2). 
+
+\begin{hol}\begin{verbatim}
+
+# get_thm "excluded_middle_thm";;
+- : thm = |- !p. p \/ ~ p
+
+# get_all_thms ();;
+- : (string * thm) list =
+[("bool_cases_thm", |- !p. (p <=> true) \/ (p <=> false));
+ ("conj_absorb_disj_thm", |- !p q. p /\ (p \/ q) <=> p);
+ ...]
+
+\end{verbatim}\end{hol}
+
+Il secondo strumento di archiviazione di teoremi è per archiviare risultati di teoremi intermedi (lemmi) che non sono 
+in una forma ideale per un uso generale. Questo non ha restrizioni sulla forma dei suoi teoremi. I lemmi sono salvati 
+usando il comando {\tt save\_lemma}. Come per i teoremi generali, c'è un comando per restituire un dato lemma archiviato 
+({\tt get\_lemma}) e un comando per restituire tutti i lemmi archiviati ({\tt get\_all\_lemmas}).
+
+\begin{hol}\begin{verbatim}
+
+# save_lemma ("temp_result_1", assume_rule `l < m /\ m < SUC n`);;
+[HZ] Storing lemma "temp_result_1".
+- : thm = l < m /\ m < SUC n |- l < m /\ m < SUC n
+
+\end{verbatim}\end{hol}
+
+\section{Dimostrazione formale}
+
+Una dimostrazione formale è il processo di usare un meccanismo logico formale di deduzione per stabilire che un enunciato 
+vale nella logica. Lo scopo principale di un dimostratore di teoremi è quello di supportare questo processo. In HOL Zero, 
+la dimostrazione è esguita valutando l'applicazione di funzioni ML chiamate {\it regole d'inferenza}, tipicamente 
+in modo annidato, e tipicamente facendo riferimento a teoremi stabiliti in precedenza.
+
+Per esempio, la seguente espressione ML è una dimostrazione di un risultato di base nella logica proposizionale (classica):
+
+\begin{hol}\begin{verbatim}
+
+# deduct_antisym_rule
+        (contr_rule `~ true` (assume_rule `false`))
+        (eq_mp_rule
+          (eqf_intro_rule (assume_rule `~ true`))
+          truth_thm );;
+    - : thm = |- ~ true <=> false
+
+\end{verbatim}\end{hol}
+
+Essa usa 5 regole d'inferenza ({\tt deduct\_antisym\_rule}, {\tt contr\_rule}, {\tt assume\_rule}, {\tt eq\_mp\_rule} and {\tt eqf\_intro\_rule}) 
+e un teorema stabilito in precedenza ({\tt truth\_thm}).
+
+Si possono trovare dei buoni esempi di dimostrazioni reali nelle parti del codice sorgente di HOL Zero dove esso stabilisce 
+la sua libreria di teoremi archiviati. Questa si estende in vari file di codice sorgente, che includono {\it boolalg.ml}, {\it boolclass.ml}, 
+{\it pair.ml}, {\it nat.ml}, {\it natarith.ml} e {\it natrel.ml}. Tutte le dimostrazioni nel codice sorgente sono formattate con un'identazione 
+per riflettere la loro struttura, e annotate di commenti per mostrare i risultati dei teoremi intermedi.
+
+\subsection{Regole d'inferenza}
+
+Una regola d'inferenza è una funzione ML che prende un teorema e/o un termine come argomenti e restituisce un teorema, calcolato 
+eseguendo una deduzione sugli argomenti, in base alle regole della logica HOL. Le regole d'inferenza in ultima analisi sono basate 
+sulla forma sintattica dei loro argomenti, e le regole base d'inferenza, che trattano soltanto una specifica forma sintattica, possono 
+essere sintetizzate in modo elegante usando una descrizione formale della regola nello stile di Gentzen.
+
+Per esempio, la regola {\tt eq\_imp\_rule2} prende un singolo teorema come argomento, dove l'argomento deve avere un'equivalenza logica 
+come sua conclusione. Il risultato è un teorema che afferma che il lato destro dell'equivalenza implica il suo lato sinistro.
+
+Questo è sintetizzato nella seguente descrizione nello stile di Gentzen.
+
+\begin{prooftree}
+\def\fCenter{\ \vdash\ }
+\AxiomC{$A \vdash p \Leftrightarrow q$}
+\UnaryInfC{$A \vdash q \Rightarrow p$}
+\end{prooftree}
+
+Qui c'è un esempio del suo utilizzo:
+
+\begin{hol}\begin{verbatim}
+
+# eq_imp_rule2 not_true_thm;;
+- : thm = |- false ==> ~ true
+
+\end{verbatim}\end{hol}
+
+Una conversione è una speciale forma di regola di inferenza che prende un termine come argomento e restituisce un teorema 
+con un'eguaglianza come sua conclusione, dove il lato sinistro dell'eguaglianza è il termine fornito come argomento.
+
+Per esempio, {\tt eval\_add\_conv} è una conversione che prende un termine nella forma dell'operatore {\tt +} applicato 
+a due numerali di numeri naturali, e restituisce un teorema che da il suo valore numerale.
+
+Essa è sintetizzata dalla seguente descrizione nello stile di Gentzen:
+
+\begin{prooftree}
+\def\fCenter{\ \vdash\ }
+\AxiomC{\`{}$m + n$\`{}}
+\UnaryInfC{$ \vdash m + n = z$}
+\end{prooftree}
+
+Qui c'è un esempio del suo utilizzo:
+
+\begin{hol}\begin{verbatim}
+
+# eval_add_conv `28 + 12`;;
+- : thm = |- 28 + 12 = 40
+
+\end{verbatim}\end{hol}
+
+Il sistema HOL Zero di base include circa 90 regole d'inferenza. Si veda l'Appendice A5 per una descrizione informale e una 
+descrizione nello stile di Gentzen di ciascuna regola.
+
+\subsection{Regole primitive d'inferenza}
+
+Tutte le regole d'inferenza in HOL Zero sono implementate (o {\it derivate}) in termini delle altre regole d'inferenza più di base. 
+In fondo a questa gerarchia di dipendenze ci sono 10 regole d'inferenza primitive che non sono implementate in termini di altre 
+regole, e che in ultima analisi formano la base di tutte le altre regole. Queste sono chiamate le {\it regole di inferenza primitive} 
+della logica. La chiamata a una regola d'inferenza derivata tipicamente risulterà in alcune chiamate a regole d'inferenza primitive.
+
+Di seguito sono elencate le descrizioni nello stile di Gentzen delle 10 regole primitive:
+
+%\begin{prooftree}
+%\def\labelSpacing{10 pt}
+%\AxiomC{\`{}$t$\`{}}
+%\RightLabel{refl\_conv}
+%\UnaryInfC{$\vdash t = t$}
+%\end{prooftree}
+
+\begin{prooftree}
+\def\labelSpacing{10 pt}
+\AxiomC{$t$}
+\RightLabel{refl\_conv}
+\UnaryInfC{$\vdash t = t$}
+\end{prooftree}
+
+\begin{prooftree}
+\def\labelSpacing{10 pt}
+\AxiomC{$(\lambda x.\ t)\ s$}
+\RightLabel{beta\_conv}
+\UnaryInfC{$\vdash (\lambda x.\ t)\ s = t[s/x]$}
+\end{prooftree}
+
+\begin{prooftree}
+\def\labelSpacing{10 pt}
+\AxiomC{$A_1 \vdash f_1 = f_2$}
+\AxiomC{$A_2 \vdash t_1 = t_2$}
+\RightLabel{mk\_comb\_rule}
+\BinaryInfC{$A_1 \cup A_2 \vdash f_1\ t_1 = f_2\ t_2$}
+\end{prooftree}
+
+\begin{prooftree}
+\def\labelSpacing{10 pt}
+\AxiomC{$x$}
+\AxiomC{$A \vdash t_1 = t_2$ [con $x$ non libera in $A$]}
+\RightLabel{mk\_abs\_rule}
+\BinaryInfC{$A \vdash (\lambda x.\ t_1)= (\lambda x.\ t_2)$}
+\end{prooftree}
+
+\begin{prooftree}
+\def\labelSpacing{10 pt}
+\AxiomC{$p$}
+\RightLabel{assume\_rule}
+\UnaryInfC{$\{p\}\vdash p$}
+\end{prooftree}
+
+\begin{prooftree}
+\def\labelSpacing{10 pt}
+\AxiomC{$p$}
+\AxiomC{$A \vdash q$}
+\RightLabel{disch\_rule}
+\BinaryInfC{$A\backslash\{p\} \vdash p \Rightarrow q$}
+\end{prooftree}
+
+\begin{prooftree}
+\def\labelSpacing{10 pt}
+\AxiomC{$A \vdash p \Rightarrow q$}
+\AxiomC{$A_2 \vdash p$}
+\RightLabel{mp\_rule}
+\BinaryInfC{$A_1 \cup A_2 \vdash q$}
+\end{prooftree}
+
+\begin{prooftree}
+\def\labelSpacing{10 pt}
+\AxiomC{$A_1 \vdash p \Leftrightarrow q$}
+\AxiomC{$A_2 \vdash p$}
+\RightLabel{eq\_mp\_rule}
+\BinaryInfC{$A_1 \cup A_2 \vdash q$}
+\end{prooftree}
+
+\begin{prooftree}
+\def\labelSpacing{10 pt}
+\AxiomC{$[(tv_1,ty_1);(tv_2,ty_2);\ldots]$}
+\AxiomC{$A \vdash p$}
+\RightLabel{inst\_type\_rule}
+\BinaryInfC{$A[ty_1/tv_1,ty_2/tv_2,\ldots] \vdash p[ty_1/tv_1,ty_2/tv_2,\ldots]$}
+\end{prooftree}
+
+\begin{prooftree}
+\def\labelSpacing{10 pt}
+\AxiomC{$[(x_1,t_1);(x_2,t_2);\ldots]$}
+\AxiomC{$A \vdash p$}
+\RightLabel{inst\_type\_rule}
+\BinaryInfC{$A[t_1/x_1,t_2/x_2,\ldots] \vdash p[t_1/x_1,t_2/x_2,\ldots]$}
+\end{prooftree}
+
+\subsection{Conteggio delle inferenze primitive}
+
+Sono matenuti due contatori per il numero di inferenze primitive effettuate dal sistema (indipendentemente dal fatto 
+che esse derivino da chiamate dirette delle regole primitive di inferenza o da chiamate indirette attraverso regole 
+di inferenza derivate). Il primo è un contatore assoluto che conta ogni passo primitivo eseguito, inclusi quelli fatti 
+durante il build di HOL Zero. Questo può essere visualizzato attraverso il comando {\tt step\_total}:
+
+\begin{hol}\begin{verbatim}
+
+# step_total ();;
+- : int = 68851
+
+\end{verbatim}\end{hol}
+
+Il secondo è un contatore relativo che conta i passi primitivi eseguiti dopo l'ultimo reset del contatore. Esso è resettato 
+a zero alla fine del build del sistema. Esso può essere interrogato dal comando {\tt step\_counter} e resettato dal comando 
+{\tt reset\_step\_counter}.
+
+\begin{hol}\begin{verbatim}
+
+# reset_step_counter ();;
+- : unit = ()
+# eval_add_conv `1+1`;;
+- : thm = |- 1 + 1 = 2
+# step_counter ();;
+- : int = 12
+
+\end{verbatim}\end{hol}
+
+\section{Dichiarazione}
+
+Il linguaggio HOL può essere esteso introducendo nuove costanti e costanti di tipo. Questo processo è chiamato {\it dichiarzione}.
+Oltre ad estendere il linguaggio, una dichiarazione introduce anche le nuove costanti e le nuove costanti di tipo nella teoria 
+(si veda la Sezione 4.5), ed è uno dei due meccanismi per costruire teorie (l'altro è l'asserzione, si veda la Sezione 4.4). Ci 
+si riferisce genericamente alle costanti e alle costanti di tipo dichiarate come a {\it oggetti della teoria}.
+
+Eseguire una dichiarazione ha un effetto immediato sulla sezione HOL Zero, dal momento che influiscono sui seguenti parsing e 
+pretty printing delle quotation.
+
+Si noti che in HOL Zero, non è possibile annullare una dichiarazione senza riavviare HOL Zero completamente. Questa limitazione 
+permette di mantenere il kernel del linguaggio semplice.
+
+\subsection{Dichiarazione di costante}
+
+Le costanti sono introdotte usando il comando di dichiarazione \holtxt{new\_const}. Questo 
+prende due argomenti: uno per il nome della costante, e uno per il suo tipo 
+generico (si veda la Sezione 3.2.4). Oltre ad aggiungere la costante al linguaggio, il 
+comando restituisce la nuova costante come un valore termine. Per esempio:
+
+\begin{holboxed}
+\begin{verbatim}
+# new_const ("c", `:nat->bool`);;
+- : term = `c`
+\end{verbatim}
+\end{holboxed}
+
+Una volta che una costante è stata dichiarata, il suo tipo denerico può essere interrogato usando il 
+comando \holtxt{get\_const\_gtype}. Per esempio:
+
+\begin{holboxed}
+\begin{verbatim}
+# get_const_gtype "c";;
+- : hol_type = `:nat->bool`
+\end{verbatim}
+\end{holboxed}
+
+Un elenco di tutti i nomi di costante dichiarati e dei loro tipi generici è restituita dal 
+comando \holtxt{get\_all\_consts}. Per esempio:
+
+\begin{holboxed}
+\begin{verbatim}
+# get_all_consts ();;
+- : (string * hol_type) list =
+[("!", `:('a->bool)->bool`); ("*", `:nat->nat->nat`);
+ ("+", `:nat->nat->nat`);
+ ...]
+\end{verbatim}
+\end{holboxed}
+
+In HOL Zero non è permesso l'overloading delle costanti con altre costanti, e 
+se una dichiarazione è inserite per un nome di costante esistente ma con un tipo 
+differente, allora la dichiarazione fallirà. Si noti che si può eseguire l'overloading 
+delle costanti con altre entità, incluse le variabili (si veda la Sezione 3.6.2).
+
+Se la dichiarazione di una costante è ripetuta (cioè per lo stesso nome di costante e lo stesso 
+tipo generico), allora questa è riconosciuta come una ``ri-dichiarazione benigna'', e non causa 
+fallimento (ma non esegue alcun cambiamento sul linguaggio). La ri-dichiarazione benigna è 
+permessa per permettere di reinserire uno script di dimostrazione nella stessa sessione HOL Zero 
+senza causare fallimento.
+

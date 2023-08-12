@@ -1,0 +1,335 @@
+\chapter{Introduzione}
+
+
+Questo è il Manuale Utente di HOL Zero e fornisce una descrizione completa di come usare il sistema.
+Esso è destinato a tutti gli utenti, dai novizi agli sviluppatori esperti e agli 
+auditor di dimostrazioni. Si faccia riferimento al file README nella cartella documentazione\footnote{Si tratta della cartella del programma originale in OCaml} per i 
+documenti correlati, che includono un tutorial [ancora non scritto!!!] per gli utenti nuovi alla dimostrazione 
+di teoremi in generale e un glossario per le definizioni precise di tutti i termini tecnici qui utilizzati.
+
+\section{Concetti Base}
+
+\subsection{HOL Zero}
+
+HOL Zero è un dimostratore di teoremi HOL, cioè un programma che supporta dimostrazioni formali e lo sviluppo 
+di teorie nella logica HOL (si veda più avanti). Si tratta di un dimostratore di teoremi relativamente semplice che si 
+concentra su buone funzionalità di base, ed è migliore rispetto ad altri sistemi HOL in aree quali la robustezza 
+architetturale, lo sviluppo della sintassi concreta, un prettyprinting completo e non ambiguo, e la leggibilità 
+del codice sorgente. Queste qualità aumentano le sue credenziali di affidabilità, rendendolo adatto come verificatore 
+di dimostrazioni per l'auditing di grandi dimostrazioni create su altri sistemi HOL (si veda più avanti). C'è persino 
+un premio di 100 \$\footnote{Per il programma originale in OCaml} per chiunque trovi dei difetti legati alla validità (si veda il file Bounty.txt nella cartella 
+principale di HOL Zero). Le stesse qualità lo rendono adatto come esempio pedagogico per logici, programmatori e 
+informatici che vogliano comprendere come funzionano i dimostratori di teoremi.
+
+Va comunque notato che pur essendo adatto al controllo di grandi dimostrazioni, HOL Zero non è adatto allo sviluppo 
+di dimostrazioni di grandi dimensioni. Esso, infatti, supporta soltanto uno stile di dimostrazione nella semplice 
+deduzione naturale, e manca di funzionalità interattive ed automatiche avanzate che altri sistemi HOL hanno.
+
+L'interazione utente con HOL avviene immettendo istruzioni a riga di comando in formato ASCII in una sessione di HOL 
+Zero. Queste istruzioni sono di fatto espressioni nel linguaggio di programmazione ML che vengono valutate da un 
+interprete ML una volta immesse. In ogni caso, non è necessario che l'utente abbia una profonda conoscenza di ML per 
+usare HOL Zero.
+
+Coloro che hanno una più profonda conoscenza di ML possono estendere le funzionalità di HOL Zero. HOL Zero è implementato 
+nel dialetto OCaml dell'ML, ed è possibile estendere il programma immettendo definizioni ML in una sessione di HOL Zero 
+(la sessione di HOL Zero non è nient'altro che una sessione ML con il codice sorgente di HOL Zero incorporata). Qualsiasi 
+di queste estensioni sono sicure nel senso che non possono introdurre incoerenze logiche nel sistema HOL Zero. Questa 
+sicurezza è garantita dal fatto che HOL Zero è implementato secondo quella che viene chiamata un'architettura nello `stile LCF' 
+(si veda la Sessione 4.1.3), che è usata anche in altri sistemi HOL. HOL Zero supporta lo standard Common HOL (si veda 
+sotto), e questo facilita il porting del sorgente e delle dimostrazioni da altri sistemi HOL.
+
+\subsection{La logica HOL}
+
+La logica HOL è una logica predicativa tipizzata, classica, di ordine superiore, cioè una logica predicativa con un sistema di 
+tipi, con la legge del terzo escluso come teorema, e con la possibilità di quantificare su funzioni. E' basata sul lambda calcolo 
+tipizzato di Alonzo Church. Ha un sistema polimorfico di tipi relativamente semplice che non è dipendentemente tipizzato e non 
+supporta la quantificazione su variabili di tipo. Si faccia riferimento al glossario per una spiegazione estesa di questi concetti.
+
+La logica HOL fu sviluppata per la prima volta negli anni 1980 per un sistema prototipo chiamato Cambridge HOL, ed è ora supportata 
+dalla famiglia di dimostratori di teoremi HOL che include HOL4, ProofPower HOL, HOL Light è Isabelle/HOL. Questi sistemi sono 
+stati utilizzati come strumenti affidabili essenziali in una varietà di progetti industriali, che includono la verifica dello sviluppo 
+di microcircuiti integrati per computer e software safety-critical. Essi sono anche preminenti nella formalizzazione della matematica, 
+in particolare nell'innovativo progetto Flyspeck di Tom Hales per formalizzare la sua dimostrazione della congettura di Keplero.
+
+\subsection{Auditing di dimostrazione}
+
+L'auditing delle dimostrazioni è il processo umano di determinare se uno script di dimostrazione che afferma di dimostrare un enunciato 
+lo prova realmente. Questo dovrebbe essere fatto quando un'importante dimostrazione formale è stata completata, perché ci sono varie 
+insidie quando si usano dei dimostratori di teoremi, ognuna delle quali può concepibilmente rendere la pretesa dimostrazione formale 
+completamente invalida. Questi variano da errori di base come il fatto che lo script di dimostrazione non risulti in una dimostrazione 
+formale di successo, o il fatto che lo script dimostri l'enunciato sbagliato, a problemi più sottili come il fatto che le costanti che 
+occorrono nell'enunciato dimostrato abbiano definizioni non corrette, che la teoria accumulata dal dimostratore di teoremi sia diventata 
+incoerente, o il fatto che il dimostratore di teoremi stesso abbia degli errori nel suo disegno o nella implementazione.
+
+L'auditing delle dimostrazioni indirizza questi problemi revisionando lo script di dimostrazione. Questo richiede come minimo il sistema 
+originale per eseguire lo script, così che esso possa essere ri-eseguito attraverso quel sistema. L'auditor ha bisogno anche di eseguire 
+controlli sull'enunciato dimostrato, le definizioni usate e la coerenza della teoria. Questi controlli sarebbero fatti normalmente usando 
+il sistema originale, e l'auditor dovrebbe tener conto delle insidie in questo sistema ed assicurarsi in qualche modo che queste insidie 
+non siano state sfruttate (in modo intenzionale o meno) dallo script di dimostrazione.
+
+HOL Zero offre una soluzione più efficace rispetto a quella di usare il sistema originale per eseguire questi controlli, agendo come 
+un controllore della dimostrazione indipendente da usare per rieseguire la dimostrazione formale originaria (usando qualche oggetto 
+di importazione della dimostrazione, per esempio si veda di seguito il paragrafo Common HOL) e per eseguire i controlli su di essa. 
+Questo rimuove ogni preoccupazione legata a insidie relative alla consistenza nel sistema originale e la necessità di esaminare lo 
+script di dimostrazione. A causa delle sue credenziali di affidabilità, non c'è alcuna necessità da parte dell'auditor di indirizzare 
+problemi legati alla consistenza nel controllore di dimostrazione. Così il processo di auditing della dimostrazione è semplificato e 
+allo stesso tempo è significativamente ampliata la sicurezza che esso fornisce.
+
+\subsection{Common HOL}
+
+Common HOL è uno standard per le funzionalità di base di un sistema HOL, che ha lo scopo di facilitare la portabilità del codice sorgente 
+e delle dimostrazioni formali tra i membri della famiglia HOL. Esso consiste nelle seguenti componenti:
+
+
+\begin{itemize}
+	\item la specifica di una API di funzionalità HOL di base, per permettere il porting del codice sorgente tra sistemi HOL compatibili;
+	\item l'implementazione dell'API per vari sistemi HOL;
+	\item la specifica di un formato di file di dimostrazione, per permettere il porting delle dimostrazioni formali tra sistemi HOL compatibili;
+	\item l'implementazioni di oggetti per l'esportazione e l'importazione delle dimostrazioni tra vari sistemi HOL.
+\end{itemize}
+
+Tutte queste componenti, eccetto l'export di dimostrazione, sono liberamente disponibili sul sito Proof Technologies. I sistemi attualmente 
+supportati sono HOL Zero, HOL Light e HOL90. L'export di dimostrazione è disponibile come servizio commerciale da parte di Proof Technologies, 
+benché varie dimostrazioni esportate siano liberamente disponibili sul sito. Si veda il file README di HOL Zero per il sito e i dettagli di 
+contatto.
+
+[Si noti che queste componenti non sono ancora disponibili sul sito web!!! Contattare Proof Technologies se si desidera averli.]
+
+\subsection{Avviare HOL Zero}
+
+Questa sezione spiega come avviare una sessione di HOL Zero. Si assume che il lettore stia utilizzando una sessione terminale su un sistema 
+di tipo Unix, e che HOL Zero sia già stato installato (si veda il file INSTALL nella cartella Home di HOL Zero).
+
+Una sessione di HOL Zero è avviata lanciando l'eseguibile `holzero', che è creato quando HOL Zero viene installato. Diamo due alternative 
+per avviare una sessione da una finestra terminale:
+
+\begin{enumerate}
+	\item Il modo più semplice è lanciare HOL Zero nella finestra terminale stessa. Comunque, si noti che le funzionalità di editing sono povere 
+	a meno che si abbia installato `rlwrap' (si veda il file INSTALL). Si esegua direttamente il comando `holzero' dalla finestra terminale:
+
+\ml{> holzero}
+	
+	il simbolo {\tt >} indica il prompt dei comandi della finestra terminale
+	
+	\item Un'alternativa migliore per una interazione sostanziale è avviare una finestra editor che mantiene delle sotto finestre per l'input ML 
+	dell'utente e per i feedback della sessione ML. Un editor buono e semplice per questo scopo è Xpp (si veda il file INSTALL), che è avviato 
+	dal comando:
+
+\ml{> xpp -c holzero}
+
+	In Xpp, la finestra in alto è per l'editing del testo e quella in basso per i feedback della sessione. Per immettere testo nella sessione, 
+	si selezioni il testo e si prema Ctrl-Enter. Il testo può essere immesso anche linea per linea premendo Ctrl-N ad ogni linea.
+	
+\end{enumerate}
+
+I primi pochi secondi di avvio di HOL Zero richiedono il build del sistema da zero. Alcune centinaia di righe di output scorrono velocemente sullo 
+schermo, e quindi appare il banner di HOL Zero, che indica un build di successo. HOL Zero è quindi pronto per ricevere comandi dall'utente. Questi 
+comandi sono di fatto espressioni ML, ma l'utente neofita non ha bisogno di una buona conoscenza di ML per usare HOL Zero.
+
+\section{Panoramica di Uso}
+
+Questa sezione fornisce una breve introduzione a semplici operazioni in HOL Zero, incluso come immettere espressioni HOL e come eseguire una semplice 
+dimostrazione. Per informazioni più approfondite circa l'uso di HOL Zero, il lettore dovrebbe procedere nei capitoli seguenti del manuale.
+
+\subsection{Termini, Tipi e Teoremi}
+
+Le espressioni nel linguaggio HOL sono chiamati termini HOL. I termini sono scritti utilizzando una serie di caratteri ASCII e racchiusi tra apici 
+acuti `{\tt `}', che sono chiamati {\it term quotation}. Nel momento in cui si immette un termine in una sessione di HOL Zero questo viene controllato 
+e ristampato a video.
+
+La sintassi dei termini è semplice e intuitiva, e si va incontro a vari meccanismi sintattici. Per esempio, il seguente termine significa 
+`per tutti i numeri naturali $x$, $y$ e $z$, se $x$ è minore di $y$ e $y$ è minore di $z$ allora $x$ è minore di $z$' 
+(il simbolo {\tt \#} indica il prompt di OCaml):
+
+\begin{hol}\begin{verbatim}
+
+# `!x y z. x < y /\ y < z ==> x < z`;; 
+- : term = `!x y z. x < y /\ y < z ==> x < z`
+						 
+\end{verbatim}\end{hol}
+
+Se si immette un termine mal formato si riceverà un messaggio di errore.
+
+\begin{hol}\begin{verbatim}
+
+# `x =`;;
+Exception:
+[HZ] SYNTAX ERROR: Unexpected end of quotation instead of RHS for infix
+"=".
+
+\end{verbatim}\end{hol}
+
+Si noti che i messaggi specifici di HOL Zero, diversamente da quelli che deirivano dall'interprete ML 
+in generale, hanno il prefisso `{\tt [HZ]}'. Questo vale per tutti i messaggi riportati da HOL Zero, inclusi messaggi di errore, warnings e 
+feedback generici all'utente.
+
+HOL è un linguaggio tipizzato, così ogni termine e sottotermine ha un tipo, e i termini devono essere costruiti in modo da avere un tipo 
+corretto. Questo impedisce la costruzione di enunciati privi di significato come `3 è uguale a vero'.
+
+\begin{hol}\begin{verbatim}
+
+# `3 = true`;;
+Exception:
+[HZ] TYPE ERROR: Function subterm domain type incompatible with argument
+subterm type.
+
+\end{verbatim}\end{hol}
+
+I sottotermini nei term quotation possono essere annotati per indicare il loro tipo, facendo seguire al sottotermine il simbolo di i due punti 
+(`{\tt :}') e poi il suo tipo, il tutto chiuso tra parentesi. Di default, i termini sono ristampati a video con annotazioni di tipo sufficienti 
+almeno ad evitare qualsiasi ambiguità circa il tipo di ogni sottotermine.
+
+\begin{hol}\begin{verbatim}
+
+# `!(x:nat) (y:nat). x = y`;;
+- : term = `!(x:nat) y. x = y`
+
+\end{verbatim}\end{hol}
+
+Il meccanismo di inferenza del tipo è usato per risolvere i tipi nei termini.Ad ogni termine inserito senza annotazioni di tipo 
+sufficienti sono assegnate delle variabili di tipo numerate per tutti i tipi non determinabili.
+
+\begin{hol}\begin{verbatim}
+
+# `!x y. x = y`;;
+- : term = `!(x:'1) y. x = y`
+
+\end{verbatim}\end{hol}
+
+I tipi HOL possono essere scritti fuori dal contesto di un termine usando delle {\it type quotation}. Come le term quotation, le type quotation 
+sono delimitate da accenti acuti, ma iniziano con un simbolo di due punti.
+
+\begin{hol}\begin{verbatim}
+
+# `:nat#nat->bool`;;
+- : hol_type = `:nat#nat->bool`
+
+\end{verbatim}\end{hol}
+
+I teoremi HOL consistono in un insieme di assunzioni e di una conclusione, con il significato che la conclusione vale assumendo che valgano le 
+assunzioni. Essi sono mostrati usando il simbolo {\it turnstile} (`{\tt |-}') per separare tutte le assunzioni dalla conclusione. Si noti che 
+tutti i teoremi predimostrati nel sistema base di HOL Zero non hanno alcuna assunzione.
+
+\begin{hol}\begin{verbatim}
+
+# excluded_middle_thm;;
+- : thm = |- !p. p \/ ~ p
+
+\end{verbatim}\end{hol}
+
+\subsection{Dimostrazione ed Asserzione}
+
+Le regole di inferenza della logica HOL sono implementate in HOL Zero come funzioni ML che prendono teoremi e/o termini e restituiscono 
+teoremi. Un passo di dimostrazione è eseguito semplicemente valutando l'applicazione di una tale funzione.
+
+\begin{hol}\begin{verbatim}
+
+# assume_rule `x + y < 5`
+- : thm = x + y < 5 |- x + y < 5
+
+# spec_rule `a = 0` excluded_middle_thm;;
+- : thm = |- a = 0 \/ ~ (a = 0)
+
+\end{verbatim}\end{hol}
+
+Le dimostrazioni sono semplicemente espressioni ML composte con applicazioni di regole di inferenza ad ogni livello.
+
+\begin{hol}\begin{verbatim}
+
+# deduct_antisym_rule
+       (contr_rule `~ true` (assume_rule `false`))
+       (eq_mp_rule (eqf_intro_rule (assume_rule `~ true`)) truth_thm);;
+- : thm = |- ~ true <=> false
+
+\end{verbatim}\end{hol}
+
+HOL Zero viene fornito con il supporto incorporato per le seguenti teorie matematiche di base: la logica predicativa, il lambda calcolo, 
+le coppie ordinate e l'aritmetica dei numeri naturali. Le sue teorie possono essere estese usando dei comandi di teoria per aggiungere 
+oggetti teoria e asserire proprietà su questi oggetti.
+
+Per esempio, il comando di definizione delle costanti introduce una nuova costante e ritorna un nuovo teorema, che afferma che il valore 
+della costante è uguale a un'espressione data. Esso prende un termine di uguaglianza con la nuova costante al suo lato sinistro e il valore 
+della costante al suo lato destro.
+
+\begin{hol}\begin{verbatim}
+
+# new_const_definition `max_height = 7`;;
+- : thm = |- max_height = 7
+
+\end{verbatim}\end{hol}
+
+\subsection{Strumenti di HELP}
+
+...
+
+\section{Capitoli successivi}
+
+I capitoli successivi e le appendici forniscono una descrizione completa di HOL Zero da un punto di vista utente.
+
+In termini semplici, gli utenti del sistema si dividono in quattro tipi:
+
+\begin{itemize}
+	\item utenti di base, che eseguono dimostrazioni semplici senza comprendere l'ML;
+	\item utenti avanzati, che eseguono dimostrazioni usando la programmazione ML;
+	\item auditor, che usano HOL Zero per controllare le dimostrazioni;
+	\item programmatori, che estendono le funzionalità di HOL Zero usando la programmazione ML;
+\end{itemize}
+
+Questo manuale si rivolge a tutte e quattro le categorie. Nonostante HOL Zero sia relativamente semplice come dimostratore di teoremi HOL, 
+ha tuttavia un'interfaccia utente piuttosto estesa. Comunque non è necessario per gli utenti di base e gli auditor di dimostrazione avere 
+famigliarità con ogni suo aspetto per poter essere produttivi. Di seguito spieghiamo quali parti del manuale sono rilevanti per ciascun 
+tipo di utente.
+
+I capitoli si dividono nel modo seguente:
+
+\begin{flushleft}
+
+\begin{tabular}{|c|c|c|c|c|l|}
+	\hline
+	Chapter & U1 & U2 & A & P & Description \\
+	\hline
+	2  &   & * & + & * &  HOL Zero's ML programming library.\\
+	3  & * & * & * & * &  HOL Zero's variant of the HOL language and its language\\
+     &   &   &   &   &  utilities.  Essential reading for all, except sections\\
+     &   &   &   &   &  3.7 and 3.8, which can be skipped by basic users (U1).\\
+	4  & * & * & * & * &  HOL Zero's variant of the HOL logic, its inference\\
+	   &   &   &   &   &  rules, assertion commands and theory.  Essential\\
+	   &   &   &   &   &  reading for all.\\
+	\hline
+\end{tabular}
+		
+\end{flushleft}
+
+Le appendici forniscono materiale di riferimento dettagliato. Le appendici A forniscono dettagli sull'interfaccia ML di HOL Zero, mentre 
+le appendici B forniscono elenchi delle sue teorie, e l'appendice C fornisce una grammatica HOL. Le appendici si dividono nel modo seguente:
+
+\begin{flushleft}
+
+\begin{tabular}{|c|c|c|c|c|l|}
+	\hline
+	Appendix & U1 & U2 & A & P & Description \\
+	\hline
+	A1  &   & * & + & * &  ML programming library functions.\\
+	A2  & * & * & * & * &  Input and display commands.\\
+  A3  & + & * & + & * &  HOL language utilities.\\
+  A4  & * & * & * & * &  HOL theory commands.\\
+	A5  & * & * &   & * &  HOL inference rules.\\
+	B1  & * & * & * & * &  HOL theory listing.\\
+	B2  & * & * &   & * &  HOL theorems listing.\\
+	C   & * & * & * & * &  HOL language formal grammar.\\
+	\hline
+\end{tabular}
+		
+\end{flushleft}
+
+Legenda codici utente:
+
+\begin{itemize}
+	\item U1 - Basic users
+	\item U2 - Advanced users
+	\item A  - Auditors
+	\item P  - Programmers
+	\item *  - Highly relevant
+	\item +  - Background reading
+\end{itemize}
+

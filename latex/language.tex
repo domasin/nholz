@@ -1,0 +1,1472 @@
+\chapter{Il Linguaggio HOL}
+
+Il linguaggio HOL è un potente linguaggio formale in grado di descrivere la maggior parte della matematica. 
+Questo capitolo spiega il linguaggio e la versione di HOL Zero della sua sintassi attraverso le term quotation. 
+Spiega inoltre varie operazioni che possono essere eseguite sull'espressioni, e come configurare 
+l'input e la stampa a video.
+
+\section{Sintassi lessicale}
+
+Questa sezione spiega la sintassi lessicale di HOL Zero, usata sia nelle type che nelle term quotation (si vedano 
+rispettivamente le Sezioni \ref{sec:regandirregnames} e \ref{sec:reservedwords}). Si veda l'Appendice C per una descrizione in grammatica 
+formale della sintassi lessicale.
+
+\subsection{Tokens}
+
+Le type e le term quotation si compongono di una lista di token lessicali (nello stesso modo in cui il linguaggio naturale 
+scritto si compone di una lista di parole e simboli di punteggiatura). I {\it token identificatori} (analoghi alle parole del 
+linguaggio naturale) sono usati per riferirsi esplicitamente a entità HOL (cioè variabili, costanti, variabili di tipo, 
+e costanti di tipo). I {\it token parole riservate} (analoghi ai simboli di punteggiatura del linguaggio naturale) aiutano 
+a fornire una struttura sintattica alle quotation.
+
+Per esempio, la seguente term quotation:
+\label{exmpl:termquotetoken}
+
+\begin{hol}\begin{verbatim}
+
+`\x. y + foo x`;;
+
+\end{verbatim}\end{hol}
+
+si divide in 7 token ("`{\tt $\backslash$}"', "`{\tt x}"', "`{\tt .}"', "`{\tt y}"', "`{\tt +}"', "`{\tt foo}"', "`{\tt x}"'):
+
+\begin{hol}\begin{verbatim}
+
+[Resword_tok "\"; Ident_tok (false, No_mark, "x"); Resword_tok ".";
+   Ident_tok (false, No_mark, "y"); Ident_tok (false, No_mark, "+");
+   Ident_tok (false, No_mark, "foo"); Ident_tok (false, No_mark, "x")]
+
+\end{verbatim}\end{hol}
+
+I token identificatori si riferiscono alle variabili "`{\tt x}"', "`{\tt y}"' e "`{\tt foo}"' e alla costante "`{\tt +}"'. Gli 
+altri, "`{\tt $\backslash$}"' e "`{\tt .}"', sono token di parole riservate.
+
+HOL è case sensitive sia per i nomi di entità che per le parole riservate.
+
+\subsection{Nomi regolari e irregolari}
+\label{sec:regandirregnames}
+
+Tutte le entità HOL hanno almeno un nome, e non ci sono restrizioni sulla forma di questo nome nel linguaggio HOL. Tuttavia, 
+l'identificatore che può essere usato nelle quotation per riferirsi alle entità HOL dipende dal fatto che il nome sia regolare 
+o irregolare. L'indentificatore per un'entità con un nome regolare può essere semplicemente lo stesso nome dell'entità (come 
+per tutte le entità nell'Esempio \ref{exmpl:termquotetoken}), mentre l'identificatore per un'entità con un nome irregolare richiede l'uso delle 
+virgolette (si veda la Sezione \ref{sec:identifierquoting}).
+
+Ci sono tre forme di nomi regolari:
+
+\begin{description}
+	\item[Alfanumerici] Iniziano con una lettera o con "`{\tt \_}"', seguiti da zero o più lettere, cifre, altri simboli "`{\tt \_}"' e apici "`{\tt '}"'
+	\item[Numerici] Iniziano con una cifra, seguita da zero o più cifre e simboli "`{\tt \_}"' mentre non possono essere immediatamente seguiti da 
+	una lettera o un apice "`{\tt '}"'
+	\item[Simbolici] Uno o più dei seguenti caratteri: "`\\\verb§! # & * + - . / ; < = > ? @ | ~ ^ [ ] \ { }§"'
+\end{description}
+
+Tutti gli altri nomi sono irregolari. Questi includono nomi con caratteri di spazio, di punteggiatura, ed ogni combinazione di caratteri alfanumerici, 
+simbolici, di spazio e punteggiatura.
+
+\begin{description}
+	\item[Caratteri di spazio] : spazio, tabulazione, line feed, form feed, carriage return.
+	\item[Caratteri di punteggiatura] : "`{\tt (}"' "`{\tt )}"' "`{\tt ,}"' "`{\tt :}"'
+\end{description}
+
+\subsection{Parole riservate}
+\label{sec:reservedwords}
+
+Ci sono tre tipi di token di parole riservate:
+
+\begin{description}
+	\item[Punteggiatura] : un singolo caratteri di punteggiatura (si veda la Sezione \ref{sec:regandirregnames})
+	\item[Parole chiave] : un nome regolare non numerico, dal seguente insieme fisso di otto token: "`\verb§\§"' "`{\tt .}"' 
+	"`{\tt and}"' "`{\tt else}"' "`{\tt if}"' "`{\tt in}"' "`{\tt let}"' "`{\tt then}"'
+	\item[Parentesi di enumerazione]:
+	
+		\begin{itemize}
+			\item un nome regolare non numerico per delimitare l'inizio o la fine di espressioni di enumerazione
+			\item l'utente può estendere l'insieme di parentesi di enumerazione (si veda la Sezione \ref{sec:enumExpressions})
+			\item nessuna parentesi di enumerazione è definita nel sistema base di HOL Zero
+		\end{itemize}
+	
+\end{description}
+
+Gli identificatori per entità con nomi che sono in conflitto con parole riservate richiedono l'uso di virgolette (si veda la Sezione \ref{sec:identifierquoting}).
+
+Si noti che il token lessicale "`{\tt =}"' è un caso speciale nella sintassi lessicale di HOL. Nonostante normalmente sia un identificatore, e sia 
+classificato come identificatore dalla sintassi lessicale, è di fatto una parola chiave quando occorre come parte di una dichiarazione-let 
+(si veda la Sezione \ref{sec:letExpressions}).
+
+\subsection{Giustapposizione di token}
+\label{sec:tokenjuxtaposition}
+
+Le quotation devono essere scritte con caratteri di spazio e parentesi sufficienti per distinguere token alfanumerici/numerici adiacenti o token 
+simbolici adiacenti (sia che questi token siano identificatori o parole riservate). Per esempio, in \verb§`\ ^ . ^ = 5`§ (dove "`\verb§^§"' è di fatto 
+una variabile), lo spazio è inserito tra "`\verb§\§"' e "`\verb§^§"', e "`\verb§^§"' e "`\verb§.§"', che sono entrambi token simbolici.
+
+\subsection{Quoting di indentificatori}
+\label{sec:identifierquoting}
+
+Gli identificatori per entità con nomi irregolari o nomi che sono in conflitto con parole riservate devono essere delimitati in modo speciale. 
+Questo implica l'utilizzo del carattere di doppie virgolette all'inizio e alla fine del nome, come in 
+
+\begin{hol}\begin{verbatim}
+
+`"then" = "foo x"`
+
+\end{verbatim}\end{hol}
+
+che significa la variabile nominata "`{\tt then}"' è uguale alla variabile nominata "`{\tt foo x}"'. Questo è chiamato quoting.
+
+Tutti i caratteri "`\verb§"§"', "`{\tt $\backslash$}"` in un nome tra virgolette devono essere preceduti da un backslash di escape come in \verb§`"\\ \""`§ (per un carattere 
+di backslash seguito da un carattere di doppie virgolette). Tutti i caratteri backquote o i caratteri non stampabili, in un nome tra virgolette, 
+devono essere inseriti attraverso un backslash seguito dal loro codice ASCII a tre cifre (con degli zero iniziali per caratteri ASCII con codice 
+minore di 100), come in "`\verb§\007\127§"' per il carattere ASCII "`{\tt 7}"' seguito dal carattere ASCII "`{\tt 127}"'. Questi codici ASCII a tre cifre possono essere 
+usati anche per i caratteri stampabili, come in "`\verb§\111\107§"' (per "`ok"'), ma questo naturalmente non è richiesto. 
+
+Variabili e costanti con nomi numerici devono anch'essi essere messi tra parentesi (poiché i token numerici nelle term quotation denotano numeri naturali 
+- si veda la Sezione \ref{sec:numerals}). Questo non si applica a variabili di tipo e costanti di tipo con nomi numerici.
+
+Il quoting di nomi di entità che non richiedono il quoting stesso (cioè nomi regolari che non vanno in conflitto) è ammesso, e denota la stessa 
+cosa del nome senza virgolette.
+
+\subsection{Segni speciali}
+\label{sec:specialSymbols}
+
+Gli identificatori in HOL Zero possono essere prefissati da un carattere speciale per definire informazioni extra. Il segno "`{\tt \$}"' 
+indica che l'identificatore occorre defissato (si veda la Sezione \ref{sec:defixing}), come in "`{\tt \$=}"'\footnote{In f\# il costrutto equivalente 
+per defissare un operatore consiste nel metterlo tra parentesi come in "`{\tt (+) 4 5}"'.}. E i segni "`{\tt '}"' e "`{\tt \%}"' indicano 
+rispettivamente che l'identificatore è una variabile di tipo o una variabile (si veda la Sezione \ref{sec:variableAndTypeVariableMarkings}), come in {\tt `:'a`} e {\tt `\%x`}.
+
+Questi segni sono parte dello stesso token lessicale della parte principale dell'identificatore, e devono precederla immediatamente senza che intervengano 
+tra essi degli spazi. Se l'identificatore il quoting (Sezione \ref{sec:identifierquoting}), allora i segni devono essere scritti fuori e immediatamente prima delle 
+virgolette di apertura, come in {\tt `$\backslash$''let''`}.
+
+Se un identificatore ha sia un segno di defixing che un segno di variabile o di variabile di tipo, allora il segno di defixing deve comparire prima, come 
+in {\tt `\$\%=`}.
+
+\section{Tipi}
+
+I tipo HOL esistono per aiutare a rafforzare una nozione di termini ben-formati, limitando come i termini possono essere costruiti (in modo specifico, 
+come possono essere costruiti i termini di applicazione di funzione). Un tipo denota un insieme non vuoto distinto di valori, e tutti i valori 
+denotabili hanno precisamente un tipo. Ogni termine ha un tipo, e i possibili valori denotati da un termine sono necessariamente tutti elementi 
+del suo tipo. I tipi hanno un datatype ML astratto "`{\tt hol\_type}"'.
+
+\subsection{Sintassi dei tipi primitivi}
+
+I tipi si suddividono in due categorie sintattiche primitive:
+
+\begin{description}
+	\item[Variabili di tipo] : 
+	
+		\begin{itemize}
+			\item consistono di un nome. Sono scritte nella forma {\tt `:'a`} (si noti che un apice precede il nomde della variabile), 
+			per qualche tipo variabile con nome "`{\tt a}"'
+			\item le variabili di tipo danno una dimensione di polimorfismo a un tipo (si veda la Sezione \ref{sec:typepolimorphism})
+		\end{itemize}
+	
+	\item[Tipi composti] : 
+	
+		\begin{itemize}
+			\item consistono di un tipo operatore "`{\tt c}"' e di una lista di tipi parametro "`{\tt t1,t2...}"': sono scritti nella forma 
+				{\tt `:c`} (si noti che nessun apice precede il nome del tipo) oppure {\tt `:(t1,t2,...)c`}, per qualche tipo costante "`{\tt c}"' 
+				e una lista di tipi parametro "`{\tt t1, t2, ...}"'.
+			\item questa categoria può essere atomica (come in "`{\tt `:c`}"') o ricorsiva (come in "`{\tt `:(t1,t2)c`}"'). Essa denota 
+				un'istanza di un tipo costante, con dei tipi forniti per ciascuno dei suoi tipi parametro. Una costante di tipo fornisce 
+				una struttura fondamentale ai tipi, e prende un numero fisso di tipi parametro.
+		\end{itemize}
+	
+\end{description}
+
+Il sistema base di HOL Zero è fornito di cinque tipi costanti preimpostati: "`{\tt bool}"', "`{\tt ind}"', "`{\tt nat}"', 
+"`{\tt ->}"' e "`{\tt \#}"' (si veda la Sezione 4.5). Il linguaggio HOL può essere esteso aumentando la list dei tipi attraverso 
+l'uso della dichiarazione di costante di tipo (Sezione 4.3.2).
+
+\subsection{Type quotations}
+
+I tipi sono mostrati usando una rappresentazione tramite virgolette, scritti con accenti acuti che ne delimitano l'inizio e la fine, iniziando 
+con il simbolo "`:"' al loro interno (come in "`{\tt `:bool->bool`}"').
+
+Le type quotation possono essere usate anche per digitare i tipi. Ogni possibile tipo ha sia una rappresentazione tramite virgolette che una 
+rappresentazione interna.
+
+Si noti che un altro modo per inserire tipi consiste nell'usare funzioni di costruttozione sintattica (si veda la Sezione 3.8.2).
+
+Le Sezioni \ref{sec:fixity}, 3.6, 3.9 e 3.10 elaborano ulteriori aspetti delle type quotation.
+
+\subsection{Tipi funzione}
+
+Una particolare costante di tipo, chiamata {\it operatore di tipo funzione} o "`{\tt ->}"' (scritta con fixity infissa), è fondamentale nel linguaggio HOL. 
+Essa prende due tipi parametro (chiamati {\it tipo dominio} e {\it tipo rango}), e denota funzioni che mappano elementi nel tipo dominio a 
+elementi nel tipo rango.
+
+Un'istanza dell'operatore di tipo funzione è conosciuta come {\it tipo funzione}. Per esempio {\tt `:nat->bool`} è un tipo funzione per funzioni 
+che mappano numeri naturali a valori booleani. Il tipo di un termine di lambda astrazione è necessariamente un tipo funzione, dove il tipo dominio è 
+il tipo della variabile che lega, e il tipo rango il tipo del corpo dell'astrazione.
+
+Per essere ben formato, un termine di applicazione di funzione ha delle restrizioni sui tipi dei suoi sottotermini. Il sottotermine funzione deve 
+avere un tipo funzione, e il suo tipo dominio deve essere uguale al tipo del sottotermine argomento.
+
+Per esempio, la seguente applicazione di funzione è ben formata:
+
+\begin{hol}\begin{verbatim}
+
+# `(f:nat->bool) (x:nat)`;;
+- : term = `(f:nat->bool) x`
+
+\end{verbatim}\end{hol}
+
+Mentre la seguente applicazione di funzione è mal formata:
+
+\begin{hol}\begin{verbatim}
+
+# `(f:bool->bool) (x:nat)`;;
+Exception: [HZ] TYPE ERROR: Function subterm domain type not equal to
+argument subterm type.
+
+\end{verbatim}\end{hol}
+
+\subsection{Polimorfismo di tipi}
+\label{sec:typepolimorphism}
+
+I tipi in HOL possono essere polimorfi, cioè un singolo tipo può fornire una famiglia di tipi tramite l'uso di variabili di tipo. Le 
+variabili di tipo in un tipo possono poi essere istanziate per dare un tipo più specifico. Questo permette di evitare di replicare le teorie 
+per ogni istanziazione richiesta.
+
+Le funzioni {\tt type\_tyvars} e {\tt term\_tyvars} ritornano le variabili di tipo rispettivamente in un dato tipo e in un dato termine HOL.
+
+\begin{hol}\begin{verbatim}
+
+# type_tyvars `:('a#'b->bool)->('a#'b)->bool`;;
+- : Type.hol_type list = [`:'a`; `:'b`]
+
+# term_tyvars `!(x:'a). P x`;;
+- : Type.hol_type list = [`:'a`]
+
+\end{verbatim}\end{hol}
+
+Si veda la Sezione 3.7 per i dettagli su come le variabili di tipo possono essere manipolate.
+
+\subsection{Calcolo dei tipi}
+
+Il tipo di ogni termine può essere calcolato in ultima analisi a partire dai tipi degli atomi del termine. 
+Questo può essere fatto ricorsivamente applicando le seguenti due regole ai sottotermini fino a quando si raggiungono 
+gli atomi del termine.
+
+\begin{itemize}
+	\item Il tipo di un'applicazione di funzione è il tipo rango del tipo della funzione
+	\item Il tipo di una lambda astrazione è un tipo funzione, con il tipo della sua variabile legante come suo tipo dominio e il tipo 
+	del corpo come suo tipo rango.
+\end{itemize}
+
+La funzione {\tt type\_of} ritorna il tipo HOL di un dato termine. Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# type_of `(2, true, x:'a)`;;
+- : hol_type = `:nat#bool#'a`
+
+\end{verbatim}\end{hol}
+
+\subsection{Inferenza di tipo}
+
+Come parte del processo di parsing di una term quotation in un termine interno, le quotation immesse sono sottoposte a un processo 
+di inferenza di tipo, per determinare i tipi di ogni atomo del termine.
+
+Per esempio, per la seguente term quotation:
+
+\begin{hol}\begin{verbatim}
+
+`x = y \/ y = (true,false)`
+
+\end{verbatim}\end{hol}
+
+l'inferenza di tipo determinerà che entrambe {\tt x} e {\tt y} sono di tipo
+
+\begin{hol}\begin{verbatim}
+
+`:bool#bool`
+
+\end{verbatim}\end{hol}
+
+L'inferenza di tipo individuerà qualunque inconsistenza di tipo all'interno della term quotation e solleverà di conseguenza un 
+messaggio di errore (si veda la Sezione 3.10.3).
+
+Alle term quotation immesse è permesso avere delle ambiguità circa i tipi specifici dei loro sottotermini (eccetto che per le 
+variabili overloaded - si veda la Sezione \ref{sec:variableOverloading}), purché i tipi sconosciuti siano autoconsistenti. L'inferenza di tipo determina 
+i tipi più generali possibili per i sottotermini, e alloca delle variabili di tipo numerate per i tipi non determinati.
+
+Per esempio nel seguente sottotermine:
+
+\begin{hol}\begin{verbatim}
+
+`f x = (a,false)`
+
+\end{verbatim}\end{hol}
+
+
+\begin{itemize}
+	\item La variabile {\tt x} è allocata al tipo {\tt `:'1`},
+	\item La variabile {\tt a} è allocata al tipo {\tt `:'2`} e
+	\item La variabile {\tt f} è allocata al tipo {\tt `:'1->'2\#bool`},
+\end{itemize}
+
+Per evitare ambiguità, si può usare l'annotazione di tipo per dichiarare esplicitamente i tipi dei sottotermini nelle term quotation 
+(Sezione 3.6.1). Si noti che un'annotazione di tipo fissa il tipo del suo sottotermine associato nella term quotation, e 
+che l'inferenza di tipo deduce solo i tipi dei sottotermini che non hanno annotazioni di tipo. 
+
+Per esempio, nel seguente sottotermine:
+
+\begin{hol}\begin{verbatim}
+
+`f x = (a:nat,false)`
+
+\end{verbatim}\end{hol}
+
+
+\begin{itemize}
+	\item La variabile {\tt x} è allocata al tipo {\tt `:'1`},
+	\item La variabile {\tt a} è allocata al tipo {\tt `:nat`} e
+	\item La variabile {\tt f} è allocata al tipo {\tt `:'1->nat\#bool`},
+\end{itemize}
+
+\subsection{Overloading delle variabili}
+\label{sec:variableOverloading}
+
+In HOL è permesso l'overloading delle variabili - in altre parole possono esistere nello stesso scopo variabili con lo stesso nome 
+ma con tipi differenti.
+
+Per esempio nel seguente sottotermine ci sono due variabili distinte:
+
+\begin{hol}\begin{verbatim}
+
+`(x:nat) = x /\ (x:ind) = x`
+
+\end{verbatim}\end{hol}
+
+Le term quotation con l'overloading di variabili devono avere annotazioni di tipo sufficiente ad evitare qualsiasi ambiguità 
+(si veda la Sezione 3.6.1).
+
+\section{Termini}
+
+Le espressioni ben formate nel linguaggio HOL sono chiamate termini. Essi hanno un datatype ML astratto {\tt term}. 
+
+I termini sono usati come base per rappresentare teoremi (si veda la Sezione 4.1).
+
+\subsection{Sintassi dei termini primitivi}
+
+Nonostante in una term quotation si possa usare una varietà di meccanismi sintattici, tutti i termini si suddividono in sole 
+quattro categorie sintattiche primitive:
+
+\begin{description}
+	\item[Variabile] :
+		(La forma di un termine variabile è {\tt `v`} per qualche variabile con nome "`{\tt v}"')
+		Questa categoria atomica denota un'occorrenza di una data variabile. Una variabile rappresenta un valore arbitrario all'interno 
+		di un termine HOL dato. Il nome della variabile può essere qualsiasi sequenza di caratteri ASCII, ed è case sensitive.
+	\item[Costante] :
+		(La forma di un termine costante è {\tt `c`} per qualche costante con nome "`{\tt c}"')
+		Questa categoria atomica denota un'occorrenza di una data costante. Una costante rappresenta un valore fisso. Il nome di una 
+		costante può essere una qualsiasi sequenza di caratteri ASCII, ed è case sensistive.
+	\item[Applicazione di funzione] :
+		(La forma di un termine applicazione di funzione è {\tt `f x`}, per qualche funzione "`{\tt f}"' e argomento "`{\tt x}"')
+		Questa categoria ricorsiva ha un sottotermine funzione e un sottotermine argomento. Denota il valore che la funzione 
+		assegna all'argomento.
+	\item[Lambda astrazione] :
+		(La forma di un termine lambda astrazione è {\tt `$\backslash$v. b`}, per qualche variabile "`{\tt v}"' e corpo "`{\tt b}"')
+		Questa categoria ricorsiva ha un sottotermine variabile legante e un sottotermine corpo. Denota la funzione anonima che 
+		assengna al suo argomento il valore determinato dal corpo, dove il corpo è espresso nei termini della variabile legante, che 
+		rappresenta un segnaposto per l'argomento.
+\end{description}
+
+Queste quattro categorie primitive sono usate per la rappresentazione interna dei termini.
+
+Tutte le term quotation possono essere espresse usando puramente le categorie primitive (usando le parentesi dove necessario per 
+delimitare i sottotermini). Per esempio: 
+
+\label{exmpl:3.3.1}
+\begin{hol}\begin{verbatim}
+
+`$! (\v1. $! (\v2. $==> ($= (f v1) (f v2)) ($= v1 v2)))`
+
+\end{verbatim}\end{hol}
+
+(Si veda la Sezione \ref{sec:specialSymbols} per il simbolo speciale "`\verb§$§"')
+
+Il sistema base di HOL Zero è fornito con quarantaquattro costanti (che includono "`{\tt true}"', "`{\tt false}"', "`{\tt =}"', 
+"`{\tt ==>}"', "`{\tt !}"' - si veda la Sezione 4.5). Il linguaggio HOL può essere esteso per averne di più usando la dichiarazione 
+di costante (si veda la Sezione 4.3.1). 
+
+\subsection{Term quotation}
+
+I termini sono mostrati usando una rappresentazione tramite virgolette, scrivendoli tra accenti acuti come delimitatori 
+(cioè "`{\tt `}"') all'inizio e la fine (come in {\tt `x + 5`}). La sintassi delle term quotation permette di scrivere le 
+espressioni matematiche in uno stile intuitivo eppure formale.
+
+Per esempio il seguente termine:
+\label{exmpl:3.3.2}
+\begin{hol}\begin{verbatim}
+
+`!v1 v2. f v1 = f v2 ==> v1 = v2`
+
+\end{verbatim}\end{hol}
+
+significa "`Per ogni $v_1$ e $v_2$, se la funzione $f$ mappa $v_1$ e $v_2$ agli stessi valori allora, 
+$v_1$ e $v_2$ sono uguali"'.
+
+La forma tramite virgolette può essere usata anche per immetere i termini. Le term quotation immesse 
+sono elaborate per costruire i "`termini interni"' (cioé la rappresentazione interna dei termini). In HOL Zero, ogni possibile 
+termine ha una term quotation così come una rappresentazione interna, e immettere la term quotation di un termine interno che viene 
+stampata a video da come risultato lo stesso termine interno.
+
+Si noti che un modo alternativo per immettere termini consiste nell'uso delle funzioni di costruzione sintattica (si veda la 
+Sezione 3.8.2).
+
+Le Sezioni \ref{sec:specialConstants}, \ref{sec:fixity}, 3.6, 3.9 e 3.10 elaborano ulteriori aspetti delle term quotation.
+
+\subsection{Abbreviazioni di termini}
+
+Anche se forse non è immediatamente ovvio, la term quotation nell'Esempio \ref{exmpl:3.3.1} da esattamente lo stesso termine interno 
+della term quotation nell'Esempio \ref{exmpl:3.3.2}. La sintassi non primitiva dell'Esempio \ref{exmpl:3.3.2} è spiegata nelle 
+Sezioni \ref{sec:specialConstants} e \ref{sec:fixity}, ma non è altro che un'abbreviazione per la sintassi primitiva usata nell'Esempio \ref{exmpl:3.3.1}. I termini 
+di default sono mostrati usando questa abbreviazione dove possibile, benché HOL Zero abbia il comando {\tt set\_language\_level\_mode}
+per mostrare soltanto la sintassi primitiva (si veda la Sezione 3.9.1).
+
+Due forme di abbreviazione sono usate persino quando si mostra la sintassi primitiva, che diventerebbe altrimenti illeggibile a causa 
+di un numero eccessivo di parentesi. 
+
+Innanzitutto, una lambda astrazione che denoti una funzione che prende più argomenti può essere 
+scritta usando una serie di variabili legate e un corpo, come in {\tt `$\backslash$x y z. body`}. Questa è un'abbreviazione per una lambda 
+astrazione annidata, come in {\tt `$\backslash$x. ($\backslash$y. ($\backslash$z. body))`}.
+
+In secondo luogo, l'applicazione di una funzione che prende più argomenti può essere scritta nella forma {\it curried}, dove la funzione 
+è seguita dai suoi argomenti in serie, come in {\tt `f a b c`}. Questa è un'abbreviazione per una serie annidata di applicazioni di funzioni 
+di un solo argomento, come in {\tt `((f a) b) c`}, dove la funzione più interna mappa il primo argomento a un valore che è esso stesso una 
+funzione, e questa mappa il secondo argomento a una funzione che prende l'argomento successivo, e così via, con la funzione finale che 
+mappa l'ultimo argomento al risultato finale. Le applicazioni delle costanti "`{\tt ==>}"' e "`{\tt =}"' nell'Esempio \ref{exmpl:3.3.1} sono tutte 
+applicazioni curried, che prendono due argomenti.
+
+\subsection{Funzioni}
+
+Sin noti che le funzioni stesse sono valori (si pensi alle funzioni come a un mapping), e così, per esempio, una costante o una variabile 
+possono denotare una funzione, l'applicazione di una funzione può essere essa stessa una funzione, e la variabile legante in una lambda 
+astrazione può essere essa stessa una funzione.
+
+E' questa mancanza di una fondamentale distinzione tra il trattamento delle funzioni dal trattamento dei valori che rende HOL un linguaggio 
+di ordine superiore, perchè le variabili legate possono riferirsi a funzioni. Questa mancanza di distinzione significa anche che gli operatori, 
+come il quantificatore universale, l'implicazione e l'uguaglianza, sono tutte costanti in HOL, perché sono tutti valori fissati. Questo 
+rende il linguaggio semplice eppure potente.
+
+Si noti che tutte le funzioni in HOL sono totali, così ogni applicazione di funzione ha un valore.
+
+\subsection{Variabili libere, legate e alfa-equivalenza}
+
+Ogni variabile in un termine dato è o libera o legata all'interno del termine. Una variabile legata è una variabile che occorre nel suo corpo 
+legato. Una variabile libera è qualsiasi variabile che occorre nel termine ma non è legata.
+
+La funzione {\tt free\_vars} restituisce le variabili libere in un dato termine. Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# free_vars `\x. x = 5 \/ x = y`;;
+- : term list = [`y:nat`]
+
+\end{verbatim}\end{hol}
+
+Lo scopo di una variabile legata è limitato al suo legame corrispondente, mentre lo scopo di una variabile libera è l'intero termine (escludendo 
+però qualsiasi sottotermine legante con una variabile legante con lo stesso nome e tipo).
+
+Due termini sono detti essere {\it alfa-qeuivalenti} se sono equivalenti modulo i nomi di qualsiasi variabile legata nei termini. Questa è una 
+nozione fondamentale di equivalenza nella logica HOL.
+
+La funzione {\tt alpha\_eq} ritorna se i termini dati sono alfa-equivalenti. Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# alpha_eq `!x. x = 5 \/ x = y` `!z. z = 5 \/ z = y`;;
+- : bool = true
+
+\end{verbatim}\end{hol}
+
+\section{Costanti particolari supportate}
+\label{sec:specialConstants}
+
+Certe costanti hanno una loro sintassi specifica nelle term quotation, per migliorare la leggibilità. Questa sezione tratta queste 
+costanti.
+
+\subsection{Espressioni condizionali}
+
+Un'espressione condizionale denota il valore di uno di due sottotermini, chiamati {\it rami}, dove la scelta è determinata da un'ulteriore 
+sottotermine, con valore booleano, chiamato {\it condizione}. Il primo ramo, chiamato {\it ramo-allora}, è scelto se la condizione è 
+vera, e il secondo, chiamato {\it ramo-altrimenti}, è scelto se la condizione è falsa.
+
+Le espressioni condizionali sono scritte con {\tt if}, seguito dalla condizione, seguito da {\tt then}, seguito dal ramo-allora, seguito 
+da {\tt else}, seguito dal ramo-altrimenti, come in:
+
+\begin{hol}\begin{verbatim}
+
+`if c then t1 else t2`
+
+\end{verbatim}\end{hol}
+
+({\tt c} ha tipo {\tt :bool}, mentre {\tt t1} ha lo stesso tipo di {\tt t2}) che significa "`il valore $t_1$, se $c$ ha valore 
+{\it vero}, e il valore $t_2$, se $c$ ha il valore {\it falso}"'. 
+
+Comunque, questa è di fatto un'{\it abbreviazione} per un'applicazione della costante {\tt COND}:
+
+\begin{hol}\begin{verbatim}
+
+`COND c t1 t2`
+
+\end{verbatim}\end{hol}
+
+\subsection{Espressioni-LET}
+\label{sec:letExpressions}
+
+Un'espressione-let è usata per introdurre variabili locali con il loro valore assegnato a un sottotermine. Ciascuna parte 
+che introduce una variabile e il suo valore assegnato è chiamata {\it let-binding}, e il sottotermine a cui questo si 
+applica è chiamato {\it let-body}. Ogni let-binding è scritto come una variabile, seguita da "`{\tt =}"', seguita dal 
+valore assegnato. Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+`let v1 = t1 and v2 = t2 and ... and vn = tn in t0`
+
+\end{verbatim}\end{hol}
+
+che significa "`il valore $t_0$, ma con la variabile $v_1$ rimpiazzata con il termine $t_1$, e la variabile $v_2$ rimpiazzata 
+con il termine $t_2$, e poi ... e poi la variabile $v_n$ rimpiazzata con il termine $t_n$"'. Questo ha lo stesso valore 
+di 
+
+\begin{hol}\begin{verbatim}
+
+`(\v1 v2 ... vn . t0) t1 t2 ... tn`
+
+\end{verbatim}\end{hol}
+
+Questa è un'abbreviazione per un'applicazione composta della costante {\tt LET}:
+
+\begin{hol}\begin{verbatim}
+
+`LET (... (LET (LET (\v1 v2 ... vn . t0) t1) t2)...) tn`
+
+\end{verbatim}\end{hol}
+
+Si noti che il simbolo "`{\tt =}"' usato in un let-binding, per separare una variabile dal suo valore assegnato, è di fatto 
+un token parola riservata benché abbia uno stato di token identificatore durante il parsing. Questa è una peculiarità 
+della sintassi lessicale di HOL.
+
+\subsection{Espressioni coppia}
+
+Le espressioni coppia sono scritte con parentesi aperte e chiuse, con le componenti separate da virgola, come in:
+
+\begin{hol}\begin{verbatim}
+
+`(t1, t2, ..., tn)`
+
+\end{verbatim}\end{hol}
+
+che significa un $n$-upla, con le componenti $t_1, t_2, ..., t_n$.
+
+Questa è un'abbreviazione per l'applicazione composta della costante {\tt PAIR}:
+
+\begin{hol}\begin{verbatim}
+
+`PAIR t1 (PAIR t2 (... tn)...)`
+
+\end{verbatim}\end{hol}
+
+\subsection{Espressioni Enumerazione}
+\label{sec:enumExpressions}
+
+Le enumerazioni danno un elenco seriale di elementi con la stessa struttura, con dei delimitatori all'inizio e alla fine che indicano 
+la forma particolare della struttura. Gli elementi in un'enumerazione sono separati da "`{\tt ;}"'\footnote{Nel manuale utente originale 
+sembra un errore l'indicazione della "`{\tt ,}"' come delimitatore di separazione per gli elementi di una lista.}.
+
+Per esempio, se devono essere definite delle liste, una lista di tre elementi può essere scritta nel seguente modo:
+
+\begin{hol}\begin{verbatim}
+
+`[ a; b; c ]`
+
+\end{verbatim}\end{hol}
+
+Il fatto che sia una lista verrebbe indicato dall'uso di \verb§[§ e \verb§]§ come delimitari di apertura e chiusura. Questa sarebbe 
+un'abbreviazione per un'applicazione composta dell'operatore di inserimento di elementi in una lista, {\tt CONS}, alla 
+costante per la lista vuota {\tt NIL}:
+
+\begin{hol}\begin{verbatim}
+
+`CONS a (CONS b (CONS c NIL))`
+
+\end{verbatim}\end{hol}
+
+Questa forma di enumerazione può essere scritta per termini di una data struttura se i delimitatori sono stati associati 
+con l'operatore di inserimento di elementi della struttura e la costante di struttura vuota. Questo è fatto usando il comando 
+"`{\tt set\_enum\_brackets}"', che prende come argomenti una coppia per i nomi delle costanti di inserimento e di lista vuota e una 
+coppia per i delimitatori di apertura e chiusura. 
+
+Per esempio, le parentesi per le liste sarebbero settate da:
+
+\begin{hol}\begin{verbatim}
+
+# set_enum_brackets ("CONS","NIL") ("[","]");;
+[HZ] Setting "[" and "]" as enumeration brackets for constructor "CONS"
+with zero "NIL".
+- : unit = ()
+
+\end{verbatim}\end{hol}
+
+I nomi forniti per le parentesi di enumerazione devono essere regolari non numerici, cioè o simbolici o alfanumerici 
+(si veda la Sezione \ref{sec:regandirregnames}), e una volta associati, questi nomi diventano parole riservate.
+
+L'informazione circa le parentesi di enumerazione già settate è fornita dal comando "`{\tt get\_all\_enum\_info}"'\footnote{Nota bene: 
+come indicato nella Sezione \ref{sec:reservedwords} nessuna parentesi di enumerazione è definita nel sistema base di HOL Zero, quindi 
+il comando indicato restituirà una lista vuota all'avvio di HOL Zero.}. 
+Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# get_all_enum_info ();;
+- : ((string * string) * (string * string)) list =
+[(("CONS", "NIL"), ("[", "]"));
+ (("SERIAL_STMT", "NULL_STMT"), ("begin", "end"))]
+
+\end{verbatim}\end{hol}
+
+\subsection{Numerali}
+\label{sec:numerals}
+
+I numerali rappresentano valori di numeri naturali, e semplicemente prendono la forma di un nome numerico (come in {\tt `19`}). 
+Qualsiasi "`{\tt \_}"' in un nome numerico è usato solamente per imbottire, e non ha alcun effetto sul valore (così {\tt `65\_535`} 
+rappresenta lo stesso termine interno di {\tt `65535`}).
+
+Un numerale in HOL Zero non è una costante, ma è di fatto soltanto l'abbreviazione per una serie di applicazioni delle funzioni 
+{\tt BIT0} e {\tt BIT1} alla costante {\tt ZERO}, con un'etichettatura esterna attraverso la funzione {\tt NUMERAL}. 
+Per esempio {\tt `19`} è un'abbreviazione per la seguente espressione:
+
+\label{exmpl:3.4}
+\begin{hol}\begin{verbatim}
+
+`NUMERAL (BIT1 (BIT1 (BIT0 (BIT0 (BIT1 ZERO)))))`
+
+\end{verbatim}\end{hol}
+
+La costante {\tt ZERO} rappresenta il numero naturale $0$. La funzione {\tt BIT0} raddoppia il suo argomento, e la 
+funzione {\tt BIT1} raddoppia il suo argomento ed aggiunge $1$. La funzione {\tt NUMERAL} semplicemente ritorna il 
+suo argomento\footnote{In formato numerico a base 10.}, ed è usata per etichettare un numerale atomico. Usare le operazioni composte 
+{\tt BIT0} e {\tt BIT1} su {\tt ZERO} corrisponde direttamente alla notazione binaria, con {\tt BIT0} per 
+0-bits e {\tt BIT1} per 1-bits, ma con l'ordine dei bit invertito. Così l'esempio \ref{exmpl:3.4} rappresenta $10011$ (base 2), 
+cioè $19$ (base 10). Si noti che i {\tt BIT0} applicati direttamente a {\tt ZERO} non hanno effetto sul valore. Termini interni con {\tt BIT0}
+applicati direttamente a {\tt ZERO} non sono nemmeno stampati a video come numerali, per assicurare che i numerali abbiano 
+una rappresentazione interna univoca.
+
+\section{Fixity}
+\label{sec:fixity}
+
+Agli identificatori di variabile, costante e tipo costante può essere assegnato uno status sintattico speciale, chiamato 
+{\it fixity}\index{fixity}, pemettendo loro di essere scritti prima, dopo o in mezzo, ai loro argomenti. La fixity è 
+un elemento decisamente importante per aumentare la leggibilità delle term quotation.
+
+\subsection{Fixity di termine e fixity di tipo}
+\label{sec:termAndTypeFixity}
+
+La {\it fixity di termine}\index{fixity di termine} si può riferire alla fixity degli identificatori di variabili e di costanti. 
+Qualsiasi variabile o costante che condivida lo stesso nome deve avere la stessa fixity di termine.
+
+Le fixity di termine disponibili sono: nonfix, prefix, infix, postfix, binder.
+
+La {\it fixity di tipo}\index{fixity di tipo} si riferisce alla fixity di tipi costanti, ed è indipendente dalla fixity di termini 
+(e così, per esempio, lo stesso identificatore, potrebbe avere fixity di tipo infissa e fixity di termine prefissa).
+
+Le fixity di tipo disponibili sono: nonfix, infix.
+
+\subsection{Fixity Nonfix}
+\label{sec:nonfix}
+
+La fixity di default di un identificatore è {\it nonfix}\index{nonfix}. Nella fixity di termine, nonfix è per le funzioni che 
+sono applicate nella classica forma curried (come in {\tt `P x y z`} che occorrono con o senza argomenti, o per costanti che 
+non sono funzioni (come in {\tt `x`}).
+
+Nella fixity di tipo, nonfix è per i tipi operatore che appaiono dopo i loro tipi argomento (come in {\tt `:('a,'b)map`}) e 
+per i tipi base (come in {\tt `:bool`}). Si noti che benché i tipi operatore appaiano dopo i loro tipi parametro, essi hanno 
+fixity nonfix e non postfix.
+
+\subsection{Fixity prefix}
+\label{sec:prefix}
+
+La fixity {\it prefix}\index{prefix} è per termini operatori unari che appaiono prima dei loro argomenti (come in \verb§`~ true`§). 
+Diversamene dagli operatori nonfix, non sono richieste parentesi per le applicazioni composte di un operatore prefisso (così 
+\verb§`~ ~ true`§ è lo stesso di \verb§`~ (~ true)`§).
+
+\subsection{Fixity infix}
+\label{sec:infix}
+
+La fixity {\it infix}\index{infix} è per operatori binari o tipi operatore che appiaono in mezzo ai loro argomenti o i loro 
+tipi parametro (come in {\tt `x + y`} o {\tt `:'a -> 'b`}).
+
+Per ridurre il numero di parentesi richieste quando si scrivono espressioni infisse composte, le fixity infix hanno un 
+{\it numero di precedenza}\index{numero di precedenza} e un {\it lato di associazione}\index{lato di associazione}. Gli operatori 
+con un numero di precedenza più alto legano in modo più stretto, e così le espressioni con operatore di precedenza più alto che 
+sono sottoespressioni di espressioni con operatore di precedenza più basso non devono essere racchiuse tra parentesi. Il 
+lato di associazione ({\it associazione a sinistra}\index{associazione a sinistra}, {\it associazione a destra}\index{associazione a destra}, 
+{\it non associazione}\index{non associazione}) indica come un'espressione composta senza parentesi sullo stesso operatore si 
+scompone, dove le parentesi per operatori associativi a sinistra o a destra si raggruppano implicitamente sul lato di associazione, e 
+le espressioni composte su operatori non associativi sono sempre scritte con parentesi esplicite.
+
+Per esempio, {\tt +} è associativo a sinistra, e {\tt *} ha precedenza più alta di {\tt +}, così il seguente termine:
+
+\begin{hol}\begin{verbatim}
+
+`(a + b * c + d + e) * f`
+
+\end{verbatim}\end{hol}
+
+rappresenta lo stesso termine interno di 
+
+\begin{hol}\begin{verbatim}
+
+`(((a + (b * c)) + d) + e) * f`
+
+\end{verbatim}\end{hol}
+
+\subsection{Fixity postfix}
+\label{sec:postfix}
+
+La fixity {\it postfix}\index{postfix} è per termini operatore unari che compaiono dopo il loro argomento (come in \verb§`5 !!`§, per 
+qualche operatore postfisso {\tt !!}). Le applicazioni composte di un operatore postfisso richiedono l'uso di parentesi come in 
+\verb§`(5 !!) !!`§).
+
+\subsection{Fixity binder}
+\label{sec:binder}
+
+La fixity {\it binder}\index{binder} è per i {\it quantificatori}\index{quantificatori}, come {\tt !} (per ogni, $\forall$), {\tt ?} (esiste, $\exists$) e 
+{\tt \@} (seleziona), che prendono come argomento una lambda astrazione e così legano una variabile legante. Questi sono scritti allo stesso modo 
+delle lambda astrazioni (come in {\tt `!x. x > 5`} che significa "`$\forall x, x > 5$"', ed è di fatto un'abbreviazione per 
+{\tt `\$! ($\backslash$x. x > 5)`}). Come per le lambda astrazioni, il binding di una serie di variabili con lo stesso operatore può essere scritto 
+come un singolo binding (come in {\tt `!x y. x = y`}.
+
+\subsection{Potenza dei binding}
+\label{sec:bindingPower}
+
+Il seguente elenco sintetizza quanto strettamente le fixity legano. I primi elementi dell'elenco legano più strettamente dei successivi:
+
+\begin{itemize}
+	\item nonfix
+	\item postfix
+	\item prefix
+	\item infix
+	\item binder
+\end{itemize}
+
+I sottotermini che legano più strettamente non hanno bisogno di parentesi, e i termini sono sempre mostrati senza parentesi.
+
+Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+`P 0 /\ (!x. ~ P (x + 1) ==> ~ P x) ==> (!x. P x)`
+
+\end{verbatim}\end{hol}
+
+è lo stesso di 
+
+\begin{hol}\begin{verbatim}
+
+`(P 0 /\ (!x. (~ (P (x + 1))) ==> (~ (P x)))) ==> (!x. (P x))`
+
+\end{verbatim}\end{hol}
+
+\subsection{Defixing}
+\label{sec:defixing}
+
+La fixity di un identificatore può essere rilasciata localmente ({\it defixing}\index{defixing}) in una data quotation, per dare 
+all'occorrenza di quell'operatore uno stato nonfix. Questo si ottiene anteponendo il simbolo "`{\tt \$}"' all'operatore, senza 
+spazi di separazione, come in {\tt \$=}.
+
+L'uso del defixing è necessario quando si fa riferimento a un operatore che non è applicato al numero completo di argomenti 
+richiesto dalla sua fixity.
+
+Si veda la Sezione \ref{sec:specialSymbols} per maggiori dettagli circa la sintassi lessicale dei simboli di defixing.
+
+\subsection{Impostazione e verifica delle fixity}
+\label{sec:settingAndQueryingFixity}
+
+Il datatype ML {\tt fixity} per rappresentare la fixity. Esso ha le seguenti classi:
+
+\begin{itemize}
+	\item Nonfix
+	\item Prefix
+	\item Infix (int * assochand)
+	\item Postfix
+	\item Binder
+\end{itemize}
+
+dove {\tt assochand} può assumere i valori {\tt LeftAssoc}, {\tt RightAssoc} or {\tt NonAssoc}.
+
+Le fixity degli identificatori di termine e di tipo possono essere impostate rispettivamente con i comandi 
+{\tt set\_fixity} e {\tt set\_type\_fixity}. Essi prendono come argomenti il nome dell'identificatore e la nuova 
+fixity. Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# set_fixity ("##", Infix (200,RightAssoc));;
+[HZ] Setting fixity for name "##".
+
+\end{verbatim}\end{hol}
+
+Le fixity di termine e di tipo possono essere verificate usando, rispettivamente, i comandi {\tt get\_fixity} e {\tt get\_type\_fixity}. 
+Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# get_type_fixity "->";;
+- : fixity = Infix (5, RightAssoc)
+
+\end{verbatim}\end{hol}
+
+La fixity di un identificatore di termine o di tipo può essere rilasciata (globalmente) usando, rispettivamente, i comandi 
+{\tt reset\_fixity} e {\tt reset\_type\_fixity}. Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# reset_type_fixity "x";;
+[HZ] Resetting type fixity for name "x".
+
+\end{verbatim}\end{hol}
+
+\section{Annotazioni}
+\label{sec:annotations}
+
+Nelle quotation possono essere usate tre forme di annotazione. Lo scopo delle annotazioni è quello di aggiungere informazioni chiare 
+circa una quotation e così evitare ambiguità. HOL Zero assicura che le quotation siano sempre mostrate con un livello sufficiente di 
+annotazioni per evitare qualsiasi ambiguità.
+
+\subsection{Annotazioni di tipo}
+\label{sec:typeAnnotations}
+
+Ai sottotermini possono essere aggiunte delle annotazioni di tipo circondando il sottotermine con delle parentesi e facendo seguire al 
+sottotermine il carattere {\tt :} e quindi il suo tipo (come in {\tt `(f:'a->'b) x`}). Si noti che le parentesi possono essere omesse 
+per delle annotazioni di tipo inserite al livello superiore (come in {\tt `x:bool`}), o per elementi di enumerazione (come in 
+{\tt `[a:nat,b]`}) o per elementi di coppie (come in {\tt `(a:nat,b:bool)`}).
+
+Le quotation di termini e di teoremi stampati a video hanno i loro termini atomo con annotazioni di tipo sufficienti per rimuovere 
+qualsiasi ambiguità circa i tipi specifici dei sottotermini. Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# `f x`;;
+- : term = `(f:'1->'2) x`
+
+\end{verbatim}\end{hol}
+
+Di default, le annotazioni di tipo automatiche di termini e teoremi stampati a video sono sufficienti per rimuovere qualsiasi ambiguità 
+a un livello minimo. Comunque, il comando {\tt set\_type\_annotation\_mode} può essere usato per far sì che ogni atomo sia stampato 
+con un'annotazione di tipo (si veda la Sezione 3.9.2).
+
+Alle type quotation immesse possono essere aggiunte delle annotazioni di tipo per vincolare i tipi dei sottotermini. L'inferenza di tipo 
+altrimenti assegna il tipo più generale per ogni termine di una quotation immessa (si veda la Sessione 3.2.6). L'uso di un'annotazione 
+di tipo fissa il tipo dei suoi sottotermini associati nella term quotation, e l'inferenza di tipo deduce solo il tipo dei sotto termini 
+senza annotazioni di tipo.
+
+Le term quotation immesse normalmente non richiedono alcuna annotazione di tipo per essere accettate dal parser (purché siano ben 
+formate). Comunque, le term quotation che coinvolgono l'overloading delle variabili hanno bisogno di annotazioni di tipo sufficienti 
+ad assicurare che i tipi delle variabili overloaded visibili al livello superiore del termine o di un sottotermine lambda astrazione 
+siano completamente risolti a quel punto (senza prendere in considerazione l'informazione contestuale dall'esterno della lambda 
+astrazione).
+
+Per esempio, la seguente è rigettata a causa dell'ambiguità della sua variabile di binding (che potrebbe essere di tipo {\tt `:'a`} o 
+di tipo {\tt `:'b`}):
+
+\begin{hol}\begin{verbatim}
+
+# `x = (x:'a) /\ !x. x=(x:'a) \/ (x:'b)=x`;;
+Exception: [HZ] TYPE ERROR: Overloaded var "x" type not resolved at name
+closure.
+
+\end{verbatim}\end{hol}
+
+La seguente, invece, non ha ambiguità (la variabile libera {\tt x} ha tipo {\tt `:'b`}) ed è accettata:
+
+\begin{hol}\begin{verbatim}
+
+# `x = x /\ !(x:'a). x=(x:'a) \/ (x:'b)=x`;;
+- : term = `x = x /\ (!(x:'a). (x:'a) = x \/ (x:'b) = x)`
+
+\end{verbatim}\end{hol}
+
+anche la seguente è accettata (tutte le {\tt x} all'interno della lambda astrazione sono assunte riferirsi alla stessa variabile):
+
+\begin{hol}\begin{verbatim}
+
+# `x = (x:'b) /\ !x. x=(x:'a) \/ x=x`;;
+- : term = `(x:'b) = x /\ (!(x:'a). x = x \/ x = x)`
+
+\end{verbatim}\end{hol}
+
+Si noti che un identificatore con annotazione di tipo mantiene la sua fixity anche se essa è nonfix (come in 
+{\tt `x (=:'a->'a->bool) y`}).
+
+\subsection{Segno di identificazione di variabile e di variabile di tipo}
+\label{sec:variableAndTypeVariableMarkings}
+
+Gli identificatori di variabili nelle term quotation possono essere distinte dagli identificatori di costanti con lo stesso 
+nome annotandoli con un segno {\tt \%} prima del nome, senza alcuno spazio di separazione (come in {\tt `\%x`}). Si noti che 
+non è obbligatorio che una tale variabile abbia lo stesso tipo della costante con lo stesso nome.
+
+Per esempio, la seguente denota una variabile con nome "`{\tt true}"' (in contrapposizione alla costante booleana "`{\tt true}"'):
+
+\begin{hol}\begin{verbatim}
+
+# `%true`;;
+- : term = `%true:'1`;;
+
+\end{verbatim}\end{hol}
+
+Analogamente, gli identificatori delle variabili di tipo nelle type quotation e nelle annotazioni di tipo possono essere distinte 
+dalle costanti di tipo facendo precedere al nome il simbolo "`{\tt '}"' (come in {\tt `:'bool`} per denotare una variabile di tipo 
+con nome "`{\tt bool}"').
+
+Nelle term quotation, gli identificatori con il nome di una costante senza annotazioni si assumono riferirsi alla costante. Analogamente, 
+nelle type quotation e nelle annotazioni di tipo, gli identificatori senza annotazioni con il nome di una costante di tipo si assumono 
+riferirsi alla costante di tipo.
+
+Le variabili che non sono sottoposte a overload rispetto alle costanti sono stampate a video di default senza il segno di variabili, mentre tutte le variabili 
+di tipo sono stampate a video di default con un segno di variabile di tipo. Questo può essere modificato usando i comandi 
+{\tt set\_var\_marking\_mode} e {\tt set\_tyvar\_marking\_mode} (si veda la Sezione 3.9.3).
+
+Si noti che qualsiasi identificatore di variabile marcato con "`{\tt \%}"' avrà la stessa fixity degli identificatori di costante con lo stesso 
+nome (a meno che l'identificatore sia defissato usando "`{\tt \$}"' - si veda la Sezione 3.5.8).
+
+Si vedano la Sezione per maggiori dettagli sulla sintassi lessicale dei segni di variabile e di variabile di tipo.
+
+\section{Instanziazione e matching}
+
+... instanziazione
+
+\begin{hol}\begin{verbatim}
+
+# type_inst : (hol_type * hol_type) list -> hol_type -> hol_type
+
+# tyvar_inst : (hol_type * hol_type) list -> term -> term
+
+# var_inst : (term * term) list -> term -> term
+
+\end{verbatim}\end{hol}
+
+\section{Funzioni sintattiche}
+
+Le funzioni sintattiche sono funzioni ML di utilità dedicate a una particolare categoria sintattica di tipo o termine, che agiscono 
+al livello superiore di un'espressione di tipo o di termine. Ci sono tre tipologie di funzioni sintattiche: decostruttori, costruttori e 
+discriminatori. Tutti le tipologie sono definite per ciascuna delle categorie sintattiche primitive di tipi e termini, così come per 
+la maggior parte delle costanti di funzione e di tipi operatori definite nel sistema HOL Zero di base.
+
+Si veda l'Appendice A3 per una descrizione completa di ciascuna funzione sintattica.
+
+\subsection{Decostruttori sintattici}
+
+Le funzioni di decustruzione della sintassi servono a suddividere un tipo HOL o un'espressione di termine che ha una particolare 
+categoria sintattica al suo livello superiore, ritornando le sottocomponenti dell'espressione. Il decustruttore di base per una 
+data categoria sintattica ha un nome ML della forma "`{\tt dest\_<categoria>}"' (si veda la Sezione 3.8.4 per una lista completa dei 
+nomi di categoria).
+
+Per esempio, il decostruttore {\tt dest\_conj} suddivide termini congiunzione:
+
+\begin{hol}\begin{verbatim}
+
+# dest_conj `x = 5 /\ y = 3`;;
+- : term * term = (`x = 5`, `y = 3`)
+
+\end{verbatim}\end{hol}
+
+Se il livello superiore dell'espressione fornita non si conforma alla categoria sintattica data è lanciata un'eccezione ML di tipo 
+HolFail. Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# dest_conj `x = 5 \/ (y = 3 /\ z = 4)`;;
+Exception: [HZ] FAIL: dest_conj - Not a conjunction.
+
+\end{verbatim}\end{hol}
+
+I decostruttori sintattici sono definiti per vari tipi di espressioni composte. Queste hanno un nome ML della forma 
+"`{\tt strip\_<category>}"'. Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# strip_conj `x = 5 /\ y = 3 /\ z = 4`;;
+- : term list = [`x = 5`; `y = 3`; `z = 4`]
+
+\end{verbatim}\end{hol}
+
+Le espressioni possono anche essere suddivise nei termini di una categoria sintattica primitiva.
+
+Per esempio, nella sintassi primitiva, il livello superiore di un termine congiunzione è un'applicazione di funzione. 
+Così la congiunzione di sopra può essere suddivisa anche nel modo seguente:
+
+\begin{hol}\begin{verbatim}
+
+# dest_comb `x = 5 /\ y = 3`;;
+- : term * term = (`$/\ (x = 5)`, `y = 3`)
+
+\end{verbatim}\end{hol}
+
+Per i termini è fornito un decostruttore generico, chiamato {\tt dest\_term}, che suddivide un termine in 
+una delle quattro categorie sintattiche primitive di termine. Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# dest_term `\x. x = 5`;;
+- : destructed_term = Term_abs (`x:nat`, `x = 5`)
+
+# dest_term `x = 5`;;
+- : destructed_term = Term_comb (`$= (x:nat)`, `5`)
+
+\end{verbatim}\end{hol}
+
+Analogamente, è fornito un decostruttore generico per i tipi, chiamato {\tt dest\_type}, per le due categorie sintattiche 
+primitive di tipo. Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# dest_type `:'a->'b`;;
+- : destructed_type = Type_comp ("->", [`:'a`; `:'b`])
+
+\end{verbatim}\end{hol}
+
+\section{Costruttori sintattici}
+
+Le funzioni di costruzione sintattica servono per creare un'espressione di tipo o di termine dalle sue sottocomponenti. 
+Queste rappresentano delle alternative alle quotation di tipo e di termine (si vedano le Sezioni 3.2.2 e 3.3.2) per 
+creare tipi e termini interni. Esse prendono una o più sottoespressioni come argomenti e ritornano un'espressione. Esse 
+prendono una o più sottoespressioni come argomenti e ritornano un'espressione. Le funzioni costruttori di base hanno 
+un nome ML della forma "`{\tt mk\_<category>}"' (si veda la Sezione 3.8.4 per una lista completa dei nomi di categoria).
+
+Per esempio, il costruttore {\tt mk\_eq} crea un termine uguaglianza:
+
+\begin{hol}\begin{verbatim}
+
+# mk_eq (`x:nat`,`5`);;
+- : term = `x = 5`
+
+\end{verbatim}\end{hol}
+
+I costruttori tipicamente hanno restrizioni sulla forma dei loro argomenti, per assicurare che essi possano creare 
+soltanto espressioni ben formate. Gli argomenti che non si adeguano alle restrizioni risultano in un'eccezione ML di tipo 
+HolFail. Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# mk_eq (`true`,`5`);;
+Exception: [HZ] FAIL: mk_eq - Arg 1 type not equal to Arg 2 type.
+
+\end{verbatim}\end{hol}
+
+Sono anche definiti costruttori sintattici per creare espressioni composte. Questi hanno un nome ML della forma 
+"`{\tt ist\_mk\_<categroy>}"'. Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# list_mk_forall ([`x:nat`;`y:nat`], `x = 0 \/ y < x`);;
+- : term = `!x y. x = 0 \/ y < x`;;
+
+\end{verbatim}\end{hol}
+
+\section{Discriminatori sintattici}
+
+I discriminatori sintattici sono funzioni ML per testare che il livello superiore di un'espressione si conformi ad una particolare 
+categoria sintattica. Essi semplicemente ritornano {\tt true} se l'espressione si conforma e {\tt false} altrimenti. I discriminatori 
+hanno un nome ML della forma {\tt is\_<category>} (si veda la Sezione 3.8.4 per una lista completa di nomi di categoria). Si noti che 
+i discriminatori non sollevano eccezioni.
+
+Per esempio, {\tt is\_fun\_type} è il discriminatore per i tipi funzione:
+
+\begin{hol}\begin{verbatim}
+
+# is_fun_type `:A->B->C`;;
+- : bool = true
+
+\end{verbatim}\end{hol}
+
+\section{Nomi di categorie sintattiche}
+
+La parte del nome di una funzione sintattica usata per riferirsi a una particolare categoria sintattica è un nome minuscolo alfabetico 
+per la categoria.
+
+Le categorie di termini HOL supportate dalle funzioni sintattiche, insieme con i loro nomi alfabetici sono come segue:
+
+\begin{description}
+	\item[variabile] : {\tt var} 
+	\item[costante] : {\tt const}
+	\item[applicazione di funzione] : {\tt comb}
+	\item[lambda astrazione] : {\tt abs}
+\end{description}
+
+\begin{flushleft}
+
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Simbolo Matematico					&		ASCII  						&		Funzione Sintattica 		\\
+		\hline		
+		$=$ 												&		\verb§=§  				&		{\tt eq} 								\\
+		$\wedge$  									&		\verb§/\§  				&		{\tt conj}							\\		
+		$\vee$ 											&		\verb§\/§  				&		{\tt disj}							\\
+		$\rightarrow$ 							&		\verb§==>§  			&		{\tt imp} 							\\ 
+		$\neg$  										&		\verb§~§  				&		{\tt not} 							\\
+		$\forall$ 									&		\verb§!§  				&		{\tt forall}						\\
+		$\exists$ 									&		\verb§?§  				&		{\tt exists}						\\
+																&		\verb§@§  				&		{\tt select}						\\
+																&		\verb§COND§* 			&		{\tt if}								\\
+																&		\verb§LET§* 			&		{\tt let}						    \\
+																&		\verb§PAIR§*			&		{\tt pair}							\\
+																&		\verb§FST§  			&		{\tt fst}							  \\
+																&		\verb§SND§  			&		{\tt snd}								\\
+																&		\verb§SUC§  			&		{\tt suc}								\\
+																&		\verb§PRE§  			&		{\tt pre}								\\
+		$+$ 												&		\verb§+§  				&		{\tt add}						    \\
+		$*$ 												&		\verb§*§  				&		{\tt mult}						  \\
+		$-$ 												&		\verb§-§  				&		{\tt sub}						    \\
+																&		\verb§EXP§  			&		{\tt exp}						  	\\
+																&		\verb§EVEN§  			&		{\tt even}						  \\
+																&		\verb§ODD§  			&		{\tt mult}						  \\
+		$<$ 												&		\verb§<§  				&		{\tt let}						    \\
+		$\leq$ 											&		\verb§<=§  				&		{\tt le}						    \\
+		$>$ 												&		\verb§>§  				&		{\tt gt}						    \\
+		$\geq$ 											&		\verb§>=§  				&		{\tt ge}						    \\
+		\hline
+	\end{tabular}
+
+\end{flushleft}
+
+
+\begin{description}
+	\item[*] Si noti che queste sono costanti supportate in modo speciale, che hanno la loro sintassi nelle term quotation (si veda la Sezione 3.4)
+\end{description}
+
+Le categorie di tipo supportate dall funzioni sintattiche, insieme con i loro nomi alfabetici, sono le seguenti:
+
+
+\begin{flushleft}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Categoria							&		ASCII 	&		Funzione Sintattica 		\\
+		\hline		
+		variabile di tipo 		&						&		{\tt var\_type} 				\\
+		tipo composto					& 					&		{\tt comp\_type}				\\		
+		tipo funzione 				& {\tt ->}	&		{\tt fun\_type}					\\
+		tipo prodotto 				& {\tt \# }	&		{\tt prod\_type} 				\\ 
+		\hline
+	\end{tabular}
+\end{flushleft}
+
+\section{Modalità di stampa a video}
+
+I dettagli di come le type, term e theorem quotation sono stampate a video sono determinati dalle modalità di visualizzazione. 
+Si noti che queste modalità non fanno differenza circa la forma delle quotation accettate come input.
+
+\subsection{Visualizzazione della sintassi primitiva dei termini}
+
+I termini e i teoremi possono essere mostrati a video puramente in termini delle categorie sintattiche primitive di termine 
+(si vedano le Sezioni 3.3.1 e 3.3.3), impostando il livello di visualizzazione a {\tt Minimal} attraverso la funzione 
+{\tt set\_language\_level\_mode}.
+
+Visualizzare soltanto la sintassi primitiva dei termini può aiutare l'utente a comprendere la struttura di una term 
+quotation, e può essere particolarmente utile per i novizi. Le costanti supportate in modo speciale (si veda la Sezione 3.4) 
+sono stampate a video senza la loro propria sintassi, e i termini operatore con una fixity (si veda la Sezione 3.5) sono 
+stampati defissati.
+
+Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# `!n. f n = if n > 1 then (n,m) else (m,n)`;;
+- : term = `!n. f n = (if n > 1 then (n,m) else (m,n))`
+
+# set_language_level_mode Minimal;;
+[HZ] Setting language level mode to Minimal.
+- : unit = ()
+
+# `!n. f n = if n > 1 then (n,m) else (m,n)`;;
+- : term =
+`$! (\n. $= (f n) (COND ($> n (BIT1 ZERO)) (PAIR n m) (PAIR m n)))`
+
+\end{verbatim}\end{hol}
+
+(Si veda la Sezione \ref{sec:specialSymbols} per il simbolo speciale "`\verb§$§"')
+
+Il livello normale di visualizzazione della sintassi dei termini può essere ripristinata impostando 
+nuovamente il livello su {\tt Full}:
+
+\begin{hol}\begin{verbatim}
+
+# set_language_level_mode Full;;
+[HZ] Setting language level mode to Full.
+- : unit = ()
+
+\end{verbatim}\end{hol}
+
+Si noti, che quando si mostra la sintassi primitiva dei termini, tutti i tipi sono ancora stampati nel modo normale 
+(cioé con le fixity delle costanti di tipo che sono state impostate).
+
+\section{Modalità di annotazione di tipo}
+
+I termini e i teoremi in HOL Zero sono sempre mostrati con annotazioni di tipo sufficienti ad evitare qualsiasi ambiguità 
+circa i tipi di ogni sottotermine (si veda la Sezione 3.6.1). Di default, questo è fatto a un livello minimo, così che non 
+ci siano più annotazioni di quelle necessarie ad evitare le ambiguità. Comunque, tutte le variabili e tutte le costanti 
+polimorfiche possono avere i tipi annotati impostando il livello di annotazione di tipo a {\tt Full}.
+
+Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# `f x = x + 2`;;
+- : term = `f x = x + 2`
+
+# set_type_annotation_mode Full;;
+[HZ] Setting type annotation mode to Full.
+- : unit = ()
+
+# `f x = x + 2`;;
+- : term = `(f:nat->nat) (x:nat) (=:nat->nat->bool) (x:nat) + 2`
+
+\end{verbatim}\end{hol}
+
+La modalità normale di a visualizzazione delle annotazioni di tipo può essere ripristinata impostando di nuovo 
+il livello su {\tt Minimal}.
+
+\subsection{Modalità di visualizzazione dei segni di variabile e di variabile di tipo}
+
+I tipi, i termini e i teoremi in HOL Zero sono sempre mostrati con sufficienti segndi di variabile e di variabile di 
+tipo per evitare qualsiasi ambiguità circa la distinzione tra variabili e costanti e tra variabili di tipo e 
+costanti di tipo (si veda la Sezione 3.6.2). Di default, tutte le variabili di tipo sono etichettate come tali, 
+e i termini variabili sono etichettati solo se il loro nome è in overlaod con un'altra costante nella teoria. Questo 
+può essere modificato impostando le modalità per i segni di variabile e variabile di tipo.
+
+Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# `!x. (P x <=> true) \/ (P x <=> false)`;;
+- : term = `!(x:'1). (P x <=> true) \/ (P x <=> false)`
+
+# set_var_marking_mode Full;;
+[HZ] Setting variable marking mode to Full.
+- : unit = ()
+
+# set_tyvar_marking_mode Minimal;;
+[HZ] Setting type variable marking mode to Minimal.
+- : unit = ()
+
+# `!x. (P x <=> true) \/ (P x <=> false)`;;
+- : term = `!(%x:1). (%P %x <=> true) \/ (%P %x <=> false)`
+
+\end{verbatim}\end{hol}
+
+
+\subsection{Sintesi delle modalità di visualizzazione}
+
+Le impostazioni delle modalità di visualizzazione correnti sono sintetizzate eseguendo il comando 
+{\tt show\_display\_modes}.
+
+Per esempio:
+
+\begin{hol}\begin{verbatim}
+
+# show_display_modes ();;
+HOL Zero Display Modes
+	 Type annotation mode :        Minimal
+	 Variable marking mode :       Minimal
+	 Type variable marking mode :  Full
+	 Language level mode :         Full
+- : unit = ()
+
+\end{verbatim}\end{hol}
+
+\section{Messaggi di errore nel parsing delle quotation}
+
+Immettere una type o una term quotation mal formata risulterà in un messaggio di errore del parser piuttosto che in un 
+tipo o termine interno. I messaggi di errore del parser sono sollevati come eccezioni ML di tipo HolErr.
+
+Gli errori di parsing si dividono in tre categorie (corrispondenti ai tre passi principali di parsing): errori lessicali, 
+errori sintattici, errori di tipo. Gli errori lessicali sono riconosciuti prima di tutti gli errori sintattici, i quali 
+sono riconosciuti prima di qualsiasi errore di tipo. Soltanto un errore di parser (corrispondente al primo errore individuato, 
+leggendo da sinistra a destra) è mostrato per ogni quotation. Un messaggio di errore di parsing inizia con la sua categoria 
+in lettere maiuscole, seguita da una descrizione dettagliata dell'errore.
+
+\subsection{Errori lessicali}
+
+Gli errori lessicali riguardano token mal formati (si veda la Sezione 3.1) nelle type e nelle term quotation. Questi 
+possono riguardare:
+
+Problemi circa l'uso dei segni di defixing/variabile/variabile di tipo:
+	
+\begin{hol}\begin{verbatim}
+
+# `$ = a b`;;
+Exception: [HZ] LEXICAL ERROR: Defix mark ($) must immediately precede
+name, without space.
+
+\end{verbatim}\end{hol}
+
+Caratteri di escape sbagliati all'interno delle virgolette:
+	
+\begin{hol}\begin{verbatim}
+
+# `f "\744"`;;
+Exception: [HZ] LEXICAL ERROR: Character escape code out of range - must
+be 000 to 255.
+
+\end{verbatim}\end{hol}
+
+Caratteri alfabetici all'interno di token numerici:
+
+\begin{hol}\begin{verbatim}
+
+# `23x`;;
+Exception: [HZ] LEXICAL ERROR: Non-numeric character in numeric token.
+
+\end{verbatim}\end{hol}
+
+Caratteri non stampabili:
+
+\begin{hol}\begin{verbatim}
+
+# `.`;;           
+Exception: [HZ] LEXICAL ERROR: Unprintable ASCII character 183 - use ASCII
+escape code inside quotes.
+
+\end{verbatim}\end{hol}
+
+[ dove {\tt .} rappresenta il carattere non stampabile con codice ASCII 183 ]
+
+\subsection{Errori sintattici}
+
+Gli errori sintattici riguardano problemi su come i token sono combinati nelle type e nelle term quotation. 
+Questi possono riguardare:
+
+Delimitatori di apertura (come "`{\tt (}"') che non hanno il corrispondente di chiusura:
+
+\begin{hol}\begin{verbatim}
+
+# `x = (3 + y * 4`;;
+Exception: [HZ] SYNTAX ERROR: Opening "(" but no subsequent ")".
+
+\end{verbatim}\end{hol}
+
+Un'occorrenza anticipata di una parola riservata, con la conseguente mancanza di un sottotermine:
+
+\begin{hol}\begin{verbatim}
+
+# `(a,b,,d)`;;
+Exception: [HZ] SYNTAX ERROR: Missing pair component.
+
+\end{verbatim}\end{hol}
+
+L'occorrenza inaspettata di un token quando ne è richiesto un altro:
+
+\begin{hol}\begin{verbatim}
+
+# `let x = 5 else in x + y`;;
+Exception: [HZ] SYNTAX ERROR: Unexpected reserved word "else" instead of
+"and" or "in".
+
+\end{verbatim}\end{hol}
+
+L'occorrenza inaspettata di un token dopo un sottotermine superiore sintatticamente corretto:
+
+\begin{hol}\begin{verbatim}
+
+# `x = 5 else`;;
+Exception: [HZ] SYNTAX ERROR: Unexpected reserved word "else" after
+syntactically-correct leading subterm.
+
+\end{verbatim}\end{hol}
+
+La fine inaspettata della quotation:
+
+\begin{hol}\begin{verbatim}
+
+# `if (P x) then Q x else`;;
+Exception: [HZ] SYNTAX ERROR: Unexpected end of quotation instead of
+conditional else-branch.
+
+\end{verbatim}\end{hol}
+
+Un token marcato come variabile di tipo all'interno di un termine, o un token marcato come variabile all'interno 
+di un tipo:
+
+\begin{hol}\begin{verbatim}
+
+# `p <=> 'a \/ b`;;
+Exception: [HZ] SYNTAX ERROR: Type variable "a" encountered outside type
+annotation.
+
+\end{verbatim}\end{hol}
+
+Problemi relativi all'uso di identificatori con fixity:
+
+\begin{hol}\begin{verbatim}
+
+# `= x`;;
+Exception: [HZ] SYNTAX ERROR: Missing LHS for infix "=".
+
+\end{verbatim}\end{hol}
+
+Una quotation vuota:
+
+\begin{hol}\begin{verbatim}
+
+# `:`;;
+Exception: [HZ] SYNTAX ERROR: Empty type quotation.
+
+\end{verbatim}\end{hol}
+
+\subsection{Errori di tipo}
+
+Gli errori di tipo riguardano problemi nell'inferenza di tipi coerenti per i termini atomo nelle term quotation, e con tipi 
+mal formati forniti nelle type e nelle term quotation. In modo specifico, questi riguardano:
+
+Liste di parametri forniti ai tipi costanti con un'arietà errata:
+
+\begin{hol}\begin{verbatim}
+
+# `:nat bool`;;
+Exception: [HZ] TYPE ERROR: Type constant "bool" has arity 0 but is used
+with type param list length 1.
+
+\end{verbatim}\end{hol}
+
+Sottotermini funzione che non hanno un tipo funzione dedotto:
+
+\begin{hol}\begin{verbatim}
+
+# `(f:'a) x = 5`;;
+Exception: [HZ] TYPE ERROR: Function subterm does not have function type.
+
+\end{verbatim}\end{hol}
+
+Sottotermini funzione e argomento con tipi dedotti incompatibili
+
+\begin{hol}\begin{verbatim}
+
+# `true + 1`;;
+Exception: [HZ] TYPE ERROR: Function subterm domain type incompatible with
+argument subterm type.
+
+\end{verbatim}\end{hol}
+
+Annotazioni di tipo incompatibili con il tipo dedotto per i loro sottotermini:
+
+\begin{hol}\begin{verbatim}
+
+# `(3:bool) = 4`;;
+Exception: [HZ] TYPE ERROR: Subterm type incompatible with type annotation.
+
+\end{verbatim}\end{hol}
+
+Tipi dedotti per le variabili che danno origine a un overloading delle variabili ambiguo:
+
+\begin{hol}\begin{verbatim}
+
+# `!x. (x:'a)=x /\ (x:'b)=x`;;
+Exception: [HZ] TYPE ERROR: Overloaded var "x" type not resolved at name
+closure.
+
+\end{verbatim}\end{hol}
+
