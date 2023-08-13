@@ -23,6 +23,10 @@ module HOL.Bool
 
 (* Utilities *)
 
+/// checks for a bool equality theorem
+/// 
+/// is_bool_eqthm not_true_thm returns true; is_bool_eqthm truth_thm returns 
+/// false
 let is_bool_eqthm th =
     try
         is_bool_term (eqthm_lhs th)
@@ -74,6 +78,12 @@ let strip_disj tm = unfoldr1 dest_disj tm
 
 let flatstrip_disj tm = unfold dest_disj tm
 
+/// Tests a term to see if it is a disjunction.
+/// 
+/// is_disj ("t1 \/ t2" |> parse_term) returns true. If the term is not a 
+/// disjunction the result is false.
+/// 
+/// Never fails.
 let is_disj tm = is_cbin "\\/" tm
 
 
@@ -90,6 +100,12 @@ let mk_not tm0 =
     let f = mk_gconst "~"
     mk_comb (f,tm0)
 
+/// Breaks apart a negation, returning its body.
+/// 
+/// dest_not is a term destructor for negations: "~t" |> parse_term |> dest_not
+/// returns "t".
+/// 
+/// Fails if term is not a negation.
 let dest_not tm =
     try
         let (f,tm0) = dest_comb tm
@@ -97,6 +113,12 @@ let dest_not tm =
         tm0
     with LocalFail | HolFail _ -> hol_fail ("dest_not","Not a negation")
 
+/// Tests a term to see if it is a logical negation.
+/// 
+/// "~t" |> parse_term |> is_not returns true. If the term is not a logical 
+/// negation the result is false.
+/// 
+/// Never fails.
 let is_not tm = can dest_not tm
 
 (* Unique existential quantification *)

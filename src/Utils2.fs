@@ -107,9 +107,21 @@ let mk_conj (tm1,tm2) =
 
 let list_mk_conj tms = try2 (foldr1' mk_conj) tms     "list_mk_conj"
 
+/// Term destructor for conjunctions.
+/// 
+/// <code>dest_conj("t1 /\ t2" |> parse_term)</code> returns 
+/// <code>("t1","t2")</code>.
+/// 
+/// Fails with dest_conj if term is not a conjunction.
 let dest_conj tm =
     try1 (dest_cbin "/\\") tm     ("dest_conj","Not a conjunction")
 
+/// Tests a term to see if it is a conjunction.
+/// 
+/// is_conj ("t1 /\ t2" |> parse_term) returns true. If the term is not a 
+/// conjunction the result is false.
+/// 
+/// Never fails.
 let is_conj tm = (can dest_conj tm)
 
 let strip_conj tm = unfoldr1 dest_conj tm

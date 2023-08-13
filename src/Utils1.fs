@@ -182,8 +182,7 @@ let dest_cbinder x tm =
 
 let is_binder tm = (can dest_binder tm)
 
-(* Boolean-valued terms *)
-
+/// Boolean-valued terms
 let is_bool_term tm = is_bool_type (type_of tm)
 
 (* Equality *)

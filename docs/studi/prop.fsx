@@ -12,18 +12,18 @@ Logica Proposizionale
 
 Riferimenti
 ------------
-In questa sezione esploriamo la logica proposizionale sfruttando il framework HOL di nholz. [Nholz](https://github.com/domasin/nholz) &egrave; semplicemente un portging in F# di [HOL Zero](http://www.proof-technologies.com/holzero/) che a sua volta &egrave; un dimostratore interattivo di teoremi sviluppato da Mark Adams in OCaml nello stile LCF della famiglia HOL.
+In questa sezione esploriamo la logica proposizionale sfruttando il framework HOL di nholz. [Nholz](https://github.com/domasin/nholz) è semplicemente un portging in F# di [HOL Zero](http://www.proof-technologies.com/holzero/) che a sua volta è un dimostratore interattivo di teoremi sviluppato da Mark Adams in OCaml nello stile LCF della famiglia HOL.
 
-Sfruttiamo il linguaggio definito da HolZero per esplorare la logica proposizionale con la guida dell'[Handbook of Practical Logic and Automated Reasoning](https://www.cl.cam.ac.uk/~jrh13/atp/) di John Harrison, seguendo passo passo il capitolo sulla logica proposizionale e riaddattando le funzioni l&igrave; definite al linguaggio HOL del nostro framework. 
+Sfruttiamo il linguaggio definito da HolZero per esplorare la logica proposizionale con la guida dell'[Handbook of Practical Logic and Automated Reasoning](https://www.cl.cam.ac.uk/~jrh13/atp/) di John Harrison, seguendo passo passo il capitolo sulla logica proposizionale e riaddattando le funzioni lì definite al linguaggio HOL del nostro framework. 
 
-L'Handbook di John Harrison &egrave; accompagnato da codice sorgente in OCaml che &egrave; stato portato in F# da Eric Taucher, Jack Pappas, Anh-Dung Phan ed &egrave; disponibile su Github: [fsharp-logic-examples](https://github.com/jack-pappas/fsharp-logic-examples/). Nel ridefinire le funzioni dell'handbook riaddattandole alla logica HOL si &egrave; utilizzata come riferimento proprio l'implementazione in F# del codice descritto nell'Handbook.
+L'Handbook di John Harrison è accompagnato da codice sorgente in OCaml che è stato portato in F# da Eric Taucher, Jack Pappas, Anh-Dung Phan ed è disponibile su Github: [fsharp-logic-examples](https://github.com/jack-pappas/fsharp-logic-examples/). Nel ridefinire le funzioni dell'handbook riaddattandole alla logica HOL si è utilizzata come riferimento proprio l'implementazione in F# del codice descritto nell'Handbook.
 
-Per la composizione di questa pagina si &egrave; utilizzato [F# Formatting](https://github.com/fsprojects/FSharp.Formatting/).
+Per la composizione di questa pagina si è utilizzato [F# Formatting](https://github.com/fsprojects/FSharp.Formatting/).
 
 Introduzione
 ------------
 
-La logica proposizionale studia espressioni che intendono rappresentare proposizioni, cio&egrave; affermazioni che possono essereconsiderate vere o false e che chiameremo nel seguito semplicemente "formule". All'interno del framework HOL che utiliziamo, queste sono semplicemente termini di tipo `bool` che possono essere costruite da atomi booleani, costituiti dalle costanti `true` e `false` e da variabili di tipo `bool`, a cui sono applicati i connettivi logici proposizionali `~`, `/\`, `\/`, `<=>` e `<=>`. Le proposizioni atomiche sono come le variabili nell'algebra ordinaria, e a volte ci riferiamo ad esse come variabili proposizionali o variabili booleane. Come suggerisce la parola "atomiche", non ne viene analizzata la loro struttura interna; questo porterebbe a conseiderare una logica predicativa che al momento non viene trattata. I connettivi proposizionali all'interno della logica HOL sono semplicemente funzioni da valori di verit&agrave; a valori di verit&agrave;.
+La logica proposizionale studia espressioni che intendono rappresentare proposizioni, cioè affermazioni che possono essere considerate vere o false e che chiameremo nel seguito semplicemente "formule". All'interno del framework HOL che utiliziamo, queste sono semplicemente termini di tipo `bool` che possono essere costruite da atomi booleani, costituiti dalle costanti `true` e `false` e da variabili di tipo `bool`, a cui sono applicati i connettivi logici proposizionali `~`, `/\`, `\/`, `<=>` e `<=>`. Le proposizioni atomiche sono come le variabili nell'algebra ordinaria, e a volte ci riferiamo ad esse come variabili proposizionali o variabili booleane. Come suggerisce la parola "atomiche", non ne viene analizzata la struttura interna; questo porterebbe a conseiderare una logica predicativa che al momento non viene trattata. I connettivi proposizionali all'interno della logica HOL sono semplicemente funzioni da valori di verità a valori di verità.
 
 Avvio del motore logico
 ------------
@@ -40,10 +40,10 @@ open HOL
 
 e istruiamo l'interprete F# a restituire una raprresentazione concreta della sintassi dei tipi e dei termini piuttosto che la loro sintassi astratta interna al sistema:
 
-*)
+    fsi.AddPrinter print_type
+    fsi.AddPrinter print_term
 
-fsi.AddPrinter print_type
-fsi.AddPrinter print_term
+*)
 
 (** 
 
@@ -60,10 +60,9 @@ Bool.load
 Operazioni sintattiche
 ------------
 
-Il modulo `Bool` contiene gi&agrave; alcune operazioni sintattiche su formule booleane che le dividono nei loro elementi e che per il 
-momento non tratter&ograve;.
+Il modulo `Bool` contiene già alcune operazioni sintattiche su formule booleane che le dividono nei loro elementi e che saranno utilizzate nel seguito.
 
-Una prima cosa importante &egrave; poter distinguere tra espressioni atomiche ed esressioni composte. A questo scopo definiamo `is_bool_atom` come una funzione che restituisce vero per termini booleani costanti o variabili.
+E' necessario però definire delle nuove funzioni. Una prima cosa importante è poter distinguere tra espressioni atomiche ed esressioni composte. A questo scopo definiamo `is_bool_atom` come una funzione che restituisce vero per termini booleani costanti o variabili.
 
 *)
 
@@ -96,7 +95,7 @@ let rec overatoms f tm b =
     else failwith "check type annotation on eq"
 
 (**
-Un'applicazione particolarmente comune &egrave; quella di raccogliere qualche insieme di attributi associati agli atomi; ritornando solamente, nel caso pi&ugrave; semplice, l'insieme di tutti gli atomi. Possiamo far questo iterando una funzione f insieme con un "append" su tutti gli atomi, e convertendo infine il risultato in un insieme per rimuovere i duplicati. 
+Un'applicazione particolarmente comune è quella di raccogliere qualche insieme di attributi associati agli atomi; ritornando solamente, nel caso piùsemplice, l'insieme di tutti gli atomi. Possiamo far questo iterando una funzione f insieme con un "append" su tutti gli atomi, e convertendo infine il risultato in un insieme per rimuovere i duplicati. 
 *)
 
 let atom_union f tm =
@@ -105,15 +104,28 @@ let atom_union f tm =
     |> List.distinct |> List.sort
 
 (**
+ad esempio la possiamo utilizzare per restituire tutti gli atomi di una formula:
+*)
+
+"p /\ q"
+|> parse_term
+|> atom_union (fun x -> [x])
+
+(**
+    val it: term list = [p:bool; q:bool]
+*)
+
+
+(**
 La semantica della logica proposizionale
 ---------------------------------------
 
 Dal momento che le formule proposizionali intendono rappresentare asserzioni che possono essere vere o false, in ultima analisi 
-il significato di una formula &egrave; semplicemente uno dei due valori di verit&agrave; "vero" e "falso". Comunque, esattamente 
+il significato di una formula è semplicemente uno dei due valori di verità "vero" e "falso". Comunque, esattamente 
 come un'espressione algebrica x + y + 1 ha un significato definito solo quando sappiamo per che cosa stanno le variabili x e y, 
-il significato di una formula proposizionale dipende dai valori di verit&agrave; assegnati alle sue formule atomiche. Questa assegnazione 
-&egrave; codificata in una valutazione, che &egrave; una funzione dagli insiemi degli atomi all'insieme dei valori di verit&agrave; 
-{falso,vero}. Data una formula `p` e una valutazione `v` valutiamo il valore di verit&agrave; complessivo con la seguente funzione definita 
+il significato di una formula proposizionale dipende dai valori di verità assegnati alle sue formule atomiche. Questa assegnazione 
+è codificata in una valutazione, che è una funzione dagli insiemi degli atomi all'insieme dei valori di verità 
+{falso,vero}. Data una formula `p` e una valutazione `v` valutiamo il valore di verità complessivo con la seguente funzione definita 
 ricorsivamente:
 *)
 
@@ -143,14 +155,14 @@ let rec eval tm v =
         failwith "Not part of propositional logic."
 
 (**
-Questa &egrave; la nostra definizione matematica della semantica della logica proposizionale, che intende costituire una formalizzazione 
-delle nostre intuizioni. Ogni connettivo logico &egrave; interpretato da una corrispondente funzione boolean HOL. Per essere molto espliciti 
+Questa è la nostra definizione matematica della semantica della logica proposizionale, che intende costituire una formalizzazione 
+delle nostre intuizioni. Ogni connettivo logico è interpretato da una corrispondente funzione boolean HOL. Per essere molto espliciti 
 sul significato di questi operatori, possiamo elencare tutte le possibili combinazioni di input e vedere gli output corrispondenti.
 
-Possiamo presentare questa informazione in una tavola di verit&agrave; che mostri come il valore di verit&agrave; di una formula &egrave; 
+Possiamo presentare questa informazione in una tavola di verità che mostri come il valore di verità di una formula è 
 determinato dalle sue sotto formule immediate.
 
-Cos&igrave; per i connettivi binari avremo:
+Così per i connettivi binari avremo:
 
 > <table class="tab">
 > 	<tr>
@@ -234,7 +246,7 @@ In un'altra valutazione, comunque, la formula viene valutata a "falso":
 
 (** 
 
-Tavole di verit&agrave; meccanizzate
+Tavole di verità meccanizzate
 -------------------------
 
 Intuitivamente sembra naturale che la valutazione di una formula sia indipendente dai valori 
@@ -252,44 +264,44 @@ seguente per ricorsione sulle formule:
 >   atoms(p ==> q)  =	atoms(p) U atoms(q)       <br/>
 >   atoms(p <=> q)  =	atoms(p) U atoms(q)       <br/>
 
-Per induzione strutturale sulle formule, si dimostra che atoms(p) &egrave; sempre finito e che quindi 
-&egrave; possibile trattarlo in termini di liste F# (usando le liste per rappresentare insiemi).
+Per induzione strutturale sulle formule, si dimostra che atoms(p) è sempre finito e che quindi 
+è possibile trattarlo in termini di liste F# (usando le liste per rappresentare insiemi).
 
-**Teorema: Per ogni formula proposizionale p, l'insieme atoms(p) &egrave; finito.**
+**Teorema: Per ogni formula proposizionale p, l'insieme atoms(p) è finito.**
 
 **Dimostrazione**. Per induzione sulla struttura della formula.
 
-*Se p &egrave; true o false, allora atoms(p) &egrave; l'insieme vuoto, e se p &egrave; un atomo, atoms(p) &egrave; un insieme singoletto.* 
+*Se p è true o false, allora atoms(p) è l'insieme vuoto, e se p è un atomo, atoms(p) è un insieme singoletto.* 
 *In ogni caso, questi sono finiti.*
 
-*Se p &egrave; della forma atoms(~ q), allora per ipotesi di induzione atoms(q) &egrave; finito* 
+*Se p è della forma atoms(~ q), allora per ipotesi di induzione atoms(q) è finito* 
 *e per definizione atoms(~ q) = atoms(q).*
 
-*Se p &egrave; della forma q /\ r, q \/ r, q ==> r, q <=> r, allora atoms(p) = atoms(q) U atoms(r).* 
-*Per ipotesi di induzione, sia atoms(q) che atoms(r) sono finiti, e l'unione di due insiemi finiti &egrave; un insieme finito.*
+*Se p è della forma q /\ r, q \/ r, q ==> r, q <=> r, allora atoms(p) = atoms(q) U atoms(r).* 
+*Per ipotesi di induzione, sia atoms(q) che atoms(r) sono finiti, e l'unione di due insiemi finiti è un insieme finito.*
 
 Analogamente, possiamo giustificare formalmente il fatto intuitivamente ovvio menzionato sopra che
 
 **Teorema: Per ogni formula proposizionale p, se due valutazioni v e v' concordano sull'insieme atmos(p)
-(&egrave; v(x) = v'(x) per tutti gli x in atoms(p)), allora `eval p v` = `eval p v'`.**
+(è v(x) = v'(x) per tutti gli x in atoms(p)), allora `eval p v` = `eval p v'`.**
 
 **Dimostrazione**. Per induzione sulla struttura della formula.
 
-*Se p &egrave; true o false, allora &egrave; interpretata rispettivamente a true e false indipendentemente dalla assegnazione.*
+*Se p è true o false, allora è interpretata rispettivamente a true e false indipendentemente dalla assegnazione.*
 
-*Se p &egrave; un atomo, allora atoms(x) = {x} e per assunzione v(x) = v'(x).*
+*Se p è un atomo, allora atoms(x) = {x} e per assunzione v(x) = v'(x).*
 *Quindi eval p v = v(x) = v'(x) = eval p v'.*
 
-*Se p &egrave; della forma ~ q, allora allora atoms(p) = {q} e per assunzione v(x) = v'(x).*
+*Se p è della forma ~ q, allora allora atoms(p) = {q} e per assunzione v(x) = v'(x).*
 *Quindi eval p v = not v(q) = not v'(q) = eval p v'.*
 
-*Se p &egrave; della forma q /\ r, q \/ r, q ==> r, q <=> r, allora atoms(p) = atoms(q) U atoms(r).* 
+*Se p è della forma q /\ r, q \/ r, q ==> r, q <=> r, allora atoms(p) = atoms(q) U atoms(r).* 
 *Dal momento che le assegnazioni si accordano sull'unione dei due insiemi, si accordano conseguentemente*
 *su ognuno degli atoms(q) e atoms(r). Possiamo quindi applicare l'ipotesi di induzione per concludere che*
-*eval q v = eval q v' e eval q r = eval r v'. E dal momento che la valutazione di p &egrave; una funzione*
+*eval q v = eval q v' e eval q r = eval r v'. E dal momento che la valutazione di p è una funzione*
 *di queste due sottoassegnazioni, eval p v = eval p v'*.
 
-La funzione atoms pu&ograve; essere implementata in F# in termini dell'iteratore `atom_union` definito di sopra:
+La funzione atoms può essere implementata in F# in termini dell'iteratore `atom_union` definito di sopra:
 
 *)
 
@@ -304,12 +316,12 @@ per esempio:
 //val it : term list = [n:bool; p:bool; q:bool; r:bool]
 
 (** 
-Poich&egrave; l'interpretazione di una formula proposizionale `p` dipende solo dall'azione della valutazione sull'insieme finito 
-(diciamo di n elementi) `atoms(p)`, e pu&ograve; fare solo una di due scelte, il valore di verit&agrave; finale &egrave; completamente determinato 
-da tutte le 2^n scelte per questi atomi. Quindi possiamo estendere in modo naturale l'enumerazione nella forma di una tavola di verit&agrave; 
+Poichè l'interpretazione di una formula proposizionale `p` dipende solo dall'azione della valutazione sull'insieme finito 
+(diciamo di n elementi) `atoms(p)`, e può fare solo una di due scelte, il valore di verità finale è completamente determinato 
+da tutte le 2^n scelte per questi atomi. Quindi possiamo estendere in modo naturale l'enumerazione nella forma di una tavola di verità 
 dalle operazioni base a formule arbitrarie. Per implementare questo in F#, iniziamo definendo una funzione che testa se una funzione 
 `subfn` ritorna true su tutte le possibili valutazioni degli atomi `ats`, usando una valutazione esistente `v` per tutti gli altri atomi. 
-Lo spazio di tutte le valutazioni &egrave; esplorato modificando successivamente `v` in modo da impostare ogni atomo `p` a 
+Lo spazio di tutte le valutazioni è esplorato modificando successivamente `v` in modo da impostare ogni atomo `p` a 
 "vero" e "falso" e richiamando ricorsivamente:
 *)
 
@@ -324,9 +336,9 @@ let rec onallvaluations subfn v ats =
         && onallvaluations subfn (v' true) ps
 
 (**  
-Possiamo applicare questa a una funzione che disegna una riga della tavola di verit&agrave; e che ritorna "vero". 
-(Il valore di ritorno &egrave; importante, perch &egrave; & valuter&agrave; il suo secondo argomento solo se il 
-primo argomento &egrave; true.) Questo pu&ograve; quindi essere usato per disegnare l'intera tavola di verit&qgrave; per una formula:
+Possiamo applicare questa a una funzione che disegna una riga della tavola di verità e che ritorna "vero". 
+(Il valore di ritorno è importante, perch è & valuterà il suo secondo argomento solo se il 
+primo argomento è true.) Questo può quindi essere usato per disegnare l'intera tavola di verit&qgrave; per una formula:
 *)
 
 let pname tm = 
