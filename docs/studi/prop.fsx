@@ -70,6 +70,12 @@ E' necessario però definire delle nuove funzioni. Una prima cosa importante è 
 let is_bool_atom tm = 
     tm |> is_bool_term && (tm |> is_const || tm |> is_var)
 
+let pAndQ = "p /\ q" |> parse_term 
+let pTerm = "p:bool" |> parse_term
+
+printfn "%A is an atom? %b" pAndQ (pAndQ |> is_bool_atom)
+printfn "%A is an atom? %b" pTerm (pTerm |> is_bool_atom)
+
 (**
 Sulle formule composte vogliamo poter applicare delle funzioni sui loro atomi. A questo scopo definiamo `overatoms` per ricorsione su termini di questo genere come un analogo dell'iteratore di liste che itera una funzione binaria su tutti gli atomi di una formula.
 *)
@@ -110,6 +116,10 @@ ad esempio la possiamo utilizzare per restituire tutti gli atomi di una formula:
 "p /\ q"
 |> parse_term
 |> atom_union (fun x -> [x])
+
+["p /\ q" |> parse_term; "p:bool" |> parse_term]
+|> Seq.map (print_term)
+|> fun x -> sprintf "[%s]" (x |> String.concat ", ")
 
 (**
     val it: term list = [p:bool; q:bool]
@@ -155,12 +165,9 @@ let rec eval tm v =
         failwith "Not part of propositional logic."
 
 (**
-Questa è la nostra definizione matematica della semantica della logica proposizionale, che intende costituire una formalizzazione 
-delle nostre intuizioni. Ogni connettivo logico è interpretato da una corrispondente funzione boolean HOL. Per essere molto espliciti 
-sul significato di questi operatori, possiamo elencare tutte le possibili combinazioni di input e vedere gli output corrispondenti.
+Questa è la nostra definizione matematica della semantica della logica proposizionale, che intende costituire una formalizzazione delle nostre intuizioni. Ogni connettivo logico è interpretato da una corrispondente funzione boolean HOL. Per essere molto espliciti sul significato di questi operatori, possiamo elencare tutte le possibili combinazioni di input e vedere gli output corrispondenti.
 
-Possiamo presentare questa informazione in una tavola di verità che mostri come il valore di verità di una formula è 
-determinato dalle sue sotto formule immediate.
+Possiamo presentare questa informazione in una tavola di verità che mostri come il valore di verità di una formula è determinato dalle sue sotto formule immediate.
 
 Così per i connettivi binari avremo:
 
@@ -224,9 +231,7 @@ e per la negazione unaria:
 > 	</tr>
 > </table>
 
-Proviamo a valutare una formula "p /\ q ==> q /\ r" in una valutazione dove p, q e r sono impostati rispettivamente a 
-"vero", "falso" e "vero". (Non ci preoccupiamo di definire il valore di atomi non coinvolti nella formula, e F# 
-mostra un messaggio di warning che ci informa che non lo abbiamo fatto. Per evitarlo possiamo eventualmente sopprimere il warning 
+Proviamo a valutare una formula "p /\ q ==> q /\ r" in una valutazione dove p, q e r sono impostati rispettivamente a "vero", "falso" e "vero". (Non ci preoccupiamo di definire il valore di atomi non coinvolti nella formula, e F# mostra un messaggio di warning che ci informa che non lo abbiamo fatto. Per evitarlo possiamo eventualmente sopprimere il warning 
 avendo l'accortezza di reimpostarlo successivamente.)
 
 *)
@@ -235,6 +240,14 @@ avendo l'accortezza di reimpostarlo successivamente.)
 (function Tmvar ("p", bool_ty) -> true | Tmvar ("q", bool_ty) -> false | Tmvar ("r", bool_ty) -> true) 
 |> eval (@"p /\ q ==> q /\ r" |> parse_term)
 //val it : bool = true
+
+"p /\ q ==> q /\ r"
+|> parse_term
+|> eval (function 
+    | Tmvar ("p", bool_ty) -> true 
+    | Tmvar ("q", bool_ty) -> false 
+    | Tmvar ("r", bool_ty) -> true
+)
 
 (**
 In un'altra valutazione, comunque, la formula viene valutata a "falso":
@@ -249,10 +262,7 @@ In un'altra valutazione, comunque, la formula viene valutata a "falso":
 Tavole di verità meccanizzate
 -------------------------
 
-Intuitivamente sembra naturale che la valutazione di una formula sia indipendente dai valori 
-assegnati dalla valutazione agli atomi che non occorrono nella formula. 
-Rendiamo preciso questo concetto definendo una funzione per estrarre 
-l'insieme delle proposizioni atomiche che occorrono in una formula, In termini matematici astratti, definiremmo atoms nel modo 
+Intuitivamente sembra naturale che la valutazione di una formula sia indipendente dai valori assegnati dalla valutazione agli atomi che non occorrono nella formula. Rendiamo preciso questo concetto definendo una funzione per estrarre l'insieme delle proposizioni atomiche che occorrono in una formula, In termini matematici astratti, definiremmo atoms nel modo 
 seguente per ricorsione sulle formule:
 
 >   atoms(true)     =	{}                        <br/>
@@ -316,13 +326,7 @@ per esempio:
 //val it : term list = [n:bool; p:bool; q:bool; r:bool]
 
 (** 
-Poichè l'interpretazione di una formula proposizionale `p` dipende solo dall'azione della valutazione sull'insieme finito 
-(diciamo di n elementi) `atoms(p)`, e può fare solo una di due scelte, il valore di verità finale è completamente determinato 
-da tutte le 2^n scelte per questi atomi. Quindi possiamo estendere in modo naturale l'enumerazione nella forma di una tavola di verità 
-dalle operazioni base a formule arbitrarie. Per implementare questo in F#, iniziamo definendo una funzione che testa se una funzione 
-`subfn` ritorna true su tutte le possibili valutazioni degli atomi `ats`, usando una valutazione esistente `v` per tutti gli altri atomi. 
-Lo spazio di tutte le valutazioni è esplorato modificando successivamente `v` in modo da impostare ogni atomo `p` a 
-"vero" e "falso" e richiamando ricorsivamente:
+Poichè l'interpretazione di una formula proposizionale `p` dipende solo dall'azione della valutazione sull'insieme finito (diciamo di n elementi) `atoms(p)`, e può fare solo una di due scelte, il valore di verità finale è completamente determinato da tutte le 2^n scelte per questi atomi. Quindi possiamo estendere in modo naturale l'enumerazione nella forma di una tavola di verità dalle operazioni base a formule arbitrarie. Per implementare questo in F#, iniziamo definendo una funzione che testa se una funzione `subfn` ritorna true su tutte le possibili valutazioni degli atomi `ats`, usando una valutazione esistente `v` per tutti gli altri atomi. Lo spazio di tutte le valutazioni è esplorato modificando successivamente `v` in modo da impostare ogni atomo `p` a "vero" e "falso" e richiamando ricorsivamente:
 *)
 
 let rec onallvaluations subfn v ats =
