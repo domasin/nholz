@@ -1,5 +1,5 @@
-#I "../src/bin/Debug/net7.0"
-#r "nholz.dll"
+#r "nuget: nholz2"
+
 open HOL
 fsi.AddPrinter print_type
 fsi.AddPrinter print_qtype
