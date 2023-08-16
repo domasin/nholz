@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>TEORIE
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="nholz">
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head> 
+
+<body>
+    <div class="columns is-fullheight m-0">
+        <div id="fsdocs-menu" class="column is-2 is-paddingless">
+            <aside class="menu">
+                <div class="container is-paddingless is-marginless has-background-dark">
+                    <a href="/nholz/">
+                        <figure class="image is-128x128 container">
+                            <img src="/nholz/img/logo.png">
+                        </figure>
+                    </a>
+                    <h2 class="title has-text-centered has-text-white pb-4">nholz</h2>
+                </div>
+                <div class="content">
+                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+                    <div id="header">
+                        <div class="searchbox" id="fsdocs-searchbox">
+                            <label for="search-by">
+                                <i class="fas fa-search"></i>
+                            </label>
+                            <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
+                            <span data-search-clear="">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- END SEARCH BOX: this adds support for the search box -->
+                    <ul class="navbar-nav">
+                        <li class="nav-header">Links</li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
+                        <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/tactics.html">
+    tactics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/3_Liguaggio_HOL.html">
+    LINGUAGGIO HOL
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/avvio.html">
+    avvio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B1_Teorie.html">
+    TEORIE
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/1_Introduzione.html">
+    Introduzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B2_Teoremi.html">
+    TEOREMI
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/goaltree.html">
+    goaltree
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/A5_Inference_Rules.html">
+    Regole d&#39;inferenza
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0018_disj_idem.html">
+    Disj Idem
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0033_select_eq.html">
+    0033_select_eq
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0032_forall_null.html">
+    0032_forall_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0001_truth.html">
+    Vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0019_disj_assoc.html">
+    0019_disj_assoc
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0007_conj_id.html">
+    vero &amp;egrave; l&#39;identit&amp;agrave; della congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0028_imp_dist_left_disj.html">
+    0028_imp_dist_left_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0021_disj_dist_right_conj.html">
+    0021_disj_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0017_disj_zero.html">
+    Disj Zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0010_conj_comm.html">
+    Propriet&amp;agrave; commutatativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0031_forall_one_point.html">
+    0031_forall_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0005_true_not_eq_false.html">
+    Vero non equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0027_imp_refl.html">
+    0027_imp_refl
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0008_conj_zero.html">
+    congiunzione zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0014_conj_dist_left_disj.html">
+    distributivit&amp;agrave; a sinistra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0016_disj_id.html">
+    Disj Id
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0015_conj_contr.html">
+    0015_conj_contr
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0012_conj_absorb_disj.html">
+    assorbimento della disgiunzione nella congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0009_conj_idem.html">
+    congiunzione della stessa proposizione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0030_forall_dist_conj.html">
+    0030_forall_dist_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0026_imp_left_zero.html">
+    0026_imp_left_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0020_disj_absorb_conj.html">
+    0020_disj_absorb_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0036_exists_null.html">
+    0036_exists_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0025_imp_left_id.html">
+    0025_imp_left_id
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0029_imp_dist_right_conj.html">
+    0029_imp_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0004_not_false.html">
+    Non falso equivale a vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0034_exists_dist_disj.html">
+    0034_exists_dist_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0024_disj_comm.html">
+    commutabilit&amp;agrave; della disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0006_not_dist_disj.html">
+    distribuzione della negazione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0011_conj_assoc.html">
+    Propriet&amp;agrave; associativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0022_disj_dist_left_conj.html">
+    0022_disj_dist_left_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0003_not_true.html">
+    Non vero equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0023_imp_right_zero.html">
+    0023_imp_right_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0013_conj_dist_right_disj.html">
+    distributivit&amp;agrave; a destra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0044_excluded_midle.html">
+    Terzo escluso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0035_exists_one_point.html">
+    0035_exists_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0045_bool_cases.html">
+    Bool Cases
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0002_fun_eq.html">
+    Equivalenza tra funzioni
+
+  </a>
+</li>
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <div class="column is-10 is-paddingless">
+            <div class="section pt-4">
+                <div class="container" id="fsdocs-content">
+                    <h1><a name="TEORIE" class="anchor" href="#TEORIE">TEORIE</a></h1>
+<h2><a name="Teoria-Core" class="anchor" href="#Teoria-Core">Teoria Core</a></h2>
+<p><strong>Costani di Tipo</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// bool             `:bool`                         Nonfix</span>
+<span class="c">// -&gt;               `:&#39;1-&gt;&#39;2`                       Infix (5, RightAssoc)</span>
+</code></pre>
+<p><strong>Costanti</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// true             `:bool`                         Nonfix</span>
+<span class="c">// ==&gt;              `:bool-&gt;bool-&gt;bool`             Infix (10, RightAssoc)</span>
+<span class="c">// /\               `:bool-&gt;bool-&gt;bool`             Infix (20, RightAssoc)</span>
+<span class="c">// =                `:&#39;a-&gt;&#39;a-&gt;bool`                 Infix (30, NonAssoc)</span>
+<span class="c">// @                `:(&#39;a-&gt;bool)-&gt;&#39;a`               Binder</span>
+<span class="c">// !                `:(&#39;a-&gt;bool)-&gt;bool`             Binder</span>
+<span class="c">// ?                `:(&#39;a-&gt;bool)-&gt;bool`             Binder</span>
+<span class="c">// ONE_ONE          `:(&#39;a-&gt;&#39;b)-&gt;bool`               Nonfix</span>
+<span class="c">// TYPE_DEFINITION  `:(&#39;a-&gt;bool)-&gt;(&#39;b-&gt;&#39;a)-&gt;bool`   Nonfix</span>
+</code></pre>
+<p><strong>Costanti Alias</strong></p>
+<p>L'unico alias supportato &egrave; <code>&lt;=&gt;</code>, per un'istanza di tipo di <code>=</code>.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// &lt;=&gt;              `:bool-&gt;bool-&gt;bool`             Infix (5, NonAssoc)</span>
+</code></pre>
+<p><strong>Definizioni</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="id">true_def</span>                                                  <span class="c">// istanza della proprieta&#39; riflessiva di uguaglianza per la </span>
+<span class="c">// |- true &lt;=&gt; (\(p:bool). p) = (\p. p)                   // funzione d&#39;identita&#39; booleana</span>
+
+<span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="id">conj_def</span>                                                  <span class="c">// funzione binaria che restituisce se il fatto che i due </span>
+<span class="c">// |- $/\ = (\p1 p2. !p. (p1 ==&gt; (p2 ==&gt; p)) ==&gt; p)       // argomenti inisieme implichino il valore, implica il valore</span>
+
+<span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="id">forall_def</span>                                                <span class="c">// funzione che restituisce se il predicato restituisce true per </span>
+<span class="c">// |- $! = (\(P:&#39;a-&gt;bool). P = (\x. true))                // ogni input</span>
+
+<span onmouseout="hideTip(event, 'fs10', 10)" onmouseover="showTip(event, 'fs10', 10)" class="id">exists_def</span>                                                <span class="c">// funzione che restituisce per un P se un qualsiasi elemento </span>
+<span class="c">// |- $? = (\(P:&#39;a-&gt;bool). P ($@ P))                      // selezionato come soddisfacente il predicato necessariamente  </span>
+                                                          <span class="c">// soddisfa il predicato</span>
+
+<span onmouseout="hideTip(event, 'fs11', 11)" onmouseover="showTip(event, 'fs11', 11)" class="id">one_one_def</span>                                               <span class="c">// funzione che restituisce se la funzione argomento e&#39;  </span>
+<span class="c">// |- ONE_ONE =                                           // iniettiva, cioe&#39; se l&#39;uguaglianza dei valori per due argomenti   </span>
+<span class="c">//     (\(f:&#39;a-&gt;&#39;b). !x1 x2. f x1 = f x2 ==&gt; x1 = x2)     // implica ncessariamente l&#39;uguaglianza dei due argomenti</span>
+
+<span onmouseout="hideTip(event, 'fs12', 12)" onmouseover="showTip(event, 'fs12', 12)" class="id">type_definition_def</span>                                       <span class="c">// funzione che prende un predicato per elementi del tipo di </span>
+<span class="c">// |- TYPE_DEFINITION =                                   // rappresentazione e un mapping da elementi del nuovo tipo al </span>
+<span class="c">//     (\P (rep:&#39;b-&gt;&#39;a). ONE_ONE rep                      // tipo di  rappresentazione e restituisce se il mapping e&#39; </span>
+<span class="c">//                     /\ (!x. P x &lt;=&gt; (?y. x = rep y)))  // iniettivo e mappa su  elementi che  soddisfano il predicato. </span>
+                                                          <span class="c">// E&#39; usata per definire nuove costanti di tipo</span>
+</code></pre>
+<p><strong>Assiomi</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs13', 13)" onmouseover="showTip(event, 'fs13', 13)" class="id">eta_ax</span>                                                     <span class="c">// per ogni funzione f la lambda astrazione dell&#39;applicazione</span>
+<span class="c">// |- !(f:&#39;a-&gt;&#39;b). (\x. f x) = f                           // di f a alla variabile lambda e&#39; uguale alla funzione stessa</span>
+   
+<span onmouseout="hideTip(event, 'fs14', 14)" onmouseover="showTip(event, 'fs14', 14)" class="id">imp_antisym_ax</span>                                             <span class="c">// proprieta&#39; antisimmetrica dell&#39;implicazione</span>
+<span class="c">// |- !p1 p2. (p1 ==&gt; p2) ==&gt;                               </span>
+<span class="c">//              ((p2 ==&gt; p1) ==&gt; (p1 &lt;=&gt; p2))               </span>
+   
+<span onmouseout="hideTip(event, 'fs15', 15)" onmouseover="showTip(event, 'fs15', 15)" class="id">select_ax</span>                                                  <span class="c">// per ogni P e x, se x soddisfa P, allora P e&#39; soddisfatto  </span>
+<span class="c">// |- !(P:&#39;a-&gt;bool) x. P x ==&gt; P ($@ P)                    // anche dall&#39;elemento selezionato per P</span>
+</code></pre>
+<h2><a name="Logica-Predicativa" class="anchor" href="#Logica-Predicativa">Logica Predicativa</a></h2>
+<p><strong>Costanti</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// false            `:bool`                         Nonfix</span>
+<span class="c">// ~                `:bool-&gt;bool`                   Prefix</span>
+<span class="c">// \/               `:bool-&gt;bool-&gt;bool`             Infix (15, RightAssoc)</span>
+<span class="c">// ?!               `:(&#39;a-&gt;bool)-&gt;bool`             Binder</span>
+<span class="c">// LET              `:(&#39;a-&gt;&#39;b)-&gt;&#39;a-&gt;&#39;b`             Nonfix *</span>
+<span class="c">// ONTO             `:(&#39;a-&gt;&#39;b)-&gt;bool`               Nonfix</span>
+<span class="c">// COND             `:bool-&gt;&#39;a-&gt;&#39;a-&gt;&#39;a`             Nonfix *</span>
+</code></pre>
+<p><strong>Definizioni</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs16', 16)" onmouseover="showTip(event, 'fs16', 16)" class="id">false_def</span>                                                    <span class="c">// falsita&#39;</span>
+<span class="c">// |- false &lt;=&gt; (!p. p)                                      //</span>
+
+<span onmouseout="hideTip(event, 'fs17', 17)" onmouseover="showTip(event, 'fs17', 17)" class="id">not_def</span>                                                      <span class="c">// negazione logica</span>
+<span class="c">// |- $~ = (\p. p ==&gt; false)                                 // </span>
+
+<span onmouseout="hideTip(event, 'fs18', 18)" onmouseover="showTip(event, 'fs18', 18)" class="id">disj_def</span>                                                     <span class="c">// digiunzione</span>
+<span class="c">// |- $\/ = (\p1 p2. !p. (p1 ==&gt; p) ==&gt; (p2 ==&gt; p) ==&gt; p)    // </span>
+
+<span onmouseout="hideTip(event, 'fs19', 19)" onmouseover="showTip(event, 'fs19', 19)" class="id">uexists_def</span>                                                  <span class="c">// quantificazione esistenziale univoca</span>
+<span class="c">// |- $?! = (\(P:&#39;a-&gt;bool). ?x. P x /\ (!y. P y ==&gt; y = x))  // </span>
+
+<span onmouseout="hideTip(event, 'fs20', 20)" onmouseover="showTip(event, 'fs20', 20)" class="id">let_def</span>                                                      <span class="c">// espressioni let: `LET (LET (\x1 x2. t) s1) s2`</span>
+<span class="c">// |- LET = (\(f:&#39;a-&gt;&#39;b) x. f x)                             // e&#39; stampato come `let x1 = s1 and x2 = s2 in t`  </span>
+
+<span onmouseout="hideTip(event, 'fs21', 21)" onmouseover="showTip(event, 'fs21', 21)" class="id">onto_def</span>                                                     <span class="c">// suriettivita&#39;</span>
+<span class="c">// |- ONTO = (\(f:&#39;a-&gt;&#39;b). !y. ?x. y = f x)                  // </span>
+
+<span onmouseout="hideTip(event, 'fs22', 22)" onmouseover="showTip(event, 'fs22', 22)" class="id">cond_def</span>                                                     <span class="c">// espressioni condizionali</span>
+<span class="c">// |- COND =                                                 // `COND c t1 t2` e stampato come</span>
+<span class="c">//     (\p (t1:&#39;a) t2.                                       // `if c then t1 else t2`</span>
+<span class="c">//         @x. ((p &lt;=&gt; true) ==&gt; x = t1)                     // </span>
+<span class="c">//              /\ ((p &lt;=&gt; false) ==&gt; x = t2))               // </span>
+</code></pre>
+<h2><a name="Coppie-ordinate" class="anchor" href="#Coppie-ordinate">Coppie ordinate</a></h2>
+<p><strong>Costanti di tipo</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// #                `:&#39;1#&#39;2`                        Infix (10, RightAssoc)</span>
+</code></pre>
+<p><strong>Costanti</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// MkPairRep        `:&#39;a-&gt;&#39;b-&gt;&#39;a-&gt;&#39;b-&gt;bool`         Nonfix</span>
+<span class="c">// IsPairRep        `:(&#39;a-&gt;&#39;b-&gt;bool)-&gt;bool`         Nonfix</span>
+<span class="c">// PairAbs          `:(&#39;a-&gt;&#39;b-&gt;bool)-&gt;&#39;a#&#39;b`        Nonfix</span>
+<span class="c">// PairRep          `:&#39;a#&#39;b-&gt;&#39;a-&gt;&#39;b-&gt;bool`          Nonfix</span>
+<span class="c">// PAIR             `:&#39;a-&gt;&#39;b-&gt;&#39;a#&#39;b`                Nonfix *</span>
+<span class="c">// FST              `:&#39;a#&#39;b-&gt;&#39;a`                    Nonfix</span>
+<span class="c">// SND              `:&#39;a#&#39;b-&gt;&#39;b`                    Nonfix</span>
+</code></pre>
+<p><strong>Definizioni di tipo</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs23', 23)" onmouseover="showTip(event, 'fs23', 23)" class="id">prod_def</span>
+<span class="c">// |- ?(f:&#39;a#&#39;b-&gt;&#39;a-&gt;&#39;b-&gt;bool). TYPE_DEFINITION IsPairRep f</span>
+</code></pre>
+<p><strong>Definizioni</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs24', 24)" onmouseover="showTip(event, 'fs24', 24)" class="id">mk_pair_rep_def</span>                                         <span class="c">// la funzione di rappresentazione restituisce vero solo </span>
+<span class="c">// |- MkPairRep =                                       // quando ogni argomento e&#39; uguale al suo corrispondente</span>
+<span class="c">//     (\(x:&#39;a) (y:&#39;b) a b. a = x /\ b = y)             // elemento nella coppia</span>
+
+<span onmouseout="hideTip(event, 'fs25', 25)" onmouseover="showTip(event, 'fs25', 25)" class="id">is_pair_rep_def</span>                                         <span class="c">// la funzione caratteristica per l&#39;operatore di tipo prodotto.</span>
+<span class="c">// |- IsPairRep =                                       // Prende la funzione di rappresentazione e restituisce vero se </span>
+<span class="c">//     (\(r:&#39;a-&gt;&#39;b-&gt;bool). ?a b. r = MkPairRep a b)     // esiste una coppia per cui ne e&#39; la concreta rappresentazione</span>
+
+<span onmouseout="hideTip(event, 'fs23', 26)" onmouseover="showTip(event, 'fs23', 26)" class="id">prod_def</span>                                                <span class="c">// definizione del tipo prodotto</span>
+<span class="c">// |- ?(f:&#39;a#&#39;b-&gt;&#39;a-&gt;&#39;b-&gt;bool).                         // </span>
+<span class="c">//                   TYPE_DEFINITION IsPairRep f        // </span>
+
+<span onmouseout="hideTip(event, 'fs26', 27)" onmouseover="showTip(event, 'fs26', 27)" class="id">prod_bij_def1</span>                                           <span class="c">// biiezioni del tipo prodotto</span>
+<span class="c">// |- !(a:&#39;a#&#39;b). PairAbs (PairRep a) = a               // </span>
+                                                        <span class="c">// </span>
+<span onmouseout="hideTip(event, 'fs27', 28)" onmouseover="showTip(event, 'fs27', 28)" class="id">prod_bij_def2</span>                                           <span class="c">// </span>
+<span class="c">// |- !(r:&#39;a-&gt;&#39;b-&gt;bool).                                // </span>
+<span class="c">//       IsPairRep r &lt;=&gt; PairRep (PairAbs r) = r        // </span>
+
+<span onmouseout="hideTip(event, 'fs28', 29)" onmouseover="showTip(event, 'fs28', 29)" class="id">pair_def</span>                                                <span class="c">// funzione di accoppiamento. E&#39; definita come l&#39;astrazione del </span>
+<span class="c">// |- PAIR =                                            // tipo prodotto della funzione </span>
+<span class="c">//     (\(x:&#39;a) (y:&#39;b). PairAbs (MkPairRep x y))        // PAIR t1 t2 e&#39; elaborata e stampata come (t1,t2).</span>
+
+<span onmouseout="hideTip(event, 'fs29', 30)" onmouseover="showTip(event, 'fs29', 30)" class="id">fst_def</span>                                                 <span class="c">// seleziona il primo componente della coppia</span>
+<span class="c">// |- FST = (\(p:&#39;a#&#39;b). @x. ?y. p = (x,y))             //</span>
+
+<span onmouseout="hideTip(event, 'fs30', 31)" onmouseover="showTip(event, 'fs30', 31)" class="id">snd_def</span>                                                 <span class="c">// seleziona il secondo componente della coppia</span>
+<span class="c">// |- SND = (\(p:&#39;a#&#39;b). @y. ?x. p = (x,y))             // </span>
+</code></pre>
+<h2><a name="Individui" class="anchor" href="#Individui">Individui</a></h2>
+<p><strong>Costanti di tipo</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// ind              `:ind`                          Nonfix</span>
+</code></pre>
+<p><strong>Costanti</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// IND_ZERO         `:ind`                          Nonfix</span>
+<span class="c">// IND_SUC          `:ind-&gt;ind`                     Nonfix</span>
+</code></pre>
+<p><strong>Definizioni</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs31', 32)" onmouseover="showTip(event, 'fs31', 32)" class="id">ind_suc_zero_spec</span>
+<span class="c">// |- ONE_ONE IND_SUC /\ (!i. ~ (IND_SUC i = IND_ZERO))</span>
+</code></pre>
+<p><strong>Assiomi</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs32', 33)" onmouseover="showTip(event, 'fs32', 33)" class="id">infinity_ax</span>                                             <span class="c">// l&#39;assioma dell&#39;infinito dichiara che il nuovo tipo degli</span>
+<span class="c">// |- ?(f:ind-&gt;ind). ONE_ONE f /\ ~ ONTO f              // individui e&#39; infinito affermando che esiste una funzione</span>
+                                                        <span class="c">// totale iniettiva da individui a individui che non e&#39;</span>
+                                                        <span class="c">// suriettiva</span>
+</code></pre>
+<h2><a name="Numeri-naturali" class="anchor" href="#Numeri-naturali">Numeri naturali</a></h2>
+<p><strong>Costanti di tipo</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// nat              `:nat`                          Nonfix</span>
+</code></pre>
+<p><strong>Costanti</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// IsNatRep         `:ind-&gt;bool`                    Nonfix</span>
+<span class="c">// NatAbs           `:ind-&gt;nat`                     Nonfix</span>
+<span class="c">// NatRep           `:nat-&gt;ind`                     Nonfix</span>
+<span class="c">// ZERO             `:nat`                          Nonfix</span>
+<span class="c">// SUC              `:nat-&gt;nat`                     Nonfix</span>
+<span class="c">// PRE              `:nat-&gt;nat`                     Nonfix</span>
+<span class="c">// +                `:nat-&gt;nat-&gt;nat`                Infix (50, LeftAssoc)</span>
+<span class="c">// -                `:nat-&gt;nat-&gt;nat`                Infix (50, LeftAssoc)</span>
+<span class="c">// *                `:nat-&gt;nat-&gt;nat`                Infix (55, LeftAssoc)</span>
+<span class="c">// EXP              `:nat-&gt;nat-&gt;nat`                Infix (60, LeftAssoc)</span>
+<span class="c">// EVEN             `:nat-&gt;bool`                    Nonfix</span>
+<span class="c">// ODD              `:nat-&gt;bool`                    Nonfix</span>
+<span class="c">// &lt;                `:nat-&gt;nat-&gt;bool`               Infix (40, NonAssoc)</span>
+<span class="c">// &lt;=               `:nat-&gt;nat-&gt;bool`               Infix (40, NonAssoc)</span>
+<span class="c">// &gt;                `:nat-&gt;nat-&gt;bool`               Infix (40, NonAssoc)</span>
+<span class="c">// &gt;=               `:nat-&gt;nat-&gt;bool`               Infix (40, NonAssoc)</span>
+<span class="c">// BIT0             `:nat-&gt;nat`                     Nonfix</span>
+<span class="c">// BIT1             `:nat-&gt;nat`                     Nonfix</span>
+<span class="c">// NUMERAL          `:nat-&gt;nat`                     Nonfix</span>
+</code></pre>
+<p><strong>Definizioni di tipo</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs33', 34)" onmouseover="showTip(event, 'fs33', 34)" class="id">nat_def</span>
+<span class="c">// |- ?(f:nat-&gt;ind). TYPE_DEFINITION IsNatRep f</span>
+</code></pre>
+<p><strong>Definizioni</strong></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs34', 35)" onmouseover="showTip(event, 'fs34', 35)" class="id">is_nat_rep_def</span>                                   <span class="c">// funzione caratteristica dei naturali definita come quella funzione che </span>
+<span class="c">// |- !i. IsNatRep i &lt;=&gt;                         // restituisce vero per un elemento di ind sse qualsiasi proprieta&#39; che </span>
+<span class="c">//    (!P. P IND_ZERO /\                         // valga per IND_ZERO e tutti i suoi successori sotto IND_SUCC vale </span>
+<span class="c">//       (!j. P j ==&gt; P (IND_SUC j)) ==&gt; P i)    // necessariamente anche per l&#39;elemento. Questo da il piu&#39; piccolo sotto-</span>
+                                                 <span class="c">// insieme di ind che contiene IND_ZERO ed e&#39; chiuso sotto IND_SUC</span>
+
+<span onmouseout="hideTip(event, 'fs35', 36)" onmouseover="showTip(event, 'fs35', 36)" class="id">nat_bij_def1</span>                                     <span class="c">// biiezioni del tipo dei naturali</span>
+<span class="c">// |- !a. NatAbs (NatRep a) = a                  //</span>
+                                                 <span class="c">//</span>
+<span onmouseout="hideTip(event, 'fs36', 37)" onmouseover="showTip(event, 'fs36', 37)" class="id">nat_bij_def2</span>                                     <span class="c">//</span>
+<span class="c">// |- !r. IsNatRep r &lt;=&gt; NatRep (NatAbs r) = r   //</span>
+
+<span onmouseout="hideTip(event, 'fs37', 38)" onmouseover="showTip(event, 'fs37', 38)" class="id">zero_def</span>                                         <span class="c">// ZERO e SUCC sono definiti in termini dei loro equivalenti nel tipo </span>
+<span class="c">// |- ZERO = NatAbs IND_ZERO                     // degli individui</span>
+                                                 <span class="c">//</span>
+<span onmouseout="hideTip(event, 'fs38', 39)" onmouseover="showTip(event, 'fs38', 39)" class="id">suc_def</span>                                          <span class="c">//</span>
+<span class="c">// |- !n. SUC n = NatAbs (IND_SUC (NatRep n))    //</span>
+
+<span onmouseout="hideTip(event, 'fs39', 40)" onmouseover="showTip(event, 'fs39', 40)" class="id">pre_def</span>
+<span class="c">// |- PRE 0 = 0 /\ (!n. PRE (SUC n) = n)</span>
+
+<span onmouseout="hideTip(event, 'fs40', 41)" onmouseover="showTip(event, 'fs40', 41)" class="id">add_def</span>
+<span class="c">// |- (!n. 0 + n = n) </span>
+<span class="c">//         /\ (!m n. SUC m + n = SUC (m + n))</span>
+
+<span onmouseout="hideTip(event, 'fs41', 42)" onmouseover="showTip(event, 'fs41', 42)" class="id">sub_def</span>
+<span class="c">// |- (!n. n - 0 = n) </span>
+<span class="c">//         /\ (!m n. m - SUC n = PRE (m - n))</span>
+
+<span onmouseout="hideTip(event, 'fs42', 43)" onmouseover="showTip(event, 'fs42', 43)" class="id">mult_def</span>
+<span class="c">// |- (!n. 0 * n = 0) </span>
+<span class="c">//         /\ (!m n. SUC m * n = n + m * n)</span>
+
+<span onmouseout="hideTip(event, 'fs43', 44)" onmouseover="showTip(event, 'fs43', 44)" class="id">exp_def</span>
+<span class="c">// |- (!n. n EXP 0 = 1) </span>
+<span class="c">//         /\ (!m n. m EXP SUC n = m * m EXP n)</span>
+
+<span onmouseout="hideTip(event, 'fs44', 45)" onmouseover="showTip(event, 'fs44', 45)" class="id">even_def</span>
+<span class="c">// |- (EVEN 0 &lt;=&gt; true) </span>
+<span class="c">//         /\ (!n. EVEN (SUC n) &lt;=&gt; ~ EVEN n)</span>
+
+<span onmouseout="hideTip(event, 'fs45', 46)" onmouseover="showTip(event, 'fs45', 46)" class="id">odd_def</span>
+<span class="c">// |- !n. ODD n &lt;=&gt; ~ EVEN n</span>
+
+<span onmouseout="hideTip(event, 'fs46', 47)" onmouseover="showTip(event, 'fs46', 47)" class="id">lt_def</span>
+<span class="c">// |- (!m. m &lt; 0 &lt;=&gt; false) </span>
+<span class="c">//        /\ (!m n. m &lt; SUC n &lt;=&gt; m = n \/ m &lt; n)</span>
+
+<span onmouseout="hideTip(event, 'fs47', 48)" onmouseover="showTip(event, 'fs47', 48)" class="id">le_def</span>
+<span class="c">// |- !m n. m &lt;= n &lt;=&gt; m &lt; n \/ m = n</span>
+
+<span onmouseout="hideTip(event, 'fs48', 49)" onmouseover="showTip(event, 'fs48', 49)" class="id">gt_def</span>
+<span class="c">// |- !m n. m &gt; n &lt;=&gt; n &lt; m</span>
+
+<span onmouseout="hideTip(event, 'fs49', 50)" onmouseover="showTip(event, 'fs49', 50)" class="id">ge_def</span>
+<span class="c">// |- !m n. m &gt;= n &lt;=&gt; n &lt;= m</span>
+</code></pre>
+<p>I numeri naturali sono definiti in termini di <code>SUC</code> e dell'addizione. La rappresentazione implica l'applicare una sequenza di operatori
+<code>BIT0</code> e <code>BIT1</code> alla costante <code>ZERO</code>, con <code>NUMERAL</code> come un tag che viene applicato al risultato. Sia <code>BIT0</code> che <code>BIT1</code> duplicano il loro
+argmento aggiungendo rispettivamente 0 o 1. Il tag <code>NUMERAL</code> semplicemente ritorna il suo argomento, ed &egrave; usato per identicare
+atomi di numerali nei termini. Letta dall'interno all'esterno, una sequenza di <code>BIT0</code> e <code>BIT1</code> corrisponde direttamente agli 0 e agli 1
+della notazione binaria.</p>
+<p>Ad esempio, il numero 6 &egrave; rappresentato da <code>NUMERAL (BIT0 (BIT1 (BIT1 ZERO)))</code> o 110 in binario.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs50', 51)" onmouseover="showTip(event, 'fs50', 51)" class="id">bit0_def</span>                                           
+<span class="c">// |- (BIT0 ZERO = ZERO)                           </span>
+<span class="c">//     /\ (!n. BIT0 (SUC n) = SUC (SUC (BIT0 n)))  </span>
+                                                   
+<span onmouseout="hideTip(event, 'fs51', 52)" onmouseover="showTip(event, 'fs51', 52)" class="id">bit1_def</span>                                           
+<span class="c">// |- !n. BIT1 n = SUC (BIT0 n)                    </span>
+                                                   
+<span onmouseout="hideTip(event, 'fs52', 53)" onmouseover="showTip(event, 'fs52', 53)" class="id">numeral_def</span>                                        
+<span class="c">// |- !n. NUMERAL n = n                            </span>
+</code></pre>
+
+                </div>
+            </div>
+        </div>
+        <div class="fsdocs-tip" id="fs1">namespace HOL</div>
+<div class="fsdocs-tip" id="fs2">val print_type: ty: hol_type -&gt; string</div>
+<div class="fsdocs-tip" id="fs3">val print_qtype: ty: hol_type -&gt; string</div>
+<div class="fsdocs-tip" id="fs4">val print_term: tm: term -&gt; string</div>
+<div class="fsdocs-tip" id="fs5">val print_qterm: tm: term -&gt; string</div>
+<div class="fsdocs-tip" id="fs6">val print_thm: th: thm -&gt; string</div>
+<div class="fsdocs-tip" id="fs7">val true_def: thm<br /><em>&lt;summary&gt;
+ It is the instance of the equality reflexive property for the boolean      
+ identity function.
+
+ |- true &amp;lt;=&amp;gt; (\(p:bool). p) = (\p. p)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs8">val conj_def: thm<br /><em>&lt;summary&gt;
+ Conjunction is defined here using implication and the universal         
+ quantifier, as the binary function that returns whether, for any boolean
+ value, the arguments together implying the value necessarily implies the
+ value.                                                                  
+
+ |- $/\ = (\p1 p2. !p. (p1 ==&amp;gt; (p2 ==&amp;gt; p)) ==&amp;gt; p)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs9">val forall_def: thm<br /><em>&lt;summary&gt;
+ The universal quantifier is defined using equality and truth, simply as  
+ the function that returns whether its predicate argument returns true for
+ every input.                                                             
+
+ |- $! = (\(P:&#39;a-&amp;gt;bool). P = (\x. true))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs10">val exists_def: thm<br /><em>&lt;summary&gt;
+ The existential quantifier is defined using just selection, as the      
+ function that returns whether any element selected as satisfying the    
+ function&#39;s predicate argument necessarily satisfies the predicate.  Note
+ that if there is no element satisfying the predicate, then not even the 
+ result of the selection operation can satisfy the predicate.            
+
+ |- $? = (\(P:&#39;a-&amp;gt;bool). P ($@ P))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs11">val one_one_def: thm<br /><em>&lt;summary&gt;
+ The one-to-one predicate is defined as the function that returns whether 
+ its function argument having the same result when applied to two elements
+ necessarily implies that the two elements are equal.                     
+
+ |- ONE_ONE = (\(f:&#39;a-&amp;gt;&#39;b). !x1 x2. f x1 = f x2 ==&amp;gt; x1 = x2)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs12">val type_definition_def: thm<br /><em>&lt;summary&gt;
+ This predicate is used in the theorem created by the primitive type     
+ constant definition command to assert that there is a bijection from the
+ new type to its representation type.  It is defined as the function that
+ takes a characteristic function (a predicate for elements of the        
+ representation type) and a representation function (mapping elements of 
+ the new type to the representation type), and returns whether the       
+ representation function is one-to-one and maps onto precisely those     
+ elements in the representation type that satisfy the characteristic     
+ function.                                                               
+
+ |- TYPE_DEFINITION = (\P (rep:&#39;b-&amp;gt;&#39;a). ONE_ONE rep /\ (!x. P x &amp;lt;=&amp;gt; (?y. x = rep y)))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs13">val eta_ax: thm<br /><em>&lt;summary&gt;
+ This axiom states that, for any given function, the lambda abstraction  
+ formed by applying the function to the binding variable is equal to the 
+ function.                                                               
+
+ |- !(f:&#39;a-&amp;gt;&#39;b). (\x. f x) = f
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs14">val imp_antisym_ax: thm<br /><em>&lt;summary&gt;
+ This axiom states the antisymmetry property for implication.
+
+ |- !p1 p2. (p1 ==&amp;gt; p2) ==&amp;gt; ((p2 ==&amp;gt; p1) ==&amp;gt; (p1 &amp;lt;=&amp;gt; p2))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs15">val select_ax: thm<br /><em>&lt;summary&gt;
+ This axiom states a crucial property about the selection operator, namely
+ that any element satisfying a given predicate implies that the selected  
+ element for the predicate satisfies the predicate.  Note that it says    
+ nothing about when there is no element that can satisfy the predicate.   
+
+ |- !(P:&#39;a-&amp;gt;bool) x. P x ==&amp;gt; P ($@ P)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs16">val false_def: thm<br /><em>&lt;summary&gt;
+  Falsity
+ 
+ |- false &amp;lt;=&amp;gt; (!p. p) 
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs17">val not_def: thm<br /><em>&lt;summary&gt;
+ |- $~ = (\p. p ==&amp;gt; false)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs18">val disj_def: thm<br /><em>&lt;summary&gt;
+ Disjunction
+
+ |- $\/ = (\p1 p2. !p. (p1 ==&amp;gt; p) ==&amp;gt; (p2 ==&amp;gt; p) ==&amp;gt; p)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs19">val uexists_def: thm<br /><em>&lt;summary&gt;
+ Unique existential quantification 
+
+ |- $?! = (\(P:&#39;a-&amp;gt;bool). ?x. P x /\ (!y. P y ==&amp;gt; y = x))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs20">val let_def: thm<br /><em>&lt;summary&gt;
+ The internal constant for let-expressions is called &quot;LET&quot;.  It has special
+ support in the parser/printer, so that the quotation                      
+    `let x1 = s1 and x2 = s2 in t`                                         
+ is parsed/printed for the internal term                                   
+    `LET (LET (\x1 x2. t) s1) s2`.                                         
+
+ |- LET = (\(f:&#39;a-&amp;gt;&#39;b) x. f x) 
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs21">val onto_def: thm<br /><em>&lt;summary&gt;
+ ONTO
+
+ |- ONTO = (\(f:&#39;a-&amp;gt;&#39;b). !y. ?x. y = f x)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs22">val cond_def: thm<br /><em>&lt;summary&gt;
+ Conditional
+
+ The internal constant for conditional expressions is called &quot;COND&quot;.  It    *)
+ has special support in the parser/printer, so that                         *)
+    `if c then t1 else t2`                                                  *)
+ is parsed/printed for the internal term                                    *)
+    `COND c t1 t2`.                                                         *)
+
+ |- COND =
+ (\p (t1:&#39;a) t2.
+     @x. ((p &amp;lt;=&amp;gt; true) ==&amp;gt; x = t1) /\ ((p &amp;lt;=&amp;gt; false) ==&amp;gt; x = t2))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs23">val prod_def: thm<br /><em>&lt;summary&gt;
+ |- ?(f:&#39;a#&#39;b-&amp;gt;&#39;a-&amp;gt;&#39;b-&amp;gt;bool). TYPE_DEFINITION IsPairRep 
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs24">val mk_pair_rep_def: thm<br /><em>&lt;summary&gt;
+ The &quot;MkPairRep&quot; function returns the concrete representation for a given  
+ pair&#39;s two components (i.e. the representation in terms of existing types,
+ before the product type is defined).  This representation is a function   
+ that takes two arguments and returns `true` for just one combination of   
+ its arguments - when each argument is equal to its respective pair        
+ component.  This is used to define both &quot;IsPairRep&quot; and the pairing       
+ function.                                                                 
+
+ |- MkPairRep = (\(x:&#39;a) (y:&#39;b) a b. a = x /\ b = y)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs25">val is_pair_rep_def: thm<br /><em>&lt;summary&gt;
+ &quot;IsPairRep&quot; is the characteristic function for the product type operator.
+ It takes a boolean-valued binary function and returns whether there is a 
+ pair for which this is the concrete representation.                      
+
+ |- IsPairRep = (\(r:&#39;a-&amp;gt;&#39;b-&amp;gt;bool). ?a b. r = MkPairRep a b)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs26">val prod_bij_def1: thm</div>
+<div class="fsdocs-tip" id="fs27">val prod_bij_def2: thm</div>
+<div class="fsdocs-tip" id="fs28">val pair_def: thm<br /><em>&lt;summary&gt;
+ The pairing function, called &quot;PAIR&quot;, takes two arguments and returns the 
+ corresponding element in the product type.  It is simply defined as the  
+ product type&#39;s abstraction of the &quot;MkPairRep&quot; function.  It has special  
+ support in the parser/printer, so that the quotation `(t1,t2)` is parsed/
+ printed for the internal term `PAIR t1 t2`.                              
+
+ |- PAIR = (\(x:&#39;a) (y:&#39;b). PairAbs (MkPairRep x y))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs29">val fst_def: thm<br /><em>&lt;summary&gt;
+ Selects the first component of a pair
+
+ |- FST = (\(p:&#39;a#&#39;b). @x. ?y. p = (x,y))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs30">val snd_def: thm<br /><em>&lt;summary&gt;
+ Selects the second component of a pair
+
+ |- SND = (\(p:&#39;a#&#39;b). @y. ?x. p = (x,y))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs31">val ind_suc_zero_spec: thm<br /><em>&lt;summary&gt;
+ |- ONE_ONE IND_SUC /\ (!i. ~ (IND_SUC i = IND_ZERO))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs32">val infinity_ax: thm<br /><em>&lt;summary&gt;
+ Infinity axiom
+
+ This states that the newly declared individuals type is infinite, by      
+ asserting that there is an injective total function from individuals to   
+ individuals that is not surjective.                                       
+
+ |- ?(f:ind-&amp;gt;ind). ONE_ONE f /\ ~ ONTO f
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs33">val nat_def: thm<br /><em>&lt;summary&gt;
+ typer for natural numbers
+
+ |- ?(f:nat-&amp;gt;ind). TYPE_DEFINITION IsNatRep f
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs34">val is_nat_rep_def: thm<br /><em>&lt;summary&gt;
+ &quot;IsNatRep&quot; is the characteristic function for the naturals base type,     
+ prescribing the subset of `:ind` used to represent naturals.  It is       
+ defined as the function that returns `true` for a given `:ind` element iff
+ any property that holds for &quot;IND_ZERO&quot; and all its successors under       
+ &quot;IND_SUC&quot; necessarily holds for the element.  This gives the smallest     
+ subset of `:ind` containing &quot;IND_ZERO&quot; and closed under &quot;IND_SUC&quot;.        
+
+ |- !i. IsNatRep i &amp;lt;=&amp;gt; (!P. P IND_ZERO /\ (!j. P j ==&amp;gt; P (IND_SUC j)) ==&amp;gt; P i)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs35">val nat_bij_def1: thm</div>
+<div class="fsdocs-tip" id="fs36">val nat_bij_def2: thm</div>
+<div class="fsdocs-tip" id="fs37">val zero_def: thm<br /><em>&lt;summary&gt;
+ |- ZERO = NatAbs IND_ZERO
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs38">val suc_def: thm<br /><em>&lt;summary&gt;
+ |- !n. SUC n = NatAbs (IND_SUC (NatRep n))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs39">val pre_def: thm<br /><em>&lt;summary&gt;
+ |- PRE 0 = 0 /\ (!n. PRE (SUC n) = n)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs40">val add_def: thm<br /><em>&lt;summary&gt;
+ |- (!n. 0 + n = n) /\ (!m n. SUC m + n = SUC (m + n))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs41">val sub_def: thm<br /><em>&lt;summary&gt;
+ |- (!n. n - 0 = n) /\ (!m n. m - SUC n = PRE (m - n))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs42">val mult_def: thm<br /><em>&lt;summary&gt;
+ |- (!n. 0 * n = 0) /\ (!m n. SUC m * n = n + m * n)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs43">val exp_def: thm<br /><em>&lt;summary&gt;
+ |- (!n. n EXP 0 = 1) /\ (!m n. m EXP SUC n = m * m EXP n)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs44">val even_def: thm<br /><em>&lt;summary&gt;
+ |- (EVEN 0 &amp;lt;=&amp;gt; true) /\ (!n. EVEN (SUC n) &amp;lt;=&amp;gt; ~ EVEN n)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs45">val odd_def: thm<br /><em>&lt;summary&gt;
+ |- !n. ODD n &amp;lt;=&amp;gt; ~ EVEN n
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs46">val lt_def: thm<br /><em>&lt;summary&gt;
+ |- (!m. m &amp;lt; 0 &amp;lt;=&amp;gt; false) /\ (!m n. m &amp;lt; SUC n &amp;lt;=&amp;gt; m = n \/ m &amp;lt; n)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs47">val le_def: thm<br /><em>&lt;summary&gt;
+ |- !m n. m &amp;lt;= n &amp;lt;=&amp;gt; m &amp;lt; n \/ m = n
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs48">val gt_def: thm<br /><em>&lt;summary&gt;
+ |- !m n. m &amp;gt; n &amp;lt;=&amp;gt; n &amp;lt; m
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs49">val ge_def: thm<br /><em>&lt;summary&gt;
+ |- !m n. m &amp;gt;= n &amp;lt;=&amp;gt; n &amp;lt;= m
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs50">val bit0_def: thm<br /><em>&lt;summary&gt;
+ |- (BIT0 ZERO = ZERO) /\ (!n. BIT0 (SUC n) = SUC (SUC (BIT0 n)))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs51">val bit1_def: thm<br /><em>&lt;summary&gt;
+ |- !n. BIT1 n = SUC (BIT0 n)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs52">val numeral_def: thm<br /><em>&lt;summary&gt;
+ |- !n. NUMERAL n = n
+&lt;/summary&gt;</em></div>
+
+    </div>
+
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/'</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+    <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+    <!-- END SEARCH BOX: this adds support for the search box -->
+</body>
+
+</html>

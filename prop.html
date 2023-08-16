@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Logica proposizionale</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="nholz">
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head> 
+
+<body>
+    <div class="columns is-fullheight m-0">
+        <div id="fsdocs-menu" class="column is-2 is-paddingless">
+            <aside class="menu">
+                <div class="container is-paddingless is-marginless has-background-dark">
+                    <a href="/nholz/">
+                        <figure class="image is-128x128 container">
+                            <img src="/nholz/img/logo.png">
+                        </figure>
+                    </a>
+                    <h2 class="title has-text-centered has-text-white pb-4">nholz</h2>
+                </div>
+                <div class="content">
+                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+                    <div id="header">
+                        <div class="searchbox" id="fsdocs-searchbox">
+                            <label for="search-by">
+                                <i class="fas fa-search"></i>
+                            </label>
+                            <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
+                            <span data-search-clear="">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- END SEARCH BOX: this adds support for the search box -->
+                    <ul class="navbar-nav">
+                        <li class="nav-header">Links</li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/domasin/nholz/blob/master/LICENSE.txt">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/domasin/nholz">Source Repository</a></li>
+                        <li class="nav-header">
+  HOL Logic
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/001/000-SintassiESemantica.html">
+    Sintassi e Semantica
+  </a>
+</li>             
+<li class="nav-header">
+  Casi di studio
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/prop.html">
+    Logica proposizionale
+  </a>
+</li>
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <div class="column is-10 is-paddingless">
+            <div class="section pt-4">
+                <div class="container" id="fsdocs-content">
+                    
+<h1><a name="Logica-Proposizionale" class="anchor" href="#Logica-Proposizionale">Logica Proposizionale</a></h1>
+<h2><a name="Riferimenti" class="anchor" href="#Riferimenti">Riferimenti</a></h2>
+<p>In questa sezione esploriamo la logica proposizionale sfruttando il framework HOL di nholz. <a href="https://github.com/domasin/nholz">Nholz</a> &egrave; semplicemente un portging in F# di <a href="http://www.proof-technologies.com/holzero/">HOL Zero</a> che a sua volta &egrave; un dimostratore interattivo di teoremi sviluppato da Mark Adams in OCaml nello stile LCF della famiglia HOL.</p>
+<p>Sfruttiamo il linguaggio definito da HolZero per esplorare la logica proposizionale con la guida dell'<a href="https://www.cl.cam.ac.uk/~jrh13/atp/">Handbook of Practical Logic and Automated Reasoning</a> di John Harrison, seguendo passo passo il capitolo sulla logica proposizionale e riaddattando le funzioni l&igrave; definite al linguaggio HOL del nostro framework.</p>
+<p>L'Handbook di John Harrison &egrave; accompagnato da codice sorgente in OCaml che &egrave; stato portato in F# da Eric Taucher, Jack Pappas, Anh-Dung Phan ed &egrave; disponibile su Github: <a href="https://github.com/jack-pappas/fsharp-logic-examples/">fsharp-logic-examples</a>. Nel ridefinire le funzioni dell'handbook riaddattandole alla logica HOL si &egrave; utilizzata come riferimento proprio l'implementazione in F# del codice descritto nell'Handbook.</p>
+<p>Per la composizione di questa pagina si &egrave; utilizzato <a href="https://github.com/fsprojects/FSharp.Formatting/">F# Formatting</a>.</p>
+<h2><a name="Introduzione" class="anchor" href="#Introduzione">Introduzione</a></h2>
+<p>La logica proposizionale studia espressioni che intendono rappresentare proposizioni, cio&egrave; affermazioni che possono essereconsiderate vere o false e che chiameremo nel seguito semplicemente "formule". All'interno del framework HOL che utiliziamo, queste sono semplicemente termini di tipo <code>bool</code> che possono essere costruite da atomi booleani, costituiti dalle costanti <code>true</code> e <code>false</code> e da variabili di tipo <code>bool</code>, a cui sono applicati i connettivi logici proposizionali <code>~</code>, <code>/\</code>, <code>\/</code>, <code>&lt;=&gt;</code> e <code>&lt;=&gt;</code>. Le proposizioni atomiche sono come le variabili nell'algebra ordinaria, e a volte ci riferiamo ad esse come variabili proposizionali o variabili booleane. Come suggerisce la parola "atomiche", non ne viene analizzata la loro struttura interna; questo porterebbe a conseiderare una logica predicativa che al momento non viene trattata. I connettivi proposizionali all'interno della logica HOL sono semplicemente funzioni da valori di verit&agrave; a valori di verit&agrave;.</p>
+<h2><a name="Avvio-del-motore-logico" class="anchor" href="#Avvio-del-motore-logico">Avvio del motore logico</a></h2>
+<p>Per iniziare referenziamo il motore di nholz:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#I</span> <span class="s">&quot;../src/bin/Debug/net7.0/&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;nholz.dll&quot;</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">HOL</span>
+</code></pre>
+<p>e istruiamo l'interprete F# a restituire una raprresentazione concreta della sintassi dei tipi e dei termini piuttosto che la loro sintassi astratta interna al sistema:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">print_type</span>
+<span class="id">fsi</span><span class="pn">.</span><span class="id">AddPrinter</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">print_term</span>
+</code></pre>
+<p>Infine carichiamo almeno le teorie fino a <code>Bool</code> che contiene la definizione dei tipi e dei termini booleani e dei loro connettivi:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="m">CoreThry</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">load</span>
+<span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="m">Equal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="id">load</span>
+<span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="m">Bool</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="id">load</span>
+</code></pre>
+<h2><a name="Operazioni-sintattiche" class="anchor" href="#Operazioni-sintattiche">Operazioni sintattiche</a></h2>
+<p>Il modulo <code>Bool</code> contiene gi&agrave; alcune operazioni sintattiche su formule booleane che le dividono nei loro elementi e che per il
+momento non tratter&ograve;.</p>
+<p>Una prima cosa importante &egrave; poter distinguere tra espressioni atomiche ed esressioni composte. A questo scopo definiamo <code>is_bool_atom</code> come una funzione che restituisce vero per termini booleani costanti o variabili.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// the term is a boolean atom</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="fn">is_bool_atom</span> <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="fn">tm</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="fn">is_bool_term</span> <span class="o">&amp;&amp;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="fn">is_const</span> <span class="o">||</span> <span onmouseout="hideTip(event, 'fs10', 16)" onmouseover="showTip(event, 'fs10', 16)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="fn">is_var</span><span class="pn">)</span>
+</code></pre>
+<p>Sulle formule composte vogliamo poter applicare delle funzioni sui loro atomi. A questo scopo definiamo <code>overatoms</code> per ricorsione su termini di questo genere come un analogo dell'iteratore di liste che itera una funzione binaria su tutti gli atomi di una formula.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs14', 18)" onmouseover="showTip(event, 'fs14', 18)" class="fn">overatoms</span> <span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs10', 20)" onmouseover="showTip(event, 'fs10', 20)" class="fn">tm</span> <span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="fn">b</span> <span class="o">=</span>
+    <span class="k">if</span> <span onmouseout="hideTip(event, 'fs10', 22)" onmouseover="showTip(event, 'fs10', 22)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 23)" onmouseover="showTip(event, 'fs9', 23)" class="fn">is_bool_atom</span> <span class="k">then</span> 
+        <span onmouseout="hideTip(event, 'fs15', 24)" onmouseover="showTip(event, 'fs15', 24)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs10', 25)" onmouseover="showTip(event, 'fs10', 25)" class="fn">tm</span> <span onmouseout="hideTip(event, 'fs16', 26)" onmouseover="showTip(event, 'fs16', 26)" class="fn">b</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 27)" onmouseover="showTip(event, 'fs10', 27)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 28)" onmouseover="showTip(event, 'fs17', 28)" class="fn">is_not</span> <span class="k">then</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 29)" onmouseover="showTip(event, 'fs18', 29)" class="fn">p</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 30)" onmouseover="showTip(event, 'fs10', 30)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 31)" onmouseover="showTip(event, 'fs19', 31)" class="fn">dest_not</span>
+        <span onmouseout="hideTip(event, 'fs14', 32)" onmouseover="showTip(event, 'fs14', 32)" class="fn">overatoms</span> <span onmouseout="hideTip(event, 'fs15', 33)" onmouseover="showTip(event, 'fs15', 33)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs18', 34)" onmouseover="showTip(event, 'fs18', 34)" class="fn">p</span> <span onmouseout="hideTip(event, 'fs16', 35)" onmouseover="showTip(event, 'fs16', 35)" class="fn">b</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 36)" onmouseover="showTip(event, 'fs10', 36)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 37)" onmouseover="showTip(event, 'fs20', 37)" class="fn">is_conj</span> <span class="k">then</span>
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 38)" onmouseover="showTip(event, 'fs18', 38)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs21', 39)" onmouseover="showTip(event, 'fs21', 39)" class="fn">q</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 40)" onmouseover="showTip(event, 'fs10', 40)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 41)" onmouseover="showTip(event, 'fs22', 41)" class="fn">dest_conj</span>
+        <span onmouseout="hideTip(event, 'fs14', 42)" onmouseover="showTip(event, 'fs14', 42)" class="fn">overatoms</span> <span onmouseout="hideTip(event, 'fs15', 43)" onmouseover="showTip(event, 'fs15', 43)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs18', 44)" onmouseover="showTip(event, 'fs18', 44)" class="fn">p</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 45)" onmouseover="showTip(event, 'fs14', 45)" class="fn">overatoms</span> <span onmouseout="hideTip(event, 'fs15', 46)" onmouseover="showTip(event, 'fs15', 46)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs21', 47)" onmouseover="showTip(event, 'fs21', 47)" class="fn">q</span> <span onmouseout="hideTip(event, 'fs16', 48)" onmouseover="showTip(event, 'fs16', 48)" class="fn">b</span><span class="pn">)</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 49)" onmouseover="showTip(event, 'fs10', 49)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 50)" onmouseover="showTip(event, 'fs23', 50)" class="fn">is_disj</span> <span class="k">then</span>
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 51)" onmouseover="showTip(event, 'fs18', 51)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs21', 52)" onmouseover="showTip(event, 'fs21', 52)" class="fn">q</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 53)" onmouseover="showTip(event, 'fs10', 53)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 54)" onmouseover="showTip(event, 'fs24', 54)" class="fn">dest_disj</span>
+        <span onmouseout="hideTip(event, 'fs14', 55)" onmouseover="showTip(event, 'fs14', 55)" class="fn">overatoms</span> <span onmouseout="hideTip(event, 'fs15', 56)" onmouseover="showTip(event, 'fs15', 56)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs18', 57)" onmouseover="showTip(event, 'fs18', 57)" class="fn">p</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 58)" onmouseover="showTip(event, 'fs14', 58)" class="fn">overatoms</span> <span onmouseout="hideTip(event, 'fs15', 59)" onmouseover="showTip(event, 'fs15', 59)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs21', 60)" onmouseover="showTip(event, 'fs21', 60)" class="fn">q</span> <span onmouseout="hideTip(event, 'fs16', 61)" onmouseover="showTip(event, 'fs16', 61)" class="fn">b</span><span class="pn">)</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 62)" onmouseover="showTip(event, 'fs10', 62)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 63)" onmouseover="showTip(event, 'fs25', 63)" class="fn">is_imp</span> <span class="k">then</span>
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 64)" onmouseover="showTip(event, 'fs18', 64)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs21', 65)" onmouseover="showTip(event, 'fs21', 65)" class="fn">q</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 66)" onmouseover="showTip(event, 'fs10', 66)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs26', 67)" onmouseover="showTip(event, 'fs26', 67)" class="fn">dest_imp</span>
+        <span onmouseout="hideTip(event, 'fs14', 68)" onmouseover="showTip(event, 'fs14', 68)" class="fn">overatoms</span> <span onmouseout="hideTip(event, 'fs15', 69)" onmouseover="showTip(event, 'fs15', 69)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs18', 70)" onmouseover="showTip(event, 'fs18', 70)" class="fn">p</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 71)" onmouseover="showTip(event, 'fs14', 71)" class="fn">overatoms</span> <span onmouseout="hideTip(event, 'fs15', 72)" onmouseover="showTip(event, 'fs15', 72)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs21', 73)" onmouseover="showTip(event, 'fs21', 73)" class="fn">q</span> <span onmouseout="hideTip(event, 'fs16', 74)" onmouseover="showTip(event, 'fs16', 74)" class="fn">b</span><span class="pn">)</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 75)" onmouseover="showTip(event, 'fs10', 75)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs27', 76)" onmouseover="showTip(event, 'fs27', 76)" class="fn">is_eq</span> <span class="k">then</span>
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 77)" onmouseover="showTip(event, 'fs18', 77)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs21', 78)" onmouseover="showTip(event, 'fs21', 78)" class="fn">q</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 79)" onmouseover="showTip(event, 'fs10', 79)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 80)" onmouseover="showTip(event, 'fs28', 80)" class="fn">dest_eq</span>
+        <span onmouseout="hideTip(event, 'fs14', 81)" onmouseover="showTip(event, 'fs14', 81)" class="fn">overatoms</span> <span onmouseout="hideTip(event, 'fs15', 82)" onmouseover="showTip(event, 'fs15', 82)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs18', 83)" onmouseover="showTip(event, 'fs18', 83)" class="fn">p</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 84)" onmouseover="showTip(event, 'fs14', 84)" class="fn">overatoms</span> <span onmouseout="hideTip(event, 'fs15', 85)" onmouseover="showTip(event, 'fs15', 85)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs21', 86)" onmouseover="showTip(event, 'fs21', 86)" class="fn">q</span> <span onmouseout="hideTip(event, 'fs16', 87)" onmouseover="showTip(event, 'fs16', 87)" class="fn">b</span><span class="pn">)</span>
+    <span class="k">else</span> <span onmouseout="hideTip(event, 'fs29', 88)" onmouseover="showTip(event, 'fs29', 88)" class="fn">failwith</span> <span class="s">&quot;check type annotation on eq&quot;</span>
+</code></pre>
+<p>Un'applicazione particolarmente comune &egrave; quella di raccogliere qualche insieme di attributi associati agli atomi; ritornando solamente, nel caso pi&ugrave; semplice, l'insieme di tutti gli atomi. Possiamo far questo iterando una funzione f insieme con un "append" su tutti gli atomi, e convertendo infine il risultato in un insieme per rimuovere i duplicati.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 89)" onmouseover="showTip(event, 'fs30', 89)" class="fn">atom_union</span> <span onmouseout="hideTip(event, 'fs31', 90)" onmouseover="showTip(event, 'fs31', 90)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs10', 91)" onmouseover="showTip(event, 'fs10', 91)" class="fn">tm</span> <span class="o">=</span>
+    <span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 92)" onmouseover="showTip(event, 'fs10', 92)" class="fn">tm</span><span class="pn">,</span> <span class="pn">[</span><span class="pn">]</span><span class="pn">)</span>
+    <span class="o">||&gt;</span> <span onmouseout="hideTip(event, 'fs14', 93)" onmouseover="showTip(event, 'fs14', 93)" class="fn">overatoms</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs32', 94)" onmouseover="showTip(event, 'fs32', 94)" class="fn">h</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs33', 95)" onmouseover="showTip(event, 'fs33', 95)" class="fn">t</span><span class="pn">)</span> <span class="k">-&gt;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs31', 96)" onmouseover="showTip(event, 'fs31', 96)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs32', 97)" onmouseover="showTip(event, 'fs32', 97)" class="fn">h</span><span class="pn">)</span> <span class="o">@</span> <span onmouseout="hideTip(event, 'fs33', 98)" onmouseover="showTip(event, 'fs33', 98)" class="fn">t</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs34', 99)" onmouseover="showTip(event, 'fs34', 99)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs35', 100)" onmouseover="showTip(event, 'fs35', 100)" class="id">distinct</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs34', 101)" onmouseover="showTip(event, 'fs34', 101)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 102)" onmouseover="showTip(event, 'fs36', 102)" class="id">sort</span>
+</code></pre>
+<h2><a name="La-semantica-della-logica-proposizionale" class="anchor" href="#La-semantica-della-logica-proposizionale">La semantica della logica proposizionale</a></h2>
+<p>Dal momento che le formule proposizionali intendono rappresentare asserzioni che possono essere vere o false, in ultima analisi
+il significato di una formula &egrave; semplicemente uno dei due valori di verit&agrave; "vero" e "falso". Comunque, esattamente
+come un'espressione algebrica x + y + 1 ha un significato definito solo quando sappiamo per che cosa stanno le variabili x e y,
+il significato di una formula proposizionale dipende dai valori di verit&agrave; assegnati alle sue formule atomiche. Questa assegnazione
+&egrave; codificata in una valutazione, che &egrave; una funzione dagli insiemi degli atomi all'insieme dei valori di verit&agrave;
+{falso,vero}. Data una formula <code>p</code> e una valutazione <code>v</code> valutiamo il valore di verit&agrave; complessivo con la seguente funzione definita
+ricorsivamente:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs37', 103)" onmouseover="showTip(event, 'fs37', 103)" class="fn">eval</span> <span onmouseout="hideTip(event, 'fs10', 104)" onmouseover="showTip(event, 'fs10', 104)" class="fn">tm</span> <span onmouseout="hideTip(event, 'fs38', 105)" onmouseover="showTip(event, 'fs38', 105)" class="fn">v</span> <span class="o">=</span>
+    <span class="k">if</span> <span onmouseout="hideTip(event, 'fs10', 106)" onmouseover="showTip(event, 'fs10', 106)" class="fn">tm</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs39', 107)" onmouseover="showTip(event, 'fs39', 107)" class="id">false_tm</span> <span class="k">then</span> 
+        <span class="k">false</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 108)" onmouseover="showTip(event, 'fs10', 108)" class="fn">tm</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs40', 109)" onmouseover="showTip(event, 'fs40', 109)" class="id">true_tm</span> <span class="k">then</span>
+        <span class="k">true</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 110)" onmouseover="showTip(event, 'fs10', 110)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 111)" onmouseover="showTip(event, 'fs9', 111)" class="fn">is_bool_atom</span> <span class="k">then</span> 
+        <span onmouseout="hideTip(event, 'fs38', 112)" onmouseover="showTip(event, 'fs38', 112)" class="fn">v</span> <span onmouseout="hideTip(event, 'fs10', 113)" onmouseover="showTip(event, 'fs10', 113)" class="fn">tm</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 114)" onmouseover="showTip(event, 'fs10', 114)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 115)" onmouseover="showTip(event, 'fs17', 115)" class="fn">is_not</span> <span class="k">then</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 116)" onmouseover="showTip(event, 'fs18', 116)" class="fn">p</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 117)" onmouseover="showTip(event, 'fs10', 117)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 118)" onmouseover="showTip(event, 'fs19', 118)" class="fn">dest_not</span>
+        <span class="fn">not</span> <span class="o">&lt;|</span> <span onmouseout="hideTip(event, 'fs37', 119)" onmouseover="showTip(event, 'fs37', 119)" class="fn">eval</span> <span onmouseout="hideTip(event, 'fs18', 120)" onmouseover="showTip(event, 'fs18', 120)" class="fn">p</span> <span onmouseout="hideTip(event, 'fs38', 121)" onmouseover="showTip(event, 'fs38', 121)" class="fn">v</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 122)" onmouseover="showTip(event, 'fs10', 122)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 123)" onmouseover="showTip(event, 'fs20', 123)" class="fn">is_conj</span> <span class="k">then</span> 
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 124)" onmouseover="showTip(event, 'fs18', 124)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs21', 125)" onmouseover="showTip(event, 'fs21', 125)" class="fn">q</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 126)" onmouseover="showTip(event, 'fs10', 126)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 127)" onmouseover="showTip(event, 'fs22', 127)" class="fn">dest_conj</span>
+        <span class="pn">(</span><span onmouseout="hideTip(event, 'fs37', 128)" onmouseover="showTip(event, 'fs37', 128)" class="fn">eval</span> <span onmouseout="hideTip(event, 'fs18', 129)" onmouseover="showTip(event, 'fs18', 129)" class="fn">p</span> <span onmouseout="hideTip(event, 'fs38', 130)" onmouseover="showTip(event, 'fs38', 130)" class="fn">v</span><span class="pn">)</span> <span class="o">&amp;&amp;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs37', 131)" onmouseover="showTip(event, 'fs37', 131)" class="fn">eval</span> <span onmouseout="hideTip(event, 'fs21', 132)" onmouseover="showTip(event, 'fs21', 132)" class="fn">q</span> <span onmouseout="hideTip(event, 'fs38', 133)" onmouseover="showTip(event, 'fs38', 133)" class="fn">v</span><span class="pn">)</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 134)" onmouseover="showTip(event, 'fs10', 134)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 135)" onmouseover="showTip(event, 'fs23', 135)" class="fn">is_disj</span> <span class="k">then</span> 
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 136)" onmouseover="showTip(event, 'fs18', 136)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs21', 137)" onmouseover="showTip(event, 'fs21', 137)" class="fn">q</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 138)" onmouseover="showTip(event, 'fs10', 138)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 139)" onmouseover="showTip(event, 'fs24', 139)" class="fn">dest_disj</span>
+        <span class="pn">(</span><span onmouseout="hideTip(event, 'fs37', 140)" onmouseover="showTip(event, 'fs37', 140)" class="fn">eval</span> <span onmouseout="hideTip(event, 'fs18', 141)" onmouseover="showTip(event, 'fs18', 141)" class="fn">p</span> <span onmouseout="hideTip(event, 'fs38', 142)" onmouseover="showTip(event, 'fs38', 142)" class="fn">v</span><span class="pn">)</span> <span class="o">||</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs37', 143)" onmouseover="showTip(event, 'fs37', 143)" class="fn">eval</span> <span onmouseout="hideTip(event, 'fs21', 144)" onmouseover="showTip(event, 'fs21', 144)" class="fn">q</span> <span onmouseout="hideTip(event, 'fs38', 145)" onmouseover="showTip(event, 'fs38', 145)" class="fn">v</span><span class="pn">)</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 146)" onmouseover="showTip(event, 'fs10', 146)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 147)" onmouseover="showTip(event, 'fs25', 147)" class="fn">is_imp</span> <span class="k">then</span> 
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 148)" onmouseover="showTip(event, 'fs18', 148)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs21', 149)" onmouseover="showTip(event, 'fs21', 149)" class="fn">q</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 150)" onmouseover="showTip(event, 'fs10', 150)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs26', 151)" onmouseover="showTip(event, 'fs26', 151)" class="fn">dest_imp</span>
+        <span class="fn">not</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs37', 152)" onmouseover="showTip(event, 'fs37', 152)" class="fn">eval</span> <span onmouseout="hideTip(event, 'fs18', 153)" onmouseover="showTip(event, 'fs18', 153)" class="fn">p</span> <span onmouseout="hideTip(event, 'fs38', 154)" onmouseover="showTip(event, 'fs38', 154)" class="fn">v</span><span class="pn">)</span> <span class="o">||</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs37', 155)" onmouseover="showTip(event, 'fs37', 155)" class="fn">eval</span> <span onmouseout="hideTip(event, 'fs21', 156)" onmouseover="showTip(event, 'fs21', 156)" class="fn">q</span> <span onmouseout="hideTip(event, 'fs38', 157)" onmouseover="showTip(event, 'fs38', 157)" class="fn">v</span><span class="pn">)</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 158)" onmouseover="showTip(event, 'fs10', 158)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs27', 159)" onmouseover="showTip(event, 'fs27', 159)" class="fn">is_eq</span> <span class="k">then</span> 
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 160)" onmouseover="showTip(event, 'fs18', 160)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs21', 161)" onmouseover="showTip(event, 'fs21', 161)" class="fn">q</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 162)" onmouseover="showTip(event, 'fs10', 162)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 163)" onmouseover="showTip(event, 'fs28', 163)" class="fn">dest_eq</span>
+        <span class="pn">(</span><span onmouseout="hideTip(event, 'fs37', 164)" onmouseover="showTip(event, 'fs37', 164)" class="fn">eval</span> <span onmouseout="hideTip(event, 'fs18', 165)" onmouseover="showTip(event, 'fs18', 165)" class="fn">p</span> <span onmouseout="hideTip(event, 'fs38', 166)" onmouseover="showTip(event, 'fs38', 166)" class="fn">v</span><span class="pn">)</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs37', 167)" onmouseover="showTip(event, 'fs37', 167)" class="fn">eval</span> <span onmouseout="hideTip(event, 'fs21', 168)" onmouseover="showTip(event, 'fs21', 168)" class="fn">q</span> <span onmouseout="hideTip(event, 'fs38', 169)" onmouseover="showTip(event, 'fs38', 169)" class="fn">v</span><span class="pn">)</span>
+    <span class="k">else</span>
+        <span onmouseout="hideTip(event, 'fs29', 170)" onmouseover="showTip(event, 'fs29', 170)" class="fn">failwith</span> <span class="s">&quot;Not part of propositional logic.&quot;</span>
+</code></pre>
+<p>Questa &egrave; la nostra definizione matematica della semantica della logica proposizionale, che intende costituire una formalizzazione
+delle nostre intuizioni. Ogni connettivo logico &egrave; interpretato da una corrispondente funzione boolean HOL. Per essere molto espliciti
+sul significato di questi operatori, possiamo elencare tutte le possibili combinazioni di input e vedere gli output corrispondenti.</p>
+<p>Possiamo presentare questa informazione in una tavola di verit&agrave; che mostri come il valore di verit&agrave; di una formula &egrave;
+determinato dalle sue sotto formule immediate.</p>
+<p>Cos&igrave; per i connettivi binari avremo:</p>
+<blockquote>
+<table class="tab">
+	<tr>
+		<td class="tab">p</td>
+		<td class="tab">q</td>
+		<td class="tab">p /\ q</td>
+		<td class="tab">p \/ q</td>
+		<td class="tab">p ==> q</td>
+		<td class="tab">p <=> q</td>
+	</tr>
+	<tr>
+		<td class="tab">falso</td>
+		<td class="tab">falso</td>
+		<td class="tab">falso</td>
+		<td class="tab">falso</td>
+		<td class="tab">vero</td>
+		<td class="tab">vero</td>
+	</tr>
+    <tr>
+		<td class="tab">falso</td>
+		<td class="tab">vero</td>
+		<td class="tab">falso</td>
+		<td class="tab">vero</td>
+		<td class="tab">vero</td>
+		<td class="tab">falso</td>
+	</tr>
+    <tr>
+    	<td class="tab">vero</td>
+    	<td class="tab">falso</td>
+    	<td class="tab">falso</td>
+    	<td class="tab">vero</td>
+    	<td class="tab">falso</td>
+    	<td class="tab">falso</td>
+    </tr>
+    <tr>
+    	<td class="tab">vero</td>
+    	<td class="tab">vero</td>
+    	<td class="tab">vero</td>
+    	<td class="tab">vero</td>
+    	<td class="tab">vero</td>
+    	<td class="tab">vero</td>
+    </tr>
+</table>
+</blockquote>
+<p>e per la negazione unaria:</p>
+<blockquote>
+<table class="tab">
+	<tr>
+		<td class="tab">p</td>
+		<td class="tab">~ p</td>
+	</tr>
+	<tr>
+		<td class="tab">falso</td>
+		<td class="tab">vero</td>
+	</tr>
+    <tr>
+		<td class="tab">vero</td>
+		<td class="tab">falso</td>
+	</tr>
+</table>
+</blockquote>
+<p>Proviamo a valutare una formula "p /\ q ==&gt; q /\ r" in una valutazione dove p, q e r sono impostati rispettivamente a
+"vero", "falso" e "vero". (Non ci preoccupiamo di definire il valore di atomi non coinvolti nella formula, e F#
+mostra un messaggio di warning che ci informa che non lo abbiamo fatto. Per evitarlo possiamo eventualmente sopprimere il warning
+avendo l'accortezza di reimpostarlo successivamente.)</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//#nowarn &quot;0025&quot;;;</span>
+<span class="pn">(</span><span class="k">function</span> <span onmouseout="hideTip(event, 'fs41', 171)" onmouseover="showTip(event, 'fs41', 171)" class="uc">Tmvar</span> <span class="pn">(</span><span class="s">&quot;p&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 172)" onmouseover="showTip(event, 'fs42', 172)" class="fn">bool_ty</span><span class="pn">)</span> <span class="k">-&gt;</span> <span class="k">true</span> <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs41', 173)" onmouseover="showTip(event, 'fs41', 173)" class="uc">Tmvar</span> <span class="pn">(</span><span class="s">&quot;q&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 174)" onmouseover="showTip(event, 'fs42', 174)" class="fn">bool_ty</span><span class="pn">)</span> <span class="k">-&gt;</span> <span class="k">false</span> <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs41', 175)" onmouseover="showTip(event, 'fs41', 175)" class="uc">Tmvar</span> <span class="pn">(</span><span class="s">&quot;r&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 176)" onmouseover="showTip(event, 'fs42', 176)" class="fn">bool_ty</span><span class="pn">)</span> <span class="k">-&gt;</span> <span class="k">true</span><span class="pn">)</span> 
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs37', 177)" onmouseover="showTip(event, 'fs37', 177)" class="fn">eval</span> <span class="pn">(</span><span class="s">@&quot;p /\ q ==&gt; q /\ r&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 178)" onmouseover="showTip(event, 'fs43', 178)" class="fn">parse_term</span><span class="pn">)</span>
+<span class="c">//val it : bool = true</span>
+</code></pre>
+<p>In un'altra valutazione, comunque, la formula viene valutata a "falso":</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">(</span><span class="k">function</span> <span onmouseout="hideTip(event, 'fs41', 179)" onmouseover="showTip(event, 'fs41', 179)" class="uc">Tmvar</span> <span class="pn">(</span><span class="s">&quot;p&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 180)" onmouseover="showTip(event, 'fs42', 180)" class="fn">bool_ty</span><span class="pn">)</span> <span class="k">-&gt;</span> <span class="k">true</span> <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs41', 181)" onmouseover="showTip(event, 'fs41', 181)" class="uc">Tmvar</span> <span class="pn">(</span><span class="s">&quot;q&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 182)" onmouseover="showTip(event, 'fs42', 182)" class="fn">bool_ty</span><span class="pn">)</span> <span class="k">-&gt;</span> <span class="k">true</span> <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs41', 183)" onmouseover="showTip(event, 'fs41', 183)" class="uc">Tmvar</span> <span class="pn">(</span><span class="s">&quot;r&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 184)" onmouseover="showTip(event, 'fs42', 184)" class="fn">bool_ty</span><span class="pn">)</span> <span class="k">-&gt;</span> <span class="k">false</span><span class="pn">)</span> 
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs37', 185)" onmouseover="showTip(event, 'fs37', 185)" class="fn">eval</span> <span class="pn">(</span><span class="s">@&quot;p /\ q ==&gt; q /\ r&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 186)" onmouseover="showTip(event, 'fs43', 186)" class="fn">parse_term</span><span class="pn">)</span>
+<span class="c">//val it : bool = false</span>
+</code></pre>
+<h2><a name="Tavole-di-verit-agrave-meccanizzate" class="anchor" href="#Tavole-di-verit-agrave-meccanizzate">Tavole di verit&agrave; meccanizzate</a></h2>
+<p>Intuitivamente sembra naturale che la valutazione di una formula sia indipendente dai valori
+assegnati dalla valutazione agli atomi che non occorrono nella formula.
+Rendiamo preciso questo concetto definendo una funzione per estrarre
+l'insieme delle proposizioni atomiche che occorrono in una formula, In termini matematici astratti, definiremmo atoms nel modo
+seguente per ricorsione sulle formule:</p>
+<blockquote>
+<p>atoms(true)     =	{}                        <br/>
+atoms(false)    =	{}                        <br/>
+atoms(x)        =	{x}                       <br/>
+atoms(~p)       =	atoms(p)                  <br/>
+atoms(p /\ q)   =	atoms(p) U atoms(q)       <br/>
+atoms(p \/ q)   =	atoms(p) U atoms(q)       <br/>
+atoms(p ==&gt; q)  =	atoms(p) U atoms(q)       <br/>
+atoms(p <=> q)  =	atoms(p) U atoms(q)       <br/></p>
+</blockquote>
+<p>Per induzione strutturale sulle formule, si dimostra che atoms(p) &egrave; sempre finito e che quindi
+&egrave; possibile trattarlo in termini di liste F# (usando le liste per rappresentare insiemi).</p>
+<p><strong>Teorema: Per ogni formula proposizionale p, l'insieme atoms(p) &egrave; finito.</strong></p>
+<p><strong>Dimostrazione</strong>. Per induzione sulla struttura della formula.</p>
+<p><em>Se p &egrave; true o false, allora atoms(p) &egrave; l'insieme vuoto, e se p &egrave; un atomo, atoms(p) &egrave; un insieme singoletto.</em>
+<em>In ogni caso, questi sono finiti.</em></p>
+<p><em>Se p &egrave; della forma atoms(~ q), allora per ipotesi di induzione atoms(q) &egrave; finito</em>
+<em>e per definizione atoms(~ q) = atoms(q).</em></p>
+<p><em>Se p &egrave; della forma q /\ r, q \/ r, q ==&gt; r, q <=> r, allora atoms(p) = atoms(q) U atoms(r).</em>
+<em>Per ipotesi di induzione, sia atoms(q) che atoms(r) sono finiti, e l'unione di due insiemi finiti &egrave; un insieme finito.</em></p>
+<p>Analogamente, possiamo giustificare formalmente il fatto intuitivamente ovvio menzionato sopra che</p>
+<p><strong>Teorema: Per ogni formula proposizionale p, se due valutazioni v e v' concordano sull'insieme atmos(p)
+(&egrave; v(x) = v'(x) per tutti gli x in atoms(p)), allora <code>eval p v</code> = <code>eval p v'</code>.</strong></p>
+<p><strong>Dimostrazione</strong>. Per induzione sulla struttura della formula.</p>
+<p><em>Se p &egrave; true o false, allora &egrave; interpretata rispettivamente a true e false indipendentemente dalla assegnazione.</em></p>
+<p><em>Se p &egrave; un atomo, allora atoms(x) = {x} e per assunzione v(x) = v'(x).</em>
+<em>Quindi eval p v = v(x) = v'(x) = eval p v'.</em></p>
+<p><em>Se p &egrave; della forma ~ q, allora allora atoms(p) = {q} e per assunzione v(x) = v'(x).</em>
+<em>Quindi eval p v = not v(q) = not v'(q) = eval p v'.</em></p>
+<p><em>Se p &egrave; della forma q /\ r, q \/ r, q ==&gt; r, q <=> r, allora atoms(p) = atoms(q) U atoms(r).</em>
+<em>Dal momento che le assegnazioni si accordano sull'unione dei due insiemi, si accordano conseguentemente</em>
+<em>su ognuno degli atoms(q) e atoms(r). Possiamo quindi applicare l'ipotesi di induzione per concludere che</em>
+<em>eval q v = eval q v' e eval q r = eval r v'. E dal momento che la valutazione di p &egrave; una funzione</em>
+<em>di queste due sottoassegnazioni, eval p v = eval p v'</em>.</p>
+<p>La funzione atoms pu&ograve; essere implementata in F# in termini dell'iteratore <code>atom_union</code> definito di sopra:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 187)" onmouseover="showTip(event, 'fs44', 187)" class="fn">atoms</span> <span onmouseout="hideTip(event, 'fs10', 188)" onmouseover="showTip(event, 'fs10', 188)" class="fn">tm</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs30', 189)" onmouseover="showTip(event, 'fs30', 189)" class="fn">atom_union</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs45', 190)" onmouseover="showTip(event, 'fs45', 190)" class="fn">a</span> <span class="k">-&gt;</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs45', 191)" onmouseover="showTip(event, 'fs45', 191)" class="fn">a</span><span class="pn">]</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs10', 192)" onmouseover="showTip(event, 'fs10', 192)" class="fn">tm</span>
+</code></pre>
+<p>per esempio:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="s">@&quot;p /\ q ==&gt; n = (r:bool)&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 193)" onmouseover="showTip(event, 'fs43', 193)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs44', 194)" onmouseover="showTip(event, 'fs44', 194)" class="fn">atoms</span>
+<span class="c">//val it : term list = [n:bool; p:bool; q:bool; r:bool]</span>
+</code></pre>
+<p>Poich&egrave; l'interpretazione di una formula proposizionale <code>p</code> dipende solo dall'azione della valutazione sull'insieme finito
+(diciamo di n elementi) <code>atoms(p)</code>, e pu&ograve; fare solo una di due scelte, il valore di verit&agrave; finale &egrave; completamente determinato
+da tutte le 2^n scelte per questi atomi. Quindi possiamo estendere in modo naturale l'enumerazione nella forma di una tavola di verit&agrave;
+dalle operazioni base a formule arbitrarie. Per implementare questo in F#, iniziamo definendo una funzione che testa se una funzione
+<code>subfn</code> ritorna true su tutte le possibili valutazioni degli atomi <code>ats</code>, usando una valutazione esistente <code>v</code> per tutti gli altri atomi.
+Lo spazio di tutte le valutazioni &egrave; esplorato modificando successivamente <code>v</code> in modo da impostare ogni atomo <code>p</code> a
+"vero" e "falso" e richiamando ricorsivamente:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs46', 195)" onmouseover="showTip(event, 'fs46', 195)" class="fn">onallvaluations</span> <span onmouseout="hideTip(event, 'fs47', 196)" onmouseover="showTip(event, 'fs47', 196)" class="fn">subfn</span> <span onmouseout="hideTip(event, 'fs48', 197)" onmouseover="showTip(event, 'fs48', 197)" class="fn">v</span> <span onmouseout="hideTip(event, 'fs49', 198)" onmouseover="showTip(event, 'fs49', 198)" class="fn">ats</span> <span class="o">=</span>
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs49', 199)" onmouseover="showTip(event, 'fs49', 199)" class="fn">ats</span> <span class="k">with</span>
+    <span class="pn">|</span> <span class="pn">[</span><span class="pn">]</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs47', 200)" onmouseover="showTip(event, 'fs47', 200)" class="fn">subfn</span> <span onmouseout="hideTip(event, 'fs48', 201)" onmouseover="showTip(event, 'fs48', 201)" class="fn">v</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs50', 202)" onmouseover="showTip(event, 'fs50', 202)" class="fn">p</span> <span class="uc">::</span> <span onmouseout="hideTip(event, 'fs51', 203)" onmouseover="showTip(event, 'fs51', 203)" class="fn">ps</span> <span class="k">-&gt;</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs52', 204)" onmouseover="showTip(event, 'fs52', 204)" class="fn">v&#39;</span> <span onmouseout="hideTip(event, 'fs53', 205)" onmouseover="showTip(event, 'fs53', 205)" class="fn">t</span> <span onmouseout="hideTip(event, 'fs54', 206)" onmouseover="showTip(event, 'fs54', 206)" class="fn">q</span> <span class="o">=</span>
+            <span class="k">if</span> <span onmouseout="hideTip(event, 'fs54', 207)" onmouseover="showTip(event, 'fs54', 207)" class="fn">q</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs50', 208)" onmouseover="showTip(event, 'fs50', 208)" class="fn">p</span> <span class="k">then</span> <span onmouseout="hideTip(event, 'fs53', 209)" onmouseover="showTip(event, 'fs53', 209)" class="fn">t</span>
+            <span class="k">else</span> <span onmouseout="hideTip(event, 'fs48', 210)" onmouseover="showTip(event, 'fs48', 210)" class="fn">v</span> <span onmouseout="hideTip(event, 'fs54', 211)" onmouseover="showTip(event, 'fs54', 211)" class="fn">q</span>
+        <span onmouseout="hideTip(event, 'fs46', 212)" onmouseover="showTip(event, 'fs46', 212)" class="fn">onallvaluations</span> <span onmouseout="hideTip(event, 'fs47', 213)" onmouseover="showTip(event, 'fs47', 213)" class="fn">subfn</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs52', 214)" onmouseover="showTip(event, 'fs52', 214)" class="fn">v&#39;</span> <span class="k">false</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs51', 215)" onmouseover="showTip(event, 'fs51', 215)" class="fn">ps</span>
+        <span class="o">&amp;&amp;</span> <span onmouseout="hideTip(event, 'fs46', 216)" onmouseover="showTip(event, 'fs46', 216)" class="fn">onallvaluations</span> <span onmouseout="hideTip(event, 'fs47', 217)" onmouseover="showTip(event, 'fs47', 217)" class="fn">subfn</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs52', 218)" onmouseover="showTip(event, 'fs52', 218)" class="fn">v&#39;</span> <span class="k">true</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs51', 219)" onmouseover="showTip(event, 'fs51', 219)" class="fn">ps</span>
+</code></pre>
+<p>Possiamo applicare questa a una funzione che disegna una riga della tavola di verit&agrave; e che ritorna "vero".
+(Il valore di ritorno &egrave; importante, perch &egrave; &amp; valuter&agrave; il suo secondo argomento solo se il
+primo argomento &egrave; true.) Questo pu&ograve; quindi essere usato per disegnare l'intera tavola di verit&qgrave; per una formula:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs55', 220)" onmouseover="showTip(event, 'fs55', 220)" class="fn">pname</span> <span onmouseout="hideTip(event, 'fs10', 221)" onmouseover="showTip(event, 'fs10', 221)" class="fn">tm</span> <span class="o">=</span> 
+    <span class="k">if</span> <span onmouseout="hideTip(event, 'fs10', 222)" onmouseover="showTip(event, 'fs10', 222)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 223)" onmouseover="showTip(event, 'fs12', 223)" class="fn">is_const</span> <span class="k">then</span> 
+        <span onmouseout="hideTip(event, 'fs10', 224)" onmouseover="showTip(event, 'fs10', 224)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs56', 225)" onmouseover="showTip(event, 'fs56', 225)" class="fn">const_name</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 226)" onmouseover="showTip(event, 'fs10', 226)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 227)" onmouseover="showTip(event, 'fs13', 227)" class="fn">is_var</span> <span class="k">then</span> 
+        <span onmouseout="hideTip(event, 'fs10', 228)" onmouseover="showTip(event, 'fs10', 228)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs57', 229)" onmouseover="showTip(event, 'fs57', 229)" class="fn">var_name</span>
+    <span class="k">else</span> <span class="s">&quot;&quot;</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs58', 230)" onmouseover="showTip(event, 'fs58', 230)" class="fn">fprint_truthtable</span> <span onmouseout="hideTip(event, 'fs59', 231)" onmouseover="showTip(event, 'fs59', 231)" class="d">sw</span> <span onmouseout="hideTip(event, 'fs60', 232)" onmouseover="showTip(event, 'fs60', 232)" class="fn">fm</span> <span class="o">=</span>
+    <span class="c">// [P &quot;p&quot;; P &quot;q&quot;; P &quot;r&quot;]</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs61', 233)" onmouseover="showTip(event, 'fs61', 233)" class="fn">ats</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs44', 234)" onmouseover="showTip(event, 'fs44', 234)" class="fn">atoms</span> <span onmouseout="hideTip(event, 'fs60', 235)" onmouseover="showTip(event, 'fs60', 235)" class="fn">fm</span>
+    <span class="c">// 5 + 1 = length of false + length of space</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs62', 236)" onmouseover="showTip(event, 'fs62', 236)" class="fn">width</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 237)" onmouseover="showTip(event, 'fs34', 237)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs63', 238)" onmouseover="showTip(event, 'fs63', 238)" class="id">foldBack</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs64', 239)" onmouseover="showTip(event, 'fs64', 239)" class="fn">max</span> <span class="o">&lt;&lt;</span> <span onmouseout="hideTip(event, 'fs65', 240)" onmouseover="showTip(event, 'fs65', 240)" class="m">String</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs66', 241)" onmouseover="showTip(event, 'fs66', 241)" class="id">length</span> <span class="o">&lt;&lt;</span> <span onmouseout="hideTip(event, 'fs55', 242)" onmouseover="showTip(event, 'fs55', 242)" class="fn">pname</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs61', 243)" onmouseover="showTip(event, 'fs61', 243)" class="fn">ats</span> <span class="n">5</span> <span class="o">+</span> <span class="n">1</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs67', 244)" onmouseover="showTip(event, 'fs67', 244)" class="fn">fixw</span> <span onmouseout="hideTip(event, 'fs68', 245)" onmouseover="showTip(event, 'fs68', 245)" class="fn">s</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs68', 246)" onmouseover="showTip(event, 'fs68', 246)" class="fn">s</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs65', 247)" onmouseover="showTip(event, 'fs65', 247)" class="m">String</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs69', 248)" onmouseover="showTip(event, 'fs69', 248)" class="id">replicate</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs62', 249)" onmouseover="showTip(event, 'fs62', 249)" class="fn">width</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs65', 250)" onmouseover="showTip(event, 'fs65', 250)" class="m">String</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs66', 251)" onmouseover="showTip(event, 'fs66', 251)" class="id">length</span> <span onmouseout="hideTip(event, 'fs68', 252)" onmouseover="showTip(event, 'fs68', 252)" class="fn">s</span><span class="pn">)</span> <span class="s">&quot; &quot;</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs70', 253)" onmouseover="showTip(event, 'fs70', 253)" class="fn">truthstring</span> <span onmouseout="hideTip(event, 'fs71', 254)" onmouseover="showTip(event, 'fs71', 254)" class="fn">p</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs67', 255)" onmouseover="showTip(event, 'fs67', 255)" class="fn">fixw</span> <span class="pn">(</span><span class="k">if</span> <span onmouseout="hideTip(event, 'fs71', 256)" onmouseover="showTip(event, 'fs71', 256)" class="fn">p</span> <span class="k">then</span> <span class="s">&quot;true&quot;</span> <span class="k">else</span> <span class="s">&quot;false&quot;</span><span class="pn">)</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs72', 257)" onmouseover="showTip(event, 'fs72', 257)" class="fn">mk_row</span> <span onmouseout="hideTip(event, 'fs38', 258)" onmouseover="showTip(event, 'fs38', 258)" class="fn">v</span> <span class="o">=</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs73', 259)" onmouseover="showTip(event, 'fs73', 259)" class="fn">lis</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 260)" onmouseover="showTip(event, 'fs34', 260)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs74', 261)" onmouseover="showTip(event, 'fs74', 261)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs75', 262)" onmouseover="showTip(event, 'fs75', 262)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs70', 263)" onmouseover="showTip(event, 'fs70', 263)" class="fn">truthstring</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs38', 264)" onmouseover="showTip(event, 'fs38', 264)" class="fn">v</span> <span onmouseout="hideTip(event, 'fs75', 265)" onmouseover="showTip(event, 'fs75', 265)" class="fn">x</span><span class="pn">)</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs61', 266)" onmouseover="showTip(event, 'fs61', 266)" class="fn">ats</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs76', 267)" onmouseover="showTip(event, 'fs76', 267)" class="fn">ans</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs70', 268)" onmouseover="showTip(event, 'fs70', 268)" class="fn">truthstring</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs37', 269)" onmouseover="showTip(event, 'fs37', 269)" class="fn">eval</span> <span onmouseout="hideTip(event, 'fs60', 270)" onmouseover="showTip(event, 'fs60', 270)" class="fn">fm</span> <span onmouseout="hideTip(event, 'fs38', 271)" onmouseover="showTip(event, 'fs38', 271)" class="fn">v</span><span class="pn">)</span>
+        <span onmouseout="hideTip(event, 'fs77', 272)" onmouseover="showTip(event, 'fs77', 272)" class="fn">fprintf</span> <span onmouseout="hideTip(event, 'fs59', 273)" onmouseover="showTip(event, 'fs59', 273)" class="d">sw</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">&quot;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs34', 274)" onmouseover="showTip(event, 'fs34', 274)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs63', 275)" onmouseover="showTip(event, 'fs63', 275)" class="id">foldBack</span> <span class="pn">(</span><span class="o">+</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs73', 276)" onmouseover="showTip(event, 'fs73', 276)" class="fn">lis</span> <span class="pn">(</span><span class="s">&quot;| &quot;</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs76', 277)" onmouseover="showTip(event, 'fs76', 277)" class="fn">ans</span><span class="pn">)</span><span class="pn">)</span>
+        <span onmouseout="hideTip(event, 'fs78', 278)" onmouseover="showTip(event, 'fs78', 278)" class="fn">fprintfn</span> <span onmouseout="hideTip(event, 'fs59', 279)" onmouseover="showTip(event, 'fs59', 279)" class="d">sw</span> <span class="s">&quot;&quot;</span>
+        <span class="k">true</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs79', 280)" onmouseover="showTip(event, 'fs79', 280)" class="fn">seperator</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs65', 281)" onmouseover="showTip(event, 'fs65', 281)" class="m">String</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs69', 282)" onmouseover="showTip(event, 'fs69', 282)" class="id">replicate</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs62', 283)" onmouseover="showTip(event, 'fs62', 283)" class="fn">width</span> <span class="o">*</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs34', 284)" onmouseover="showTip(event, 'fs34', 284)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs80', 285)" onmouseover="showTip(event, 'fs80', 285)" class="id">length</span> <span onmouseout="hideTip(event, 'fs61', 286)" onmouseover="showTip(event, 'fs61', 286)" class="fn">ats</span><span class="pn">)</span> <span class="o">+</span> <span class="n">9</span><span class="pn">)</span> <span class="s">&quot;-&quot;</span>
+    <span onmouseout="hideTip(event, 'fs78', 287)" onmouseover="showTip(event, 'fs78', 287)" class="fn">fprintfn</span> <span onmouseout="hideTip(event, 'fs59', 288)" onmouseover="showTip(event, 'fs59', 288)" class="d">sw</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">&quot;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs34', 289)" onmouseover="showTip(event, 'fs34', 289)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs63', 290)" onmouseover="showTip(event, 'fs63', 290)" class="id">foldBack</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs81', 291)" onmouseover="showTip(event, 'fs81', 291)" class="fn">s</span> <span onmouseout="hideTip(event, 'fs82', 292)" onmouseover="showTip(event, 'fs82', 292)" class="fn">t</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs67', 293)" onmouseover="showTip(event, 'fs67', 293)" class="fn">fixw</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs55', 294)" onmouseover="showTip(event, 'fs55', 294)" class="fn">pname</span> <span onmouseout="hideTip(event, 'fs81', 295)" onmouseover="showTip(event, 'fs81', 295)" class="fn">s</span><span class="pn">)</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs82', 296)" onmouseover="showTip(event, 'fs82', 296)" class="fn">t</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs61', 297)" onmouseover="showTip(event, 'fs61', 297)" class="fn">ats</span> <span class="s">&quot;| formula&quot;</span><span class="pn">)</span>
+    <span onmouseout="hideTip(event, 'fs78', 298)" onmouseover="showTip(event, 'fs78', 298)" class="fn">fprintfn</span> <span onmouseout="hideTip(event, 'fs59', 299)" onmouseover="showTip(event, 'fs59', 299)" class="d">sw</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs79', 300)" onmouseover="showTip(event, 'fs79', 300)" class="fn">seperator</span>
+    <span class="k">let</span> <span class="id">_</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs46', 301)" onmouseover="showTip(event, 'fs46', 301)" class="fn">onallvaluations</span> <span onmouseout="hideTip(event, 'fs72', 302)" onmouseover="showTip(event, 'fs72', 302)" class="fn">mk_row</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs75', 303)" onmouseover="showTip(event, 'fs75', 303)" class="fn">x</span> <span class="k">-&gt;</span> <span class="k">false</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs61', 304)" onmouseover="showTip(event, 'fs61', 304)" class="fn">ats</span>
+    <span onmouseout="hideTip(event, 'fs78', 305)" onmouseover="showTip(event, 'fs78', 305)" class="fn">fprintfn</span> <span onmouseout="hideTip(event, 'fs59', 306)" onmouseover="showTip(event, 'fs59', 306)" class="d">sw</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs79', 307)" onmouseover="showTip(event, 'fs79', 307)" class="fn">seperator</span>
+    <span onmouseout="hideTip(event, 'fs78', 308)" onmouseover="showTip(event, 'fs78', 308)" class="fn">fprintfn</span> <span onmouseout="hideTip(event, 'fs59', 309)" onmouseover="showTip(event, 'fs59', 309)" class="d">sw</span> <span class="s">&quot;&quot;</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs83', 310)" onmouseover="showTip(event, 'fs83', 310)" class="fn">writeToString</span> <span onmouseout="hideTip(event, 'fs84', 311)" onmouseover="showTip(event, 'fs84', 311)" class="fn">fn</span> <span class="o">=</span> 
+    <span class="k">use</span> <span onmouseout="hideTip(event, 'fs85', 312)" onmouseover="showTip(event, 'fs85', 312)" class="d">sw</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs86', 313)" onmouseover="showTip(event, 'fs86', 313)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs87', 314)" onmouseover="showTip(event, 'fs87', 314)" class="id">IO</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs88', 315)" onmouseover="showTip(event, 'fs88', 315)" class="id">StringWriter</span><span class="pn">(</span><span class="pn">)</span>
+    <span onmouseout="hideTip(event, 'fs84', 316)" onmouseover="showTip(event, 'fs84', 316)" class="fn">fn</span> <span onmouseout="hideTip(event, 'fs85', 317)" onmouseover="showTip(event, 'fs85', 317)" class="d">sw</span>
+    <span onmouseout="hideTip(event, 'fs85', 318)" onmouseover="showTip(event, 'fs85', 318)" class="d">sw</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs89', 319)" onmouseover="showTip(event, 'fs89', 319)" class="id">ToString</span><span class="pn">(</span><span class="pn">)</span>
+
+<span class="k">let</span> <span class="k">inline</span> <span onmouseout="hideTip(event, 'fs90', 320)" onmouseover="showTip(event, 'fs90', 320)" class="fn">print_truthtable</span> <span onmouseout="hideTip(event, 'fs91', 321)" onmouseover="showTip(event, 'fs91', 321)" class="fn">f</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs58', 322)" onmouseover="showTip(event, 'fs58', 322)" class="fn">fprint_truthtable</span> <span onmouseout="hideTip(event, 'fs92', 323)" onmouseover="showTip(event, 'fs92', 323)" class="id">stdout</span> <span onmouseout="hideTip(event, 'fs91', 324)" onmouseover="showTip(event, 'fs91', 324)" class="fn">f</span>
+<span class="k">let</span> <span class="k">inline</span> <span onmouseout="hideTip(event, 'fs93', 325)" onmouseover="showTip(event, 'fs93', 325)" class="fn">sprint_truthtable</span> <span onmouseout="hideTip(event, 'fs91', 326)" onmouseover="showTip(event, 'fs91', 326)" class="fn">f</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs83', 327)" onmouseover="showTip(event, 'fs83', 327)" class="fn">writeToString</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs85', 328)" onmouseover="showTip(event, 'fs85', 328)" class="d">sw</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs58', 329)" onmouseover="showTip(event, 'fs58', 329)" class="fn">fprint_truthtable</span> <span onmouseout="hideTip(event, 'fs85', 330)" onmouseover="showTip(event, 'fs85', 330)" class="d">sw</span> <span onmouseout="hideTip(event, 'fs91', 331)" onmouseover="showTip(event, 'fs91', 331)" class="fn">f</span><span class="pn">)</span>
+</code></pre>
+<p>Possiamo testare la nostra funzione di stampa su alcune formule:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="s">@&quot;p \/ ~ p&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 332)" onmouseover="showTip(event, 'fs43', 332)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs90', 333)" onmouseover="showTip(event, 'fs90', 333)" class="fn">print_truthtable</span>
+<span class="c">//p     | formula</span>
+<span class="c">//---------------</span>
+<span class="c">//false | true  </span>
+<span class="c">//true  | true  </span>
+<span class="c">//---------------</span>
+
+<span class="c">//val it : unit = ()</span>
+
+<span class="s">@&quot;(true ==&gt; (x = false)) ==&gt; ~(y \/ false /\ z)&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 334)" onmouseover="showTip(event, 'fs43', 334)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs90', 335)" onmouseover="showTip(event, 'fs90', 335)" class="fn">print_truthtable</span>
+<span class="c">//x     y     z     false true  | formula</span>
+<span class="c">//---------------------------------------</span>
+<span class="c">//false false false false false | true  </span>
+<span class="c">//false false false false true  | true  </span>
+<span class="c">//false false false true  false | true  </span>
+<span class="c">//false false false true  true  | true  </span>
+<span class="c">//false false true  false false | true  </span>
+<span class="c">//false false true  false true  | true  </span>
+<span class="c">//false false true  true  false | true  </span>
+<span class="c">//false false true  true  true  | true  </span>
+<span class="c">//false true  false false false | false </span>
+<span class="c">//false true  false false true  | false </span>
+<span class="c">//false true  false true  false | false </span>
+<span class="c">//false true  false true  true  | false </span>
+<span class="c">//false true  true  false false | false </span>
+<span class="c">//false true  true  false true  | false </span>
+<span class="c">//false true  true  true  false | false </span>
+<span class="c">//false true  true  true  true  | false </span>
+<span class="c">//true  false false false false | true  </span>
+<span class="c">//true  false false false true  | true  </span>
+<span class="c">//true  false false true  false | true  </span>
+<span class="c">//true  false false true  true  | true  </span>
+<span class="c">//true  false true  false false | true  </span>
+<span class="c">//true  false true  false true  | true  </span>
+<span class="c">//true  false true  true  false | true  </span>
+<span class="c">//true  false true  true  true  | true  </span>
+<span class="c">//true  true  false false false | true  </span>
+<span class="c">//true  true  false false true  | true  </span>
+<span class="c">//true  true  false true  false | true  </span>
+<span class="c">//true  true  false true  true  | true  </span>
+<span class="c">//true  true  true  false false | true  </span>
+<span class="c">//true  true  true  false true  | true  </span>
+<span class="c">//true  true  true  true  false | true  </span>
+<span class="c">//true  true  true  true  true  | true  </span>
+<span class="c">//---------------------------------------</span>
+
+<span class="c">//val it : unit = ()</span>
+</code></pre>
+<h2><a name="Simplifying-propositional-formulas" class="anchor" href="#Simplifying-propositional-formulas">Simplifying propositional formulas</a></h2>
+<p>Then I define a simplyfication function on proposition in way similar to that described by
+the John Harrison's Handbook of Automated Reasoing customized on the typed lambda language of hol.</p>
+<p><code>psimplify1</code> is an zusiliary function:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs94', 336)" onmouseover="showTip(event, 'fs94', 336)" class="fn">psimplify1</span> <span onmouseout="hideTip(event, 'fs10', 337)" onmouseover="showTip(event, 'fs10', 337)" class="fn">tm</span> <span class="o">=</span> 
+    <span class="k">if</span> <span onmouseout="hideTip(event, 'fs10', 338)" onmouseover="showTip(event, 'fs10', 338)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 339)" onmouseover="showTip(event, 'fs17', 339)" class="fn">is_not</span> <span class="k">then</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs95', 340)" onmouseover="showTip(event, 'fs95', 340)" class="fn">tm1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 341)" onmouseover="showTip(event, 'fs10', 341)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 342)" onmouseover="showTip(event, 'fs19', 342)" class="fn">dest_not</span>
+        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs95', 343)" onmouseover="showTip(event, 'fs95', 343)" class="fn">tm1</span> <span class="k">with</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs96', 344)" onmouseover="showTip(event, 'fs96', 344)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;false&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 345)" onmouseover="showTip(event, 'fs42', 345)" class="fn">bool_ty</span><span class="pn">)</span>     <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs40', 346)" onmouseover="showTip(event, 'fs40', 346)" class="id">true_tm</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs96', 347)" onmouseover="showTip(event, 'fs96', 347)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;true&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 348)" onmouseover="showTip(event, 'fs42', 348)" class="fn">bool_ty</span><span class="pn">)</span>      <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs39', 349)" onmouseover="showTip(event, 'fs39', 349)" class="id">false_tm</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs95', 350)" onmouseover="showTip(event, 'fs95', 350)" class="fn">tm1</span> <span class="k">when</span> <span onmouseout="hideTip(event, 'fs95', 351)" onmouseover="showTip(event, 'fs95', 351)" class="fn">tm1</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 352)" onmouseover="showTip(event, 'fs17', 352)" class="fn">is_not</span>         <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs95', 353)" onmouseover="showTip(event, 'fs95', 353)" class="fn">tm1</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 354)" onmouseover="showTip(event, 'fs19', 354)" class="fn">dest_not</span>
+        <span class="pn">|</span> <span class="id">_</span>                              <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs10', 355)" onmouseover="showTip(event, 'fs10', 355)" class="fn">tm</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 356)" onmouseover="showTip(event, 'fs10', 356)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 357)" onmouseover="showTip(event, 'fs20', 357)" class="fn">is_conj</span> <span class="k">then</span>              
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs95', 358)" onmouseover="showTip(event, 'fs95', 358)" class="fn">tm1</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs97', 359)" onmouseover="showTip(event, 'fs97', 359)" class="fn">tm2</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 360)" onmouseover="showTip(event, 'fs10', 360)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 361)" onmouseover="showTip(event, 'fs22', 361)" class="fn">dest_conj</span>  
+        <span class="k">match</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs95', 362)" onmouseover="showTip(event, 'fs95', 362)" class="fn">tm1</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs97', 363)" onmouseover="showTip(event, 'fs97', 363)" class="fn">tm2</span><span class="pn">)</span> <span class="k">with</span>             
+        <span class="pn">|</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs96', 364)" onmouseover="showTip(event, 'fs96', 364)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;false&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 365)" onmouseover="showTip(event, 'fs42', 365)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">,</span><span class="id">_</span><span class="pn">)</span> 
+        <span class="pn">|</span> <span class="pn">(</span><span class="id">_</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs96', 366)" onmouseover="showTip(event, 'fs96', 366)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;false&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 367)" onmouseover="showTip(event, 'fs42', 367)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">)</span> 
+                                         <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs39', 368)" onmouseover="showTip(event, 'fs39', 368)" class="id">false_tm</span>
+        <span class="pn">|</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs96', 369)" onmouseover="showTip(event, 'fs96', 369)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;true&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 370)" onmouseover="showTip(event, 'fs42', 370)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs18', 371)" onmouseover="showTip(event, 'fs18', 371)" class="fn">p</span><span class="pn">)</span>  
+        <span class="pn">|</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 372)" onmouseover="showTip(event, 'fs18', 372)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs96', 373)" onmouseover="showTip(event, 'fs96', 373)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;true&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 374)" onmouseover="showTip(event, 'fs42', 374)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">)</span>  
+                                         <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs18', 375)" onmouseover="showTip(event, 'fs18', 375)" class="fn">p</span>
+        <span class="pn">|</span> <span class="id">_</span>                              <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs10', 376)" onmouseover="showTip(event, 'fs10', 376)" class="fn">tm</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 377)" onmouseover="showTip(event, 'fs10', 377)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 378)" onmouseover="showTip(event, 'fs23', 378)" class="fn">is_disj</span> <span class="k">then</span>              
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs95', 379)" onmouseover="showTip(event, 'fs95', 379)" class="fn">tm1</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs97', 380)" onmouseover="showTip(event, 'fs97', 380)" class="fn">tm2</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 381)" onmouseover="showTip(event, 'fs10', 381)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 382)" onmouseover="showTip(event, 'fs24', 382)" class="fn">dest_disj</span>  
+        <span class="k">match</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs95', 383)" onmouseover="showTip(event, 'fs95', 383)" class="fn">tm1</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs97', 384)" onmouseover="showTip(event, 'fs97', 384)" class="fn">tm2</span><span class="pn">)</span> <span class="k">with</span>             
+        <span class="pn">|</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs96', 385)" onmouseover="showTip(event, 'fs96', 385)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;false&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 386)" onmouseover="showTip(event, 'fs42', 386)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs18', 387)" onmouseover="showTip(event, 'fs18', 387)" class="fn">p</span><span class="pn">)</span> 
+        <span class="pn">|</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 388)" onmouseover="showTip(event, 'fs18', 388)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs96', 389)" onmouseover="showTip(event, 'fs96', 389)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;false&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 390)" onmouseover="showTip(event, 'fs42', 390)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">)</span> 
+                                         <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs18', 391)" onmouseover="showTip(event, 'fs18', 391)" class="fn">p</span>
+        <span class="pn">|</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs96', 392)" onmouseover="showTip(event, 'fs96', 392)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;true&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 393)" onmouseover="showTip(event, 'fs42', 393)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">,</span><span class="id">_</span><span class="pn">)</span>  
+        <span class="pn">|</span> <span class="pn">(</span><span class="id">_</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs96', 394)" onmouseover="showTip(event, 'fs96', 394)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;true&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 395)" onmouseover="showTip(event, 'fs42', 395)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">)</span>  
+                                         <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs40', 396)" onmouseover="showTip(event, 'fs40', 396)" class="id">true_tm</span>
+        <span class="pn">|</span> <span class="id">_</span>                              <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs10', 397)" onmouseover="showTip(event, 'fs10', 397)" class="fn">tm</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 398)" onmouseover="showTip(event, 'fs10', 398)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 399)" onmouseover="showTip(event, 'fs25', 399)" class="fn">is_imp</span> <span class="k">then</span>               
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs95', 400)" onmouseover="showTip(event, 'fs95', 400)" class="fn">tm1</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs97', 401)" onmouseover="showTip(event, 'fs97', 401)" class="fn">tm2</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 402)" onmouseover="showTip(event, 'fs10', 402)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs26', 403)" onmouseover="showTip(event, 'fs26', 403)" class="fn">dest_imp</span>   
+        <span class="k">match</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs95', 404)" onmouseover="showTip(event, 'fs95', 404)" class="fn">tm1</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs97', 405)" onmouseover="showTip(event, 'fs97', 405)" class="fn">tm2</span><span class="pn">)</span> <span class="k">with</span>             
+        <span class="pn">|</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs96', 406)" onmouseover="showTip(event, 'fs96', 406)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;false&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 407)" onmouseover="showTip(event, 'fs42', 407)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">,</span><span class="id">_</span><span class="pn">)</span> 
+        <span class="pn">|</span> <span class="pn">(</span><span class="id">_</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs96', 408)" onmouseover="showTip(event, 'fs96', 408)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;true&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 409)" onmouseover="showTip(event, 'fs42', 409)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">)</span>  
+                                         <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs40', 410)" onmouseover="showTip(event, 'fs40', 410)" class="id">true_tm</span>
+        <span class="pn">|</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs96', 411)" onmouseover="showTip(event, 'fs96', 411)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;true&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 412)" onmouseover="showTip(event, 'fs42', 412)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs18', 413)" onmouseover="showTip(event, 'fs18', 413)" class="fn">p</span><span class="pn">)</span>  <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs18', 414)" onmouseover="showTip(event, 'fs18', 414)" class="fn">p</span>
+        <span class="pn">|</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 415)" onmouseover="showTip(event, 'fs18', 415)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs96', 416)" onmouseover="showTip(event, 'fs96', 416)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;false&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 417)" onmouseover="showTip(event, 'fs42', 417)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">)</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs18', 418)" onmouseover="showTip(event, 'fs18', 418)" class="fn">p</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs98', 419)" onmouseover="showTip(event, 'fs98', 419)" class="fn">mk_not</span>
+        <span class="pn">|</span> <span class="id">_</span>                              <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs10', 420)" onmouseover="showTip(event, 'fs10', 420)" class="fn">tm</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 421)" onmouseover="showTip(event, 'fs10', 421)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs27', 422)" onmouseover="showTip(event, 'fs27', 422)" class="fn">is_eq</span> <span class="k">then</span>               
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs95', 423)" onmouseover="showTip(event, 'fs95', 423)" class="fn">tm1</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs97', 424)" onmouseover="showTip(event, 'fs97', 424)" class="fn">tm2</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 425)" onmouseover="showTip(event, 'fs10', 425)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 426)" onmouseover="showTip(event, 'fs28', 426)" class="fn">dest_eq</span>   
+        <span class="k">match</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs95', 427)" onmouseover="showTip(event, 'fs95', 427)" class="fn">tm1</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs97', 428)" onmouseover="showTip(event, 'fs97', 428)" class="fn">tm2</span><span class="pn">)</span> <span class="k">with</span>             
+        <span class="pn">|</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs96', 429)" onmouseover="showTip(event, 'fs96', 429)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;true&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 430)" onmouseover="showTip(event, 'fs42', 430)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs18', 431)" onmouseover="showTip(event, 'fs18', 431)" class="fn">p</span><span class="pn">)</span>  
+        <span class="pn">|</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 432)" onmouseover="showTip(event, 'fs18', 432)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs96', 433)" onmouseover="showTip(event, 'fs96', 433)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;true&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 434)" onmouseover="showTip(event, 'fs42', 434)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">)</span>  
+                                         <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs18', 435)" onmouseover="showTip(event, 'fs18', 435)" class="fn">p</span>
+        <span class="pn">|</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs96', 436)" onmouseover="showTip(event, 'fs96', 436)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;false&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 437)" onmouseover="showTip(event, 'fs42', 437)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs18', 438)" onmouseover="showTip(event, 'fs18', 438)" class="fn">p</span><span class="pn">)</span> 
+        <span class="pn">|</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 439)" onmouseover="showTip(event, 'fs18', 439)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs96', 440)" onmouseover="showTip(event, 'fs96', 440)" class="uc">Tmconst</span> <span class="pn">(</span><span class="s">&quot;false&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 441)" onmouseover="showTip(event, 'fs42', 441)" class="fn">bool_ty</span><span class="pn">)</span><span class="pn">)</span> 
+                                         <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs18', 442)" onmouseover="showTip(event, 'fs18', 442)" class="fn">p</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs98', 443)" onmouseover="showTip(event, 'fs98', 443)" class="fn">mk_not</span>
+        <span class="pn">|</span> <span class="id">_</span>                              <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs10', 444)" onmouseover="showTip(event, 'fs10', 444)" class="fn">tm</span>
+    <span class="k">else</span> <span onmouseout="hideTip(event, 'fs10', 445)" onmouseover="showTip(event, 'fs10', 445)" class="fn">tm</span>
+</code></pre>
+<p>With that ready than I define <code>psimplify</code> itself:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs99', 446)" onmouseover="showTip(event, 'fs99', 446)" class="fn">psimplify</span> <span onmouseout="hideTip(event, 'fs10', 447)" onmouseover="showTip(event, 'fs10', 447)" class="fn">tm</span> <span class="o">=</span>
+    <span class="k">if</span> <span onmouseout="hideTip(event, 'fs10', 448)" onmouseover="showTip(event, 'fs10', 448)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 449)" onmouseover="showTip(event, 'fs17', 449)" class="fn">is_not</span> <span class="k">then</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 450)" onmouseover="showTip(event, 'fs18', 450)" class="fn">p</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 451)" onmouseover="showTip(event, 'fs10', 451)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 452)" onmouseover="showTip(event, 'fs19', 452)" class="fn">dest_not</span>
+        <span onmouseout="hideTip(event, 'fs94', 453)" onmouseover="showTip(event, 'fs94', 453)" class="fn">psimplify1</span> <span class="pn">(</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs99', 454)" onmouseover="showTip(event, 'fs99', 454)" class="fn">psimplify</span> <span onmouseout="hideTip(event, 'fs18', 455)" onmouseover="showTip(event, 'fs18', 455)" class="fn">p</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs98', 456)" onmouseover="showTip(event, 'fs98', 456)" class="fn">mk_not</span><span class="pn">)</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 457)" onmouseover="showTip(event, 'fs10', 457)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 458)" onmouseover="showTip(event, 'fs20', 458)" class="fn">is_conj</span> <span class="k">then</span>
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 459)" onmouseover="showTip(event, 'fs18', 459)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs21', 460)" onmouseover="showTip(event, 'fs21', 460)" class="fn">q</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 461)" onmouseover="showTip(event, 'fs10', 461)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 462)" onmouseover="showTip(event, 'fs22', 462)" class="fn">dest_conj</span>
+        <span onmouseout="hideTip(event, 'fs94', 463)" onmouseover="showTip(event, 'fs94', 463)" class="fn">psimplify1</span> <span class="pn">(</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs99', 464)" onmouseover="showTip(event, 'fs99', 464)" class="fn">psimplify</span> <span onmouseout="hideTip(event, 'fs18', 465)" onmouseover="showTip(event, 'fs18', 465)" class="fn">p</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs99', 466)" onmouseover="showTip(event, 'fs99', 466)" class="fn">psimplify</span> <span onmouseout="hideTip(event, 'fs21', 467)" onmouseover="showTip(event, 'fs21', 467)" class="fn">q</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs100', 468)" onmouseover="showTip(event, 'fs100', 468)" class="fn">mk_conj</span><span class="pn">)</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 469)" onmouseover="showTip(event, 'fs10', 469)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 470)" onmouseover="showTip(event, 'fs23', 470)" class="fn">is_disj</span> <span class="k">then</span>
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 471)" onmouseover="showTip(event, 'fs18', 471)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs21', 472)" onmouseover="showTip(event, 'fs21', 472)" class="fn">q</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 473)" onmouseover="showTip(event, 'fs10', 473)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs24', 474)" onmouseover="showTip(event, 'fs24', 474)" class="fn">dest_disj</span>
+        <span onmouseout="hideTip(event, 'fs94', 475)" onmouseover="showTip(event, 'fs94', 475)" class="fn">psimplify1</span> <span class="pn">(</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs99', 476)" onmouseover="showTip(event, 'fs99', 476)" class="fn">psimplify</span> <span onmouseout="hideTip(event, 'fs18', 477)" onmouseover="showTip(event, 'fs18', 477)" class="fn">p</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs99', 478)" onmouseover="showTip(event, 'fs99', 478)" class="fn">psimplify</span> <span onmouseout="hideTip(event, 'fs21', 479)" onmouseover="showTip(event, 'fs21', 479)" class="fn">q</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs101', 480)" onmouseover="showTip(event, 'fs101', 480)" class="fn">mk_disj</span><span class="pn">)</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 481)" onmouseover="showTip(event, 'fs10', 481)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 482)" onmouseover="showTip(event, 'fs25', 482)" class="fn">is_imp</span> <span class="k">then</span>
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 483)" onmouseover="showTip(event, 'fs18', 483)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs21', 484)" onmouseover="showTip(event, 'fs21', 484)" class="fn">q</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 485)" onmouseover="showTip(event, 'fs10', 485)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs26', 486)" onmouseover="showTip(event, 'fs26', 486)" class="fn">dest_imp</span>
+        <span onmouseout="hideTip(event, 'fs94', 487)" onmouseover="showTip(event, 'fs94', 487)" class="fn">psimplify1</span> <span class="pn">(</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs99', 488)" onmouseover="showTip(event, 'fs99', 488)" class="fn">psimplify</span> <span onmouseout="hideTip(event, 'fs18', 489)" onmouseover="showTip(event, 'fs18', 489)" class="fn">p</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs99', 490)" onmouseover="showTip(event, 'fs99', 490)" class="fn">psimplify</span> <span onmouseout="hideTip(event, 'fs21', 491)" onmouseover="showTip(event, 'fs21', 491)" class="fn">q</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs102', 492)" onmouseover="showTip(event, 'fs102', 492)" class="fn">mk_imp</span><span class="pn">)</span>
+    <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs10', 493)" onmouseover="showTip(event, 'fs10', 493)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs27', 494)" onmouseover="showTip(event, 'fs27', 494)" class="fn">is_eq</span> <span class="k">then</span>
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 495)" onmouseover="showTip(event, 'fs18', 495)" class="fn">p</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs21', 496)" onmouseover="showTip(event, 'fs21', 496)" class="fn">q</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 497)" onmouseover="showTip(event, 'fs10', 497)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 498)" onmouseover="showTip(event, 'fs28', 498)" class="fn">dest_eq</span>
+        <span onmouseout="hideTip(event, 'fs94', 499)" onmouseover="showTip(event, 'fs94', 499)" class="fn">psimplify1</span> <span class="pn">(</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs99', 500)" onmouseover="showTip(event, 'fs99', 500)" class="fn">psimplify</span> <span onmouseout="hideTip(event, 'fs18', 501)" onmouseover="showTip(event, 'fs18', 501)" class="fn">p</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs99', 502)" onmouseover="showTip(event, 'fs99', 502)" class="fn">psimplify</span> <span onmouseout="hideTip(event, 'fs21', 503)" onmouseover="showTip(event, 'fs21', 503)" class="fn">q</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs103', 504)" onmouseover="showTip(event, 'fs103', 504)" class="fn">mk_eq</span><span class="pn">)</span>
+    <span class="k">else</span> <span onmouseout="hideTip(event, 'fs10', 505)" onmouseover="showTip(event, 'fs10', 505)" class="fn">tm</span>
+</code></pre>
+<p>Applying the function gives the desired result:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="s">@&quot;(true ==&gt; (x = false)) ==&gt; ~(y \/ false /\ z)&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 506)" onmouseover="showTip(event, 'fs43', 506)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs99', 507)" onmouseover="showTip(event, 'fs99', 507)" class="fn">psimplify</span>
+<span class="c">//val it : term = `~ x ==&gt; ~ y`</span>
+</code></pre>
+<h2><a name="Valuating-a-formula" class="anchor" href="#Valuating-a-formula">Valuating a formula</a></h2>
+<p>To valuate a formula, in general, I need a function that given an assignment
+to all prop variables of the formulas give me its global truth value.</p>
+<p>Here is it:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs104', 508)" onmouseover="showTip(event, 'fs104', 508)" class="fn">onatoms</span> <span onmouseout="hideTip(event, 'fs105', 509)" onmouseover="showTip(event, 'fs105', 509)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs10', 510)" onmouseover="showTip(event, 'fs10', 510)" class="fn">tm</span> <span class="o">=</span>
+    <span class="k">if</span> <span onmouseout="hideTip(event, 'fs10', 511)" onmouseover="showTip(event, 'fs10', 511)" class="fn">tm</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 512)" onmouseover="showTip(event, 'fs11', 512)" class="fn">is_bool_term</span> <span class="k">then</span> 
+        <span onmouseout="hideTip(event, 'fs105', 513)" onmouseover="showTip(event, 'fs105', 513)" class="fn">f</span> <span onmouseout="hideTip(event, 'fs10', 514)" onmouseover="showTip(event, 'fs10', 514)" class="fn">tm</span>
+    <span class="k">else</span> <span onmouseout="hideTip(event, 'fs10', 515)" onmouseover="showTip(event, 'fs10', 515)" class="fn">tm</span>
+
+<span class="s">@&quot;a:bool&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 516)" onmouseover="showTip(event, 'fs43', 516)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs44', 517)" onmouseover="showTip(event, 'fs44', 517)" class="fn">atoms</span>
+<span class="s">@&quot;true&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 518)" onmouseover="showTip(event, 'fs43', 518)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs44', 519)" onmouseover="showTip(event, 'fs44', 519)" class="fn">atoms</span>
+<span class="s">@&quot;~p&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 520)" onmouseover="showTip(event, 'fs43', 520)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs44', 521)" onmouseover="showTip(event, 'fs44', 521)" class="fn">atoms</span>
+<span class="s">@&quot;~p /\ q /\ r ==&gt; (v:bool) = x&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 522)" onmouseover="showTip(event, 'fs43', 522)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs44', 523)" onmouseover="showTip(event, 'fs44', 523)" class="fn">atoms</span>
+
+<span class="s">@&quot;a:bool&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 524)" onmouseover="showTip(event, 'fs43', 524)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 525)" onmouseover="showTip(event, 'fs11', 525)" class="fn">is_bool_term</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs75', 526)" onmouseover="showTip(event, 'fs75', 526)" class="id">x</span> <span class="o">=</span> <span class="pn">(</span><span class="s">@&quot;p:bool&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 527)" onmouseover="showTip(event, 'fs43', 527)" class="fn">parse_term</span><span class="pn">)</span> 
+</code></pre>
+
+                </div>
+            </div>
+        </div>
+        <div class="fsdocs-tip" id="fs1">namespace HOL</div>
+<div class="fsdocs-tip" id="fs2">val print_type: ty: hol_type -&gt; string</div>
+<div class="fsdocs-tip" id="fs3">val print_term: tm: term -&gt; string</div>
+<div class="fsdocs-tip" id="fs4">module CoreThry
+
+from HOL<br /><em>&lt;summary&gt;
+This module completes the logical core for HOL by defining the core       
+theory.  This involves giving declarations, definitions and axioms for all
+the HOL theory objects anticipated by the language and inference kernels. 
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs5">val load: (string * thm) list</div>
+<div class="fsdocs-tip" id="fs6">module Equal
+
+from HOL<br /><em>&lt;summary&gt;
+This module adds more constants and inference rules for basic reasoning
+using equality.                                                                                                       
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs7">val load: (string * thm) list<br /><em>&lt;summary&gt;
+ Force module evaluation
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs8">module Bool
+
+from HOL<br /><em>&lt;summary&gt;
+This module extends the boolean-related theory by giving definitions for  
+classic predicate logic theory objects not introduced in &#39;CoreThry&#39;, and  
+adds various derived syntax functions, theorems and inference rules.  Note
+that derivations relying on the Axiom of Choice are separated out into the
+&#39;BoolClass&#39; module.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs9">val is_bool_atom: tm: term -&gt; bool<br /><em>&#160;the term is a boolean atom</em></div>
+<div class="fsdocs-tip" id="fs10">val tm: term</div>
+<div class="fsdocs-tip" id="fs11">val is_bool_term: tm: term -&gt; bool</div>
+<div class="fsdocs-tip" id="fs12">val is_const: tm: term -&gt; bool<br /><em>&lt;summary&gt;
+Checks if a term is a constant term
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs13">val is_var: tm: term -&gt; bool<br /><em>&lt;summary&gt;
+Checks if a term is a variable term
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs14">val overatoms: f: (term -&gt; &#39;a -&gt; &#39;a) -&gt; tm: term -&gt; b: &#39;a -&gt; &#39;a</div>
+<div class="fsdocs-tip" id="fs15">val f: (term -&gt; &#39;a -&gt; &#39;a)</div>
+<div class="fsdocs-tip" id="fs16">val b: &#39;a</div>
+<div class="fsdocs-tip" id="fs17">val is_not: tm: term -&gt; bool</div>
+<div class="fsdocs-tip" id="fs18">val p: term</div>
+<div class="fsdocs-tip" id="fs19">val dest_not: tm: term -&gt; term</div>
+<div class="fsdocs-tip" id="fs20">val is_conj: tm: term -&gt; bool</div>
+<div class="fsdocs-tip" id="fs21">val q: term</div>
+<div class="fsdocs-tip" id="fs22">val dest_conj: tm: term -&gt; term * term</div>
+<div class="fsdocs-tip" id="fs23">val is_disj: tm: term -&gt; bool</div>
+<div class="fsdocs-tip" id="fs24">val dest_disj: tm: term -&gt; term * term</div>
+<div class="fsdocs-tip" id="fs25">val is_imp: tm: term -&gt; bool</div>
+<div class="fsdocs-tip" id="fs26">val dest_imp: tm: term -&gt; term * term</div>
+<div class="fsdocs-tip" id="fs27">val is_eq: tm: term -&gt; bool</div>
+<div class="fsdocs-tip" id="fs28">val dest_eq: tm: term -&gt; term * term</div>
+<div class="fsdocs-tip" id="fs29">val failwith: message: string -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs30">val atom_union: f: (term -&gt; &#39;a list) -&gt; tm: term -&gt; &#39;a list (requires comparison)</div>
+<div class="fsdocs-tip" id="fs31">val f: (term -&gt; &#39;a list) (requires comparison)</div>
+<div class="fsdocs-tip" id="fs32">val h: term</div>
+<div class="fsdocs-tip" id="fs33">val t: &#39;a list (requires comparison)</div>
+<div class="fsdocs-tip" id="fs34">Multiple items<br />module List
+
+from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =
+  | op_Nil
+  | op_ColonColon of Head: &#39;T * Tail: &#39;T list
+  interface IReadOnlyList&lt;&#39;T&gt;
+  interface IReadOnlyCollection&lt;&#39;T&gt;
+  interface IEnumerable
+  interface IEnumerable&lt;&#39;T&gt;
+  member GetReverseIndex: rank: int * offset: int -&gt; int
+  member GetSlice: startIndex: int option * endIndex: int option -&gt; &#39;T list
+  static member Cons: head: &#39;T * tail: &#39;T list -&gt; &#39;T list
+  member Head: &#39;T
+  member IsEmpty: bool
+  member Item: index: int -&gt; &#39;T with get
+  ...</div>
+<div class="fsdocs-tip" id="fs35">val distinct: list: &#39;T list -&gt; &#39;T list (requires equality)</div>
+<div class="fsdocs-tip" id="fs36">val sort: list: &#39;T list -&gt; &#39;T list (requires comparison)</div>
+<div class="fsdocs-tip" id="fs37">val eval: tm: term -&gt; v: (term -&gt; bool) -&gt; bool</div>
+<div class="fsdocs-tip" id="fs38">val v: (term -&gt; bool)</div>
+<div class="fsdocs-tip" id="fs39">val false_tm: term</div>
+<div class="fsdocs-tip" id="fs40">val true_tm: term</div>
+<div class="fsdocs-tip" id="fs41">union case term.Tmvar: string * hol_type -&gt; term</div>
+<div class="fsdocs-tip" id="fs42">val bool_ty: hol_type</div>
+<div class="fsdocs-tip" id="fs43">val parse_term: x: string -&gt; term<br /><em>&lt;summary&gt;
+ This takes a string and parses it into an internal term.  The type     
+ analysis stage first detypes the preterm before inferring types (in    
+ &#39;resolve_preterm&#39;), since the syntax analysis stage gives all variables
+ and constants the null pretype.  Note that type inference is capable of
+ handling overloaded variables.                                         
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs44">val atoms: tm: term -&gt; term list</div>
+<div class="fsdocs-tip" id="fs45">val a: term</div>
+<div class="fsdocs-tip" id="fs46">val onallvaluations: subfn: ((&#39;a -&gt; bool) -&gt; bool) -&gt; v: (&#39;a -&gt; bool) -&gt; ats: &#39;a list -&gt; bool (requires equality)</div>
+<div class="fsdocs-tip" id="fs47">val subfn: ((&#39;a -&gt; bool) -&gt; bool) (requires equality)</div>
+<div class="fsdocs-tip" id="fs48">val v: (&#39;a -&gt; bool) (requires equality)</div>
+<div class="fsdocs-tip" id="fs49">val ats: &#39;a list (requires equality)</div>
+<div class="fsdocs-tip" id="fs50">val p: &#39;a (requires equality)</div>
+<div class="fsdocs-tip" id="fs51">val ps: &#39;a list (requires equality)</div>
+<div class="fsdocs-tip" id="fs52">val v&#39;: t: bool -&gt; q: &#39;a -&gt; bool (requires equality)</div>
+<div class="fsdocs-tip" id="fs53">val t: bool</div>
+<div class="fsdocs-tip" id="fs54">val q: &#39;a (requires equality)</div>
+<div class="fsdocs-tip" id="fs55">val pname: tm: term -&gt; string</div>
+<div class="fsdocs-tip" id="fs56">val const_name: tm: term -&gt; string</div>
+<div class="fsdocs-tip" id="fs57">val var_name: tm: term -&gt; string</div>
+<div class="fsdocs-tip" id="fs58">val fprint_truthtable: sw: System.IO.TextWriter -&gt; fm: term -&gt; unit</div>
+<div class="fsdocs-tip" id="fs59">val sw: System.IO.TextWriter</div>
+<div class="fsdocs-tip" id="fs60">val fm: term</div>
+<div class="fsdocs-tip" id="fs61">val ats: term list</div>
+<div class="fsdocs-tip" id="fs62">val width: int</div>
+<div class="fsdocs-tip" id="fs63">val foldBack: folder: (&#39;T -&gt; &#39;State -&gt; &#39;State) -&gt; list: &#39;T list -&gt; state: &#39;State -&gt; &#39;State</div>
+<div class="fsdocs-tip" id="fs64">val max: e1: &#39;T -&gt; e2: &#39;T -&gt; &#39;T (requires comparison)</div>
+<div class="fsdocs-tip" id="fs65">module String
+
+from Microsoft.FSharp.Core</div>
+<div class="fsdocs-tip" id="fs66">val length: str: string -&gt; int</div>
+<div class="fsdocs-tip" id="fs67">val fixw: s: string -&gt; string</div>
+<div class="fsdocs-tip" id="fs68">val s: string</div>
+<div class="fsdocs-tip" id="fs69">val replicate: count: int -&gt; str: string -&gt; string</div>
+<div class="fsdocs-tip" id="fs70">val truthstring: p: bool -&gt; string</div>
+<div class="fsdocs-tip" id="fs71">val p: bool</div>
+<div class="fsdocs-tip" id="fs72">val mk_row: v: (term -&gt; bool) -&gt; bool</div>
+<div class="fsdocs-tip" id="fs73">val lis: string list</div>
+<div class="fsdocs-tip" id="fs74">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; list: &#39;T list -&gt; &#39;U list</div>
+<div class="fsdocs-tip" id="fs75">val x: term</div>
+<div class="fsdocs-tip" id="fs76">val ans: string</div>
+<div class="fsdocs-tip" id="fs77">val fprintf: textWriter: System.IO.TextWriter -&gt; format: Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs78">val fprintfn: textWriter: System.IO.TextWriter -&gt; format: Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs79">val seperator: string</div>
+<div class="fsdocs-tip" id="fs80">val length: list: &#39;T list -&gt; int</div>
+<div class="fsdocs-tip" id="fs81">val s: term</div>
+<div class="fsdocs-tip" id="fs82">val t: string</div>
+<div class="fsdocs-tip" id="fs83">val writeToString: fn: (System.IO.StringWriter -&gt; unit) -&gt; string</div>
+<div class="fsdocs-tip" id="fs84">val fn: (System.IO.StringWriter -&gt; unit)</div>
+<div class="fsdocs-tip" id="fs85">val sw: System.IO.StringWriter</div>
+<div class="fsdocs-tip" id="fs86">namespace System</div>
+<div class="fsdocs-tip" id="fs87">namespace System.IO</div>
+<div class="fsdocs-tip" id="fs88">Multiple items<br />type StringWriter =
+  inherit TextWriter
+  new: unit -&gt; unit + 3 overloads
+  member Close: unit -&gt; unit
+  member FlushAsync: unit -&gt; Task
+  member GetStringBuilder: unit -&gt; StringBuilder
+  member ToString: unit -&gt; string
+  member Write: value: char -&gt; unit + 4 overloads
+  member WriteAsync: value: char -&gt; Task + 4 overloads
+  member WriteLine: buffer: ReadOnlySpan&lt;char&gt; -&gt; unit + 1 overload
+  member WriteLineAsync: value: char -&gt; Task + 4 overloads
+  ...<br /><em>&lt;summary&gt;Implements a &lt;see cref=&quot;T:System.IO.TextWriter&quot; /&gt; for writing information to a string. The information is stored in an underlying &lt;see cref=&quot;T:System.Text.StringBuilder&quot; /&gt;.&lt;/summary&gt;</em><br /><br />--------------------<br />System.IO.StringWriter() : System.IO.StringWriter<br />System.IO.StringWriter(formatProvider: System.IFormatProvider) : System.IO.StringWriter<br />System.IO.StringWriter(sb: System.Text.StringBuilder) : System.IO.StringWriter<br />System.IO.StringWriter(sb: System.Text.StringBuilder, formatProvider: System.IFormatProvider) : System.IO.StringWriter</div>
+<div class="fsdocs-tip" id="fs89">System.IO.StringWriter.ToString() : string</div>
+<div class="fsdocs-tip" id="fs90">val print_truthtable: f: term -&gt; unit</div>
+<div class="fsdocs-tip" id="fs91">val f: term</div>
+<div class="fsdocs-tip" id="fs92">val stdout&lt;&#39;T&gt; : System.IO.TextWriter</div>
+<div class="fsdocs-tip" id="fs93">val sprint_truthtable: f: term -&gt; string</div>
+<div class="fsdocs-tip" id="fs94">val psimplify1: tm: term -&gt; term</div>
+<div class="fsdocs-tip" id="fs95">val tm1: term</div>
+<div class="fsdocs-tip" id="fs96">union case term.Tmconst: string * hol_type -&gt; term</div>
+<div class="fsdocs-tip" id="fs97">val tm2: term</div>
+<div class="fsdocs-tip" id="fs98">val mk_not: tm0: term -&gt; term</div>
+<div class="fsdocs-tip" id="fs99">val psimplify: tm: term -&gt; term</div>
+<div class="fsdocs-tip" id="fs100">val mk_conj: tm1: term * tm2: term -&gt; term</div>
+<div class="fsdocs-tip" id="fs101">val mk_disj: tm1: term * tm2: term -&gt; term</div>
+<div class="fsdocs-tip" id="fs102">val mk_imp: tm1: term * tm2: term -&gt; term</div>
+<div class="fsdocs-tip" id="fs103">val mk_eq: tm1: term * tm2: term -&gt; term</div>
+<div class="fsdocs-tip" id="fs104">val onatoms: f: (term -&gt; term) -&gt; tm: term -&gt; term</div>
+<div class="fsdocs-tip" id="fs105">val f: (term -&gt; term)</div>
+
+    </div>
+
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/'</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+    <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+    <!-- END SEARCH BOX: this adds support for the search box -->
+</body>
+
+</html>

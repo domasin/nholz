@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Utils2 (nholz)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="nholz">
+    <meta name="author" content="Domenico Masini">
     <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -56,11 +56,26 @@
                         <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
                         <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/domasin/nholz">Source Repository</a></li>
                         <li class="nav-header">
-  HOL Logic
+  Manuale
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/001/000-HOLLogic.html">
-    La logica HOL
+  <a class="nav-link" href="/nholz/001-Introduzione.html">
+    Introduzione
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/002-Liguaggio_HOL.html">
+    Il linguaggio HOL
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/003-Inference_Rules.html">
+    Regole d&#39;inferenza
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/004-Teorie.html">
+    Teorie
   </a>
 </li>
                         <li class="nav-header">
@@ -138,7 +153,7 @@ This module defines various basic useful operations on types, terms and theorems
                 <img src="/nholz/content/img/copy-xml.png" class="normal"/>
                 <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
               </div>
-              <a href="https://github.com/domasin/nholz/tree/master/src/Utils2.fs#L208-208" class="fsdocs-source-link" title="Source on GitHub">
+              <a href="https://github.com/domasin/nholz/tree/master/src/Utils2.fs#L220-220" class="fsdocs-source-link" title="Source on GitHub">
                 <img src="/nholz/content/img/github.png" class="normal"/>
                 <img src="/nholz/content/img/github-hover.png" class="hover"/>
               </a>
@@ -390,25 +405,53 @@ This module defines various basic useful operations on types, terms and theorems
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  tm
-                </span>
-                :
-                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;*&#32;<a href="/nholz/reference/hol-term-term.html">term</a></span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Utils2.dest_conj`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Utils2.dest_conj\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <a href="https://github.com/domasin/nholz/tree/master/src/Utils2.fs#L116-116" class="fsdocs-source-link" title="Source on GitHub">
+                    <img src="/nholz/content/img/github.png" class="normal"/>
+                    <img src="/nholz/content/img/github-hover.png" class="hover"/>
+                  </a>
+                  <p class="fsdocs-summary">
+                    
+ Term destructor for conjunctions.
+ 
+ <code>dest_conj("t1 /\ t2" |> parse_term)</code> returns 
+ <code>("t1","t2")</code>.
+ 
+ Fails with dest_conj if term is not a conjunction.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="/nholz/reference/hol-term-term.html">term</a>&#32;*&#32;<a href="/nholz/reference/hol-term-term.html">term</a></span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>
@@ -1440,25 +1483,53 @@ This module defines various basic useful operations on types, terms and theorems
             </div>
           </td>
           <td class="fsdocs-member-xmldoc">
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  tm
-                </span>
-                :
-                <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code>bool</code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:HOL.Utils2.is_conj`')">
+                    <img src="/nholz/content/img/copy-md.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-md-hover.png" class="hover"/>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:HOL.Utils2.is_conj\'/>')">
+                    <img src="/nholz/content/img/copy-xml.png" class="normal"/>
+                    <img src="/nholz/content/img/copy-xml-hover.png" class="hover"/>
+                  </div>
+                  <a href="https://github.com/domasin/nholz/tree/master/src/Utils2.fs#L125-125" class="fsdocs-source-link" title="Source on GitHub">
+                    <img src="/nholz/content/img/github.png" class="normal"/>
+                    <img src="/nholz/content/img/github-hover.png" class="hover"/>
+                  </a>
+                  <p class="fsdocs-summary">
+                    
+ Tests a term to see if it is a conjunction.
+ 
+ is_conj ("t1 /\ t2" |> parse_term) returns true. If the term is not a 
+ conjunction the result is false.
+ 
+ Never fails.
+
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    tm
+                  </span>
+                  :
+                  <code><a href="/nholz/reference/hol-term-term.html">term</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>bool</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
           </td>
         </tr>
         <tr>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Bool Cases
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="nholz">
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head> 
+
+<body>
+    <div class="columns is-fullheight m-0">
+        <div id="fsdocs-menu" class="column is-2 is-paddingless">
+            <aside class="menu">
+                <div class="container is-paddingless is-marginless has-background-dark">
+                    <a href="/nholz/">
+                        <figure class="image is-128x128 container">
+                            <img src="/nholz/img/logo.png">
+                        </figure>
+                    </a>
+                    <h2 class="title has-text-centered has-text-white pb-4">nholz</h2>
+                </div>
+                <div class="content">
+                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+                    <div id="header">
+                        <div class="searchbox" id="fsdocs-searchbox">
+                            <label for="search-by">
+                                <i class="fas fa-search"></i>
+                            </label>
+                            <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
+                            <span data-search-clear="">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- END SEARCH BOX: this adds support for the search box -->
+                    <ul class="navbar-nav">
+                        <li class="nav-header">Links</li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/domasin/nholz/blob/master/LICENSE.txt">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/domasin/nholz">Source Repository</a></li>
+                        <li class="nav-header">Il sistema HOL</li>
+                        <li class="nav-item" id="index-link"><a class="nav-link" href="/index.html">Indice</a></li>
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <div class="column is-10 is-paddingless">
+            <div class="section pt-4">
+                <div class="container" id="fsdocs-content">
+                    <h1><a name="Bool-Cases" class="anchor" href="#Bool-Cases">Bool Cases</a></h1>
+<p><span class="math">\(\vdash \forall p.\ (p \Leftrightarrow \top) \vee (p \Leftrightarrow \bot)\)</span></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="id">bool_cases_thm</span>
+<span class="c">// |- !p. (p &lt;=&gt; true) \/ (p &lt;=&gt; false)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="id">p</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="fn">mk_var</span> <span class="pn">(</span><span class="s">&quot;p&quot;</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="id">bool_ty</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="id">tm1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="fn">spec_rule</span> <span onmouseout="hideTip(event, 'fs10', 18)" onmouseover="showTip(event, 'fs10', 18)" class="id">p</span> <span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="id">excluded_middle_thm</span>                   <span class="c">//     |- p \/ ~ p</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 20)" onmouseover="showTip(event, 'fs16', 20)" class="id">tm2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 21)" onmouseover="showTip(event, 'fs17', 21)" class="fn">eqt_intro_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 22)" onmouseover="showTip(event, 'fs18', 22)" class="fn">assume_rule</span> <span onmouseout="hideTip(event, 'fs10', 23)" onmouseover="showTip(event, 'fs10', 23)" class="id">p</span><span class="pn">)</span>                    <span class="c">//   p |- p &lt;=&gt; true</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 24)" onmouseover="showTip(event, 'fs19', 24)" class="id">tm3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 25)" onmouseover="showTip(event, 'fs20', 25)" class="fn">disj1_rule</span> <span onmouseout="hideTip(event, 'fs16', 26)" onmouseover="showTip(event, 'fs16', 26)" class="id">tm2</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs21', 27)" onmouseover="showTip(event, 'fs21', 27)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;p &lt;=&gt; false&quot;</span><span class="pn">)</span><span class="pn">)</span>       <span class="c">//   p |- (p &lt;=&gt; true) \/ (p &lt;=&gt; false)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 28)" onmouseover="showTip(event, 'fs22', 28)" class="id">tm4</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 29)" onmouseover="showTip(event, 'fs23', 29)" class="fn">eqf_intro_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 30)" onmouseover="showTip(event, 'fs18', 30)" class="fn">assume_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs21', 31)" onmouseover="showTip(event, 'fs21', 31)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;~ p&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span> <span class="c">// ~ p |- p &lt;=&gt; false</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 32)" onmouseover="showTip(event, 'fs24', 32)" class="id">tm5</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs25', 33)" onmouseover="showTip(event, 'fs25', 33)" class="fn">disj2_rule</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs21', 34)" onmouseover="showTip(event, 'fs21', 34)" class="fn">parse_term</span><span class="pn">(</span><span class="s">@&quot;p &lt;=&gt; true&quot;</span><span class="pn">)</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs22', 35)" onmouseover="showTip(event, 'fs22', 35)" class="id">tm4</span>        <span class="c">// ~ p |- (p &lt;=&gt; true) \/ (p &lt;=&gt; false)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 36)" onmouseover="showTip(event, 'fs26', 36)" class="id">tm6</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs27', 37)" onmouseover="showTip(event, 'fs27', 37)" class="fn">disj_cases_rule</span> <span onmouseout="hideTip(event, 'fs13', 38)" onmouseover="showTip(event, 'fs13', 38)" class="id">tm1</span> <span onmouseout="hideTip(event, 'fs19', 39)" onmouseover="showTip(event, 'fs19', 39)" class="id">tm3</span> <span onmouseout="hideTip(event, 'fs24', 40)" onmouseover="showTip(event, 'fs24', 40)" class="id">tm5</span>                       <span class="c">//     |- (p &lt;=&gt; true) \/ (p &lt;=&gt; false)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 41)" onmouseover="showTip(event, 'fs28', 41)" class="id">tm7</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 42)" onmouseover="showTip(event, 'fs29', 42)" class="fn">gen_rule</span> <span onmouseout="hideTip(event, 'fs10', 43)" onmouseover="showTip(event, 'fs10', 43)" class="id">p</span> <span onmouseout="hideTip(event, 'fs26', 44)" onmouseover="showTip(event, 'fs26', 44)" class="id">tm6</span>
+</code></pre>
+<pre class="fssnip highlighted"><code lang="fsharp"></code></pre>
+<p><span class="math">\(\small{ 	\dfrac
+{p:bool
+\qquad
+\dfrac
+{\dfrac
+{p:bool
+\qquad
+\vdash\ \forall\ p.\ p\ \vee\ \neg\ p\; \mathbf{ excluded\_middle\_thm}}
+{\vdash\ p\ \vee\ \neg\ p}
+\textsf{ spec_rule}
+\qquad
+\dfrac
+{\dfrac
+{\dfrac
+{p:bool}
+{p\ \vdash\ p}
+\textsf{ assume_rule}}
+{p\ \vdash\ p\ \Leftrightarrow\ \top}
+\textsf{ eqt_intro_rule}
+\qquad
+p\ \Leftrightarrow\ \bot}
+{p\ \vdash\ (p\ \Leftrightarrow\ \top)\ \vee\ (p\ \Leftrightarrow\ \bot)}
+\textsf{ disj1_rule}
+\qquad
+\dfrac
+{p\ \Leftrightarrow\ \top
+\qquad
+\dfrac
+{\dfrac
+{\neg\ p}
+{\neg\ p\ \vdash\ \neg\ p}
+\textsf{ assume_rule}}
+{\neg\ p\ \vdash\ p\ \Leftrightarrow\ \bot}
+\textsf{ eqf_intro_rule}}
+{\neg\ p\ \vdash\ (p\ \Leftrightarrow\ \top)\ \vee\ (p\ \Leftrightarrow\ \bot)}
+\textsf{ disj2_rule}}
+{\vdash\ (p\ \Leftrightarrow\ \top)\ \vee\ (p\ \Leftrightarrow\ \bot)}
+\textsf{ disj_cases_rule}}
+{\vdash\ \forall\ p.\ (p\ \Leftrightarrow\ \top)\ \vee\ (p\ \Leftrightarrow\ \bot)}
+\textsf{ gen_rule} }\)</span></p>
+
+                </div>
+            </div>
+        </div>
+        <div class="fsdocs-tip" id="fs1">namespace HOL</div>
+<div class="fsdocs-tip" id="fs2">module CoreThry
+
+from HOL<br /><em>&lt;summary&gt;
+This module completes the logical core for HOL by defining the core       
+theory.  This involves giving declarations, definitions and axioms for all
+the HOL theory objects anticipated by the language and inference kernels. 
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs3">val load: (string * thm) list</div>
+<div class="fsdocs-tip" id="fs4">module Equal
+
+from HOL<br /><em>&lt;summary&gt;
+This module adds more constants and inference rules for basic reasoning
+using equality.                                                                                                       
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs5">val load: (string * thm) list<br /><em>&lt;summary&gt;
+ Force module evaluation
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs6">module Bool
+
+from HOL<br /><em>&lt;summary&gt;
+This module extends the boolean-related theory by giving definitions for  
+classic predicate logic theory objects not introduced in &#39;CoreThry&#39;, and  
+adds various derived syntax functions, theorems and inference rules.  Note
+that derivations relying on the Axiom of Choice are separated out into the
+&#39;BoolClass&#39; module.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs7">module BoolAlg
+
+from HOL<br /><em>&lt;summary&gt;
+This module proves various algebraic property theorems for the predicate
+logic operators.                                                                  
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs8">module BoolClass
+
+from HOL<br /><em>&lt;summary&gt;
+ This module derives further predicate logic theorems and inference rules.
+ Unlike all preceding derivations, these all use the Axiom of Choice (i.e.
+ &#39;select_ax&#39;), and thus could be considered as classical logic.  However, 
+ note that some of these (such as &#39;exists_rule&#39;) are actually derivable in
+ intuitionistic logic if an alternative definition of existential         
+ quantification is used (as in HOL Light).                                                                                        
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs9">val bool_cases_thm: thm<br /><em>&lt;summary&gt;
+ |- !p. (p &amp;lt;=&amp;gt; true) \/ (p &amp;lt;=&amp;gt; false)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs10">val p: term</div>
+<div class="fsdocs-tip" id="fs11">val mk_var: x: string * ty: hol_type -&gt; term<br /><em>&lt;summary&gt;
+Takes a name and a type , with no restrictions on these arguments: any name 
+can be used for a variable, including the name of a declared constant.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs12">val bool_ty: hol_type</div>
+<div class="fsdocs-tip" id="fs13">val tm1: thm</div>
+<div class="fsdocs-tip" id="fs14">val spec_rule: tm: term -&gt; th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the universal elimination rule.  It strips off the outermost     
+ universal quantifier from the supplied theorem, and replaces in the body 
+ each occurrence of the stripped binding variable with the supplied term. 
+ The type of the supplied term must equal the type of the stripped binding
+ variable.                                                                
+                                                                          
+    `t`   A |- !x. p                                                      
+    ----------------                                                      
+      A |- p[t/x]                                                         
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs15">val excluded_middle_thm: thm<br /><em>&lt;summary&gt;
+    |- !p. p \/ ~p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs16">val tm2: thm</div>
+<div class="fsdocs-tip" id="fs17">val eqt_intro_rule: th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the truth equivalence introduction rule.  It takes any theorem,
+ and returns the theorem stating that the conclusion is equivalent to   
+ truth, under the same assumptions.                                     
+                                                                        
+         A |- p                                                         
+    ---------------                                                     
+    A |- p &amp;lt;=&amp;gt; true                                                     
+
+ See also: eqt_elim_rule, eqf_intro_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs18">val assume_rule: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the assumption rule.  It takes a boolean term, and returns a theorem
+ stating that the term holds under the single assumption of the term itself.
+
+     `p`
+   --------
+   {p} |- p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs19">val tm3: thm</div>
+<div class="fsdocs-tip" id="fs20">val disj1_rule: th: thm -&gt; tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the disjunction introduction rule for the LHS.  It disjoins the supplied
+ boolean term to the RHS of the supplied theorem.
+ 
+       A |- p   `q`
+       ------------
+       A |- p \/ q
+ 
+ See also: disj2_rule, disj_cases_rule, mk_disj1_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs21">val parse_term: x: string -&gt; term<br /><em>&lt;summary&gt;
+ This takes a string and parses it into an internal term.  The type     
+ analysis stage first detypes the preterm before inferring types (in    
+ &#39;resolve_preterm&#39;), since the syntax analysis stage gives all variables
+ and constants the null pretype.  Note that type inference is capable of
+ handling overloaded variables.                                         
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs22">val tm4: thm</div>
+<div class="fsdocs-tip" id="fs23">val eqf_intro_rule: th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the falsity equivalence introduction rule.  It takes a theorem    
+ with logical negation at its top level, and returns a theorem stating that
+ the body of the negation is equivalent to falsity, under the same         
+ assumptions.                                                              
+                                                                           
+        A |- ~ p                                                           
+    ----------------                                                       
+    A |- p &amp;lt;=&amp;gt; false                                                       
+
+ See also: eqf_elim_rule, not_elim_rule, not_intro_rule, mk_not_rule,
+ eqt_intro_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs24">val tm5: thm</div>
+<div class="fsdocs-tip" id="fs25">val disj2_rule: tm: term -&gt; th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the disjunction introduction rule for the RHS.  It disjoins the   
+ supplied boolean term to LHS of the supplied theorem.                     
+                                                                           
+    `p`   A |- q                                                           
+    ------------                                                           
+    A |- p \/ q                                         
+
+ Si veda anche: disj1_rule, disj_cases_rule, mk_disj2_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs26">val tm6: thm</div>
+<div class="fsdocs-tip" id="fs27">val disj_cases_rule: th0: thm -&gt; th01: thm -&gt; th02: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the disjunction elimination rule.  It takes a disjunction theorem  
+ and two extra theorems that share the same conclusion.  It returns a       
+ theorem with the same conclusion as the extra theorems.  The assumptions   
+ of the returned theorem union the assumptions of the extra theorems, but   
+ with the disjunction theorem&#39;s LHS removed from the first&#39;s assumptions    
+ and its RHS removed from the second&#39;s, unioned together with the           
+ disjunction theorem&#39;s assumptions.                                         
+                                                                            
+    A |- p \/ q    A1 |- r    A2 |- r                                       
+    ---------------------------------                                       
+        A u A1\{p} u A2\{q} |- r                
+
+ See also: disj1_rule, disj2_rule, mk_disj_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs28">val tm7: thm</div>
+<div class="fsdocs-tip" id="fs29">val gen_rule: v: term -&gt; th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ gen_rule : term -&amp;gt; thm -&amp;gt; thm                                             
+                                                                           
+ This is the universal introduction rule.  It universally quantifies the   
+ supplied theorem with the supplied binding variable, under the same       
+ assumptions.  The binding variable must not occur free in the assumptions.
+                                                                           
+    `x`   A |- p         [ &quot;x&quot; not free in `A` ]                           
+    ------------                                                           
+     A |- !x. p                                                            
+
+ See also: list_gen_rule, spec_rule, mk_forall_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs30">val excluded_middle_thm_gr: thm * obj</div>
+<div class="fsdocs-tip" id="fs31">union case Exp.Th: thm -&gt; Exp</div>
+<div class="fsdocs-tip" id="fs32">val th1: obj</div>
+<div class="fsdocs-tip" id="fs33">val th2: obj</div>
+<div class="fsdocs-tip" id="fs34">val th3: obj</div>
+<div class="fsdocs-tip" id="fs35">val th4: obj</div>
+<div class="fsdocs-tip" id="fs36">val th5: obj</div>
+<div class="fsdocs-tip" id="fs37">val th6: obj</div>
+<div class="fsdocs-tip" id="fs38">val th7: obj</div>
+
+    </div>
+
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/'</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+    <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+    <!-- END SEARCH BOX: this adds support for the search box -->
+</body>
+
+</html>

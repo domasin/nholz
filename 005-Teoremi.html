@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>TEOREMI
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="nholz">
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head> 
+
+<body>
+    <div class="columns is-fullheight m-0">
+        <div id="fsdocs-menu" class="column is-2 is-paddingless">
+            <aside class="menu">
+                <div class="container is-paddingless is-marginless has-background-dark">
+                    <a href="/nholz/">
+                        <figure class="image is-128x128 container">
+                            <img src="/nholz/img/logo.png">
+                        </figure>
+                    </a>
+                    <h2 class="title has-text-centered has-text-white pb-4">nholz</h2>
+                </div>
+                <div class="content">
+                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+                    <div id="header">
+                        <div class="searchbox" id="fsdocs-searchbox">
+                            <label for="search-by">
+                                <i class="fas fa-search"></i>
+                            </label>
+                            <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
+                            <span data-search-clear="">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- END SEARCH BOX: this adds support for the search box -->
+                    <ul class="navbar-nav">
+                        <li class="nav-header">Links</li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/domasin/nholz/blob/master/LICENSE.txt">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/domasin/nholz">Source Repository</a></li>
+                        <li class="nav-header">Il sistema HOL</li>
+                        <li class="nav-item" id="index-link"><a class="nav-link" href="/index.html">Indice</a></li>
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <div class="column is-10 is-paddingless">
+            <div class="section pt-4">
+                <div class="container" id="fsdocs-content">
+                    <h1><a name="TEOREMI" class="anchor" href="#TEOREMI">TEOREMI</a></h1>
+<p>Per i teoremi gi&agrave; documentati, cliccando sul nome del teorema si apre una pagina
+di dettaglio con l'esposizione della dimostrazione a codice e un rendering della dimostrazione nel calcolo
+dei sequenti.</p>
+<p>Laddove sono disponibili, per le regole di inferenza utilizzate, vengono usate delle estensioni
+al sistema base con dimostrazioni ad albero, strategie di dimostrazioni all'indietro e un opzione <code>view</code>
+di visualizzazione dell'albero di dimostrazione in LaTeX.</p>
+<p>Queste estensioni non sono derivate da Hol Zero e sono in corso di implementazione.</p>
+<p>*<em><a href="teoremi\0001_truth.html">truth_thm</a>*</em></p>
+<p><span class="math">\(\vdash \top\)</span></p>
+<p>vero &egrave; derivabile</p>
+<p>*<em><a href="0002_fun_eq.html">fun_eq_thm</a>*</em></p>
+<p><span class="math">\(\vdash \forall (f:\alpha \rightarrow \beta)\ g.\ f = g\ \Leftrightarrow\ (\forall x.\ f\ x = g\ x)\)</span></p>
+<p>L'euivalenza tra funzioni corrisponde all'equivalenza dei loro valori a parit&agrave; di argomento</p>
+<h2><a name="Propriet-agrave-algebriche-degli-operatori-logici" class="anchor" href="#Propriet-agrave-algebriche-degli-operatori-logici">Propriet&agrave; algebriche degli operatori logici</a></h2>
+<p>*<em><a href="0003_not_true.html">not_true_thm</a>*</em></p>
+<p><span class="math">\(\vdash \neg \top \Leftrightarrow \bot\)</span></p>
+<p>non vero equivale a falso</p>
+<p>*<em><a href="0004_not_false.html">not_false_thm</a>*</em></p>
+<p><span class="math">\(\vdash \neg \bot \Leftrightarrow \top\)</span></p>
+<p>non falso equivale a vero</p>
+<p>*<em><a href="0005_true_not_eq_false.html">true_not_eq_false_thm</a>*</em></p>
+<p><span class="math">\(\vdash \neg (\top \Leftrightarrow \bot)\)</span></p>
+<p>vero non equivale a falso</p>
+<p>*<em><a href="0006_not_dist_disj.html">not_dist_disj_thm</a>*</em></p>
+<p><span class="math">\(\forall p\ q.\ \neg (p \vee q) \Leftrightarrow \neg p \wedge \neg q\)</span></p>
+<p>ditribuzione della negazione sulla disgiunzione</p>
+<p>*<em><a href="0007_conj_id.html">conj_id_thm</a>*</em></p>
+<p><span class="math">\(\forall p.\ p \wedge \top \Leftrightarrow p\)</span></p>
+<p>vero &egrave; l'identit&agrave; della congiunzione</p>
+<p>*<em><a href="0008_conj_zero.html">conj_zero_thm</a>*</em></p>
+<p><span class="math">\(\forall p.\ p \wedge \bot \Leftrightarrow \bot\)</span></p>
+<p>congiunzione zero</p>
+<p>*<em><a href="0009_conj_idem.html">conj_idem_thm</a>*</em></p>
+<p><span class="math">\(\forall p.\ p \wedge p \Leftrightarrow p\)</span></p>
+<p>congiunzione idem</p>
+<p>*<em><a href="0010_conj_comm.html">conj_comm_thm</a>*</em></p>
+<p><span class="math">\(\forall p.\ p \wedge q \Leftrightarrow q \wedge p\)</span></p>
+<p>commutativit&agrave; della congiunzione</p>
+<p>*<em><a href="0011_conj_assoc.html">conj_assoc_thm</a>*</em></p>
+<p><span class="math">\(\forall p\ q\ r.\ p \wedge (q \wedge r) \Leftrightarrow (p \wedge q) \wedge r\)</span></p>
+<p>associativit&agrave; della congiunzione</p>
+<p>*<em><a href="0012_conj_absorb_disj.html">conj_absorb_disj_thm</a>*</em></p>
+<p><span class="math">\(\forall p\ q.\ p \wedge (p \vee q) \Leftrightarrow p\)</span></p>
+<p>assorbimento della disgiunzione nella congiunzione</p>
+<p>*<em><a href="0013_conj_dist_right_disj.html">conj_dist_right_disj_thm</a>*</em></p>
+<p><span class="math">\(\forall p\ q\ r.\ p \wedge (q \vee r) \Leftrightarrow (p \wedge q) \vee (p \wedge r)\)</span></p>
+<p>distributivit&agrave; a destra della congiunzione sulla disgiunzione</p>
+<p>*<em><a href="0014_conj_dist_left_disj.html">conj_dist_left_disj_thm</a>*</em></p>
+<p><span class="math">\(\forall p\ q\ r.\ (p \vee q) \wedge r \Leftrightarrow (p \wedge r) \vee (q \wedge r)\)</span></p>
+<p>distributivit&agrave; a sinistra della congiunzione sulla disgiunzione</p>
+<p>work in prog...</p>
+<p>*<em><a href="0016_disj_id.html">disj_id_thm</a>*</em></p>
+<p><span class="math">\(\vdash \forall p.\ p \vee \bot \Leftrightarrow p\)</span></p>
+<p>falso &egrave; l'identit&agrave; della disgiunzione</p>
+<p>*<em><a href="0017_disj_zero.html">disj_zero_thm</a>*</em></p>
+<p><span class="math">\(\vdash \forall p.\ p \vee \top \Leftrightarrow \top\)</span></p>
+<p>*<em><a href="0018_disj_idem.html">disj_idem_thm</a>*</em></p>
+<p><span class="math">\(\vdash \forall p.\ p \vee p \Leftrightarrow p\)</span></p>
+<p>...</p>
+<h2><a name="Logica-classica" class="anchor" href="#Logica-classica">Logica classica</a></h2>
+<p>Tutti i teoremi seguenti sono derivati attraverso l'assioma di scelta e pertanto
+possono essere considerati come logica classica.</p>
+<p>Va comunque notato che alcuni sono di fatto derivabili nella logica intuizionista
+se si utilizza una definizione alternativa dell quantificatore esistenziale
+(come in HOL Light).</p>
+<p>*<em><a href="0044_excluded_midle.html">excluded_middle_thm</a>*</em></p>
+<p><span class="math">\(\vdash \forall p.\ p \vee \neg p\)</span></p>
+<p>Per ogni proposizione, o essa &egrave; dimostrabile o lo &egrave; la sua negazione</p>
+<p>*<em><a href="0045_bool_cases.html">bool_cases_thm</a>*</em></p>
+<p><span class="math">\(\vdash \forall p.\ (p \Leftrightarrow \top) \vee (p \Leftrightarrow \bot)\)</span></p>
+<p>Per ogni proposizione, o essa equivale a true oppure equivale a false</p>
+<p>...</p>
+<h2><a name="Work-in-progress" class="anchor" href="#Work-in-progress">Work in progress</a></h2>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">cond_false_thm</span>
+<span class="c">// |- !(t1:&#39;a) t2. (if false then t1 else t2) = t2</span>
+
+<span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">cond_idem_thm</span>
+<span class="c">// |- !p (t:&#39;a). (if p then t else t) = t</span>
+
+<span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">cond_not_thm</span>
+<span class="c">// |- !p (t1:&#39;a) t2. (if (~ p) then t1 else t2) = (if p then t2 else t1)</span>
+
+<span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">cond_true_thm</span>
+<span class="c">// |- !(t1:&#39;a) t2. (if true then t1 else t2) = t1</span>
+
+
+<span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="id">conj_contr_thm</span>
+<span class="c">//   |- !p. p /\ ~ p &lt;=&gt; false</span>
+
+
+<span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="id">disj_absorb_conj_thm</span>
+<span class="c">//   |- !p q. p \/ (p /\ q) &lt;=&gt; p</span>
+
+<span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="id">disj_assoc_thm</span>
+<span class="c">//   |- !p q r. p \/ (q \/ r) &lt;=&gt; (p \/ q) \/ r</span>
+
+<span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="id">disj_comm_thm</span>
+<span class="c">//   |- !p q. p \/ q &lt;=&gt; q \/ p</span>
+
+<span onmouseout="hideTip(event, 'fs10', 10)" onmouseover="showTip(event, 'fs10', 10)" class="id">disj_dist_left_conj_thm</span>
+<span class="c">//   |- !p q r. (p /\ q) \/ r &lt;=&gt; (p \/ r) /\ (q \/ r)</span>
+
+<span onmouseout="hideTip(event, 'fs11', 11)" onmouseover="showTip(event, 'fs11', 11)" class="id">disj_dist_right_conj_thm</span>
+<span class="c">//   |- !p q r. p \/ (q /\ r) &lt;=&gt; (p \/ q) /\ (p \/ r)</span>
+
+<span onmouseout="hideTip(event, 'fs12', 12)" onmouseover="showTip(event, 'fs12', 12)" class="id">exists_dist_disj_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool) Q. (?x. P x \/ Q x) &lt;=&gt; (?x. P x) \/ (?x. Q x)</span>
+
+<span onmouseout="hideTip(event, 'fs13', 13)" onmouseover="showTip(event, 'fs13', 13)" class="id">exists_null_thm</span>
+<span class="c">//   |- !t. (?(x:&#39;a). t) &lt;=&gt; t</span>
+
+<span onmouseout="hideTip(event, 'fs14', 14)" onmouseover="showTip(event, 'fs14', 14)" class="id">exists_one_point_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool) a. (?x. x = a /\ P x) &lt;=&gt; P a</span>
+
+<span class="c">//exists_value_thm</span>
+<span class="c">//   |- !(x:&#39;a). ?y. y = x</span>
+
+<span onmouseout="hideTip(event, 'fs15', 15)" onmouseover="showTip(event, 'fs15', 15)" class="id">forall_dist_conj_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool) Q. (!x. P x /\ Q x) &lt;=&gt; (!x. P x) /\ (!x. Q x)</span>
+
+<span onmouseout="hideTip(event, 'fs16', 16)" onmouseover="showTip(event, 'fs16', 16)" class="id">forall_null_thm</span>
+<span class="c">//   |- !t. (!(x:&#39;a). t) &lt;=&gt; t</span>
+
+<span onmouseout="hideTip(event, 'fs17', 17)" onmouseover="showTip(event, 'fs17', 17)" class="id">forall_one_point_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool) a. (!x. x = a ==&gt; P x) &lt;=&gt; P a</span>
+
+<span class="c">//imp_alt_def_thm</span>
+<span class="c">//   |- $==&gt; = (\p q. p /\ q &lt;=&gt; p)</span>
+
+<span onmouseout="hideTip(event, 'fs18', 18)" onmouseover="showTip(event, 'fs18', 18)" class="id">imp_disj_thm</span>
+<span class="c">//   |- !p q. (p ==&gt; q) &lt;=&gt; (~ p \/ q)</span>
+
+<span onmouseout="hideTip(event, 'fs19', 19)" onmouseover="showTip(event, 'fs19', 19)" class="id">imp_dist_left_disj_thm</span>
+<span class="c">//   |- !p q r. (p \/ q ==&gt; r) &lt;=&gt; (p ==&gt; r) /\ (q ==&gt; r)</span>
+
+<span onmouseout="hideTip(event, 'fs20', 20)" onmouseover="showTip(event, 'fs20', 20)" class="id">imp_dist_right_conj_thm</span>
+<span class="c">//   |- !p q r. (p ==&gt; q /\ r) &lt;=&gt; (p ==&gt; q) /\ (p ==&gt; r)</span>
+
+<span class="c">//imp_imp_thm</span>
+<span class="c">//   |- !p q r. (p ==&gt; q ==&gt; r) &lt;=&gt; (p /\ q ==&gt; r)</span>
+
+<span onmouseout="hideTip(event, 'fs21', 21)" onmouseover="showTip(event, 'fs21', 21)" class="id">imp_left_id_thm</span>
+<span class="c">//   |- !p. (true ==&gt; p) &lt;=&gt; p</span>
+
+<span onmouseout="hideTip(event, 'fs22', 22)" onmouseover="showTip(event, 'fs22', 22)" class="id">imp_left_zero_thm</span>
+<span class="c">//   |- !p. false ==&gt; p</span>
+
+<span onmouseout="hideTip(event, 'fs23', 23)" onmouseover="showTip(event, 'fs23', 23)" class="id">imp_refl_thm</span>
+<span class="c">//   |- !p. p ==&gt; p</span>
+
+<span onmouseout="hideTip(event, 'fs24', 24)" onmouseover="showTip(event, 'fs24', 24)" class="id">imp_right_zero_thm</span>
+<span class="c">//   |- !p. p ==&gt; true</span>
+
+<span onmouseout="hideTip(event, 'fs25', 25)" onmouseover="showTip(event, 'fs25', 25)" class="id">not_dist_conj_thm</span>
+<span class="c">//   |- !p q. ~ (p /\ q) &lt;=&gt; ~ p \/ ~ q</span>
+
+
+
+<span onmouseout="hideTip(event, 'fs26', 26)" onmouseover="showTip(event, 'fs26', 26)" class="id">not_dist_exists_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool). ~ (?x. P x) &lt;=&gt; (!x. ~ P x)</span>
+
+<span onmouseout="hideTip(event, 'fs27', 27)" onmouseover="showTip(event, 'fs27', 27)" class="id">not_dist_forall_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool). ~ (!x. P x) &lt;=&gt; (?x. ~ P x)</span>
+
+<span onmouseout="hideTip(event, 'fs28', 28)" onmouseover="showTip(event, 'fs28', 28)" class="id">not_dneg_thm</span>
+<span class="c">//   |- !p. ~ ~ p &lt;=&gt; p</span>
+
+<span onmouseout="hideTip(event, 'fs29', 29)" onmouseover="showTip(event, 'fs29', 29)" class="id">select_eq_thm</span>
+<span class="c">//   |- !(a:&#39;a). (@x. x = a) = a</span>
+
+<span onmouseout="hideTip(event, 'fs30', 30)" onmouseover="showTip(event, 'fs30', 30)" class="id">skolem_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;&#39;b-&gt;bool). (!x. ?y. P x y) &lt;=&gt; (?f. !x. P x (f x))</span>
+
+<span onmouseout="hideTip(event, 'fs31', 31)" onmouseover="showTip(event, 'fs31', 31)" class="id">uexists_thm1</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool). (?!x. P x) &lt;=&gt; (?x. P x /\ (!y. P y ==&gt; y = x))</span>
+
+<span onmouseout="hideTip(event, 'fs32', 32)" onmouseover="showTip(event, 'fs32', 32)" class="id">uexists_thm2</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool). (?!x. P x) &lt;=&gt; (?x. !y. P y &lt;=&gt; x = y)</span>
+
+<span onmouseout="hideTip(event, 'fs33', 33)" onmouseover="showTip(event, 'fs33', 33)" class="id">uexists_thm3</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool). (?!x. P x)</span>
+<span class="c">//                     &lt;=&gt; (?x. P x) /\ (!x&#39; x&#39;&#39;. P x&#39; /\ P x&#39;&#39; ==&gt; x&#39; = x&#39;&#39;)</span>
+
+<span onmouseout="hideTip(event, 'fs34', 34)" onmouseover="showTip(event, 'fs34', 34)" class="id">uexists_one_point_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;bool) a. (?!x. x = a /\ P x) &lt;=&gt; P a</span>
+
+<span onmouseout="hideTip(event, 'fs35', 35)" onmouseover="showTip(event, 'fs35', 35)" class="id">unique_skolem_thm</span>
+<span class="c">//   |- !(P:&#39;a-&gt;&#39;b-&gt;bool). (!x. ?!y. P x y) &lt;=&gt; (?f. !x y. P x y &lt;=&gt; f x = y)</span>
+</code></pre>
+<h2><a name="PAIRS" class="anchor" href="#PAIRS">PAIRS</a></h2>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs36', 36)" onmouseover="showTip(event, 'fs36', 36)" class="id">fst_snd_thm</span>
+<span class="c">//   |- !(p:&#39;a#&#39;b). (FST p, SND p) = p</span>
+
+<span onmouseout="hideTip(event, 'fs37', 37)" onmouseover="showTip(event, 'fs37', 37)" class="id">fst_thm</span>
+<span class="c">//   |- !(x:&#39;a) (y:&#39;b). FST (x,y) = x</span>
+
+<span onmouseout="hideTip(event, 'fs38', 38)" onmouseover="showTip(event, 'fs38', 38)" class="id">pair_eq_thm</span>
+<span class="c">//   |- !(x:&#39;a) (y:&#39;b) u v. (x,y) = (u,v) &lt;=&gt; x = u /\ y = v</span>
+
+<span onmouseout="hideTip(event, 'fs39', 39)" onmouseover="showTip(event, 'fs39', 39)" class="id">pair_surjective_thm</span>
+<span class="c">//   |- !(p:&#39;a#&#39;b). ?x y. p = (x,y)</span>
+
+<span onmouseout="hideTip(event, 'fs40', 40)" onmouseover="showTip(event, 'fs40', 40)" class="id">snd_thm</span>
+<span class="c">//   |- !(x:&#39;a) (y:&#39;b). SND (x,y) = y</span>
+</code></pre>
+<h2><a name="INDIVIDUALS" class="anchor" href="#INDIVIDUALS">INDIVIDUALS</a></h2>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs41', 41)" onmouseover="showTip(event, 'fs41', 41)" class="id">ind_suc_injective_thm</span>
+<span class="c">//   |- !i j. IND_SUC i = IND_SUC j &lt;=&gt; i = j</span>
+
+<span onmouseout="hideTip(event, 'fs42', 42)" onmouseover="showTip(event, 'fs42', 42)" class="id">ind_suc_not_zero_thm</span>
+<span class="c">//   |- !i. ~ (IND_SUC i = IND_ZERO)</span>
+</code></pre>
+<h2><a name="NATURAL-NUMBERS" class="anchor" href="#NATURAL-NUMBERS">NATURAL NUMBERS</a></h2>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs43', 43)" onmouseover="showTip(event, 'fs43', 43)" class="id">add_assoc_thm</span>
+<span class="c">//   |- !l m n. l + (m + n) = (l + m) + n</span>
+
+<span class="c">//add_comm_thm</span>
+<span class="c">//   |- !m n. m + n = n + m</span>
+
+<span class="c">//add_dist_left_suc_thm</span>
+<span class="c">//   |- !m n. (SUC m) + n = SUC (m + n)</span>
+
+<span class="c">//add_dist_right_suc_thm</span>
+<span class="c">//   |- !m n. m + (SUC n) = SUC (m + n)</span>
+
+<span class="c">//add_eq_cancel_thm</span>
+<span class="c">//   |- !l m n. l + n = m + n &lt;=&gt; l = m</span>
+
+<span class="c">//add_eq_zero_thm</span>
+<span class="c">//   |- !m n. m + n = 0 &lt;=&gt; m = 0 /\ n = 0</span>
+
+<span class="c">//add_id_thm</span>
+<span class="c">//   |- !n. n + 0 = n</span>
+
+<span class="c">//add_le_cancel_thm</span>
+<span class="c">//   |- !l m n. l + n &lt;= m + n &lt;=&gt; l &lt;= m</span>
+
+<span class="c">//add_lt_cancel_thm</span>
+<span class="c">//   |- !l m n. l + n &lt; m + n &lt;=&gt; l &lt; m</span>
+
+<span class="c">//add_sub_cancel_thm</span>
+<span class="c">//   |- !m n. (m + n) - n = m</span>
+
+<span class="c">//even_suc_thm</span>
+<span class="c">//   |- !n. EVEN (SUC n) &lt;=&gt; ~ EVEN n</span>
+
+<span class="c">//exp_dist_right_add_thm</span>
+<span class="c">//   |- !l m n. l EXP (m + n) = (l EXP m) * (l EXP n)</span>
+
+<span class="c">//exp_dist_right_suc_thm</span>
+<span class="c">//   |- !m n. m EXP (SUC n) = m * m EXP n</span>
+
+<span class="c">//exp_right_id_thm</span>
+<span class="c">//   |- !n. n EXP 1 = n</span>
+
+<span class="c">//exp_right_zero_thm</span>
+<span class="c">//   |- !n. n EXP 0 = 1</span>
+
+<span class="c">//le_antisym_thm</span>
+<span class="c">//   |- !m n. m &lt;= n /\ n &lt;= m ==&gt; m = n</span>
+
+<span class="c">//le_cases_thm</span>
+<span class="c">//   |- !m n. m &lt;= n &lt;=&gt; m &lt; n \/ m = n</span>
+
+<span class="c">//le_refl_thm</span>
+<span class="c">//   |- !n. n &lt;= n</span>
+
+<span class="c">//le_trans_thm</span>
+<span class="c">//   |- !l m n. l &lt;= m /\ m &lt;= n ==&gt; l &lt;= n</span>
+
+<span class="c">//le_zero_thm</span>
+<span class="c">//   |- !n. n &lt;= 0 &lt;=&gt; n = 0</span>
+
+<span class="c">//lt_asym_thm</span>
+<span class="c">//   |- !m n. ~ (m &lt; n /\ n &lt; m)</span>
+
+<span class="c">//lt_irrefl_thm</span>
+<span class="c">//   |- !n. ~ (n &lt; n)</span>
+
+<span class="c">//lt_suc_cases_thm</span>
+<span class="c">//   |- !m n. m &lt; SUC n &lt;=&gt; m = n \/ m &lt; n</span>
+
+<span class="c">//lt_suc_le_thm</span>
+<span class="c">//   |- !m n. m &lt; SUC n &lt;=&gt; m &lt;= n</span>
+
+<span class="c">//lt_suc_thm</span>
+<span class="c">//   |- !n. n &lt; SUC n</span>
+
+<span class="c">//lt_trans_thm</span>
+<span class="c">//   |- !l m n. l &lt; m /\ m &lt; n ==&gt; l &lt; n</span>
+
+<span class="c">//lt_zero_cases_thm</span>
+<span class="c">//   |- !n. n = 0 \/ 0 &lt; n</span>
+
+<span class="c">//mult_assoc_thm</span>
+<span class="c">//   |- !l m n. l * (m * n) = (l * m) * n</span>
+
+<span class="c">//mult_comm_thm</span>
+<span class="c">//   |- !m n. m * n = n * m</span>
+
+<span class="c">//mult_dist_left_add_thm</span>
+<span class="c">//   |- !l m n. (l + m) * n = l * n + m * n</span>
+
+<span class="c">//mult_dist_left_suc_thm</span>
+<span class="c">//   |- !m n. (SUC m) * n = n + m * n</span>
+
+<span class="c">//mult_dist_right_add_thm</span>
+<span class="c">//   |- !l m n. l * (m + n) = l * m + l * n</span>
+
+<span class="c">//mult_dist_right_suc_thm</span>
+<span class="c">//   |- !m n. m * SUC n = m + (m * n)</span>
+
+<span class="c">//mult_eq_cancel_thm</span>
+<span class="c">//   |- !l m n. ~ (l = 0) ==&gt; (l * m = l * n &lt;=&gt; m = n)</span>
+
+<span class="c">//mult_eq_zero_thm</span>
+<span class="c">//   |- !m n. m * n = 0 &lt;=&gt; m = 0 \/ n = 0</span>
+
+<span class="c">//mult_id_thm</span>
+<span class="c">//   |- !n. n * 1 = n</span>
+
+<span class="c">//mult_le_cancel_thm</span>
+<span class="c">//   |- !l m n. ~ (l = 0) ==&gt; (l * m &lt;= l * n &lt;=&gt; m &lt;= n)</span>
+
+<span class="c">//mult_lt_cancel_thm</span>
+<span class="c">//   |- !l m n. ~ (l = 0) ==&gt; (l * m &lt; l * n &lt;=&gt; m &lt; n)</span>
+
+<span class="c">//mult_zero_thm</span>
+<span class="c">//   |- !n. n * 0 = 0</span>
+
+<span class="c">//nat_cases_thm</span>
+<span class="c">//   |- !n. n = 0 \/ (?m. n = SUC m)</span>
+
+<span class="c">//nat_induction_thm</span>
+<span class="c">//   |- !P. P 0 /\ (!n. P n ==&gt; P (SUC n)) ==&gt; (!n. P n)</span>
+
+<span class="c">//nat_recursion_thm</span>
+<span class="c">//   |- !(e1:&#39;a) e2. ?F. F 0 = e1 /\ (!n. F (SUC n) = e2 (F n) n)</span>
+
+<span class="c">//not_lt_cases_thm</span>
+<span class="c">//   |- !m n. ~ (m &lt; n) &lt;=&gt; n = m \/ n &lt; m</span>
+
+<span class="c">//not_lt_zero_thm</span>
+<span class="c">//   |- !n. ~ (n &lt; 0)</span>
+
+<span class="c">//odd_suc_thm</span>
+<span class="c">//   |- !n. ODD (SUC n) &lt;=&gt; ~ ODD n</span>
+
+<span class="c">//one_not_zero_thm</span>
+<span class="c">//   |- ~ (1 = 0)</span>
+
+<span class="c">//one_odd_thm</span>
+<span class="c">//   |- ODD 1</span>
+
+<span class="c">//pre_suc_thm</span>
+<span class="c">//   |- !n. PRE (SUC n) = n</span>
+
+<span class="c">//pre_zero_thm</span>
+<span class="c">//   |- PRE 0 = 0</span>
+
+<span class="c">//sub_cancel_thm</span>
+<span class="c">//   |- !n. n - n = 0</span>
+
+<span class="c">//sub_dist_right_suc_thm</span>
+<span class="c">//   |- !m n. m - SUC n = PRE (m - n)</span>
+
+<span class="c">//sub_floor_thm</span>
+<span class="c">//   |- !m n. m &lt;= n ==&gt; m - n = 0</span>
+
+<span class="c">//sub_right_id_thm</span>
+<span class="c">//   |- !n. n - 0 = n</span>
+
+<span class="c">//suc_add_thm</span>
+<span class="c">//   |- !n. SUC n = n + 1</span>
+
+<span class="c">//suc_injective_thm</span>
+<span class="c">//   |- !m n. SUC m = SUC n &lt;=&gt; m = n</span>
+
+<span class="c">//suc_le_cancel_thm</span>
+<span class="c">//   |- !m n. SUC m &lt;= SUC n &lt;=&gt; m &lt;= n</span>
+
+<span class="c">//suc_le_lt_thm</span>
+<span class="c">//   |- !m n. SUC m &lt;= n &lt;=&gt; m &lt; n</span>
+
+<span class="c">//suc_lt_cancel_thm</span>
+<span class="c">//   |- !m n. SUC m &lt; SUC n &lt;=&gt; m &lt; n</span>
+
+<span class="c">//suc_not_zero_thm</span>
+<span class="c">//   |- !n. ~ (SUC n = 0)</span>
+
+<span class="c">//suc_one_thm</span>
+<span class="c">//   |- SUC 1 = 2</span>
+
+<span class="c">//suc_sub_suc_thm</span>
+<span class="c">//   |- !m n. SUC m - SUC n = m - n</span>
+
+<span class="c">//suc_twice_odd_thm</span>
+<span class="c">//   |- !n. ODD (SUC (2 * n))</span>
+
+<span class="c">//suc_zero_thm</span>
+<span class="c">//   |- SUC 0 = 1</span>
+
+<span class="c">//twice_even_thm</span>
+<span class="c">//   |- !n. EVEN (2 * n)</span>
+
+<span class="c">//twice_thm</span>
+<span class="c">//   |- !n. 2 * n = n + n</span>
+
+<span class="c">//two_not_zero_thm</span>
+<span class="c">//   |- ~ (2 = 0)</span>
+
+<span class="c">//zero_even_thm</span>
+<span class="c">//   |- EVEN 0</span>
+
+<span class="c">//zero_le_thm</span>
+<span class="c">//   |- !n. 0 &lt;= n</span>
+
+<span class="c">//zero_lt_suc_thm</span>
+<span class="c">//   |- !n. 0 &lt; SUC n</span>
+
+<span class="c">//zero_lt_thm</span>
+<span class="c">//   |- !n. 0 &lt; n &lt;=&gt; ~ (n = 0)</span>
+
+<span class="c">//zero_not_odd_thm</span>
+<span class="c">//   |- ~ ODD 0</span>
+
+<span class="c">//********************************************************************************</span>
+</code></pre>
+
+                </div>
+            </div>
+        </div>
+        <div class="fsdocs-tip" id="fs1">namespace HOL</div>
+<div class="fsdocs-tip" id="fs2">val cond_false_thm: thm<br /><em>&lt;summary&gt;
+ |- !t1 t2. (if false then t1 else t2) = t2 
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs3">val cond_idem_thm: thm<br /><em>&lt;summary&gt;
+ |- !p t. (if p then t else t) = t
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs4">val cond_not_thm: thm<br /><em>&lt;summary&gt;
+ |- !p t1 t2. (if ~ p then t1 else t2) = (if p then t2 else t1)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs5">val cond_true_thm: thm<br /><em>&lt;summary&gt;
+ |- !t1 t2. (if true then t1 else t2) = t1
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs6">val conj_contr_thm: thm<br /><em>&lt;summary&gt;
+ |- !p. p /\ ~ p &amp;lt;=&amp;gt; false
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs7">val disj_absorb_conj_thm: thm<br /><em>&lt;summary&gt;
+ |- !p q. p \/ (p /\ q) &amp;lt;=&amp;gt; p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs8">val disj_assoc_thm: thm<br /><em>&lt;summary&gt;
+ |- !p q r. p \/ (q \/ r) &amp;lt;=&amp;gt; (p \/ q) \/ r
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs9">val disj_comm_thm: thm<br /><em>&lt;summary&gt;
+ |- !p q. p \/ q &amp;lt;=&amp;gt; q \/ p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs10">val disj_dist_left_conj_thm: thm<br /><em>&lt;summary&gt;
+ |- !p q r. (p /\ q) \/ r &amp;lt;=&amp;gt; (p \/ r) /\ (q \/ r)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs11">val disj_dist_right_conj_thm: thm<br /><em>&lt;summary&gt;
+ |- !p q r. p \/ (q /\ r) &amp;lt;=&amp;gt; (p \/ q) /\ (p \/ r)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs12">val exists_dist_disj_thm: thm<br /><em>&lt;summary&gt;
+ |- !P Q. (?x. P x \/ Q x) &amp;lt;=&amp;gt; (?x. P x) \/ (?x. Q x)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs13">val exists_null_thm: thm<br /><em>&lt;summary&gt;
+ |- !t. (?x. t) &amp;lt;=&amp;gt; t
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs14">val exists_one_point_thm: thm<br /><em>&lt;summary&gt;
+ |- !P a. (?x. x = a /\ P x) &amp;lt;=&amp;gt; P a
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs15">val forall_dist_conj_thm: thm<br /><em>&lt;summary&gt;
+ |- !P Q. (!x. P x /\ Q x) &amp;lt;=&amp;gt; (!x. P x) /\ (!x. Q x)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs16">val forall_null_thm: thm<br /><em>&lt;summary&gt;
+ |- !t. (!(x:&#39;a). t) &amp;lt;=&amp;gt; t
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs17">val forall_one_point_thm: thm<br /><em>&lt;summary&gt;
+ |- !P a. (!x. x = a ==&amp;gt; P x) &amp;lt;=&amp;gt; P a
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs18">val imp_disj_thm: thm<br /><em>&lt;summary&gt;
+ |- !p q. (p ==&amp;gt; q) &amp;lt;=&amp;gt; (~ p \/ q)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs19">val imp_dist_left_disj_thm: thm<br /><em>&lt;summary&gt;
+ |- !p q r. (p \/ q ==&amp;gt; r) &amp;lt;=&amp;gt; (p ==&amp;gt; r) /\ (q ==&amp;gt; r)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs20">val imp_dist_right_conj_thm: thm<br /><em>&lt;summary&gt;
+ |- !p q r. (p ==&amp;gt; q /\ r) &amp;lt;=&amp;gt; (p ==&amp;gt; q) /\ (p ==&amp;gt; r)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs21">val imp_left_id_thm: thm<br /><em>&lt;summary&gt;
+ |- !p. (true ==&amp;gt; p) &amp;lt;=&amp;gt; p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs22">val imp_left_zero_thm: thm<br /><em>&lt;summary&gt;
+ |- !p. false ==&amp;gt; p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs23">val imp_refl_thm: thm<br /><em>&lt;summary&gt;
+ |- !p. p ==&amp;gt; p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs24">val imp_right_zero_thm: thm<br /><em>&lt;summary&gt;
+ |- !p. p ==&amp;gt; true
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs25">val not_dist_conj_thm: thm<br /><em>&lt;summary&gt;
+ |- !p q. ~ (p /\ q) &amp;lt;=&amp;gt; ~ p \/ ~ q
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs26">val not_dist_exists_thm: thm<br /><em>&lt;summary&gt;
+ |- !P. ~ (?x. P x) &amp;lt;=&amp;gt; (!x. ~ P x)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs27">val not_dist_forall_thm: thm<br /><em>&lt;summary&gt;
+ |- !P. ~ (!x. P x) &amp;lt;=&amp;gt; (?x. ~ P x)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs28">val not_dneg_thm: thm<br /><em>&lt;summary&gt;
+ |- !p. ~ ~ p &amp;lt;=&amp;gt; p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs29">val select_eq_thm: thm<br /><em>&lt;summary&gt;
+ |- !(a:&#39;a). (@x. x = a) = a
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs30">val skolem_thm: thm<br /><em>&lt;summary&gt;
+ |- !P. (!x. ?y. P x y) &amp;lt;=&amp;gt; (?f. !x. P x (f x))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs31">val uexists_thm1: thm<br /><em>&lt;summary&gt;
+ |- !P. (?!x. P x) &amp;lt;=&amp;gt; (?x. P x /\ (!y. P y ==&amp;gt; y = x))
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs32">val uexists_thm2: thm<br /><em>&lt;summary&gt;
+ |- !P. (?!x. P x) &amp;lt;=&amp;gt; (?x. !y. P y &amp;lt;=&amp;gt; x = y)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs33">val uexists_thm3: thm<br /><em>&lt;summary&gt;
+ |- !P. (?!x. P x) &amp;lt;=&amp;gt; (?x. P x) /\ (!x x&#39;. P x /\ P x&#39; ==&amp;gt; x = x&#39;)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs34">val uexists_one_point_thm: thm<br /><em>&lt;summary&gt;
+ |- !P a. (?!x. x = a /\ P x) &amp;lt;=&amp;gt; P a
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs35">val unique_skolem_thm: thm<br /><em>&lt;summary&gt;
+ |- !P. (!x. ?!y. P x y) &amp;lt;=&amp;gt; (?f. !x y. P x y &amp;lt;=&amp;gt; f x = y)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs36">val fst_snd_thm: thm<br /><em>&lt;summary&gt;
+ |- !p. (FST p, SND p) = p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs37">val fst_thm: thm<br /><em>&lt;summary&gt;
+ |- !x y. FST (x,y) = x
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs38">val pair_eq_thm: thm</div>
+<div class="fsdocs-tip" id="fs39">val pair_surjective_thm: thm<br /><em>&lt;summary&gt;
+ |- !p. ?x y. p = (x,y)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs40">val snd_thm: thm<br /><em>&lt;summary&gt;
+ |- !x y. SND (x,y) = y
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs41">val ind_suc_injective_thm: thm<br /><em>&lt;summary&gt;
+ |- !i j. IND_SUC i = IND_SUC j &amp;lt;=&amp;gt; i = j
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs42">val ind_suc_not_zero_thm: thm<br /><em>&lt;summary&gt;
+ |- !i. ~(IND_SUC i = IND_ZERO)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs43">val add_assoc_thm: thm<br /><em>&lt;summary&gt;
+ |- !l m n. l + (m + n) = (l + m) + n
+&lt;/summary&gt;</em></div>
+
+    </div>
+
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/'</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+    <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+    <!-- END SEARCH BOX: this adds support for the search box -->
+</body>
+
+</html>

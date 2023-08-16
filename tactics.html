@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>tactics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="nholz">
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head> 
+
+<body>
+    <div class="columns is-fullheight m-0">
+        <div id="fsdocs-menu" class="column is-2 is-paddingless">
+            <aside class="menu">
+                <div class="container is-paddingless is-marginless has-background-dark">
+                    <a href="/nholz/">
+                        <figure class="image is-128x128 container">
+                            <img src="/nholz/img/logo.png">
+                        </figure>
+                    </a>
+                    <h2 class="title has-text-centered has-text-white pb-4">nholz</h2>
+                </div>
+                <div class="content">
+                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+                    <div id="header">
+                        <div class="searchbox" id="fsdocs-searchbox">
+                            <label for="search-by">
+                                <i class="fas fa-search"></i>
+                            </label>
+                            <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
+                            <span data-search-clear="">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- END SEARCH BOX: this adds support for the search box -->
+                    <ul class="navbar-nav">
+                        <li class="nav-header">Links</li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/domasin/nholz/blob/master/LICENSE.txt">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/domasin/nholz">Source Repository</a></li>
+                        <li class="nav-header">Il sistema HOL</li>
+                        <li class="nav-item" id="index-link"><a class="nav-link" href="/index.html">Indice</a></li>
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <div class="column is-10 is-paddingless">
+            <div class="section pt-4">
+                <div class="container" id="fsdocs-content">
+                    <pre class="fssnip highlighted"><code lang="fsharp"><span class="m">#load</span> <span class="s">&quot;avvio.fsx&quot;</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">HOL</span>
+<span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="m">CoreThry</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">load</span>
+<span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="m">Equal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">load</span>
+<span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="m">Bool</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 7)" onmouseover="showTip(event, 'fs5', 7)" class="id">load</span>
+
+<span class="c">//let true_def_tr = true_def, mkGraph (Th true_def, &quot;true\_def&quot;) []</span>
+
+<span class="c">//let th = </span>
+<span class="c">//    (* |- true                        *)</span>
+<span class="c">//    eq_mp_rule_tr</span>
+<span class="c">//      (* |- (\p. p) = (\p. p) &lt;=&gt; true  *)</span>
+<span class="c">//      (sym_rule_tr true_def_tr)</span>
+<span class="c">//      (* |- (\p. p) = (\p. p)           *)</span>
+<span class="c">//      (refl_conv_tr (parse_term(@&quot;\(p:bool).p&quot;)))</span>
+
+<span class="c">//th |&gt; print_graph</span>
+
+<span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="fn">eq_mp_tac</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="rt">term</span> <span class="k">-&gt;</span> <span class="id">tactic</span><span class="pn">)</span> <span class="o">=</span>
+  <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="fn">tm</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="fn">asl</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="fn">w</span><span class="pn">)</span> <span class="k">-&gt;</span>
+    <span class="k">try</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 13)" onmouseover="showTip(event, 'fs12', 13)" class="fn">tm1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 14)" onmouseover="showTip(event, 'fs13', 14)" class="fn">mk_eq</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs9', 15)" onmouseover="showTip(event, 'fs9', 15)" class="fn">tm</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="fn">w</span><span class="pn">)</span>
+        <span class="id">null_meta</span><span class="pn">,</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs10', 17)" onmouseover="showTip(event, 'fs10', 17)" class="fn">asl</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs12', 18)" onmouseover="showTip(event, 'fs12', 18)" class="fn">tm1</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs10', 19)" onmouseover="showTip(event, 'fs10', 19)" class="fn">asl</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs9', 20)" onmouseover="showTip(event, 'fs9', 20)" class="fn">tm</span><span class="pn">]</span><span class="pn">,</span>
+        <span class="k">fun</span> <span class="id">_</span> <span class="id">[</span><span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="fn">th1</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="fn">th2</span><span class="pn">]</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="fn">eq_mp_rule</span> <span onmouseout="hideTip(event, 'fs14', 24)" onmouseover="showTip(event, 'fs14', 24)" class="fn">th1</span> <span onmouseout="hideTip(event, 'fs15', 25)" onmouseover="showTip(event, 'fs15', 25)" class="fn">th2</span>
+    <span class="k">with</span> <span onmouseout="hideTip(event, 'fs17', 26)" onmouseover="showTip(event, 'fs17', 26)" class="uc">Failure</span> <span class="id">_</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs18', 27)" onmouseover="showTip(event, 'fs18', 27)" class="fn">failwith</span> <span class="s">&quot;eq_mp_tac&quot;</span><span class="pn">;;</span>
+
+<span class="id">g</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs19', 28)" onmouseover="showTip(event, 'fs19', 28)" class="id">parse_term</span> <span class="s">@&quot;true&quot;</span><span class="pn">)</span>
+<span class="id">e2</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs7', 29)" onmouseover="showTip(event, 'fs7', 29)" class="id">eq_mp_tac</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs19', 30)" onmouseover="showTip(event, 'fs19', 30)" class="id">parse_term</span> <span class="s">@&quot;(\(p:bool). p) = (\p. p)&quot;</span><span class="pn">)</span><span class="pn">)</span>
+<span class="id">e2</span> <span class="pn">(</span><span class="id">CONV_TAC</span> <span onmouseout="hideTip(event, 'fs20', 31)" onmouseover="showTip(event, 'fs20', 31)" class="id">sym_conv</span><span class="pn">)</span>
+<span class="id">e2</span> <span class="pn">(</span><span class="id">ACCEPT_TAC</span> <span onmouseout="hideTip(event, 'fs21', 32)" onmouseover="showTip(event, 'fs21', 32)" class="id">true_def</span><span class="pn">)</span>
+<span class="id">e2</span> <span class="id">REFL_TAC</span>
+<span class="id">top_thm</span><span class="pn">(</span><span class="pn">)</span>
+
+<span class="id">g</span> <span class="pn">(</span><span class="s">&quot;p = p&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 33)" onmouseover="showTip(event, 'fs19', 33)" class="id">parse_term</span><span class="pn">)</span>
+<span class="id">top_realgoal</span><span class="pn">(</span><span class="pn">)</span>
+<span class="id">e2</span> <span class="id">REFL_TAC</span>
+<span class="id">top_thm</span><span class="pn">(</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 34)" onmouseover="showTip(event, 'fs22', 34)" class="id">truth_thm_tr</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs23', 35)" onmouseover="showTip(event, 'fs23', 35)" class="id">truth_thm</span><span class="pn">,</span> <span class="id">mkGraph</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs24', 36)" onmouseover="showTip(event, 'fs24', 36)" class="id">Th</span> <span onmouseout="hideTip(event, 'fs23', 37)" onmouseover="showTip(event, 'fs23', 37)" class="id">truth_thm</span><span class="pn">,</span> <span class="s">&quot;truth\_thm&quot;</span><span class="pn">)</span> <span class="pn">[</span><span class="pn">]</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 38)" onmouseover="showTip(event, 'fs25', 38)" class="id">th</span> <span class="o">=</span> 
+    <span class="c">(* |- ~ true &lt;=&gt; false         *)</span>
+    <span class="id">deduct_antisym_rule_tr</span>
+        <span class="c">(* false |- ~ true             *)</span>
+        <span class="pn">(</span><span class="id">contr_rule_tr</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs19', 39)" onmouseover="showTip(event, 'fs19', 39)" class="id">parse_term</span><span class="pn">(</span><span class="s">@&quot;~ true&quot;</span><span class="pn">)</span><span class="pn">)</span> <span class="pn">(</span><span class="id">assume_rule_tr</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs19', 40)" onmouseover="showTip(event, 'fs19', 40)" class="id">parse_term</span><span class="pn">(</span><span class="s">@&quot;false&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span>
+        <span class="c">(* ~ true |- false             *)</span>
+        <span class="pn">(</span><span class="id">eq_mp_rule_tr</span>
+          <span class="c">(* ~ true |- true &lt;=&gt; false    *)</span>
+          <span class="pn">(</span><span class="id">eqf_intro_rule_tr</span> <span class="pn">(</span><span class="id">assume_rule_tr</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs19', 41)" onmouseover="showTip(event, 'fs19', 41)" class="id">parse_term</span><span class="pn">(</span><span class="s">@&quot;~ true&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span>
+           <span onmouseout="hideTip(event, 'fs22', 42)" onmouseover="showTip(event, 'fs22', 42)" class="id">truth_thm_tr</span> <span class="pn">)</span>
+
+<span onmouseout="hideTip(event, 'fs25', 43)" onmouseover="showTip(event, 'fs25', 43)" class="id">th</span> <span class="o">|&gt;</span> <span class="id">print_graph</span>
+
+<span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs26', 44)" onmouseover="showTip(event, 'fs26', 44)" class="fn">deduct_antisym_rule_tac</span><span class="pn">:</span> <span class="id">tactic</span><span class="pn">)</span> <span class="o">=</span>
+  <span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs27', 45)" onmouseover="showTip(event, 'fs27', 45)" class="fn">asl</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs11', 46)" onmouseover="showTip(event, 'fs11', 46)" class="fn">w</span><span class="pn">)</span> <span class="k">-&gt;</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 47)" onmouseover="showTip(event, 'fs12', 47)" class="fn">tm1</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs28', 48)" onmouseover="showTip(event, 'fs28', 48)" class="fn">tm2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 49)" onmouseover="showTip(event, 'fs29', 49)" class="fn">dest_eq</span> <span onmouseout="hideTip(event, 'fs11', 50)" onmouseover="showTip(event, 'fs11', 50)" class="fn">w</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 51)" onmouseover="showTip(event, 'fs14', 51)" class="fn">th1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 52)" onmouseover="showTip(event, 'fs30', 52)" class="fn">assume_rule</span> <span onmouseout="hideTip(event, 'fs12', 53)" onmouseover="showTip(event, 'fs12', 53)" class="fn">tm1</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 54)" onmouseover="showTip(event, 'fs15', 54)" class="fn">th2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 55)" onmouseover="showTip(event, 'fs30', 55)" class="fn">assume_rule</span> <span onmouseout="hideTip(event, 'fs28', 56)" onmouseover="showTip(event, 'fs28', 56)" class="fn">tm2</span>
+    <span class="k">try</span> 
+        <span class="id">null_meta</span><span class="pn">,</span><span class="pn">[</span><span class="pn">(</span><span class="s">&quot;&quot;</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs15', 57)" onmouseover="showTip(event, 'fs15', 57)" class="fn">th2</span><span class="pn">)</span><span class="uc">::</span><span onmouseout="hideTip(event, 'fs27', 58)" onmouseover="showTip(event, 'fs27', 58)" class="fn">asl</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs12', 59)" onmouseover="showTip(event, 'fs12', 59)" class="fn">tm1</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;&quot;</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs14', 60)" onmouseover="showTip(event, 'fs14', 60)" class="fn">th1</span><span class="pn">)</span><span class="uc">::</span><span onmouseout="hideTip(event, 'fs27', 61)" onmouseover="showTip(event, 'fs27', 61)" class="fn">asl</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs28', 62)" onmouseover="showTip(event, 'fs28', 62)" class="fn">tm2</span><span class="pn">]</span><span class="pn">,</span>
+        <span class="k">fun</span> <span class="id">_</span> <span class="id">[</span><span onmouseout="hideTip(event, 'fs14', 63)" onmouseover="showTip(event, 'fs14', 63)" class="fn">th1</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs15', 64)" onmouseover="showTip(event, 'fs15', 64)" class="fn">th2</span><span class="pn">]</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs31', 65)" onmouseover="showTip(event, 'fs31', 65)" class="fn">deduct_antisym_rule</span> <span onmouseout="hideTip(event, 'fs14', 66)" onmouseover="showTip(event, 'fs14', 66)" class="fn">th1</span> <span onmouseout="hideTip(event, 'fs15', 67)" onmouseover="showTip(event, 'fs15', 67)" class="fn">th2</span>
+    <span class="k">with</span> <span onmouseout="hideTip(event, 'fs17', 68)" onmouseover="showTip(event, 'fs17', 68)" class="uc">Failure</span> <span class="id">_</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs18', 69)" onmouseover="showTip(event, 'fs18', 69)" class="fn">failwith</span> <span class="s">&quot;deduct_antisym_rule_tac&quot;</span><span class="pn">;;</span>
+
+<span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs32', 70)" onmouseover="showTip(event, 'fs32', 70)" class="fn">CONTR_TAC</span><span class="pn">:</span> <span class="id">thm_tactic</span><span class="pn">)</span> <span class="o">=</span>
+  <span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 71)" onmouseover="showTip(event, 'fs33', 71)" class="fn">propagate_thm</span> <span onmouseout="hideTip(event, 'fs34', 72)" onmouseover="showTip(event, 'fs34', 72)" class="fn">th</span> <span onmouseout="hideTip(event, 'fs35', 73)" onmouseover="showTip(event, 'fs35', 73)" class="fn">i</span> <span class="id">[</span><span class="pn">]</span> <span class="o">=</span> <span class="id">INSTANTIATE_ALL</span> <span onmouseout="hideTip(event, 'fs35', 74)" onmouseover="showTip(event, 'fs35', 74)" class="id">i</span> <span onmouseout="hideTip(event, 'fs34', 75)" onmouseover="showTip(event, 'fs34', 75)" class="id">th</span> <span class="k">in</span>
+  <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs36', 76)" onmouseover="showTip(event, 'fs36', 76)" class="fn">cth</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 77)" onmouseover="showTip(event, 'fs10', 77)" class="fn">asl</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs11', 78)" onmouseover="showTip(event, 'fs11', 78)" class="fn">w</span><span class="pn">)</span> <span class="k">-&gt;</span>
+    <span class="k">try</span> <span class="k">let</span> <span onmouseout="hideTip(event, 'fs37', 79)" onmouseover="showTip(event, 'fs37', 79)" class="fn">th</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs38', 80)" onmouseover="showTip(event, 'fs38', 80)" class="fn">contr_rule</span> <span onmouseout="hideTip(event, 'fs11', 81)" onmouseover="showTip(event, 'fs11', 81)" class="fn">w</span> <span onmouseout="hideTip(event, 'fs36', 82)" onmouseover="showTip(event, 'fs36', 82)" class="fn">cth</span> <span class="k">in</span>
+        <span class="id">null_meta</span><span class="pn">,</span><span class="pn">[</span><span class="pn">]</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs33', 83)" onmouseover="showTip(event, 'fs33', 83)" class="fn">propagate_thm</span> <span onmouseout="hideTip(event, 'fs37', 84)" onmouseover="showTip(event, 'fs37', 84)" class="fn">th</span>
+    <span class="k">with</span> <span onmouseout="hideTip(event, 'fs17', 85)" onmouseover="showTip(event, 'fs17', 85)" class="uc">Failure</span> <span class="id">_</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs18', 86)" onmouseover="showTip(event, 'fs18', 86)" class="fn">failwith</span> <span class="s">&quot;CONTR_TAC&quot;</span>
+
+
+<span class="id">g</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs19', 87)" onmouseover="showTip(event, 'fs19', 87)" class="id">parse_term</span> <span class="s">@&quot;~ true &lt;=&gt; false&quot;</span><span class="pn">)</span>
+<span class="id">e2</span> <span onmouseout="hideTip(event, 'fs26', 88)" onmouseover="showTip(event, 'fs26', 88)" class="id">deduct_antisym_rule_tac</span>
+<span class="id">e2</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs32', 89)" onmouseover="showTip(event, 'fs32', 89)" class="id">CONTR_TAC</span> <span class="pn">(</span><span class="s">&quot;false&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 90)" onmouseover="showTip(event, 'fs19', 90)" class="id">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs30', 91)" onmouseover="showTip(event, 'fs30', 91)" class="id">assume_rule</span><span class="pn">)</span><span class="pn">)</span>
+<span class="id">e2</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs7', 92)" onmouseover="showTip(event, 'fs7', 92)" class="id">eq_mp_tac</span> <span class="pn">(</span><span class="s">&quot;true&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 93)" onmouseover="showTip(event, 'fs19', 93)" class="id">parse_term</span><span class="pn">)</span><span class="pn">)</span>
+
+<span class="c">//let th1 = (just_fn1:justification) null_inst []</span>
+
+<span class="c">//let (deduct_antisym_tac: tactic) =</span>
+<span class="c">//  fun (asl,w) -&gt;</span>
+<span class="c">//    try let l,r = dest_eq w in</span>
+<span class="c">//        null_meta,[asl, mk_imp(l,r); asl, mk_imp(r,l)],</span>
+<span class="c">//        fun _ [th1; th2] -&gt; deduct_antisym_rule th1 th2</span>
+<span class="c">//    with Failure _ -&gt; failwith &quot;deduct_antisym_tac&quot;;;</span>
+
+<span class="c">//let asl : (string * thm) list = []</span>
+
+<span class="c">//let w = &quot;~ true &lt;=&gt; false &quot; |&gt; parse_term</span>
+<span class="c">//let l,r = dest_eq w</span>
+<span class="c">//let th1_tm = mk_imp(l,r)</span>
+<span class="c">//let th2_tm = mk_imp(r,l)</span>
+
+<span class="c">//let newgoals = [asl, th1_tm; asl, th2_tm]</span>
+<span class="c">//let justfn = fun _ [th1; th2] -&gt; deduct_antisym_rule th1 th2</span>
+
+<span class="c">//let (eq_mp_tac: tactic) =</span>
+<span class="c">//  fun (asl,w) -&gt;</span>
+<span class="c">//    try let l,r = dest_eq w in</span>
+<span class="c">//        null_meta,[asl, mk_imp(l,r); asl, mk_imp(r,l)],</span>
+<span class="c">//        fun _ [th1; th2] -&gt; eq_mp_rule th1 th2</span>
+<span class="c">//    with Failure _ -&gt; failwith &quot;eq_mp_tac&quot;;;</span>
+
+<span class="c">//let (imp_antisym_rule_tac: tactic) =</span>
+<span class="c">//  fun (asl,w) -&gt;</span>
+<span class="c">//    try let l,r = dest_eq w in</span>
+<span class="c">//        null_meta,[asl, mk_imp(l,r); asl, mk_imp(r,l)],</span>
+<span class="c">//        fun _ [th1; th2] -&gt; imp_antisym_rule th1 th2</span>
+<span class="c">//    with Failure _ -&gt; failwith &quot;imp_antisym_rule_tac&quot;;;</span>
+
+<span class="c">//let (DISCH_TAC: tactic) =</span>
+<span class="c">//  let f_tm = false_tm in</span>
+<span class="c">//  fun (asl,w) -&gt;</span>
+<span class="c">//    try let ant,c = dest_imp w in</span>
+<span class="c">//        let th1 = assume_rule ant in</span>
+<span class="c">//        null_meta,[(&quot;&quot;,th1)::asl,c],</span>
+<span class="c">//        fun i [th] -&gt; prim_disch_rule (instantiate i ant) th</span>
+<span class="c">//    with Failure _ -&gt; </span>
+<span class="c">//        try</span>
+<span class="c">//            let ant = dest_not w in</span>
+<span class="c">//            let th1 = assume_rule ant in</span>
+<span class="c">//            null_meta,[(&quot;&quot;,th1)::asl,f_tm],</span>
+<span class="c">//            fun i [th] -&gt; not_intro_rule(prim_disch_rule (instantiate i ant) th)</span>
+<span class="c">//        with Failure _ -&gt; failwith &quot;DISCH_TAC&quot;</span>
+
+<span class="c">//let (UNDISCH_TAC: term -&gt; tactic) =</span>
+<span class="c">// fun tm (asl,w) -&gt;</span>
+<span class="c">//   try let sthm,asl&#39; = remove1 (fun (_,asm) -&gt; alpha_eq (concl asm) tm) asl in</span>
+<span class="c">//       let thm = snd sthm in</span>
+<span class="c">//       null_meta,[asl&#39;,mk_imp(tm,w)],</span>
+<span class="c">//       fun i [th] -&gt; prim_mp_rule th (INSTANTIATE_ALL i thm)</span>
+<span class="c">//   with Failure _ -&gt; failwith &quot;UNDISCH_TAC&quot;</span>
+
+<span class="c">//let goal1:goal = ([], (parse_term @&quot;~ true &lt;=&gt; false&quot;));;</span>
+<span class="c">//let (_,goal_list1,just_fn1) = imp_antisym_rule_tac goal1</span>
+
+<span class="c">//let (_,goal_list2,just_fn2) = DISCH_TAC goal_list1.[1]</span>
+<span class="c">//let goal3 = ACCEPT_TAC (&quot;false&quot; |&gt; parse_term |&gt; assume_rule) goal_list2.[0]</span>
+
+
+<span class="c">//let goal2 = UNDISCH_TAC (&quot;false&quot; |&gt; parse_term) goal_list1.[0]</span>
+
+<span class="c">//let th1 = (just_fn1:justification) null_inst []</span>
+</code></pre>
+
+                </div>
+            </div>
+        </div>
+        <div class="fsdocs-tip" id="fs1">namespace HOL</div>
+<div class="fsdocs-tip" id="fs2">module CoreThry
+
+from HOL<br /><em>&lt;summary&gt;
+This module completes the logical core for HOL by defining the core       
+theory.  This involves giving declarations, definitions and axioms for all
+the HOL theory objects anticipated by the language and inference kernels. 
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs3">val load: (string * thm) list</div>
+<div class="fsdocs-tip" id="fs4">module Equal
+
+from HOL<br /><em>&lt;summary&gt;
+This module adds more constants and inference rules for basic reasoning
+using equality.                                                                                                       
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs5">val load: (string * thm) list<br /><em>&lt;summary&gt;
+ Force module evaluation
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs6">module Bool
+
+from HOL<br /><em>&lt;summary&gt;
+This module extends the boolean-related theory by giving definitions for  
+classic predicate logic theory objects not introduced in &#39;CoreThry&#39;, and  
+adds various derived syntax functions, theorems and inference rules.  Note
+that derivations relying on the Axiom of Choice are separated out into the
+&#39;BoolClass&#39; module.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs7">val eq_mp_tac: (term -&gt; &#39;a * term -&gt; &#39;b * (&#39;a * term) list * (&#39;c -&gt; thm list -&gt; thm))</div>
+<div class="fsdocs-tip" id="fs8">type term =
+  | Tmvar of string * hol_type
+  | Tmconst of string * hol_type
+  | Tmcomb of term * term
+  | Tmabs of term * term
+  override ToString: unit -&gt; string<br /><em>&lt;summary&gt;
+ This is the datatype for internal HOL terms.  It has 4 classes,          
+ corresponding to the 4 primitive syntactic categories of term:&lt;para&gt;&#160;&lt;/para&gt;&lt;br /&gt;       
+                                                                         
+ Variable - This denotes an occurrence of a variable.  It has name and  
+ type attributes.  Any two occurrences of variables within a given object
+ refer the same entity iff they have the same name, type and scope.&lt;para&gt;&#160;&lt;/para&gt;&lt;br /&gt;     
+                                                                         
+ Constant - This denotes an occurrence of a constant.  It has name and  
+ type attributes, where the name must be a declared constant&#39;s name and  
+ the type must match the declared constant&#39;s generic type.&lt;para&gt;&#160;&lt;/para&gt;&lt;br /&gt;              
+                                                                         
+ Function Application - This consists of a function subterm and an      
+ argument subterm, where the function&#39;s type must be a function type with
+ domain type equal to the argument&#39;s type.&lt;para&gt;&#160;&lt;/para&gt;&lt;br /&gt;                               
+                                                                         
+ Lambda Astraction - This consists of a binding variable and a body     
+ subterm.  It bounds the scope of the binding variable to the body, and  
+ this is the only primitive means of bounding variable scope.&lt;para&gt;&#160;&lt;/para&gt;&lt;br /&gt;&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs9">val tm: term</div>
+<div class="fsdocs-tip" id="fs10">val asl: &#39;a</div>
+<div class="fsdocs-tip" id="fs11">val w: term</div>
+<div class="fsdocs-tip" id="fs12">val tm1: term</div>
+<div class="fsdocs-tip" id="fs13">val mk_eq: tm1: term * tm2: term -&gt; term</div>
+<div class="fsdocs-tip" id="fs14">val th1: thm</div>
+<div class="fsdocs-tip" id="fs15">val th2: thm</div>
+<div class="fsdocs-tip" id="fs16">val eq_mp_rule: th1: thm -&gt; th2: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the equality modus ponens rule.  It takes an equality theorem and a
+ second theorem, where the equality theorem&#39;s LHS is alpha-equivalent to the
+ conclusion of the second theorem.  It returns a theorem stating that the
+ equality theorem&#39;s RHS holds, under the unioned assumptions of the supplied
+ theorems.
+ 
+       A1 |- p &amp;lt;=&amp;gt; q    A2 |- p
+       ------------------------
+             A1 u A2 |- q
+ 
+ See also: mp_rule, eq_imp_rule1, eq_imp_rule2, imp_antisym_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs17">Multiple items<br />val Failure: message: string -&gt; exn<br /><br />--------------------<br />active recognizer Failure: exn -&gt; string option</div>
+<div class="fsdocs-tip" id="fs18">val failwith: message: string -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs19">val parse_term: x: string -&gt; term<br /><em>&lt;summary&gt;
+ This takes a string and parses it into an internal term.  The type     
+ analysis stage first detypes the preterm before inferring types (in    
+ &#39;resolve_preterm&#39;), since the syntax analysis stage gives all variables
+ and constants the null pretype.  Note that type inference is capable of
+ handling overloaded variables.                                         
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs20">val sym_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the symmetry conversion for equality.  It transforms the supplied
+ equality term by swapping its LHS with its RHS, under no assumptions.    
+                                                                          
+           `t1 = t2`                                                      
+    ----------------------                                                
+    |- t1 = t2 &amp;lt;=&amp;gt; t2 = t1                                                
+
+ See also: sym_rule, refl_conv.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs21">val true_def: thm<br /><em>&lt;summary&gt;
+ It is the instance of the equality reflexive property for the boolean      
+ identity function.
+
+ |- true &amp;lt;=&amp;gt; (\(p:bool). p) = (\p. p)
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs22">val truth_thm_tr: thm * obj</div>
+<div class="fsdocs-tip" id="fs23">val truth_thm: thm<br /><em>&lt;summary&gt;
+ |- true
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs24">union case Exp.Th: thm -&gt; Exp</div>
+<div class="fsdocs-tip" id="fs25">val th: obj</div>
+<div class="fsdocs-tip" id="fs26">val deduct_antisym_rule_tac: ((string * thm) list * term -&gt; &#39;a * ((string * thm) list * term) list * (&#39;b -&gt; thm list -&gt; thm))</div>
+<div class="fsdocs-tip" id="fs27">val asl: (string * thm) list</div>
+<div class="fsdocs-tip" id="fs28">val tm2: term</div>
+<div class="fsdocs-tip" id="fs29">val dest_eq: tm: term -&gt; term * term</div>
+<div class="fsdocs-tip" id="fs30">val assume_rule: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the assumption rule.  It takes a boolean term, and returns a theorem
+ stating that the term holds under the single assumption of the term itself.
+
+     `p`
+   --------
+   {p} |- p
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs31">val deduct_antisym_rule: th01: thm -&gt; th02: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the antisymmetry rule for deduction.  It takes two theorem        
+ arguments.  It returns a theorem stating that the supplied conclusions are
+ equivalent, under the unioned assumptions but with each theorem&#39;s         
+ conclusion removed from the other&#39;s assumptions.                          
+                                                                           
+        A1 |- p    A2 |- q      
+    --------------------------              
+    A1\{q} u A2\{p} |- p &amp;lt;=&amp;gt; q                      
+
+ See also: imp_antisym_rule, undisch_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs32">val CONTR_TAC: (thm -&gt; &#39;a * term -&gt; &#39;b * &#39;c list * (&#39;d -&gt; &#39;e list -&gt; &#39;f))</div>
+<div class="fsdocs-tip" id="fs33">val propagate_thm: th: &#39;g -&gt; i: &#39;h -&gt; &#39;i list -&gt; &#39;j</div>
+<div class="fsdocs-tip" id="fs34">val th: &#39;g</div>
+<div class="fsdocs-tip" id="fs35">val i: &#39;h</div>
+<div class="fsdocs-tip" id="fs36">val cth: thm</div>
+<div class="fsdocs-tip" id="fs37">val th: thm</div>
+<div class="fsdocs-tip" id="fs38">val contr_rule: tm: term -&gt; th: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the intuitionistic contradiction rule.  It takes a boolean term   
+ and a theorem with falsity as its conclusion.  It returns a theorem with  
+ the supplied term as its conclusion, under the same assumptions as the    
+ supplied theorem.                                                         
+                                                                           
+    `p`   A |- false                                                       
+    ----------------                                                       
+         A |- p                                               
+
+ See also: ccontr_rule, deduct_contrapos_rule.
+&lt;/summary&gt;</em></div>
+
+    </div>
+
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/'</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+    <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+    <!-- END SEARCH BOX: this adds support for the search box -->
+</body>
+
+</html>

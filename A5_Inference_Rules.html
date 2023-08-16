@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Regole d'inferenza
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="nholz">
+    <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/nholz/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/nholz/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head> 
+
+<body>
+    <div class="columns is-fullheight m-0">
+        <div id="fsdocs-menu" class="column is-2 is-paddingless">
+            <aside class="menu">
+                <div class="container is-paddingless is-marginless has-background-dark">
+                    <a href="/nholz/">
+                        <figure class="image is-128x128 container">
+                            <img src="/nholz/img/logo.png">
+                        </figure>
+                    </a>
+                    <h2 class="title has-text-centered has-text-white pb-4">nholz</h2>
+                </div>
+                <div class="content">
+                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+                    <div id="header">
+                        <div class="searchbox" id="fsdocs-searchbox">
+                            <label for="search-by">
+                                <i class="fas fa-search"></i>
+                            </label>
+                            <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
+                            <span data-search-clear="">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- END SEARCH BOX: this adds support for the search box -->
+                    <ul class="navbar-nav">
+                        <li class="nav-header">Links</li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
+                        <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/tactics.html">
+    tactics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/3_Liguaggio_HOL.html">
+    LINGUAGGIO HOL
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/avvio.html">
+    avvio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B1_Teorie.html">
+    TEORIE
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/1_Introduzione.html">
+    Introduzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/B2_Teoremi.html">
+    TEOREMI
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/goaltree.html">
+    goaltree
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/A5_Inference_Rules.html">
+    Regole d&#39;inferenza
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0018_disj_idem.html">
+    Disj Idem
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0033_select_eq.html">
+    0033_select_eq
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0032_forall_null.html">
+    0032_forall_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0001_truth.html">
+    Vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0019_disj_assoc.html">
+    0019_disj_assoc
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0007_conj_id.html">
+    vero &amp;egrave; l&#39;identit&amp;agrave; della congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0028_imp_dist_left_disj.html">
+    0028_imp_dist_left_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0021_disj_dist_right_conj.html">
+    0021_disj_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0017_disj_zero.html">
+    Disj Zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0010_conj_comm.html">
+    Propriet&amp;agrave; commutatativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0031_forall_one_point.html">
+    0031_forall_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0005_true_not_eq_false.html">
+    Vero non equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0027_imp_refl.html">
+    0027_imp_refl
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0008_conj_zero.html">
+    congiunzione zero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0014_conj_dist_left_disj.html">
+    distributivit&amp;agrave; a sinistra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0016_disj_id.html">
+    Disj Id
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0015_conj_contr.html">
+    0015_conj_contr
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0012_conj_absorb_disj.html">
+    assorbimento della disgiunzione nella congiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0009_conj_idem.html">
+    congiunzione della stessa proposizione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0030_forall_dist_conj.html">
+    0030_forall_dist_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0026_imp_left_zero.html">
+    0026_imp_left_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0020_disj_absorb_conj.html">
+    0020_disj_absorb_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0036_exists_null.html">
+    0036_exists_null
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0025_imp_left_id.html">
+    0025_imp_left_id
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0029_imp_dist_right_conj.html">
+    0029_imp_dist_right_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0004_not_false.html">
+    Non falso equivale a vero
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0034_exists_dist_disj.html">
+    0034_exists_dist_disj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0024_disj_comm.html">
+    commutabilit&amp;agrave; della disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0006_not_dist_disj.html">
+    distribuzione della negazione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0011_conj_assoc.html">
+    Propriet&amp;agrave; associativa della congiuzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0022_disj_dist_left_conj.html">
+    0022_disj_dist_left_conj
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0003_not_true.html">
+    Non vero equivale a falso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0023_imp_right_zero.html">
+    0023_imp_right_zero
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0013_conj_dist_right_disj.html">
+    distributivit&amp;agrave; a destra della congiunzione sulla disgiunzione
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0044_excluded_midle.html">
+    Terzo escluso
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0035_exists_one_point.html">
+    0035_exists_one_point
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0045_bool_cases.html">
+    Bool Cases
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/teoremi/0002_fun_eq.html">
+    Equivalenza tra funzioni
+
+  </a>
+</li>
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <div class="column is-10 is-paddingless">
+            <div class="section pt-4">
+                <div class="container" id="fsdocs-content">
+                    <h1><a name="Regole-d-inferenza" class="anchor" href="#Regole-d-inferenza">Regole d'inferenza</a></h1>
+<p>Questa appendice fornisce una descrizione delle regole d'inferenza</p>
+<h2><a name="Regole-primitive" class="anchor" href="#Regole-primitive">Regole primitive</a></h2>
+<p><span class="math">\(\dfrac
+{t}
+{\vdash t = t}
+\textsf{ refl_conv}\)</span></p>
+<p>Questa &egrave; la regola di riflessivit&agrave; per l'uguaglianza. Prende un
+termine, e restituisce un teorema che afferma che il termine &egrave; uguale a
+se stesso, senza alcuna assunzione. Non ci sono restrizioni al termine fornito.</p>
+<p>Si veda anche: sym_conv, sym_rule, trans_rule.</p>
+<p><span class="math">\(\dfrac
+{(\lambda x. t)\ s}
+{\vdash (\lambda x. t)\ s = t[s/x]}
+\textsf{ beta_conv}\)</span></p>
+<p>Questa &egrave; la conversione di beta riduzione. Prende una lambda astrazione
+applicata a un termine, e restituisce un teorema che afferma che l'applicazione
+&egrave; uguale al corpo della lambda astrazione con tutte le occorrenze della
+variabile legata sostituita con l'argomento dell'apllicazione, senza alcuna
+assunzione.</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash f_1 = f_2 \qquad  A_2 \vdash t_1 = t_2}
+{A_1 \cup A_2 \vdash f_1\ t_1 = f_2\ t_2}
+\textsf{ mk_comb_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di
+funzione. Prende due teoremi di equivalenza, e applica i corrispondenti lati del
+primo teorema a quelli del secondo, unendo le loro assunzioni. I lati sinistro e
+destro del primo teorema devono essere funzioni con il tipo del dominio uguale al
+tipo dei lati sinistro e destro del secondo teorema.</p>
+<p>Si veda anche: mk_comb1_rule, mk_comb2_rule, mk_bin_rule, mk_abs_rule.</p>
+<p><span class="math">\(\dfrac
+{x \qquad A \vdash t_1 = t_2}
+{A \vdash (\lambda x.\ t_1) = (\lambda x.\ t_2))}
+\textsf{ mk_abs_rule}\)</span></p>
+<p>(per x non libera in A)</p>
+<p>Questa &egrave; la regola di congruenza di eguaglianza per la lambda astrazione.
+Prende una variabile e un teorema di uguaglianza, e astrae la variabile da
+entrambi i lati del teorema. La variabile non deve occorrere libera nelle
+assunzioni del teorema fornito.</p>
+<p>Si veda anche: mk_comb_rule.</p>
+<p><span class="math">\(\dfrac
+{p}
+{p \vdash p}
+\textsf{ assume_rule}\)</span></p>
+<p>Questa &egrave; la regola di assunzione. Prende un termine booleano, e restituisce
+un teorema che afferma che il termine vale sotto la singola assunzione del termine
+stesso.</p>
+<p>Si veda anche: add_asm_rule.</p>
+<p><span class="math">\(\dfrac
+{p \qquad A \vdash q}
+{A \setminus \{p\} \vdash p \Rightarrow q}
+\textsf{ disch_rule}\)</span></p>
+<p>Questa &egrave; la regola d'intrdouzone dell'implicazione. Prende un termine booleano
+e un teorema, rimuove il termine (se presente) dalle assunzioni del teorema e lo
+aggiunge come antecedente della conclusione. Si noti che il termine non deve essere
+presente nelle assunzioni del teorema fornito perch&eacute; la regola abbia
+successo.</p>
+<p>Si veda anche: undisch_rule, mp_rule.</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash p \Rightarrow q \qquad A_2 \vdash p}
+{A_1 \cup A_2 \vdash q}
+\textsf{ mp_rule}\)</span></p>
+<p>Questa &egrave; la regola di modus ponens. Prende un teorema di implicazione ed
+un secondo teorema, dove l'antecendente del teorema di implicazione &egrave;
+alfa-equivalente alla conclusione del secondo teorema. Restituisce un teorema che
+afferma che vale il conseguente del teorema di implicazione, sotto l'unione delle
+assunzioni dei teoremi forniti.</p>
+<p>Si veda anche: eq_mp_rule, disch_rule, undisch_rule, prove_asm_rule.</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash p \Leftrightarrow q \qquad A_2 \vdash p}
+{A_1 \cup A_2 \vdash q}
+\textsf{ eq_mp_rule}\)</span></p>
+<p>Questa &egrave; la regola di modus ponens per l'uguaglianza. Prende un teorema di
+uguaglianza e un secondo teorema, dove il lato sinistro del teorema &egrave;
+alf-equivalente alla conclusione del secondo teorema. Restituisce un teorema che
+aggerma la parte destra del teorema di uguaglianza vale, sotto l'unione delle
+assunzioni dei teoremi forniti.</p>
+<p>Si veda anche: mp_rule, eq_imp_rule1, eq_imp_rule2, imp_antisym_rule.</p>
+<p><span class="math">\(\dfrac
+{[(x_1,t_1);(x_2,t_2);\dots] \qquad   A \vdash p}
+{A[t_1/x_1,t_2/x_2,\dots] \vdash p[t_1/x_1,t_2/x_2,\dots]}
+\textsf{ inst_rule}\)</span></p>
+<p>Questa &egrave; la regola d'istanziazione della variabile. Prende una lista di
+instanziazioni di variabili e un teorema, ed esegue una singola instanziazione
+parallela delle variabili libere nelle assunzioni e nella conclusione del teorema,
+secondo la lista di instanziazioni. Tutte le occorrenze libere di elementi nel dominio
+della lista di instanziazione sono sostituite nel teorema. Ciascun elemento del dominio
+della lista di instanziazione deve essere una variabile, e ciascun elemento nel rango
+deve avere lo stesso tipo del corrispondente elemento del dominio.</p>
+<p>Le variabili legate nel teorema risultante sono rinominate a seconda delle
+necessit&agrave; per evitare catture di variabili. Si noti che gli elementi della
+lista che non possono essere applicati sono semplicemente ignorati, cos&igrave;
+come lo sono gli elementi ripetuti per una data variabile (oltre al primo elemento).
+Se nessun elemento della lista soddisfa i criteri, allora il teorema risultante
+&egrave; lo stesso del teorema in input.</p>
+<p>Si veda anche: inst_type_rule, subs_rule, subst_rule.</p>
+<p><span class="math">\(\dfrac
+{[(tv_1,ty_1);(tv_2,ty_2);\dots] \qquad   A \vdash p}
+{A[ty_1/tv_1,ty_2/tv_2,\dots] \vdash p[ty_1/tv_1,ty_2/tv_2,\dots]}
+\textsf{ inst_type_rule}\)</span></p>
+<p>Questa &egrave; la regola d'istanziazione delle variabili di tipo. Prende una lista di
+instanziazioni di variabili di tipo e un teorema, ed esegue una singola instanziazione
+parallela delle variabili di tipo nelle assunzioni e nella conclusione del teorema, secondo
+la lista di instanziazione. Tutte le occorrenze di elementi nel dominio della lista
+di instanziazione sono sostituite nel teorema. Ciascun elemento del dominio della
+lista deve essere una variabile di tipo.</p>
+<p>Le variabili legate nel teorema risultante sono rinominate a seconda delle
+necessit&agrave; per evitare catture di variabili. Si noti che gli elementi della
+lista che non possono essere applicati sono semplicemente ignorati, cos&igrave;
+come lo sono gli elementi ripetuti per una data variabile (oltre al primo elemento).
+Se nessun elemento della lista soddisfa i criteri, allora il teorema risultante
+&egrave; lo stesso del teorema in input.</p>
+<p>Si veda anche: inst_rule.</p>
+<h2><a name="Eguaglianza" class="anchor" href="#Eguaglianza">Eguaglianza</a></h2>
+<p><span class="math">\(\dfrac
+{A \vdash f_1 = f_2 \qquad t}
+{A \vdash f_1\ t = f_2\ t}
+\textsf{ mk_comb1_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza di eguaglianza di funzioni per l'applicazione di
+funzioni. Prende un teorema di equivalenza su funzioni e un termine, e fornisce
+il termine come argomento a ciascun lato del teorema. Il tipo del termine fornito
+deve essere lo stesso del tipo del dominio delle funzioni.</p>
+<p>Derivazione:</p>
+<p><span class="math">\(\tiny{
+\dfrac
+{
+A \vdash f_1 = f_2
+\qquad
+\dfrac
+{t}
+{\vdash t = t}
+\textsf{ refl_conv}  
+}
+{A \vdash f_1\ t = f_2\ t}
+\textsf{ mk_comb_rule}
+}\)</span></p>
+<p>Si veda anche: mk_comb2_rule, mk_comb_rule.</p>
+<p><span class="math">\(\dfrac
+{f \qquad  A \vdash t_1 = t_2}
+{A \vdash f\ t_1 = f\ t_2}
+\textsf{ mk_comb2_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza di eguaglianza di argomenti per l'applicazione di
+funzioni. Prende un termine funzione e un teorema di uguaglianza, ed applica la
+funzione a ciascun lato del teorema. Il tipo del dominio della funzione fornita deve
+essere lo stesso del tipo dei lati sinitro e destro del teorema.</p>
+<p>Derivazione:</p>
+<p><span class="math">\(\tiny{
+\dfrac
+{
+\dfrac
+{f}
+{\vdash f = f}
+\textsf{ refl_conv}
+\qquad
+A \vdash t_1 = t_2
+}
+{A \vdash f\ t_1 = f\ t_2}
+\textsf{ mk_comb_rule}
+}\)</span></p>
+<p>Si veda anche: mk_comb1_rule, mk_comb_rule.</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash t_1 = t_2 \qquad  A_2 \vdash t_2 = t_3}
+{A_1 \cup A2 \vdash t_1 = t_3}
+\textsf{ trans_rule}\)</span></p>
+<p>Questa &egrave; la regola di transitivit&agrave; per l'uguaglianza. Prende
+due teoremi di uguaglianza, dove il lato destro del primo teorema &egrave;
+lo stesso (modulo alfa-equivalenza) del lato sinistro del secondot. Restituisce
+un teorema che afferma che il lato sinistro del primo teorema uguaglia il
+lato destro del secondo teorema, sotto l'unione delle assunzioni dei due
+teoremi.</p>
+<p>Si veda anche: list_trans_rule, refl_conv, sym_rule, imp_trans_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash t_1 = t_2}
+{A \vdash t_2 = t_1}
+\textsf{ sym_rule}\)</span></p>
+<p>Questa &egrave; la regola di simmetria per l'uguaglianza. Scambia il lato
+sinistro con il destro nel teorema di uguaglianza fornito.</p>
+<p>Si veda anche: sym_conv, refl_conv, trans_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash f = (\lambda v.\ t)  \qquad s}
+{A \vdash f\ s = t[s/v]}
+\textsf{ app_beta_rhs_rule}\)</span></p>
+<p>Questa regola &egrave; utilizzata per espandere una funzione definita in termini
+di una lambda astrazione. Prende un teorema di uguaglianza e un termine, dove
+la parte destra del teorema &egrave; una lambda astrazione con una variabile
+legata dello stesso tipo del termine argomento. Restituisce un teorema che
+afferma che l'argomento sinistro del teorema applicato al termine in input
+&egrave; uguale alla beta riduzione della lambda astrazione applicata al termine
+in input.</p>
+<p><strong>list_app_beta_rhs_rule</strong></p>
+<p>da documentare...</p>
+<p><span class="math">\(\dfrac
+{A \vdash (\lambda v_1. t_1) = (\lambda v_2. t_2)  \qquad s}
+{A \vdash t_1[s/v_1] = t_2[s/v_2]}
+\textsf{ app_beta_rule}\)</span></p>
+<p>Si veda anche: app_beta_rhs_rule.</p>
+<p><strong>list_app_beta_rule</strong></p>
+<p>Da documentare...</p>
+<p><span class="math">\(\dfrac
+{t' \qquad t}
+{\vdash t = t'}
+\textsf{ alpha_link_conv}\)</span></p>
+<p>Questa &egrave; la regola di conversione alfa linking. Prende due termini
+alfa-equivalentei e restituisce un terorema che afferma che il secondo &egrave;
+uguale al primo, senza alcuna assunzione. Fallisce se i termini forniti non sono
+alfa equivalenti.</p>
+<p><span class="math">\(\dfrac
+{y \qquad \lambda x.\ t}
+{\vdash (\lambda x.\ t) = (\lambda y.\ t[y/x])}
+\textsf{ alpha_conv}\)</span></p>
+<p>Questa &egrave; la regola di alfa conversione. Sostituisce la variabile legata
+e tutte le sue occorrenze nel termine di lambda astrazione  fornito (il secondo
+argomento) con la variabile fornita (come primo argomento).</p>
+<p>Si veda anche alpha_link_conv.</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash s_1 = t_1 \qquad A_2 \vdash s_2 = t_2 \qquad \dots \qquad t}
+{A_1 \cup A_2 \cup \dots \vdash t = t[t_1/s_1,t_2/s_2,\dots] }
+\textsf{ subs_conv}\)</span></p>
+<p>Questa &egrave; la conversione di sostituzione base. Prende una lista di
+teoremi di eguaglianza e un termine, e trasofrma il termine eseguendo una
+singola sostituzione parallela di tutti i suoi sottotermini liberi secondo
+i teoremi di eguaglianza. Tutto le occorrenze libere dei lati sinistri dei
+teoremi di eguaglianza nel termine vegono rimpiazzate. Il teorema risultante
+ha l'unione delle assunzioni di tutti i teoremi forniti (indipendentemente
+dal fatto che esse si applichino al teorema).</p>
+<p>Le variabili legate nel lato destro del teorema risultante sono rinominate
+a seconda delle necessit&agrave; per evitare catture di variabili. Si noti
+che se uno dei lati sinistri dei teorei di uguaglianza occorre libero
+in uno degli altri, allora viene usato di preferenza il teorema con il lato
+sinistro pi&ugrave; ampio, e se due teoremi di uguaglianza hanno lati sinistri
+alfa-equivalenti, allora di preferenza &egrave; usato di preferenza il primo
+teorema nella lisa. Se nessuno dei teoremi di eguaglianza pu&ograve; essere
+usato, allora il lato destro del teorema risultante &egrave; lo stesso del
+suo lato sinistro.</p>
+<p>Si veda anche: subs_rule, subst_conv, inst_rule.</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash s_1 = t_1 \qquad A_2 \vdash s_2 = t_2 \qquad \dots \qquad A \vdash t}
+{A_1 \cup A_2 \cup \dots \cup A \vdash t = t[t_1/s_1,t_2/s_2,\dots] }
+\textsf{ subs_rule}\)</span></p>
+<p>Questa &egrave; la regola di sostituzione di base. Prende una lista di
+teoremi di equivalenza e un teorema, ed esegue una singola sostituzione
+parallela dei sottotermini liberi nella conclusione del teorema secondo i
+teoremi di equivalenza. Tutte le occorrenze libere dei lati sinistri dei
+teoremi di equivalenza nel teorema vengono rimpiazzate. Il teorema risultante
+ha l'unione di tutte le assunzioni di tutti i teoremi forniti (indipendentemente
+dal fatto che questi si applichino o meno al teorema fornito).</p>
+<p>Le variabili legate nel teorema risultante sono rinominate
+a seconda delle necessit&agrave; per evitare catture di variabili. Si noti
+che se uno dei lati sinistri dei teorei di uguaglianza occorre libero
+in uno degli altri, allora viene usato di preferenza il teorema con il lato
+sinistro pi&ugrave; ampio, e se due teoremi di uguaglianza hanno lati sinistri
+alfa-equivalenti, allora di preferenza &egrave; usato di preferenza il primo
+teorema nella lisa. Se nessuno dei teoremi di eguaglianza pu&ograve; essere
+usato, allora la conclusione del teorema risultante &egrave; la stessa
+dell'input.</p>
+<p>Si veda anche: subs_conv, subst_rule, inst_rule.</p>
+<p><span class="math">\(\dfrac
+{(v_1, A_1 \vdash s_1 = t_1) \qquad (v_2, A_2 \vdash s_2 = t_2) \qquad \dots \qquad t \qquad t[s_1/v_1,s_2/v_2,\dots]}
+{A_1 \cup A_2 \cup \dots \vdash t = t[s_1/v_1,s_2/v_2,\dots] = t[t_1/v_1,t_2/v_2,\dots]}
+\textsf{ subst_conv}\)</span></p>
+<p>Questa &egrave; la conversione di sostituzione tramite template. Prende uno
+schema di sostituzione (nella forma di una lista di associazione e un termine
+template) seguito da un termine principale, e trasforma il termine principale
+con una singola sostituzione parallela di tutti i suoi sottotermini liberi, secondo
+lo schema di sostituzione. Il termine template determina quali occorrenze
+libere dei lati sinistri del teorema di equivalenza nel termine principale sono
+rimpiazzate, e riflette la struttura sintattica del termine, eccetto che per
+l'avere atomi variabili template al posto dei sottotoermini a causa del
+rimpiazzamento. La lista di associazione mappa ogni variabile template a un
+teorema di equivalenza, con il lato sinistro del teorema di equivalenza per
+il sottotermine del termine principale originale e il lato destro per il
+sottotermine che lo rimpiazza. Il teorema risultante ha l'unione delle
+assunzioni di tutti i teoremi forniti (indipenentemente dal fatto che essi
+si applichino al template fornito).</p>
+<p>Le variabili legate nel teorema risultante sono rinominate secondo le
+necessit&agrave; per evitare catture di variabili. Si noti che se due elementi
+appaiono nella lista di associazione per la stessa variabile template, allora
+viene usato il primo elemento, e che elementi per variabili che non appaiono
+nel template sono ignorate. Se nessun elemento pu&ograve; essere applicato,
+allora il lato destro della conclusione del teorema risultante &egrave;
+lo stesso del suo lato sinistro.</p>
+<p>Si veda anche: subst_rule, subs_conv, inst_rule.</p>
+<p><span class="math">\(\dfrac
+{(v_1, A_1 \vdash s_1 = t_1) \qquad (v_2, A_2 \vdash s_2 = t_2) \qquad \dots \qquad t \qquad A \vdash t[s_1/v_1,s_2/v_2,\dots]}
+{A_1 \cup A_2 \cup \dots \cup A \vdash t = t[t_1/v_1,t_2/v_2,\dots]}
+\textsf{ subst_rule}\)</span></p>
+<p>Questa &egrave; la regola di sostituzione tramite template. Prende uno
+schema di sostituzione (nella forma di una lista di associazione e di
+un termine template) seguito da un teorema, ed esegue una singola sostituzione
+parallela di tutti i sottotermini liberi nella conclusione del teorema, secondo
+lo schema di sostituzione. Il termine template determina quali occorrenze
+libere dei lati sinistri del teorema di equivalenza vengono rimpiazzate nella
+conclusione del teorema, eccetto che variabili atomiche template al posto
+dei sottotermini a causa del rimpiazzamento. La lista di associazione mappa
+ogni variabile template a un teorema di equivalenza, con il lato sinistro del
+teorema di equivalenza per il sottotermine del teorema originale fornito e il
+lato destro per il sottotermine che viene sostituito. Il teorema risultante
+ha l'unione delle assunzioni di tutti i teoremi forniti (indipenentemente dal
+fatto che essi si applichino al template fornito).</p>
+<p>Le variabili di astrazione nel teorema risultante sono rinominate secondo le
+necessit&agrave; per evitare catture di variabili. Si noti che se due elementi
+appaiono nella lista di associazione per la stessa variabile template, allora
+viene usato il primo elemento, e che elementi per variabili che non appaiono
+nel template sono ignorate. Se nessun elemento pu&ograve; essere applicato,
+allora il lato destro della conclusione del teorema risultante &egrave;
+lo stesso del suo lato sinistro.</p>
+<p>Si veda anche: subst_conv, subs_rule, inst_rule.</p>
+<p><strong>conv_rule</strong></p>
+<p>Regola di metaconversione.</p>
+<p>Prende una regola di conversione <code>term -&gt; thm</code> e un teorema e applica <code>eq_mp_rule</code> alla conclusione
+convertita e al teorema stesso.</p>
+<h2><a name="Logica" class="anchor" href="#Logica">Logica</a></h2>
+<p><span class="math">\(\dfrac
+{A \vdash p \Leftrightarrow \top}
+{A \vdash p}
+\textsf{ eqt_elim_rule}\)</span></p>
+<p>Questa &egrave; la regola di eliminazione di equivalenza a vero. Prende un
+teoram di guguaglianza con ha <code>true</code> sul lato destro, e restituisce un
+teorema che afferma che il lato sinistro vale, sotto le stesse assunzioni.</p>
+<p>Si veda anche: eqt_intro_rule, eqf_elim_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash p \Rightarrow q}
+{A \cup \{p\} \vdash q}
+\textsf{ undisch_rule}\)</span></p>
+<p>Questa &egrave; la regola di anti-scaricamento. Prende un teorema di implicazione,
+e rimuove l'antecedente dalla conclusione e lo aggiunge nelle assunzioni.</p>
+<p>Si veda anche: disch_rule, mp_rule, prove_asm_rule.</p>
+<p><span class="math">\(\dfrac
+{q \qquad A \vdash p}
+{A \cup \{q\} \vdash p}
+\textsf{ add_asm_rule}\)</span></p>
+<p>Questa &egrave; la regola di aggiunta di un'assunzione. Prende un termine booleano
+e un teorema e restituisce lo stesso teorema ma con il termine fornito aggiunto
+alle sue assunzioni. Il teorema restituito in output coincide con quello fornito in input
+se il termine &egrave; gi&agrave; presente nelle assunzioni.</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash p \qquad A_2 \vdash q}
+{A_1 \cup (A_2 \setminus \{p\}) \vdash q}
+\textsf{ prove_asm_rule}\)</span></p>
+<p>Questa &egrave; la regola di assunzione provata. Prende due teoremi, e
+restituisce il secondo teorema ma con la conclusione del primo teorema
+rimossa (se presente) dalle sue assunzioni a cui sono aggiunte le assunzioni
+del primo teorema. Si noti che la conclusione del primo teorema non deve
+essere nelle assunzioni del secondo affinch&egrave; questa regola abbia
+successo.</p>
+<p>Si veda anche: mp_rule, undisch_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash p \Leftrightarrow q}
+{A \vdash p \Rightarrow q}
+\textsf{ eq_imp_rule1}\)</span></p>
+<p>Questa &egrave; la prima regola di eliminazione dell'equivalenza.
+Prende un teorema che afferma l'equivalenza di due termini booleani, e
+restituisce un teorema che afferna che il sinistro implica il destro,
+sotto le stesse assunzioni.</p>
+<p>Si veda anche: eq_imp_rule2, imp_antisym_rule, eq_mp_rule, undisch_rule, mk_imp_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash p \Leftrightarrow q}
+{A \vdash q \Rightarrow p}
+\textsf{ eq_imp_rule2}\)</span></p>
+<p>Questa &egrave; la seconda regola di eliminazione dell'equivalenza.
+Prende un teorema che afferma l'equivalenza di due termini booleani, e
+restituisce un teorema che afferna che il destro implica il sinistro,
+sotto le stesse assunzioni.</p>
+<p>Si veda anche: eq_imp_rule1, imp_antisym_rule, eq_mp_rule, undisch_rule, mk_imp_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash p \Rightarrow \bot}
+{A \vdash \neg p}
+\textsf{ not_intro_rule}\)</span></p>
+<p>Questa &egrave; la regola di introduzione della negazione logica. Prende un
+teorema di implicazione dove il lato destro &egrave; <code>false</code>, e restituisce la
+negazione logica del lato sinistro, sotto le stesse assunzioni.</p>
+<p>Si veda anche: not_elim_rule, eqf_elim_rule, eqf_intro_rule, deduct_contrapos_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash \neg p}
+{A \vdash p \Rightarrow \bot}
+\textsf{ not_elim_rule}\)</span></p>
+<p>Questa &egrave; la regola di eliminazione della negazione logica. Prende
+un teorema di negazione logica, e restituisce un'implicazione con
+il termine negato sul lato sinistro e <code>false</code> sul lato destro, sotto le
+stesse assunzioni.</p>
+<p>Si veda anche: not_intro_rule, eqf_intro_rule, eqf_elim_rule.</p>
+<p><span class="math">\(\dfrac
+{q \qquad A \vdash p}
+{A \cup \{\neg p\} \setminus \{q\} \vdash \neg q}
+\textsf{ deduct_contrapos_rule}\)</span></p>
+<p>Questa &egrave; la regola di contraddizione per la deduzione. Scambia e
+nega logicamente il termine dell'assunzione fornita e la conclusione del
+teorema fornito. Si noti che il termine fornito non deve essere presente
+nelle assunzioni del teorema di input perhc&eacute; la regola abbia successo.
+Se la negazione logica della conclusione del teorema in input coincide con
+il termine fornito, allora non occorrer&agrave; nelle assunzioni del teorema
+risultante.</p>
+<p>See also: not_intro_rule, disch_rule, contr_rule, ccontr_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash p \Leftrightarrow \bot}
+{A \vdash \neg p}
+\textsf{ eqf_elim_rule}\)</span></p>
+<p>Questa &egrave; la regola di eliminazione di equivalenza a falso. Prende un
+teoram di equivalenza con la <code>false</code> sulla destra, e restituisce la negazione
+logica del lato sinistro, sotto le stesse assunzioni.</p>
+<p>Si veda anche: eqf_intro_rule, not_intro_rule, not_elim_rule, mk_not_rule,
+eqt_elim_rule, deduct_contrapos_rule.</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash p \Rightarrow q \qquad A_2 \vdash q \Rightarrow r}
+{A_1 \cup A_2 \vdash p \Rightarrow r}
+\textsf{ imp_trans_rule}\)</span></p>
+<p>Questa &egrave; la regola di transitivt&agrave; per l'implicazione. Prende due
+teoremi d'implicazione come argomenti, dove il lato destro del primo teorema
+&egrave; lo stesso (modulo alfa-equivalenza) del lato sinistro del secondo.
+Restituisce un teorema che afferma che il lato sinistro del primo teorema
+implica il lato destro del secondo, sotto l'unione delle assunzione dei due
+teoremi.</p>
+<p>Si veda anche: list_imp_trans_rule, eq_trans_rule, disch_rule, imp_anitsym_asm_rule.</p>
+<p><strong>list_imp_trans_rule</strong></p>
+<p>Si veda anche: imp_trans_rule.</p>
+<p><span class="math">\(\dfrac
+{t \qquad A \vdash \forall x\ \dots p}
+{A \vdash p[t/x]}
+\textsf{ spec_rule}\)</span></p>
+<p>Questa &egrave; la regola di eliminazine universale. Spoglia il
+quantificatore universale pi&ugrave; esterno del teorema, e sostituisce nel corpo ciascuna
+occorrenza della variabile legata eliminata con il termine fornito.
+Il tipo del termine fornito deve essere uguale al tipo della variabile eliminata.</p>
+<p>Si veda anche: spec_rule, spec_all_rule, bspec_rule, list_gen_rule.</p>
+<p><span class="math">\(\dfrac
+{[t_1;t_2;\dots] \qquad A \vdash \forall x_1\ x_2\ \dots p}
+{A \vdash p[t_1/x_1; t_2/x_2; \dots]}
+\textsf{ list_spec_rule}\)</span></p>
+<p>Questa &egrave; la regola di eliminazine universale composta. Spoglia il
+quantificatore universale pi&ugrave; esterno del teorema fornito per
+ogni elemento nella lista di termini fornita, sostituendo nel corpo ciascuna
+occorrenza di una variabile legata eliminata con il corrispondente elemento
+nella lista di termini. Il tipo di ogni termine nella lista deve essere
+uguale al tipo della sua corrispondente variabile.</p>
+<p>Si veda anche: spec_rule, spec_all_rule, bspec_rule, list_gen_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash \forall x_1\ x_2 \dots x_n.\ p}
+{A \vdash p}
+\textsf{ spec_all_rule}\)</span></p>
+<p>Questa &egrave; la regola composta di eliminazione di default del quantificatore
+universale. Elimina tutti i quantificatori universali esterni dal teorema fornito.
+Si noti che il teorema fornito non deve necessariamente essere una quantificazione
+universale perch&egrave; il teorema abbia successo (in  questo caso il teorema
+risultante &egrave; semplicemente lo stesso del teorema fornito):</p>
+<p>Si veda anche: spec_rule, list_spec_rule, bspec_rule, list_gen_rule.</p>
+<p><span class="math">\(\dfrac
+{\lambda y.\ t \qquad A \vdash \forall x.\ p}
+{A \vdash p[\lambda y.\ t\ /\ x; t[s/y] /\ x\ s]}
+\textsf{ bspec_rule}\)</span></p>
+<p>Questa &egrave; la regola di eliminazione del quantifcatore universale con
+beta-riduzione. Toglie il quantificatore universale pi&ugrave; esterno dal
+teorema fornito, e sostituisce nel corpo ogni occorrenza della variabile legata
+eliminata con il termine fornito. Se il termine in input &egrave; una lambda
+astrazione, esegue anche la beta riduzione di ogni occorrenza sostituita che
+sia applicata ad un argomento. Il tipo del termine fornito deve essere uguale
+al tipo della variabile legata eliminata.</p>
+<p>Si veda anche: spec_rule, list_spec_rule, spec_all_rule, gen_rule.</p>
+<p><span class="math">\(\dfrac
+{p \qquad A \vdash \bot}
+{A \vdash p}
+\textsf{ contr_rule}\)</span></p>
+<p>Questa &egrave; la regola di contraddizione della logica intuizionista. Prende
+un termine booleano e un teorema con falso come conclusione. Restituisce un
+teorema con il termine fornito come sua conclusione, sotto le stess assunzioni
+del teorema fornito.</p>
+<p>See also: ccontr_rule, deduct_contrapos_rule.</p>
+<p><span class="math">\(\dfrac
+{\lambda x.\ f\ x}
+{A \vdash (\lambda x.\ f\ x) = f}
+\textsf{ eta_conv}\)</span></p>
+<p>Questa &egrave; la regola di eta riduzione. Prende un termine di lambda
+astrazione, dove il corpo &egrave; un'applicazione di funzione, e la variabile
+legata &egrave; il sottotermine argomento dell'applicazione della funzione e
+non &egrave; libera nel sottotermine funzione. Restituisce un teoream che
+afferma che il termine &egrave; uguale al sottotermine funzione, senza alcuna
+assunzione.</p>
+<p>Si veda anche: beta_conv.</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash p \Rightarrow q \qquad A_2 \vdash q \Rightarrow p}
+{A_1 \cup A_2 \vdash p \Leftrightarrow q}
+\textsf{ imp_antisym_rule}\)</span></p>
+<p>Questa &egrave; la regola di antisimmetria per l'implicazione. Prende due
+teoremi di implicazione come argomenti, dove il lato sinistro di ciascuno
+&egrave; lo stesso (modulo alfa-equivalenza) del lato destro dell'altro.
+Restituisce</p>
+<p>Si veda anche: list_gen_rule, spec_rule, mk_forall_rule.</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash p  \qquad A_2 \vdash q }
+{A_1 \setminus \{q\} \cup A_2 \setminus \{p\} \vdash p \Leftrightarrow q}
+\textsf{ deduct_antisym_rule}\)</span></p>
+<p>Questa &egrave; la regola di antisimmetria per la deduzione. Prende due
+teoremi come argomenti. Restituisce un teorema che afferma che le conclusioni
+fornite sono equivalente, sotto l'unione delle assunzioni ma con la conclusione
+di un teorema rimossa dalle assunzioni dell'altro</p>
+<p>See also: imp_antisym_rule, undisch_rule.</p>
+<p><span class="math">\(\dfrac
+{t_1 = t_2}
+{\vdash t_1 = t_2 \Leftrightarrow t_2 = t_2}
+\textsf{ sym_conv}\)</span></p>
+<p>Questa &egrave; la conversione di simmetria per l'uguaglianza. Trasforma il
+termine di ugualianza fornito scambiando il lato sinistro con il destro, senza
+alcuna assunzione.</p>
+<p>Si veda anche: sym_rule, refl_conv.</p>
+<p><span class="math">\(\dfrac
+{A \vdash p}
+{A \vdash p \Leftrightarrow \top}
+\textsf{ eqt_intro_rule}\)</span></p>
+<p>Questa &egrave; la regola di introduzione di equivalenza a vero. Prende un
+qualsiasi teorema, e restituisce il teorema che afferma che la conclusione
+&egrave; equivalente a <code>true</code>, sotto le stesse assunzioni.</p>
+<p>Si veda anche: eqt_elim_rule, eq\f_intro_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash \neg p}
+{A \vdash p \Leftrightarrow \bot}
+\textsf{ eqf_intro_rule}\)</span></p>
+<p>Questa &egrave; la regola di introduzione di equivalenza a falso. Prende un
+teoram con la negazione logica come sua conclusione, e restituisce un teoram
+che afferma che il corpo della negazione &egrave; equivalente a <code>false</code>, sotto
+le stesse assunzioni.</p>
+<p>Si veda anche: eqf_elim_rule, not_elim_rule, not_intro_rule, mk_not_rule,
+eqt_intro_rule.</p>
+<p><span class="math">\(\dfrac
+{x \qquad A \vdash p}
+{A \vdash \forall x.\ p}
+\textsf{ gen_rule}\)</span></p>
+<p>per x non libera in A</p>
+<p>Questa &egrave; di introduzione del quantificatore universale. Quantifica
+universamente il teorema fornito con la variabile legata fornita sotto le
+stesse assunzioni. La variabile legata non deve comparire libera nelle
+assunzioni.</p>
+<p>Si veda anche: list_gen_rule, spec_rule, mk_forall_rule.</p>
+<p><span class="math">\(\dfrac
+{[x_1;x_2;\dots] \qquad A \vdash p}
+{A \vdash \forall x_1\ x_2\ \dots\ .\ p}
+\textsf{ list_gen_rule}\)</span></p>
+<p>per <span class="math">\(x_1, x_2, \dots\)</span> non libere in A</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash p \qquad A_2 \vdash q}
+{A_1 \cup A_2 \vdash p \wedge q}
+\textsf{ conj_rule}\)</span></p>
+<p>Questa &egrave; la regola di e-introduzione. Congiunge i due teoremi forniti
+e unisce le loro assunzioni.</p>
+<p>Si veda anche: conjunct1_rule, conjunct2_rule, mk_conj_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash p \wedge q}
+{A \vdash p}
+\textsf{ conjunct1_rule}\)</span></p>
+<p>Questa &egrave; la regola di e-eliminazione a sinistra. Rimuove il
+congiunto a destra dal teorema di congiuzione fornito.</p>
+<p>Si veda anche: conjunct2_rule, conjunct_rule, mk_conj_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash p \wedge q}
+{A \vdash q}
+\textsf{ conjunct2_rule}\)</span></p>
+<p>Questa &egrave; la regola di e-eliminazione a destra. Rimuove il
+congiunto a sinistra dal teorema di congiuzione fornito.</p>
+<p>Si veda anche: conjunct1_rule, conjunct_rule, mk_conj_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash p \vee q \qquad A_1 \vdash r \qquad A_2 \vdash r}
+{A \cup A_1 \setminus \{p\} \cup A_2 \setminus \{q\} \vdash r}
+\textsf{ disj_cases_rule}\)</span></p>
+<p>Questa &egrave; la regola di o-eliminazione. Prende un teorema di disgiunzione
+e due teoremi extra che condividono la stessa conclusione. Restituisce un
+teorema con la stessa conclusione dei teoremi extra. Le assunzioni del teorema
+restituito sono l'unione delle assunzioni dei teoremi extra, ma con il
+lato sinistro del teorema di disgiunzione rimosso dalle assunzioni del primo
+e il lato destro rimosso da quelle del secondo, e unite insieme con le
+assunzioni del teorema di disgiunzione.</p>
+<p>Si veda anche: disj1_rule, disj2_rule, mk_disj_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash p \qquad q}
+{A \vdash p \vee q}
+\textsf{ disj1_rule}\)</span></p>
+<p>Questa &egrave; la regola di o-introduzione per il lato sinistro. Disgiunge il
+termine booleano fornito al lato destro del teorema in input.</p>
+<p>Si veda anche: disj2_rule, disj_cases_rule, mk_disj1_rule.</p>
+<p><span class="math">\(\dfrac
+{p \qquad A \vdash q}
+{A \vdash p \vee q}
+\textsf{ disj2_rule}\)</span></p>
+<p>Questa &egrave; la regola di o-introduzione per il lato destro. Disgiunge il
+termine booleano fornito al lato sinistro del teorema in input.</p>
+<p>Si veda anche: disj2_rule, disj_cases_rule, mk_disj1_rule.</p>
+<p><span class="math">\(\dfrac
+{y \qquad A_1 \vdash \exists x.\ p \qquad A_2 \vdash q}
+{A_1 \cup A_2 \setminus \{p[y/x]\} \vdash q}
+\textsf{ choose_rule}\)</span></p>
+<p>con <span class="math">\(y\)</span> non libera in: <span class="math">\(\exists x.\ p\)</span>, <span class="math">\(q\)</span> o <span class="math">\(A_2 \setminus \{p[y/x]\}\)</span></p>
+<p>Questa &egrave; la regola di eliminazione del quantificatore esistenziale.
+Rimuove, dalle assunzioni di un teorema principale fornito, il corpo di un
+teorema esistenziale fornito (ma con tutte le occorrenze della variabile
+legata sostituite con una variabile fornita), e aggiunge le assunzioni del
+teorema esistenziale. Alla variabile fornita non &egrave; permesso di essere
+libera nella conclusione del teorema esistenziale o nelle altre assuzioni del
+teorema principale originario o nella sua conclusione. Si noti che il corpo
+alterato del teorema esistenziale non deve essere presente nelle assunzioni
+del teorema principale affinch&eacute; questa regola abbia successo.</p>
+<p>See also: exists_rule, mk_exists_rule.</p>
+<h2><a name="Regole-di-congruenza-per-l-uguaglianza" class="anchor" href="#Regole-di-congruenza-per-l-uguaglianza">Regole di congruenza per l'uguaglianza</a></h2>
+<p><span class="math">\(\dfrac
+{f \qquad A_1 \vdash s_1 = s_2 \qquad A_2 \vdash t_1 = t_2}
+{A_1 \cup A_2 \vdash f\ s_1\ t_1 = f\ s_2\ t_2}
+\textsf{ mk_bin_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di
+funzione binaria. Prende un termine di funzione binaria e due teoremi di
+eguaglianza, e applica la funzione nella forma curried ai corrispondenti
+lati di ciascun teorema, sotto l'unione delle loro assunzioni. Il tipo
+della funzione fornita deve avere essere binario nella forma curried, con i tipi
+del primo e del secondo dominio uguali al tipo di ciascun lato del teorema
+corrispondente.</p>
+<p>Si veda anche: mk_comb_rule.</p>
+<p><span class="math">\(\dfrac
+{f \qquad \vdash s_1 = s_2 \qquad t}
+{\vdash f\ s_1\ t = f\ s_2\ t}
+\textsf{ mk_bin1_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di
+funzione binaria sul lato sinistro. Prende un termine di funzione binaria, un
+teorema di uguaglianza e un termine, e applica la funzione in forma curried
+ai lati corrispondenti del teorema come suo lato sinistro e il termine fornito
+come lato destro. Il tipo della funzione fornita deve avere essere binario
+nella forma curried, con il tipo del primo dominio uguale al tipo di ciascun
+lato del teorema e il secondo dominio uguale al tipo del termine argomento
+aggiunto a destra.</p>
+<p>Si veda anche: mk_bin2_rule, mk_bin_rule, mk_comb_rule.</p>
+<p><span class="math">\(\dfrac
+{f \qquad s \qquad \vdash t_1 = t_2}
+{\vdash f\ s\ t_1 = f\ s\ t_2}
+\textsf{ mk_bin2_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza di eguaglianza per l'applicazione di
+funzione binaria sul lato destro. Prende un termine di funzione binaria, un
+teorema di uguaglianza e un termine, e applica la funzione in forma curried
+al termine fornito sul lato sinistro e ai lati corrispondenti del teorema
+come suo lato destro. Il tipo della funzione fornita deve avere essere binario
+nella forma curried, con il tipo del primo dominio uguale al tipo del termine
+argomento a sinistra, e il tipo del secondo dominio uguale al tipo di ciascun
+lato del teorema.</p>
+<p>Si veda anche: mk_bin1_rule, mk_bin_rule, mk_comb_rule.</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash s_1 = s_2 \qquad A_2 \vdash t_1 = t_2}
+{A_1 \cup A_2 \vdash s_1 = t_1 \Leftrightarrow s_2 = t_2}
+\textsf{ mk_eq_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza.
+Prende due teoremi di uguaglianza, e uguaglia i corrispondenti lati del
+primo teorema con quelli del secondo, unendone le assunzioni. I tipi di
+ciascun lato di ogni equazione devono essere uguali.</p>
+<p>Si veda anche: mk_eq1_rule, mk_eq2_rule, mk_eq_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash s_1 = s_2 \qquad t}
+{A \vdash s_1 = t \Leftrightarrow s_2 = t}
+\textsf{ mk_eq1_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza
+sul lato sinistro. Prende un teorema di uguaglianza e un termine, e uguaglia
+ogni lato del teorema con il termine fornito. Il tipo del termine fornito
+deve essere uguale al tipo di ciascun lato del teorema fornito.</p>
+<p>Si veda anche: mk_eq2_rule, mk_eq_rule, mk_eq1_rule.</p>
+<p><span class="math">\(\dfrac
+{s \qquad A \vdash t_1 = t_2}
+{A \vdash s = t_1 \Leftrightarrow s = t_2}
+\textsf{ mk_eq2_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'eguaglianza
+sul lato destro. Prende un termine e un teorema di eguaglianza, e uguaglia
+il termine a ciascun lato del teorema. Il tipo del termine fornito deve
+essere uguale al tipo di cascun lato del teorema fornito.</p>
+<p>Si veda anche: mk_eq1_rule, mk_eq_rule, mk_eq1_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash p_1 \Leftrightarrow p_2}
+{A \vdash \neg p_1 \Leftrightarrow \neg p_2}
+\textsf{ mk_not_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la negazione
+logica, Prende un teorema di eguaglianza booleana, e nega logicamente
+ciascun lato del teorema.</p>
+<p>Si veda anche: mk_comb_rule, eqf_intro_rule, eqf_elim_rule.</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash p_1 \Leftrightarrow p_2 \qquad A_2 \vdash q_1 \Leftrightarrow q_2}
+{A_1 \cup A_2 \vdash p_1 \wedge p_2 \Leftrightarrow q_1 \wedge q_2 }
+\textsf{ mk_conj_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza per la congiunzione. Prende due teoremi
+di egualianza boolena, e congiunge i corrispondenti lati del rpimo teorema
+con quelli del secondo, unendone le assunzioni.</p>
+<p>Si veda anche: mk_conj1_rule, mk_conj2_rule, mk_bin_rule, conj_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash p_1 \Leftrightarrow p_2 \qquad q}
+{A \vdash p_1 \wedge q \Leftrightarrow p_2 \wedge q}
+\textsf{ mk_conj1_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza per il lato sinistro della congiunzione.
+Prende un teorema di eguaglianza booleana e un termine booleano, e congiunge
+ciaszun lato del teorema con il termine fornito</p>
+<p>Si veda anche: mk_conj2_rule, mk_conj_rule, mk_bin1_rule, conj_rule.</p>
+<p><span class="math">\(\dfrac
+{p \quad A \vdash q_1 \Leftrightarrow q_2}
+{A \vdash p \wedge q_1 \Leftrightarrow p \wedge q_2}
+\textsf{ mk_conj2_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza per il lato destro della congiunzione.
+Prende un termine booleano e un teorema di eguaglianza booleana, e congiunge il
+termine fornito con ciascun lato del teorema.</p>
+<p>Si veda anche: mk_conj1_rule, mk_conj_rule, mk_bin1_rule, conj_rule.</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash p_1 \Leftrightarrow p_2 \quad A_2 \vdash q_1 \Leftrightarrow q_2}
+{A_1 \cup A_2 \vdash p_1 \vee q_1 \Leftrightarrow p_2 \vee q_2}
+\textsf{ mk_disj_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza per la disgiunzione, Prende due
+teoremi di eguaglianza booleana, e disgiunge i corrispondenti lati del
+primo teorema con quelli del secondo, unendone le assunzioni.</p>
+<p>Si veda anche: mk_disj1_rule, mk_disj2_rule, mk_bin_rule, disj1_rule, disj2_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash p_1 \Leftrightarrow p_2 \quad q}
+{A \vdash p_1 \vee q \Leftrightarrow p_2 \vee q}
+\textsf{ mk_disj1_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la disgiunzione sul
+lato sinistro. Prende un teorema di eguaglianza booleana e un termine booleano,
+e disgiunge ogni lato del teorema con il termine fornito.</p>
+<p>Si veda anche: mk_disj2_rule, mk_disj_rule, mk_bin1_rule, disj1_rule.</p>
+<p><span class="math">\(\dfrac
+{p \qquad A \vdash q_1 \Leftrightarrow q_2}
+{A \vdash p \vee q_1 \Leftrightarrow p \vee q_2}
+\textsf{ mk_disj2_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la disgiunzione sul
+lato destro. Prende un termine booleano e un teorema di eguaglianza booleana,
+e disgiunge il termine fornito con ogni lato del teorema.</p>
+<p>Si veda anche: mk_disj1_rule, mk_disj_rule, mk_bin1_rule, disj2_rule.</p>
+<p><span class="math">\(\dfrac
+{A_1 \vdash p_1 \Leftrightarrow p_2 \quad A_2 \vdash q_1 \Leftrightarrow q_2}
+{A_1 \cup A_2 \vdash p_1 \Rightarrow q_1 \Leftrightarrow p_2 \Rightarrow q_2}
+\textsf{ mk_imp_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione.
+Prende due teoremi di eguaglianza booleana, e crea l'implicazione dai
+corrispondeti lati del primo e del secondo teorema, unendone le assunzioni.</p>
+<p>Si veda anche: mk_imp1_rule, mk_imp2_rule, mk_bin_rule.</p>
+<p><span class="math">\(\dfrac
+{A \vdash p_1 \Leftrightarrow p_2 \quad q}
+{A \vdash p_1 \Rightarrow q \Leftrightarrow p_2 \Rightarrow q}
+\textsf{ mk_imp1_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione
+su lato sinistro. Prende un teorema di eguaglianza booleana e un termine
+booleano, e crea le implicazioni da ogni lato del teorema, con il lato
+del teorema come antecedente e il termine come conseguente.</p>
+<p>Si veda anche: mk_imp2_rule, mk_imp_rule, mk_bin1_rule</p>
+<p><span class="math">\(\dfrac
+{p \qquad A \vdash q_1 \Leftrightarrow q_2}
+{A \vdash p \Rightarrow q_1 \Leftrightarrow p \Rightarrow q_2}
+\textsf{ mk_imp2_rule}\)</span></p>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'implicazione
+su lato destro. Prende un termine booleano e un teorema di eguaglianza
+booleana, e rende il termine un antecedente di ciascun lato del teorema.</p>
+<p>Si veda anche: mk_imp1_rule, mk_imp_rule, mk_bin2_rule</p>
+<p><span class="math">\(\dfrac
+{x \qquad A \vdash p_1 \Leftrightarrow p_2}
+{A \vdash (\forall x.\ p_1) \Leftrightarrow (\forall x.\ p_2) }
+\textsf{ mk_forall_rule}\)</span></p>
+<p>per <code>x</code> non libera in <code>A</code></p>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione
+universale. Prende una variabile e un teorema di uguaglianza, e quantifica
+universalmente la variabile su entrambi i lati del teorema. La variabile
+non deve occorrere libera nelle assunzioni del teorema fornito</p>
+<p>Si veda anche: mk_abs_rule, mk_comb_rule, gen_rule.</p>
+<p><span class="math">\(\dfrac
+{x \qquad A \vdash p_1 \Leftrightarrow p_2}
+{A \vdash (\exists x.\ p_1) \Leftrightarrow (\exists x.\ p_2) }
+\textsf{ mk_exists_rule}\)</span></p>
+<p>per <code>x</code> non libera in <code>A</code></p>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione
+esistenziale. Prende una variabile e un teorema di uguaglianza, e quantifica
+in modo esistenzaiale la variabile su entrambi i lati del teorema. La variabile
+non deve occorrere libera nelle assunzioni del teorema fornito</p>
+<p>Si veda anche: mk_uexists_rule, mk_abs_rule, mk_comb_rule, exists_rule.</p>
+<p><span class="math">\(\dfrac
+{x \qquad A \vdash p_1 \Leftrightarrow p_2}
+{A \vdash (\exists ! x.\ p_1) \Leftrightarrow (\exists ! x.\ p_2) }
+\textsf{ mk_uexists_rule}\)</span></p>
+<p>per <code>x</code> non libera in <code>A</code></p>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la quantificazione
+esistenziale univoca. Prende una variabile e un teorema di eguaglianza, e
+quantifica con quantificatore esistenziale univoco la variabile su
+entrambi i lato del teorema. La variabile non deve occorrere libera
+nelle assunzioni del teorema fornito.</p>
+<p>Si veda anche: mk_exists_rule, mk_abs_rule, mk_comb_rule</p>
+<p><span class="math">\(\dfrac
+{x \qquad A \vdash p_1 \Leftrightarrow p_2}
+{A \vdash (\epsilon x.\ p_1) \Leftrightarrow (\epsilon x.\ p_2) }
+\textsf{ mk_uexists_rule}\)</span></p>
+<p>per <code>x</code> non libera in <code>A</code></p>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la selezione.
+Prende una variabile e un teorema di eguaglianza, e seleziona la variabile
+da entrambi i lati del teorema. La variabile non deve occorrere libera
+nelle assunzioni del teorema.</p>
+<p>Si veda anche: mk_abs_rule, mk_comb_rule.</p>
+<h2><a name="Logica-classica" class="anchor" href="#Logica-classica">Logica classica</a></h2>
+<p><span class="math">\(\dfrac
+{A \vdash \exists x.\ p}
+{A \vdash p[(\epsilon x. p)/x]}
+\textsf{ select_rule}\)</span></p>
+<p>Questa &egrave; la regola di selezione esistenziale. Elimina il
+quantificatore esistenziale del teorema fornito, e sostituisce nel corpo
+ogni occorrenza della variabile legata con l'operatore di selezione
+applicato al corpo originario (con la stessa variabile legata).</p>
+<p>Si veda anche: exists_rule.</p>
+<p><span class="math">\(\dfrac
+{\exists x.\ p \qquad t \qquad A \vdash p[t/x]}
+{A \vdash \exists x.\ p}
+\textsf{ exists_rule}\)</span></p>
+<p>Questa &egrave; la regola di intruduzione esistenzial. Prende un termine esistenziale,
+un termine testimone e un teorema, dove la conclusionde del teorema &egrave; il corpo
+del termine esistenziale ma con il termine testimone che sostituisce le occorrenze
+della sua variabile legata. Restituisce un teorema che afferma che il termine esistenziale
+fornito vale, sotto le stesse assunzioni del teorema fornito.</p>
+<p><span class="math">\(\dfrac
+{p \qquad A \vdash \bot}
+{A \setminus \{\neg p\} \vdash p}
+\textsf{ ccontr_rule}\)</span></p>
+<p>Questa &egrave; la regola contraddizione della logica classica. Prende un termine
+booleano e un teorema con falso come sua conclusione. Restituisce un teorema con
+il termine fornito come sua conclusione, e con le stesse assunzioni del teorema
+fornito ma con la negazione logica del termine fornito rimossa. Si noti che la
+negazione logica del termine fornito non deve essere necessariamente presente
+nelle assunzioni del teorema affinch&eacute; questa regola abbia successo.</p>
+<p>Si veda anche: contr_rule, deduct_contrapos_rule.</p>
+<p>work in progress...</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#I</span> <span class="s">&quot;../src/bin/Debug/net7.0&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;nholz.dll&quot;</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">HOL</span>
+</code></pre>
+<h2><a name="NatEval-eval_add_conv" class="anchor" href="#NatEval-eval_add_conv">| NatEval.eval_add_conv</a></h2>
+<p>Questa &egrave; la conversione di valutazione per l'addizione numerale. Prende
+un termine della forma <code>m + n</code>, dove <code>m</code> e <code>n</code> sono entrambi numeri naturali,
+e restituisce un teorema che afferma che questo equivale al suo valore numerale,
+senza assunzioni.</p>
+<p>Si veda anche: eval_sub_conv, eval_mult_conv, eval_exp_conv.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="fn">eval_add_conv</span>
+
+<span class="c">///    `m + n`                                                             </span>
+<span class="c">/// ------------                                                           </span>
+<span class="c">/// |- m + n = z </span>
+</code></pre>
+<h2><a name="NatEval-eval_even_conv" class="anchor" href="#NatEval-eval_even_conv">| NatEval.eval_even_conv</a></h2>
+<p>Questa &egrave; la conversione di valutazione per la parit&agrave; per un numerale.
+Prende un termine della forma <code>Even n</code>, dove <code>n</code> &egrave; un numerale per un numero
+naturale, e restituisce un teorema che afferma il suo valore booleano,
+senza assunzioni.</p>
+<p>Si veda anche: eval_odd_conv.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="fn">eval_even_conv</span>
+
+<span class="c">//     `EVEN n`                                                         </span>
+<span class="c">// ---------------                                                      </span>
+<span class="c">// |- EVEN n &lt;=&gt; z    </span>
+</code></pre>
+<h2><a name="NatEval-eval_exp_conv" class="anchor" href="#NatEval-eval_exp_conv">| NatEval.eval_exp_conv</a></h2>
+<p>Questa &egrave; la conversione di valutazione per l'esponenziazione numerale.
+Prende un termine della forma <code>m EXP n</code>, dove <code>m</code> e <code>n</code>sono entrambi numerali
+di numeri naturali, e restituisce un teorema che afferma che questo equivale
+al suo valore, senza assunzioni.</p>
+<p>Si veda anche: eval_add_conv, eval_sub_conv, eval_mult_conv.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="fn">eval_exp_conv</span>
+
+<span class="c">//    `m EXP n`                                                          </span>
+<span class="c">// --------------                                                        </span>
+<span class="c">// |- m EXP n = z    </span>
+</code></pre>
+<h2><a name="NatEval-eval_ge_conv" class="anchor" href="#NatEval-eval_ge_conv">| NatEval.eval_ge_conv</a></h2>
+<p>Questa &egrave; la conversione di valutazione il confronto maggiore-o-uguale-a.
+Prende un termine della forma <code>m &gt;= n</code>, dove <code>m</code> e <code>n</code>sono entrambi numerali
+di numeri naturali, e restituisce un teorema che afferma che questo equivale
+al suo valore booleano, senza assunzioni.</p>
+<p>Si veda anche: eval_gt_conv, eval_le_conv, eval_lt_conv, eval_nat_eq_conv.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="fn">eval_ge_conv</span>
+
+<span class="c">//      `m &gt;= n`</span>
+<span class="c">//  ---------------</span>
+<span class="c">//  |- m &gt;= n &lt;=&gt; z</span>
+</code></pre>
+<h2><a name="NatEval-eval_gt_conv" class="anchor" href="#NatEval-eval_gt_conv">| NatEval.eval_gt_conv</a></h2>
+<p>Questa &egrave; la conversione di valutazione il confronto maggiore-di.
+Prende un termine della forma <code>m &gt; n</code>, dove <code>m</code> e <code>n</code>sono entrambi numerali
+di numeri naturali, e restituisce un teorema che afferma che questo equivale
+al suo valore booleano, senza assunzioni.</p>
+<p>Si veda anche: eval_ge_conv, eval_le_conv, eval_lt_conv, eval_nat_eq_conv.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="fn">eval_gt_conv</span>
+
+<span class="c">//      `m &gt; n`    </span>
+<span class="c">//  -------------- </span>
+<span class="c">//  |- m &gt; n &lt;=&gt; z </span>
+</code></pre>
+<h2><a name="NatEval-eval_le_conv" class="anchor" href="#NatEval-eval_le_conv">| NatEval.eval_le_conv</a></h2>
+<p>Questa &egrave; la conversione di valutazione per il confronto minore-o-uguale-a.
+Prende un termine della forma <code>m &lt;= n</code>, dove <code>m</code> e <code>n</code>sono entrambi numerali
+di numeri naturali, e restituisce un teorema che afferma che questo equivale
+al suo valore booleano, senza assunzioni.</p>
+<p>Si veda anche: eval_lt_conv, eval_ge_conv, eval_gt_conv, eval_nat_eq_conv.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="fn">eval_le_conv</span>
+
+<span class="c">//        `m &lt;= n`                               </span>
+<span class="c">//    --------------                            </span>
+<span class="c">//    |- m &lt;= n &lt;=&gt; z</span>
+</code></pre>
+<h2><a name="NatEval-eval_lt_conv" class="anchor" href="#NatEval-eval_lt_conv">| NatEval.eval_lt_conv</a></h2>
+<p>Questa &egrave; la conversione di valutazione per il confronto minore-di.
+Prende un termine della forma <code>m &lt; n</code>, dove <code>m</code> e <code>n</code>sono entrambi numerali
+di numeri naturali, e restituisce un teorema che afferma che questo equivale
+al suo valore booleano, senza assunzioni.</p>
+<p>Si veda anche: eval_le_conv, eval_ge_conv, eval_gt_conv, eval_nat_eq_conv.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="fn">eval_lt_conv</span>
+
+<span class="c">//        `m &lt; n`                               </span>
+<span class="c">//    --------------                            </span>
+<span class="c">//    |- m &lt; n &lt;=&gt; z</span>
+</code></pre>
+<p>Es.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="s">&quot;12 &lt; 7&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="fn">eval_lt_conv</span>
+<span class="c">// val it : thm = |- 12 &lt; 7 &lt;=&gt; false</span>
+
+<span class="s">&quot;7 &lt; 12&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 12)" onmouseover="showTip(event, 'fs8', 12)" class="fn">eval_lt_conv</span>
+<span class="c">// val it : thm = |- 7 &lt; 12 &lt;=&gt; true</span>
+</code></pre>
+<h2><a name="NatEval-eval_mult_conv" class="anchor" href="#NatEval-eval_mult_conv">| NatEval.eval_mult_conv</a></h2>
+<p>Questa &egrave; la conversione di valutazione per la moltiplicazione numerale.
+Prende un termine della forma <code>m * n</code>, dove <code>m</code> e <code>n</code> sono entrambi numerali di
+numeri naturali, e restituisce un teorema che afferma che questo equivale al
+suo valore numerale, senza assunzioni.</p>
+<p>Si veda anche: eval_add_conv, eval_sub_conv, eval_exp_conv.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="fn">eval_mult_conv</span>
+
+<span class="c">//     `m * n`                                                            </span>
+<span class="c">//  ------------                                                          </span>
+<span class="c">//  |- m * n = z</span>
+</code></pre>
+<p>Es.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="s">&quot;12 * 7&quot;</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 14)" onmouseover="showTip(event, 'fs9', 14)" class="fn">parse_term</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 15)" onmouseover="showTip(event, 'fs10', 15)" class="fn">eval_mult_conv</span>
+<span class="c">// val it : thm = |- 12 * 7 = 84</span>
+</code></pre>
+<h2><a name="NatEval-eval_nat_eq_conv" class="anchor" href="#NatEval-eval_nat_eq_conv">| NatEval.eval_nat_eq_conv</a></h2>
+<p>Questa &egrave; la conversione di valutazione per l'eguaglianza numerica.
+Prende un termine della forma <code>m = n</code>, dove <code>m</code> e <code>n</code> sono entrambi numerali di
+numeri naturali, e restituisce un teorema che afferma che questo equivale al
+suo valore booleano, senza assunzioni.</p>
+<p>Si veda anche: eval_le_conv, eval_lt_conv, eval_ge_conv, eval_gt_conv.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="fn">eval_nat_eq_conv</span>
+
+<span class="c">//      `m = n`                                                            </span>
+<span class="c">//  --------------                                                         </span>
+<span class="c">//  |- m = n &lt;=&gt; z   </span>
+</code></pre>
+<h2><a name="NatEval-eval_odd_conv" class="anchor" href="#NatEval-eval_odd_conv">| NatEval.eval_odd_conv</a></h2>
+<p>Questa &egrave; la conversione di valutazione per la disparit&agrave; numerale.
+Prende un termine della forma <code>ODD n</code>, dove <code>n</code> &egrave; un numerale di un numero
+naturale, e restituisce un teorema che afferma il suo valore booleano, senza
+assunzioni.</p>
+<p>Si veda anche: eval_even_conv.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="fn">eval_odd_conv</span>
+
+<span class="c">//      `ODD n`                                                            </span>
+<span class="c">//  --------------                                                         </span>
+<span class="c">//  |- ODD n &lt;=&gt; z </span>
+</code></pre>
+<h2><a name="NatEval-eval_pre_conv" class="anchor" href="#NatEval-eval_pre_conv">| NatEval.eval_pre_conv</a></h2>
+<p>Questa &egrave; la conversione di valutazione per il predcessore numerale. Prende
+un termine della forma <code>PRE n</code>, dove <code>n</code> &amp;egrave, un numerale di un numero naturale,
+e restituisce un teorema che afferma che questo equivale al suo valore numerale,
+senza assunzioni.</p>
+<p>Si veda anche: eval_suc_conv.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="fn">eval_pre_conv</span>
+
+<span class="c">//     `PRE n`                                                         </span>
+<span class="c">//  ------------                                                       </span>
+<span class="c">//  |- PRE n = z   </span>
+</code></pre>
+<h2><a name="NatEval-eval_sub_conv" class="anchor" href="#NatEval-eval_sub_conv">| NatEval.eval_sub_conv</a></h2>
+<p>Questa &egrave; la conversione di valutazione per la sottrazione numerale. Prende
+un termine della forma <code>m - n</code>, dove <code>m</code> e <code>n</code> sono entrambi numerali di numeri
+naturali, e restituisce un teorema che afferma che questo equivale al suo
+valore numerale, senza assunzioni.</p>
+<p>Si veda anche: eval_add_conv, eval_mult_conv, eval_exp_conv.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="fn">eval_sub_conv</span>
+
+<span class="c">//     `m - n`                                                         </span>
+<span class="c">//  ------------                                                       </span>
+<span class="c">//  |- m - n = z  </span>
+</code></pre>
+<h2><a name="NatEval-eval_suc_conv" class="anchor" href="#NatEval-eval_suc_conv">| NatEval.eval_suc_conv</a></h2>
+<p>Questa &egrave; la conversione di valutazione per il successore numerale. Prende
+un termine della forma <code>SUCC n</code>, dove <code>n</code> &egrave; un numerale per un numero naturale,
+e restituisce un teorema che afferma che questo equivale al suo valore numerale,
+senza assunzioni.</p>
+<p>Si veda anche: eval_add_conv, eval_mult_conv, eval_exp_conv.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs15', 20)" onmouseover="showTip(event, 'fs15', 20)" class="fn">eval_suc_conv</span>
+
+<span class="c">//     `SUC n`                                                            </span>
+<span class="c">//  ------------                                                          </span>
+<span class="c">//  |- SUC n = z     </span>
+</code></pre>
+<h2><a name="BoolClass-eval_sub_conv" class="anchor" href="#BoolClass-eval_sub_conv">| BoolClass.eval_sub_conv</a></h2>
+<p>Questa &egrave; di introduzione del quantificatore esistenziale. Prende
+un termine esistenziale, un termine testimone, e un teorema, dove la conclusione
+del teorea &egrave; il corpo del termine esistenziale ma con il termine testimone
+che sostituisce le occorrenze della sua variabile legata. Restituisce un teorema
+che afferma che il termine esistenziale fornito vale, sotto le stesse
+assunzioni del teorema fornito.</p>
+<p>Si veda anche: choose_rule, select_rule, mk_exists_rule.</p>
+<h2><a name="Pair-mk_pair_rule" class="anchor" href="#Pair-mk_pair_rule">| Pair.mk_pair_rule</a></h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per l'accoppiamento.
+Prende due teoremi di uguaglianza, e accoppia i corrispondenti lati del
+primo teorema con quelli del secondo, unendone le assunzioni</p>
+<p>Si veda anche: mk_pair1_rule, mk_pair2_rule, mk_bin_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="fn">mk_pair_rule</span>
+
+<span class="c">//  A1 |- x1 = x2    A2 |- y1 = y2                                       </span>
+<span class="c">//  ------------------------------                                       </span>
+<span class="c">//   A1 u A2 |- (x1,y1) = (x2,y2)    </span>
+</code></pre>
+<h2><a name="Pair-mk_pair1_rule" class="anchor" href="#Pair-mk_pair1_rule">| Pair.mk_pair1_rule</a></h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la coppia a
+sinistra. Prende un teorema di uguaglianza e un termine, e accoppia ogni
+lato del teorema con il termine.</p>
+<p>Si veda anche: mk_pair2_rule, mk_pair_rule, mk_bin1_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="fn">mk_pair1_rule</span>
+
+<span class="c">//    A |- x1 = x2   `y`                                                  </span>
+<span class="c">//   --------------------                                                 </span>
+<span class="c">//   A |- (x1,y) = (x2,y) </span>
+</code></pre>
+<h2><a name="Pair-mk_pair2_rule" class="anchor" href="#Pair-mk_pair2_rule">| Pair.mk_pair2_rule</a></h2>
+<p>Questa &egrave; la regola di congruenza dell'eguaglianza per la coppia a
+destra. Prende un termine un teorema di uguaglianza, e accoppia il termine
+con ogni lato del teorema.</p>
+<p>Si veda anche: mk_pair1_rule, mk_pair_rule, mk_bin2_rule.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="fn">mk_pair2_rule</span>
+
+<span class="c">///     `x`   A |- y1 = y2                                                    </span>
+<span class="c">///    --------------------                                                   </span>
+<span class="c">///    A |- (x,y1) = (x,y2)  </span>
+
+   
+</code></pre>
+
+                </div>
+            </div>
+        </div>
+        <div class="fsdocs-tip" id="fs1">namespace HOL</div>
+<div class="fsdocs-tip" id="fs2">val eval_add_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the evaluation conversion for numeral addition.  It takes a term  
+ of the form `m + n`, where &quot;m&quot; and &quot;n&quot; are both natural number numerals,  
+ and returns a theorem stating that this equals its numeral value, under no
+ assumptions.                                                              
+                                                                           
+       `m + n`                                                             
+    ------------                                                           
+    |- m + n = z                                                
+
+ See also: eval_sub_conv, eval_mult_conv, eval_exp_conv.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs3">val eval_even_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the evaluation conversion for numeral evenness.  It takes a term
+ of the form `EVEN n`, where &quot;n&quot; is a natural number numeral, and returns
+ a theorem stating its boolean value, under no assumptions.              
+                                                                         
+        `EVEN n`                                                         
+    ---------------                                                      
+    |- EVEN n &amp;lt;=&amp;gt; z                                                      
+
+ See also: eval_odd_conv.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs4">val eval_exp_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the evaluation conversion for numeral exponentiation.  It takes a
+ term of the form `m EXP n`, where &quot;m&quot; and &quot;n&quot; are both natural number    
+ numerals, and returns a theorem stating that this equals its numeral     
+ value, under no assumptions.                                             
+                                                                          
+       `m EXP n`                                                          
+    --------------                                                        
+    |- m EXP n = z                                                        
+
+ See also: eval_add_conv, eval_sub_conv, eval_mult_conv.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs5">val eval_ge_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the evaluation conversion for numeral greater-than-or-equal comparison.
+ It takes a term of the form `m &amp;gt;= n`, where &quot;m&quot; and &quot;n&quot; are both natural number
+ numerals, and returns a theorem stating that this input equals its boolean
+ value, under no assumptions.
+ 
+           `m &amp;gt;= n`
+       ---------------
+       |- m &amp;gt;= n &amp;lt;=&amp;gt; z
+
+ eval_ge_conv, eval_le_conv, eval_lt_conv, eval_nat_eq_conv.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs6">val eval_gt_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the evaluation conversion for numeral greater-than comparison.  It takes
+ a term of the form `m &amp;gt; n`, where &quot;m&quot; and &quot;n&quot; are both natural number numerals,
+ and returns a theorem stating that this input equals its boolean value, under no
+ assumptions.                                                
+                   
+        `m &amp;gt; n`    
+    -------------- 
+    |- m &amp;gt; n &amp;lt;=&amp;gt; z 
+
+ eval_ge_conv, eval_le_conv, eval_lt_conv, eval_nat_eq_conv.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs7">val eval_le_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the evaluation conversion for numeral less-than-or-equal comparison.  It
+ takes a term of the form `m &amp;lt;= n`, where &quot;m&quot; and &quot;n&quot; are both natural number
+ numerals, and returns a theorem stating that this input equals its boolean
+ value, under no assumptions.                                                        
+                                                                           
+        `m &amp;lt;= n`                               
+    --------------                            
+    |- m &amp;lt;= n &amp;lt;=&amp;gt; z            
+
+ See also: eval_lt_conv, eval_ge_conv, eval_gt_conv, eval_nat_eq_conv.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs8">val eval_lt_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the evaluation conversion for numeral less-than-or-equal comparison.  It
+ takes a term of the form `m &amp;lt; n`, where &quot;m&quot; and &quot;n&quot; are both natural number
+ numerals, and returns a theorem stating that this input equals its boolean
+ value, under no assumptions.                                                        
+                                                                           
+        `m &amp;lt; n`                               
+    --------------                            
+    |- m &amp;lt; n &amp;lt;=&amp;gt; z            
+
+ See also: eval_le_conv, eval_ge_conv, eval_gt_conv, eval_nat_eq_conv.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs9">val parse_term: x: string -&gt; term<br /><em>&lt;summary&gt;
+ This takes a string and parses it into an internal term.  The type     
+ analysis stage first detypes the preterm before inferring types (in    
+ &#39;resolve_preterm&#39;), since the syntax analysis stage gives all variables
+ and constants the null pretype.  Note that type inference is capable of
+ handling overloaded variables.                                         
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs10">val eval_mult_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ eval_mult_conv : term -&amp;gt; thm                                             
+                                                                          
+ This is the evaluation conversion for numeral multiplication.  It takes a
+ term of the form `m * m`, where &quot;m&quot; and &quot;n&quot; are both natural number      
+ numerals, and returns a theorem stating that this equals its numeral     
+ value, under no assumptions.                                             
+                                                                          
+       `m * n`                                                            
+    ------------                                                          
+    |- m * n = z                                                          
+
+ See also: eval_add_conv, eval_sub_conv, eval_exp_conv.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs11">val eval_nat_eq_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the evaluation conversion for numeric equality.  It takes a term  
+ of the form `m = n`, where &quot;m&quot; and &quot;n&quot; are both natural number numerals,  
+ and returns a theorem stating that this equals its boolean value, under no
+ assumptions.                                                              
+                                                                           
+        `m = n`                                                            
+    --------------                                                         
+    |- m = n &amp;lt;=&amp;gt; z                                    
+
+ See also: eval_le_conv, eval_lt_conv, eval_ge_conv, eval_gt_conv.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs12">val eval_odd_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the evaluation conversion for numeral oddness.  It takes a term of
+ the form `ODD n`, where &quot;n&quot; is a natural number numeral, and returns a    
+ theorem stating its boolean value, under no assumptions.                  
+                                                                           
+        `ODD n`                                                            
+    --------------                                                         
+    |- ODD n &amp;lt;=&amp;gt; z       
+
+ See also: eval_even_conv.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs13">val eval_pre_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ eval_pre_conv : term -&amp;gt; thm                                           
+                                                                       
+ This is the evaluation conversion for numeral predecessor.  It takes a
+ term of the form `PRE n`, where &quot;n&quot; is a natural number numeral, and  
+ returns a theorem stating that this equals its numeral value, under no
+ assumptions.                                                          
+                                                                       
+       `PRE n`                                                         
+    ------------                                                       
+    |- PRE n = z                                                       
+
+ See also: eval_suc_conv.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs14">val eval_sub_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the evaluation conversion for numeral subtraction.  It takes a
+ term of the form `m - n`, where &quot;m&quot; and &quot;n&quot; are both natural number   
+ numerals, and returns a theorem stating that this equals its numeral  
+ value, under no assumptions.                                          
+                                                                       
+       `m - n`                                                         
+    ------------                                                       
+    |- m - n = z                                                       
+
+ See also: eval_add_conv, eval_mult_conv, eval_exp_conv.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs15">val eval_suc_conv: tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the evaluation conversion for numeral successor.  It takes a term
+ of the form `SUC n`, where &quot;n&quot; is a natural number numeral, and returns a
+ theorem stating that this equals its numeral value, under no assumptions.
+                                                                          
+       `SUC n`                                                            
+    ------------                                                          
+    |- SUC n = z                                                          
+
+ See also: eval_pre_conv.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs16">val mk_pair_rule: th1: thm -&gt; th2: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the equality congruence rule for pairing.  It takes two equality
+ theorems, and pairs corresponding sides of the first theorem with the   
+ second, unioning the assumptions.                                       
+                                                                         
+    A1 |- x1 = x2    A2 |- y1 = y2                                       
+    ------------------------------                                       
+     A1 u A2 |- (x1,y1) = (x2,y2)                                        
+
+ See also: mk_pair1_rule, mk_pair2_rule, mk_bin_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs17">val mk_pair1_rule: th1: thm -&gt; tm: term -&gt; thm<br /><em>&lt;summary&gt;
+ This is the equality congruence rule for pair LHS.  It takes an equality
+ theorem and a term, and pairs each side of the theorem with the term.   
+                                                                         
+     A |- x1 = x2   `y`                                                  
+    --------------------                                                 
+    A |- (x1,y) = (x2,y)                                                 
+
+ See also: mk_pair2_rule, mk_pair_rule, mk_bin1_rule.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs18">val mk_pair2_rule: tm: term -&gt; th2: thm -&gt; thm<br /><em>&lt;summary&gt;
+ This is the equality congruence rule for pair RHS.  It takes a term and an
+ equality theorem, and pairs the term with each side of the theorem.       
+                                                                           
+     `x`   A |- y1 = y2                                                    
+    --------------------                                                   
+    A |- (x,y1) = (x,y2)                                                   
+
+ See also: mk_pair1_rule, mk_pair_rule, mk_bin2_rule.
+&lt;/summary&gt;</em></div>
+
+    </div>
+
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <script type="text/javascript">var fsdocs_search_baseurl = '/nholz/'</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+    <script type="text/javascript" src="/nholz/content/fsdocs-search.js"></script>
+    <!-- END SEARCH BOX: this adds support for the search box -->
+</body>
+
+</html>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>La logica HOL</title>
+    <title>Sintassi e Semantica</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="nholz">
     <link rel="shortcut icon" type="image/x-icon" href="/nholz//img/favicon.ico">
@@ -59,8 +59,16 @@
   HOL Logic
 </li>             
 <li class="nav-item">
-  <a class="nav-link" href="/nholz/001/000-HOLLogic.html">
-    La logica HOL
+  <a class="nav-link" href="/nholz/001/000-SintassiESemantica.html">
+    Sintassi e Semantica
+  </a>
+</li>             
+<li class="nav-header">
+  Casi di studio
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/nholz/prop.html">
+    Logica proposizionale
   </a>
 </li>
                         <li class="nav-header">
@@ -81,8 +89,8 @@
                     
 <h1><a name="La-logica-HOL" class="anchor" href="#La-logica-HOL">La logica HOL</a></h1>
 <p>La logica supportata dai sistemi HOL è una variante della teoria dei tipi semplici di Church.</p>
-<p>La sintsassi di HOL contiene categorie sintattiche di tipi e termini i cui elementi sono
-intesi denotare rispettivamente certi insiemi e elementi di insiemi. Di seguito sarà sviluppata questa interpretazione insiemisitica accanto alla descrizione della sintassi di del linguaggio, e più avanti, il sistema di dimostrazione implementato sarà mostrato essere valido per il ragionamento circa proprietà del modello insiemistico.</p>
+<p>La sintassi di HOL contiene categorie sintattiche di tipi e termini i cui elementi sono
+intesi denotare rispettivamente certi insiemi e elementi di insiemi. Di seguito sarà sviluppata questa interpretazione insiemistica accanto alla descrizione della sintassi di del linguaggio, e più avanti, il sistema di dimostrazione implementato sarà mostrato essere valido per il ragionamento circa proprietà del modello insiemistico.</p>
 <h2><a name="Universo" class="anchor" href="#Universo">Universo</a></h2>
 <p>Il modello insiemistico è dato in termini di un insieme di insiemi fisso <span class="math">\(\cal U\)</span>, che sarà chiamato l'<em>universo</em> e che si assume avere le seguenti proprietà:</p>
 <table>
@@ -97,7 +105,7 @@ intesi denotare rispettivamente certi insiemi e elementi di insiemi. Di seguito 
 </tr>
 <tr class="odd">
 <td><p><strong>Prod</strong></p></td>
-<td><p>Se <span class="math">\(X\in{\cal U}\)</span> e <span class="math">\(Y\in{\cal U}\)</span>, allora <span class="math">\(X \times Y\in{\cal U}\)</span>. L'insieme <span class="math">\(X\times Y\)</span> è il prodotto cartesiano, consistente di coppie ordinate <span class="math">\((x,y)\)</span> con <span class="math">\(x\in X\)</span> e <span class="math">\(y\in Y\)</span>, con l'usuale notazione insiemistica delle coppie ordinate, cioé <span class="math">\((x,y)=\{\{x\},\{x,y\}\}\)</span>.</p></td>
+<td><p>Se <span class="math">\(X\in{\cal U}\)</span> e <span class="math">\(Y\in{\cal U}\)</span>, allora <span class="math">\(X \times Y\in{\cal U}\)</span>. L'insieme <span class="math">\(X\times Y\)</span> è il prodotto cartesiano, consistente di coppie ordinate <span class="math">\((x,y)\)</span> con <span class="math">\(x\in X\)</span> e <span class="math">\(y\in Y\)</span>, con l'usuale notazione insiemistica delle coppie ordinate, cioè <span class="math">\((x,y)=\{\{x\},\{x,y\}\}\)</span>.</p></td>
 </tr>
 <tr class="even">
 <td><p><strong>Pow</strong></p></td>
@@ -146,6 +154,8 @@ intesi denotare rispettivamente certi insiemi e elementi di insiemi. Di seguito 
 <li><p><strong>Tipi funzione</strong>: Se <span class="math">\(\sigma_1\)</span> e <span class="math">\(\sigma_2\)</span> sono tipi, allora <span class="math">\(\sigma_1 \rightarrow \sigma_2\)</span> è il tipo funzione con <em>dominio</em> <span class="math">\(\sigma_1\)</span> e rango <span class="math">\(\sigma_2\)</span>. Esso denota l'insieme di tutte le funzioni (totali) dall'insieme denotato dal suo dominio all'insieme denotato dal suo rango. Si not che sintatticamente <span class="math">\(\rightarrow\)</span> è semplicmente un distinto operatore di tipo di arietà <span class="math">\(2\)</span> scritto con notazione infissa. E' isolato nelladefinizione dei tipi HOL perché denoterà sempre la stessa operazione in qualsiasi modello di una teoria HOL (si veda <a href="https://github.com/domasin/nholz/blob/master/src/CoreThry.fs#L41">CoreThry</a>) - contrariamente agli altri operatori di tipo che possono essere interpretati in modo differente in modelli differenti. (Si veda più avanti TODO indicare precisamente dove).</p></li>
 </ul>
 <p>Risulta conveniente identificare i tipi atomici con tipi composti costruiti con operatori di tipo <span class="math">\(0\)</span>-ari. Per esempio, il tipo atomico <span class="math">\(bool\)</span> dei valori di verità può essere considerato come un’abbreviazione per <span class="math">\(()bool\)</span>. Questa identificazione sarà fatta nei dettagli tecnici che seguono, ma nella presentazione informale i tipi atomici continueranno ad essere distinti dai tipi composti, e <span class="math">\(()c\)</span> sarà scritto come <span class="math">\(c\)</span>.</p>
+<h3><a name="Strutture-di-tipo" class="anchor" href="#Strutture-di-tipo">Strutture di tipo</a></h3>
+<p>Il termine 'costante di tipo' è usato per comprendere sia i tipi atomici sia gli operatori di tipo. Si assume che sia dato un insieme infinito <span class="math">\(TyNames\)</span> dei <em>nomi delle costantti di tipo</em>. La lettera greca <span class="math">\(v\)</span> è usata per variare su membri arbitrari di <span class="math">\(TyNames\)</span>, si continuerà ad usare <span class="math">\(c\)</span> per variare sui nomi dei tipi atomici (cioè costanti di tipo <span class="math">\(0\)</span>-arie), e <span class="math">\(op\)</span> è usato per variare sui nomi degli operatori di tipo (cioè costanti di tipo <span class="math">\(n\)</span>-arie, dove <span class="math">\(n &gt; 0\)</span>)</p>
 
                 </div>
             </div>
