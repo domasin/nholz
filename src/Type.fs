@@ -14,13 +14,13 @@
 (* ========================================================================== *)
 
 
-///This module defines the internal representation of HOL types.  This is    
-///done by defining an abstract datatype for types, and then primitive syntax
-///functions for constructing and destructing types, and support for type    
-///constant declaration.  The primitive syntax constructors ensure that only 
-///well-formed types can be constructed.  This module is a trusted component 
+/// This module defines the internal representation of HOL types.  This is    
+/// done by defining an abstract datatype for types, and then primitive syntax
+/// functions for constructing and destructing types, and support for type    
+/// constant declaration.  The primitive syntax constructors ensure that only 
+/// well-formed types can be constructed.  This module is a trusted component 
+/// of the system
 [<AutoOpen>] 
-///of the system.                                                                                                          
 module HOL.Type
 
 open System.Numerics

@@ -39,7 +39,7 @@ let the_type_bijections =
 let get_type_bijection_info x =
     let func = "get_type_bijection_info" in
     try
-        dltree_lookup x !the_type_bijections
+        dltree_lookup x the_type_bijections.Value
     with HolFail _ ->
         if (is_tyconst_name x)
           then hol_fail (func, "No bijections defined for type constant " + quote x)
@@ -49,7 +49,7 @@ let get_type_bijections x =
     snd (try2 get_type_bijection_info x    "get_type_bijections")
 
 let get_all_type_bijections () =
-    let xxxtts = dltree_elems !the_type_bijections in
+    let xxxtts = dltree_elems the_type_bijections.Value in
     let xtts = map (fun (x,((x1,x2),(th1,th2))) -> (x,(th1,th2))) xxxtts in
     xtts
 

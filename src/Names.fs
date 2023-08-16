@@ -224,7 +224,7 @@ let the_type_fixities = ref (dltree_empty : dltree<string,fixity>)
 
 let get_type_fixity x =
     try
-        dltree_lookup x !the_type_fixities
+        dltree_lookup x the_type_fixities.Value
     with HolFail _ -> Nonfix
 
 let get_all_type_fixities() =

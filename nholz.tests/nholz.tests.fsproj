@@ -4,8 +4,21 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Bool.fs" />
-    <Compile Include="ProofTests.fs" />
+    <Compile Include="ExnTest.fs" />
+    <Compile Include="LibTests.fs" />
+    <Compile Include="DltreeTests.fs" />
+    <Compile Include="ReaderTests.fs" />
+    <Compile Include="TypeTests.fs" />
+    <Compile Include="TermTests.fs" />
+    <!-- <Compile Include="NamesTests.fs" />
+    <Compile Include="DmodesTests.fs" />
+    <Compile Include="LexerTests.fs" />
+    <Compile Include="Utils1Tests.fs" />
+    <Compile Include="PretermTests.fs" />
+    <Compile Include="TypeAnalTests.fs" /> -->
+    <Compile Include="ParserTests.fs" />
+    <!-- <Compile Include="Bool.fs" /> -->
+    <!-- <Compile Include="ProofTests.fs" /> -->
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
