@@ -29,7 +29,7 @@ module TypeTests =
             the_tyconsts.Value <- Node (1,("A",BigInteger.Parse "1"),Leaf,Node (1,("B",BigInteger.Parse "3"),Leaf,Leaf))
             let actual = prim_get_tyconst_arity "B"
 
-            the_tyconsts.Value <- Leaf
+            the_tyconsts.Value <- dltree_empty
 
             actual
             |> should equal (BigInteger.Parse "3")
@@ -42,7 +42,7 @@ module TypeTests =
             the_tyconsts.Value <- Node (1,("A",BigInteger.Parse "1"),Leaf,Node (1,("B",BigInteger.Parse "3"),Leaf,Leaf))
             let actual = prim_get_all_tyconsts()
 
-            the_tyconsts.Value <- Leaf
+            the_tyconsts.Value <- dltree_empty
 
             actual
             |> should equal [("A",BigInteger.Parse "1");("B",BigInteger.Parse "3")]
@@ -55,7 +55,7 @@ module TypeTests =
             the_tyconsts.Value <- Node (1,("A",BigInteger.Parse "1"),Node (1,("B",BigInteger.Parse "0"),Leaf,Leaf),Node (1,("C",BigInteger.Parse "3"),Leaf,Leaf))
             let actual = is_tyconst_name "C"
 
-            the_tyconsts.Value <- Leaf
+            the_tyconsts.Value <- dltree_empty
 
             actual
             |> should equal true
@@ -70,7 +70,7 @@ module TypeTests =
 
             let actual = the_tyconsts.Value
 
-            the_tyconsts.Value <- Leaf
+            the_tyconsts.Value <- dltree_empty
 
             actual
             |> should equal expected
@@ -109,7 +109,7 @@ module TypeTests =
             let expected = Tycomp ("C",[Tyvar "A"; Tyvar "C"])
             let actual = mk_comp_type("C",[Tyvar "A"; Tyvar "C"])
 
-            the_tyconsts.Value <- Leaf
+            the_tyconsts.Value <- dltree_empty
 
             actual
             |> should equal expected
@@ -198,7 +198,7 @@ module TypeTests =
             let expected = (Tycomp ("->",[Tyvar "C";Tyvar "B"]))
             let actual = type_inst [(Tyvar "A",Tyvar "C")] (Tycomp ("->",[Tyvar "A";Tyvar "B"]))
 
-            the_tyconsts.Value <- Leaf
+            the_tyconsts.Value <- dltree_empty
 
             actual
             |> should equal expected

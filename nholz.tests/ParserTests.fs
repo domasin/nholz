@@ -67,10 +67,13 @@ module ParserTests =
 
         [<Fact>]
         member __.``parse_type_test``() =
-            printfn "%A" (the_tyconsts)
             let expected = Tycomp ("->", [Tycomp ("bool", []); Tycomp ("bool", [])])
 
-            parse_type("bool->bool")
+            let test() = 
+                printfn "%A" (the_tyconsts) |> ignore
+                parse_type("bool->bool")
+
+            test()
             |> should equal expected
 
         

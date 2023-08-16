@@ -29,7 +29,7 @@ module TermTests =
             let expected = Tycomp ("->",[Tycomp ("->",[Tyvar "num";Tyvar "num"]);Tyvar "num"])
             let actual = get_const_gtype "+"
 
-            the_consts.Value <- Leaf
+            the_consts.Value <- dltree_empty
 
             actual
             |> should equal expected
@@ -44,36 +44,40 @@ module TermTests =
             let expected = [("+",Tycomp ("->",[Tycomp ("->",[Tyvar "num";Tyvar "num"]);Tyvar "num"]))]
             let actual = get_all_consts()
 
-            the_consts.Value <- Leaf
+            the_consts.Value <- dltree_empty
 
             actual
             |> should equal expected
 
-        // (* is_const_name tests *)
+        (* is_const_name tests *)
 
-        // // [<Fact>]
-        // member __.``is_const_name_test``() =
+        [<Fact>]
+        member __.``is_const_name_test``() =
 
-        //     the_consts.Value <- Node (1,("+",Tycomp ("->",[Tycomp ("->",[Tyvar "num";Tyvar "num"]);Tyvar "num"])),Leaf,Leaf)
+            the_consts.Value <- Node (1,("+",Tycomp ("->",[Tycomp ("->",[Tyvar "num";Tyvar "num"]);Tyvar "num"])),Leaf,Leaf)
 
-        //     let expected = true
-        //     let actual = is_const_name "+"
+            let expected = true
+            let actual = is_const_name "+"
 
-        //     actual
-        //     |> should equal expected
+            the_consts.Value <- dltree_empty
 
-        // (* prim_new_const tests *)
+            actual
+            |> should equal expected
 
-        // // [<Fact>]
-        // member __.``prim_new_const_test``() =
+        (* prim_new_const tests *)
 
-        //     prim_new_const("+",Tycomp ("->",[Tycomp ("->",[Tyvar "num";Tyvar "num"]);Tyvar "num"])) |> ignore
+        [<Fact>]
+        member __.``prim_new_const_test``() =
 
-        //     let expected = Node (1,("+",Tycomp ("->",[Tycomp ("->",[Tyvar "num";Tyvar "num"]);Tyvar "num"])),Leaf,Leaf)
-        //     let actual = !the_consts
+            prim_new_const("+",Tycomp ("->",[Tycomp ("->",[Tyvar "num";Tyvar "num"]);Tyvar "num"])) |> ignore
 
-        //     actual
-        //     |> should equal expected
+            let expected = Node (1,("+",Tycomp ("->",[Tycomp ("->",[Tyvar "num";Tyvar "num"]);Tyvar "num"])),Leaf,Leaf)
+            let actual = the_consts.Value
+
+            the_consts.Value <- dltree_empty
+
+            actual
+            |> should equal expected
 
         // (* term_eq tests *)
 
