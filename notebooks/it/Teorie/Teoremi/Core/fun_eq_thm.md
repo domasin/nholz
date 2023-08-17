@@ -2,7 +2,7 @@
 
 ## Enunciato
 
-$\vdash \forall f\_{\alpha \rightarrow \beta}\ g.\ f = g \Leftrightarrow (\forall x.\ f\ x = g\ x)$
+$\vdash \forall f_{\alpha \rightarrow \beta}\ g.\ f = g \Leftrightarrow (\forall x.\ f\ x = g\ x)$
 
 ## Dimostrazione
 

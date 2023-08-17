@@ -36,3 +36,8 @@
       |- COND =
            (\p (t1:'a) t2.
                @x. ((p <=> true) ==> x = t1) /\ ((p <=> false) ==> x = t2))
+
+## Teoremi
+
+### [bool_cases_thm](./Teoremi/Predicati/bool_cases_thm.ipynb)
+      |- !p. (p <=> true) \/ (p <=> false)

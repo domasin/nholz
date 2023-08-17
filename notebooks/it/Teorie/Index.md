@@ -10,6 +10,7 @@
 2. [Logica dei predicati](Predicati.md)
     1. [Costanti](Predicati.md#costanti)
     2. [Definizioni](Predicati.md#definizioni)
+    3. [Teoremi](Predicati.md#teoremi)
 3. [Coppie ordinate](Coppie.md)
     1. [Costanti di tipo](Coppie.md#costanti-di-tipo)
     2. [Costanti](Coppie.md#costanti)

@@ -21,6 +21,8 @@ NatArith.load
 NatRel.load
 NatEval.load
 
+BoolClass.bool_cases_thm
+
 fun_eq_thm
 
 let latexStr (loc:Proof Location) =
@@ -51,4 +53,5 @@ let g = parse_term(@"g:'a->'b")
     (* f = g |- !x. f x = g x                 *)
     (gen_rule_fd x
     (mk_comb1_rule_fd (assume_rule_fd (parse_term(@"(f:'a->'b)=g"))) x) )))
-|> zipper |> latexStr
+|> zipper 
+|> latexStr
