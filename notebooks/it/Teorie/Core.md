@@ -63,5 +63,5 @@ L'unico alias supportato è <=>, per un'istanza di '='.
 
 ## Teoremi
 
-### [fun_eq_thm](./Teoremi/Core/fun_eq_thm.md)
+### [fun_eq_thm](./Teoremi/Core/fun_eq_thm.ipynb)
       |- !(f:'a->'b) g. f = g <=> (!x. f x = g x)
