@@ -13,10 +13,10 @@
 (* http://github.com/domasin/nholz                                        *)
 (* ========================================================================== *)
 
-///This module implements databases for storing theorems and lemmas under a
-///name index.  Like axioms, stored theorems are restricted to having no   
-///free variables or assumptions, whereas stored lemmas are theorems that have 
-///no such restrictions.                                                   
+/// This module implements databases for storing theorems and lemmas under a
+/// name index.  Like axioms, stored theorems are restricted to having no   
+/// free variables or assumptions, whereas stored lemmas are theorems that have 
+/// no such restrictions.                                                   
 [<AutoOpen>]
 module HOL.Store
 

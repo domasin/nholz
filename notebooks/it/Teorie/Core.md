@@ -60,3 +60,8 @@ L'unico alias supportato è <=>, per un'istanza di '='.
 
 ### select_ax
       |- !(P:'a->bool) x. P x ==> P ($@ P)
+
+## Teoremi
+
+### [fun_eq_thm](./Teoremi/Core/fun_eq_thm.md)
+      |- !(f:'a->'b) g. f = g <=> (!x. f x = g x)

@@ -6,6 +6,7 @@
     3. [Costanti alias](Core.md#costanti-alias)
     4. [Definizioni](Core.md#definizioni)
     5. [Assiomi](Core.md#assiomi)
+    6. [Teoremi](Core.md#teoremi)
 2. [Logica dei predicati](Predicati.md)
     1. [Costanti](Predicati.md#costanti)
     2. [Definizioni](Predicati.md#definizioni)
