@@ -47,16 +47,88 @@ let x = "x:bool" |> parse_term
 |> parse_term
 |> psimplify
 
-let fm =  
-    @"(p <=> q) <=> ~(r ==> s)"
-    |> parse_term
+// let fm =  
+//     @"(p <=> q) <=> ~(r ==> s)"
+//     |> parse_term
 
-let fm' = 
-    fm
-    |> nnf
+// let fm' = 
+//     fm
+//     |> nnf
 
-tautology (mk_eq (fm,fm'))
+// tautology (mk_eq (fm,fm'))
 
 @"(p ==> p') /\ (q ==> q') ==> (p /\ q ==> p' /\ q')"
 |> parse_term
 |> tautology
+
+@"p ==> q"
+|> parse_term
+|> print_truthtable
+
+@"(~p /\ ~q) \/ (~p /\ q) \/ (p /\ q)"
+|> parse_term
+|> print_truthtable
+
+
+// let fm = @"(p \/ q /\ r) /\ (~p \/ ~r)" |> parse_term
+
+// dnfOrig fm
+
+// fm |> print_truthtable
+
+// ------------------------------------------------------------------------- //
+// DNF via distribution.                                                     //
+// ------------------------------------------------------------------------- //
+
+@"(p \/ q /\ r) /\ (~p \/ ~r)"
+|> parse_term
+|> rawdnf
+
+// ------------------------------------------------------------------------- //
+// A dnf version using a list representation.                                //
+// ------------------------------------------------------------------------- //
+
+@"(p \/ q /\ r) /\ (~p \/ ~r)"
+|> parse_term
+|> purednf
+
+// ------------------------------------------------------------------------- //
+// Filtering out trivial disjuncts (in this guise, contradictory).           //
+// ------------------------------------------------------------------------- //
+
+@"(p \/ q /\ r) /\ (~p \/ ~r)"
+|> parse_term
+|> purednf
+|> filter (not << trivial)
+
+// ------------------------------------------------------------------------- //
+// With subsumption checking, done very naively (quadratic).                 //
+// ------------------------------------------------------------------------- //
+
+// ------------------------------------------------------------------------- //
+// Mapping back to a formula.                                                //
+// ------------------------------------------------------------------------- //
+
+let fm = 
+    @"(p \/ q /\ r) /\ (~p \/ ~r)"
+    |> parse_term
+
+let dnfFm = fm |> dnf
+
+tautology(mk_eq (fm,dnfFm))
+
+@"p /\ ~p"
+|> parse_term
+|> dnf
+
+@"p ==> (q /\ r)"
+|> parse_term
+|> dnf
+
+@"p ==> (q /\ r)"
+|> parse_term
+|> cnf
+
+@"~ (p /\ ~p)"
+|> parse_term
+|> cnf

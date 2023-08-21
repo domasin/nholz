@@ -45,6 +45,7 @@
     <Compile Include="GenericTree.fs" />
     <Compile Include="ProofTree.fs" />
     <Compile Include="ProofManagement.fs" />
+    <Compile Include="FormulaUtils.fs" />
     <Compile Include="PropUtils.fs" />
     <!--<Compile Include="Nets.fs" />
     <Compile Include="Conversions.fs" />

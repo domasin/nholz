@@ -370,6 +370,19 @@ let cut_while p xs =
     let (ys,zs) = cut_while0 p [] xs in
     (rev ys, zs)
 
+// Compute list of all results from applying function to pairs from two lists.
+/// 
+/// The call allpairs f [x1;...;xm] [y1;...;yn] returns the list of results 
+/// [f x1 y1; f x1 y2; ... ; f x1 yn; fx2 y1 ; f x2 y2 ...; f xm y1; 
+/// f xm y2 ...; f xm yn ]
+/// 
+/// Never fails.
+let rec allpairs f l1 l2 =
+    match l1 with
+    | [] -> []
+    | h1 :: t1 ->
+        List.foldBack (fun x a -> f h1 x :: a) l2 (allpairs f t1 l2)
+
 (* ** NUMERI ** *)
 
 (* Questa sezione è per funzioni che eseguono operazioni di base sui numeri.        *)
@@ -872,6 +885,27 @@ let subset xs1 xs2 = forall (fun x1 -> mem x1 xs2) xs1
 /// anche nella seconda rispetto a una funzione di confronto fornita come argomento.                                                      
 let subset' eq xs1 xs2 = forall (fun x1 -> mem' eq x1 xs2) xs1
 
+let subset'',psubset =
+    let rec subset'' l1 l2 =
+        match l1, l2 with
+        | [], l2 -> true
+        | l1, [] -> false
+        | h1 :: t1, h2 :: t2 ->
+            if h1 = h2 then subset'' t1 t2
+            elif h1 < h2 then false
+            else subset'' l1 t2
+    /// Proper subset
+    and psubset l1 l2 =
+        match l1, l2 with
+        | l1, [] -> false
+        | [], l2 -> true
+        | h1 :: t1, h2 :: t2 ->
+            if h1 = h2 then psubset t1 t2
+            elif h1 < h2 then false
+            else subset'' l1 t2
+    (fun s1 s2 -> subset'' (setify s1) (setify s2)),
+    (fun s1 s2 -> psubset (setify s1) (setify s2))
+
 //  disjoint : 'a list -> 'a list -> bool                               
 //                                                                     
 /// Restituisce "true" sse non ci sono elementi in comune tra le due liste fornite.
@@ -930,6 +964,9 @@ let rec no_dups0' eq xs0 xs =
 /// Restituisce "true" sse la lista fornita non contiene duplicati
 /// rispetto a una funzione di confronto fornita come argomento.
 let no_dups' eq xs = no_dups0' eq [] xs
+
+let image f s =
+    setify (List.map f s)
 
 (* ** CARATTERI E SRTINGHE ** *)
 
@@ -1047,8 +1084,8 @@ let rec merge r xs ys =
 
 //  mergesort : ('a -> 'a -> bool) -> 'a list -> 'a list                   
 //                                                                        
-/// Ordina la lista fornita usando la tecnica del merge, rispetto alla relazione 
-/// di orinamento totale fornita.
+/// Ordina la lista fornita usando la tecnica del merge, rispetto alla 
+/// relazione di orinamento totale fornita.
 let mergesort r xs =
     let rec mergepairs yss xss =
         match (yss,xss) with

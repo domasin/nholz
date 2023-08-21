@@ -1,49 +1,17 @@
+// This file contains implementations of the functions described in the book 
+// "handbook of practical logic and automated reasoning" 
+// (https://www.cl.cam.ac.uk/~jrh13/atp/) adapted to fit the nholz hol system.
+// Many of the implementations are based on the version of the code ported in 
+// F# by https://github.com/jack-pappas/fsharp-logic-examples/
+//
+// Here "propositional term" means a HOL term in the propositional fragment
+// i.e. either a boolean variable or the boolean constants true and false
+
 module HOL.PropUtils
 
-let (|False|_|) tm =
-   match tm with
-   | Tmconst ("false", Tycomp ("bool", [])) -> Some false_tm
-   | _ -> None 
+open HOL.FormulaUtils
 
-let (|True|_|) tm =
-   match tm with
-   | Tmconst ("true", Tycomp ("bool", [])) -> Some true_tm
-   | _ -> None
-
-let (|Atom|_|) tm =
-   match tm with
-   | Tmvar (p, Tycomp ("bool", [])) -> Some p
-   | _ -> None
-
-let (|Not|_|) tm =
-   match tm with
-   | Tmcomb (Tmconst ("~", Tycomp ("->", [Tycomp ("bool", []); Tycomp ("bool", [])])), p) -> Some p
-   | _ -> None
-
-let (|And|_|) tm =
-   match tm with
-   | Tmcomb (Tmcomb (Tmconst ("/\\", Tycomp ("->", [Tycomp ("bool", []); Tycomp ("->", [Tycomp ("bool", []); Tycomp ("bool", [])])])), p), q) -> 
-        Some (p,q)
-   | _ -> None
-let (|Or|_|) tm =
-   match tm with
-   | Tmcomb (Tmcomb (Tmconst ("\\/", Tycomp ("->", [Tycomp ("bool", []); Tycomp ("->", [Tycomp ("bool", []); Tycomp ("bool", [])])])), p), q) -> 
-        Some (p,q)
-   | _ -> None
-
-let (|Imp|_|) tm =
-   match tm with
-   | Tmcomb (Tmcomb (Tmconst ("==>", Tycomp ("->", [Tycomp ("bool", []); Tycomp ("->", [Tycomp ("bool", []); Tycomp ("bool", [])])])), p), q)-> 
-        Some (p,q)
-   | _ -> None
-
-let (|Iff|_|) tm =
-   match tm with
-   | Tmcomb (Tmcomb (Tmconst ("=", Tycomp ("->", [Tycomp ("bool", []); Tycomp ("->", [Tycomp ("bool", []); Tycomp ("bool", [])])])), p), q)-> 
-        Some (p,q)
-   | _ -> None
-
-/// returns constant or variable name of a term
+/// returns constant or variable name of a propositional term
 let pname tm = 
     if tm |> is_const then 
         tm |> const_name
@@ -51,6 +19,7 @@ let pname tm =
         tm |> var_name
     else ""
 
+/// Interpretation of propositional terms
 let rec eval v tm =
     match tm with
     | False _ -> false
@@ -63,62 +32,13 @@ let rec eval v tm =
     | Iff (p, q) -> (eval v p) = (eval v q)
     | _ -> failwith "Not part of propositional logic."
 
-/// the term is a boolean atom
-let is_bool_atom tm = 
-    tm |> is_bool_term && (tm |> is_const || tm |> is_var)
-
-let rec overatoms f tm b =
-    if tm |> is_bool_atom then 
-        f tm b
-    elif tm |> is_not then
-        let p = tm |> dest_not
-        overatoms f p b
-    elif tm |> is_conj then
-        let (p,q) = tm |> dest_conj
-        overatoms f p (overatoms f q b)
-    elif tm |> is_disj then
-        let (p,q) = tm |> dest_disj
-        overatoms f p (overatoms f q b)
-    elif tm |> is_imp then
-        let (p,q) = tm |> dest_imp
-        overatoms f p (overatoms f q b)
-    elif tm |> is_eq then
-        let (p,q) = tm |> dest_eq
-        overatoms f p (overatoms f q b)
-    else failwith "check type annotation on eq"
-
-let atom_union f tm =
-    (tm, [])
-    ||> overatoms (fun h (t) -> (f h) @ t)
-    |> setify
-
+/// Return the set of propositional terms in a formula
 let atoms tm = 
     atom_union (fun a -> [a]) tm
 
-// let rec eval v tm =
-//     if tm = false_tm then 
-//         false
-//     elif tm = true_tm then
-//         true
-//     elif tm |> is_bool_atom then 
-//         v tm
-//     elif tm |> is_not then 
-//         let p = tm |> dest_not
-//         not <| eval v p
-//     elif tm |> is_conj then 
-//         let (p,q) = tm |> dest_conj
-//         (eval v p) && (eval v q)
-//     elif tm |> is_disj then 
-//         let (p,q) = tm |> dest_disj
-//         (eval v p) || (eval v q)
-//     elif tm |> is_imp then 
-//         let (p,q) = tm |> dest_imp
-//         not(eval v p) || (eval v q)
-//     elif tm |> is_eq then 
-//         let (p,q) = tm |> dest_eq
-//         (eval v p) = (eval v q)
-//     else
-//         failwith "Not part of propositional logic."
+// ------------------------------------------------------------------------- //
+// Code to print out truth tables.                                           //
+// ------------------------------------------------------------------------- //
 
 let rec onallvaluations subfn v ats =
     match ats with
@@ -163,7 +83,11 @@ let writeToString fn =
 let inline print_truthtable f = fprint_truthtable stdout f
 let inline sprint_truthtable f = writeToString (fun sw -> fprint_truthtable sw f)
 
-/// checks if a term in the propositional fragment is a tautology
+// ------------------------------------------------------------------------- //
+// Recognizing validity and satisfiability.                                  //
+// ------------------------------------------------------------------------- //
+
+/// checks if a propositional term is a tautology
 let tautology tm =
     onallvaluations (fun v -> tm |> eval v) (fun s -> false) (atoms tm)
 
@@ -174,6 +98,10 @@ let unsatisfiable fm =
 /// checks if a term in the propositional fragment is satisfiable
 let satisfiable fm = 
     not <| unsatisfiable fm
+
+// ------------------------------------------------------------------------- //
+// Dualization.                                                              //
+// ------------------------------------------------------------------------- //
 
 /// returns the dual of a term in the propositional fragment
 let rec dual tm =
@@ -188,6 +116,10 @@ let rec dual tm =
         mk_conj (dual p, dual q)
     | _ ->
         failwith "Formula involves connectives ==> or <=>"
+
+// ------------------------------------------------------------------------- //
+// Routine simplification.                                                   //
+// ------------------------------------------------------------------------- //
 
 /// auxiliary function for psimplify
 let psimplify1 tm =
@@ -275,6 +207,10 @@ let rec nnfOrig fm =
             mk_conj (nnfOrig (mk_not p), nnfOrig q))
     | fm -> fm
 
+// ------------------------------------------------------------------------- //
+// Roll in simplification.                                                   //
+// ------------------------------------------------------------------------- //
+
 /// cahnge a formula into its negation normal form and simplifies it
 let nnf fm =
     nnfOrig <| psimplify fm
@@ -309,3 +245,115 @@ let rec nenfOrig fm =
 /// a version of nnf that don't transform iif
 let nenf fm =
     nenfOrig <| psimplify fm
+
+// ------------------------------------------------------------------------- //
+// Disjunctive normal form (DNF) via truth tables.                           //
+// ------------------------------------------------------------------------- //
+
+let list_conj l =
+    if l = [] then true_tm
+    else list_mk_conj l
+
+let list_disj l = 
+    if l = [] then false_tm 
+    else list_mk_disj l
+
+let mk_lits pvs v =
+    list_conj (map (fun p -> if eval v p then p else mk_not p) pvs)
+
+let rec allsatvaluations subfn v pvs =
+    match pvs with
+    | [] ->
+        if subfn v then [v] else []
+    | p :: ps -> 
+        let v' t q =
+            if q = p then t
+            else v q
+        allsatvaluations subfn (v' false) ps @
+        allsatvaluations subfn (v' true) ps
+
+let dnfOrig fm =
+    let pvs = atoms fm
+    let satvals = allsatvaluations (fun v -> eval v fm) (fun s -> false) pvs
+    list_disj (List.map (mk_lits (List.map (id) pvs)) satvals)
+
+// ------------------------------------------------------------------------- //
+// DNF via distribution.                                                     //
+// ------------------------------------------------------------------------- //
+
+let rec distribOrig fm =
+    match fm with
+    | And (p, Or (q, r)) ->
+        mk_disj (distribOrig (mk_conj (p, q)), distribOrig (mk_conj (p, r)))
+    | And (Or (p, q), r) ->
+        mk_disj (distribOrig (mk_conj (p, r)), distribOrig (mk_conj (q, r)))
+    | _ -> fm
+
+let rec rawdnf fm =
+    match fm with
+    | And (p, q) ->
+        distribOrig <| mk_conj (rawdnf p, rawdnf q)
+    | Or (p, q) ->
+        mk_disj (rawdnf p, rawdnf q)
+    | _ -> fm
+
+// ------------------------------------------------------------------------- //
+// A dnf version using a list representation.                                //
+// ------------------------------------------------------------------------- //
+
+let distrib s1 s2 =
+    setify <| allpairs union s1 s2
+
+let rec purednf fm =
+    match fm with
+    | And (p, q) ->
+        distrib (purednf p) (purednf q)
+    | Or (p, q) ->
+        union (purednf p) (purednf q)
+    | _ -> [[fm]]
+
+// ------------------------------------------------------------------------- //
+// Filtering out trivial disjuncts (in this guise, contradictory).           //
+// ------------------------------------------------------------------------- //
+
+let trivial lits =
+    let pos, neg = List.partition positive lits
+    intersect pos (image negate neg) <> []
+
+// ------------------------------------------------------------------------- //
+// With subsumption checking, done very naively (quadratic).                 //
+// ------------------------------------------------------------------------- //
+
+let simpdnf fm =
+    if fm = false_tm then [] 
+    elif fm = true_tm then [[]] 
+    else
+        let djs = List.filter (not << trivial) (purednf (nnf fm))
+        List.filter (fun d -> not (List.exists (fun d' -> psubset d' d) djs)) djs
+
+// ------------------------------------------------------------------------- //
+// Mapping back to a formula.                                                //
+// ------------------------------------------------------------------------- //
+
+/// Disjuntive normal form
+let dnf fm =
+    List.map list_conj (simpdnf fm)
+    |> list_disj
+
+// ------------------------------------------------------------------------- //
+// Conjunctive normal form (CNF) by essentially the same code.               //
+// ------------------------------------------------------------------------- //
+
+let purecnf fm = image (image negate) (purednf (nnf (mk_not fm)))
+
+let simpcnf fm =
+    if fm = false_tm then [[]]
+    elif fm = true_tm then []
+    else
+        let cjs = List.filter (not << trivial) (purecnf fm)
+        List.filter (fun c -> not (List.exists (fun c' -> psubset c' c) cjs)) cjs
+
+/// conjuctive normal form
+let cnf fm =
+    List.map list_disj (simpcnf fm)
+    |> list_conj
