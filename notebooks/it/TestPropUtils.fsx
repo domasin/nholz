@@ -2,7 +2,7 @@
 #r "nholz.dll"
 
 open HOL
-open HOL.PropUtils
+open HOL.AutomatedReasoning
 
 // fsi.AddPrinter print_type
 // fsi.AddPrinter print_qtype

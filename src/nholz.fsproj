@@ -47,6 +47,7 @@
     <Compile Include="ProofManagement.fs" />
     <Compile Include="FormulaUtils.fs" />
     <Compile Include="PropUtils.fs" />
+    <Compile Include="PropExamples.fs" />
     <!--<Compile Include="Nets.fs" />
     <Compile Include="Conversions.fs" />
     <Compile Include="Instantiations.fs" />

@@ -1,10 +1,16 @@
-// This file contains implementations of the functions described in the book
-// "handbook of practical logic and automated reasoning"
-// (https://www.cl.cam.ac.uk/~jrh13/atp/) adapted to fit the nholz hol system.
-// Many of the implementations are based on the version of the code ported in
-// F# by https://github.com/jack-pappas/fsharp-logic-examples/
+/// General functions to work with terms in the propositional or 
+/// first order fragments. 
+/// 
+/// The module implements ideas described in the book "handbook of practical
+/// logic and automated reasoning" (https://www.cl.cam.ac.uk/~jrh13/atp/)
+/// adapting the code to fit nholz HOL system.
+/// 
+/// Many of the implementations are based on the version of the code ported in 
+/// F# by https://github.com/jack-pappas/fsharp-logic-examples/.
+[<AutoOpen>]
+module HOL.AutomatedReasoning.FormulaUtils
 
-module HOL.FormulaUtils
+open HOL
 
 // ------------------------------------------------------------------------- //
 // Active patterns to make reuse of logic-examles code easier                //

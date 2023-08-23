@@ -1,15 +1,16 @@
-// This file contains implementations of the functions described in the book 
-// "handbook of practical logic and automated reasoning" 
-// (https://www.cl.cam.ac.uk/~jrh13/atp/) adapted to fit the nholz hol system.
-// Many of the implementations are based on the version of the code ported in 
-// F# by https://github.com/jack-pappas/fsharp-logic-examples/
-//
-// Here "propositional term" means a HOL term in the propositional fragment
-// i.e. either a boolean variable or the boolean constants true and false
+/// Functions to automate tautology and satisfiability in the propositional 
+/// fragment.
+/// 
+/// The module implements ideas described in the book "handbook of practical
+/// logic and automated reasoning" (https://www.cl.cam.ac.uk/~jrh13/atp/)
+/// adapting the code to fit nholz HOL system.
+/// 
+/// Many of the implementations are based on the version of the code ported in 
+/// F# by https://github.com/jack-pappas/fsharp-logic-examples/.
+[<AutoOpen>]
+module HOL.AutomatedReasoning.PropUtils
 
-module HOL.PropUtils
-
-open HOL.FormulaUtils
+open HOL
 
 /// returns constant or variable name of a propositional term
 let pname tm = 
