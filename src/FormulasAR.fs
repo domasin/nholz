@@ -8,7 +8,7 @@
 /// Many of the implementations are based on the version of the code ported in 
 /// F# by https://github.com/jack-pappas/fsharp-logic-examples/.
 [<AutoOpen>]
-module HOL.AutomatedReasoning.FormulaUtils
+module HOL.AutomatedReasoning.Formulas
 
 open HOL
 

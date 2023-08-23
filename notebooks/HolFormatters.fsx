@@ -1,4 +1,7 @@
-#r "nuget: nholz2"
+// #r "nuget: nholz2"
+#I "../src/bin/Debug/net7.0"
+#r "nholz.dll"
+
 open HOL
 
 let latexStr (loc:Proof Location) =
