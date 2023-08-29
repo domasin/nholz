@@ -111,69 +111,14 @@ let mk_index2 x i j =
 
 let [x; y; out; c] = map mk_index ["X"; "Y"; "OUT"; "C"]
 
-@"((OUT_0 <=> ((X_0 <=> ~ Y_0) <=> ~ C_0)) /\
-(C_1 <=> X_0 /\ Y_0 \/ (X_0 \/ Y_0) /\ C_0)) /\
-(OUT_1 <=> ((X_1 <=> ~ Y_1) <=> ~C_1)) /\
-(C_2 <=> X_1 /\ Y_1 \/ (X_1 \/ Y_1) /\ C_1)"
-|> parse_term
-|> tautology
-
-
-let truthTable values fm =
-    // [P "p"; P "q"; P "r"]
-    let ats = atoms fm
-    // 5 + 1 = length of false + length of space
-    let width = List.foldBack (max << String.length << pname) ats 5 + 1
-    let fixw s = s + String.replicate (width - String.length s) " "
-    let truthstring p = fixw (if p then "1" else "0")
-    let mk_row v =
-        let lis = ats |> map (fun x -> 
-            match x with
-            | True _ -> fixw "1"
-            | False _ -> fixw "0"
-            | _ -> truthstring(v x)
-            )
-        if values |> List.contains (eval v fm) then 
-            let ans = truthstring (eval v fm)
-            printf "%s" (List.foldBack (+) lis ("| " + ans))
-            printfn "" |> ignore
-        true
-    let seperator = String.replicate (width * (List.length ats) + 9) "-"
-    printfn "%s" (List.foldBack (fun s t -> fixw(pname s) + t) ats "| formula")
-    printfn "%s" seperator
-    let _ = onallvaluations mk_row (fun x -> false) ats
-    printfn "%s" seperator
-    printfn ""
-
-@"p /\ q /\ z"
-|> parse_term
-|> truthTable [true]
-
-@"p /\ q /\ z"
-|> parse_term
-|> truthTable [true;false]
-
-ripplecarry x y c out 2
-|> truthTable [true]
-
 // ------------------------------------------------------------------------- //
 // Special case with 0 instead of c(0).                                      //
 // ------------------------------------------------------------------------- //
 
-let ats = @"p /\ q /\ z" |> parse_term |> atoms
-
-let even x = x % 2 = 0
-
-[0.0..(2. ** ats.Length)] 
-|> List.chunkBySize 3
-
 let ripplecarry0 x y c out n =
     psimplify (ripplecarry x y (fun i -> if i = 0 then false_tm else c i) out n)
 
-
 ripplecarry0 x y c out 2
-|> truthTable [true]
-
 
 // ------------------------------------------------------------------------- //
 // Carry-select adder                                                        //
@@ -198,3 +143,14 @@ let rec carryselect x y c0 c1 s0 s1 c s n k =
             (offset k x) (offset k y) (offset k c0) (offset k c1)
             (offset k s0) (offset k s1) (offset k c) (offset k s)
             (n - k) k)
+
+// ------------------------------------------------------------------------- //
+// Primality examples.                                                       //
+// For large examples, should use "num" instead of "int" in these functions. //
+// ------------------------------------------------------------------------- //
+
+let rec bitlength x = if x = 0 then 0 else 1 + bitlength (x / 2)
+
+let rec bit n x = if n = 0 then x % 2 = 1 else bit (n - 1) (x / 2)
+
+bit 0 2

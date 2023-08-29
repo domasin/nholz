@@ -14,6 +14,14 @@ CoreThry.load
 Equal.load
 Bool.load
 
+// let psubst subfn =
+//     onatoms <| fun p ->
+//         tryapplyd subfn p (p + ":bool" |> parse_term)
+
+psubst ("p" |=> (@"p /\ q" |> parse_term)) (@"p ==> q" |> parse_term)
+
+let p = @"p:bool" |> parse_term |> fun x -> printfn "%s" (x.ToString())
+
 @"p /\ q ==> q /\ r"
 |> parse_term
 |> print_truthtable
