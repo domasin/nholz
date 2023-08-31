@@ -50,7 +50,7 @@ tautology(ramsey 3 3 6)
 (**********************************) 
 
 // Mezzo addizionatore (vale solo per la cifra più a destra 
-// che non prevede andcora priporto)
+// che non prevede andcora riporto)
 
 let halfsum x y = mk_eq (x, mk_not y)
 let halfcarry x y = mk_conj (x,y)
@@ -62,6 +62,12 @@ let to01 tm =
     | False _ -> 0
     | True _ -> 1
     | _ -> failwith "unexpected input"
+
+halfcarry true_tm true_tm
+
+halfsum true_tm true_tm
+
+ha true_tm true_tm false_tm true_tm
 
 printfn "x|y|c|s"
 printfn "-------"
@@ -76,7 +82,13 @@ for x in [false_tm;true_tm] do
 // riporto dalla somma precedente)
 
 let carry x y z = mk_disj(mk_conj(x,y),mk_conj(mk_disj(x,y),z))
+
+carry p q false_tm
+
 let sum x y z = halfsum (halfsum x y) z
+
+sum p q false_tm
+
 let fa x y z s c = mk_conj(mk_eq(s,sum x y z),mk_eq(c,carry x y z))
 
 printfn "x|y|z||c|s"
