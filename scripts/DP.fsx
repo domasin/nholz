@@ -14,6 +14,27 @@ CoreThry.load
 Equal.load
 Bool.load
 
+# time;;
+tautology(prime 11)
+// Real: 00:00:02.052, CPU: 00:00:02.070, GC gen0: 72, gen1: 1, gen2: 0
+# time;;
+
+# time;;
+dptaut(prime 11)
+// Real: 00:00:00.899, CPU: 00:00:00.950, GC gen0: 18, gen1: 1, gen2: 0
+// fails from 16
+# time;;
+
+# time;;
+dplltaut(prime 11)
+// Real: 00:00:00.243, CPU: 00:00:00.240, GC gen0: 3, gen1: 0, gen2: 0
+# time;;
+
+# time;;
+dplitaut(prime 11)
+// Real: 00:00:00.629, CPU: 00:00:00.640, GC gen0: 8, gen1: 1, gen2: 0
+# time;;
+
 let rec conjToClauses tm = 
     match tm with
     | And (p, q) ->
@@ -175,3 +196,18 @@ let rec dp clauses =
 let dpsat fm = dp (defcnfs fm)
 
 let dptaut fm = not (dpsat (mk_not fm))
+
+// ------------------------------------------------------------------------- //
+// Iterative implementation with explicit trail instead of recursion.        //
+// ------------------------------------------------------------------------- //
+
+type trailmix = Guessed | Deduced
+
+let unassigned =
+    let litabs p = 
+        match p with
+        | Not q -> q
+        | _ -> p
+    fun cls trail ->
+        subtract (unions (image (image litabs) cls))
+            (image (litabs << fst) trail)

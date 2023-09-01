@@ -14,16 +14,6 @@ CoreThry.load
 Equal.load
 Bool.load
 
-# time;;
-tautology(prime 11)
-// 2 sec
-# time;;
-
-# time;;
-dptaut(prime 11)
-// 1 sec
-# time;;
-
 let s,t,n = 3,3,4
 let vertices = [1..n]
 let yesgrps = List.map (allsets 2) (allsets s vertices)
