@@ -84,6 +84,34 @@ let writeToString fn =
 let inline print_truthtable f = fprint_truthtable stdout f
 let inline sprint_truthtable f = writeToString (fun sw -> fprint_truthtable sw f)
 
+/// A filterable truth table. Can be used to print only false or true 
+/// rows of the truth table based on input value.
+let filtered_truthtable value tm =
+    // [P "p"; P "q"; P "r"]
+    let ats = atoms tm
+    // 5 + 1 = length of false + length of space
+    let width = List.foldBack (max << String.length << pname) ats 5 + 1
+    let fixw s = s + String.replicate (width - String.length s) " "
+    let truthstring p = fixw (if p then "true" else "false")
+    let mk_row v =
+        let lis = ats |> map (fun x -> 
+            match x with
+            | Tmconst ("true", Tycomp ("bool", [])) -> fixw "true"
+            | Tmconst ("false", Tycomp ("bool", [])) -> fixw "false"
+            | _ -> truthstring(v x)
+            )
+        if (eval v tm) = true then 
+            let ans = truthstring (eval v tm)
+            printf "%s" (List.foldBack (+) lis ("| " + ans))
+            printfn ""
+        true
+    let seperator = String.replicate (width * (List.length ats) + 9) "-"
+    printfn "%s" (List.foldBack (fun s t -> fixw(pname s) + t) ats "| formula")
+    printfn "%s" seperator
+    let _ = onallvaluations mk_row (fun x -> false) ats
+    printfn "%s" seperator
+    printfn ""
+
 // ------------------------------------------------------------------------- //
 // Recognizing validity and satisfiability.                                  //
 // ------------------------------------------------------------------------- //

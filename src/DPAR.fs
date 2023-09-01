@@ -91,17 +91,11 @@ let resolution_rule clauses =
 /// Implements the Davis-Putnam procedure to check the satisfiability 
 /// of a given list of clauses.
 let rec dp clauses =
-    if clauses = [] then true 
-    elif mem [] clauses then false 
+    if clauses = [] then true else if mem [] clauses then false 
     else
-        try 
-            dp (one_literal_rule clauses) 
-        with 
-            Failure _ ->
-                try 
-                    dp (affirmative_negative_rule clauses) 
-                with Failure _ ->
-                    dp(resolution_rule clauses)
+        try dp (one_literal_rule clauses) with _ ->
+        try dp (affirmative_negative_rule clauses) with _ ->
+        dp (resolution_rule clauses)
 
 // ------------------------------------------------------------------------- //
 // Davis-Putnam satisfiability tester and tautology checker.                 //

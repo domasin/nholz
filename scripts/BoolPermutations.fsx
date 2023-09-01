@@ -30,5 +30,5 @@ boolList 4
 let x,y,z = true,true,false
 
 let carry = (x && y) || ((x || y) && z) 
-let sum = halfsum (halfsum x y) z
+// let sum = halfsum (halfsum x y) z
 
