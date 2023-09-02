@@ -181,15 +181,20 @@ let unassigned =
 /// Modifies the problem clauses `cls`, and also processes the trail 
 /// `trail` into a ﬁnite partial function `fn`.
 let rec unit_subpropagate (cls, fn, trail) =
-    let cls' = List.map (List.filter (not << defined fn << negate)) cls
+    // removes from clauses all litterals contrary to those defined in fn
+    let cls' = cls |> List.map (List.filter (not << defined fn << negate))
+    // checks for litterals not already defined in fn
     let uu = function
         | [c] when not (defined fn c) -> [c]
         | _ -> failwith ""
+    // find new unit litterals
     let newunits = unions (mapfilter uu cls')
     if newunits = [] then
         cls', fn, trail
     else
+        // add new units to the trail as Deduced
         let trail' = List.foldBack (fun p t -> (p, Deduced) :: t) newunits trail
+        // add new units to the partial function
         let fn' = List.foldBack (fun u -> u |-> ()) newunits fn
         unit_subpropagate (cls', fn', trail')
 
@@ -197,6 +202,7 @@ let rec unit_subpropagate (cls, fn, trail) =
 /// or the empty clause is derived (by unit_subpropagate) and returns both 
 /// the modiﬁed clauses and the trail.
 let unit_propagate (cls, trail) =
+    // adds every litteral in the trail (both Guessed or Deduced) to the FPF
     let fn = List.foldBack (fun (x, _) -> x |-> ()) trail undefined
     let cls', fn', trail' = unit_subpropagate (cls, fn, trail)
     cls', trail'
@@ -209,6 +215,7 @@ let rec backtrack trail =
         backtrack tt
     | _ -> trail
 
+/// Iterative Davis-Putnam-Loveland-Logemann procedure with backtracking.
 let rec dpli cls trail =
     let cls', trail' = unit_propagate (cls, trail)
     if mem [] cls' then 
@@ -230,6 +237,52 @@ let rec dpli cls trail =
             let p = maximize (posneg_count cls') ps
             dpli cls ((p, Guessed) :: trail')
 
+/// Satisfiability tester based on iterative version of 
+/// Davis-Putnam-Loveland-Logemann procedure.
 let dplisat fm = dpli (defcnfs fm) []
 
+/// Tautology tester based on iterative version of 
+/// Davis-Putnam-Loveland-Logemann procedure.
 let dplitaut fm = not (dplisat (mk_not fm))
+
+// ------------------------------------------------------------------------- //
+// With simple non-chronological backjumping and learning.                   //
+// ------------------------------------------------------------------------- //
+
+/// Simple non-chronological backjumping.
+/// 
+/// It just goes back through the trail as far as possible while ensuring 
+/// that the most recent decision `p` still leads to a conﬂict.
+let rec backjump cls p trail =
+    match backtrack trail with
+    | (q, Guessed) :: tt ->
+        let cls', trail' = unit_propagate (cls, (p, Guessed) :: tt)
+        if mem [] cls' then backjump cls p tt else trail
+    | _ -> trail
+
+/// Iterative version of Davis-Putnam-Loveland-Logemann procedure 
+/// with backjumping and learning.
+let rec dplb cls trail =
+    let cls', trail' = unit_propagate (cls, trail)
+    if mem [] cls' then
+        match backtrack trail with
+        | (p, Guessed) :: tt ->
+            let trail' = backjump cls p tt
+            let declits = List.filter (fun (_, d) -> d = Guessed) trail'
+            let conflict = insert (negate p) (image (negate << fst) declits)
+            dplb (conflict :: cls) ((negate p, Deduced) :: trail')
+        | _ -> false
+    else
+        match unassigned cls trail' with
+        | [] -> true
+        | ps ->
+            let p = maximize (posneg_count cls') ps
+            dplb cls ((p, Guessed) :: trail')
+
+/// Satisfiability tester based on iterative version of 
+/// Davis-Putnam-Loveland-Logemann procedure with backjumping and learning.
+let dplbsat fm = dplb (defcnfs fm) []
+
+/// Tautology tester based on iterative version of 
+/// Davis-Putnam-Loveland-Logemann procedure with backjumping and learning.
+let dplbtaut fm = not (dplbsat (mk_not fm))

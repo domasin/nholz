@@ -944,6 +944,9 @@ let rec no_dups0' eq xs0 xs =
 /// rispetto a una funzione di confronto fornita come argomento.
 let no_dups' eq xs = no_dups0' eq [] xs
 
+/// The image of set `s` under the function `f`.
+/// 
+/// Can be vewied as the equivalent of the `map` function for sets.
 let image f s =
     setify (List.map f s)
 
