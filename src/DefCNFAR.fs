@@ -22,6 +22,7 @@ open LanguagePrimitives
 // Make a stylized variable and update the index.                            //
 // ------------------------------------------------------------------------- //
 
+/// Makes a stylized variable and update the index.
 let mkprop (n : bigint) =
     let name = sprintf "p_%O" n
     (name + ":bool" |> parse_term), n + (bigint 1)
@@ -30,6 +31,7 @@ let mkprop (n : bigint) =
 // Core definitional CNF procedure.                                          //
 // ------------------------------------------------------------------------- //
 
+/// Core definitional CNF procedure.
 let rec maincnf (fm, defs, n as trip) =
     match fm with
     | And (p, q) ->
