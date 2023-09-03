@@ -54,6 +54,7 @@
     <Compile Include="DefCNFAR.fs" />
     <Compile Include="DPAR.fs" />
     <Compile Include="UnionFindAR.fs" />
+    <Compile Include="StalAR.fs" />
     <!--<Compile Include="Nets.fs" />
     <Compile Include="Conversions.fs" />
     <Compile Include="Instantiations.fs" />

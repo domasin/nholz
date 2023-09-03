@@ -1,4 +1,4 @@
-/// Union-find algorithm.
+/// Union-find algorithm (equivalence classes).
 /// 
 /// The module is the porting of the union-find algorithm defined in the file 
 /// lib.ml from the code that accompanies the book "handbook of practical logic 
