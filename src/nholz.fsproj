@@ -55,6 +55,7 @@
     <Compile Include="DPAR.fs" />
     <Compile Include="UnionFindAR.fs" />
     <Compile Include="StalAR.fs" />
+    <Compile Include="BDDAR.fs" />
     <!--<Compile Include="Nets.fs" />
     <Compile Include="Conversions.fs" />
     <Compile Include="Instantiations.fs" />
