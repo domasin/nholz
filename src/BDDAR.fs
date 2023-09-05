@@ -21,24 +21,31 @@ open HOL
 
 
 type bddnode = 
-    term * int * int
+    // propositional variable, left node, right node
+    string * int * int
 
-/// A BDD contains a variable order, unique and computed table.
+/// A Binary Decision Diagram
 type bdd = 
     Bdd of 
-        (func<bddnode, int> * func<int, bddnode> * int) 
-        * 
-        (term -> term -> bool)
+        (
+            func<bddnode, int>        // unique table
+            * func<int, bddnode>      // expansion table
+            * int                     // smallest positive unused node index
+        )   
+        *  (string -> string -> bool) // variable order
 
 let print_bdd (Bdd ((unique, uback, n), ord)) =
     printf "<BDD with %i nodes>" n
 
-/// Map a BDD node back to its components. 
+let emptyTerm = Tmvar ("", Tycomp ("bool", []))
+
+/// Returns the bddnode corresponding to the index `n` of the bdd
+/// If a negative index is used the complement of the node is returned.
 let expand_node (Bdd ((_, expand, _), _)) n =
     if n >= 0 then
-        tryapplyd expand n (p, 1, 1) // p al posto di P "" 
+        tryapplyd expand n ("", 1, 1)
     else 
-        let p, l, r = tryapplyd expand -n (p, 1, 1) // p al posto di P "" 
+        let p, l, r = tryapplyd expand -n ("", 1, 1)
         p, -l, -r
 
 /// Lookup or insertion if not there in unique table. 
@@ -62,7 +69,7 @@ let mk_bdd ord =
 
 /// Extract the ordering field of a BDD. 
 let order (Bdd (_, ord)) p1 p2 =
-    (p2 = p && p1 <> p) // p instead of P ""
+    (p2 = "" && p1 <> "")
     || ord p1 p2
 
 /// Threading state through.  
@@ -114,7 +121,7 @@ let rec mkbdd (bdd,comp as bddcomp) fm =
     | True _ ->
         bddcomp, 1
     | Atom s ->
-        let bdd', n = mk_node bdd (fm, 1, -1) 
+        let bdd', n = mk_node bdd (s, 1, -1) 
         (bdd', comp), n
     | Not p ->
         let bddcomp', n = mkbdd bddcomp p
@@ -129,5 +136,98 @@ let rec mkbdd (bdd,comp as bddcomp) fm =
         thread bddcomp bdd_iff (mkbdd, p) (mkbdd, q)
     | _ -> failwith "mkbdd"
 
+/// Checks for tautology based on dinary decision diagrams
 let bddtaut fm = 
     snd (mkbdd (mk_bdd (<), undefined) fm) = 1
+
+// ------------------------------------------------------------------------- //
+// Towards a more intelligent treatment of "definitions".                    //
+// ------------------------------------------------------------------------- //
+
+let dest_nimp fm =
+    match fm with
+    | Not p -> p, false_tm
+    | _ -> dest_imp fm
+
+let rec dest_iffdef fm =
+    match fm with
+    | Iff (Atom x, r)
+    | Iff (r, Atom x) ->
+        x,r
+    | _ -> failwith "not a defining equivalence"
+
+let restore_iffdef (x,e) fm =
+    mk_imp (mk_eq (x + ":bool" |> parse_term, e), fm)
+
+let suitable_iffdef defs (x, q) =
+    let fvs = 
+        atoms q 
+        |> List.map (Term.dest_var >> fst)
+    defs
+    |> List.exists (fun (x', _) ->
+        mem x' fvs)
+    |> not
+
+let rec sort_defs (acc:(string * term) list) 
+    (defs:(string * term) list) fm =
+    try 
+        let x, e =
+            defs |> List.find (suitable_iffdef defs)
+        let ps, nonps =
+            defs |> List.partition (fun (x', _) -> x' = x)
+        let ps' = subtract ps [x, e]
+        sort_defs ((x, e) :: acc) nonps (List.foldBack restore_iffdef ps' fm)
+    with _ ->
+        List.rev acc, List.foldBack restore_iffdef defs fm
+
+// ------------------------------------------------------------------------- //
+// Improved setup.                                                           //
+// ------------------------------------------------------------------------- //
+
+let rec mkbdde sfn (bdd,comp as bddcomp) fm =
+    match fm with
+    | False _ ->
+        bddcomp, -1
+    | True _ ->
+        bddcomp, 1
+    | Atom s ->
+        try bddcomp, apply sfn s
+        with _ ->
+            let bdd', n = mk_node bdd (s, 1, -1)
+            (bdd', comp), n
+    | Not p ->
+        let bddcomp', n = mkbdde sfn bddcomp p
+        bddcomp', -n
+    | And (p, q) ->
+        thread bddcomp bdd_and (mkbdde sfn, p) (mkbdde sfn, q)
+    | Or (p, q)  ->
+        thread bddcomp bdd_or (mkbdde sfn, p) (mkbdde sfn, q)
+    | Imp (p, q) ->
+        thread bddcomp bdd_imp (mkbdde sfn, p) (mkbdde sfn, q)
+    | Iff (p, q) ->
+        thread bddcomp bdd_iff (mkbdde sfn, p) (mkbdde sfn, q)
+    | _ -> failwith "mkbdde"
+
+let rec mkbdds sfn bdd defs fm =
+    match defs with
+    | [] -> mkbdde sfn bdd fm
+    | (p, e) :: odefs ->
+        let bdd', b = mkbdde sfn bdd e
+        mkbdds ((p |-> b) sfn) bdd' odefs fm
+
+let ebddtaut fm =
+    let l, r =
+        try dest_nimp fm
+        with _ -> true_tm, fm
+    let eqs, noneqs =
+        let parFun fm =
+            try
+                dest_iffdef fm |> ignore
+                true
+            with _ -> false
+        List.partition parFun (strip_conj l)
+    let mk_imp tm1 tm2 = mk_imp (tm1,tm2) 
+    let defs, fm' = 
+        sort_defs [] (List.map dest_iffdef eqs) 
+            (List.foldBack mk_imp noneqs r)
+    snd (mkbdds undefined (mk_bdd (<), undefined) defs fm') = 1

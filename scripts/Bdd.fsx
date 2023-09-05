@@ -9,6 +9,7 @@ open HOL.AutomatedReasoning
 // fsi.AddPrinter print_term
 // fsi.AddPrinter print_qterm
 // fsi.AddPrinter print_thm
+// fsi.AddPrinter sprint_patricia_tree
 
 CoreThry.load
 Equal.load
@@ -16,8 +17,143 @@ Bool.load
 BoolAlg.load
 BoolClass.load
 
+let bddP = "p:bool" |> parse_term |> mkbdd (mk_bdd (<), undefined)
+let bddQ = "q:bool" |> parse_term |> mkbdd (mk_bdd (<), undefined)
+
+let f1 = 
+    undefined
+    |> ("x" |-> 1)
+    |> ("y" |-> 2)
+    |> ("z" |-> 3)
+// |> print_patricia_tree
+
+let f2 = 
+    undefined
+    |> ("y" |-> 2)
+    |> ("z" |-> 3)
+    |> ("x" |-> 1)
+    // |> print_patricia_tree
+
+f1 = f2
+
+(2 |-> ("p", 1, -1)) undefined
+|> fun fn -> tryapplyd fn -2 ("", 1, 1)
+
+@"p /\ q ==> q /\ r"
+|> parse_term
+|> mkbdd (mk_bdd (<), undefined)
+|> fst
+|> snd
+|> fun bdd -> order bdd "r" "p"
+// |> fun bdd -> expand_node bdd 2
+// |> fun bdd -> 
+//     match bdd with
+//     | Bdd ((uniqueTable, expansionTable, index), ord) -> 
+//         expansionTable |> sprint_patricia_tree
+
+#time
+@"/\ (out_0 <=> x_0 /\ y_0)"
+|> String.replicate 2000
+|> fun x -> @"(out_0 <=> x_0 /\ y_0) " + x
+|> parse_term
+|> bddtaut
+// Real: 00:00:09.044, CPU: 00:00:09.100, GC gen0: 168, gen1: 3, gen2: 0
+#time
+
+#time
+@"/\ (out_0 <=> x_0 /\ y_0)"
+|> String.replicate 2000
+|> fun x -> @"(out_0 <=> x_0 /\ y_0) " + x
+|> parse_term
+|> ebddtaut
+// Real: 00:00:09.330, CPU: 00:00:09.310, GC gen0: 168, gen1: 2, gen2: 0
+#time
+
+@"/\ ((out_0 <=> x_0 /\ y_0) ==> true)"
+|> String.replicate 500
+|> fun x -> @"((out_0 <=> x_0 /\ y_0) ==> true) " + x
+|> parse_term
+|> ebddtaut
+
+let prime50 = prime 50
+
+#time
+prime50 
+|> atoms
+// Real: 00:00:00.010, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+#time
+
+prime50 |> bddtaut
+prime50 |> ebddtaut
+
+@"out_0 <=> x_0 /\ y_0"
+|> parse_term
+|> bddtaut
+
+
+
+#time
+bddtaut (prime 50)
+// Real: 00:00:33.862, CPU: 00:00:35.050, GC gen0: 795, gen1: 117, gen2: 21
+#time
+
+
+#time
+ebddtaut (prime 50)
+// Real: 00:00:36.621, CPU: 00:00:36.690, GC gen0: 801, gen1: 123, gen2: 28
+#time
+
+ebddtaut (prime 19)
+bddtaut (prime 19)
+
+prime 50
+|> atoms
+|> List.map (Term.dest_var >> fst)
+
+prime 50
+|> free_vars
+
+
+ebddtaut (prime 101)
+
+ebddtaut (mk_adder_test 9 5)
+
+mk_adder_test 4 2
+
+let emptyBdd = 
+    mk_bdd (<)
+
+emptyBdd |> print_bdd
+
+@"p:bool"
+|> parse_term
+|> Term.dest_var
+|> fst
+
+
+
+@"p:bool"
+|> parse_term
+|> mkbdd (mk_bdd (<), undefined)
+|> fst
+|> fst
+|> fun bdd -> lookup_unique bdd (expand_node bdd 2)
+    
+@"p /\ q ==> q /\ r"
+|> parse_term
+|> mkbdd (mk_bdd (<), undefined)
+|> snd
+
+@"true"
+|> parse_term
+|> mkbdd (emptyBdd, undefined)
+|> snd
 
 @"a \/ ~a"
+|> parse_term
+|> bddtaut
+
+@"a ==> b"
 |> parse_term
 |> bddtaut
 
@@ -27,11 +163,13 @@ BoolClass.load
 
 // bddtaut (mk_adder_test 4 2)
 
-// bddtaut (prime 19)
+// bddtaut (prime 101)
 
 // dptaut (mk_adder_test 4 2) // false: va controllato dovrebbe essere true
 
-dpsat (mk_adder_test 4 2) 
+dplisat (mk_adder_test 4 2) 
+
+dplisat (mk_not (mk_adder_test 4 2))
 
 // dplitaut (mk_adder_test 4 2) // false: va controllato dovrebbe essere true
 
