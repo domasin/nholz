@@ -114,10 +114,10 @@ let dest_term tm =
 
 (* Constants *)
 
-///A derived constructor for constants.  It takes a constant 
-///name and a type (defined in the type constants db), where the type must be a valid match for the constant's  
-///generic type (defined in the term constants db). It returns the constant with 
-///the supplied type as its type.
+/// A derived constructor for constants.  It takes a constant name and a type 
+/// (defined in the type constants db), where the type must be a valid match 
+/// for the constant's generic type (defined in the term constants db). It 
+/// returns the constant with the supplied type as its type.
 let mk_const (x,ty) =
     let func = "mk_const"
     let ty0 = try2 get_const_gtype x func
