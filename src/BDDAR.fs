@@ -99,17 +99,16 @@ let rec bdd_and (bdd,comp as bddcomp) (m1, m2) =
                 let bdd'', n = mk_node bdd' (p, lnew, rnew)
                 (bdd'', ((m1, m2) |-> n) comp'), n
 
-// ------------------------------------------------------------------------- //
-// The other binary connectives.                                             //
-// ------------------------------------------------------------------------- //
-
+/// Perform an OR operation on BDDs, maintaining canonicity.
 let bdd_or bdc (m1, m2) = 
     let bdc1, n = bdd_and bdc (-m1, -m2)
     bdc1, -n
 
+/// Perform an IMP operation on BDDs, maintaining canonicity.
 let bdd_imp bdc (m1, m2) = 
     bdd_or bdc (-m1, m2)
 
+/// Perform an IFF operation on BDDs, maintaining canonicity.
 let bdd_iff bdc (m1, m2) =
     thread bdc bdd_or (bdd_and, (m1, m2)) (bdd_and, (-m1, -m2))
 

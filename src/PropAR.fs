@@ -201,15 +201,15 @@ let rec psimplify fm =
 // Some operations on literals.                                              //
 // ------------------------------------------------------------------------- //
 
-/// checks if a litteral is negative
+/// checks if a literal is negative
 let negative = function
     | Not p -> true
     | _ -> false
     
-/// checks if a litteral is positive
+/// checks if a literal is positive
 let positive lit = not <| negative lit
     
-/// change a litteral into its contrary
+/// change a literal into its contrary
 let negate = function
     | Not p -> p
     | p -> p |> mk_not
@@ -218,8 +218,7 @@ let negate = function
 // Negation normal form.                                                     //
 // ------------------------------------------------------------------------- //
 
-/// cahnge a formula into its negation normal form 
-/// without simplifying it
+/// Changes a formula into its negation normal form without simplifying it
 let rec nnfOrig fm =
     match fm with
     | And (p, q) ->
